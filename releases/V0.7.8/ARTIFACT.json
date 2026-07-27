@@ -1,0 +1,15 @@
+{
+  "version": "V0.7.8",
+  "paper_key": "CANVAS",
+  "title": "Cellular architecture and neighborhood-informed virtual spatial tumor profiling from histopathology",
+  "filename": "V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+  "size_bytes": 25930345,
+  "sha256": "3d5d9093601fd4c2411f28ee923814631f9ab8b850119d428256745d8e8d2f36",
+  "validation": {
+    "static_contract": "passed",
+    "browser_checks": "10/10",
+    "page_errors": 0,
+    "console_errors": 0
+  },
+  "release_policy": "immutable"
+}
