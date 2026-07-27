@@ -1,0 +1,1 @@
+Build V0.8 candidate from the locked V0.7.8 artifact.
