@@ -1,1 +1,2 @@
 Build the V0.8.2 CANVAS candidate from the locked V0.8.1 artifact.
+Sequential batch contract validated on 2026-07-27.
