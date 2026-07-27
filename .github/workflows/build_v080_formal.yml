@@ -1,0 +1,40 @@
+name: Build V0.8 formal release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "releases/V0.8/source/from_V0.7.8.patch.json.gz.b64"
+      - "tools/apply_line_patch.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build locked V0.8 artifact
+        run: |
+          python tools/apply_line_patch.py \
+            published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html \
+            releases/V0.8/source/from_V0.7.8.patch.json.gz.b64 \
+            published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html
+      - name: Verify release checksum
+        run: echo "c02aad24689eefaed372decb3068f339a83d5c15fdf8b45f259c019418ceece2  published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html" | sha256sum --check
+      - name: Commit formal artifact
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html
+          if git diff --cached --quiet; then
+            echo "V0.8 artifact already current"
+          else
+            git commit -m "Publish V0.8 CANVAS formal release"
+            git push origin HEAD:main
+          fi
