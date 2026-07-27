@@ -1,0 +1,46 @@
+name: Review and build candidate pull request
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "releases/V0.8-candidate/**"
+      - "published/V0.8_CANVAS_*"
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  build-v080:
+    if: github.head_ref == 'v0.8-candidate'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --quiet beautifulsoup4
+      - name: Build from locked V0.7.8
+        run: python releases/V0.8-candidate/build.py
+      - name: Validate content and interaction contract
+        run: |
+          python releases/V0.8-candidate/validators/validate.py \
+            published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html \
+            published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html
+          sha256sum --check releases/V0.8-candidate/SHA256SUMS.txt
+      - name: Commit generated candidate only to candidate branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html
+          if git diff --cached --quiet; then
+            echo "Candidate artifact already current"
+          else
+            git commit -m "Build V0.8 CANVAS candidate HTML"
+            git push origin HEAD:${{ github.event.pull_request.head.ref }}
+          fi
