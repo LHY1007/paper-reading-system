@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - "releases/V0.8/source/from_V0.7.8.patch.json.gz.b64"
+      - "releases/V0.8/build_trigger.txt"
       - "tools/apply_line_patch.py"
   workflow_dispatch:
 
