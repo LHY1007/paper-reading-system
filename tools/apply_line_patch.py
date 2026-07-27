@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
-import argparse, hashlib, json
+import argparse, base64, gzip, hashlib, json
 from pathlib import Path
 
 def sha(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+def load_patch(path: Path):
+    raw=path.read_bytes()
+    if path.name.endswith('.gz.b64'):
+        raw=gzip.decompress(base64.b64decode(raw))
+    return json.loads(raw.decode('utf-8'))
 
 def main():
     ap=argparse.ArgumentParser()
@@ -12,7 +18,7 @@ def main():
     ap.add_argument('output')
     args=ap.parse_args()
     base=Path(args.base); patch_path=Path(args.patch); output=Path(args.output)
-    p=json.loads(patch_path.read_text('utf-8'))
+    p=load_patch(patch_path)
     raw=base.read_bytes()
     if sha(raw)!=p['base_sha256']:
         raise SystemExit(f"base SHA256 mismatch: {sha(raw)} != {p['base_sha256']}")
