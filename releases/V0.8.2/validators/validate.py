@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# V0.8.2 validator; touching this file intentionally triggers the active release workflow.
+# V0.8.2 validator; active workflow rebuild trigger 2026-07-27.
 import argparse, hashlib, json, re
 from pathlib import Path
 
