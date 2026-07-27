@@ -5,21 +5,51 @@ on:
     paths:
       - "published/**/*.html"
       - "releases/**/validators/*.py"
+      - "releases/V0.8.2/build.py"
+      - "releases/V0.8.2/source/patch_chunks/**"
   pull_request:
     paths:
       - "published/**/*.html"
       - "releases/**/validators/*.py"
+      - "releases/V0.8.2/build.py"
+      - "releases/V0.8.2/source/patch_chunks/**"
+
+permissions:
+  contents: write
 
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Build V0.8.2 candidate from locked V0.8.1
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/v0.8.2-candidate' && hashFiles('releases/V0.8.2/build.py') != '' }}
+        run: python releases/V0.8.2/build.py
+      - name: Validate V0.8.2 candidate contract
+        if: ${{ hashFiles('published/V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html') != '' }}
+        run: >-
+          python releases/V0.8.2/validators/validate.py
+          published/V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html
+          --sha256 84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1
       - name: Validate V0.7.8 figure-study contract
         if: ${{ hashFiles('published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html') != '' }}
         run: >-
           python releases/V0.7.8/validators/validate_figure_study.py
           published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html
+      - name: Commit V0.8.2 candidate artifact
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/v0.8.2-candidate' }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add published/V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html
+          if git diff --cached --quiet; then
+            echo "V0.8.2 candidate artifact already current"
+          else
+            git commit -m "Build V0.8.2 CANVAS candidate HTML"
+            git push origin HEAD:v0.8.2-candidate
+          fi
