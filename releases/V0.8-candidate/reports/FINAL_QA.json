@@ -1,0 +1,62 @@
+{
+  "version": "0.8.0-candidate",
+  "passed": true,
+  "static": {
+    "passed": true,
+    "checks": {
+      "quick_pane_unchanged": true,
+      "bilingual_pane_unchanged": true,
+      "reference_data_unchanged": true,
+      "study_source_unchanged": true,
+      "body_source_byte_identical": true,
+      "v080_style_present": true,
+      "v080_script_present": true,
+      "review_manifest_present": true,
+      "figure_cards": true,
+      "table_cards": true,
+      "study_buttons": true,
+      "no_verified_hotspot_guessing": true
+    },
+    "content_hashes": {
+      "quick_pane": "71ddbf3408eefb56bec939cec45249f0e4eac285f41570bb73effa9d2711f0ba",
+      "bilingual_pane": "a696adef8a27a941e5a6c8692aaff21222df02188ced848407d22cd5031c0074",
+      "reference_data": "700e843a587259387cbb32d3ce9c589e10982032e089ae718012cc08d91a3ef0",
+      "study_source_script": "6847a362e5e559288666fcc9784b3269b89dd0c2b5cd92a128981f369df84b6e"
+    },
+    "output_sha256": "c02aad24689eefaed372decb3068f339a83d5c15fdf8b45f259c019418ceece2",
+    "output_bytes": 25948287
+  },
+  "browser": {
+    "passed": true,
+    "checks_passed": 20,
+    "page_errors": [],
+    "console_errors": [],
+    "verified": [
+      "runtime review",
+      "classified search and exact locate",
+      "layout presets",
+      "viewer open and close transitions",
+      "figure-study open and close transitions",
+      "text-only subfigure focus",
+      "absence of guessed image hotspots",
+      "unchanged figure, table and study-entry counts"
+    ]
+  },
+  "validator": {
+    "passed": true,
+    "checks": {
+      "quick_pane": true,
+      "bilingual_pane": true,
+      "reference_data": true,
+      "study_source": true,
+      "figure_ids": true,
+      "table_ids": true,
+      "study_button_count": true
+    }
+  },
+  "notes": [
+    "论文正文、双语翻译、图注、图表精读数据、参考文献和资源映射与V0.7.8保持锁定。",
+    "子图图像区域定位未启用，因为当前没有通过人工核对的坐标映射；仅提供文字卡片聚焦。",
+    "浏览器交互检查使用去除大体积图片载荷的等结构副本；静态检查验证原图数据未发生变化。"
+  ]
+}
