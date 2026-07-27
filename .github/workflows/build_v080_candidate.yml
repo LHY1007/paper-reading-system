@@ -3,11 +3,9 @@ name: Build V0.8 candidate
 on:
   push:
     branches:
-      - v0.8-candidate
+      - main
     paths:
-      - "releases/V0.8-candidate/build.py"
-      - "releases/V0.8-candidate/source/**"
-      - "releases/V0.8-candidate/validators/**"
+      - "releases/V0.8-candidate/build_trigger_main.txt"
   workflow_dispatch:
 
 permissions:
