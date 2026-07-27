@@ -1,0 +1,48 @@
+name: Build V0.8 candidate
+
+on:
+  push:
+    branches:
+      - v0.8-candidate
+    paths:
+      - ".github/workflows/build_v080_candidate.yml"
+      - "releases/V0.8-candidate/build.py"
+      - "releases/V0.8-candidate/source/**"
+      - "releases/V0.8-candidate/validators/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8-candidate
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install validator dependencies
+        run: python -m pip install --quiet beautifulsoup4
+      - name: Build candidate from locked V0.7.8 body
+        run: python releases/V0.8-candidate/build.py
+      - name: Validate content and function contract
+        run: |
+          python releases/V0.8-candidate/validators/validate.py \
+            published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html \
+            published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html
+      - name: Verify checksum
+        run: sha256sum --check releases/V0.8-candidate/SHA256SUMS.txt
+      - name: Commit candidate artifact to candidate branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html
+          if git diff --cached --quiet; then
+            echo "Candidate artifact already current"
+          else
+            git commit -m "Build V0.8 CANVAS candidate HTML"
+            git push origin HEAD:v0.8-candidate
+          fi
