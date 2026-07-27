@@ -1,0 +1,25 @@
+name: Validate paper reader release
+
+on:
+  push:
+    paths:
+      - "published/**/*.html"
+      - "releases/**/validators/*.py"
+  pull_request:
+    paths:
+      - "published/**/*.html"
+      - "releases/**/validators/*.py"
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate V0.7.8 figure-study contract
+        if: ${{ hashFiles('published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html') != '' }}
+        run: >-
+          python releases/V0.7.8/validators/validate_figure_study.py
+          published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html
