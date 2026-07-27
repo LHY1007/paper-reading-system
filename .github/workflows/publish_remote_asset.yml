@@ -17,7 +17,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - name: Install validator dependencies
+        run: python -m pip install --quiet beautifulsoup4
       - name: Download and verify release asset
+        id: asset
         run: |
           python - <<'PY'
           import hashlib
@@ -25,24 +28,29 @@ jobs:
           import pathlib
           import urllib.request
 
-          manifests = sorted(pathlib.Path("releases").glob("*/source/remote_asset.json"))
+          manifests = sorted(pathlib.Path("releases").glob("*/source/remote_asset.json"), key=lambda p: p.stat().st_mtime)
           if not manifests:
               raise SystemExit("remote asset manifest missing")
           manifest_path = manifests[-1]
           data = json.loads(manifest_path.read_text("utf-8"))
           target = pathlib.Path(data["target"])
           target.parent.mkdir(parents=True, exist_ok=True)
-          with urllib.request.urlopen(data["url"], timeout=180) as response:
+          with urllib.request.urlopen(data["url"], timeout=240) as response:
               target.write_bytes(response.read())
           digest = hashlib.sha256(target.read_bytes()).hexdigest()
           if digest != data["sha256"]:
               raise SystemExit(f"SHA256 mismatch: {digest}")
+          pathlib.Path("/tmp/release_manifest.json").write_text(json.dumps(data), "utf-8")
           print(f"verified {target}: {digest}")
           PY
       - name: Validate release contract
         run: |
-          python releases/V0.7.8/validators/validate_figure_study.py published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html
-      - name: Commit published artifact
+          python - <<'PY'
+          import json, subprocess
+          data=json.load(open('/tmp/release_manifest.json'))
+          subprocess.run(['python',data['validator'],data['base'],data['target']],check=True)
+          PY
+      - name: Commit candidate artifact to current branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -50,6 +58,7 @@ jobs:
           if git diff --cached --quiet; then
             echo "Artifact already published"
           else
-            git commit -m "Publish V0.7.8 CANVAS HTML"
-            git push
+            MSG=$(python -c "import json;print(json.load(open('/tmp/release_manifest.json')).get('commit_message','Publish candidate HTML'))")
+            git commit -m "$MSG"
+            git push origin HEAD:${GITHUB_REF_NAME}
           fi
