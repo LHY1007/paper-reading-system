@@ -1,0 +1,19 @@
+{
+  "passed": 10,
+  "total": 10,
+  "all_passed": true,
+  "checks": [
+    {"name": "single_annotation_entry", "passed": true},
+    {"name": "unified_annotation_toolbox", "passed": true},
+    {"name": "annotation_notebook", "passed": true},
+    {"name": "figure_study_open", "passed": true},
+    {"name": "figure_1_terms", "passed": true, "detail": 119},
+    {"name": "figure_1_panel_depth", "passed": true, "detail": {"panels": 10, "minimum_characters": 212}},
+    {"name": "daylight_toolbar", "passed": true},
+    {"name": "zoom_contrast", "passed": true, "detail": {"text": "rgb(23, 38, 58)", "background": "rgb(255, 255, 255)", "font_weight": "850"}},
+    {"name": "figure_3_depth_and_terms", "passed": true, "detail": {"panels": 14, "minimum_characters": 202, "term_nodes": 204}},
+    {"name": "mobile_toolbox_fit", "passed": true}
+  ],
+  "page_errors": [],
+  "console_errors": []
+}
