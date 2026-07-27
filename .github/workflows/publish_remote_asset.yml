@@ -1,9 +1,12 @@
-name: Publish remote release asset
+name: Publish or build release asset
 
 on:
   push:
+    branches:
+      - main
     paths:
       - "releases/**/source/remote_asset.json"
+      - "releases/**/source/build_request.json"
   workflow_dispatch:
 
 permissions:
@@ -17,39 +20,62 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Download and verify release asset
+      - name: Resolve request
         run: |
           python - <<'PY'
-          import hashlib
-          import json
-          import pathlib
-          import urllib.request
-
-          manifests = sorted(pathlib.Path("releases").glob("*/source/remote_asset.json"))
-          if not manifests:
-              raise SystemExit("remote asset manifest missing")
-          manifest_path = manifests[-1]
-          data = json.loads(manifest_path.read_text("utf-8"))
-          target = pathlib.Path(data["target"])
-          target.parent.mkdir(parents=True, exist_ok=True)
-          with urllib.request.urlopen(data["url"], timeout=180) as response:
-              target.write_bytes(response.read())
-          digest = hashlib.sha256(target.read_bytes()).hexdigest()
-          if digest != data["sha256"]:
-              raise SystemExit(f"SHA256 mismatch: {digest}")
-          print(f"verified {target}: {digest}")
+          import json, pathlib
+          builds=sorted(pathlib.Path('releases').glob('*/source/build_request.json'),key=lambda p:p.stat().st_mtime)
+          remotes=sorted(pathlib.Path('releases').glob('*/source/remote_asset.json'),key=lambda p:p.stat().st_mtime)
+          if builds:
+              req=json.loads(builds[-1].read_text('utf-8')); req['mode']='build'
+          elif remotes:
+              req=json.loads(remotes[-1].read_text('utf-8')); req['mode']='remote'
+          else:
+              raise SystemExit('release request missing')
+          pathlib.Path('/tmp/release_request.json').write_text(json.dumps(req),'utf-8')
+          print(req)
           PY
-      - name: Validate release contract
+      - name: Publish remote asset
         run: |
-          python releases/V0.7.8/validators/validate_figure_study.py published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html
+          MODE=$(python -c "import json;print(json.load(open('/tmp/release_request.json'))['mode'])")
+          if [ "$MODE" != "remote" ]; then exit 0; fi
+          python - <<'PY'
+          import hashlib,json,pathlib,urllib.request
+          data=json.load(open('/tmp/release_request.json'))
+          target=pathlib.Path(data['target']);target.parent.mkdir(parents=True,exist_ok=True)
+          with urllib.request.urlopen(data['url'],timeout=240) as r: target.write_bytes(r.read())
+          digest=hashlib.sha256(target.read_bytes()).hexdigest()
+          if digest!=data['sha256']: raise SystemExit(f'SHA256 mismatch: {digest}')
+          PY
+      - name: Build candidate branch asset
+        run: |
+          MODE=$(python -c "import json;print(json.load(open('/tmp/release_request.json'))['mode'])")
+          if [ "$MODE" != "build" ]; then exit 0; fi
+          BRANCH=$(python -c "import json;print(json.load(open('/tmp/release_request.json'))['branch'])")
+          git fetch origin "$BRANCH"
+          git checkout "$BRANCH"
+          python -m pip install --quiet beautifulsoup4
+          BUILDER=$(python -c "import json;print(json.load(open('/tmp/release_request.json'))['builder'])")
+          BASE=$(python -c "import json;print(json.load(open('/tmp/release_request.json'))['base'])")
+          TARGET=$(python -c "import json;print(json.load(open('/tmp/release_request.json'))['target'])")
+          VALIDATOR=$(python -c "import json;print(json.load(open('/tmp/release_request.json'))['validator'])")
+          python "$BUILDER"
+          python "$VALIDATOR" "$BASE" "$TARGET"
+          EXPECTED=$(python -c "import json;print(json.load(open('/tmp/release_request.json'))['sha256'])")
+          ACTUAL=$(sha256sum "$TARGET" | cut -d' ' -f1)
+          test "$EXPECTED" = "$ACTUAL"
       - name: Commit published artifact
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add published/
+          MODE=$(python -c "import json;print(json.load(open('/tmp/release_request.json'))['mode'])")
+          TARGET=$(python -c "import json;print(json.load(open('/tmp/release_request.json'))['target'])")
+          MSG=$(python -c "import json;print(json.load(open('/tmp/release_request.json')).get('commit_message','Publish release asset'))")
+          BRANCH=$(python -c "import json;print(json.load(open('/tmp/release_request.json')).get('branch','main'))")
+          git add "$TARGET"
           if git diff --cached --quiet; then
-            echo "Artifact already published"
+            echo "Artifact already current"
           else
-            git commit -m "Publish V0.7.8 CANVAS HTML"
-            git push
+            git commit -m "$MSG"
+            git push origin HEAD:"$BRANCH"
           fi
