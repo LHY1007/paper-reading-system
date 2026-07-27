@@ -1,0 +1,1 @@
+Build the V0.8.2 CANVAS candidate from the locked V0.8.1 artifact.
