@@ -1,0 +1,9 @@
+{
+  "branch": "v0.8-candidate",
+  "builder": "releases/V0.8-candidate/build.py",
+  "validator": "releases/V0.8-candidate/validators/validate.py",
+  "base": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+  "target": "published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+  "sha256": "c02aad24689eefaed372decb3068f339a83d5c15fdf8b45f259c019418ceece2",
+  "commit_message": "Build V0.8 CANVAS candidate HTML"
+}
