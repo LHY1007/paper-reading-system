@@ -1,0 +1,40 @@
+{
+  "version": "V0.7.8",
+  "source": "V0.7.7",
+  "output": "V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+  "sha256": "3d5d9093601fd4c2411f28ee923814631f9ab8b850119d428256745d8e8d2f36",
+  "size_bytes": 25930345,
+  "locked_content_unchanged": true,
+  "structural_counts": {
+    "bilingual_units": 111,
+    "source_blocks": 167,
+    "translation_blocks": 167,
+    "figure_cards": 19,
+    "table_cards": 5,
+    "references": 112,
+    "figure_references": 247,
+    "section_references": 31
+  },
+  "checks": {
+    "single_visible_annotation_entry": true,
+    "selection_note_drawing_notebook_unified": true,
+    "main_figure_panel_counts": {
+      "figure-1": 10,
+      "figure-2": 10,
+      "figure-3": 14,
+      "figure-4": 10,
+      "figure-5": 15
+    },
+    "main_figure_min_panel_chars": {
+      "figure-1": 212,
+      "figure-2": 209,
+      "figure-3": 202,
+      "figure-4": 251,
+      "figure-5": 191
+    },
+    "dedicated_study_term_enhancer": true,
+    "daylight_study_toolbar": true,
+    "high_contrast_zoom_label": true,
+    "browser_qa": "10/10"
+  }
+}
