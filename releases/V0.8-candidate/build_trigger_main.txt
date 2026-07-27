@@ -1,0 +1,1 @@
+Build the V0.8 candidate on branch v0.8-candidate without modifying the main release artifact.
