@@ -7,12 +7,13 @@ on:
       - "experiments/V0.8x_batch_diagnosis/**"
       - "experiments/V0.8.2_template_lock/**"
       - "schemas/paper_content_manifest_v082.schema.json"
+      - "tools/normalize_v082_canvas_master.py"
       - "tools/render_v082_canvas_locked.py"
-      - "tools/render_v082_canvas_component_locked.py"
-      - "tools/render_v082_canvas_component_locked_v2.py"
+      - "tools/render_v082_canvas_component_locked*.py"
       - "tools/migrate_v082_batch_to_manifest.py"
-      - "tools/validate_v082_canvas_shell_lock.py"
-      - "tools/validate_v082_canvas_components.py"
+      - "tools/validate_v082_canvas_shell_lock*.py"
+      - "tools/validate_v082_canvas_components*.py"
+      - "tools/validate_v082_paper_isolation.py"
       - "tools/validate_reader_content_coverage.py"
       - ".github/workflows/diagnose_v08x_batch.yml"
   pull_request:
@@ -21,12 +22,13 @@ on:
       - "experiments/V0.8x_batch_diagnosis/**"
       - "experiments/V0.8.2_template_lock/**"
       - "schemas/paper_content_manifest_v082.schema.json"
+      - "tools/normalize_v082_canvas_master.py"
       - "tools/render_v082_canvas_locked.py"
-      - "tools/render_v082_canvas_component_locked.py"
-      - "tools/render_v082_canvas_component_locked_v2.py"
+      - "tools/render_v082_canvas_component_locked*.py"
       - "tools/migrate_v082_batch_to_manifest.py"
-      - "tools/validate_v082_canvas_shell_lock.py"
-      - "tools/validate_v082_canvas_components.py"
+      - "tools/validate_v082_canvas_shell_lock*.py"
+      - "tools/validate_v082_canvas_components*.py"
+      - "tools/validate_v082_paper_isolation.py"
       - "tools/validate_reader_content_coverage.py"
       - ".github/workflows/diagnose_v08x_batch.yml"
   workflow_dispatch:
@@ -50,40 +52,40 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
+          CANVAS_ORIGINAL=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
           BASE080=$(find published -maxdepth 1 -name 'V0.8_CANVAS*.html' | head -n 1)
           BASE081=$(find . -maxdepth 1 -name 'V0.8.1_CANVAS*.html' | head -n 1)
           MAAS=$(find . -maxdepth 1 -name '01_V0.8.2_Maas*.html' | head -n 1)
           VAL=$(find . -maxdepth 1 -name '04_V0.8.2_Valanarasu*.html' | head -n 1)
-          test -n "$CANVAS" && test -n "$BASE080" && test -n "$BASE081" && test -n "$MAAS" && test -n "$VAL"
-          printf 'CANVAS=%q\nBASE080=%q\nBASE081=%q\nMAAS=%q\nVAL=%q\n' "$CANVAS" "$BASE080" "$BASE081" "$MAAS" "$VAL" > /tmp/v08x_paths
-      - name: Inspect and validate canonical CANVAS component contracts
+          MASTER=experiments/V0.8.2_template_lock/output/V0.8.2_CANVAS_NORMALIZED_MASTER.html
+          test -n "$CANVAS_ORIGINAL" && test -n "$BASE080" && test -n "$BASE081" && test -n "$MAAS" && test -n "$VAL"
+          printf 'CANVAS_ORIGINAL=%q\nMASTER=%q\nBASE080=%q\nBASE081=%q\nMAAS=%q\nVAL=%q\n' "$CANVAS_ORIGINAL" "$MASTER" "$BASE080" "$BASE081" "$MAAS" "$VAL" > /tmp/v08x_paths
+      - name: Build and validate normalized CANVAS master
         shell: bash
         run: |
           set -euo pipefail
           source /tmp/v08x_paths
-          REPORTS=experiments/V0.8.2_template_lock/reports
-          mkdir -p "$REPORTS"
-          python experiments/V0.8.2_template_lock/inspect_canvas_dom.py "$CANVAS" --out "$REPORTS/CANVAS_DOM.json"
-          python experiments/V0.8.2_template_lock/inspect_canvas_scripts.py "$CANVAS" --out "$REPORTS/CANVAS_SCRIPTS.json"
-          python experiments/V0.8.2_template_lock/inspect_canvas_components.py "$CANVAS" --out "$REPORTS/CANVAS_COMPONENTS.json"
-          python tools/validate_v082_canvas_components.py "$CANVAS" --report "$REPORTS/CANVAS_COMPONENT_CONTRACT.json"
+          ROOT=experiments/V0.8.2_template_lock
+          mkdir -p "$ROOT/output" "$ROOT/reports"
+          python tools/normalize_v082_canvas_master.py "$CANVAS_ORIGINAL" "$MASTER" --report "$ROOT/reports/NORMALIZED_MASTER.json"
+          python experiments/V0.8.2_template_lock/inspect_canvas_dom.py "$CANVAS_ORIGINAL" --out "$ROOT/reports/CANVAS_DOM.json"
+          python experiments/V0.8.2_template_lock/inspect_canvas_scripts.py "$CANVAS_ORIGINAL" --out "$ROOT/reports/CANVAS_SCRIPTS.json"
+          python experiments/V0.8.2_template_lock/inspect_canvas_components.py "$CANVAS_ORIGINAL" --out "$ROOT/reports/CANVAS_COMPONENTS.json"
+          python tools/validate_v082_canvas_components.py "$CANVAS_ORIGINAL" --diagnostic --report "$ROOT/reports/CANVAS_ORIGINAL_COMPONENT_DEVIATIONS.json"
+          python tools/validate_v082_canvas_components.py "$MASTER" --report "$ROOT/reports/NORMALIZED_MASTER_COMPONENTS.json"
+          python tools/validate_v082_canvas_shell_lock.py "$MASTER" --canonical "$MASTER" --report "$ROOT/reports/NORMALIZED_MASTER_SHELL_SELF.json"
       - name: Build exact component-locked smoke output
         shell: bash
         run: |
           set -euo pipefail
           source /tmp/v08x_paths
-          OUT=experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_SMOKE.html
-          REPORTS=experiments/V0.8.2_template_lock/reports
-          mkdir -p "$(dirname "$OUT")" "$REPORTS"
-          python tools/render_v082_canvas_component_locked_v2.py \
-            experiments/V0.8.2_template_lock/fixtures/smoke_manifest.json \
-            "$OUT" \
-            --canonical "$CANVAS" \
-            --schema schemas/paper_content_manifest_v082.schema.json
-          python tools/validate_v082_canvas_shell_lock.py "$OUT" --canonical "$CANVAS" --report "$REPORTS/COMPONENT_LOCKED_SMOKE_SHELL.json"
-          python tools/validate_v082_canvas_components.py "$OUT" --report "$REPORTS/COMPONENT_LOCKED_SMOKE_COMPONENTS.json"
-      - name: Migrate Maas and Valanarasu legacy content into the exact CANVAS components
+          ROOT=experiments/V0.8.2_template_lock
+          OUT="$ROOT/output/V0.8.2_COMPONENT_LOCKED_SMOKE.html"
+          python tools/render_v082_canvas_component_locked_v2.py "$ROOT/fixtures/smoke_manifest.json" "$OUT" --canonical "$MASTER" --schema schemas/paper_content_manifest_v082.schema.json
+          python tools/validate_v082_canvas_shell_lock.py "$OUT" --canonical "$MASTER" --report "$ROOT/reports/COMPONENT_LOCKED_SMOKE_SHELL.json"
+          python tools/validate_v082_canvas_components.py "$OUT" --report "$ROOT/reports/COMPONENT_LOCKED_SMOKE_COMPONENTS.json"
+          python tools/validate_v082_paper_isolation.py "$OUT" "$ROOT/fixtures/smoke_manifest.json" --report "$ROOT/reports/COMPONENT_LOCKED_SMOKE_ISOLATION.json"
+      - name: Migrate Maas and Valanarasu legacy content into normalized components
         shell: bash
         run: |
           set -euo pipefail
@@ -92,28 +94,31 @@ jobs:
           mkdir -p "$ROOT/manifests" "$ROOT/output" "$ROOT/reports"
           python tools/migrate_v082_batch_to_manifest.py "$MAAS" "$ROOT/manifests/MAAS_LEGACY_CONTENT.json"
           python tools/migrate_v082_batch_to_manifest.py "$VAL" "$ROOT/manifests/VALANARASU_LEGACY_CONTENT.json"
-          python tools/render_v082_canvas_component_locked_v2.py "$ROOT/manifests/MAAS_LEGACY_CONTENT.json" "$ROOT/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html" --canonical "$CANVAS" --schema schemas/paper_content_manifest_v082.schema.json
-          python tools/render_v082_canvas_component_locked_v2.py "$ROOT/manifests/VALANARASU_LEGACY_CONTENT.json" "$ROOT/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html" --canonical "$CANVAS" --schema schemas/paper_content_manifest_v082.schema.json
-          python tools/validate_v082_canvas_shell_lock.py "$ROOT/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html" --canonical "$CANVAS" --report "$ROOT/reports/MAAS_MIGRATED_SHELL.json"
-          python tools/validate_v082_canvas_components.py "$ROOT/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html" --report "$ROOT/reports/MAAS_MIGRATED_COMPONENTS.json"
-          python tools/validate_v082_canvas_shell_lock.py "$ROOT/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html" --canonical "$CANVAS" --report "$ROOT/reports/VALANARASU_MIGRATED_SHELL.json"
-          python tools/validate_v082_canvas_components.py "$ROOT/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html" --report "$ROOT/reports/VALANARASU_MIGRATED_COMPONENTS.json"
-      - name: Demonstrate failures of the original simplified batch shells
+          python tools/render_v082_canvas_component_locked_v2.py "$ROOT/manifests/MAAS_LEGACY_CONTENT.json" "$ROOT/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html" --canonical "$MASTER" --schema schemas/paper_content_manifest_v082.schema.json
+          python tools/render_v082_canvas_component_locked_v2.py "$ROOT/manifests/VALANARASU_LEGACY_CONTENT.json" "$ROOT/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html" --canonical "$MASTER" --schema schemas/paper_content_manifest_v082.schema.json
+          for NAME in MAAS VALANARASU; do
+            OUT="$ROOT/output/V0.8.2_COMPONENT_LOCKED_${NAME}_LEGACY_CONTENT.html"
+            MANIFEST="$ROOT/manifests/${NAME}_LEGACY_CONTENT.json"
+            python tools/validate_v082_canvas_shell_lock.py "$OUT" --canonical "$MASTER" --report "$ROOT/reports/${NAME}_MIGRATED_SHELL.json"
+            python tools/validate_v082_canvas_components.py "$OUT" --report "$ROOT/reports/${NAME}_MIGRATED_COMPONENTS.json"
+            python tools/validate_v082_paper_isolation.py "$OUT" "$MANIFEST" --report "$ROOT/reports/${NAME}_MIGRATED_ISOLATION.json"
+          done
+      - name: Demonstrate failures of original simplified batch shells
         shell: bash
         run: |
           set -euo pipefail
           source /tmp/v08x_paths
           ROOT=experiments/V0.8.2_template_lock/reports
           set +e
-          python tools/validate_v082_canvas_shell_lock.py "$MAAS" --canonical "$CANVAS" --report "$ROOT/MAAS_BATCH_SHELL_FAILURE.json"
+          python tools/validate_v082_canvas_shell_lock.py "$MAAS" --canonical "$MASTER" --report "$ROOT/MAAS_BATCH_SHELL_FAILURE.json"
           MAAS_SHELL=$?
-          python tools/validate_v082_canvas_shell_lock.py "$VAL" --canonical "$CANVAS" --report "$ROOT/VALANARASU_BATCH_SHELL_FAILURE.json"
+          python tools/validate_v082_canvas_shell_lock.py "$VAL" --canonical "$MASTER" --report "$ROOT/VALANARASU_BATCH_SHELL_FAILURE.json"
           VAL_SHELL=$?
           python tools/validate_v082_canvas_components.py "$MAAS" --diagnostic --report "$ROOT/MAAS_BATCH_COMPONENT_FAILURE.json"
           python tools/validate_v082_canvas_components.py "$VAL" --diagnostic --report "$ROOT/VALANARASU_BATCH_COMPONENT_FAILURE.json"
           set -e
           test "$MAAS_SHELL" -ne 0 && test "$VAL_SHELL" -ne 0
-      - name: Run independent content coverage audits before and after exact-shell migration
+      - name: Run independent content coverage audits
         shell: bash
         run: |
           set -euo pipefail
@@ -121,11 +126,11 @@ jobs:
           REPORTS=experiments/V0.8x_batch_diagnosis/reports
           LOCK=experiments/V0.8.2_template_lock
           mkdir -p "$REPORTS"
-          python tools/validate_reader_content_coverage.py "$CANVAS" --baseline "$BASE081" --diagnostic --report "$REPORTS/00_CANVAS_control.json"
+          python tools/validate_reader_content_coverage.py "$MASTER" --baseline "$BASE081" --diagnostic --report "$REPORTS/00_CANVAS_normalized_control.json"
           python tools/validate_reader_content_coverage.py "$MAAS" --baseline "$BASE081" --expected-body-blocks 234 --diagnostic --report "$REPORTS/01_Maas_V082_batch.json"
           python tools/validate_reader_content_coverage.py "$VAL" --baseline "$BASE081" --expected-body-blocks 183 --diagnostic --report "$REPORTS/04_Valanarasu_V082_batch.json"
-          python tools/validate_reader_content_coverage.py "$LOCK/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html" --baseline "$CANVAS" --expected-body-blocks 234 --diagnostic --report "$REPORTS/01_Maas_component_locked_legacy_content.json"
-          python tools/validate_reader_content_coverage.py "$LOCK/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html" --baseline "$CANVAS" --expected-body-blocks 183 --diagnostic --report "$REPORTS/04_Valanarasu_component_locked_legacy_content.json"
+          python tools/validate_reader_content_coverage.py "$LOCK/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html" --baseline "$MASTER" --expected-body-blocks 234 --diagnostic --report "$REPORTS/01_Maas_component_locked_legacy_content.json"
+          python tools/validate_reader_content_coverage.py "$LOCK/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html" --baseline "$MASTER" --expected-body-blocks 183 --diagnostic --report "$REPORTS/04_Valanarasu_component_locked_legacy_content.json"
       - name: Aggregate diagnosis
         run: |
           python - <<'PY'
@@ -141,21 +146,21 @@ jobs:
               content.append({k:r.get(k) for k in ('file','passed','bilingual_units','expected_pdf_body_blocks','bilingual_to_pdf_body_block_ratio','core_to_appendix_coverage','content_score','structural_score','content_errors','structural_errors')})
           structural=[]
           for p in sorted(lock_root.glob('*.json')):
-              if any(x in p.name for x in ('SHELL','COMPONENT','CONTRACT')):
+              if any(x in p.name for x in ('SHELL','COMPONENT','ISOLATION','MASTER')):
                   r=json.loads(p.read_text('utf-8'))
                   structural.append({'report':p.name,'passed':r.get('passed'),'errors':r.get('errors',[])})
           summary={
-            'experiment':'CANVAS exact component cloning with identical legacy Maas and Valanarasu content',
-            'interpretation':'A migrated file must pass shell and component locks while remaining failed by PDF-native content coverage. This separates product-template repair from scientific-content repair.',
+            'experiment':'Normalized CANVAS master plus exact component cloning with identical legacy Maas and Valanarasu content',
+            'interpretation':'The normalized master resolves defects present in the original 00 file. Generated readers must pass normalized shell, component, isolation and browser gates while PDF-native content remains independently audited.',
             'structural_reports':structural,
             'content_reports':content
           }
-          (lock_root/'COMPONENT_LOCK_SUMMARY.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n','utf-8')
+          (lock_root/'NORMALIZED_COMPONENT_LOCK_SUMMARY.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n','utf-8')
           PY
       - name: Upload diagnostic artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: v082-component-lock-diagnosis
+          name: v082-normalized-component-lock-diagnosis
           path: |
             experiments/V0.8x_batch_diagnosis/reports
             experiments/V0.8.2_template_lock/manifests
@@ -172,6 +177,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "Experiment artifacts already current"
           else
-            git commit -m "Build exact V0.8.2 component-lock comparison artifacts"
+            git commit -m "Build normalized V0.8.2 master and comparison artifacts"
             git push origin HEAD:v0.8x-batch-diagnosis
           fi
