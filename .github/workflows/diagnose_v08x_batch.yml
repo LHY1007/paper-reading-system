@@ -8,6 +8,7 @@ on:
       - "experiments/V0.8x_batch_diagnosis/run_trigger.txt"
       - "experiments/V0.8.2_template_lock/inspect_canvas_dom.py"
       - "experiments/V0.8.2_template_lock/inspect_canvas_scripts.py"
+      - "experiments/V0.8.2_template_lock/inspect_canvas_components.py"
       - "tools/validate_reader_content_coverage.py"
       - ".github/workflows/diagnose_v08x_batch.yml"
   pull_request:
@@ -42,6 +43,7 @@ jobs:
           test -n "$CANVAS"
           python experiments/V0.8.2_template_lock/inspect_canvas_dom.py "$CANVAS" --out experiments/V0.8.2_template_lock/reports/CANVAS_DOM.json
           python experiments/V0.8.2_template_lock/inspect_canvas_scripts.py "$CANVAS" --out experiments/V0.8.2_template_lock/reports/CANVAS_SCRIPTS.json
+          python experiments/V0.8.2_template_lock/inspect_canvas_components.py "$CANVAS" --out experiments/V0.8.2_template_lock/reports/CANVAS_COMPONENTS.json
       - name: Build same-content V0.8.0 and V0.8.1 experiments
         run: python experiments/V0.8x_batch_diagnosis/build_version_adapters.py
       - name: Run independent content and parity audits
