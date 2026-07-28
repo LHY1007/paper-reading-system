@@ -64,7 +64,8 @@ def test_reader(page: Page, url: str, name: str) -> dict[str, Any]:
         if not condition:
             failures.append(label)
 
-    require(attr(page, "html", "data-v080-review") == "passed", "v080_review_passed", attr(page, "html", "data-v080-review"))
+    runtime_review = page.evaluate("window.__CANVAS_V080_REVIEW__ || null")
+    require(attr(page, "html", "data-v080-review") == "passed", "v080_review_passed", runtime_review)
     require(page.locator("#quick-pane").count() == 1 and page.locator("#bilingual-pane").count() == 1, "both_mode_panes_exist")
     mode_count = page.locator(".mode-btn[data-mode]").count()
     require(mode_count >= 2, "visible_mode_controls_exist", mode_count)
@@ -74,9 +75,11 @@ def test_reader(page: Page, url: str, name: str) -> dict[str, Any]:
         quick.click()
         page.wait_for_timeout(150)
         require(attr(page, "body", "data-mode") == "quick" and page.locator("#quick-pane").evaluate("e=>e.classList.contains('active')"), "quick_mode_switch")
+        require(quick.get_attribute("aria-pressed") == "true", "quick_mode_accessibility_state")
         bilingual.click()
         page.wait_for_timeout(150)
         require(attr(page, "body", "data-mode") == "bilingual" and page.locator("#bilingual-pane").evaluate("e=>e.classList.contains('active')"), "bilingual_mode_switch")
+        require(bilingual.get_attribute("aria-pressed") == "true", "bilingual_mode_accessibility_state")
 
     page.locator("#settingsBtn").click()
     page.wait_for_timeout(100)
@@ -111,23 +114,24 @@ def test_reader(page: Page, url: str, name: str) -> dict[str, Any]:
         study_id = study_button.get_attribute("data-figure-id")
         study_button.click()
         page.wait_for_timeout(450)
-        require(page.locator("#v6Study").count() == 1 and visible(page, "#v6Study"), "figure_study_open", study_id)
+        require(page.locator("#v6Study").count() == 1 and attr(page, "#v6Study", "aria-hidden") == "false" and page.locator("body").evaluate("e=>e.classList.contains('v6-study-open')"), "figure_study_open", study_id)
         require(bool(page.locator("#v6StudyDoc").inner_text().strip()) if page.locator("#v6StudyDoc").count() else False, "figure_study_has_content")
         if page.locator("#v6StudyClose").count():
             page.locator("#v6StudyClose").click()
-            page.wait_for_timeout(100)
-            require(not visible(page, "#v6Study"), "figure_study_close")
+            page.wait_for_timeout(120)
+            closed = attr(page, "#v6Study", "aria-hidden") == "true" and not page.locator("#v6Study").evaluate("e=>e.classList.contains('open')") and not page.locator("body").evaluate("e=>e.classList.contains('v6-study-open')")
+            require(closed, "figure_study_close", {"aria_hidden": attr(page, "#v6Study", "aria-hidden"), "class": attr(page, "#v6Study", "class")})
 
     if page.locator(".term-pop").count():
         page.locator(".term-pop").first.click()
         page.wait_for_timeout(120)
-        require(visible(page, "#termTooltip") and bool(page.locator("#termTooltip").inner_text().strip()), "term_tooltip_content")
+        require(page.locator("#termTooltip").evaluate("e=>e.classList.contains('show')") and bool(page.locator("#termTooltip").inner_text().strip()), "term_tooltip_content", page.locator("#termTooltip").inner_text())
         page.locator("body").click(position={"x": 5, "y": 5})
 
     if page.locator(".citation").count():
         page.locator(".citation").first.click()
         page.wait_for_timeout(120)
-        require(visible(page, ".reference-pop") and bool(page.locator(".reference-pop").inner_text().strip()), "citation_popover_content")
+        require(attr(page, "#referencePop", "hidden") is None and bool(page.locator("#referencePop").inner_text().strip()), "citation_popover_content", page.locator("#referencePop").inner_text()[:240])
 
     require(page.locator("#v6AnnotationBtn").count() == 1, "dynamic_annotation_tool_installed")
     require(page.locator("#v6EditBtn").count() == 1, "dynamic_edit_tool_installed")
@@ -137,6 +141,7 @@ def test_reader(page: Page, url: str, name: str) -> dict[str, Any]:
     return {
         "file": name,
         "url": url,
+        "runtime_review": runtime_review,
         "checks": checks,
         "page_errors": page_errors,
         "console_errors": console_errors,
