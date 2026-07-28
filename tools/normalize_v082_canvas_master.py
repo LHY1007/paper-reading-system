@@ -29,6 +29,18 @@ sync();
 })();
 """.strip()
 
+TERM_COMPAT_SCRIPT = """
+(function(){
+'use strict';
+// V0.7.1 formerly created #canvas-term-tooltip and intercepted term clicks in
+// capture phase. V0.8 already owns the canonical #termTooltip implementation.
+// Keeping two handlers made the visible tooltip diverge from the component
+// contract, so the legacy patch is intentionally retired in the normalized master.
+const duplicate=document.getElementById('canvas-term-tooltip');
+if(duplicate)duplicate.remove();
+})();
+""".strip()
+
 
 def text(node: Tag | None) -> str:
     return " ".join(node.get_text(" ", strip=True).split()) if node else ""
@@ -79,6 +91,18 @@ def ensure_mode_assets(soup: BeautifulSoup) -> tuple[bool, bool]:
     return style_added, script_added
 
 
+def retire_duplicate_term_tooltip(soup: BeautifulSoup) -> bool:
+    script = soup.find("script", id="canvas-v071-patch-script")
+    if not script:
+        return False
+    script["data-normalized-reason"] = "duplicate-term-tooltip-retired"
+    script.string = TERM_COMPAT_SCRIPT
+    duplicate = soup.select_one("#canvas-term-tooltip")
+    if duplicate:
+        duplicate.decompose()
+    return True
+
+
 def normalize_figure_images(soup: BeautifulSoup) -> int:
     changed = 0
     for card in soup.select("#bilingual-pane .figure-card:not(.table-card)"):
@@ -118,7 +142,6 @@ def normalize_table_captions(soup: BeautifulSoup) -> int:
         if not captions:
             captions = soup.new_tag("div")
             content.append(captions)
-            changed += 1
         existing = captions.find_all(recursive=False)
         en_text = text(captions.select_one(".caption-en")) or (text(existing[0]) if existing else "")
         zh_text = text(captions.select_one(".caption-zh")) or (text(existing[1]) if len(existing) > 1 else "")
@@ -173,6 +196,7 @@ def normalize(source: Path, output: Path) -> dict[str, Any]:
         soup.head.append(marker)
     mode_added = ensure_mode_switch(soup)
     style_added, script_added = ensure_mode_assets(soup)
+    duplicate_term_handler_retired = retire_duplicate_term_tooltip(soup)
     image_attrs = normalize_figure_images(soup)
     table_cards = normalize_table_captions(soup)
     section_attrs = normalize_sections(soup)
@@ -186,6 +210,7 @@ def normalize(source: Path, output: Path) -> dict[str, Any]:
         "mode_switch_added": mode_added,
         "mode_style_added": style_added,
         "mode_script_added": script_added,
+        "duplicate_term_handler_retired": duplicate_term_handler_retired,
         "figure_image_attributes_added": image_attrs,
         "table_cards_normalized": table_cards,
         "section_attributes_added": section_attrs,
