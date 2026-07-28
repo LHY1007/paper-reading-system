@@ -9,6 +9,9 @@ on:
       - "tools/render_v082_canvas_component_locked_v2.py"
       - "tools/validate_v082_canvas_components.py"
       - "tools/validate_v082_canvas_components_core.py"
+      - "tools/validate_v082_canvas_shell_lock.py"
+      - "tools/validate_v082_canvas_shell_lock_core.py"
+      - "tools/validate_v082_paper_isolation.py"
       - "tools/migrate_v082_batch_to_manifest.py"
       - "schemas/paper_content_manifest_v082.schema.json"
       - "experiments/V0.8.2_template_lock/fixtures/smoke_manifest.json"
@@ -50,6 +53,8 @@ jobs:
             echo "smoke_component_rc=$?" >> "$LOG"
             python tools/validate_v082_canvas_shell_lock.py "$ROOT/output/V0.8.2_COMPONENT_LOCKED_SMOKE.html" --canonical "$CANVAS" --report "$ROOT/reports/COMPONENT_LOCKED_SMOKE_SHELL.json" >> "$LOG" 2>&1
             echo "smoke_shell_rc=$?" >> "$LOG"
+            python tools/validate_v082_paper_isolation.py "$ROOT/output/V0.8.2_COMPONENT_LOCKED_SMOKE.html" "$ROOT/fixtures/smoke_manifest.json" --diagnostic --report "$ROOT/reports/COMPONENT_LOCKED_SMOKE_ISOLATION.json" >> "$LOG" 2>&1
+            echo "smoke_isolation_rc=$?" >> "$LOG"
           fi
           echo '=== legacy migration/render ===' >> "$LOG"
           python tools/migrate_v082_batch_to_manifest.py "$MAAS" "$ROOT/manifests/MAAS_LEGACY_CONTENT.json" >> "$LOG" 2>&1
@@ -65,6 +70,7 @@ jobs:
               if test -f "$OUT"; then
                 python tools/validate_v082_canvas_components_core.py "$OUT" --diagnostic --report "$ROOT/reports/${NAME}_MIGRATED_COMPONENTS.json" >> "$LOG" 2>&1
                 python tools/validate_v082_canvas_shell_lock.py "$OUT" --canonical "$CANVAS" --report "$ROOT/reports/${NAME}_MIGRATED_SHELL.json" >> "$LOG" 2>&1
+                python tools/validate_v082_paper_isolation.py "$OUT" "$MANIFEST" --diagnostic --report "$ROOT/reports/${NAME}_MIGRATED_ISOLATION.json" >> "$LOG" 2>&1
               fi
             fi
           done
@@ -84,6 +90,6 @@ jobs:
           if git diff --cached --quiet; then
             echo no changes
           else
-            git commit -m "Record V0.8.2 component-lock debug artifacts"
+            git commit -m "Record V0.8.2 component-lock and isolation artifacts"
             git push origin HEAD:v0.8x-batch-diagnosis
           fi
