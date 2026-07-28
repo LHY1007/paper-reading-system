@@ -1,0 +1,71 @@
+name: Diagnose V0.8x batch generation
+
+on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - "experiments/V0.8x_batch_diagnosis/build_version_adapters.py"
+      - "experiments/V0.8x_batch_diagnosis/run_trigger.txt"
+      - "tools/validate_reader_content_coverage.py"
+      - ".github/workflows/diagnose_v08x_batch.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  controlled-experiment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install parser
+        run: python -m pip install --disable-pip-version-check beautifulsoup4
+      - name: Build same-content V0.8.0 and V0.8.1 experiments
+        run: python experiments/V0.8x_batch_diagnosis/build_version_adapters.py
+      - name: Run independent content and parity audits
+        shell: bash
+        run: |
+          set -euo pipefail
+          REPORTS=experiments/V0.8x_batch_diagnosis/reports
+          mkdir -p "$REPORTS"
+          BASE080=$(find published -maxdepth 1 -name 'V0.8_CANVAS*.html' | head -n 1)
+          BASE081=$(find . -maxdepth 1 -name 'V0.8.1_CANVAS*.html' | head -n 1)
+          CONTROL=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
+          MAAS=$(find . -maxdepth 1 -name '01_V0.8.2_Maas*.html' | head -n 1)
+          VAL=$(find . -maxdepth 1 -name '04_V0.8.2_Valanarasu*.html' | head -n 1)
+          test -n "$BASE080" && test -n "$BASE081" && test -n "$CONTROL" && test -n "$MAAS" && test -n "$VAL"
+          python tools/validate_reader_content_coverage.py "$CONTROL" --baseline "$BASE081" --diagnostic --report "$REPORTS/00_CANVAS_control.json"
+          python tools/validate_reader_content_coverage.py "$MAAS" --baseline "$BASE081" --diagnostic --report "$REPORTS/01_Maas_V082_batch.json"
+          python tools/validate_reader_content_coverage.py "$VAL" --baseline "$BASE081" --diagnostic --report "$REPORTS/04_Valanarasu_V082_batch.json"
+          python tools/validate_reader_content_coverage.py experiments/V0.8x_batch_diagnosis/output/V0.8.0_EXPERIMENT_Valanarasu_batch_content.html --baseline "$BASE080" --diagnostic --report "$REPORTS/04_Valanarasu_under_V080.json"
+          python tools/validate_reader_content_coverage.py experiments/V0.8x_batch_diagnosis/output/V0.8.1_EXPERIMENT_Valanarasu_batch_content.html --baseline "$BASE081" --diagnostic --report "$REPORTS/04_Valanarasu_under_V081.json"
+      - name: Aggregate diagnosis
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('experiments/V0.8x_batch_diagnosis/reports')
+          reports=[json.loads(p.read_text('utf-8')) for p in sorted(root.glob('*.json')) if p.name!='SUMMARY.json']
+          summary={
+            'experiment':'same degraded Valanarasu content tested under V0.8.0 and V0.8.1 interaction adapters',
+            'conclusion_rule':'If both adapters preserve similar content failures, the dominant defect is upstream content generation, not the V0.8/V0.8.1 shell.',
+            'reports':[{k:r.get(k) for k in ('file','passed','bilingual_units','core_to_appendix_coverage','content_score','structural_score','content_errors','structural_errors')} for r in reports]
+          }
+          (root/'SUMMARY.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n','utf-8')
+          PY
+      - name: Commit experiment artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/V0.8x_batch_diagnosis/output experiments/V0.8x_batch_diagnosis/reports
+          if git diff --cached --quiet; then
+            echo "Experiment artifacts already current"
+          else
+            git commit -m "Build V0.8x controlled migration experiments and quality reports"
+            git push origin HEAD:v0.8x-batch-diagnosis
+          fi
