@@ -10,22 +10,11 @@
   "core_chinese_chars": 16260,
   "appendix_words": 0,
   "core_to_appendix_coverage": null,
+  "expected_pdf_body_blocks": null,
+  "bilingual_to_pdf_body_block_ratio": null,
   "malformed_nested_p": 0,
   "duplicated_overview_cards": 0,
-  "truncated_units": [
-    2,
-    3,
-    4,
-    11,
-    60,
-    66,
-    72,
-    80,
-    84,
-    97,
-    101,
-    102
-  ],
+  "truncated_units": [],
   "reference_contamination_units": [],
   "table_fragment_units": [],
   "garbled_toc_labels": [],
@@ -55,11 +44,9 @@
     "annotation": true
   },
   "missing_from_baseline": [],
-  "content_score": 88,
+  "content_score": 100,
   "structural_score": 100,
-  "content_errors": [
-    "truncated or page-split core paragraphs: [2, 3, 4, 11, 60, 66, 72, 80, 84, 97, 101, 102]"
-  ],
+  "content_errors": [],
   "structural_errors": [],
-  "passed": false
+  "passed": true
 }

@@ -4,14 +4,12 @@
   "reports": [
     {
       "file": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
-      "passed": false,
+      "passed": true,
       "bilingual_units": 111,
       "core_to_appendix_coverage": null,
-      "content_score": 88,
+      "content_score": 100,
       "structural_score": 100,
-      "content_errors": [
-        "truncated or page-split core paragraphs: [2, 3, 4, 11, 60, 66, 72, 80, 84, 97, 101, 102]"
-      ],
+      "content_errors": [],
       "structural_errors": []
     },
     {
@@ -19,14 +17,14 @@
       "passed": false,
       "bilingual_units": 12,
       "core_to_appendix_coverage": 0.1149311450669685,
-      "content_score": 28,
+      "content_score": 40,
       "structural_score": 90,
       "content_errors": [
         "too few bilingual units: 12 < 35",
         "core English coverage too low: 0.115 < 0.45",
         "malformed nested paragraphs: 24",
         "duplicated overview-card nesting: 9",
-        "truncated or page-split core paragraphs: [1, 6, 7, 8]",
+        "explicitly truncated or page-split core paragraphs: [1, 6]",
         "garbled TOC labels: ['01 · 01 Article PDF p.1', '02 · 02 Article PDF p.1', '03 · 03 Article PDF p.1', '04 · e analysis PDF p.2', '05 · e analysis PDF p.2', '06 · e analysis PDF p.3', '07 · e analysis PDF p.3', '08 · 08 正文 PDF p.5']"
       ],
       "structural_errors": [
@@ -38,14 +36,14 @@
       "passed": false,
       "bilingual_units": 12,
       "core_to_appendix_coverage": 0.06993952330131625,
-      "content_score": 4,
+      "content_score": 20,
       "structural_score": 90,
       "content_errors": [
         "too few bilingual units: 12 < 38",
         "core English coverage too low: 0.070 < 0.45",
         "malformed nested paragraphs: 24",
         "duplicated overview-card nesting: 9",
-        "truncated or page-split core paragraphs: [2, 3, 6, 12]",
+        "explicitly truncated or page-split core paragraphs: [2]",
         "table fragments inserted as prose: [6]",
         "garbled TOC labels: ['01 · t modeling PDF p.1', '02 · t modeling PDF p.2', '03 · t modeling PDF p.2', '04 · t modeling PDF p.3', '05 · t modeling PDF p.3', '06 · 20 B cells PDF p.3', '07 · 0 B cells PDF p.10', '08 · 0 B cells PDF p.14']",
         "numeric values misclassified as citations: 3"
@@ -59,14 +57,14 @@
       "passed": false,
       "bilingual_units": 12,
       "core_to_appendix_coverage": 0.06993952330131625,
-      "content_score": 4,
+      "content_score": 20,
       "structural_score": 90,
       "content_errors": [
         "too few bilingual units: 12 < 38",
         "core English coverage too low: 0.070 < 0.45",
         "malformed nested paragraphs: 24",
         "duplicated overview-card nesting: 9",
-        "truncated or page-split core paragraphs: [2, 3, 6, 12]",
+        "explicitly truncated or page-split core paragraphs: [2]",
         "table fragments inserted as prose: [6]",
         "garbled TOC labels: ['01 · t modeling PDF p.1', '02 · t modeling PDF p.2', '03 · t modeling PDF p.2', '04 · t modeling PDF p.3', '05 · t modeling PDF p.3', '06 · 20 B cells PDF p.3', '07 · 0 B cells PDF p.10', '08 · 0 B cells PDF p.14']",
         "numeric values misclassified as citations: 3"
@@ -80,14 +78,14 @@
       "passed": false,
       "bilingual_units": 12,
       "core_to_appendix_coverage": 0.06993952330131625,
-      "content_score": 4,
+      "content_score": 20,
       "structural_score": 90,
       "content_errors": [
         "too few bilingual units: 12 < 38",
         "core English coverage too low: 0.070 < 0.45",
         "malformed nested paragraphs: 24",
         "duplicated overview-card nesting: 9",
-        "truncated or page-split core paragraphs: [2, 3, 6, 12]",
+        "explicitly truncated or page-split core paragraphs: [2]",
         "table fragments inserted as prose: [6]",
         "garbled TOC labels: ['01 · t modeling PDF p.1', '02 · t modeling PDF p.2', '03 · t modeling PDF p.2', '04 · t modeling PDF p.3', '05 · t modeling PDF p.3', '06 · 20 B cells PDF p.3', '07 · 0 B cells PDF p.10', '08 · 0 B cells PDF p.14']",
         "numeric values misclassified as citations: 3"
@@ -95,6 +93,16 @@
       "structural_errors": [
         "missing baseline features: mode_panes"
       ]
+    },
+    {
+      "file": null,
+      "passed": null,
+      "bilingual_units": null,
+      "core_to_appendix_coverage": null,
+      "content_score": null,
+      "structural_score": null,
+      "content_errors": null,
+      "structural_errors": null
     }
   ]
 }
