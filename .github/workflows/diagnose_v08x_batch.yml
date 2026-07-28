@@ -6,9 +6,10 @@ on:
     paths:
       - "experiments/V0.8x_batch_diagnosis/build_version_adapters.py"
       - "experiments/V0.8x_batch_diagnosis/run_trigger.txt"
-      - "experiments/V0.8.2_template_lock/inspect_canvas_dom.py"
-      - "experiments/V0.8.2_template_lock/inspect_canvas_scripts.py"
-      - "experiments/V0.8.2_template_lock/inspect_canvas_components.py"
+      - "experiments/V0.8.2_template_lock/**"
+      - "schemas/paper_content_manifest_v082.schema.json"
+      - "tools/render_v082_canvas_locked.py"
+      - "tools/validate_v082_canvas_shell_lock.py"
       - "tools/validate_reader_content_coverage.py"
       - ".github/workflows/diagnose_v08x_batch.yml"
   pull_request:
@@ -16,6 +17,9 @@ on:
     paths:
       - "experiments/V0.8x_batch_diagnosis/**"
       - "experiments/V0.8.2_template_lock/**"
+      - "schemas/paper_content_manifest_v082.schema.json"
+      - "tools/render_v082_canvas_locked.py"
+      - "tools/validate_v082_canvas_shell_lock.py"
       - "tools/validate_reader_content_coverage.py"
       - ".github/workflows/diagnose_v08x_batch.yml"
   workflow_dispatch:
@@ -33,32 +37,62 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install parser
-        run: python -m pip install --disable-pip-version-check beautifulsoup4
-      - name: Inspect canonical V0.8.2 CANVAS shell
+      - name: Install parser and schema validator
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 jsonschema
+      - name: Locate canonical files
         shell: bash
         run: |
           set -euo pipefail
           CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
-          test -n "$CANVAS"
+          BASE080=$(find published -maxdepth 1 -name 'V0.8_CANVAS*.html' | head -n 1)
+          BASE081=$(find . -maxdepth 1 -name 'V0.8.1_CANVAS*.html' | head -n 1)
+          MAAS=$(find . -maxdepth 1 -name '01_V0.8.2_Maas*.html' | head -n 1)
+          VAL=$(find . -maxdepth 1 -name '04_V0.8.2_Valanarasu*.html' | head -n 1)
+          test -n "$CANVAS" && test -n "$BASE080" && test -n "$BASE081" && test -n "$MAAS" && test -n "$VAL"
+          printf 'CANVAS=%q\nBASE080=%q\nBASE081=%q\nMAAS=%q\nVAL=%q\n' "$CANVAS" "$BASE080" "$BASE081" "$MAAS" "$VAL" > /tmp/v08x_paths
+      - name: Inspect canonical V0.8.2 CANVAS shell
+        shell: bash
+        run: |
+          set -euo pipefail
+          source /tmp/v08x_paths
           python experiments/V0.8.2_template_lock/inspect_canvas_dom.py "$CANVAS" --out experiments/V0.8.2_template_lock/reports/CANVAS_DOM.json
           python experiments/V0.8.2_template_lock/inspect_canvas_scripts.py "$CANVAS" --out experiments/V0.8.2_template_lock/reports/CANVAS_SCRIPTS.json
           python experiments/V0.8.2_template_lock/inspect_canvas_components.py "$CANVAS" --out experiments/V0.8.2_template_lock/reports/CANVAS_COMPONENTS.json
+      - name: Build and validate locked-shell smoke output
+        shell: bash
+        run: |
+          set -euo pipefail
+          source /tmp/v08x_paths
+          OUT=experiments/V0.8.2_template_lock/output/V0.8.2_LOCKED_SMOKE.html
+          REPORT=experiments/V0.8.2_template_lock/reports/LOCKED_SMOKE_SHELL.json
+          python tools/render_v082_canvas_locked.py \
+            experiments/V0.8.2_template_lock/fixtures/smoke_manifest.json \
+            "$OUT" \
+            --canonical "$CANVAS" \
+            --schema schemas/paper_content_manifest_v082.schema.json
+          python tools/validate_v082_canvas_shell_lock.py "$OUT" --canonical "$CANVAS" --report "$REPORT"
+      - name: Demonstrate current batch shell failures
+        shell: bash
+        run: |
+          set -euo pipefail
+          source /tmp/v08x_paths
+          set +e
+          python tools/validate_v082_canvas_shell_lock.py "$MAAS" --canonical "$CANVAS" --report experiments/V0.8.2_template_lock/reports/MAAS_BATCH_SHELL_FAILURE.json
+          MAAS_RC=$?
+          python tools/validate_v082_canvas_shell_lock.py "$VAL" --canonical "$CANVAS" --report experiments/V0.8.2_template_lock/reports/VALANARASU_BATCH_SHELL_FAILURE.json
+          VAL_RC=$?
+          set -e
+          test "$MAAS_RC" -ne 0 && test "$VAL_RC" -ne 0
       - name: Build same-content V0.8.0 and V0.8.1 experiments
         run: python experiments/V0.8x_batch_diagnosis/build_version_adapters.py
       - name: Run independent content and parity audits
         shell: bash
         run: |
           set -euo pipefail
+          source /tmp/v08x_paths
           REPORTS=experiments/V0.8x_batch_diagnosis/reports
           mkdir -p "$REPORTS"
-          BASE080=$(find published -maxdepth 1 -name 'V0.8_CANVAS*.html' | head -n 1)
-          BASE081=$(find . -maxdepth 1 -name 'V0.8.1_CANVAS*.html' | head -n 1)
-          CONTROL=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
-          MAAS=$(find . -maxdepth 1 -name '01_V0.8.2_Maas*.html' | head -n 1)
-          VAL=$(find . -maxdepth 1 -name '04_V0.8.2_Valanarasu*.html' | head -n 1)
-          test -n "$BASE080" && test -n "$BASE081" && test -n "$CONTROL" && test -n "$MAAS" && test -n "$VAL"
-          python tools/validate_reader_content_coverage.py "$CONTROL" --baseline "$BASE081" --diagnostic --report "$REPORTS/00_CANVAS_control.json"
+          python tools/validate_reader_content_coverage.py "$CANVAS" --baseline "$BASE081" --diagnostic --report "$REPORTS/00_CANVAS_control.json"
           python tools/validate_reader_content_coverage.py "$MAAS" --baseline "$BASE081" --expected-body-blocks 234 --diagnostic --report "$REPORTS/01_Maas_V082_batch.json"
           python tools/validate_reader_content_coverage.py "$VAL" --baseline "$BASE081" --expected-body-blocks 183 --diagnostic --report "$REPORTS/04_Valanarasu_V082_batch.json"
           python tools/validate_reader_content_coverage.py experiments/V0.8x_batch_diagnosis/output/V0.8.0_EXPERIMENT_Valanarasu_batch_content.html --baseline "$BASE080" --expected-body-blocks 183 --diagnostic --report "$REPORTS/04_Valanarasu_under_V080.json"
@@ -84,6 +118,7 @@ jobs:
           path: |
             experiments/V0.8x_batch_diagnosis/output
             experiments/V0.8x_batch_diagnosis/reports
+            experiments/V0.8.2_template_lock/output
             experiments/V0.8.2_template_lock/reports
           if-no-files-found: error
           retention-days: 14
@@ -92,10 +127,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add experiments/V0.8x_batch_diagnosis/output experiments/V0.8x_batch_diagnosis/reports experiments/V0.8.2_template_lock/reports
+          git add experiments/V0.8x_batch_diagnosis/output experiments/V0.8x_batch_diagnosis/reports experiments/V0.8.2_template_lock/output experiments/V0.8.2_template_lock/reports
           if git diff --cached --quiet; then
             echo "Experiment artifacts already current"
           else
-            git commit -m "Build V0.8x experiments and V0.8.2 CANVAS inventories"
+            git commit -m "Build V0.8.2 locked-shell proof and diagnostic reports"
             git push origin HEAD:v0.8x-batch-diagnosis
           fi
