@@ -22,12 +22,6 @@
     "figure-8",
     "figure-9"
   ],
-  "errors": [
-    "referenceData does not match manifest references",
-    "crossRefPreviewStore contains stale paper text: STAR Methods（详细方法） 以下为论文 STAR Methods 的完整小节，按原文顺序汇总。 Human specimens and study cohorts（人体样本与研究队列） This study integrated ",
-    "crossRefPreviewStore data-paper-key mismatch",
-    "unable to parse canvas-reader-v062-script:supported",
-    "canvas-v077-script:STUDY_IDS ['figure-1', 'figure-2', 'figure-3', 'figure-4', 'figure-5', 'figure-s1', 'figure-s2', 'figure-s3', 'figure-s4', 'figure-s5', 'figure-s6', 'figure-s7', 'figure-s8', 'graphical-abstract'] != ['figure-1', 'figure-10', 'figure-11', 'figure-12', 'figure-13', 'figure-14', 'figure-15', 'figure-16', 'figure-17', 'figure-2', 'figure-3', 'figure-4', 'figure-5', 'figure-6', 'figure-7', 'figure-8', 'figure-9']"
-  ],
-  "passed": false
+  "errors": [],
+  "passed": true
 }

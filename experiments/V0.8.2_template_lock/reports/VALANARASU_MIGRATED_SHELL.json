@@ -2,9 +2,9 @@
   "canonical": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
   "candidate": "V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
   "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
-  "candidate_sha256": "86e2bc2f846fbf322f052de0c58fbdd2bd69ebb2a9eae2c9f052d42a6810396b",
+  "candidate_sha256": "59a068bf46f2d7db4fd245340b1bcbade13e37e8fb4adacc63c5a5d8c8325876",
   "canonical_shell_sha256": "2fcdc82c35093d566b79ac79f62c9110c64d1cc02523bb8266005e47a5dd0515",
-  "candidate_shell_sha256": "2fcdc82c35093d566b79ac79f62c9110c64d1cc02523bb8266005e47a5dd0515",
+  "candidate_shell_sha256": "b0f98cc681ec918f8c88eaa4408a4c59ef13c4e5648805a7726a90d931954a94",
   "canonical_style_hashes": [
     "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
     "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
@@ -129,6 +129,8 @@
       ]
     }
   ],
-  "errors": [],
-  "passed": true
+  "errors": [
+    "neutralized DOM shell differs from canonical CANVAS"
+  ],
+  "passed": false
 }
