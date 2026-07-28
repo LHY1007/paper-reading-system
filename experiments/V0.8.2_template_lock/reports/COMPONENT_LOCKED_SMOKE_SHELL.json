@@ -3,8 +3,8 @@
   "candidate": "V0.8.2_COMPONENT_LOCKED_SMOKE.html",
   "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
   "candidate_sha256": "8ca544677b2e875fb22e8a604da5778bb33d91a1518fd1aa151c8346ca2f98be",
-  "canonical_shell_sha256": "2fcdc82c35093d566b79ac79f62c9110c64d1cc02523bb8266005e47a5dd0515",
-  "candidate_shell_sha256": "6333a3bb176428d55707ee219d6506bd95ae6269e4e6473f4be1dc614f35d1b3",
+  "canonical_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
+  "candidate_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
   "canonical_style_hashes": [
     "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
     "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
@@ -129,8 +129,6 @@
       ]
     }
   ],
-  "errors": [
-    "neutralized DOM shell differs from canonical CANVAS"
-  ],
-  "passed": false
+  "errors": [],
+  "passed": true
 }
