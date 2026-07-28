@@ -2,7 +2,7 @@
   "canonical": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
   "candidate": "V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
   "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
-  "candidate_sha256": "f47bba6220cb236024bcfbfc33f3c76725503eb8c5169d5bf06fad22f9ed703f",
+  "candidate_sha256": "0b0e20e581972673843aed773592a90781661bd68b73552a7a7e8dce10608395",
   "canonical_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
   "candidate_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
   "canonical_style_hashes": [

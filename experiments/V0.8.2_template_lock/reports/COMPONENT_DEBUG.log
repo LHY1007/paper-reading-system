@@ -27,12 +27,13 @@ canonical_rc=0
 === smoke render ===
 {
   "output": "experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_SMOKE.html",
-  "sha256": "8ca544677b2e875fb22e8a604da5778bb33d91a1518fd1aa151c8346ca2f98be",
+  "sha256": "e603fa4de2be5b3136acb8e9dad375ba6021c6a94248a500d7818aa30ad34c7b",
   "sections": 2,
   "paragraphs": 2,
   "assets": 2,
   "references": 1,
-  "paper_isolation_postprocessed": true
+  "paper_isolation_postprocessed": true,
+  "review_manifest_completed": true
 }
 smoke_render_rc=0
 {
@@ -49,7 +50,7 @@ smoke_component_rc=0
   "canonical": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
   "candidate": "V0.8.2_COMPONENT_LOCKED_SMOKE.html",
   "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
-  "candidate_sha256": "8ca544677b2e875fb22e8a604da5778bb33d91a1518fd1aa151c8346ca2f98be",
+  "candidate_sha256": "e603fa4de2be5b3136acb8e9dad375ba6021c6a94248a500d7818aa30ad34c7b",
   "canonical_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
   "candidate_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
   "canonical_style_hashes": [
@@ -199,12 +200,13 @@ maas_migrate_rc=0
 val_migrate_rc=0
 {
   "output": "experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
-  "sha256": "f47bba6220cb236024bcfbfc33f3c76725503eb8c5169d5bf06fad22f9ed703f",
+  "sha256": "0b0e20e581972673843aed773592a90781661bd68b73552a7a7e8dce10608395",
   "sections": 1,
   "paragraphs": 12,
   "assets": 17,
   "references": 0,
-  "paper_isolation_postprocessed": true
+  "paper_isolation_postprocessed": true,
+  "review_manifest_completed": true
 }
 MAAS_render_rc=0
 {
@@ -220,7 +222,7 @@ MAAS_render_rc=0
   "canonical": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
   "candidate": "V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
   "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
-  "candidate_sha256": "f47bba6220cb236024bcfbfc33f3c76725503eb8c5169d5bf06fad22f9ed703f",
+  "candidate_sha256": "0b0e20e581972673843aed773592a90781661bd68b73552a7a7e8dce10608395",
   "canonical_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
   "candidate_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
   "canonical_style_hashes": [
@@ -379,12 +381,13 @@ MAAS_render_rc=0
 }
 {
   "output": "experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
-  "sha256": "59a068bf46f2d7db4fd245340b1bcbade13e37e8fb4adacc63c5a5d8c8325876",
+  "sha256": "8b633b6cff3bb0c8a58dd16705908dfd1393e2e9ceec58ff4ca40aff53fa5302",
   "sections": 1,
   "paragraphs": 12,
   "assets": 6,
   "references": 0,
-  "paper_isolation_postprocessed": true
+  "paper_isolation_postprocessed": true,
+  "review_manifest_completed": true
 }
 VALANARASU_render_rc=0
 {
@@ -400,7 +403,7 @@ VALANARASU_render_rc=0
   "canonical": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
   "candidate": "V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
   "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
-  "candidate_sha256": "59a068bf46f2d7db4fd245340b1bcbade13e37e8fb4adacc63c5a5d8c8325876",
+  "candidate_sha256": "8b633b6cff3bb0c8a58dd16705908dfd1393e2e9ceec58ff4ca40aff53fa5302",
   "canonical_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
   "candidate_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
   "canonical_style_hashes": [

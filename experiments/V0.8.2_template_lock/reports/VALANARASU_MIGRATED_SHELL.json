@@ -2,7 +2,7 @@
   "canonical": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
   "candidate": "V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
   "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
-  "candidate_sha256": "59a068bf46f2d7db4fd245340b1bcbade13e37e8fb4adacc63c5a5d8c8325876",
+  "candidate_sha256": "8b633b6cff3bb0c8a58dd16705908dfd1393e2e9ceec58ff4ca40aff53fa5302",
   "canonical_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
   "candidate_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
   "canonical_style_hashes": [
