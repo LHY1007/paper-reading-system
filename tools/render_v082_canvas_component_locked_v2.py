@@ -5,7 +5,7 @@ import json
 import re
 from typing import Any
 
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, NavigableString, Tag
 import render_v082_canvas_component_locked_v2_core as core
 
 
@@ -40,6 +40,64 @@ def replace_const_expression(script: str, name: str, expression: str) -> str:
     raise ValueError(f"unterminated JavaScript assignment for {name}")
 
 
+def format_reference_ids(ids: list[str]) -> str:
+    values = [int(value) for value in ids]
+    if len(values) >= 2 and values == list(range(values[0], values[-1] + 1)):
+        return f"{values[0]}–{values[-1]}"
+    return ",".join(str(value) for value in values)
+
+
+def append_inline(soup: BeautifulSoup, parent: Tag, items: list[dict[str, Any]], unit: str, prefix: str, terms: dict[str, dict[str, Any]]) -> None:
+    parent.clear()
+    for index, item in enumerate(items):
+        text = item.get("text", "")
+        group = f"sp-{prefix}-{unit}-{index}"
+        if item.get("figure_ids"):
+            ids = item["figure_ids"]
+            for position, asset_id in enumerate(ids):
+                if position:
+                    parent.append(NavigableString("、"))
+                button = soup.new_tag("button")
+                button["class"] = ["figure-ref"]
+                button["type"] = "button"
+                button["data-target"] = asset_id
+                button.append(NavigableString(text if len(ids) == 1 else asset_id))
+                parent.append(button)
+        elif item.get("section_id"):
+            button = soup.new_tag("button")
+            button["class"] = ["section-ref"]
+            button["type"] = "button"
+            button["data-target"] = item["section_id"]
+            button.append(NavigableString(text))
+            parent.append(button)
+        elif item.get("term_id"):
+            term_data = terms.get(item["term_id"], {})
+            outer = soup.new_tag("span")
+            outer["class"] = ["term-pop"]
+            outer["data-term-id"] = item["term_id"]
+            outer["data-term-level"] = str(term_data.get("level", item.get("level", 2)))
+            outer["data-tip"] = term_data.get("definition_zh", item.get("definition_zh", ""))
+            category = term_data.get("category", item.get("category"))
+            if category:
+                outer["data-term-category"] = category
+            outer["role"] = "button"
+            outer["tabindex"] = "0"
+            outer.append(core.base.sentence(soup, text, group, index))
+            parent.append(outer)
+        else:
+            parent.append(core.base.sentence(soup, text, group, index))
+
+        reference_ids = [str(value) for value in item.get("citation_ids", [])]
+        if reference_ids:
+            citation = soup.new_tag("sup")
+            citation["class"] = ["citation"]
+            citation["data-refs"] = ",".join(reference_ids)
+            citation["role"] = "button"
+            citation["tabindex"] = "0"
+            citation.append(NavigableString(format_reference_ids(reference_ids)))
+            parent.append(citation)
+
+
 def complete_review_manifest(soup: BeautifulSoup, manifest: dict[str, Any], study_ids: list[str]) -> None:
     node = soup.find("script", id="v080ReviewManifest")
     if not node:
@@ -68,6 +126,7 @@ def complete_review_manifest(soup: BeautifulSoup, manifest: dict[str, Any], stud
 
 
 core.base.replace_const_expression = replace_const_expression
+core.base.append_inline = append_inline
 core.complete_review_manifest = complete_review_manifest
 
 
