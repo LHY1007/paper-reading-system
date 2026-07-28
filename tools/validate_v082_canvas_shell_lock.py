@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import hashlib
 from pathlib import Path
 
 from bs4 import BeautifulSoup
@@ -36,8 +37,6 @@ def neutralize(path: Path) -> tuple[str, dict]:
         if node.name == "title":
             node.string = "__PAPER_TITLE__"
         else:
-            # Paper-specific attributes are content as well. Preserve only the
-            # canonical identity/class contract before inserting the slot marker.
             keep = {}
             if node.get("id"):
                 keep["id"] = node.get("id")
@@ -66,6 +65,28 @@ def neutralize(path: Path) -> tuple[str, dict]:
 
 
 core.neutralize = neutralize
+_original_analyze = core.analyze
+
+
+def analyze(canonical: Path, candidate: Path) -> dict:
+    canonical_soup = BeautifulSoup(canonical.read_text("utf-8"), "html.parser")
+    normalized = canonical_soup.select_one('meta[name="v082-canonical-normalized"][content="1"]') is not None
+    if normalized:
+        core.CANONICAL_SHA256 = hashlib.sha256(canonical.read_bytes()).hexdigest()
+        required = [
+            "#readerModeSwitch.reader-mode-switch",
+            '#readerModeSwitch .mode-btn[data-mode="quick"]',
+            '#readerModeSwitch .mode-btn[data-mode="bilingual"]',
+        ]
+        for selector in required:
+            if selector not in core.REQUIRED_FIXED_SELECTORS:
+                core.REQUIRED_FIXED_SELECTORS.append(selector)
+    report = _original_analyze(canonical, candidate)
+    report["canonical_kind"] = "normalized-master" if normalized else "original-00"
+    return report
+
+
+core.analyze = analyze
 
 
 if __name__ == "__main__":
