@@ -3,7 +3,9 @@ from __future__ import annotations
 
 import argparse
 import copy
+import hashlib
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -109,7 +111,91 @@ def ensure_table_caption_module(template: Tag, soup: BeautifulSoup) -> Tag:
     return adapted
 
 
+def term_triples(manifest: dict[str, Any]) -> list[list[str]]:
+    rows: list[list[str]] = []
+    for term in manifest.get("terms", []):
+        label = term.get("label", "")
+        definition = term.get("definition_zh", "")
+        category = term.get("category", "术语")
+        seen: set[str] = set()
+        for alias in [label, *(term.get("aliases") or [])]:
+            alias = str(alias).strip()
+            if alias and alias not in seen:
+                rows.append([alias, definition, category])
+                seen.add(alias)
+    return rows
+
+
+def replace_const_if_present(text: str, name: str, expression: str) -> str:
+    try:
+        return base.replace_const_expression(text, name, expression)
+    except ValueError:
+        return text
+
+
+def patch_script(soup: BeautifulSoup, script_id: str, transform) -> None:
+    node = soup.find("script", id=script_id)
+    if node:
+        node.string = transform(node.get_text() or "")
+
+
+def postprocess_paper_isolation(output: Path, manifest: dict[str, Any]) -> None:
+    soup = BeautifulSoup(output.read_text("utf-8"), "html.parser")
+    paper_key = manifest["paper"]["key"]
+    study_ids = [a["id"] for a in manifest.get("assets", []) if a.get("kind") == "figure" and a.get("study")]
+    study_json = json.dumps(study_ids, ensure_ascii=False, separators=(",", ":"))
+    terms_json = json.dumps(term_triples(manifest), ensure_ascii=False, separators=(",", ":"))
+
+    # The reference popover data is a paper-content store, not part of the UI shell.
+    reference_data = soup.find("script", id="referenceData")
+    if reference_data:
+        reference_data["type"] = "application/json"
+        reference_data.string = json.dumps(
+            {
+                str(ref["id"]): {k: v for k, v in {"text": ref["text"], "url": ref.get("url")}.items() if v}
+                for ref in manifest.get("references", [])
+            },
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
+
+    # CANVAS kept a hidden STAR Methods preview store outside the bilingual pane.
+    # It must never leak into another paper. Main-section jumps work directly; a
+    # later PDF-native builder may repopulate this store with paper-specific extras.
+    preview_store = soup.select_one("#crossRefPreviewStore")
+    if preview_store:
+        preview_store.clear()
+        preview_store["data-paper-key"] = paper_key
+
+    def patch_v062(text: str) -> str:
+        text = replace_const_if_present(text, "KEY", "'paper-reader-'+document.body.dataset.paperKey+'-v082'")
+        return replace_const_if_present(text, "supported", "new Set(" + study_json + ")")
+
+    def patch_v073(text: str) -> str:
+        return replace_const_if_present(text, "STORE", "'paper-reader-'+document.body.dataset.paperKey+'-v082-study'")
+
+    def patch_v077(text: str) -> str:
+        return replace_const_if_present(text, "STUDY_IDS", "new Set(" + study_json + ")")
+
+    def patch_v078(text: str) -> str:
+        return replace_const_if_present(text, "TERMS", terms_json)
+
+    def patch_v081(text: str) -> str:
+        text = replace_const_if_present(text, "EXTRA_TERMS", terms_json)
+        text = re.sub(r"\|\|\s*\[[^\]]*\]\.includes\(id\)", "||" + study_json + ".includes(id)", text, count=1)
+        return text
+
+    patch_script(soup, "canvas-reader-v062-script", patch_v062)
+    patch_script(soup, "canvas-v073-script", patch_v073)
+    patch_script(soup, "canvas-v077-script", patch_v077)
+    patch_script(soup, "canvas-v078-final-script", patch_v078)
+    patch_script(soup, "canvas-v081-script", patch_v081)
+
+    output.write_text(str(soup), "utf-8")
+
+
 def render(canonical: Path, manifest_path: Path, output: Path, schema: Path | None) -> dict[str, Any]:
+    manifest = base.load_json(manifest_path)
     original_hero = base.fill_hero
     original_table = base.fill_table
 
@@ -122,14 +208,19 @@ def render(canonical: Path, manifest_path: Path, output: Path, schema: Path | No
     base.fill_hero = owned_fill
     base.fill_table = normalized_table
     try:
-        return base.render(canonical, manifest_path, output, schema)
+        report = base.render(canonical, manifest_path, output, schema)
     finally:
         base.fill_hero = original_hero
         base.fill_table = original_table
 
+    postprocess_paper_isolation(output, manifest)
+    report["sha256"] = hashlib.sha256(output.read_bytes()).hexdigest()
+    report["paper_isolation_postprocessed"] = True
+    return report
+
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Render exact V0.8.2 CANVAS components with normalized table captions")
+    parser = argparse.ArgumentParser(description="Render exact V0.8.2 CANVAS components with paper-specific stores isolated")
     parser.add_argument("manifest", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--canonical", type=Path, required=True)
