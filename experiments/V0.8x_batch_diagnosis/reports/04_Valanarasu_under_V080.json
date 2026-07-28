@@ -1,7 +1,7 @@
 {
   "file": "V0.8.0_EXPERIMENT_Valanarasu_batch_content.html",
-  "sha256": "2f4e955e06d78b9540f025398cf7317cfb6bde92bf870b241b55639e0bc43fed",
-  "bytes": 5572163,
+  "sha256": "279b6fa859d19d8958d22060d381119749f46a6635a7c73aa13d0cfbed20a8dd",
+  "bytes": 5572147,
   "pages": 35,
   "bilingual_units": 12,
   "english_blocks": 12,
@@ -35,7 +35,7 @@
   ],
   "numeric_citation_corruption": 3,
   "features": {
-    "mode_panes": false,
+    "mode_panes": true,
     "bilingual_units": true,
     "right_viewer": true,
     "figure_index": true,
@@ -58,11 +58,9 @@
     "study_mode": true,
     "annotation": true
   },
-  "missing_from_baseline": [
-    "mode_panes"
-  ],
+  "missing_from_baseline": [],
   "content_score": 20,
-  "structural_score": 90,
+  "structural_score": 100,
   "content_errors": [
     "too few bilingual units: 12 < 38",
     "core English coverage too low: 0.070 < 0.45",
@@ -73,8 +71,6 @@
     "garbled TOC labels: ['01 · t modeling PDF p.1', '02 · t modeling PDF p.2', '03 · t modeling PDF p.2', '04 · t modeling PDF p.3', '05 · t modeling PDF p.3', '06 · 20 B cells PDF p.3', '07 · 0 B cells PDF p.10', '08 · 0 B cells PDF p.14']",
     "numeric values misclassified as citations: 3"
   ],
-  "structural_errors": [
-    "missing baseline features: mode_panes"
-  ],
+  "structural_errors": [],
   "passed": false
 }

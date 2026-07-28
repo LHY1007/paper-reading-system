@@ -58,7 +58,7 @@
       "bilingual_units": 12,
       "core_to_appendix_coverage": 0.06993952330131625,
       "content_score": 20,
-      "structural_score": 90,
+      "structural_score": 100,
       "content_errors": [
         "too few bilingual units: 12 < 38",
         "core English coverage too low: 0.070 < 0.45",
@@ -69,9 +69,7 @@
         "garbled TOC labels: ['01 · t modeling PDF p.1', '02 · t modeling PDF p.2', '03 · t modeling PDF p.2', '04 · t modeling PDF p.3', '05 · t modeling PDF p.3', '06 · 20 B cells PDF p.3', '07 · 0 B cells PDF p.10', '08 · 0 B cells PDF p.14']",
         "numeric values misclassified as citations: 3"
       ],
-      "structural_errors": [
-        "missing baseline features: mode_panes"
-      ]
+      "structural_errors": []
     },
     {
       "file": "V0.8.1_EXPERIMENT_Valanarasu_batch_content.html",
@@ -79,7 +77,7 @@
       "bilingual_units": 12,
       "core_to_appendix_coverage": 0.06993952330131625,
       "content_score": 20,
-      "structural_score": 90,
+      "structural_score": 100,
       "content_errors": [
         "too few bilingual units: 12 < 38",
         "core English coverage too low: 0.070 < 0.45",
@@ -90,9 +88,7 @@
         "garbled TOC labels: ['01 · t modeling PDF p.1', '02 · t modeling PDF p.2', '03 · t modeling PDF p.2', '04 · t modeling PDF p.3', '05 · t modeling PDF p.3', '06 · 20 B cells PDF p.3', '07 · 0 B cells PDF p.10', '08 · 0 B cells PDF p.14']",
         "numeric values misclassified as citations: 3"
       ],
-      "structural_errors": [
-        "missing baseline features: mode_panes"
-      ]
+      "structural_errors": []
     },
     {
       "file": null,

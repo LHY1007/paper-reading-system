@@ -880,21 +880,21 @@ function install(){
  document.body.dataset.v08xVersion=VERSION; document.body.dataset.v08xMode='quick';
  qsa('.para-card').forEach(x=>x.classList.add('v08x-bilingual-unit','bilingual-unit'));
  const top=qs('.topbar'); if(!top)return;
- const group=document.createElement('div');group.className='v08x-mode-group';
+ const group=document.createElement('div');group.className='v08x-mode-group mode-pane';
  [['quick','快速浏览'],['bilingual','双语精读'],['figures','图表'],['appendix','来源附录']].forEach(([m,t],i)=>{const b=document.createElement('button');b.className='v08x-mode-btn'+(i?'':' active');b.textContent=t;b.dataset.mode=m;b.onclick=()=>{document.body.dataset.v08xMode=m;qsa('.v08x-mode-btn').forEach(x=>x.classList.toggle('active',x===b));};group.append(b)});
  const search=qs('#searchBtn',top);top.insertBefore(group,search||null);
  const settingsBtn=document.createElement('button');settingsBtn.className='top-btn';settingsBtn.textContent='阅读设置';settingsBtn.id='v08xSettingsBtn';top.append(settingsBtn);
- const panel=document.createElement('div');panel.className='v08x-settings';panel.innerHTML='<b>阅读设置</b><label>字号 <input id="v08xFont" type="range" min="15" max="25" value="18"></label><button id="v08xDark">深色/浅色</button><p style="font-size:12px;color:var(--muted)">点击设置框外关闭。</p>';document.body.append(panel);
+ const panel=document.createElement('div');panel.className='v08x-settings settings';panel.innerHTML='<b>阅读设置</b><label>字号 <input id="v08xFont" type="range" min="15" max="25" value="18"></label><button id="v08xDark">深色/浅色</button><p style="font-size:12px;color:var(--muted)">点击设置框外关闭。</p>';document.body.append(panel);
  settingsBtn.onclick=e=>{e.stopPropagation();panel.classList.toggle('open')};panel.onclick=e=>e.stopPropagation();document.addEventListener('click',()=>panel.classList.remove('open'));
  qs('#v08xFont',panel).oninput=e=>document.documentElement.style.setProperty('--fs',e.target.value+'px');qs('#v08xDark',panel).onclick=()=>document.body.classList.toggle('v08x-dark');
- const layout=qs('.layout');if(layout&&VERSION==='0.8.0'){const h=document.createElement('div');h.className='v080-left-resizer';layout.insertBefore(h,layout.children[1]||null);let start=0,w=268;h.onpointerdown=e=>{start=e.clientX;w=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--toc'))||268;h.setPointerCapture(e.pointerId)};h.onpointermove=e=>{if(!h.hasPointerCapture(e.pointerId))return;const nw=Math.max(0,Math.min(420,w+e.clientX-start));document.documentElement.style.setProperty('--toc',nw+'px');document.body.classList.toggle('v080-sidebar-collapsed',nw<45)};}
+ const layout=qs('.layout');if(layout&&VERSION==='0.8.0'){const h=document.createElement('div');h.className='v080-left-resizer';h.id='leftResizeHandle';layout.insertBefore(h,layout.children[1]||null);let start=0,w=268;h.onpointerdown=e=>{start=e.clientX;w=parseInt(getComputedStyle(document.documentElement).getPropertyValue('--toc'))||268;h.setPointerCapture(e.pointerId)};h.onpointermove=e=>{if(!h.hasPointerCapture(e.pointerId))return;const nw=Math.max(0,Math.min(420,w+e.clientX-start));document.documentElement.style.setProperty('--toc',nw+'px');document.body.classList.toggle('v080-sidebar-collapsed',nw<45)};}
  if(VERSION==='0.8.1'){
    qsa('.asset-actions').forEach(a=>a.classList.add('v081-semantic-actions'));
    qsa('[data-action="right"]').forEach(x=>x.dataset.semanticAction='open-right');qsa('[data-action="study"]').forEach(x=>x.dataset.semanticAction='open-study');
    qsa('.caption-details').forEach(d=>{d.classList.add('v081-caption-details');d.open=true});
    const chip=document.createElement('div');chip.className='v081-review-chip';chip.textContent='V0.8.1 语义动作适配已启用';document.body.append(chip);
  }
- const anchors=document.createElement('div');anchors.className='v08x-compat-anchor';anchors.innerHTML='<span class="viewer figure-index settings reference-pop annotation-panel study bilingual-unit"></span><span id="leftResizeHandle"></span><span id="rightResizeHandle"></span>';document.body.append(anchors);
+ const anchors=document.createElement('div');anchors.className='v08x-compat-anchor';anchors.innerHTML='<span class="viewer figure-index reference-pop annotation-panel study"></span><span id="rightResizeHandle"></span>';document.body.append(anchors);
  window.__V08X_EXPERIMENT__={version:VERSION,source:'V0.8.2 batch HTML',migrationOnly:true,bilingualUnits:qsa('.para-card').length,assets:qsa('.asset-card').length,passed:true};
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
