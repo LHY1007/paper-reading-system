@@ -1,0 +1,276 @@
+{
+  "generated_at": "2026-07-28T14:42:23Z",
+  "files": [
+    {
+      "file": "V0.8.2_COMPONENT_LOCKED_SMOKE.html",
+      "url": "http://127.0.0.1:57265/experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_SMOKE.html",
+      "checks": {
+        "v080_review_passed": {
+          "passed": false,
+          "detail": "failed"
+        },
+        "both_mode_panes_exist": {
+          "passed": true,
+          "detail": null
+        },
+        "visible_mode_controls_exist": {
+          "passed": false,
+          "detail": 0
+        },
+        "settings_open": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_backdrop_visible": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_outside_close": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_card_toggle": {
+          "passed": true,
+          "detail": {
+            "id": "figure-1",
+            "before_hidden": true,
+            "after_hidden": false
+          }
+        },
+        "right_viewer_open": {
+          "passed": true,
+          "detail": "figure-1"
+        },
+        "right_viewer_has_content": {
+          "passed": true,
+          "detail": null
+        },
+        "right_viewer_close": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_study_open": {
+          "passed": true,
+          "detail": "figure-1"
+        },
+        "figure_study_has_content": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_study_close": {
+          "passed": false,
+          "detail": null
+        },
+        "term_tooltip_content": {
+          "passed": false,
+          "detail": null
+        },
+        "citation_popover_content": {
+          "passed": true,
+          "detail": null
+        },
+        "dynamic_annotation_tool_installed": {
+          "passed": true,
+          "detail": null
+        },
+        "dynamic_edit_tool_installed": {
+          "passed": true,
+          "detail": null
+        },
+        "no_page_errors": {
+          "passed": true,
+          "detail": []
+        },
+        "no_console_errors": {
+          "passed": false,
+          "detail": [
+            "[CANVAS V0.8 review failed] {version: 0.8.2-component-locked, passed: false, errors: Array(2), warnings: Array(1), checkedAt: 2026-07-28T14:42:11.626Z}"
+          ]
+        }
+      },
+      "page_errors": [],
+      "console_errors": [
+        "[CANVAS V0.8 review failed] {version: 0.8.2-component-locked, passed: false, errors: Array(2), warnings: Array(1), checkedAt: 2026-07-28T14:42:11.626Z}"
+      ],
+      "failures": [
+        "v080_review_passed",
+        "visible_mode_controls_exist",
+        "figure_study_close",
+        "term_tooltip_content",
+        "no_console_errors"
+      ],
+      "passed": false
+    },
+    {
+      "file": "V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
+      "url": "http://127.0.0.1:57265/experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
+      "checks": {
+        "v080_review_passed": {
+          "passed": true,
+          "detail": "passed"
+        },
+        "both_mode_panes_exist": {
+          "passed": true,
+          "detail": null
+        },
+        "visible_mode_controls_exist": {
+          "passed": false,
+          "detail": 0
+        },
+        "settings_open": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_backdrop_visible": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_outside_close": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_card_toggle": {
+          "passed": true,
+          "detail": {
+            "id": "figure-1",
+            "before_hidden": true,
+            "after_hidden": false
+          }
+        },
+        "right_viewer_open": {
+          "passed": true,
+          "detail": "figure-1"
+        },
+        "right_viewer_has_content": {
+          "passed": true,
+          "detail": null
+        },
+        "right_viewer_close": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_study_open": {
+          "passed": true,
+          "detail": "figure-1"
+        },
+        "figure_study_has_content": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_study_close": {
+          "passed": false,
+          "detail": null
+        },
+        "dynamic_annotation_tool_installed": {
+          "passed": true,
+          "detail": null
+        },
+        "dynamic_edit_tool_installed": {
+          "passed": true,
+          "detail": null
+        },
+        "no_page_errors": {
+          "passed": true,
+          "detail": []
+        },
+        "no_console_errors": {
+          "passed": true,
+          "detail": []
+        }
+      },
+      "page_errors": [],
+      "console_errors": [],
+      "failures": [
+        "visible_mode_controls_exist",
+        "figure_study_close"
+      ],
+      "passed": false
+    },
+    {
+      "file": "V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
+      "url": "http://127.0.0.1:57265/experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
+      "checks": {
+        "v080_review_passed": {
+          "passed": true,
+          "detail": "passed"
+        },
+        "both_mode_panes_exist": {
+          "passed": true,
+          "detail": null
+        },
+        "visible_mode_controls_exist": {
+          "passed": false,
+          "detail": 0
+        },
+        "settings_open": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_backdrop_visible": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_outside_close": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_card_toggle": {
+          "passed": true,
+          "detail": {
+            "id": "figure-1",
+            "before_hidden": true,
+            "after_hidden": false
+          }
+        },
+        "right_viewer_open": {
+          "passed": true,
+          "detail": "figure-1"
+        },
+        "right_viewer_has_content": {
+          "passed": true,
+          "detail": null
+        },
+        "right_viewer_close": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_study_open": {
+          "passed": true,
+          "detail": "figure-1"
+        },
+        "figure_study_has_content": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_study_close": {
+          "passed": false,
+          "detail": null
+        },
+        "dynamic_annotation_tool_installed": {
+          "passed": true,
+          "detail": null
+        },
+        "dynamic_edit_tool_installed": {
+          "passed": true,
+          "detail": null
+        },
+        "no_page_errors": {
+          "passed": true,
+          "detail": []
+        },
+        "no_console_errors": {
+          "passed": true,
+          "detail": []
+        }
+      },
+      "page_errors": [],
+      "console_errors": [],
+      "failures": [
+        "visible_mode_controls_exist",
+        "figure_study_close"
+      ],
+      "passed": false
+    }
+  ],
+  "passed": false
+}
