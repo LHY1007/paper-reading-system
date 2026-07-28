@@ -139,6 +139,38 @@ def patch_script(soup: BeautifulSoup, script_id: str, transform) -> None:
         node.string = transform(node.get_text() or "")
 
 
+def complete_review_manifest(soup: BeautifulSoup, manifest: dict[str, Any], study_ids: list[str]) -> None:
+    node = soup.find("script", id="v080ReviewManifest")
+    if not node:
+        return
+    try:
+        data = json.loads(node.get_text() or "{}")
+    except json.JSONDecodeError:
+        data = {}
+    assets = manifest.get("assets", [])
+    figure_ids = [a["id"] for a in assets if a.get("kind") == "figure"]
+    table_ids = [a["id"] for a in assets if a.get("kind") == "table"]
+    data.update({
+        "version": "0.8.2-component-locked",
+        "base_version": "0.8.2-CANVAS",
+        "content_hashes": data.get("content_hashes") or {},
+        "expected": {
+            "figure_cards": len(figure_ids),
+            "table_cards": len(table_ids),
+            "study_buttons": len(study_ids),
+            "figure_ids": figure_ids,
+            "table_ids": table_ids,
+            "study_ids": study_ids,
+        },
+        "panel_location_policy": {
+            "mode": "verified-only",
+            "verified_panel_maps": {},
+        },
+    })
+    node["type"] = "application/json"
+    node.string = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
+
+
 def postprocess_paper_isolation(output: Path, manifest: dict[str, Any]) -> None:
     soup = BeautifulSoup(output.read_text("utf-8"), "html.parser")
     paper_key = manifest["paper"]["key"]
@@ -146,7 +178,8 @@ def postprocess_paper_isolation(output: Path, manifest: dict[str, Any]) -> None:
     study_json = json.dumps(study_ids, ensure_ascii=False, separators=(",", ":"))
     terms_json = json.dumps(term_triples(manifest), ensure_ascii=False, separators=(",", ":"))
 
-    # The reference popover data is a paper-content store, not part of the UI shell.
+    complete_review_manifest(soup, manifest, study_ids)
+
     reference_data = soup.find("script", id="referenceData")
     if reference_data:
         reference_data["type"] = "application/json"
@@ -159,9 +192,6 @@ def postprocess_paper_isolation(output: Path, manifest: dict[str, Any]) -> None:
             separators=(",", ":"),
         )
 
-    # CANVAS kept a hidden STAR Methods preview store outside the bilingual pane.
-    # It must never leak into another paper. Main-section jumps work directly; a
-    # later PDF-native builder may repopulate this store with paper-specific extras.
     preview_store = soup.select_one("#crossRefPreviewStore")
     if preview_store:
         preview_store.clear()
@@ -216,6 +246,7 @@ def render(canonical: Path, manifest_path: Path, output: Path, schema: Path | No
     postprocess_paper_isolation(output, manifest)
     report["sha256"] = hashlib.sha256(output.read_bytes()).hexdigest()
     report["paper_isolation_postprocessed"] = True
+    report["review_manifest_completed"] = True
     return report
 
 
