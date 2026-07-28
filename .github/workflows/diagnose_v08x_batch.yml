@@ -46,21 +46,21 @@ jobs:
           VAL=$(find . -maxdepth 1 -name '04_V0.8.2_Valanarasu*.html' | head -n 1)
           test -n "$BASE080" && test -n "$BASE081" && test -n "$CONTROL" && test -n "$MAAS" && test -n "$VAL"
           python tools/validate_reader_content_coverage.py "$CONTROL" --baseline "$BASE081" --diagnostic --report "$REPORTS/00_CANVAS_control.json"
-          python tools/validate_reader_content_coverage.py "$MAAS" --baseline "$BASE081" --diagnostic --report "$REPORTS/01_Maas_V082_batch.json"
-          python tools/validate_reader_content_coverage.py "$VAL" --baseline "$BASE081" --diagnostic --report "$REPORTS/04_Valanarasu_V082_batch.json"
-          python tools/validate_reader_content_coverage.py experiments/V0.8x_batch_diagnosis/output/V0.8.0_EXPERIMENT_Valanarasu_batch_content.html --baseline "$BASE080" --diagnostic --report "$REPORTS/04_Valanarasu_under_V080.json"
-          python tools/validate_reader_content_coverage.py experiments/V0.8x_batch_diagnosis/output/V0.8.1_EXPERIMENT_Valanarasu_batch_content.html --baseline "$BASE081" --diagnostic --report "$REPORTS/04_Valanarasu_under_V081.json"
+          python tools/validate_reader_content_coverage.py "$MAAS" --baseline "$BASE081" --expected-body-blocks 234 --diagnostic --report "$REPORTS/01_Maas_V082_batch.json"
+          python tools/validate_reader_content_coverage.py "$VAL" --baseline "$BASE081" --expected-body-blocks 183 --diagnostic --report "$REPORTS/04_Valanarasu_V082_batch.json"
+          python tools/validate_reader_content_coverage.py experiments/V0.8x_batch_diagnosis/output/V0.8.0_EXPERIMENT_Valanarasu_batch_content.html --baseline "$BASE080" --expected-body-blocks 183 --diagnostic --report "$REPORTS/04_Valanarasu_under_V080.json"
+          python tools/validate_reader_content_coverage.py experiments/V0.8x_batch_diagnosis/output/V0.8.1_EXPERIMENT_Valanarasu_batch_content.html --baseline "$BASE081" --expected-body-blocks 183 --diagnostic --report "$REPORTS/04_Valanarasu_under_V081.json"
       - name: Aggregate diagnosis
         run: |
           python - <<'PY'
           import json
           from pathlib import Path
           root=Path('experiments/V0.8x_batch_diagnosis/reports')
-          reports=[json.loads(p.read_text('utf-8')) for p in sorted(root.glob('*.json')) if p.name!='SUMMARY.json']
+          reports=[json.loads(p.read_text('utf-8')) for p in sorted(root.glob('*.json')) if p.name not in {'SUMMARY.json','PDF_STRUCTURAL_AUDIT_LOCAL.json'}]
           summary={
             'experiment':'same degraded Valanarasu content tested under V0.8.0 and V0.8.1 interaction adapters',
-            'conclusion_rule':'If both adapters preserve similar content failures, the dominant defect is upstream content generation, not the V0.8/V0.8.1 shell.',
-            'reports':[{k:r.get(k) for k in ('file','passed','bilingual_units','core_to_appendix_coverage','content_score','structural_score','content_errors','structural_errors')} for r in reports]
+            'conclusion_rule':'If both adapters preserve similar PDF-native coverage and content failures after structural parity is restored, the dominant defect is upstream content generation rather than the V0.8/V0.8.1 shell.',
+            'reports':[{k:r.get(k) for k in ('file','passed','bilingual_units','expected_pdf_body_blocks','bilingual_to_pdf_body_block_ratio','core_to_appendix_coverage','content_score','structural_score','content_errors','structural_errors')} for r in reports]
           }
           (root/'SUMMARY.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n','utf-8')
           PY
