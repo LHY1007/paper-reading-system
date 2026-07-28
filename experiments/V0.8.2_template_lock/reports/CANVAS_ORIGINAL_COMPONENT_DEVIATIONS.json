@@ -1,0 +1,24 @@
+{
+  "file": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+  "bilingual_units": 111,
+  "figure_cards": 14,
+  "table_cards": 5,
+  "references": 112,
+  "errors": [
+    "figure card 7 image missing data-complete-page",
+    "figure card 8 image missing data-complete-page",
+    "figure card 9 image missing data-complete-page",
+    "figure card 10 image missing data-complete-page",
+    "figure card 11 image missing data-complete-page",
+    "figure card 12 image missing data-complete-page",
+    "figure card 13 image missing data-complete-page",
+    "figure card 14 image missing data-complete-page",
+    "table card 1 captions mismatch",
+    "table card 2 captions mismatch",
+    "table card 3 captions mismatch",
+    "table card 4 captions mismatch",
+    "table card 5 captions mismatch",
+    "paper section 40 missing canonical data-level/title"
+  ],
+  "passed": false
+}

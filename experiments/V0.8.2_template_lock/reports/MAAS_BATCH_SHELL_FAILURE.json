@@ -1,9 +1,9 @@
 {
-  "canonical": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+  "canonical": "V0.8.2_CANVAS_NORMALIZED_MASTER.html",
   "candidate": "01_V0.8.2_Maas_等_-_2026_-_A_microenvironment-determined_risk_continuum_refines_subtyping_in_meningioma_and_reveals_determinant.html",
-  "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
+  "canonical_sha256": "08f7727041d8d76e37bca7ed62bd4eb70e1bb3aea2b5d19196f823472ddf1758",
   "candidate_sha256": "192dd0a014fe48681b71c07a34c1289f3fe17604083e61f2eb996da454112e93",
-  "canonical_shell_sha256": "2fcdc82c35093d566b79ac79f62c9110c64d1cc02523bb8266005e47a5dd0515",
+  "canonical_shell_sha256": "83d491b4bec88b02595c85fd6fc59d58f81e6d6a18b3da2b75ee63b77dca51d5",
   "candidate_shell_sha256": "a4b42d841915e98250eeab9ac61af9201bccb3aebbbfdd2500d9fcdb1b9fe423",
   "canonical_style_hashes": [
     "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
@@ -18,6 +18,7 @@
     "8e475bd3924ac3e4be952771041cf9e65c0fbdfe4787d508e1302234369a769b",
     "1e2358b59d6dd01c9469f0ec37deacd4d32848fe39c79e422332a9e02f7c982a",
     "1466d3ab816b730a60de0d364f4b24f23798aa32b7ca9cda4efa9280e7071a95",
+    "c2385fe9a6c043df4eb1daa05efb2c1983a77120b7bf77e6a8a2b484066a907d",
     "3fe54f99d0128c6b05b67a46c6e5164fccae91e7d044b4168040c0c42c074ab5",
     "1e9a0d4f384f0b43cc5d110acb807fe68308851064ad75ec4660a11b0551ef09",
     "94b0e20c1730cb0e549d5a51e6fd829d9484dc01113aaacc1b0271c40bb4deec"
@@ -72,11 +73,15 @@
     "required fixed selector '.image-magnifier': expected 1, found 0",
     "required fixed selector '#quick-pane.mode-pane': expected 1, found 0",
     "required fixed selector '#bilingual-pane.mode-pane': expected 1, found 0",
+    "required fixed selector '#readerModeSwitch.reader-mode-switch': expected 1, found 0",
+    "required fixed selector '#readerModeSwitch .mode-btn[data-mode=\"quick\"]': expected 1, found 0",
+    "required fixed selector '#readerModeSwitch .mode-btn[data-mode=\"bilingual\"]': expected 1, found 0",
     "forbidden simplified-batch token: meta name=\"reader-version\" content=\"0.8.2\"",
     "forbidden simplified-batch token: class=\"para-card\"",
     "forbidden simplified-batch token: V0.8.2 SEQUENTIAL BUILD",
     "forbidden simplified-batch token: 核心双语段落 12",
     "neutralized DOM shell differs from canonical CANVAS"
   ],
-  "passed": false
+  "passed": false,
+  "canonical_kind": "normalized-master"
 }

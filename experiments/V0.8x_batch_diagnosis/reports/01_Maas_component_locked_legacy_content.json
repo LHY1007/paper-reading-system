@@ -1,7 +1,7 @@
 {
   "file": "V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
-  "sha256": "d2f74fee469d74ad9be5c82cd75015813bc91c2e3e991845991175535b059246",
-  "bytes": 12592838,
+  "sha256": "32b4e38874de52668e70173fc1307b135a820f4b71f0b64580b641ffadee025d",
+  "bytes": 12248206,
   "pages": null,
   "bilingual_units": 12,
   "english_blocks": 12,
@@ -48,12 +48,14 @@
   },
   "missing_from_baseline": [],
   "content_score": 70,
-  "structural_score": 100,
+  "structural_score": 90,
   "content_errors": [
     "too few bilingual units: 12 < 18",
     "PDF-native body-block coverage too low: 0.051 < 0.45 (12/234)",
     "explicitly truncated or page-split core paragraphs: [1, 6]"
   ],
-  "structural_errors": [],
+  "structural_errors": [
+    "no clickable citations"
+  ],
   "passed": false
 }
