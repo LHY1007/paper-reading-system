@@ -1,0 +1,97 @@
+{
+  "schema_version": "0.8.2",
+  "paper": {
+    "key": "v082-template-lock-smoke",
+    "title_en": "Template-lock smoke test for the CANVAS paper reader",
+    "title_zh": "CANVAS 论文阅读器模板锁定冒烟测试",
+    "authors": ["Template Lock Test"],
+    "affiliations": ["Paper Reading System"],
+    "journal": "Internal validation",
+    "year": 2026,
+    "doi": "10.0000/v082-template-lock",
+    "pages": 2,
+    "metadata": [{"label": "构建", "value": "V0.8.2 locked shell"}]
+  },
+  "overview": {
+    "qa": [
+      {"question": "研究解决什么问题？", "answer": "验证不同论文只能替换内容数据，不能改变 CANVAS 页面骨架。"},
+      {"question": "核心数据是什么？", "answer": "一份结构化 JSON 内容清单。"},
+      {"question": "输入与输出是什么？", "answer": "输入论文数据，输出固定 CANVAS 结构的独立 HTML。"},
+      {"question": "最重要的验收是什么？", "answer": "CSS、固定脚本、按钮顺序和固定 DOM 与标准文件一致。"}
+    ],
+    "story": "该测试只用于验证渲染器和外壳锁，不代表任何真实论文内容。",
+    "scope_note": "测试文件不进入正式论文发布。"
+  },
+  "sections": [
+    {
+      "id": "summary",
+      "title_en": "Summary",
+      "title_zh": "摘要",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "id": "summary-p1",
+          "english": [{"text": "This file verifies that the reader shell is immutable.", "citation_ids": ["1"]}],
+          "chinese": [{"text": "本文件验证阅读器外壳不可变。", "citation_ids": ["1"]}],
+          "source_fragments": ["This file verifies that the reader shell is immutable."],
+          "tip": "仅验证结构。"
+        },
+        {"type": "asset", "asset_id": "figure-1"}
+      ]
+    },
+    {
+      "id": "methods",
+      "title_en": "Methods",
+      "title_zh": "方法",
+      "blocks": [
+        {
+          "type": "paragraph",
+          "id": "methods-p1",
+          "english": [{"text": "Paper-specific data are rendered into fixed components."}],
+          "chinese": [{"text": "论文特异数据被渲染到固定组件中。"}],
+          "source_fragments": ["Paper-specific data are rendered into fixed components."]
+        },
+        {"type": "asset", "asset_id": "table-1"}
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "figure-1",
+      "kind": "figure",
+      "group": "主要图表",
+      "title_en": "Figure 1. Locked-shell rendering workflow",
+      "title_zh": "图 1：锁定外壳渲染流程",
+      "intro": "展示结构化数据进入固定阅读器组件。",
+      "image_src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='300'%3E%3Crect width='100%25' height='100%25' fill='white'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='32'%3EV0.8.2 CANVAS LOCK%3C/text%3E%3C/svg%3E",
+      "caption_en": "Structured paper data are inserted into immutable CANVAS components.",
+      "caption_zh": "结构化论文数据被填入不可变的 CANVAS 组件。",
+      "study": {
+        "overview": "The figure tests the fixed figure-card and figure-study interfaces.",
+        "panels": [{"label": "A", "title": "Manifest", "explanation": "The generator reads structured data rather than model-written HTML."}],
+        "conclusion": "The shell remains shared across papers.",
+        "boundary": "This is a structural test, not scientific evidence."
+      }
+    },
+    {
+      "id": "table-1",
+      "kind": "table",
+      "group": "主要图表",
+      "title_en": "Table 1. Locked and variable fields",
+      "title_zh": "表 1：固定字段与可变字段",
+      "intro": "区分系统外壳和论文内容。",
+      "caption_en": "Only content fields vary between papers.",
+      "caption_zh": "不同论文之间仅内容字段发生变化。",
+      "table": {
+        "headers": ["Layer", "Status"],
+        "rows": [["CSS and controls", "Locked"], ["Paper text and assets", "Variable"]]
+      }
+    }
+  ],
+  "terms": [
+    {"id": "immutable-shell", "label": "immutable shell", "definition_zh": "不可由论文生成过程修改的阅读器结构。", "aliases": ["immutable shell", "locked shell"]}
+  ],
+  "references": [
+    {"id": "1", "text": "Internal V0.8.2 CANVAS template-lock contract."}
+  ]
+}
