@@ -1,0 +1,19 @@
+{
+  "version": "V0.8.1",
+  "status": "candidate",
+  "file": "V0.8.1_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+  "size_bytes": 25958782,
+  "sha256": "6b5e13ae62361b2b10ac2d3abdbb51eda0188a102195b0384b037463cb3ab013",
+  "static_passed": true,
+  "browser_harness_passed": true,
+  "content_lock": true,
+  "main_figure_panel_counts": {"figure-1": 10, "figure-2": 10, "figure-3": 14, "figure-4": 10, "figure-5": 15},
+  "figure4_min_chars": 243,
+  "figure5_min_chars": 182,
+  "semantic_actions": {"figure": ["右侧", "精读"], "table": ["右侧"]},
+  "caption_default_open": true,
+  "caption_independent_toggle": true,
+  "term_harness_count": 6,
+  "inferred_panel_coordinates": 0,
+  "passed": true
+}

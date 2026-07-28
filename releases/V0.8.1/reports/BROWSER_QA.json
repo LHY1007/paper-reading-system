@@ -1,0 +1,21 @@
+{
+  "cards": 2,
+  "fig_actions": ["右侧", "精读"],
+  "table_actions": ["右侧"],
+  "right_calls": ["figure-1"],
+  "study_calls": ["figure-1"],
+  "viewer_details": 2,
+  "viewer_open": [true, true],
+  "study_open": [true, true],
+  "terms": 6,
+  "toggle_closed": true,
+  "audit": {
+    "version": "0.8.1",
+    "passed": true,
+    "errors": [],
+    "assetCards": 2,
+    "captionPanels": 2,
+    "coordinatePolicy": "no inferred panel coordinates"
+  },
+  "errors": []
+}
