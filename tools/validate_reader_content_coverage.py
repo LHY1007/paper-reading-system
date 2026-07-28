@@ -52,7 +52,18 @@ def collect_nodes(soup: BeautifulSoup, selectors: Iterable[str]) -> list:
     return found
 
 
-def analyze(path: Path, baseline: Path | None = None) -> dict:
+def is_explicitly_truncated(text: str) -> bool:
+    """Use rejection-oriented signals only; avoid flagging normal citation endings."""
+    if re.search(r"[A-Za-z]{2,}-$", text):
+        return True
+    if re.search(r"\bFigures?\s+\d+[A-Z]?$", text):
+        return True
+    if re.search(r"\b(?:and|or|of|the|a|an|to|for|with|from|in|on|by|as|at|that|which|while)$", text, re.I) and len(text) > 180:
+        return True
+    return False
+
+
+def analyze(path: Path, baseline: Path | None = None, expected_body_blocks: int | None = None) -> dict:
     raw = path.read_text("utf-8")
     soup = BeautifulSoup(raw, "html.parser")
     units = collect_nodes(soup, [".para-card", ".bilingual-unit"])
@@ -66,6 +77,7 @@ def analyze(path: Path, baseline: Path | None = None) -> dict:
     core_zh_chars = sum(len(re.findall(r"[\u4e00-\u9fff]", x)) for x in zh_texts)
     appendix_words = word_count(appendix_text)
     coverage = core_en_words / appendix_words if appendix_words else None
+    pdf_block_coverage = len(units) / expected_body_blocks if expected_body_blocks else None
     pages = page_count(soup)
 
     malformed_nested_p = len(soup.select("p p"))
@@ -76,7 +88,7 @@ def analyze(path: Path, baseline: Path | None = None) -> dict:
     reference_contamination = []
     table_fragments = []
     for i, text in enumerate(en_texts, 1):
-        if re.search(r"(?:[A-Za-z]{2,}-|\bFigures?\s+\d+[A-Z]?)$", text) or (text and text[-1].isalnum() and len(text) > 180 and not re.search(r"(?:et al\.|Fig\.|Dr\.|vs\.)$", text)):
+        if is_explicitly_truncated(text):
             truncated.append(i)
         if re.match(r"^\d+\.\s+[A-Z]", text) and ("doi.org" in text or re.search(r"\b(?:Nature|Cell|Science|Commun\.|Springer|MICCAI)\b", text)):
             reference_contamination.append(i)
@@ -105,6 +117,8 @@ def analyze(path: Path, baseline: Path | None = None) -> dict:
     expected_min_units = max(18, int((pages or 15) * 1.1))
     if len(units) < expected_min_units:
         content_errors.append(f"too few bilingual units: {len(units)} < {expected_min_units}")
+    if expected_body_blocks and pdf_block_coverage is not None and pdf_block_coverage < 0.45:
+        content_errors.append(f"PDF-native body-block coverage too low: {pdf_block_coverage:.3f} < 0.45 ({len(units)}/{expected_body_blocks})")
     if appendix_words >= 1500 and coverage is not None and coverage < 0.45:
         content_errors.append(f"core English coverage too low: {coverage:.3f} < 0.45")
     if len(en_nodes) != len(zh_nodes):
@@ -114,7 +128,7 @@ def analyze(path: Path, baseline: Path | None = None) -> dict:
     if duplicated_overview:
         content_errors.append(f"duplicated overview-card nesting: {duplicated_overview}")
     if truncated:
-        content_errors.append(f"truncated or page-split core paragraphs: {truncated}")
+        content_errors.append(f"explicitly truncated or page-split core paragraphs: {truncated}")
     if reference_contamination:
         content_errors.append(f"reference entries inserted into core reading: {reference_contamination}")
     if table_fragments:
@@ -132,7 +146,7 @@ def analyze(path: Path, baseline: Path | None = None) -> dict:
     if not soup.select("sup.citation, .citation"):
         structural_errors.append("no clickable citations")
 
-    content_score = max(0, 100 - 12 * len(content_errors))
+    content_score = max(0, 100 - 10 * len(content_errors))
     structural_score = max(0, 100 - 10 * len(structural_errors))
     passed = not content_errors and not structural_errors
     return {
@@ -147,6 +161,8 @@ def analyze(path: Path, baseline: Path | None = None) -> dict:
         "core_chinese_chars": core_zh_chars,
         "appendix_words": appendix_words,
         "core_to_appendix_coverage": coverage,
+        "expected_pdf_body_blocks": expected_body_blocks,
+        "bilingual_to_pdf_body_block_ratio": pdf_block_coverage,
         "malformed_nested_p": malformed_nested_p,
         "duplicated_overview_cards": duplicated_overview,
         "truncated_units": truncated,
@@ -169,10 +185,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Independent reader-content coverage and baseline-parity validator")
     parser.add_argument("html", type=Path)
     parser.add_argument("--baseline", type=Path)
+    parser.add_argument("--expected-body-blocks", type=int)
     parser.add_argument("--report", type=Path)
     parser.add_argument("--diagnostic", action="store_true", help="write/report failures without a non-zero exit")
     args = parser.parse_args()
-    report = analyze(args.html, args.baseline)
+    report = analyze(args.html, args.baseline, args.expected_body_blocks)
     text = json.dumps(report, ensure_ascii=False, indent=2)
     print(text)
     if args.report:
