@@ -1,0 +1,84 @@
+{
+  "file": "01_V0.8.2_Maas_等_-_2026_-_A_microenvironment-determined_risk_continuum_refines_subtyping_in_meningioma_and_reveals_determinant.html",
+  "sha256": "192dd0a014fe48681b71c07a34c1289f3fe17604083e61f2eb996da454112e93",
+  "bytes": 12125294,
+  "pages": 32,
+  "bilingual_units": 12,
+  "english_blocks": 12,
+  "chinese_blocks": 12,
+  "core_english_words": 2437,
+  "core_chinese_chars": 2045,
+  "appendix_words": 21204,
+  "core_to_appendix_coverage": 0.1149311450669685,
+  "malformed_nested_p": 24,
+  "duplicated_overview_cards": 9,
+  "truncated_units": [
+    1,
+    6,
+    7,
+    8
+  ],
+  "reference_contamination_units": [],
+  "table_fragment_units": [],
+  "garbled_toc_labels": [
+    "01 · 01 Article PDF p.1",
+    "02 · 02 Article PDF p.1",
+    "03 · 03 Article PDF p.1",
+    "04 · e analysis PDF p.2",
+    "05 · e analysis PDF p.2",
+    "06 · e analysis PDF p.3",
+    "07 · e analysis PDF p.3",
+    "08 · 08 正文 PDF p.5",
+    "09 · 09 正文 PDF p.5",
+    "10 · mune cells PDF p.9",
+    "11 · P = 0.01 PDF p.10",
+    "12 · P = 0.01 PDF p.18"
+  ],
+  "numeric_citation_corruption": 0,
+  "features": {
+    "mode_panes": false,
+    "bilingual_units": false,
+    "right_viewer": true,
+    "figure_index": false,
+    "settings": true,
+    "reference_popover": false,
+    "left_resizer": false,
+    "right_resizer": false,
+    "study_mode": true,
+    "annotation": true
+  },
+  "baseline_required_features": {
+    "mode_panes": true,
+    "bilingual_units": true,
+    "right_viewer": true,
+    "figure_index": true,
+    "settings": true,
+    "reference_popover": true,
+    "left_resizer": true,
+    "right_resizer": true,
+    "study_mode": true,
+    "annotation": true
+  },
+  "missing_from_baseline": [
+    "mode_panes",
+    "bilingual_units",
+    "figure_index",
+    "reference_popover",
+    "left_resizer",
+    "right_resizer"
+  ],
+  "content_score": 28,
+  "structural_score": 90,
+  "content_errors": [
+    "too few bilingual units: 12 < 35",
+    "core English coverage too low: 0.115 < 0.45",
+    "malformed nested paragraphs: 24",
+    "duplicated overview-card nesting: 9",
+    "truncated or page-split core paragraphs: [1, 6, 7, 8]",
+    "garbled TOC labels: ['01 · 01 Article PDF p.1', '02 · 02 Article PDF p.1', '03 · 03 Article PDF p.1', '04 · e analysis PDF p.2', '05 · e analysis PDF p.2', '06 · e analysis PDF p.3', '07 · e analysis PDF p.3', '08 · 08 正文 PDF p.5']"
+  ],
+  "structural_errors": [
+    "missing baseline features: mode_panes, bilingual_units, figure_index, reference_popover, left_resizer, right_resizer"
+  ],
+  "passed": false
+}
