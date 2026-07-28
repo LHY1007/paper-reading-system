@@ -1,0 +1,81 @@
+{
+  "canonical": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+  "candidate": "04_V0.8.2_Valanarasu_等_-_2026_-_Multimodal_AI_generates_virtual_population_for_tumor_microenvironment_modeling.html",
+  "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
+  "candidate_sha256": "7f0bd2f23c579594b3ab7ee4b925af81997c751bd59bfafaef0eaea246c19c19",
+  "canonical_shell_sha256": "0f5f07b37476b0822699967b7b5275dbe460e4df3d8bc9ca32765f201bf0956a",
+  "candidate_shell_sha256": "79d7c184afbec79f9a2048d459389974148716afc7bd7a370a5bd5c448d24bf5",
+  "canonical_style_hashes": [
+    "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
+    "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
+    "f82f1da605f7f77839bfef3d0a2b3be1154aedbae6e61d8ed62ff8adaa1d8268",
+    "f81b9084ea6ef20186446db9baa9c415ef1d781316ba6d192ff8db3c8736160c",
+    "4101554deeee96cd761b2f2ab80261fee454cc6f7b573c6bd39f93364d27ae35",
+    "8f665ecc1b1f41d06bf7c5dd0774d6029f8b059751d2901bfcc0aef4bd3da269",
+    "a0175adf0fb35d5da4c3c4d55c6a70e930e7575f0211fc67942aa5043f891ae1",
+    "46ce2357d64a9530417760c526dcfe6f00aa95ff7cf6cc0b1304c3761e3c137f",
+    "b59d633ba71d347cf6aa80ec1b61c4ceaa0035387fe8b70504d9989a99e8dd39",
+    "8e475bd3924ac3e4be952771041cf9e65c0fbdfe4787d508e1302234369a769b",
+    "1e2358b59d6dd01c9469f0ec37deacd4d32848fe39c79e422332a9e02f7c982a",
+    "1466d3ab816b730a60de0d364f4b24f23798aa32b7ca9cda4efa9280e7071a95",
+    "3fe54f99d0128c6b05b67a46c6e5164fccae91e7d044b4168040c0c42c074ab5",
+    "1e9a0d4f384f0b43cc5d110acb807fe68308851064ad75ec4660a11b0551ef09",
+    "94b0e20c1730cb0e549d5a51e6fd829d9484dc01113aaacc1b0271c40bb4deec"
+  ],
+  "candidate_style_hashes": [
+    "2638029cb5bad828b96ea00b73ca02e37bab26c6c0f1a33d60731c83eb8d5dae"
+  ],
+  "topbar_children": [],
+  "layout_children": [
+    {
+      "tag": "nav",
+      "id": null,
+      "classes": [
+        "toc"
+      ]
+    },
+    {
+      "tag": "main",
+      "id": null,
+      "classes": []
+    }
+  ],
+  "errors": [
+    "candidate: content slot '#topbar .brand' expected once, found 0",
+    "candidate: content slot '#quick-pane' expected once, found 0",
+    "candidate: content slot '#bilingual-pane' expected once, found 0",
+    "style blocks differ from canonical CANVAS",
+    "static script inventory or hashes differ from canonical CANVAS",
+    "topbar child order differs",
+    "layout child order differs",
+    "body fixed-node order differs",
+    "required fixed selector '#topbar': expected 1, found 0",
+    "required fixed selector '#tocBtn': expected 1, found 0",
+    "required fixed selector '#immersiveBtn': expected 1, found 0",
+    "required fixed selector '#settingsBtn': expected 1, found 0",
+    "required fixed selector '#annotationBtn': expected 1, found 0",
+    "required fixed selector '#pdfBtn': expected 1, found 0",
+    "required fixed selector '#printBtn': expected 1, found 0",
+    "required fixed selector '#sidebar': expected 1, found 0",
+    "required fixed selector '#toc': expected 1, found 0",
+    "required fixed selector '#leftResizeHandle.resizer.left-resizer': expected 1, found 0",
+    "required fixed selector '#rightResizeHandle.resizer.right-resizer': expected 1, found 0",
+    "required fixed selector '#viewer.viewer': expected 1, found 0",
+    "required fixed selector '#settings.settings': expected 1, found 0",
+    "required fixed selector '.settings-backdrop': expected 1, found 0",
+    "required fixed selector '.annotation-toolbar': expected 1, found 0",
+    "required fixed selector '.annotation-drawer': expected 1, found 0",
+    "required fixed selector '#termTooltip.term-tooltip': expected 1, found 0",
+    "required fixed selector '.reference-pop': expected 1, found 0",
+    "required fixed selector '.modal .zoom-stage': expected 1, found 0",
+    "required fixed selector '.image-magnifier': expected 1, found 0",
+    "required fixed selector '#quick-pane.mode-pane': expected 1, found 0",
+    "required fixed selector '#bilingual-pane.mode-pane': expected 1, found 0",
+    "forbidden simplified-batch token: meta name=\"reader-version\" content=\"0.8.2\"",
+    "forbidden simplified-batch token: class=\"para-card\"",
+    "forbidden simplified-batch token: V0.8.2 SEQUENTIAL BUILD",
+    "forbidden simplified-batch token: 核心双语段落 12",
+    "neutralized DOM shell differs from canonical CANVAS"
+  ],
+  "passed": false
+}
