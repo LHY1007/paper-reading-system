@@ -2,7 +2,7 @@
   "canonical": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
   "candidate": "V0.8.2_LOCKED_SMOKE.html",
   "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
-  "candidate_sha256": "21b75face6ff64dabb51e59923d4b6eb998ca92e0eda87345667d0a8e8e1585c",
+  "candidate_sha256": "26c2a42472f058b52e27dc364b5c7c95ef5c97360be0e2240c30f08c47683614",
   "canonical_shell_sha256": "0f5f07b37476b0822699967b7b5275dbe460e4df3d8bc9ca32765f201bf0956a",
   "candidate_shell_sha256": "0f5f07b37476b0822699967b7b5275dbe460e4df3d8bc9ca32765f201bf0956a",
   "canonical_style_hashes": [
