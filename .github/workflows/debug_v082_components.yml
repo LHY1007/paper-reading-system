@@ -1,0 +1,89 @@
+name: Debug V0.8.2 component lock
+
+on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - ".github/workflows/debug_v082_components.yml"
+      - "tools/render_v082_canvas_component_locked.py"
+      - "tools/render_v082_canvas_component_locked_v2.py"
+      - "tools/validate_v082_canvas_components.py"
+      - "tools/validate_v082_canvas_components_core.py"
+      - "tools/migrate_v082_batch_to_manifest.py"
+      - "schemas/paper_content_manifest_v082.schema.json"
+      - "experiments/V0.8.2_template_lock/fixtures/smoke_manifest.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  debug:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check beautifulsoup4 jsonschema
+      - name: Run non-blocking component diagnostics
+        shell: bash
+        run: |
+          set +e
+          CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
+          MAAS=$(find . -maxdepth 1 -name '01_V0.8.2_Maas*.html' | head -n 1)
+          VAL=$(find . -maxdepth 1 -name '04_V0.8.2_Valanarasu*.html' | head -n 1)
+          ROOT=experiments/V0.8.2_template_lock
+          mkdir -p "$ROOT/output" "$ROOT/reports" "$ROOT/manifests"
+          LOG="$ROOT/reports/COMPONENT_DEBUG.log"
+          : > "$LOG"
+          echo '=== canonical component contract ===' >> "$LOG"
+          python tools/validate_v082_canvas_components_core.py "$CANVAS" --diagnostic --report "$ROOT/reports/CANVAS_COMPONENT_CONTRACT.json" >> "$LOG" 2>&1
+          echo "canonical_rc=$?" >> "$LOG"
+          echo '=== smoke render ===' >> "$LOG"
+          python tools/render_v082_canvas_component_locked_v2.py "$ROOT/fixtures/smoke_manifest.json" "$ROOT/output/V0.8.2_COMPONENT_LOCKED_SMOKE.html" --canonical "$CANVAS" --schema schemas/paper_content_manifest_v082.schema.json >> "$LOG" 2>&1
+          echo "smoke_render_rc=$?" >> "$LOG"
+          if test -f "$ROOT/output/V0.8.2_COMPONENT_LOCKED_SMOKE.html"; then
+            python tools/validate_v082_canvas_components_core.py "$ROOT/output/V0.8.2_COMPONENT_LOCKED_SMOKE.html" --diagnostic --report "$ROOT/reports/COMPONENT_LOCKED_SMOKE_COMPONENTS.json" >> "$LOG" 2>&1
+            echo "smoke_component_rc=$?" >> "$LOG"
+            python tools/validate_v082_canvas_shell_lock.py "$ROOT/output/V0.8.2_COMPONENT_LOCKED_SMOKE.html" --canonical "$CANVAS" --report "$ROOT/reports/COMPONENT_LOCKED_SMOKE_SHELL.json" >> "$LOG" 2>&1
+            echo "smoke_shell_rc=$?" >> "$LOG"
+          fi
+          echo '=== legacy migration/render ===' >> "$LOG"
+          python tools/migrate_v082_batch_to_manifest.py "$MAAS" "$ROOT/manifests/MAAS_LEGACY_CONTENT.json" >> "$LOG" 2>&1
+          echo "maas_migrate_rc=$?" >> "$LOG"
+          python tools/migrate_v082_batch_to_manifest.py "$VAL" "$ROOT/manifests/VALANARASU_LEGACY_CONTENT.json" >> "$LOG" 2>&1
+          echo "val_migrate_rc=$?" >> "$LOG"
+          for NAME in MAAS VALANARASU; do
+            MANIFEST="$ROOT/manifests/${NAME}_LEGACY_CONTENT.json"
+            OUT="$ROOT/output/V0.8.2_COMPONENT_LOCKED_${NAME}_LEGACY_CONTENT.html"
+            if test -f "$MANIFEST"; then
+              python tools/render_v082_canvas_component_locked_v2.py "$MANIFEST" "$OUT" --canonical "$CANVAS" --schema schemas/paper_content_manifest_v082.schema.json >> "$LOG" 2>&1
+              echo "${NAME}_render_rc=$?" >> "$LOG"
+              if test -f "$OUT"; then
+                python tools/validate_v082_canvas_components_core.py "$OUT" --diagnostic --report "$ROOT/reports/${NAME}_MIGRATED_COMPONENTS.json" >> "$LOG" 2>&1
+                python tools/validate_v082_canvas_shell_lock.py "$OUT" --canonical "$CANVAS" --report "$ROOT/reports/${NAME}_MIGRATED_SHELL.json" >> "$LOG" 2>&1
+              fi
+            fi
+          done
+          exit 0
+      - name: Upload debug artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: v082-component-debug
+          path: experiments/V0.8.2_template_lock
+          if-no-files-found: error
+          retention-days: 14
+      - name: Commit debug artifacts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/V0.8.2_template_lock/manifests experiments/V0.8.2_template_lock/output experiments/V0.8.2_template_lock/reports
+          if git diff --cached --quiet; then
+            echo no changes
+          else
+            git commit -m "Record V0.8.2 component-lock debug artifacts"
+            git push origin HEAD:v0.8x-batch-diagnosis
+          fi
