@@ -25,15 +25,27 @@
 }
 canonical_rc=0
 === smoke render ===
-{
-  "output": "experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_SMOKE.html",
-  "sha256": "7c72fe0c801a836d13334f84d47b6b8e053b547d4eaf9bdf001ccc76da624afb",
-  "sections": 2,
-  "paragraphs": 2,
-  "assets": 2,
-  "references": 1
-}
-smoke_render_rc=0
+Traceback (most recent call last):
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 233, in <module>
+    main()
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 229, in main
+    print(json.dumps(render(args.canonical, args.manifest, args.output, args.schema), ensure_ascii=False, indent=2))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 216, in render
+    postprocess_paper_isolation(output, manifest)
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 188, in postprocess_paper_isolation
+    patch_script(soup, "canvas-reader-v062-script", patch_v062)
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 139, in patch_script
+    node.string = transform(node.get_text() or "")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 171, in patch_v062
+    text = replace_const_if_present(text, "KEY", "'paper-reader-'+document.body.dataset.paperKey+'-v082'")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 131, in replace_const_if_present
+    return base.replace_const_expression(text, name, expression)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'render_v082_canvas_component_locked' has no attribute 'replace_const_expression'
+smoke_render_rc=1
 {
   "file": "V0.8.2_COMPONENT_LOCKED_SMOKE.html",
   "bilingual_units": 2,
@@ -49,8 +61,8 @@ smoke_component_rc=0
   "candidate": "V0.8.2_COMPONENT_LOCKED_SMOKE.html",
   "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
   "candidate_sha256": "7c72fe0c801a836d13334f84d47b6b8e053b547d4eaf9bdf001ccc76da624afb",
-  "canonical_shell_sha256": "0f5f07b37476b0822699967b7b5275dbe460e4df3d8bc9ca32765f201bf0956a",
-  "candidate_shell_sha256": "0f5f07b37476b0822699967b7b5275dbe460e4df3d8bc9ca32765f201bf0956a",
+  "canonical_shell_sha256": "2fcdc82c35093d566b79ac79f62c9110c64d1cc02523bb8266005e47a5dd0515",
+  "candidate_shell_sha256": "2fcdc82c35093d566b79ac79f62c9110c64d1cc02523bb8266005e47a5dd0515",
   "canonical_style_hashes": [
     "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
     "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
@@ -184,15 +196,27 @@ smoke_shell_rc=0
 maas_migrate_rc=0
 {"output": "experiments/V0.8.2_template_lock/manifests/VALANARASU_LEGACY_CONTENT.json", "paragraphs": 18, "assets": 6}
 val_migrate_rc=0
-{
-  "output": "experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
-  "sha256": "d2f74fee469d74ad9be5c82cd75015813bc91c2e3e991845991175535b059246",
-  "sections": 1,
-  "paragraphs": 12,
-  "assets": 17,
-  "references": 0
-}
-MAAS_render_rc=0
+Traceback (most recent call last):
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 233, in <module>
+    main()
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 229, in main
+    print(json.dumps(render(args.canonical, args.manifest, args.output, args.schema), ensure_ascii=False, indent=2))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 216, in render
+    postprocess_paper_isolation(output, manifest)
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 188, in postprocess_paper_isolation
+    patch_script(soup, "canvas-reader-v062-script", patch_v062)
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 139, in patch_script
+    node.string = transform(node.get_text() or "")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 171, in patch_v062
+    text = replace_const_if_present(text, "KEY", "'paper-reader-'+document.body.dataset.paperKey+'-v082'")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 131, in replace_const_if_present
+    return base.replace_const_expression(text, name, expression)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'render_v082_canvas_component_locked' has no attribute 'replace_const_expression'
+MAAS_render_rc=1
 {
   "file": "V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
   "bilingual_units": 12,
@@ -207,8 +231,8 @@ MAAS_render_rc=0
   "candidate": "V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
   "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
   "candidate_sha256": "d2f74fee469d74ad9be5c82cd75015813bc91c2e3e991845991175535b059246",
-  "canonical_shell_sha256": "0f5f07b37476b0822699967b7b5275dbe460e4df3d8bc9ca32765f201bf0956a",
-  "candidate_shell_sha256": "0f5f07b37476b0822699967b7b5275dbe460e4df3d8bc9ca32765f201bf0956a",
+  "canonical_shell_sha256": "2fcdc82c35093d566b79ac79f62c9110c64d1cc02523bb8266005e47a5dd0515",
+  "candidate_shell_sha256": "2fcdc82c35093d566b79ac79f62c9110c64d1cc02523bb8266005e47a5dd0515",
   "canonical_style_hashes": [
     "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
     "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
@@ -336,15 +360,27 @@ MAAS_render_rc=0
   "errors": [],
   "passed": true
 }
-{
-  "output": "experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
-  "sha256": "86e2bc2f846fbf322f052de0c58fbdd2bd69ebb2a9eae2c9f052d42a6810396b",
-  "sections": 1,
-  "paragraphs": 12,
-  "assets": 6,
-  "references": 0
-}
-VALANARASU_render_rc=0
+Traceback (most recent call last):
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 233, in <module>
+    main()
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 229, in main
+    print(json.dumps(render(args.canonical, args.manifest, args.output, args.schema), ensure_ascii=False, indent=2))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 216, in render
+    postprocess_paper_isolation(output, manifest)
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 188, in postprocess_paper_isolation
+    patch_script(soup, "canvas-reader-v062-script", patch_v062)
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 139, in patch_script
+    node.string = transform(node.get_text() or "")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 171, in patch_v062
+    text = replace_const_if_present(text, "KEY", "'paper-reader-'+document.body.dataset.paperKey+'-v082'")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/paper-reading-system/paper-reading-system/tools/render_v082_canvas_component_locked_v2.py", line 131, in replace_const_if_present
+    return base.replace_const_expression(text, name, expression)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'render_v082_canvas_component_locked' has no attribute 'replace_const_expression'
+VALANARASU_render_rc=1
 {
   "file": "V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
   "bilingual_units": 12,
@@ -359,8 +395,8 @@ VALANARASU_render_rc=0
   "candidate": "V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
   "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
   "candidate_sha256": "86e2bc2f846fbf322f052de0c58fbdd2bd69ebb2a9eae2c9f052d42a6810396b",
-  "canonical_shell_sha256": "0f5f07b37476b0822699967b7b5275dbe460e4df3d8bc9ca32765f201bf0956a",
-  "candidate_shell_sha256": "0f5f07b37476b0822699967b7b5275dbe460e4df3d8bc9ca32765f201bf0956a",
+  "canonical_shell_sha256": "2fcdc82c35093d566b79ac79f62c9110c64d1cc02523bb8266005e47a5dd0515",
+  "candidate_shell_sha256": "2fcdc82c35093d566b79ac79f62c9110c64d1cc02523bb8266005e47a5dd0515",
   "canonical_style_hashes": [
     "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
     "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
