@@ -1,0 +1,14 @@
+{
+  "file": "04_V0.8.2_Valanarasu_等_-_2026_-_Multimodal_AI_generates_virtual_population_for_tumor_microenvironment_modeling.html",
+  "bilingual_units": 0,
+  "figure_cards": 0,
+  "table_cards": 0,
+  "references": 0,
+  "errors": [
+    "missing overview card #quick-pane #overview",
+    "missing overview card #overview-bilingual-folded > .card",
+    "missing #figure-table-index",
+    "no bilingual units"
+  ],
+  "passed": false
+}

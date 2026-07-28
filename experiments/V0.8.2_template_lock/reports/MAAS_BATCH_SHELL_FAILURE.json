@@ -3,7 +3,7 @@
   "candidate": "01_V0.8.2_Maas_等_-_2026_-_A_microenvironment-determined_risk_continuum_refines_subtyping_in_meningioma_and_reveals_determinant.html",
   "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
   "candidate_sha256": "192dd0a014fe48681b71c07a34c1289f3fe17604083e61f2eb996da454112e93",
-  "canonical_shell_sha256": "0f5f07b37476b0822699967b7b5275dbe460e4df3d8bc9ca32765f201bf0956a",
+  "canonical_shell_sha256": "2fcdc82c35093d566b79ac79f62c9110c64d1cc02523bb8266005e47a5dd0515",
   "candidate_shell_sha256": "a4b42d841915e98250eeab9ac61af9201bccb3aebbbfdd2500d9fcdb1b9fe423",
   "canonical_style_hashes": [
     "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
@@ -44,6 +44,7 @@
     "candidate: content slot '#topbar .brand' expected once, found 0",
     "candidate: content slot '#quick-pane' expected once, found 0",
     "candidate: content slot '#bilingual-pane' expected once, found 0",
+    "candidate: content slot '#crossRefPreviewStore' expected once, found 0",
     "style blocks differ from canonical CANVAS",
     "static script inventory or hashes differ from canonical CANVAS",
     "topbar child order differs",

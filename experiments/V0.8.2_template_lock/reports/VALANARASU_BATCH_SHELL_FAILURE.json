@@ -3,7 +3,7 @@
   "candidate": "04_V0.8.2_Valanarasu_等_-_2026_-_Multimodal_AI_generates_virtual_population_for_tumor_microenvironment_modeling.html",
   "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
   "candidate_sha256": "7f0bd2f23c579594b3ab7ee4b925af81997c751bd59bfafaef0eaea246c19c19",
-  "canonical_shell_sha256": "0f5f07b37476b0822699967b7b5275dbe460e4df3d8bc9ca32765f201bf0956a",
+  "canonical_shell_sha256": "2fcdc82c35093d566b79ac79f62c9110c64d1cc02523bb8266005e47a5dd0515",
   "candidate_shell_sha256": "79d7c184afbec79f9a2048d459389974148716afc7bd7a370a5bd5c448d24bf5",
   "canonical_style_hashes": [
     "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
@@ -44,6 +44,7 @@
     "candidate: content slot '#topbar .brand' expected once, found 0",
     "candidate: content slot '#quick-pane' expected once, found 0",
     "candidate: content slot '#bilingual-pane' expected once, found 0",
+    "candidate: content slot '#crossRefPreviewStore' expected once, found 0",
     "style blocks differ from canonical CANVAS",
     "static script inventory or hashes differ from canonical CANVAS",
     "topbar child order differs",

@@ -1,0 +1,64 @@
+{
+  "file": "V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
+  "sha256": "86e2bc2f846fbf322f052de0c58fbdd2bd69ebb2a9eae2c9f052d42a6810396b",
+  "bytes": 6049104,
+  "pages": null,
+  "bilingual_units": 12,
+  "english_blocks": 12,
+  "chinese_blocks": 12,
+  "core_english_words": 959,
+  "core_chinese_chars": 814,
+  "appendix_words": 0,
+  "core_to_appendix_coverage": null,
+  "expected_pdf_body_blocks": 183,
+  "bilingual_to_pdf_body_block_ratio": 0.06557377049180328,
+  "malformed_nested_p": 0,
+  "duplicated_overview_cards": 0,
+  "truncated_units": [
+    2
+  ],
+  "reference_contamination_units": [
+    9
+  ],
+  "table_fragment_units": [
+    6
+  ],
+  "garbled_toc_labels": [],
+  "numeric_citation_corruption": 0,
+  "features": {
+    "mode_panes": true,
+    "bilingual_units": true,
+    "right_viewer": true,
+    "figure_index": true,
+    "settings": true,
+    "reference_popover": true,
+    "left_resizer": true,
+    "right_resizer": true,
+    "study_mode": true,
+    "annotation": true
+  },
+  "baseline_required_features": {
+    "mode_panes": true,
+    "bilingual_units": true,
+    "right_viewer": true,
+    "figure_index": true,
+    "settings": true,
+    "reference_popover": true,
+    "left_resizer": true,
+    "right_resizer": true,
+    "study_mode": true,
+    "annotation": true
+  },
+  "missing_from_baseline": [],
+  "content_score": 50,
+  "structural_score": 100,
+  "content_errors": [
+    "too few bilingual units: 12 < 18",
+    "PDF-native body-block coverage too low: 0.066 < 0.45 (12/183)",
+    "explicitly truncated or page-split core paragraphs: [2]",
+    "reference entries inserted into core reading: [9]",
+    "table fragments inserted as prose: [6]"
+  ],
+  "structural_errors": [],
+  "passed": false
+}

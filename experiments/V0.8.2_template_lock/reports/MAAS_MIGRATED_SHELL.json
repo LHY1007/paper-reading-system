@@ -3,8 +3,8 @@
   "candidate": "V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
   "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
   "candidate_sha256": "d2f74fee469d74ad9be5c82cd75015813bc91c2e3e991845991175535b059246",
-  "canonical_shell_sha256": "0f5f07b37476b0822699967b7b5275dbe460e4df3d8bc9ca32765f201bf0956a",
-  "candidate_shell_sha256": "0f5f07b37476b0822699967b7b5275dbe460e4df3d8bc9ca32765f201bf0956a",
+  "canonical_shell_sha256": "2fcdc82c35093d566b79ac79f62c9110c64d1cc02523bb8266005e47a5dd0515",
+  "candidate_shell_sha256": "2fcdc82c35093d566b79ac79f62c9110c64d1cc02523bb8266005e47a5dd0515",
   "canonical_style_hashes": [
     "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
     "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
