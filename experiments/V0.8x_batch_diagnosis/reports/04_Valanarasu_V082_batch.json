@@ -10,8 +10,8 @@
   "core_chinese_chars": 862,
   "appendix_words": 14055,
   "core_to_appendix_coverage": 0.06993952330131625,
-  "expected_pdf_body_blocks": null,
-  "bilingual_to_pdf_body_block_ratio": null,
+  "expected_pdf_body_blocks": 183,
+  "bilingual_to_pdf_body_block_ratio": 0.06557377049180328,
   "malformed_nested_p": 24,
   "duplicated_overview_cards": 9,
   "truncated_units": [
@@ -67,10 +67,11 @@
     "left_resizer",
     "right_resizer"
   ],
-  "content_score": 20,
+  "content_score": 10,
   "structural_score": 90,
   "content_errors": [
     "too few bilingual units: 12 < 38",
+    "PDF-native body-block coverage too low: 0.066 < 0.45 (12/183)",
     "core English coverage too low: 0.070 < 0.45",
     "malformed nested paragraphs: 24",
     "duplicated overview-card nesting: 9",

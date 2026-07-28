@@ -1,11 +1,13 @@
 {
   "experiment": "same degraded Valanarasu content tested under V0.8.0 and V0.8.1 interaction adapters",
-  "conclusion_rule": "If both adapters preserve similar content failures, the dominant defect is upstream content generation, not the V0.8/V0.8.1 shell.",
+  "conclusion_rule": "If both adapters preserve similar PDF-native coverage and content failures after structural parity is restored, the dominant defect is upstream content generation rather than the V0.8/V0.8.1 shell.",
   "reports": [
     {
       "file": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
       "passed": true,
       "bilingual_units": 111,
+      "expected_pdf_body_blocks": null,
+      "bilingual_to_pdf_body_block_ratio": null,
       "core_to_appendix_coverage": null,
       "content_score": 100,
       "structural_score": 100,
@@ -16,11 +18,14 @@
       "file": "01_V0.8.2_Maas_等_-_2026_-_A_microenvironment-determined_risk_continuum_refines_subtyping_in_meningioma_and_reveals_determinant.html",
       "passed": false,
       "bilingual_units": 12,
+      "expected_pdf_body_blocks": 234,
+      "bilingual_to_pdf_body_block_ratio": 0.05128205128205128,
       "core_to_appendix_coverage": 0.1149311450669685,
-      "content_score": 40,
+      "content_score": 30,
       "structural_score": 90,
       "content_errors": [
         "too few bilingual units: 12 < 35",
+        "PDF-native body-block coverage too low: 0.051 < 0.45 (12/234)",
         "core English coverage too low: 0.115 < 0.45",
         "malformed nested paragraphs: 24",
         "duplicated overview-card nesting: 9",
@@ -35,11 +40,14 @@
       "file": "04_V0.8.2_Valanarasu_等_-_2026_-_Multimodal_AI_generates_virtual_population_for_tumor_microenvironment_modeling.html",
       "passed": false,
       "bilingual_units": 12,
+      "expected_pdf_body_blocks": 183,
+      "bilingual_to_pdf_body_block_ratio": 0.06557377049180328,
       "core_to_appendix_coverage": 0.06993952330131625,
-      "content_score": 20,
+      "content_score": 10,
       "structural_score": 90,
       "content_errors": [
         "too few bilingual units: 12 < 38",
+        "PDF-native body-block coverage too low: 0.066 < 0.45 (12/183)",
         "core English coverage too low: 0.070 < 0.45",
         "malformed nested paragraphs: 24",
         "duplicated overview-card nesting: 9",
@@ -56,11 +64,14 @@
       "file": "V0.8.0_EXPERIMENT_Valanarasu_batch_content.html",
       "passed": false,
       "bilingual_units": 12,
+      "expected_pdf_body_blocks": 183,
+      "bilingual_to_pdf_body_block_ratio": 0.06557377049180328,
       "core_to_appendix_coverage": 0.06993952330131625,
-      "content_score": 20,
+      "content_score": 10,
       "structural_score": 100,
       "content_errors": [
         "too few bilingual units: 12 < 38",
+        "PDF-native body-block coverage too low: 0.066 < 0.45 (12/183)",
         "core English coverage too low: 0.070 < 0.45",
         "malformed nested paragraphs: 24",
         "duplicated overview-card nesting: 9",
@@ -75,11 +86,14 @@
       "file": "V0.8.1_EXPERIMENT_Valanarasu_batch_content.html",
       "passed": false,
       "bilingual_units": 12,
+      "expected_pdf_body_blocks": 183,
+      "bilingual_to_pdf_body_block_ratio": 0.06557377049180328,
       "core_to_appendix_coverage": 0.06993952330131625,
-      "content_score": 20,
+      "content_score": 10,
       "structural_score": 100,
       "content_errors": [
         "too few bilingual units: 12 < 38",
+        "PDF-native body-block coverage too low: 0.066 < 0.45 (12/183)",
         "core English coverage too low: 0.070 < 0.45",
         "malformed nested paragraphs: 24",
         "duplicated overview-card nesting: 9",
@@ -89,16 +103,6 @@
         "numeric values misclassified as citations: 3"
       ],
       "structural_errors": []
-    },
-    {
-      "file": null,
-      "passed": null,
-      "bilingual_units": null,
-      "core_to_appendix_coverage": null,
-      "content_score": null,
-      "structural_score": null,
-      "content_errors": null,
-      "structural_errors": null
     }
   ]
 }
