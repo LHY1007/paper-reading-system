@@ -178,7 +178,8 @@ smoke_component_rc=0
     }
   ],
   "errors": [],
-  "passed": true
+  "passed": true,
+  "canonical_kind": "original-00"
 }
 smoke_shell_rc=0
 {
@@ -350,7 +351,8 @@ MAAS_render_rc=0
     }
   ],
   "errors": [],
-  "passed": true
+  "passed": true,
+  "canonical_kind": "original-00"
 }
 {
   "file": "V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
@@ -531,7 +533,8 @@ VALANARASU_render_rc=0
     }
   ],
   "errors": [],
-  "passed": true
+  "passed": true,
+  "canonical_kind": "original-00"
 }
 {
   "file": "V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
