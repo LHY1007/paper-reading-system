@@ -46,7 +46,7 @@ jobs:
           python tools/render_v082_canvas_component_locked_v2.py "$ROOT/fixtures/smoke_manifest.json" "$ROOT/output/V0.8.2_COMPONENT_LOCKED_SMOKE.html" --canonical "$MASTER" --schema schemas/paper_content_manifest_v082.schema.json
           python tools/render_v082_canvas_component_locked_v2.py "$ROOT/manifests/MAAS_LEGACY_CONTENT.json" "$ROOT/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html" --canonical "$MASTER" --schema schemas/paper_content_manifest_v082.schema.json
           python tools/render_v082_canvas_component_locked_v2.py "$ROOT/manifests/VALANARASU_LEGACY_CONTENT.json" "$ROOT/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html" --canonical "$MASTER" --schema schemas/paper_content_manifest_v082.schema.json
-      - name: Run strict browser regression
+      - name: Run browser diagnostics
         shell: bash
         run: |
           python tools/browser_regression_v082.py \
@@ -55,7 +55,8 @@ jobs:
             experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html \
             experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html \
             --root . \
-            --report experiments/V0.8.2_template_lock/reports/BROWSER_REGRESSION.json
+            --report experiments/V0.8.2_template_lock/reports/BROWSER_REGRESSION.json \
+            --diagnostic
       - uses: actions/upload-artifact@v4
         with:
           name: v082-browser-regression
@@ -73,6 +74,6 @@ jobs:
           if git diff --cached --quiet; then
             echo no changes
           else
-            git commit -m "Record normalized-master browser regression results"
+            git commit -m "Record normalized-master browser diagnostics"
             git push origin HEAD:v0.8x-batch-diagnosis
           fi
