@@ -1,0 +1,31 @@
+{
+  "method": "PyMuPDF sorted text-block audit; repeated headers/footers excluded; figure/table captions and references classified separately",
+  "papers": [
+    {
+      "file": "Valanarasu 等 - 2026 - Multimodal AI generates virtual population for tumor microenvironment modeling(6).pdf",
+      "sha256": "33ccceacaf565138c35840d6ea5a06fbcb594e455311947188222557c18eec50",
+      "pages": 35,
+      "body_text_blocks": 183,
+      "figure_table_captions": 21,
+      "reference_blocks": 55,
+      "heading_blocks": 58,
+      "header_footer_blocks_removed": 48,
+      "minimum_expected_bilingual_units": 38,
+      "observed_v082_bilingual_units": 12,
+      "observed_to_body_block_ratio": 0.06557377049180328
+    },
+    {
+      "file": "Maas 等 - 2026 - A microenvironment-determined risk continuum refines subtyping in meningioma and reveals determinant(2).pdf",
+      "sha256": "6736c1c3f7096e758fbe071ef6d4513810037633ae442049f3904b462e530399",
+      "pages": 32,
+      "body_text_blocks": 234,
+      "figure_table_captions": 17,
+      "reference_blocks": 0,
+      "heading_blocks": 156,
+      "header_footer_blocks_removed": 76,
+      "minimum_expected_bilingual_units": 35,
+      "observed_v082_bilingual_units": 12,
+      "observed_to_body_block_ratio": 0.05128205128205128
+    }
+  ]
+}
