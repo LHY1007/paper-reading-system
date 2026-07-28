@@ -1,8 +1,8 @@
 name: Build V0.8.2 final readers
 
 on:
-  push:
-    branches: [v0.8x-batch-diagnosis]
+  pull_request:
+    branches: [main]
     paths:
       - ".github/workflows/build_v082_final_readers.yml"
       - "config/v082_paper_sources.json"
@@ -106,9 +106,7 @@ jobs:
           schema=root/'schemas/paper_content_manifest_v082.schema.json'
           glossary=root/'config/biomedical_glossary_zh.json'
           cache=root/'final/V0.8.2/cache/opus-mt-en-zh.json'
-          master=pathlib.Path(__import__('os').environ.get('MASTER',''))
-          if not master.exists():
-              master=next((root/'final/V0.8.2/readers').glob('00_V0.8.2_FINAL_CANVAS*.html'))
+          master=next((root/'final/V0.8.2/readers').glob('00_V0.8.2_FINAL_CANVAS*.html'))
           raw_dir=root/'.build/v082/manifests_raw'
           raw_dir.mkdir(parents=True,exist_ok=True)
           final_manifest_dir=root/'final/V0.8.2/manifests'
@@ -155,14 +153,13 @@ jobs:
           readers=sorted((root/'readers').glob('*.html'))
           content=[]; shells=[]; components=[]
           for p in sorted((root/'reports').glob('*_CONTENT.json')):
-              content.append(json.loads(p.read_text('utf-8')))
+              content.append({'report':p.name,**json.loads(p.read_text('utf-8'))})
           for p in sorted((root/'reports').glob('*_SHELL.json')):
               shells.append({'report':p.name,**json.loads(p.read_text('utf-8'))})
           for p in sorted((root/'reports').glob('*_COMPONENTS.json')):
               components.append({'report':p.name,**json.loads(p.read_text('utf-8'))})
           browser=json.loads((root/'reports/BROWSER_REGRESSION.json').read_text('utf-8'))
           sources=json.loads((root/'reports/SOURCE_DOWNLOAD.json').read_text('utf-8'))
-          master_content=json.loads((root/'reports/00_CANVAS_CONTENT.json').read_text('utf-8'))
           inventory=[]
           for p in readers:
               inventory.append({'file':p.name,'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()})
@@ -170,8 +167,7 @@ jobs:
           actual=[p.name for p in readers]
           if actual!=expected: errors.append({'reader_inventory':{'expected':expected,'actual':actual}})
           if not sources.get('passed'): errors.append('official source download gate failed')
-          if not master_content.get('passed'): errors.append('normalized CANVAS content parity failed')
-          if len(content)!=11 or not all(x.get('passed') for x in content): errors.append('non-CANVAS content gate failed')
+          if len(content)!=12 or not all(x.get('passed') for x in content): errors.append('content gate failed')
           if len(shells)!=12 or not all(x.get('passed') for x in shells): errors.append('shell-lock gate failed')
           if len(components)!=12 or not all(x.get('passed') for x in components): errors.append('component-contract gate failed')
           if not browser.get('passed') or len(browser.get('files',[]))!=12: errors.append('browser regression gate failed')
@@ -181,7 +177,6 @@ jobs:
               'reader_count':len(readers),
               'inventory':inventory,
               'source_download_passed':sources.get('passed'),
-              'canvas_content_parity':master_content,
               'content_reports':content,
               'shell_reports':shells,
               'component_reports':components,
