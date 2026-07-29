@@ -12,6 +12,7 @@ on:
       - "tools/download_v082_release_sources.py"
       - "tools/build_pdf_native_manifest_v082.py"
       - "tools/build_pdf_native_manifest_v082_unpacked.py"
+      - "tools/build_pdf_native_manifest_v082_final.py"
       - "tools/translate_v082_manifest.py"
       - "tools/validate_v082_final_manifest.py"
       - "tools/normalize_v082_canvas_master.py"
@@ -26,7 +27,7 @@ permissions:
 
 concurrency:
   group: v082-final-reader-build
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   HF_HUB_DISABLE_XET: "1"
