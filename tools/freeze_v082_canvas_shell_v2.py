@@ -27,6 +27,12 @@ def first(node: BeautifulSoup | Tag, selector: str) -> Tag:
     return found
 
 
+def script_text(node: Tag) -> str:
+    if node.string is not None:
+        return str(node.string)
+    return str(node.decode_contents())
+
+
 def scrub_hero(soup: BeautifulSoup) -> None:
     hero = base.require_one(soup, ".hero")
     base.set_text(hero.find("h1", recursive=False), base.PLACEHOLDERS["title"])
@@ -112,16 +118,22 @@ def scrub_runtime_data(soup: BeautifulSoup) -> None:
     ORIGINAL_SCRUB_RUNTIME_DATA(soup)
 
     immersive = soup.find("script", id="canvas-reader-v061-script")
-    if immersive is not None:
-        text = immersive.get_text() or ""
-        text = text.replace("else window.openCanvasFigureStudy?.('figure-1')", "else void 0")
-        immersive.string = text
+    if immersive is None:
+        raise RuntimeError("missing canvas-reader-v061-script")
+    immersive_text = script_text(immersive)
+    if "TERM_DATA" not in immersive_text:
+        raise RuntimeError("TERM_DATA interface was lost while freezing the shell")
+    immersive_text = immersive_text.replace("else window.openCanvasFigureStudy?.('figure-1')", "else void 0")
+    immersive.string = str(immersive_text)
 
     interaction = soup.find("script", id="canvas-v081-script")
-    if interaction is not None:
-        text = interaction.get_text() or ""
-        text = text.replace(CANVAS_STUDY_FALLBACK, "")
-        interaction.string = text
+    if interaction is None:
+        raise RuntimeError("missing canvas-v081-script")
+    interaction_text = script_text(interaction)
+    if "EXTRA_TERMS" not in interaction_text or "studySupported" not in interaction_text:
+        raise RuntimeError("V0.8.1 interaction interfaces were lost while freezing the shell")
+    interaction_text = interaction_text.replace(CANVAS_STUDY_FALLBACK, "")
+    interaction.string = str(interaction_text)
 
 
 def scrub_bilingual_pane(soup: BeautifulSoup) -> None:
@@ -191,17 +203,35 @@ def freeze(source: Path, output: Path) -> dict[str, Any]:
 
     soup = BeautifulSoup(output.read_text("utf-8"), "html.parser")
     cleared_images = clear_paper_images(soup)
+    required_script_interfaces = {
+        "canvas-reader-v060-script": "V6_ASSETS",
+        "canvas-reader-v061-script": "TERM_DATA",
+        "canvas-reader-v062-script": "supported",
+        "canvas-v077-script": "STUDY_IDS",
+        "canvas-v078-final-script": "TERMS",
+        "canvas-v081-script": "EXTRA_TERMS",
+        "canvas-v082-script": "ONTOLOGY",
+    }
+    missing_interfaces = []
+    for script_id, interface in required_script_interfaces.items():
+        node = soup.find("script", id=script_id)
+        if node is None or interface not in script_text(node):
+            missing_interfaces.append(f"{script_id}:{interface}")
+    if missing_interfaces:
+        raise RuntimeError(f"fixed shell lost dynamic script interfaces: {missing_interfaces}")
+
     output.write_text(str(soup), "utf-8")
     raw = output.read_text("utf-8")
     report.update(
         {
-            "version": "v082-frozen-shell-3",
+            "version": "v082-frozen-shell-4",
             "output_sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
             "output_bytes": output.stat().st_size,
             "size_ratio": round(output.stat().st_size / max(1, source.stat().st_size), 6),
             "placeholder_count": raw.count("__V082_"),
             "paper_images_cleared": cleared_images,
             "paper_asset_id_residues": [],
+            "dynamic_script_interfaces": required_script_interfaces,
         }
     )
     return report
