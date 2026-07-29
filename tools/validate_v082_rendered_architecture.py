@@ -95,7 +95,7 @@ def normalize_script(node: Tag, missing_interfaces: list[str]) -> str:
 def normalized_script_inventory(soup: BeautifulSoup) -> tuple[list[dict[str, Any]], list[str]]:
     inventory: list[dict[str, Any]] = []
     missing_interfaces: list[str] = []
-    for index, node in enumerate(soup.find_all("script")):
+    for node in soup.find_all("script"):
         if node.find_parent(id="bilingual-pane") is not None:
             continue
         script_id = node.get("id")
@@ -104,7 +104,7 @@ def normalized_script_inventory(soup: BeautifulSoup) -> tuple[list[dict[str, Any
         normalized = normalize_script(node, missing_interfaces)
         inventory.append(
             {
-                "index": index,
+                "index": len(inventory),
                 "id": script_id,
                 "type": node.get("type"),
                 "src": node.get("src"),
@@ -116,7 +116,7 @@ def normalized_script_inventory(soup: BeautifulSoup) -> tuple[list[dict[str, Any
 
 def fixed_button_inventory(soup: BeautifulSoup) -> list[dict[str, Any]]:
     inventory: list[dict[str, Any]] = []
-    for index, button in enumerate(soup.find_all("button")):
+    for button in soup.find_all("button"):
         if button.find_parent(id="bilingual-pane") is not None:
             continue
         attrs = {
@@ -126,7 +126,7 @@ def fixed_button_inventory(soup: BeautifulSoup) -> list[dict[str, Any]]:
         }
         inventory.append(
             {
-                "index": index,
+                "index": len(inventory),
                 "attrs": attrs,
                 "text": " ".join(button.get_text(" ", strip=True).split()),
             }
