@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/build_v082_final_readers.yml"
       - "config/v082_paper_sources.json"
+      - "config/v082_frozen_shell_lock.json"
       - "config/biomedical_glossary_zh.json"
       - "schemas/paper_content_manifest_v082.schema.json"
       - "tools/download_v082_sources.py"
@@ -155,6 +156,7 @@ jobs:
           python tools/freeze_v082_canvas_shell_v2.py "$MASTER" "$SHELL" \
             --report final/V0.8.2/reports/FROZEN_SHELL_BUILD.json
           python tools/validate_v082_frozen_shell.py "$SHELL" --master "$MASTER" \
+            --lock config/v082_frozen_shell_lock.json \
             --report final/V0.8.2/reports/FROZEN_SHELL_GATE.json
           printf 'MASTER=%q\nSHELL=%q\n' "$MASTER" "$SHELL" >> /tmp/v082_final_paths
 
@@ -169,6 +171,7 @@ jobs:
           registry=json.loads((root/'config/v082_paper_sources.json').read_text('utf-8'))
           schema=root/'schemas/paper_content_manifest_v082.schema.json'
           glossary=root/'config/biomedical_glossary_zh.json'
+          shell_lock=root/'config/v082_frozen_shell_lock.json'
           cache=root/'final/V0.8.2/cache/opus-mt-en-zh.json'
           master=next((root/'final/V0.8.2/readers').glob('00_V0.8.2_FINAL_CANVAS*.html'))
           shell=root/'.build/v082/templates/V082_CANVAS_FROZEN_SHELL.html'
@@ -198,7 +201,7 @@ jobs:
               subprocess.run([sys.executable,'tools/translate_v082_manifest.py',str(raw),str(manifest),'--glossary',str(glossary),'--cache',str(cache),'--batch-size','16'],check=True)
               subprocess.run([sys.executable,'tools/validate_v082_final_manifest.py',str(manifest),'--schema',str(schema),'--audit',str(audit),'--report',str(content_report)],check=True)
               subprocess.run([sys.executable,'tools/validate_v082_manifest_code_boundary.py',str(manifest),'--report',str(code_boundary_report)],check=True)
-              subprocess.run([sys.executable,'tools/render_v082_from_frozen_shell.py',str(manifest),str(output),'--shell',str(shell),'--schema',str(schema),'--report',str(render_report)],check=True)
+              subprocess.run([sys.executable,'tools/render_v082_from_frozen_shell.py',str(manifest),str(output),'--shell',str(shell),'--lock',str(shell_lock),'--schema',str(schema),'--report',str(render_report)],check=True)
               subprocess.run([sys.executable,'tools/validate_v082_canvas_shell_lock.py',str(output),'--canonical',str(master),'--report',str(shell_report)],check=True)
               subprocess.run([sys.executable,'tools/validate_v082_canvas_components.py',str(output),'--report',str(component_report)],check=True)
           PY
@@ -218,6 +221,7 @@ jobs:
           import hashlib,json,pathlib,sys
           root=pathlib.Path('final/V0.8.2')
           registry=json.load(open('config/v082_paper_sources.json'))
+          shell_lock=json.load(open('config/v082_frozen_shell_lock.json'))
           expected=[x['output'] for x in sorted(registry['papers'],key=lambda x:x['order'])]
           readers=sorted((root/'readers').glob('*.html'))
           content=[]; shells=[]; components=[]; boundaries=[]; renders=[]
@@ -242,22 +246,31 @@ jobs:
           if actual!=expected: errors.append({'reader_inventory':{'expected':expected,'actual':actual}})
           if not sources.get('passed'): errors.append('source input audit gate failed')
           if not frozen_shell.get('passed'): errors.append('fixed product shell gate failed')
+          if frozen_shell.get('shell_sha256') != shell_lock.get('frozen_shell_sha256'):
+              errors.append('fixed product shell differs from version lock')
           if len(content)!=12 or not all(x.get('passed') for x in content): errors.append('content gate failed')
           if len(shells)!=12 or not all(x.get('passed') for x in shells): errors.append('shell-lock gate failed')
           if len(components)!=12 or not all(x.get('passed') for x in components): errors.append('component-contract gate failed')
           if len(boundaries)!=11 or not all(x.get('passed') for x in boundaries): errors.append('manifest-only code boundary gate failed')
           if len(renders)!=11: errors.append('fixed-shell render inventory failed')
-          expected_shell_sha=frozen_shell.get('shell_sha256')
-          if renders and any(x.get('shell_sha256')!=expected_shell_sha or x.get('renderer')!='v082-frozen-shell-1' for x in renders):
+          expected_shell_sha=shell_lock.get('frozen_shell_sha256')
+          expected_lock_version=shell_lock.get('version')
+          if renders and any(
+              x.get('shell_sha256')!=expected_shell_sha
+              or x.get('shell_lock_version')!=expected_lock_version
+              or x.get('renderer')!='v082-frozen-shell-2'
+              for x in renders
+          ):
               errors.append('reader shell provenance gate failed')
           if not browser.get('passed') or len(browser.get('files',[]))!=12: errors.append('browser regression gate failed')
           gate={
               'release':'V0.8.2 FINAL',
               'registry_version':registry['version'],
-              'architecture':'immutable CANVAS shell + validated paper manifest',
+              'architecture':'hash-locked immutable CANVAS shell + validated paper manifest',
               'reader_count':len(readers),
               'inventory':inventory,
               'source_input_audit_passed':sources.get('passed'),
+              'frozen_shell_lock':shell_lock,
               'frozen_shell_gate':frozen_shell,
               'manifest_code_boundary_reports':boundaries,
               'render_reports':renders,
