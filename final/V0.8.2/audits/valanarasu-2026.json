@@ -398,7 +398,7 @@
   "manifest_source_fragments_sha256": "e7de958d9ea3f196d17f0cabc7f752f8989bacc58e959ebe6d32cf289c0e2826",
   "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
   "passed": true,
-  "strict_layout_parser": "v082-final-4",
+  "strict_layout_parser": "v082-final-5",
   "formula_blocks_detected": 11,
   "formula_blocks_missing": 0,
   "formula_samples": [
@@ -424,6 +424,8 @@
   "source_outline_entries": 37,
   "figure_titles_corrected_from_pdf_toc": 0,
   "captions_trimmed": 2,
-  "caption_panel_evidence_blocks": 0,
-  "reference_repair_applied": true
+  "caption_panel_evidence_blocks": 24,
+  "reference_repair_applied": true,
+  "titles_extended_from_caption": 0,
+  "uppercase_panel_evidence_blocks": 24
 }

@@ -17,12 +17,12 @@
       "key": "maas-2026",
       "order": 1,
       "pdf": ".build/v082/pdfs/01_maas-2026.pdf",
-      "returncode": 1,
-      "stdout": "{\n  \"key\": \"maas-2026\",\n  \"sections\": 19,\n  \"paragraphs\": 202,\n  \"assets\": 16,\n  \"references\": 86,\n  \"formula_blocks\": 27,\n  \"cross_column_caption_merges\": 7,\n  \"passed\": false,\n  \"errors\": [\n    {\n      \"missing_formula_blocks\": [\n        \"N2 - n=6 N3 - n=8\",\n        \"N4 - n=5 N6 - n=7\",\n        \"S6 - n=4 S7 - n=2\",\n        \"r = 0.401\",\n        \"r = −0.219\"\n      ]\n    }\n  ]\n}\n",
+      "returncode": 0,
+      "stdout": "{\n  \"key\": \"maas-2026\",\n  \"sections\": 19,\n  \"paragraphs\": 199,\n  \"assets\": 16,\n  \"references\": 86,\n  \"formula_blocks\": 20,\n  \"cross_column_caption_merges\": 7,\n  \"passed\": true,\n  \"errors\": []\n}\n",
       "stderr": "",
       "manifest_exists": true,
       "audit_exists": true,
-      "passed": false,
+      "passed": true,
       "audit": {
         "schema_version": "v082-pdf-native-audit-1",
         "paper_key": "maas-2026",
@@ -34,12 +34,12 @@
         "kept_text_blocks": 1737,
         "repeated_header_footer_patterns": 4,
         "events": {
-          "body": 76884,
+          "body": 76887,
           "heading": 337,
           "reference": 34787,
           "caption": 36999
         },
-        "paragraphs": 202,
+        "paragraphs": 199,
         "sections": 19,
         "assets": 16,
         "references": 82,
@@ -318,12 +318,12 @@
           }
         ],
         "kept_text_sha256": "76e2836c6f47a3ebda7bd6b2dbb98362a84c8974973a0b31f5a727d226dc63db",
-        "manifest_source_fragments_sha256": "e937c7cd83c45536884fdfc910abd0c6355719eea3b3d51db38a1901b847ed31",
+        "manifest_source_fragments_sha256": "a24efd586bc43f857b3f2c633ac9774858e4a0d40632621a034cabfc38e880fe",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
-        "passed": false,
-        "strict_layout_parser": "v082-final-4",
-        "formula_blocks_detected": 27,
-        "formula_blocks_missing": 5,
+        "passed": true,
+        "strict_layout_parser": "v082-final-5",
+        "formula_blocks_detected": 20,
+        "formula_blocks_missing": 0,
         "formula_samples": [
           "A = WAHA = (BH+",
           "Cjk = round (",
@@ -332,42 +332,34 @@
           "H ←H ×",
           "K k=1σ ( ∑",
           "M ∑",
-          "Meningioma cases (n = 1,378)",
           "N ∑",
-          "N2 - n=6 N3 - n=8",
-          "N4 - n=5 N6 - n=7",
           "Precisionmacro = 1",
           "Recallmacro = 1",
-          "S6 - n=4 S7 - n=2",
           "T k=1d′",
-          "TMA cores (n = 3,334)",
           "W [W > 1] ←1",
           "W ←W ×",
           "c=1",
-          "h Nx) = W2 × D × B × φ (W1 × x + b1) + b2"
+          "h Nx) = W2 × D × B × φ (W1 × x + b1) + b2",
+          "i=1",
+          "∑",
+          "∑ k∈NNNi)",
+          "∑i(Xi−̄X)",
+          "∑i∑jwij(Xi−̄X)(X j−̄X)"
         ],
         "cross_column_body_merges": 4,
         "cross_column_caption_merges": 7,
-        "source_chars": 76884,
+        "source_chars": 76887,
         "expected_reference_count": 86,
         "expected_main_figures": 0,
-        "strict_errors": [
-          {
-            "missing_formula_blocks": [
-              "N2 - n=6 N3 - n=8",
-              "N4 - n=5 N6 - n=7",
-              "S6 - n=4 S7 - n=2",
-              "r = 0.401",
-              "r = −0.219"
-            ]
-          }
-        ],
+        "strict_errors": [],
         "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
         "source_outline_entries": 25,
         "figure_titles_corrected_from_pdf_toc": 16,
         "captions_trimmed": 3,
-        "caption_panel_evidence_blocks": 24,
-        "reference_repair_applied": true
+        "caption_panel_evidence_blocks": 55,
+        "reference_repair_applied": true,
+        "titles_extended_from_caption": 1,
+        "uppercase_panel_evidence_blocks": 31
       }
     },
     {
@@ -610,7 +602,7 @@
         "manifest_source_fragments_sha256": "d6120ca1e365aa85b19278d88d99ea539aaa266dc48bbe2e4a5b9724348ba338",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-4",
+        "strict_layout_parser": "v082-final-5",
         "formula_blocks_detected": 2,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -628,7 +620,9 @@
         "figure_titles_corrected_from_pdf_toc": 12,
         "captions_trimmed": 2,
         "caption_panel_evidence_blocks": 39,
-        "reference_repair_applied": true
+        "reference_repair_applied": true,
+        "titles_extended_from_caption": 0,
+        "uppercase_panel_evidence_blocks": 0
       }
     },
     {
@@ -752,7 +746,7 @@
         "manifest_source_fragments_sha256": "b5c970d8fe70ab6d66eb4a909fcf2e8f03b1e48cf35351c7d483eb577678d2af",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-4",
+        "strict_layout_parser": "v082-final-5",
         "formula_blocks_detected": 1,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -769,7 +763,9 @@
         "figure_titles_corrected_from_pdf_toc": 0,
         "captions_trimmed": 3,
         "caption_panel_evidence_blocks": 0,
-        "reference_repair_applied": true
+        "reference_repair_applied": true,
+        "titles_extended_from_caption": 0,
+        "uppercase_panel_evidence_blocks": 0
       }
     },
     {
@@ -1182,7 +1178,7 @@
         "manifest_source_fragments_sha256": "e7de958d9ea3f196d17f0cabc7f752f8989bacc58e959ebe6d32cf289c0e2826",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-4",
+        "strict_layout_parser": "v082-final-5",
         "formula_blocks_detected": 11,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -1208,8 +1204,10 @@
         "source_outline_entries": 37,
         "figure_titles_corrected_from_pdf_toc": 0,
         "captions_trimmed": 2,
-        "caption_panel_evidence_blocks": 0,
-        "reference_repair_applied": true
+        "caption_panel_evidence_blocks": 24,
+        "reference_repair_applied": true,
+        "titles_extended_from_caption": 0,
+        "uppercase_panel_evidence_blocks": 24
       }
     },
     {
@@ -1520,7 +1518,7 @@
         "manifest_source_fragments_sha256": "505c35a9d1d95b5875ba0b8302704b8796e5bfcbd7365293436cc3a0b19eea87",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": false,
-        "strict_layout_parser": "v082-final-4",
+        "strict_layout_parser": "v082-final-5",
         "formula_blocks_detected": 6,
         "formula_blocks_missing": 1,
         "formula_samples": [
@@ -1548,7 +1546,9 @@
         "figure_titles_corrected_from_pdf_toc": 16,
         "captions_trimmed": 2,
         "caption_panel_evidence_blocks": 22,
-        "reference_repair_applied": true
+        "reference_repair_applied": true,
+        "titles_extended_from_caption": 0,
+        "uppercase_panel_evidence_blocks": 0
       }
     },
     {
@@ -1556,7 +1556,7 @@
       "order": 6,
       "pdf": ".build/v082/pdfs/06_andani-2025.pdf",
       "returncode": 1,
-      "stdout": "{\n  \"key\": \"andani-2025\",\n  \"sections\": 17,\n  \"paragraphs\": 235,\n  \"assets\": 14,\n  \"references\": 65,\n  \"formula_blocks\": 37,\n  \"cross_column_caption_merges\": 4,\n  \"passed\": false,\n  \"errors\": [\n    \"reference coverage incomplete: 65 < 66\"\n  ]\n}\n",
+      "stdout": "{\n  \"key\": \"andani-2025\",\n  \"sections\": 17,\n  \"paragraphs\": 233,\n  \"assets\": 14,\n  \"references\": 65,\n  \"formula_blocks\": 35,\n  \"cross_column_caption_merges\": 4,\n  \"passed\": false,\n  \"errors\": [\n    \"reference coverage incomplete: 65 < 66\"\n  ]\n}\n",
       "stderr": "",
       "manifest_exists": true,
       "audit_exists": true,
@@ -1572,12 +1572,12 @@
         "kept_text_blocks": 630,
         "repeated_header_footer_patterns": 3,
         "events": {
-          "body": 70356,
+          "body": 70358,
           "heading": 473,
           "caption": 7699,
           "reference": 10212
         },
-        "paragraphs": 235,
+        "paragraphs": 233,
         "sections": 17,
         "assets": 14,
         "references": 65,
@@ -1822,11 +1822,11 @@
           }
         ],
         "kept_text_sha256": "6fd154d50915a45357a8ea59fcb5f2b7290e0f50200115a5ade77166c2c7782f",
-        "manifest_source_fragments_sha256": "644210a51b616bd573bbd6b1fdbf398273968a801227ee50841988d29722a8c6",
+        "manifest_source_fragments_sha256": "f5dfd0193808a3038593732ec63afc72581dccb9e36f1d6fbd94b80baadc9ac9",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": false,
-        "strict_layout_parser": "v082-final-4",
-        "formula_blocks_detected": 37,
+        "strict_layout_parser": "v082-final-5",
+        "formula_blocks_detected": 35,
         "formula_blocks_missing": 0,
         "formula_samples": [
           "Cold (n = 26)",
@@ -1835,7 +1835,6 @@
           "HYPEfake = (",
           "HYPEreal = (",
           "Hot (n = 8)",
-          "Hot (n = 8) Inflamed",
           "K ∑",
           "Lce = −",
           "Lgp = ∑",
@@ -1843,16 +1842,17 @@
           "M ∑ i=1",
           "MSE = 1",
           "N j=1 exp{w⊤(tanh(Vhj) ⊙η(Uhj))}",
-          "N n=1 exp (z ⋅z−",
           "N ∑",
           "PSNR = 10log10 ( L2",
           "ai = exp{w⊤(tanh(Vhi) ⊙η(Uhi))}",
           "exp(z ⋅z+/τ) + ∑",
-          "g = g(hi) ="
+          "g = g(hi) =",
+          "i=0",
+          "i=1"
         ],
         "cross_column_body_merges": 3,
         "cross_column_caption_merges": 4,
-        "source_chars": 70195,
+        "source_chars": 70197,
         "expected_reference_count": 66,
         "expected_main_figures": 0,
         "strict_errors": [
@@ -1863,7 +1863,9 @@
         "figure_titles_corrected_from_pdf_toc": 10,
         "captions_trimmed": 1,
         "caption_panel_evidence_blocks": 11,
-        "reference_repair_applied": false
+        "reference_repair_applied": false,
+        "titles_extended_from_caption": 0,
+        "uppercase_panel_evidence_blocks": 0
       }
     },
     {
@@ -1871,7 +1873,7 @@
       "order": 8,
       "pdf": ".build/v082/pdfs/08_spitzer-2025.pdf",
       "returncode": 1,
-      "stdout": "{\n  \"key\": \"spitzer-2025\",\n  \"sections\": 30,\n  \"paragraphs\": 173,\n  \"assets\": 12,\n  \"references\": 52,\n  \"formula_blocks\": 15,\n  \"cross_column_caption_merges\": 8,\n  \"passed\": false,\n  \"errors\": [\n    {\n      \"missing_formula_blocks\": [\n        \"AC (n=13) GPC (n=5) MES/Hypoxia (n=6)\",\n        \"HMF (n=14) IMF (n=15) LMF−GN (n=12) LMF−OC (n=9) LMF−TAM (n=1) Mixed (n=8)\",\n        \"MET (n = 4) NOS (n = 8) UM (n = 18)\",\n        \"Mixed (n=10)\",\n        \"NEU (n=6) OPC/NPC (n=12)\",\n        \"OPC p=0.0018\",\n        \"Others (n = 47)\"\n      ]\n    }\n  ]\n}\n",
+      "stdout": "{\n  \"key\": \"spitzer-2025\",\n  \"sections\": 30,\n  \"paragraphs\": 170,\n  \"assets\": 12,\n  \"references\": 52,\n  \"formula_blocks\": 9,\n  \"cross_column_caption_merges\": 8,\n  \"passed\": false,\n  \"errors\": [\n    {\n      \"missing_formula_blocks\": [\n        \"HMF (n=14) IMF (n=15) LMF−GN (n=12) LMF−OC (n=9) LMF−TAM (n=1) Mixed (n=8)\",\n        \"Mixed (n=10)\",\n        \"OPC p=0.0018\",\n        \"Others (n = 47)\"\n      ]\n    }\n  ]\n}\n",
       "stderr": "",
       "manifest_exists": true,
       "audit_exists": true,
@@ -1887,12 +1889,12 @@
         "kept_text_blocks": 1506,
         "repeated_header_footer_patterns": 3,
         "events": {
-          "body": 58473,
+          "body": 58476,
           "heading": 892,
           "caption": 29500,
           "reference": 35612
         },
-        "paragraphs": 173,
+        "paragraphs": 170,
         "sections": 30,
         "assets": 12,
         "references": 53,
@@ -2103,42 +2105,33 @@
           }
         ],
         "kept_text_sha256": "94dfa0b60cb079acdd859622443bc0fdcd392d19725cfe6c6a8d0fc561d0558c",
-        "manifest_source_fragments_sha256": "4668db166c31e9694a8851c40de711b39d9ba87bd5be218b46750674ae8fc374",
+        "manifest_source_fragments_sha256": "668ec2b5018076529a5ff443d425a760500f84ae4a76c98d6408111283980554",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": false,
-        "strict_layout_parser": "v082-final-4",
-        "formula_blocks_detected": 15,
-        "formula_blocks_missing": 7,
+        "strict_layout_parser": "v082-final-5",
+        "formula_blocks_detected": 9,
+        "formula_blocks_missing": 4,
         "formula_samples": [
-          "AC (n=13) GPC (n=5) MES/Hypoxia (n=6)",
           "HMF (n=14) IMF (n=15) LMF−GN (n=12) LMF−OC (n=9) LMF−TAM (n=1) Mixed (n=8)",
-          "MET (n = 4) NOS (n = 8) UM (n = 18)",
-          "MET (n=12) UM (n=19)",
           "Mixed (n=10)",
-          "NEU (n=6) OPC/NPC (n=12)",
           "OPC p=0.0018",
           "Others (n = 47)",
           "T1 n = 26",
           "T1 n = 42",
           "T1 n = 63",
           "T2 n = 26",
-          "T2 n = 42",
-          "T2 n = 63 GLASS—no small deletion",
-          "Tumor pairs (n = 46 pairs)"
+          "T2 n = 42"
         ],
         "cross_column_body_merges": 6,
         "cross_column_caption_merges": 8,
-        "source_chars": 58440,
+        "source_chars": 58443,
         "expected_reference_count": 52,
         "expected_main_figures": 0,
         "strict_errors": [
           {
             "missing_formula_blocks": [
-              "AC (n=13) GPC (n=5) MES/Hypoxia (n=6)",
               "HMF (n=14) IMF (n=15) LMF−GN (n=12) LMF−OC (n=9) LMF−TAM (n=1) Mixed (n=8)",
-              "MET (n = 4) NOS (n = 8) UM (n = 18)",
               "Mixed (n=10)",
-              "NEU (n=6) OPC/NPC (n=12)",
               "OPC p=0.0018",
               "Others (n = 47)"
             ]
@@ -2149,7 +2142,9 @@
         "figure_titles_corrected_from_pdf_toc": 12,
         "captions_trimmed": 1,
         "caption_panel_evidence_blocks": 52,
-        "reference_repair_applied": true
+        "reference_repair_applied": true,
+        "titles_extended_from_caption": 0,
+        "uppercase_panel_evidence_blocks": 0
       }
     },
     {
@@ -2426,7 +2421,7 @@
         "manifest_source_fragments_sha256": "281168ee361323167b4d93bf59ca5c05be52504c554fa90d26da353f8666267c",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-4",
+        "strict_layout_parser": "v082-final-5",
         "formula_blocks_detected": 0,
         "formula_blocks_missing": 0,
         "formula_samples": [],
@@ -2441,7 +2436,9 @@
         "figure_titles_corrected_from_pdf_toc": 14,
         "captions_trimmed": 0,
         "caption_panel_evidence_blocks": 43,
-        "reference_repair_applied": true
+        "reference_repair_applied": true,
+        "titles_extended_from_caption": 0,
+        "uppercase_panel_evidence_blocks": 0
       }
     },
     {
@@ -2718,7 +2715,7 @@
         "manifest_source_fragments_sha256": "db391414ab8bd631e706d5e21392d465f37f12687deea30e89f0655e07e4e74e",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-4",
+        "strict_layout_parser": "v082-final-5",
         "formula_blocks_detected": 1,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -2735,19 +2732,21 @@
         "figure_titles_corrected_from_pdf_toc": 6,
         "captions_trimmed": 1,
         "caption_panel_evidence_blocks": 29,
-        "reference_repair_applied": true
+        "reference_repair_applied": true,
+        "titles_extended_from_caption": 0,
+        "uppercase_panel_evidence_blocks": 0
       }
     },
     {
       "key": "karimi-2023",
       "order": 11,
       "pdf": ".build/v082/pdfs/11_karimi-2023.pdf",
-      "returncode": 1,
-      "stdout": "{\n  \"key\": \"karimi-2023\",\n  \"sections\": 22,\n  \"paragraphs\": 207,\n  \"assets\": 14,\n  \"references\": 62,\n  \"formula_blocks\": 31,\n  \"cross_column_caption_merges\": 2,\n  \"passed\": false,\n  \"errors\": [\n    {\n      \"missing_formula_blocks\": [\n        \"With LMD (n = 30)\",\n        \"Without LMD (n = 12)\"\n      ]\n    }\n  ]\n}\n",
+      "returncode": 0,
+      "stdout": "{\n  \"key\": \"karimi-2023\",\n  \"sections\": 22,\n  \"paragraphs\": 190,\n  \"assets\": 14,\n  \"references\": 62,\n  \"formula_blocks\": 11,\n  \"cross_column_caption_merges\": 2,\n  \"passed\": true,\n  \"errors\": []\n}\n",
       "stderr": "",
       "manifest_exists": true,
       "audit_exists": true,
-      "passed": false,
+      "passed": true,
       "audit": {
         "schema_version": "v082-pdf-native-audit-1",
         "paper_key": "karimi-2023",
@@ -2760,11 +2759,11 @@
         "repeated_header_footer_patterns": 4,
         "events": {
           "heading": 633,
-          "body": 60974,
+          "body": 60991,
           "caption": 22065,
           "reference": 27466
         },
-        "paragraphs": 207,
+        "paragraphs": 190,
         "sections": 22,
         "assets": 14,
         "references": 57,
@@ -3009,57 +3008,43 @@
           }
         ],
         "kept_text_sha256": "58604b4fadfea1426b1c1e6eebe099c1371bffa5ca75f41a519fdc20de465d30",
-        "manifest_source_fragments_sha256": "fb50f6a26a30cb7f687455acb0237530d2bf352c39f62f44aa73c742d8a57a21",
+        "manifest_source_fragments_sha256": "6d886bd9ed65a268733d1e8a1ea33cc75c57062bdf91f960ac059de52f3f6229",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
-        "passed": false,
-        "strict_layout_parser": "v082-final-4",
-        "formula_blocks_detected": 31,
-        "formula_blocks_missing": 2,
+        "passed": true,
+        "strict_layout_parser": "v082-final-5",
+        "formula_blocks_detected": 11,
+        "formula_blocks_missing": 0,
         "formula_samples": [
-          "Adj norm (n = 18)",
-          "BrM-cores (n = 72)",
-          "BrM-margins (n = 47)",
           "Breast (n = 12)",
           "Breast (n = 17)",
-          "CN high (n = 16) CN low (n = 16)",
           "CN_high (n=13) CN_low (n=14)",
-          "Early recur (n = 6)",
-          "Early recur (n = 9)",
-          "IDH WT (n = 192)",
-          "IDH mut (n = 19)",
-          "Late recur (n = 4)",
-          "Late recur (n = 5)",
           "Lung (n = 22)",
           "Lung (n = 29)",
-          "MGMT meth (n = 104)",
-          "MGMT unmeth (n = 84)",
           "Melanoma (n = 13)",
           "Melanoma (n = 6)",
-          "No recur (n = 10)"
+          "Other (n = 13)",
+          "Other (n = 7)",
+          "Recur (n = 22)",
+          "time (years) CN_high (n=16) CN_low (n=16)"
         ],
         "cross_column_body_merges": 4,
         "cross_column_caption_merges": 2,
-        "source_chars": 60974,
+        "source_chars": 60991,
         "expected_reference_count": 62,
         "expected_main_figures": 0,
-        "strict_errors": [
-          {
-            "missing_formula_blocks": [
-              "With LMD (n = 30)",
-              "Without LMD (n = 12)"
-            ]
-          }
-        ],
+        "strict_errors": [],
         "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
         "source_outline_entries": 21,
         "figure_titles_corrected_from_pdf_toc": 13,
         "captions_trimmed": 0,
         "caption_panel_evidence_blocks": 54,
-        "reference_repair_applied": true
+        "reference_repair_applied": true,
+        "titles_extended_from_caption": 0,
+        "uppercase_panel_evidence_blocks": 0
       }
     }
   ],
-  "passed_count": 5,
-  "failed_count": 5,
+  "passed_count": 7,
+  "failed_count": 3,
   "all_available_passed": false
 }
