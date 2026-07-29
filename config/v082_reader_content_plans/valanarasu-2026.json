@@ -1,0 +1,132 @@
+{
+  "version": "v082-valanarasu-reader-plan-1",
+  "status": "approved content plan; final manifest still required",
+  "paper": {
+    "key": "valanarasu-2026",
+    "title_en": "Multimodal AI generates virtual population for tumor microenvironment modeling",
+    "title_zh": "多模态人工智能生成用于肿瘤微环境建模的虚拟人群",
+    "journal": "Cell",
+    "publisher": "Elsevier",
+    "doi": "10.1016/j.cell.2025.11.016",
+    "article_type": "Article",
+    "publication_timeline": "Published online 22 January 2026 · Cell 189, 386–400 (2026)",
+    "citation": "Valanarasu et al. Cell 189, 386–400 (2026) · Main article and STAR Methods PDF 35 pages",
+    "journal_scope": "Cell publishes broad, high-impact biological and biomedical research with mechanistic and translational significance.",
+    "field_positioning": "该研究位于计算病理、虚拟空间蛋白组学、真实世界临床数据和人群尺度肿瘤免疫微环境研究的交叉方向。",
+    "authors_requirement": "Preserve the full author order: Jeya Maria Jose Valanarasu, Hanwen Xu, Naoto Usuyama, Chanwoo Kim, Cliff Wong, Peniel Argaw, Racheli Ben Shimol, Angela Crabtree, Kevin Matlock, Alexandra Q. Bartlett, Jaspreet Bagga, Yu Gu, Sheng Zhang, Tristan Naumann, Bernard A. Fox, Bill Wright, Ari Robicsek, Brian Piening, Carlo Bifulco, Sheng Wang and Hoifung Poon.",
+    "affiliations_requirement": "Preserve the numbered affiliations and contribution notes for Microsoft Research, University of Washington, Providence Genomics, Earle A. Chiles Research Institute, Providence Research Network and Arclight Intelligence, together with all three corresponding authors."
+  },
+  "overview": {
+    "qa": [
+      {
+        "question": "研究解决什么问题？",
+        "answer": "多重免疫荧光能够同时刻画肿瘤免疫微环境中的多种蛋白和空间关系，但成本高、通量低，难以覆盖大规模临床人群。研究尝试从常规 H&E 切片生成虚拟 mIF，并检验这些预测结果能否支持人群尺度的生物标志物发现和患者分层。"
+      },
+      {
+        "question": "核心数据是什么？",
+        "answer": "模型训练数据来自21张配对 H&E 切片和441张 mIF 图像，覆盖21个蛋白通道与约4,000万个细胞；随后应用于 Providence Health 的14,256名患者、51家医院和1,000余家诊所，生成299,376张虚拟 mIF 全切片，并以10,200例 TCGA 肿瘤进行独立验证。"
+      },
+      {
+        "question": "模型或分析的输入与输出是什么？",
+        "answer": "GigaTIME 将 H&E 图像块输入基于 NestedUNet 的跨模态编码器—解码器，同时输出21个蛋白通道的二值激活图并拼接为全切片虚拟 mIF；随后计算蛋白激活密度、空间指标、组合通道和21维 GigaTIME 特征，用于蛋白—生物标志物关联、分期与生存分层。"
+      },
+      {
+        "question": "主要生物学发现是什么？",
+        "answer": "虚拟人群共发现1,234项经多重检验校正的蛋白—生物标志物关联，显示多种免疫细胞和通路往往协同变化而非彼此孤立。CD138 与 CD68、PD-L1 与caspase 3等组合通道比单一蛋白提供更强关联，空间熵、信噪比和锐度也补充了单纯激活密度。"
+      },
+      {
+        "question": "主要临床结果是什么？",
+        "answer": "21通道联合形成的 GigaTIME 特征能够区分病理分期和生存组，并整体优于单一虚拟蛋白。Providence 与 TCGA 在癌症亚型层面的虚拟蛋白激活相关性达到0.88，且两个人群发现的蛋白—生物标志物关系具有显著重叠。"
+      },
+      {
+        "question": "最重要的限制是什么？",
+        "answer": "训练配对数据仅来自21张 H&E 切片，不同蛋白从形态中可预测的程度差异明显；患者主要来自美国西部，地理和族群代表性有限。虚拟 mIF 仍是模型预测而非直接测量，目前分析以回顾性关联为主，尚不能证明所发现空间或组合模式具有因果作用。"
+      }
+    ],
+    "method": "配对 H&E/mIF 配准与细胞分割 → 以约4,000万个细胞训练21通道跨模态翻译器 → 在留出集比较 Dice 与 Pearson 相关 → 对14,256名患者生成299,376张虚拟 mIF → 计算蛋白激活和空间/组合指标 → 分析生物标志物、分期与生存关联 → 在10,200例 TCGA 虚拟人群中独立验证",
+    "story": "GigaTIME 的核心不是把少量 mIF 图像做得更逼真，而是把常规 H&E 中可恢复的蛋白激活信息扩展到真实世界大人群，再把这些虚拟蛋白作为群体研究变量。文章证明这种路径能够发现可重复的免疫关联和患者分层信号，但预测质量因蛋白而异，虚拟蛋白不能被当作真实检测的无误差替代物。"
+  },
+  "body_section_map": [
+    ["Introduction", "引言"],
+    ["Results", "结果"],
+    ["GigaTIME generates a virtual population of multiplex immunofluorescence", "GigaTIME 生成多重免疫荧光虚拟人群"],
+    ["GigaTIME translates whole-slide H&E images to mIF", "GigaTIME 将全切片 H&E 转换为虚拟 mIF"],
+    ["Virtual population enables large-scale discovery of protein-biomarker associations", "虚拟人群支持大规模蛋白—生物标志物关联发现"],
+    ["Virtual population enables large-scale discovery on pathological stages and patient stratification", "虚拟人群支持病理分期分析与患者分层"],
+    ["Independent validation using a virtual population from TCGA", "利用 TCGA 虚拟人群进行独立验证"],
+    ["Virtual population uncovers spatial and combinatorial protein activation patterns", "虚拟人群揭示空间与组合蛋白激活模式"],
+    ["Discussion", "讨论"],
+    ["Limitations of the study", "研究局限"],
+    ["Resource availability", "资源可用性"],
+    ["STAR Methods", "STAR 方法"],
+    ["References", "参考文献"]
+  ],
+  "main_figures": [
+    {
+      "id": "figure-1",
+      "title_en": "Figure 1. GigaTIME enables population-scale tumor immune microenvironment analysis",
+      "title_zh": "图 1：GigaTIME 支持人群尺度的肿瘤免疫微环境分析",
+      "reader_role": "概括从 H&E 到21通道虚拟 mIF、14,256人虚拟人群、蛋白激活图谱以及 Providence—TCGA 对照的完整研究框架。",
+      "panel_requirement": "A 解释输入、输出、人群规模和临床分析链；B 解释同心圆各层如何表示患者、癌种/亚型及21通道激活；C 解释 Providence 与 TCGA 的亚型层面一致性及每个点所代表的对象。"
+    },
+    {
+      "id": "figure-2",
+      "title_en": "Figure 2. GigaTIME enables translation from H&E to mIF images",
+      "title_zh": "图 2：GigaTIME 实现从 H&E 到 mIF 图像的跨模态转换",
+      "reader_role": "完成模型的技术验证，比较 GigaTIME 与 CycleGAN，并用量化指标、散点图和真实案例展示不同蛋白通道的预测质量。",
+      "panel_requirement": "A、B 解释 Dice 与 Pearson 的比较及误差线；C 解释预测与真实激活密度的一致性；D 对照 H&E、真实 mIF 与虚拟 mIF，指出 PD-L1、CD68和DAPI的可恢复信息及误差。"
+    },
+    {
+      "id": "figure-3",
+      "title_en": "Figure 3. GigaTIME identifies novel TIME protein versus biomarker associations at pan-cancer, cancer-type and cancer-subtype levels",
+      "title_zh": "图 3：GigaTIME 在泛癌、癌种和癌症亚型层面发现 TIME 蛋白—生物标志物关联",
+      "reader_role": "把虚拟 mIF 从技术输出转化为人群研究变量，展示如何在三个分析层级识别1,234项经校正的关联，并区分已有证据和新发现。",
+      "panel_requirement": "A 解释三层分析设计；B–D 分别说明泛癌、癌种和亚型关联矩阵中的颜色、大小和置信度；后续案例应说明 TMB、MSI、KMT2D、KRAS 等改变与免疫蛋白方向，而不把相关性写成因果。"
+    },
+    {
+      "id": "figure-4",
+      "title_en": "Figure 4. GigaTIME enables effective patient stratification across pathological stages and survival groups",
+      "title_zh": "图 4：GigaTIME 可按病理分期和生存结局进行患者分层",
+      "reader_role": "检验虚拟蛋白是否具有患者级临床价值，并比较单一通道与21通道联合特征的分层能力。",
+      "panel_requirement": "A–C 解释泛癌、癌种和亚型中的蛋白—TNM分期关系；D–F 解释不同人群的 Kaplan–Meier 分层；G 直接比较 GigaTIME 联合特征和单通道的 log-rank 结果。"
+    },
+    {
+      "id": "figure-5",
+      "title_en": "Figure 5. Independent validation on a virtual population from TCGA",
+      "title_zh": "图 5：在 TCGA 虚拟人群中进行独立验证",
+      "reader_role": "判断 Providence 真实世界人群中发现的关系是否能在独立 TCGA 数据中重现，并区分共同关联与仅在单一人群出现的关联。",
+      "panel_requirement": "A 比较泛癌关联重叠；B 比较肺癌层面；C 展示 LUAD 亚型结果；D 用具体 H&E 与虚拟 mIF 案例说明突变组和非突变组的方向。"
+    },
+    {
+      "id": "figure-6",
+      "title_en": "Figure 6. GigaTIME uncovers spatial and combinatorial virtual mIF patterns",
+      "title_zh": "图 6：GigaTIME 揭示虚拟 mIF 的空间与组合激活模式",
+      "reader_role": "从平均激活密度进一步转向空间分布和多蛋白协同，说明哪些信息只有空间指标或组合通道才能捕获。",
+      "panel_requirement": "A–C 比较激活密度与熵、信噪比和锐度；D、E 比较 CD138/CD68 与 PD-L1/caspase 3的单通道和逻辑 OR 组合；F 用病例图解释组合模式，避免把统计增强等同于生物机制证明。"
+    }
+  ],
+  "table_requirements": [
+    {
+      "id": "table-1",
+      "title_en": "Table 1. TIME markers used in the study and their cellular expression",
+      "title_zh": "表 1：研究使用的 TIME 标志物及其典型细胞表达",
+      "reader_role": "以结构化两列表格展示21个蛋白通道及其主要细胞来源，供后续模型输出和生物学解释查阅。",
+      "expected_headers": ["TIME marker", "Typical cellular expression"],
+      "expected_rows": 21
+    }
+  ],
+  "supplementary_source_requirement": "The PDF contains Figures S1–S14 and STAR Methods. Every supplementary figure must retain its complete caption and related-main-figure link; the key resources table is method metadata and must not be confused with the scientific Table 1.",
+  "reference_requirement": {
+    "expected_count": 55,
+    "preserve_source_numbers": true,
+    "reject_body_paragraphs": true
+  },
+  "explicit_rejections_of_current_valanarasu": [
+    "Do not use PDF page count, parser block count, asset count or reference count as the core dataset.",
+    "Do not create title fragments, Highlights bullets, author lines or the article title as body sections.",
+    "Do not title figures merely Figure 1. or Figure S1.; recover the descriptive caption title.",
+    "Do not emit Table 1 as a figure image when the PDF exposes a native two-column table.",
+    "Do not copy English into the Chinese title, body, caption or figure-study fields.",
+    "Do not describe virtual mIF as direct protein measurement or convert association into causation."
+  ]
+}
