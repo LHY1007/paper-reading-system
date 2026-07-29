@@ -35,7 +35,7 @@ jobs:
         with:
           python-version: "3.12"
       - name: Install audit dependencies
-        run: python -m pip install --disable-pip-version-check requests beautifulsoup4 PyMuPDF curl_cffi
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4 PyMuPDF Pillow curl_cffi
       - name: Locate CANVAS
         shell: bash
         run: |
