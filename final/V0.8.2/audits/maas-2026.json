@@ -296,7 +296,7 @@
   "manifest_source_fragments_sha256": "e937c7cd83c45536884fdfc910abd0c6355719eea3b3d51db38a1901b847ed31",
   "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
   "passed": false,
-  "strict_layout_parser": "v082-final-3",
+  "strict_layout_parser": "v082-final-4",
   "formula_blocks_detected": 27,
   "formula_blocks_missing": 5,
   "formula_samples": [
@@ -335,7 +335,12 @@
         "r = 0.401",
         "r = −0.219"
       ]
-    },
-    "reference coverage incomplete: 82 < 86"
-  ]
+    }
+  ],
+  "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
+  "source_outline_entries": 25,
+  "figure_titles_corrected_from_pdf_toc": 16,
+  "captions_trimmed": 3,
+  "caption_panel_evidence_blocks": 24,
+  "reference_repair_applied": true
 }
