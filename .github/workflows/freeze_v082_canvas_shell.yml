@@ -1,0 +1,126 @@
+name: Freeze V0.8.2 CANVAS shell
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/freeze_v082_canvas_shell.yml"
+      - "tools/freeze_v082_canvas_shell*.py"
+      - "tools/render_v082_from_frozen_shell.py"
+      - "tools/render_v082_canvas_component_locked*.py"
+      - "tools/validate_v082_frozen_shell.py"
+      - "tools/validate_v082_canvas_shell_lock*.py"
+      - "tools/validate_v082_canvas_components*.py"
+      - "tools/normalize_v082_canvas_master.py"
+      - "schemas/paper_content_manifest_v082.schema.json"
+      - "tests/fixtures/v082_shell_smoke_manifest.json"
+      - "00_V0.8.2_CANVAS*.html"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fixed-shell:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 1
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install deterministic renderer dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 jsonschema lxml
+
+      - name: Locate immutable CANVAS source
+        shell: bash
+        run: |
+          set -euo pipefail
+          CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
+          test -n "$CANVAS"
+          printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_shell_paths
+
+      - name: Normalize CANVAS and extract content-free shell
+        shell: bash
+        run: |
+          set -euo pipefail
+          source /tmp/v082_shell_paths
+          mkdir -p .build/v082/shell reports/v082-shell
+          MASTER=.build/v082/shell/00_CANVAS_NORMALIZED.html
+          SHELL=.build/v082/shell/V082_CANVAS_FROZEN_SHELL.html
+          OUTPUT=.build/v082/shell/V082_SHELL_SMOKE_READER.html
+          python tools/normalize_v082_canvas_master.py "$CANVAS_ORIGINAL" "$MASTER" \
+            --report reports/v082-shell/NORMALIZED_MASTER.json
+          python tools/freeze_v082_canvas_shell_v2.py "$MASTER" "$SHELL" \
+            --report reports/v082-shell/FROZEN_SHELL_BUILD.json
+          python tools/validate_v082_frozen_shell.py "$SHELL" --master "$MASTER" \
+            --report reports/v082-shell/FROZEN_SHELL_GATE.json
+          printf 'MASTER=%q\nSHELL=%q\nOUTPUT=%q\n' "$MASTER" "$SHELL" "$OUTPUT" >> /tmp/v082_shell_paths
+
+      - name: Render smoke manifest through fixed shell
+        shell: bash
+        run: |
+          set -euo pipefail
+          source /tmp/v082_shell_paths
+          python tools/render_v082_from_frozen_shell.py \
+            tests/fixtures/v082_shell_smoke_manifest.json "$OUTPUT" \
+            --shell "$SHELL" \
+            --schema schemas/paper_content_manifest_v082.schema.json \
+            --report reports/v082-shell/SMOKE_RENDER.json
+          python tools/validate_v082_canvas_shell_lock.py "$OUTPUT" --canonical "$MASTER" \
+            --report reports/v082-shell/SMOKE_SHELL_LOCK.json
+          python tools/validate_v082_canvas_components.py "$OUTPUT" \
+            --report reports/v082-shell/SMOKE_COMPONENTS.json
+
+      - name: Assert AI-to-HTML boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          source /tmp/v082_shell_paths
+          python - <<'PY'
+          import hashlib, json, pathlib
+          shell = pathlib.Path('.build/v082/shell/V082_CANVAS_FROZEN_SHELL.html')
+          output = pathlib.Path('.build/v082/shell/V082_SHELL_SMOKE_READER.html')
+          manifest = pathlib.Path('tests/fixtures/v082_shell_smoke_manifest.json')
+          raw = output.read_text('utf-8')
+          errors = []
+          if '__V082_' in raw:
+              errors.append('unresolved shell placeholder')
+          if 'data-v082-template="frozen-shell-rendered"' not in raw:
+              errors.append('rendered shell marker missing')
+          if hashlib.sha256(shell.read_bytes()).hexdigest() not in raw:
+              errors.append('shell SHA provenance missing')
+          gate = {
+              'version': 'v082-ai-html-boundary-1',
+              'ai_permitted_input': str(manifest),
+              'ai_permitted_format': 'JSON manifest only',
+              'fixed_shell': str(shell),
+              'fixed_shell_sha256': hashlib.sha256(shell.read_bytes()).hexdigest(),
+              'rendered_output': str(output),
+              'rendered_output_sha256': hashlib.sha256(output.read_bytes()).hexdigest(),
+              'errors': errors,
+              'passed': not errors,
+          }
+          pathlib.Path('reports/v082-shell/AI_HTML_BOUNDARY_GATE.json').write_text(
+              json.dumps(gate, ensure_ascii=False, indent=2) + '\n', 'utf-8'
+          )
+          print(json.dumps(gate, ensure_ascii=False, indent=2))
+          if errors:
+              raise SystemExit(1)
+          PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v082-fixed-shell-audit
+          path: |
+            reports/v082-shell
+            .build/v082/shell/V082_CANVAS_FROZEN_SHELL.html
+            .build/v082/shell/V082_SHELL_SMOKE_READER.html
+          if-no-files-found: error
+          retention-days: 14
