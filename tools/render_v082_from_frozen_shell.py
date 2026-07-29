@@ -58,12 +58,24 @@ def fill_document_metadata(soup: BeautifulSoup, paper: dict[str, Any]) -> None:
             link["href"] = article_url
 
 
-def render(shell: Path, manifest_path: Path, output: Path, schema: Path | None) -> dict[str, Any]:
+def render(shell: Path, manifest_path: Path, output: Path, schema: Path | None, lock_path: Path) -> dict[str, Any]:
     shell_raw = shell.read_text("utf-8")
     shell_soup = BeautifulSoup(shell_raw, "html.parser")
     if shell_soup.select_one('html[data-v082-template="frozen-shell"]') is None:
         raise SystemExit("renderer input is not a frozen V0.8.2 CANVAS shell")
+
+    lock = json.loads(lock_path.read_text("utf-8"))
     shell_sha = hashlib.sha256(shell.read_bytes()).hexdigest()
+    expected_shell_sha = lock.get("frozen_shell_sha256")
+    expected_shell_bytes = lock.get("frozen_shell_bytes")
+    if shell_sha != expected_shell_sha or shell.stat().st_size != expected_shell_bytes:
+        raise SystemExit(
+            "frozen shell does not match immutable lock: "
+            f"sha {shell_sha} != {expected_shell_sha} or bytes {shell.stat().st_size} != {expected_shell_bytes}"
+        )
+    policy = lock.get("policy") or {}
+    if any(policy.get(key) is not False for key in ("ai_may_generate_html", "ai_may_generate_css", "ai_may_generate_interaction_code")):
+        raise SystemExit("invalid frozen-shell lock policy")
 
     report = locked_renderer.core.render(shell, manifest_path, output, schema)
     manifest = json.loads(manifest_path.read_text("utf-8"))
@@ -71,6 +83,7 @@ def render(shell: Path, manifest_path: Path, output: Path, schema: Path | None) 
     fill_document_metadata(soup, manifest["paper"])
     soup.html["data-v082-template"] = "frozen-shell-rendered"
     soup.html["data-v082-shell-sha256"] = shell_sha
+    soup.html["data-v082-shell-lock"] = str(lock.get("version") or "")
     output.write_text(str(soup), "utf-8")
 
     raw = output.read_text("utf-8")
@@ -81,9 +94,11 @@ def render(shell: Path, manifest_path: Path, output: Path, schema: Path | None) 
 
     report.update(
         {
-            "renderer": "v082-frozen-shell-1",
+            "renderer": "v082-frozen-shell-2",
             "shell": str(shell),
             "shell_sha256": shell_sha,
+            "shell_lock": str(lock_path),
+            "shell_lock_version": lock.get("version"),
             "manifest": str(manifest_path),
             "output_sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
             "unresolved_placeholders": unresolved,
@@ -93,14 +108,15 @@ def render(shell: Path, manifest_path: Path, output: Path, schema: Path | None) 
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Render paper data through the immutable V0.8.2 CANVAS shell")
+    parser = argparse.ArgumentParser(description="Render paper data through the immutable, hash-locked V0.8.2 CANVAS shell")
     parser.add_argument("manifest", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--shell", type=Path, required=True)
+    parser.add_argument("--lock", type=Path, default=Path("config/v082_frozen_shell_lock.json"))
     parser.add_argument("--schema", type=Path)
     parser.add_argument("--report", type=Path)
     args = parser.parse_args()
-    report = render(args.shell, args.manifest, args.output, args.schema)
+    report = render(args.shell, args.manifest, args.output, args.schema, args.lock)
     text = json.dumps(report, ensure_ascii=False, indent=2)
     print(text)
     if args.report:
