@@ -9,69 +9,149 @@ from pathlib import Path
 from jsonschema import Draft202012Validator
 
 CJK_RE = re.compile(r"[\u3400-\u9fff]")
+HTML_TAG_RE = re.compile(r"<\/?(?:p|div|span|script|style|html|body)\b", re.I)
 
 
 def plain(items: list[dict]) -> str:
-    return "".join(str(x.get("text", "")) for x in items)
+    return "".join(str(item.get("text", "")) for item in items)
+
+
+def normalized(text: str) -> str:
+    return re.sub(r"\s+", " ", str(text)).strip()
 
 
 def validate(manifest: dict, schema: dict, audit: dict | None) -> dict:
-    errors = [e.message for e in Draft202012Validator(schema).iter_errors(manifest)]
-    paragraphs = [b for s in manifest["sections"] for b in s["blocks"] if b["type"] == "paragraph"]
-    assets = manifest["assets"]
-    refs = manifest["references"]
-    source_chars = sum(len(plain(b["english"])) for b in paragraphs)
-    zh_chars = sum(len(plain(b["chinese"])) for b in paragraphs)
-    cjk_chars = sum(len(CJK_RE.findall(plain(b["chinese"]))) for b in paragraphs)
-    cjk_ratio = cjk_chars / max(1, zh_chars)
-    pages = manifest["paper"]["pages"]
+    errors = [error.message for error in Draft202012Validator(schema).iter_errors(manifest)]
+    paragraphs = [
+        block
+        for section in manifest.get("sections", [])
+        for block in section.get("blocks", [])
+        if block.get("type") == "paragraph"
+    ]
+    assets = manifest.get("assets", [])
+    references = manifest.get("references", [])
+    pages = int(manifest.get("paper", {}).get("pages", 0) or 0)
+    source_chars = sum(len(plain(block.get("english", []))) for block in paragraphs)
+    translated_chars = sum(len(plain(block.get("chinese", []))) for block in paragraphs)
+    cjk_chars = sum(len(CJK_RE.findall(plain(block.get("chinese", [])))) for block in paragraphs)
+    cjk_ratio = cjk_chars / max(1, translated_chars)
+
     if len(paragraphs) < max(20, pages * 2):
         errors.append(f"too few paragraph blocks: {len(paragraphs)} for {pages} pages")
-    if not assets:
-        errors.append("no figure/table assets")
     if source_chars < pages * 1200:
         errors.append(f"source text coverage too low: {source_chars} characters for {pages} pages")
+    if not assets:
+        errors.append("no figure/table assets")
     if cjk_ratio < 0.18:
         errors.append(f"Chinese translation ratio too low: {cjk_ratio:.3f}")
-    if any(not b.get("source_fragments") for b in paragraphs):
-        errors.append("paragraph without source_fragments")
-    if any(not a.get("image_src", "").startswith("data:image/") for a in assets if a["kind"] == "figure"):
+
+    empty_paragraphs = []
+    source_mismatches = []
+    bilingual_item_mismatches = []
+    untranslated_long_blocks = []
+    html_leaks = []
+    for block in paragraphs:
+        block_id = block.get("id", "unknown")
+        english = normalized(plain(block.get("english", [])))
+        chinese = normalized(plain(block.get("chinese", [])))
+        fragments = normalized(" ".join(block.get("source_fragments", [])))
+        if not english or not chinese or not fragments:
+            empty_paragraphs.append(block_id)
+        if english != fragments:
+            source_mismatches.append(block_id)
+        if len(block.get("english", [])) != len(block.get("chinese", [])):
+            bilingual_item_mismatches.append(block_id)
+        if len(english) >= 120 and english == chinese:
+            untranslated_long_blocks.append(block_id)
+        if HTML_TAG_RE.search(english) or HTML_TAG_RE.search(chinese):
+            html_leaks.append(block_id)
+    if empty_paragraphs:
+        errors.append({"empty_paragraphs": empty_paragraphs[:30]})
+    if source_mismatches:
+        errors.append({"source_fragment_mismatches": source_mismatches[:30]})
+    if bilingual_item_mismatches:
+        errors.append({"bilingual_item_mismatches": bilingual_item_mismatches[:30]})
+    if untranslated_long_blocks:
+        errors.append({"untranslated_long_blocks": untranslated_long_blocks[:30]})
+    if html_leaks:
+        errors.append({"html_markup_leaks": html_leaks[:30]})
+
+    if any(not asset.get("image_src", "").startswith("data:image/") for asset in assets if asset.get("kind") == "figure"):
         errors.append("figure asset without embedded source image")
-    if len({a["id"] for a in assets}) != len(assets):
+    if len({asset.get("id") for asset in assets}) != len(assets):
         errors.append("duplicate asset IDs")
-    asset_refs = [b["asset_id"] for s in manifest["sections"] for b in s["blocks"] if b["type"] == "asset"]
+    asset_refs = [
+        block.get("asset_id")
+        for section in manifest.get("sections", [])
+        for block in section.get("blocks", [])
+        if block.get("type") == "asset"
+    ]
     if len(asset_refs) != len(set(asset_refs)):
         errors.append("duplicate asset card placement")
-    if set(asset_refs) != {a["id"] for a in assets}:
+    if set(asset_refs) != {asset.get("id") for asset in assets}:
         errors.append("asset inventory and section placement differ")
-    if audit and not audit.get("passed"):
-        errors.append("PDF-native extraction audit failed")
-    if audit and audit.get("paragraphs") != len(paragraphs):
-        errors.append(f"audit/manifest paragraph mismatch: {audit.get('paragraphs')} != {len(paragraphs)}")
-    if audit and audit.get("assets") != len(assets):
-        errors.append(f"audit/manifest asset mismatch: {audit.get('assets')} != {len(assets)}")
+
+    reference_ids = [str(item.get("id", "")) for item in references]
+    expected_reference_ids = [str(index) for index in range(1, len(references) + 1)]
+    if reference_ids != expected_reference_ids:
+        errors.append("reference IDs are not a continuous 1-based sequence")
+    if len(reference_ids) != len(set(reference_ids)):
+        errors.append("duplicate reference IDs")
+
+    caption_zh_chars = sum(len(CJK_RE.findall(str(asset.get("caption_zh", "")))) for asset in assets)
+    caption_total_chars = sum(len(str(asset.get("caption_zh", ""))) for asset in assets)
+    caption_cjk_ratio = caption_zh_chars / max(1, caption_total_chars)
+    if assets and caption_cjk_ratio < 0.12:
+        errors.append(f"Chinese caption coverage too low: {caption_cjk_ratio:.3f}")
+
+    if audit is None:
+        errors.append("missing independent PDF-native audit")
+    else:
+        if audit.get("strict_layout_parser") != "v082-final-2":
+            errors.append("strict layout parser audit missing or obsolete")
+        if not audit.get("passed"):
+            errors.append("PDF-native extraction audit failed")
+        if int(audit.get("paragraphs", -1)) != len(paragraphs):
+            errors.append(f"audit/manifest paragraph mismatch: {audit.get('paragraphs')} != {len(paragraphs)}")
+        if int(audit.get("assets", -1)) != len(assets):
+            errors.append(f"audit/manifest asset mismatch: {audit.get('assets')} != {len(assets)}")
+        if int(audit.get("formula_blocks_missing", -1)) != 0:
+            errors.append(f"standalone formula retention failed: {audit.get('formula_blocks_missing')}")
+        expected_refs = int(audit.get("expected_reference_count", 0) or 0)
+        if expected_refs and len(references) != expected_refs:
+            errors.append(f"reference count mismatch: {len(references)} != {expected_refs}")
+        audited_source_chars = int(audit.get("source_chars", -1))
+        if audited_source_chars != source_chars:
+            errors.append(f"audit/manifest source character mismatch: {audited_source_chars} != {source_chars}")
+        if audit.get("strict_errors"):
+            errors.append({"strict_extraction_errors": audit.get("strict_errors")})
+
     return {
-        "paper_key": manifest["paper"]["key"],
+        "paper_key": manifest.get("paper", {}).get("key"),
         "pages": pages,
-        "sections": len(manifest["sections"]),
+        "sections": len(manifest.get("sections", [])),
         "paragraphs": len(paragraphs),
         "assets": len(assets),
-        "references": len(refs),
+        "references": len(references),
         "source_chars": source_chars,
-        "translated_chars": zh_chars,
+        "translated_chars": translated_chars,
         "cjk_ratio": round(cjk_ratio, 4),
+        "caption_cjk_ratio": round(caption_cjk_ratio, 4),
+        "formula_blocks_detected": audit.get("formula_blocks_detected") if audit else None,
+        "cross_column_body_merges": audit.get("cross_column_body_merges") if audit else None,
+        "cross_column_caption_merges": audit.get("cross_column_caption_merges") if audit else None,
         "errors": errors,
         "passed": not errors,
     }
 
 
 def main() -> None:
-    p = argparse.ArgumentParser(description="Strict content validation for final V0.8.2 manifests")
-    p.add_argument("manifest", type=Path)
-    p.add_argument("--schema", type=Path, required=True)
-    p.add_argument("--audit", type=Path)
-    p.add_argument("--report", type=Path, required=True)
-    args = p.parse_args()
+    parser = argparse.ArgumentParser(description="Strict content validation for final V0.8.2 manifests")
+    parser.add_argument("manifest", type=Path)
+    parser.add_argument("--schema", type=Path, required=True)
+    parser.add_argument("--audit", type=Path)
+    parser.add_argument("--report", type=Path, required=True)
+    args = parser.parse_args()
     manifest = json.loads(args.manifest.read_text("utf-8"))
     schema = json.loads(args.schema.read_text("utf-8"))
     audit = json.loads(args.audit.read_text("utf-8")) if args.audit else None
