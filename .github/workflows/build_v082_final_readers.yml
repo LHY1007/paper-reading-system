@@ -48,19 +48,8 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Cache translation model
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/huggingface
-          key: hf-opus-mt-en-zh-v1
-
-      - name: Install build and browser dependencies
-        run: |
-          python -m pip install --disable-pip-version-check \
-            beautifulsoup4 jsonschema requests lxml pillow PyMuPDF \
-            transformers sentencepiece sacremoses playwright
-          python -m pip install --disable-pip-version-check torch --index-url https://download.pytorch.org/whl/cpu
-          python -m playwright install --with-deps chromium
+      - name: Install source-audit dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4 PyMuPDF
 
       - name: Locate immutable CANVAS source
         shell: bash
@@ -69,6 +58,12 @@ jobs:
           CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
           test -n "$CANVAS"
           printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_final_paths
+
+      - name: Cache audited non-CANVAS PDFs
+        uses: actions/cache@v4
+        with:
+          path: .build/v082/pdfs
+          key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json') }}
 
       - name: Audit CANVAS baseline and download non-CANVAS source PDFs
         shell: bash
@@ -80,7 +75,21 @@ jobs:
             --registry config/v082_paper_sources.json \
             --canonical-html "$CANVAS_ORIGINAL" \
             --output-dir .build/v082/pdfs \
-            --report final/V0.8.2/reports/SOURCE_DOWNLOAD.json
+            --report final/V0.8.2/reports/SOURCE_DOWNLOAD.json \
+            --reuse
+
+      - name: Cache translation model
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: hf-opus-mt-en-zh-v1
+
+      - name: Install manifest, translation and browser dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            jsonschema lxml pillow transformers sentencepiece sacremoses playwright
+          python -m pip install --disable-pip-version-check torch --index-url https://download.pytorch.org/whl/cpu
+          python -m playwright install --with-deps chromium
 
       - name: Build normalized canonical final reader
         shell: bash
