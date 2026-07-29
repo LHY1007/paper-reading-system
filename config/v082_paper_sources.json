@@ -1,5 +1,5 @@
 {
-  "version": "0.8.2-final-source-registry-3",
+  "version": "0.8.2-final-source-registry-4",
   "papers": [
     {
       "order": 0,
@@ -59,7 +59,10 @@
       "expected_pages": 35,
       "expected_reference_count": 55,
       "output": "04_V0.8.2_FINAL_Valanarasu_GigaTIME.html",
-      "download_candidates": ["https://www.cell.com/cell/pdf/S0092-8674(25)01312-1.pdf"]
+      "download_candidates": [
+        "https://www.microsoft.com/en-us/research/wp-content/uploads/2025/12/Multimodal-AI-generates-virtual-population-for-tumor.pdf",
+        "https://www.cell.com/cell/pdf/S0092-8674(25)01312-1.pdf"
+      ]
     },
     {
       "order": 5,
