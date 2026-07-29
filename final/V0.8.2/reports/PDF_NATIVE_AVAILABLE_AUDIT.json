@@ -1,0 +1,118 @@
+{
+  "available_pdf_keys": [
+    "andani-2025",
+    "karimi-2023",
+    "landry-2026",
+    "lee-2025",
+    "li-hex-2026",
+    "maas-2026",
+    "sorin-2023",
+    "spitzer-2025",
+    "valanarasu-2026"
+  ],
+  "available_pdf_count": 9,
+  "results": [
+    {
+      "key": "maas-2026",
+      "order": 1,
+      "pdf": ".build/v082/pdfs/01_maas-2026.pdf",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082.py\", line 9, in <module>\n    from build_pdf_native_manifest_v082_final import main\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_final.py\", line 13, in <module>\n    import build_pdf_native_manifest_v082_unpacked as base\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_unpacked.py\", line 20, in <module>\n    from PIL import Image\nModuleNotFoundError: No module named 'PIL'\n",
+      "manifest_exists": false,
+      "audit_exists": false,
+      "passed": false
+    },
+    {
+      "key": "landry-2026",
+      "order": 2,
+      "pdf": ".build/v082/pdfs/02_landry-2026.pdf",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082.py\", line 9, in <module>\n    from build_pdf_native_manifest_v082_final import main\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_final.py\", line 13, in <module>\n    import build_pdf_native_manifest_v082_unpacked as base\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_unpacked.py\", line 20, in <module>\n    from PIL import Image\nModuleNotFoundError: No module named 'PIL'\n",
+      "manifest_exists": false,
+      "audit_exists": false,
+      "passed": false
+    },
+    {
+      "key": "lee-2025",
+      "order": 3,
+      "pdf": ".build/v082/pdfs/03_lee-2025.pdf",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082.py\", line 9, in <module>\n    from build_pdf_native_manifest_v082_final import main\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_final.py\", line 13, in <module>\n    import build_pdf_native_manifest_v082_unpacked as base\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_unpacked.py\", line 20, in <module>\n    from PIL import Image\nModuleNotFoundError: No module named 'PIL'\n",
+      "manifest_exists": false,
+      "audit_exists": false,
+      "passed": false
+    },
+    {
+      "key": "valanarasu-2026",
+      "order": 4,
+      "pdf": ".build/v082/pdfs/04_valanarasu-2026.pdf",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082.py\", line 9, in <module>\n    from build_pdf_native_manifest_v082_final import main\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_final.py\", line 13, in <module>\n    import build_pdf_native_manifest_v082_unpacked as base\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_unpacked.py\", line 20, in <module>\n    from PIL import Image\nModuleNotFoundError: No module named 'PIL'\n",
+      "manifest_exists": false,
+      "audit_exists": false,
+      "passed": false
+    },
+    {
+      "key": "li-hex-2026",
+      "order": 5,
+      "pdf": ".build/v082/pdfs/05_li-hex-2026.pdf",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082.py\", line 9, in <module>\n    from build_pdf_native_manifest_v082_final import main\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_final.py\", line 13, in <module>\n    import build_pdf_native_manifest_v082_unpacked as base\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_unpacked.py\", line 20, in <module>\n    from PIL import Image\nModuleNotFoundError: No module named 'PIL'\n",
+      "manifest_exists": false,
+      "audit_exists": false,
+      "passed": false
+    },
+    {
+      "key": "andani-2025",
+      "order": 6,
+      "pdf": ".build/v082/pdfs/06_andani-2025.pdf",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082.py\", line 9, in <module>\n    from build_pdf_native_manifest_v082_final import main\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_final.py\", line 13, in <module>\n    import build_pdf_native_manifest_v082_unpacked as base\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_unpacked.py\", line 20, in <module>\n    from PIL import Image\nModuleNotFoundError: No module named 'PIL'\n",
+      "manifest_exists": false,
+      "audit_exists": false,
+      "passed": false
+    },
+    {
+      "key": "spitzer-2025",
+      "order": 8,
+      "pdf": ".build/v082/pdfs/08_spitzer-2025.pdf",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082.py\", line 9, in <module>\n    from build_pdf_native_manifest_v082_final import main\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_final.py\", line 13, in <module>\n    import build_pdf_native_manifest_v082_unpacked as base\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_unpacked.py\", line 20, in <module>\n    from PIL import Image\nModuleNotFoundError: No module named 'PIL'\n",
+      "manifest_exists": false,
+      "audit_exists": false,
+      "passed": false
+    },
+    {
+      "key": "sorin-2023",
+      "order": 10,
+      "pdf": ".build/v082/pdfs/10_sorin-2023.pdf",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082.py\", line 9, in <module>\n    from build_pdf_native_manifest_v082_final import main\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_final.py\", line 13, in <module>\n    import build_pdf_native_manifest_v082_unpacked as base\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_unpacked.py\", line 20, in <module>\n    from PIL import Image\nModuleNotFoundError: No module named 'PIL'\n",
+      "manifest_exists": false,
+      "audit_exists": false,
+      "passed": false
+    },
+    {
+      "key": "karimi-2023",
+      "order": 11,
+      "pdf": ".build/v082/pdfs/11_karimi-2023.pdf",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082.py\", line 9, in <module>\n    from build_pdf_native_manifest_v082_final import main\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_final.py\", line 13, in <module>\n    import build_pdf_native_manifest_v082_unpacked as base\n  File \"/home/runner/work/paper-reading-system/paper-reading-system/tools/build_pdf_native_manifest_v082_unpacked.py\", line 20, in <module>\n    from PIL import Image\nModuleNotFoundError: No module named 'PIL'\n",
+      "manifest_exists": false,
+      "audit_exists": false,
+      "passed": false
+    }
+  ],
+  "passed_count": 0,
+  "failed_count": 9,
+  "all_available_passed": false
+}
