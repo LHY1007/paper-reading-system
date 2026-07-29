@@ -65,7 +65,7 @@ def render(shell: Path, manifest_path: Path, output: Path, schema: Path | None) 
         raise SystemExit("renderer input is not a frozen V0.8.2 CANVAS shell")
     shell_sha = hashlib.sha256(shell.read_bytes()).hexdigest()
 
-    report = locked_renderer.render(shell, manifest_path, output, schema)
+    report = locked_renderer.core.render(shell, manifest_path, output, schema)
     manifest = json.loads(manifest_path.read_text("utf-8"))
     soup = BeautifulSoup(output.read_text("utf-8"), "html.parser")
     fill_document_metadata(soup, manifest["paper"])
