@@ -104,7 +104,7 @@ def validate(manifest: dict, schema: dict, audit: dict | None) -> dict:
     if audit is None:
         errors.append("missing independent PDF-native audit")
     else:
-        if audit.get("strict_layout_parser") not in {"v082-final-2", "v082-final-3"}:
+        if audit.get("strict_layout_parser") not in {"v082-final-2", "v082-final-3", "v082-final-4"}:
             errors.append("strict layout parser audit missing or obsolete")
         if not audit.get("passed"):
             errors.append("PDF-native extraction audit failed")
