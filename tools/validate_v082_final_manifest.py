@@ -12,6 +12,7 @@ from validate_v082_reader_content_quality import validate as validate_reader_con
 
 CJK_RE = re.compile(r"[\u3400-\u9fff]")
 HTML_TAG_RE = re.compile(r"<\/?(?:p|div|span|script|style|html|body)\b", re.I)
+PARSER_VERSION_RE = re.compile(r"^v082-final-(?:[2-9]|[1-9]\d+)$")
 
 
 def plain(items: list[dict]) -> str:
@@ -104,8 +105,9 @@ def validate(manifest: dict, schema: dict, audit: dict | None) -> dict:
     if audit is None:
         errors.append("missing independent PDF-native audit")
     else:
-        if audit.get("strict_layout_parser") not in {"v082-final-2", "v082-final-3", "v082-final-4"}:
-            errors.append("strict layout parser audit missing or obsolete")
+        parser_version = str(audit.get("strict_layout_parser", ""))
+        if not PARSER_VERSION_RE.fullmatch(parser_version):
+            errors.append(f"strict layout parser audit missing or obsolete: {parser_version or 'none'}")
         if not audit.get("passed"):
             errors.append("PDF-native extraction audit failed")
         if int(audit.get("paragraphs", -1)) != len(paragraphs):
