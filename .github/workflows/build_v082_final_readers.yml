@@ -59,13 +59,16 @@ jobs:
           test -n "$CANVAS"
           printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_final_paths
 
-      - name: Cache audited non-CANVAS PDFs
-        uses: actions/cache@v4
+      - name: Restore audited non-CANVAS PDFs
+        id: source_pdf_cache
+        uses: actions/cache/restore@v4
         with:
           path: .build/v082/pdfs
           key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json') }}
 
       - name: Audit CANVAS baseline and download non-CANVAS source PDFs
+        id: source_audit
+        continue-on-error: true
         shell: bash
         run: |
           set -euo pipefail
@@ -77,6 +80,19 @@ jobs:
             --output-dir .build/v082/pdfs \
             --report final/V0.8.2/reports/SOURCE_DOWNLOAD.json \
             --reuse
+
+      - name: Save partial audited PDF cache
+        if: always() && steps.source_pdf_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .build/v082/pdfs
+          key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json') }}
+
+      - name: Enforce source audit result
+        if: steps.source_audit.outcome != 'success'
+        run: |
+          cat final/V0.8.2/reports/SOURCE_DOWNLOAD.json || true
+          exit 1
 
       - name: Cache translation model
         uses: actions/cache@v4
