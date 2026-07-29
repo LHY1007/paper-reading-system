@@ -24,6 +24,18 @@ EXPECTED_EXEMPLARS = {
     "#figure-table-index .figure-ref": 1,
 }
 
+LOCK_EXEMPLAR_KEYS = {
+    "#bilingual-pane > section.paper-section": "sections",
+    "#bilingual-pane .bilingual-unit": "bilingual_units",
+    "#bilingual-pane .figure-card:not(.table-card)": "figures",
+    "#bilingual-pane .table-card": "tables",
+    "#bilingual-pane .reference-item": "references",
+    "#quick-pane #overview .qa": "overview_questions_quick",
+    "#overview-bilingual-folded .qa": "overview_questions_bilingual",
+    "#figure-table-index .figure-index-section": "figure_index_sections",
+    "#figure-table-index .figure-ref": "figure_index_buttons",
+}
+
 REQUIRED_PLACEHOLDERS = {
     "__V082_PAPER_TITLE__",
     "__V082_PAPER_TITLE_ZH__",
@@ -39,11 +51,16 @@ REQUIRED_PLACEHOLDERS = {
 }
 
 
-def analyze(master: Path, shell: Path) -> dict[str, Any]:
+def sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def analyze(master: Path, shell: Path, lock_path: Path) -> dict[str, Any]:
     raw = shell.read_text("utf-8")
     soup = BeautifulSoup(raw, "html.parser")
     master_raw = master.read_text("utf-8")
-    errors: list[str] = []
+    lock = json.loads(lock_path.read_text("utf-8"))
+    errors: list[Any] = []
 
     parity = shell_lock.analyze(master, shell)
     if not parity.get("passed"):
@@ -54,11 +71,14 @@ def analyze(master: Path, shell: Path) -> dict[str, Any]:
         errors.append("missing html[data-v082-template=frozen-shell]")
 
     exemplar_counts: dict[str, int] = {}
-    for selector, expected in EXPECTED_EXEMPLARS.items():
+    lock_exemplars = lock.get("component_exemplars") or {}
+    for selector, default_expected in EXPECTED_EXEMPLARS.items():
+        lock_key = LOCK_EXEMPLAR_KEYS[selector]
+        expected = int(lock_exemplars.get(lock_key, default_expected))
         actual = len(soup.select(selector))
         exemplar_counts[selector] = actual
         if actual != expected:
-            errors.append(f"component exemplar {selector!r}: expected {expected}, found {actual}")
+            errors.append(f"component exemplar {selector!r}: expected locked value {expected}, found {actual}")
 
     missing_placeholders = sorted(token for token in REQUIRED_PLACEHOLDERS if token not in raw)
     if missing_placeholders:
@@ -77,6 +97,8 @@ def analyze(master: Path, shell: Path) -> dict[str, Any]:
     if residues:
         errors.append({"CANVAS_content_residues": residues})
 
+    master_sha = sha256(master)
+    shell_sha = sha256(shell)
     source_bytes = master.stat().st_size
     shell_bytes = shell.stat().st_size
     size_ratio = shell_bytes / max(1, source_bytes)
@@ -88,30 +110,54 @@ def analyze(master: Path, shell: Path) -> dict[str, Any]:
     if styles_master != styles_shell:
         errors.append("style blocks changed during shell extraction")
 
+    locked_values = {
+        "normalized_master_sha256": master_sha,
+        "normalized_master_bytes": source_bytes,
+        "frozen_shell_sha256": shell_sha,
+        "frozen_shell_bytes": shell_bytes,
+        "fixed_shell_dom_sha256": parity.get("candidate_shell_sha256"),
+    }
+    lock_mismatches = {
+        key: {"expected": lock.get(key), "actual": actual}
+        for key, actual in locked_values.items()
+        if lock.get(key) != actual
+    }
+    if lock_mismatches:
+        errors.append({"immutable_lock_mismatches": lock_mismatches})
+
+    policy = lock.get("policy") or {}
+    if any(policy.get(key) is not False for key in ("ai_may_generate_html", "ai_may_generate_css", "ai_may_generate_interaction_code")):
+        errors.append("lock policy must prohibit AI-generated product code")
+
     return {
-        "version": "v082-frozen-shell-gate-1",
+        "version": "v082-frozen-shell-gate-2",
+        "lock": str(lock_path),
+        "lock_version": lock.get("version"),
         "master": str(master),
-        "master_sha256": hashlib.sha256(master.read_bytes()).hexdigest(),
+        "master_sha256": master_sha,
         "master_bytes": source_bytes,
         "shell": str(shell),
-        "shell_sha256": hashlib.sha256(shell.read_bytes()).hexdigest(),
+        "shell_sha256": shell_sha,
         "shell_bytes": shell_bytes,
         "size_ratio": round(size_ratio, 6),
         "component_exemplars": exemplar_counts,
         "placeholder_count": raw.count("__V082_"),
         "fixed_shell_parity": parity,
+        "locked_values": locked_values,
+        "policy": policy,
         "errors": errors,
         "passed": not errors,
     }
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Validate that a generated template is a content-free, immutable V0.8.2 CANVAS shell")
+    parser = argparse.ArgumentParser(description="Validate a content-free V0.8.2 CANVAS shell against its immutable version lock")
     parser.add_argument("shell", type=Path)
     parser.add_argument("--master", type=Path, required=True)
+    parser.add_argument("--lock", type=Path, default=Path("config/v082_frozen_shell_lock.json"))
     parser.add_argument("--report", type=Path)
     args = parser.parse_args()
-    report = analyze(args.master, args.shell)
+    report = analyze(args.master, args.shell, args.lock)
     text = json.dumps(report, ensure_ascii=False, indent=2)
     print(text)
     if args.report:
