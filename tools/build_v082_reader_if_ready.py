@@ -30,9 +30,16 @@ def write_status(path: Path, status: dict[str, Any]) -> None:
     print(json.dumps(status, ensure_ascii=False, indent=2))
 
 
+def stop(args: argparse.Namespace, status: dict[str, Any], reason: str) -> None:
+    status["reason"] = reason
+    write_status(args.status_report, status)
+    if args.require_ready:
+        raise SystemExit(1)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Render a V0.8.2 paper only when its paper-specific task and completed reader manifest pass every content gate"
+        description="Render a V0.8.2 paper only when source evidence, paper plan and completed reader manifest pass every gate"
     )
     parser.add_argument("raw_manifest", type=Path)
     parser.add_argument("audit", type=Path)
@@ -60,19 +67,36 @@ def main() -> None:
     args.output_reader.parent.mkdir(parents=True, exist_ok=True)
 
     prefix = args.paper_key.replace("/", "-")
+    evidence_report = args.report_dir / f"{prefix}_EVIDENCE_QUALITY.json"
     status: dict[str, Any] = {
-        "version": "v082-reader-build-readiness-1",
+        "version": "v082-reader-build-readiness-2",
         "paper_key": args.paper_key,
         "raw_manifest": str(args.raw_manifest),
         "audit": str(args.audit),
         "task": str(args.task_output),
         "curated_manifest": str(args.curated_dir / f"{args.paper_key}.json"),
         "output_reader": str(args.output_reader),
+        "ready_for_content_generation": False,
         "ready_for_rendering": False,
         "rendered": False,
         "reason": None,
         "steps": {},
+        "reports": {"evidence": str(evidence_report)},
     }
+
+    evidence_command = [
+        sys.executable,
+        "tools/validate_v082_evidence_quality.py",
+        str(args.raw_manifest),
+        "--audit",
+        str(args.audit),
+        "--report",
+        str(evidence_report),
+    ]
+    status["steps"]["evidence"] = run(evidence_command)
+    if status["steps"]["evidence"]["returncode"] != 0:
+        stop(args, status, "PDF evidence failed outline, figure, table, caption or reference quality checks")
+        return
 
     task_command = [
         sys.executable,
@@ -88,36 +112,28 @@ def main() -> None:
     ]
     status["steps"]["task"] = run(task_command)
     if status["steps"]["task"]["returncode"] != 0 or not args.task_output.exists():
-        status["reason"] = "reader content task could not be created"
-        write_status(args.status_report, status)
-        if args.require_ready:
-            raise SystemExit(1)
+        stop(args, status, "reader content task could not be created")
         return
 
     task = json.loads(args.task_output.read_text("utf-8"))
     status["task_version"] = task.get("task_version")
     status["paper_specific_plan"] = task.get("paper_specific_plan_path")
     status["plan_errors"] = task.get("plan_errors")
-    status["ready_for_content_generation"] = task.get("ready_for_content_generation")
-    if not task.get("ready_for_content_generation"):
-        status["reason"] = "paper-specific reader content plan is missing or invalid"
-        write_status(args.status_report, status)
-        if args.require_ready:
-            raise SystemExit(1)
+    status["ready_for_content_generation"] = bool(task.get("ready_for_content_generation"))
+    if not status["ready_for_content_generation"]:
+        stop(args, status, "paper-specific reader content plan is missing or invalid")
         return
 
     curated = args.curated_dir / f"{args.paper_key}.json"
     if not curated.exists():
-        status["reason"] = "completed reader-ready manifest is missing; raw evidence and machine translation must not be rendered"
-        write_status(args.status_report, status)
-        if args.require_ready:
-            raise SystemExit(1)
+        stop(args, status, "completed reader-ready manifest is missing; raw evidence and machine translation must not be rendered")
         return
 
     shutil.copy2(curated, args.manifest_output)
     status["manifest_output"] = str(args.manifest_output)
 
     reports = {
+        "evidence": evidence_report,
         "reader_content": args.report_dir / f"{prefix}_READER_CONTENT.json",
         "content": args.report_dir / f"{prefix}_CONTENT.json",
         "boundary": args.report_dir / f"{prefix}_MANIFEST_CODE_BOUNDARY.json",
@@ -164,11 +180,8 @@ def main() -> None:
         name for name in validation_commands if status["steps"][name]["returncode"] != 0
     ]
     if failed_content_steps:
-        status["reason"] = "completed manifest failed reader/content gates"
         status["failed_steps"] = failed_content_steps
-        write_status(args.status_report, status)
-        if args.require_ready:
-            raise SystemExit(1)
+        stop(args, status, "completed manifest failed reader/content gates")
         return
 
     status["ready_for_rendering"] = True
@@ -244,17 +257,14 @@ def main() -> None:
         if status["steps"].get(name, {}).get("returncode") not in (0, None)
     ]
     if failed_render_steps:
-        status["reason"] = "rendered reader failed product or reader-experience gates"
         status["failed_steps"] = failed_render_steps
         if args.output_reader.exists():
             args.output_reader.unlink()
-        write_status(args.status_report, status)
-        if args.require_ready:
-            raise SystemExit(1)
+        stop(args, status, "rendered reader failed product or reader-experience gates")
         return
 
     status["rendered"] = True
-    status["reason"] = "reader-ready manifest passed all pre-render and post-render gates"
+    status["reason"] = "source evidence, reader-ready manifest and rendered reader passed all gates"
     write_status(args.status_report, status)
 
 
