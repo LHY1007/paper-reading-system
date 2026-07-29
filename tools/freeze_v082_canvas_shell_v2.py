@@ -93,6 +93,10 @@ def scrub_figure(card: Tag) -> None:
     if zoom is not None:
         for attr in ("data-card", "data-target", "data-figure-id", "data-figure"):
             zoom.attrs.pop(attr, None)
+    content = base.require_one(card, ":scope > .figure-content")
+    for side in ("en", "zh"):
+        paragraph = base.require_one(content, f":scope > .captions.bilingual-caption > .caption-{side} > p")
+        paragraph["data-annotation-block"] = f"caption-{side}-__V082_FIGURE_ID__"
 
 
 def scrub_table(card: Tag) -> None:
