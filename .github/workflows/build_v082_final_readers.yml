@@ -18,6 +18,7 @@ on:
       - "tools/translate_v082_manifest.py"
       - "tools/validate_v082_final_manifest.py"
       - "tools/validate_v082_manifest_code_boundary.py"
+      - "tools/validate_v082_rendered_architecture.py"
       - "tools/normalize_v082_canvas_master.py"
       - "tools/freeze_v082_canvas_shell*.py"
       - "tools/render_v082_from_frozen_shell.py"
@@ -193,6 +194,7 @@ jobs:
               content_report=report_dir/f'{prefix}_CONTENT.json'
               code_boundary_report=report_dir/f'{prefix}_MANIFEST_CODE_BOUNDARY.json'
               render_report=report_dir/f'{prefix}_RENDER.json'
+              architecture_report=report_dir/f'{prefix}_ARCHITECTURE.json'
               output=reader_dir/paper['output']
               shell_report=report_dir/f'{prefix}_SHELL.json'
               component_report=report_dir/f'{prefix}_COMPONENTS.json'
@@ -204,6 +206,7 @@ jobs:
               subprocess.run([sys.executable,'tools/render_v082_from_frozen_shell.py',str(manifest),str(output),'--shell',str(shell),'--lock',str(shell_lock),'--schema',str(schema),'--report',str(render_report)],check=True)
               subprocess.run([sys.executable,'tools/validate_v082_canvas_shell_lock.py',str(output),'--canonical',str(master),'--report',str(shell_report)],check=True)
               subprocess.run([sys.executable,'tools/validate_v082_canvas_components.py',str(output),'--report',str(component_report)],check=True)
+              subprocess.run([sys.executable,'tools/validate_v082_rendered_architecture.py',str(output),'--shell',str(shell),'--manifest',str(manifest),'--lock',str(shell_lock),'--report',str(architecture_report)],check=True)
           PY
 
       - name: Run strict browser regression across all 12 readers
@@ -224,7 +227,7 @@ jobs:
           shell_lock=json.load(open('config/v082_frozen_shell_lock.json'))
           expected=[x['output'] for x in sorted(registry['papers'],key=lambda x:x['order'])]
           readers=sorted((root/'readers').glob('*.html'))
-          content=[]; shells=[]; components=[]; boundaries=[]; renders=[]
+          content=[]; shells=[]; components=[]; boundaries=[]; renders=[]; architectures=[]
           for p in sorted((root/'reports').glob('*_CONTENT.json')):
               content.append({'report':p.name,**json.loads(p.read_text('utf-8'))})
           for p in sorted((root/'reports').glob('*_SHELL.json')):
@@ -235,6 +238,8 @@ jobs:
               boundaries.append({'report':p.name,**json.loads(p.read_text('utf-8'))})
           for p in sorted((root/'reports').glob('*_RENDER.json')):
               renders.append({'report':p.name,**json.loads(p.read_text('utf-8'))})
+          for p in sorted((root/'reports').glob('*_ARCHITECTURE.json')):
+              architectures.append({'report':p.name,**json.loads(p.read_text('utf-8'))})
           browser=json.loads((root/'reports/BROWSER_REGRESSION.json').read_text('utf-8'))
           sources=json.loads((root/'reports/SOURCE_DOWNLOAD.json').read_text('utf-8'))
           frozen_shell=json.loads((root/'reports/FROZEN_SHELL_GATE.json').read_text('utf-8'))
@@ -253,6 +258,7 @@ jobs:
           if len(components)!=12 or not all(x.get('passed') for x in components): errors.append('component-contract gate failed')
           if len(boundaries)!=11 or not all(x.get('passed') for x in boundaries): errors.append('manifest-only code boundary gate failed')
           if len(renders)!=11: errors.append('fixed-shell render inventory failed')
+          if len(architectures)!=11 or not all(x.get('passed') for x in architectures): errors.append('rendered fixed-architecture gate failed')
           expected_shell_sha=shell_lock.get('frozen_shell_sha256')
           expected_lock_version=shell_lock.get('version')
           if renders and any(
@@ -262,6 +268,13 @@ jobs:
               for x in renders
           ):
               errors.append('reader shell provenance gate failed')
+          if architectures and any(
+              x.get('shell_sha256')!=expected_shell_sha
+              or x.get('shell_lock_version')!=expected_lock_version
+              or x.get('version')!='v082-rendered-architecture-gate-1'
+              for x in architectures
+          ):
+              errors.append('rendered architecture provenance gate failed')
           if not browser.get('passed') or len(browser.get('files',[]))!=12: errors.append('browser regression gate failed')
           gate={
               'release':'V0.8.2 FINAL',
@@ -274,6 +287,7 @@ jobs:
               'frozen_shell_gate':frozen_shell,
               'manifest_code_boundary_reports':boundaries,
               'render_reports':renders,
+              'rendered_architecture_reports':architectures,
               'content_reports':content,
               'shell_reports':shells,
               'component_reports':components,
