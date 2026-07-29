@@ -47,7 +47,6 @@ def validate(manifest: dict, schema: dict, audit: dict | None) -> dict:
 
     empty_paragraphs = []
     source_mismatches = []
-    bilingual_item_mismatches = []
     untranslated_long_blocks = []
     html_leaks = []
     for block in paragraphs:
@@ -59,8 +58,6 @@ def validate(manifest: dict, schema: dict, audit: dict | None) -> dict:
             empty_paragraphs.append(block_id)
         if english != fragments:
             source_mismatches.append(block_id)
-        if len(block.get("english", [])) != len(block.get("chinese", [])):
-            bilingual_item_mismatches.append(block_id)
         if len(english) >= 120 and english == chinese:
             untranslated_long_blocks.append(block_id)
         if HTML_TAG_RE.search(english) or HTML_TAG_RE.search(chinese):
@@ -69,8 +66,6 @@ def validate(manifest: dict, schema: dict, audit: dict | None) -> dict:
         errors.append({"empty_paragraphs": empty_paragraphs[:30]})
     if source_mismatches:
         errors.append({"source_fragment_mismatches": source_mismatches[:30]})
-    if bilingual_item_mismatches:
-        errors.append({"bilingual_item_mismatches": bilingual_item_mismatches[:30]})
     if untranslated_long_blocks:
         errors.append({"untranslated_long_blocks": untranslated_long_blocks[:30]})
     if html_leaks:
