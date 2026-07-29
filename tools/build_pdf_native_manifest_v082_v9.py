@@ -17,8 +17,9 @@ AUTHOR_NAME = re.compile(
     r"([A-Z][A-Za-zÀ-ÖØ-öø-ÿ.’'\-]+(?:\s+(?:[A-Z]\.|[A-Za-zÀ-ÖØ-öø-ÿ.’'\-]+)){1,8})\s*,?\s*\d+(?:\s*,\s*\d+)*"
 )
 FINAL_AUTHOR = re.compile(r"&\s+([A-Z][A-Za-zÀ-ÖØ-öø-ÿ.’'\-]+(?:\s+(?:[A-Z]\.|[A-Za-zÀ-ÖØ-öø-ÿ.’'\-]+)){1,8})\s*\d+(?:\s*,\s*\d+)*")
-AFFILIATION_START = re.compile(r"(?<!\d)(\d{1,2})(?=[A-Z])")
+AFFILIATION_START = re.compile(r"(?<!\d)(\d{1,2})\s*(?=[A-Z])")
 AFFILIATION_NON_ORG = re.compile(r"^(?:These authors|Senior author|Lead contact)", re.I)
+AFFILIATION_BLOCK = re.compile(r"^\d{1,2}\s*(?:Department|Division|Institute|University|School|Program|Centre|Center|Laboratory|LipiTUM|CIOBio|Clinical|Translational|Sorbonne|Systems|Hopp|Single-cell|Faculty|National|German|Neurovascular|Signalling|Robert|Medical|Biomedical|Earle|Providence|Microsoft|Arclight)")
 DATE_FIELD = re.compile(r"\b(Received|Accepted|Published online):\s*([^\n]+)", re.I)
 
 
@@ -92,7 +93,7 @@ def parse_affiliation_chunk(text: str, expected: int) -> tuple[list[str], int]:
     for position, number in positions:
         if number != expected:
             continue
-        tail = text[position + len(str(number)) :]
+        tail = text[position + len(str(number)) :].lstrip()
         if AFFILIATION_NON_ORG.match(tail):
             break
         accepted.append((position, number))
@@ -101,7 +102,7 @@ def parse_affiliation_chunk(text: str, expected: int) -> tuple[list[str], int]:
     for index, (position, number) in enumerate(accepted):
         end = accepted[index + 1][0] if index + 1 < len(accepted) else len(text)
         value = norm(text[position:end])
-        stop = re.search(r"\s+\d{1,2}(?:These authors|Senior author|Lead contact)", value, re.I)
+        stop = re.search(r"\s+\d{1,2}\s*(?:These authors|Senior author|Lead contact)", value, re.I)
         if stop:
             value = norm(value[: stop.start()])
         if value:
@@ -115,7 +116,7 @@ def extract_affiliations(doc: fitz.Document, page_index: int, block_text: str) -
     for index in range(page_index, min(len(doc), page_index + 3)):
         for block in doc[index].get_text("blocks"):
             text = norm(block[4])
-            if re.match(r"^\d{1,2}(?:Department|Division|Institute|University|School|Program|Centre|Center|Laboratory|LipiTUM|CIOBio|Clinical|Translational|Sorbonne|Systems|Hopp|Single-cell|Faculty|National|German|Neurovascular|Signalling|Robert|Medical|Biomedical|Earle|Providence|Microsoft|Arclight)", text):
+            if AFFILIATION_BLOCK.match(text):
                 chunks.append(text)
     affiliations: list[str] = []
     expected = 1
