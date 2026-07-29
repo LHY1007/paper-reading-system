@@ -6,6 +6,7 @@ import hashlib
 import json
 import re
 import time
+import xml.etree.ElementTree as ET
 from collections import deque
 from pathlib import Path
 from urllib.parse import quote, urljoin, urlparse
@@ -16,6 +17,12 @@ from bs4 import BeautifulSoup
 
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149 Safari/537.36"
 PDF_ACCEPT = "application/pdf,text/html;q=0.9,application/xhtml+xml;q=0.8,*/*;q=0.5"
+
+
+class DownloadError(RuntimeError):
+    def __init__(self, message: str, attempts: list[dict]) -> None:
+        super().__init__(message)
+        self.attempts = attempts
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -35,6 +42,12 @@ def dedupe(values: list[str]) -> list[str]:
             seen.add(value)
             out.append(value)
     return out
+
+
+def normalize_download_url(url: str) -> str:
+    if url.startswith("ftp://ftp.ncbi.nlm.nih.gov/"):
+        return "https://ftp.ncbi.nlm.nih.gov/" + url.removeprefix("ftp://ftp.ncbi.nlm.nih.gov/")
+    return url
 
 
 def request_headers(url: str, *, pdf_only: bool = False) -> dict[str, str]:
@@ -57,28 +70,35 @@ def request_headers(url: str, *, pdf_only: bool = False) -> dict[str, str]:
 
 
 def publisher_variants(url: str) -> list[str]:
+    url = normalize_download_url(url)
     variants = [url]
     low = url.lower()
     if "cell.com/" in low and "/pdf/" in low:
-        variants.extend([url + ("&" if "?" in url else "?") + "download=true"])
+        variants.append(url + ("&" if "?" in url else "?") + "download=true")
         match = re.search(r"/(S\d{16})\.pdf", url, flags=re.I)
         if match:
             pii = match.group(1)
-            variants.extend([
-                f"https://www.sciencedirect.com/science/article/pii/{pii}/pdfft?isDTMRedir=true&download=true",
-                f"https://api.elsevier.com/content/article/pii/{pii}?httpAccept=application/pdf",
-            ])
+            variants.extend(
+                [
+                    f"https://www.sciencedirect.com/science/article/pii/{pii}/pdfft?isDTMRedir=true&download=true",
+                    f"https://api.elsevier.com/content/article/pii/{pii}?httpAccept=application/pdf",
+                ]
+            )
     if "science.org/doi/pdf/" in low:
-        variants.extend([
-            url + ("&" if "?" in url else "?") + "download=true",
-            url.replace("/doi/pdf/", "/doi/epdf/"),
-        ])
+        variants.extend(
+            [
+                url + ("&" if "?" in url else "?") + "download=true",
+                url.replace("/doi/pdf/", "/doi/epdf/"),
+            ]
+        )
     if "science.org/doi/" in low and "/pdf/" not in low and "/epdf/" not in low:
         doi = url.split("/doi/", 1)[1].split("?", 1)[0]
-        variants.extend([
-            f"https://www.science.org/doi/pdf/{doi}?download=true",
-            f"https://www.science.org/doi/epdf/{doi}",
-        ])
+        variants.extend(
+            [
+                f"https://www.science.org/doi/pdf/{doi}?download=true",
+                f"https://www.science.org/doi/epdf/{doi}",
+            ]
+        )
     return dedupe(variants)
 
 
@@ -102,14 +122,17 @@ def extract_pdf_links(base_url: str, html: str) -> list[str]:
         for node in soup.select(selector):
             href = node.get("content") or node.get("href") or node.get("src")
             if href:
-                urls.append(urljoin(base_url, href))
+                urls.append(normalize_download_url(urljoin(base_url, href)))
     for link in soup.find_all("a", href=True):
-        href = urljoin(base_url, link["href"])
+        href = normalize_download_url(urljoin(base_url, link["href"]))
         label = " ".join(link.get_text(" ", strip=True).split()).lower()
         if "download pdf" in label or label == "pdf" or "full text pdf" in label:
             urls.append(href)
-    for match in re.findall(r'https?://[^"\'<> ]+(?:/pdf/[^"\'<> ]+|/epdf/[^"\'<> ]+|\.pdf(?:\?[^"\'<> ]*)?)', html):
-        urls.append(match.replace("\\/", "/"))
+    for match in re.findall(
+        r'https?://[^"\'<> ]+(?:/pdf/[^"\'<> ]+|/epdf/[^"\'<> ]+|\.pdf(?:\?[^"\'<> ]*)?)',
+        html,
+    ):
+        urls.append(normalize_download_url(match.replace("\\/", "/")))
     return dedupe(urls)
 
 
@@ -129,21 +152,47 @@ def discover_doi_urls(session: requests.Session, doi: str) -> tuple[list[str], d
 
 
 def discover_pmc_urls(session: requests.Session, doi: str) -> tuple[list[str], dict]:
-    endpoint = "https://www.ncbi.nlm.nih.gov/pmc/utils/idconv/v1.0/"
+    id_endpoint = "https://www.ncbi.nlm.nih.gov/pmc/utils/idconv/v1.0/"
     response = session.get(
-        endpoint,
+        id_endpoint,
         params={"ids": doi, "format": "json", "tool": "paper-reading-system", "email": "noreply@example.com"},
         timeout=60,
-        headers=request_headers(endpoint),
+        headers=request_headers(id_endpoint),
     )
     response.raise_for_status()
-    payload = response.json()
-    records = payload.get("records", [])
+    records = response.json().get("records", [])
     pmcid = next((record.get("pmcid") for record in records if record.get("pmcid")), None)
     if not pmcid:
         return [], {"pmc_found": False}
+
+    urls: list[str] = []
+    info: dict = {"pmc_found": True, "pmcid": pmcid}
+    oa_endpoint = "https://www.ncbi.nlm.nih.gov/pmc/utils/oa/oa.fcgi"
+    try:
+        oa_response = session.get(
+            oa_endpoint,
+            params={"id": pmcid},
+            timeout=60,
+            headers=request_headers(oa_endpoint),
+        )
+        oa_response.raise_for_status()
+        root = ET.fromstring(oa_response.content)
+        oa_links = []
+        for link in root.findall(".//link"):
+            href = link.attrib.get("href")
+            fmt = (link.attrib.get("format") or "").lower()
+            if href and fmt == "pdf":
+                normalized = normalize_download_url(href)
+                oa_links.append(normalized)
+                urls.append(normalized)
+        info["oa_pdf_links"] = oa_links
+        info["oa_response_bytes"] = len(oa_response.content)
+    except Exception as exc:
+        info["oa_error"] = f"{type(exc).__name__}: {exc}"
+
     article = f"https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/"
-    return [f"{article}pdf/", article], {"pmc_found": True, "pmcid": pmcid}
+    urls.extend([article, f"{article}pdf/"])
+    return dedupe(urls), info
 
 
 def discover_crossref_urls(session: requests.Session, doi: str) -> tuple[list[str], dict]:
@@ -156,7 +205,7 @@ def discover_crossref_urls(session: requests.Session, doi: str) -> tuple[list[st
         url = link.get("URL")
         content_type = (link.get("content-type") or "").lower()
         if url and ("pdf" in content_type or ".pdf" in url.lower() or "/pdf/" in url.lower()):
-            urls.append(url)
+            urls.append(normalize_download_url(url))
     return dedupe(urls), {"crossref_links": len(urls)}
 
 
@@ -169,7 +218,7 @@ def discover_elsevier_urls(doi: str) -> list[str]:
     ]
 
 
-def fetch_pdf(session: requests.Session, urls: list[str], *, max_requests: int = 80) -> tuple[bytes, str, list[dict]]:
+def fetch_pdf(session: requests.Session, urls: list[str], *, max_requests: int = 100) -> tuple[bytes, str, list[dict]]:
     attempts: list[dict] = []
     queue: deque[str] = deque()
     queued: set[str] = set()
@@ -209,7 +258,7 @@ def fetch_pdf(session: requests.Session, urls: list[str], *, max_requests: int =
                             queue.append(variant)
         except Exception as exc:
             attempts.append({"url": url, "error": f"{type(exc).__name__}: {exc}"})
-    raise RuntimeError(f"all PDF download candidates failed after {len(attempts)} attempts")
+    raise DownloadError(f"all PDF download candidates failed after {len(attempts)} attempts", attempts)
 
 
 def validate_pdf(data: bytes, expected_pages: int) -> dict:
@@ -257,7 +306,9 @@ def main() -> None:
         if args.reuse and target.exists():
             data = target.read_bytes()
             validation = validate_pdf(data, paper["expected_pages"])
-            results.append({"key": key, "path": str(target), "source": "reused", "sha256": sha256_bytes(data), **validation})
+            results.append(
+                {"key": key, "path": str(target), "source": "reused", "sha256": sha256_bytes(data), **validation}
+            )
             write_report(args.report, registry["version"], results, failures, len(papers))
             continue
 
@@ -278,10 +329,13 @@ def main() -> None:
         candidates.extend(discover_elsevier_urls(paper["doi"]))
         candidates = dedupe(candidates)
 
+        attempts: list[dict] = []
         try:
             data, final_url, attempts = fetch_pdf(session, candidates)
             validation = validate_pdf(data, paper["expected_pages"])
         except Exception as exc:
+            if isinstance(exc, DownloadError):
+                attempts = exc.attempts
             failure = {
                 "order": paper["order"],
                 "key": key,
@@ -289,7 +343,7 @@ def main() -> None:
                 "error": f"{type(exc).__name__}: {exc}",
                 "discovery": discovery,
                 "candidates": candidates,
-                "attempts": locals().get("attempts", []),
+                "attempts": attempts,
             }
             failures.append(failure)
             write_report(args.report, registry["version"], results, failures, len(papers))
@@ -297,19 +351,24 @@ def main() -> None:
             raise
 
         target.write_bytes(data)
-        results.append({
-            "order": paper["order"],
-            "key": key,
-            "doi": paper["doi"],
-            "path": str(target),
-            "final_url": final_url,
-            "sha256": sha256_bytes(data),
-            "discovery": discovery,
-            "attempts": attempts,
-            **validation,
-        })
+        results.append(
+            {
+                "order": paper["order"],
+                "key": key,
+                "doi": paper["doi"],
+                "path": str(target),
+                "final_url": final_url,
+                "sha256": sha256_bytes(data),
+                "discovery": discovery,
+                "attempts": attempts,
+                **validation,
+            }
+        )
         write_report(args.report, registry["version"], results, failures, len(papers))
-        print(json.dumps({"key": key, "pages": validation["pages"], "final_url": final_url}, ensure_ascii=False), flush=True)
+        print(
+            json.dumps({"key": key, "pages": validation["pages"], "final_url": final_url}, ensure_ascii=False),
+            flush=True,
+        )
         time.sleep(1)
 
     print(json.dumps({"papers": len(results), "passed": len(results) == len(papers)}, ensure_ascii=False))
