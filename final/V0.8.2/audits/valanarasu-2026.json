@@ -395,40 +395,31 @@
     }
   ],
   "kept_text_sha256": "f7c2171758dd41ca83b2fb30fac8c35662239a478eb446bfdc7db6dd6a0ee18d",
-  "manifest_source_fragments_sha256": "4b354889d7592c1f8e96f08b9d778cbdbe251957af5056614952cd302192c405",
+  "manifest_source_fragments_sha256": "e7de958d9ea3f196d17f0cabc7f752f8989bacc58e959ebe6d32cf289c0e2826",
   "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
   "passed": false,
-  "strict_layout_parser": "v082-final-2",
-  "formula_blocks_detected": 15,
-  "formula_blocks_missing": 1,
+  "strict_layout_parser": "v082-final-3",
+  "formula_blocks_detected": 11,
+  "formula_blocks_missing": 0,
   "formula_samples": [
-    "2 ). Entropy measures the information content of an image based on the distribution of pixel intensities. It is calculated as:",
     "Dice c = 2 ∑ y c ̂ yc ∑ y c + ∑ ̂ yc",
+    "H = −",
     "L BCE = 1",
     "L Dice = 1 − 1 C",
     "L model = L Dice + 0:5 ∗ L BCE",
-    "SNR = μ",
-    "T-bet NK cells, T cells (CD3 + , of CD4 + or CD8 +",
-    "The SNR tends to infinity when the image is uniform (p = 0 or p = 1) and is minimized when the image has a nuanced composition of 0s and 1s (p = 2",
-    "To assess performance at the cell level, we used an 8 × 8-pixel window and counted the number of activated pixels in each window for each channel. Pearson correlation was then computed",
     "c = 1",
     "i = 1",
-    "p(x i )logp(x i )",
-    "where I(x; y) is the pixel intensity at location (x;y), ∂I",
     "σ = p p(1 − p) √",
-    "− (y c log(̂ yc ) + (1 − y c )log(1 − yc ))"
+    "∑",
+    "∑ C",
+    "∑ N"
   ],
-  "cross_column_body_merges": 3,
+  "cross_column_body_merges": 4,
   "cross_column_caption_merges": 0,
   "source_chars": 61810,
   "expected_reference_count": 55,
   "expected_main_figures": 0,
   "strict_errors": [
-    {
-      "missing_formula_blocks": [
-        "T-bet NK cells, T cells (CD3 + , of CD4 + or CD8 +"
-      ]
-    },
     "reference coverage incomplete: 54 < 55"
   ]
 }
