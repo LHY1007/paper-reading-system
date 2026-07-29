@@ -6,8 +6,9 @@ import hashlib
 import json
 import re
 import time
+from collections import deque
 from pathlib import Path
-from urllib.parse import urlparse
+from urllib.parse import quote, urljoin, urlparse
 
 from bs4 import BeautifulSoup
 import requests
@@ -17,6 +18,20 @@ import download_v082_sources as source_tools
 ORIGINAL_PUBLISHER_VARIANTS = source_tools.publisher_variants
 PMC_PDF_RE = re.compile(r"/articles/(PMC\d+)/pdf/([^/?#]+\.pdf)", re.I)
 PMC_ARTICLE_RE = re.compile(r"/articles/(PMC\d+)/?$", re.I)
+CELL_STEM_RE = re.compile(r"(S\d{4}-\d{4}\(\d{2}\)\d{5}-\d)", re.I)
+COMPACT_PII_RE = re.compile(r"(S\d{16})", re.I)
+EMBEDDED_URL_RE = re.compile(r"https?(?::|%3A)(?:\\?/|%2F){2}[^\"'<>\\s]+", re.I)
+
+
+def cell_stem_to_compact(stem: str) -> str:
+    return re.sub(r"[^A-Za-z0-9]", "", stem).upper()
+
+
+def compact_to_cell_stem(compact: str) -> str | None:
+    compact = compact.upper()
+    if not re.fullmatch(r"S\d{16}", compact):
+        return None
+    return f"{compact[:5]}-{compact[5:9]}({compact[9:11]}){compact[11:16]}-{compact[16]}"
 
 
 def release_publisher_variants(url: str) -> list[str]:
@@ -40,10 +55,111 @@ def release_publisher_variants(url: str) -> list[str]:
             f"https://europepmc.org/articles/{pmcid}?pdf=render",
             f"https://europepmc.org/backend/ptpmcrender.fcgi?accid={pmcid}&blobtype=pdf",
         ])
+
+    decoded_url = requests.utils.unquote(url)
+    stem_match = CELL_STEM_RE.search(decoded_url)
+    compact_match = COMPACT_PII_RE.search(decoded_url)
+    stem = stem_match.group(1).upper() if stem_match else None
+    compact = compact_match.group(1).upper() if compact_match else None
+    if stem and not compact:
+        compact = cell_stem_to_compact(stem)
+    if compact and not stem:
+        stem = compact_to_cell_stem(compact)
+    if stem and compact:
+        escaped_stem = quote(stem, safe="")
+        variants.extend([
+            f"https://www.cell.com/action/showPdf?pii={escaped_stem}",
+            f"https://www.cell.com/cell/pdfExtended/{stem}",
+            f"https://www.cell.com/cell/fulltext/{stem}",
+            f"https://www.cell.com/cell/fulltext/{stem}?download=true",
+            f"https://www.sciencedirect.com/science/article/pii/{compact}/pdfft?download=true",
+            f"https://www.sciencedirect.com/science/article/pii/{compact}/pdfft?isDTMRedir=true&download=true",
+            f"https://api.elsevier.com/content/article/pii/{compact}?view=FULL&httpAccept=application/pdf",
+            f"https://api.elsevier.com/content/article/pii/{compact}?httpAccept=application/pdf",
+        ])
     return source_tools.dedupe(variants)
 
 
 source_tools.publisher_variants = release_publisher_variants
+
+
+def decode_embedded_url(value: str) -> str:
+    value = value.replace("\\/", "/")
+    value = requests.utils.unquote(value)
+    return value.rstrip("\\,;)")
+
+
+def extract_embedded_pdf_links(base_url: str, body: str) -> list[str]:
+    links = list(source_tools.extract_pdf_links(base_url, body))
+    soup = BeautifulSoup(body, "html.parser")
+    for node in soup.find_all(True):
+        for attribute in ("data-pdf-url", "data-download-url", "data-url", "href", "src"):
+            raw = node.get(attribute)
+            if raw and ("pdf" in raw.lower() or "pdfft" in raw.lower() or "showpdf" in raw.lower()):
+                links.append(urljoin(base_url, decode_embedded_url(raw)))
+    for raw in EMBEDDED_URL_RE.findall(body):
+        decoded = decode_embedded_url(raw)
+        if any(token in decoded.lower() for token in (".pdf", "/pdf", "pdfft", "showpdf", "sciencedirectassets")):
+            links.append(decoded)
+    return source_tools.dedupe(links)
+
+
+def release_fetch_pdf(
+    session: requests.Session,
+    urls: list[str],
+    *,
+    max_requests: int = 160,
+) -> tuple[bytes, str, list[dict]]:
+    attempts: list[dict] = []
+    queue: deque[str] = deque()
+    queued: set[str] = set()
+    for url in urls:
+        for variant in release_publisher_variants(url):
+            if variant not in queued:
+                queued.add(variant)
+                queue.append(variant)
+
+    while queue and len(attempts) < max_requests:
+        url = queue.popleft()
+        lower = url.lower()
+        pdf_only = any(token in lower for token in (
+            ".pdf", "pdfft", "showpdf", "pdfextended", "httpaccept=application/pdf", "fulltextpdf"
+        ))
+        try:
+            response = session.get(
+                url,
+                timeout=180,
+                allow_redirects=True,
+                headers=source_tools.request_headers(url, pdf_only=pdf_only),
+            )
+            content_type = response.headers.get("content-type", "")
+            attempt = {
+                "url": url,
+                "final_url": response.url,
+                "status": response.status_code,
+                "content_type": content_type,
+                "bytes": len(response.content),
+            }
+            attempts.append(attempt)
+            if source_tools.is_pdf(response.content, content_type) and len(response.content) > 10_000:
+                return response.content, response.url, attempts
+
+            looks_html = "html" in content_type.lower() or response.content.lstrip().startswith(b"<")
+            if looks_html and len(response.content) <= 8_000_000:
+                body = response.text
+                nested = extract_embedded_pdf_links(response.url, body)
+                attempt["nested_pdf_links"] = len(nested)
+                for nested_url in nested:
+                    for variant in release_publisher_variants(nested_url):
+                        if variant not in queued:
+                            queued.add(variant)
+                            queue.append(variant)
+        except Exception as exc:
+            attempts.append({"url": url, "error": f"{type(exc).__name__}: {exc}"})
+    raise source_tools.DownloadError(
+        f"all PDF download candidates failed after {len(attempts)} attempts",
+        attempts,
+    )
 
 
 def write_report(
@@ -191,7 +307,7 @@ def main() -> None:
         candidates, discovery = discover_candidates(session, paper)
         attempts: list[dict] = []
         try:
-            data, final_url, attempts = source_tools.fetch_pdf(session, candidates)
+            data, final_url, attempts = release_fetch_pdf(session, candidates)
             validation = source_tools.validate_pdf(data, paper["expected_pages"])
         except Exception as exc:
             if isinstance(exc, source_tools.DownloadError):
