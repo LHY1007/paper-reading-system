@@ -10,5 +10,6 @@
     "missing #figure-table-index",
     "no bilingual units"
   ],
-  "passed": false
+  "passed": false,
+  "citation_count": 0
 }

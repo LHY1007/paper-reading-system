@@ -1,10 +1,10 @@
 {
-  "canonical": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+  "canonical": "V0.8.2_CANVAS_NORMALIZED_MASTER.html",
   "candidate": "V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
-  "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
-  "candidate_sha256": "8b633b6cff3bb0c8a58dd16705908dfd1393e2e9ceec58ff4ca40aff53fa5302",
-  "canonical_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
-  "candidate_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
+  "canonical_sha256": "d72ad77c76487c39c699c420582ef8c102fa889bc77f68b83f277946802309cd",
+  "candidate_sha256": "12a021e5ecd23a2caf2c39051145c3d5c0d70df755ad856679dc9d1c7a99a303",
+  "canonical_shell_sha256": "3ae17b77cd7ca23846794a13856181fd63c63ebcd01d72d414685382fcc79c13",
+  "candidate_shell_sha256": "3ae17b77cd7ca23846794a13856181fd63c63ebcd01d72d414685382fcc79c13",
   "canonical_style_hashes": [
     "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
     "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
@@ -18,6 +18,7 @@
     "8e475bd3924ac3e4be952771041cf9e65c0fbdfe4787d508e1302234369a769b",
     "1e2358b59d6dd01c9469f0ec37deacd4d32848fe39c79e422332a9e02f7c982a",
     "1466d3ab816b730a60de0d364f4b24f23798aa32b7ca9cda4efa9280e7071a95",
+    "c2385fe9a6c043df4eb1daa05efb2c1983a77120b7bf77e6a8a2b484066a907d",
     "3fe54f99d0128c6b05b67a46c6e5164fccae91e7d044b4168040c0c42c074ab5",
     "1e9a0d4f384f0b43cc5d110acb807fe68308851064ad75ec4660a11b0551ef09",
     "94b0e20c1730cb0e549d5a51e6fd829d9484dc01113aaacc1b0271c40bb4deec"
@@ -35,6 +36,7 @@
     "8e475bd3924ac3e4be952771041cf9e65c0fbdfe4787d508e1302234369a769b",
     "1e2358b59d6dd01c9469f0ec37deacd4d32848fe39c79e422332a9e02f7c982a",
     "1466d3ab816b730a60de0d364f4b24f23798aa32b7ca9cda4efa9280e7071a95",
+    "c2385fe9a6c043df4eb1daa05efb2c1983a77120b7bf77e6a8a2b484066a907d",
     "3fe54f99d0128c6b05b67a46c6e5164fccae91e7d044b4168040c0c42c074ab5",
     "1e9a0d4f384f0b43cc5d110acb807fe68308851064ad75ec4660a11b0551ef09",
     "94b0e20c1730cb0e549d5a51e6fd829d9484dc01113aaacc1b0271c40bb4deec"
@@ -50,6 +52,13 @@
       "id": null,
       "classes": [
         "brand"
+      ]
+    },
+    {
+      "tag": "div",
+      "id": "readerModeSwitch",
+      "classes": [
+        "reader-mode-switch"
       ]
     },
     {
@@ -131,5 +140,5 @@
   ],
   "errors": [],
   "passed": true,
-  "canonical_kind": "original-00"
+  "canonical_kind": "normalized-master"
 }

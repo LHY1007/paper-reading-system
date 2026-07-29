@@ -1,9 +1,9 @@
 {
   "canonical": "V0.8.2_CANVAS_NORMALIZED_MASTER.html",
   "candidate": "04_V0.8.2_Valanarasu_等_-_2026_-_Multimodal_AI_generates_virtual_population_for_tumor_microenvironment_modeling.html",
-  "canonical_sha256": "08f7727041d8d76e37bca7ed62bd4eb70e1bb3aea2b5d19196f823472ddf1758",
+  "canonical_sha256": "d72ad77c76487c39c699c420582ef8c102fa889bc77f68b83f277946802309cd",
   "candidate_sha256": "7f0bd2f23c579594b3ab7ee4b925af81997c751bd59bfafaef0eaea246c19c19",
-  "canonical_shell_sha256": "83d491b4bec88b02595c85fd6fc59d58f81e6d6a18b3da2b75ee63b77dca51d5",
+  "canonical_shell_sha256": "3ae17b77cd7ca23846794a13856181fd63c63ebcd01d72d414685382fcc79c13",
   "candidate_shell_sha256": "79d7c184afbec79f9a2048d459389974148716afc7bd7a370a5bd5c448d24bf5",
   "canonical_style_hashes": [
     "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",

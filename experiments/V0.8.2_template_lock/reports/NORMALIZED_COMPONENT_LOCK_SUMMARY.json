@@ -143,6 +143,11 @@
       "errors": []
     },
     {
+      "report": "NORMALIZED_COMPONENT_LOCK_SUMMARY.json",
+      "passed": null,
+      "errors": []
+    },
+    {
       "report": "NORMALIZED_MASTER.json",
       "passed": null,
       "errors": []
@@ -380,6 +385,42 @@
         "numeric values misclassified as citations: 3"
       ],
       "structural_errors": []
+    },
+    {
+      "file": null,
+      "passed": null,
+      "bilingual_units": null,
+      "expected_pdf_body_blocks": null,
+      "bilingual_to_pdf_body_block_ratio": null,
+      "core_to_appendix_coverage": null,
+      "content_score": null,
+      "structural_score": null,
+      "content_errors": null,
+      "structural_errors": null
+    },
+    {
+      "file": null,
+      "passed": null,
+      "bilingual_units": null,
+      "expected_pdf_body_blocks": null,
+      "bilingual_to_pdf_body_block_ratio": null,
+      "core_to_appendix_coverage": null,
+      "content_score": null,
+      "structural_score": null,
+      "content_errors": null,
+      "structural_errors": null
+    },
+    {
+      "file": null,
+      "passed": null,
+      "bilingual_units": null,
+      "expected_pdf_body_blocks": null,
+      "bilingual_to_pdf_body_block_ratio": null,
+      "core_to_appendix_coverage": null,
+      "content_score": null,
+      "structural_score": null,
+      "content_errors": null,
+      "structural_errors": null
     }
   ]
 }

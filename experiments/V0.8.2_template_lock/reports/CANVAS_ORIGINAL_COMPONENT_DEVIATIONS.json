@@ -20,5 +20,6 @@
     "table card 5 captions mismatch",
     "paper section 40 missing canonical data-level/title"
   ],
-  "passed": false
+  "passed": false,
+  "citation_count": 196
 }
