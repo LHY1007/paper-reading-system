@@ -1,0 +1,136 @@
+name: Audit V0.8.2 available PDFs and parser
+
+on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - ".github/workflows/audit_v082_available_sources_and_parser.yml"
+      - "config/v082_paper_sources.json"
+      - "tools/download_v082_sources.py"
+      - "tools/download_v082_release_sources.py"
+      - "tools/download_v082_release_sources_continue.py"
+      - "tools/prefetch_v082_blocked_sources.py"
+      - "tools/build_pdf_native_manifest_v082.py"
+      - "tools/build_pdf_native_manifest_v082_unpacked.py"
+      - "tools/build_pdf_native_manifest_v082_final.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: v082-available-source-parser-audit
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install audit dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4 PyMuPDF curl_cffi
+      - name: Locate CANVAS
+        shell: bash
+        run: |
+          set -euo pipefail
+          CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
+          test -n "$CANVAS"
+          printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_audit_paths
+      - name: Restore rolling PDF cache
+        id: source_pdf_cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/pdfs
+          key: v082-source-pdfs-audit-${{ hashFiles('config/v082_paper_sources.json', 'tools/download_v082_sources.py', 'tools/download_v082_release_sources.py', 'tools/download_v082_release_sources_continue.py', 'tools/prefetch_v082_blocked_sources.py') }}
+          restore-keys: |
+            v082-source-pdfs-
+      - name: Try blocked-source browser fingerprint
+        continue-on-error: true
+        run: |
+          mkdir -p .build/v082/pdfs final/V0.8.2/reports
+          python tools/prefetch_v082_blocked_sources.py \
+            --registry config/v082_paper_sources.json \
+            --output-dir .build/v082/pdfs \
+            --report final/V0.8.2/reports/BLOCKED_SOURCE_PREFETCH.json
+      - name: Download every other source without early abort
+        id: source_audit
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          source /tmp/v082_audit_paths
+          mkdir -p .build/v082/pdfs final/V0.8.2/reports
+          python tools/download_v082_release_sources_continue.py \
+            --registry config/v082_paper_sources.json \
+            --canonical-html "$CANVAS_ORIGINAL" \
+            --output-dir .build/v082/pdfs \
+            --report final/V0.8.2/reports/SOURCE_DOWNLOAD_AVAILABLE.json \
+            --reuse
+      - name: Save rolling PDF cache
+        if: always() && steps.source_pdf_cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .build/v082/pdfs
+          key: v082-source-pdfs-audit-${{ hashFiles('config/v082_paper_sources.json', 'tools/download_v082_sources.py', 'tools/download_v082_release_sources.py', 'tools/download_v082_release_sources_continue.py', 'tools/prefetch_v082_blocked_sources.py') }}
+      - name: Run strict PDF-native parser on every available PDF
+        if: always()
+        run: |
+          mkdir -p .build/v082/parser_manifests final/V0.8.2/audits final/V0.8.2/reports
+          python - <<'PY'
+          from __future__ import annotations
+          import json, pathlib, subprocess, sys
+
+          root=pathlib.Path('.')
+          registry=json.loads((root/'config/v082_paper_sources.json').read_text('utf-8'))
+          papers={item['key']:item for item in registry['papers']}
+          results=[]
+          for pdf in sorted((root/'.build/v082/pdfs').glob('*.pdf')):
+              key=pdf.stem.split('_',1)[1]
+              if key not in papers:
+                  results.append({'key':key,'pdf':str(pdf),'passed':False,'error':'not registered'})
+                  continue
+              raw=root/'.build/v082/parser_manifests'/f'{key}.json'
+              audit=root/'final/V0.8.2/audits'/f'{key}.json'
+              command=[sys.executable,'tools/build_pdf_native_manifest_v082.py',str(pdf),str(raw),'--registry','config/v082_paper_sources.json','--key',key,'--audit',str(audit)]
+              process=subprocess.run(command,text=True,capture_output=True)
+              item={
+                  'key':key,'order':papers[key]['order'],'pdf':str(pdf),'returncode':process.returncode,
+                  'stdout':process.stdout[-12000:],'stderr':process.stderr[-12000:],
+                  'manifest_exists':raw.exists(),'audit_exists':audit.exists(),
+                  'passed':process.returncode==0,
+              }
+              if audit.exists():
+                  item['audit']=json.loads(audit.read_text('utf-8'))
+              results.append(item)
+              print(json.dumps({k:item.get(k) for k in ('key','returncode','passed','manifest_exists','audit_exists')},ensure_ascii=False),flush=True)
+          expected_available=sorted(p.stem.split('_',1)[1] for p in (root/'.build/v082/pdfs').glob('*.pdf'))
+          report={
+              'available_pdf_keys':expected_available,
+              'available_pdf_count':len(expected_available),
+              'results':results,
+              'passed_count':sum(item['passed'] for item in results),
+              'failed_count':sum(not item['passed'] for item in results),
+              'all_available_passed':bool(results) and all(item['passed'] for item in results),
+          }
+          (root/'final/V0.8.2/reports/PDF_NATIVE_AVAILABLE_AUDIT.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n','utf-8')
+          print(json.dumps({k:report[k] for k in ('available_pdf_count','passed_count','failed_count','all_available_passed')},ensure_ascii=False,indent=2))
+          PY
+      - name: Commit diagnostic audit reports
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add final/V0.8.2/reports/SOURCE_DOWNLOAD_AVAILABLE.json final/V0.8.2/reports/PDF_NATIVE_AVAILABLE_AUDIT.json final/V0.8.2/audits
+          if git diff --cached --quiet; then
+            echo "Available-source parser reports unchanged"
+          else
+            git commit -m "Audit available V0.8.2 source PDFs and parser"
+            git push origin HEAD:v0.8x-batch-diagnosis
+          fi
