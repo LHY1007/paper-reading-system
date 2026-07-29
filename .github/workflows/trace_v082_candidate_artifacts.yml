@@ -52,7 +52,8 @@ jobs:
 
           repo=os.environ['GITHUB_REPOSITORY']
           raw_runs=subprocess.check_output([
-              'gh','api',f'repos/{repo}/actions/runs','-f','branch=v0.8.2-candidate','-f','per_page=100'
+              'gh','api','--method','GET',f'repos/{repo}/actions/runs',
+              '-f','branch=v0.8.2-candidate','-f','per_page=100'
           ],text=True)
           runs_payload=json.loads(raw_runs)
           runs=[]
@@ -62,7 +63,7 @@ jobs:
               )}
               try:
                   artifacts=json.loads(subprocess.check_output([
-                      'gh','api',f'repos/{repo}/actions/runs/{run["id"]}/artifacts','-f','per_page=100'
+                      'gh','api','--method','GET',f'repos/{repo}/actions/runs/{run["id"]}/artifacts','-f','per_page=100'
                   ],text=True)).get('artifacts',[])
               except subprocess.CalledProcessError as exc:
                   artifacts=[]
