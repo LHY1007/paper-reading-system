@@ -1,0 +1,27 @@
+{
+  "version": "v082-frozen-shell-lock-1",
+  "canonical_source_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
+  "normalized_master_sha256": "d72ad77c76487c39c699c420582ef8c102fa889bc77f68b83f277946802309cd",
+  "normalized_master_bytes": 26007949,
+  "frozen_shell_sha256": "c452f62a98a5c1b4d44d8a37bbf9963b6ef864dd280376bf1428beac6780f3c1",
+  "frozen_shell_bytes": 238967,
+  "fixed_shell_dom_sha256": "3ae17b77cd7ca23846794a13856181fd63c63ebcd01d72d414685382fcc79c13",
+  "component_exemplars": {
+    "sections": 1,
+    "bilingual_units": 1,
+    "figures": 1,
+    "tables": 1,
+    "references": 1,
+    "overview_questions_quick": 1,
+    "overview_questions_bilingual": 1,
+    "figure_index_sections": 1,
+    "figure_index_buttons": 1
+  },
+  "policy": {
+    "fixed_layer": "DOM shell, layout, buttons, colors, CSS, static JavaScript, interaction components and component exemplars",
+    "variable_layer": "schema-validated JSON paper manifest only",
+    "ai_may_generate_html": false,
+    "ai_may_generate_css": false,
+    "ai_may_generate_interaction_code": false
+  }
+}
