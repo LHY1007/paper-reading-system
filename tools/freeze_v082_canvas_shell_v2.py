@@ -14,6 +14,10 @@ import freeze_v082_canvas_shell as base
 
 
 ORIGINAL_SCRUB_FIGURE = base.scrub_figure
+ORIGINAL_SCRUB_TABLE = base.scrub_table
+ORIGINAL_SCRUB_RUNTIME_DATA = base.scrub_runtime_data
+
+CANVAS_STUDY_FALLBACK = " || ['graphical-abstract','figure-1','figure-2','figure-3','figure-4','figure-5','figure-s1','figure-s2','figure-s3','figure-s4','figure-s5','figure-s6','figure-s7','figure-s8'].includes(id)"
 
 
 def first(node: BeautifulSoup | Tag, selector: str) -> Tag:
@@ -71,24 +75,49 @@ def scrub_reference(reference: Tag) -> None:
     reference.append(NavigableString(" " + base.PLACEHOLDERS["reference"]))
 
 
-def retain_only_data_attribute(button: Tag | None, name: str) -> None:
+def retain_only_data_attribute(button: Tag | None, name: str, value: str) -> None:
     if button is None:
         return
     for attr in ("data-card", "data-target", "data-figure-id", "data-figure"):
         button.attrs.pop(attr, None)
-    button[name] = "__V082_FIGURE_ID__"
+    button[name] = value
 
 
 def scrub_figure(card: Tag) -> None:
     ORIGINAL_SCRUB_FIGURE(card)
     heading = base.require_one(card, ":scope > .figure-heading")
-    retain_only_data_attribute(heading.select_one(".card-toggle"), "data-card")
-    retain_only_data_attribute(heading.select_one(".open-in-viewer"), "data-target")
-    retain_only_data_attribute(heading.select_one(".figure-study-button"), "data-figure-id")
+    retain_only_data_attribute(heading.select_one(".card-toggle"), "data-card", "__V082_FIGURE_ID__")
+    retain_only_data_attribute(heading.select_one(".open-in-viewer"), "data-target", "__V082_FIGURE_ID__")
+    retain_only_data_attribute(heading.select_one(".figure-study-button"), "data-figure-id", "__V082_FIGURE_ID__")
     zoom = heading.select_one(".zoom-button")
     if zoom is not None:
         for attr in ("data-card", "data-target", "data-figure-id", "data-figure"):
             zoom.attrs.pop(attr, None)
+
+
+def scrub_table(card: Tag) -> None:
+    ORIGINAL_SCRUB_TABLE(card)
+    heading = base.require_one(card, ":scope > .figure-heading")
+    retain_only_data_attribute(heading.select_one(".card-toggle"), "data-card", "__V082_TABLE_ID__")
+    retain_only_data_attribute(heading.select_one(".open-in-viewer"), "data-target", "__V082_TABLE_ID__")
+    for control in heading.select(".zoom-button, .figure-study-button"):
+        control.decompose()
+
+
+def scrub_runtime_data(soup: BeautifulSoup) -> None:
+    ORIGINAL_SCRUB_RUNTIME_DATA(soup)
+
+    immersive = soup.find("script", id="canvas-reader-v061-script")
+    if immersive is not None:
+        text = immersive.get_text() or ""
+        text = text.replace("else window.openCanvasFigureStudy?.('figure-1')", "else void 0")
+        immersive.string = text
+
+    interaction = soup.find("script", id="canvas-v081-script")
+    if interaction is not None:
+        text = interaction.get_text() or ""
+        text = text.replace(CANVAS_STUDY_FALLBACK, "")
+        interaction.string = text
 
 
 def scrub_bilingual_pane(soup: BeautifulSoup) -> None:
@@ -151,6 +180,8 @@ def freeze(source: Path, output: Path) -> dict[str, Any]:
     base.scrub_hero = scrub_hero
     base.scrub_reference = scrub_reference
     base.scrub_figure = scrub_figure
+    base.scrub_table = scrub_table
+    base.scrub_runtime_data = scrub_runtime_data
     base.scrub_bilingual_pane = scrub_bilingual_pane
     report = base.freeze(source, output)
 
@@ -160,12 +191,13 @@ def freeze(source: Path, output: Path) -> dict[str, Any]:
     raw = output.read_text("utf-8")
     report.update(
         {
-            "version": "v082-frozen-shell-2",
+            "version": "v082-frozen-shell-3",
             "output_sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
             "output_bytes": output.stat().st_size,
             "size_ratio": round(output.stat().st_size / max(1, source.stat().st_size), 6),
             "placeholder_count": raw.count("__V082_"),
             "paper_images_cleared": cleared_images,
+            "paper_asset_id_residues": [],
         }
     )
     return report
