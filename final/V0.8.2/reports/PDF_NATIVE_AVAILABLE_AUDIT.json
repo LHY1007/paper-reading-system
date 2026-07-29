@@ -321,7 +321,7 @@
         "manifest_source_fragments_sha256": "a24efd586bc43f857b3f2c633ac9774858e4a0d40632621a034cabfc38e880fe",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-7",
+        "strict_layout_parser": "v082-final-8",
         "formula_blocks_detected": 20,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -364,7 +364,8 @@
         "tables_reconstructed": 0,
         "table_image_fallbacks": 0,
         "cross_page_captions_rebuilt": 0,
-        "continuation_blocks_missing": []
+        "continuation_blocks_missing": [],
+        "cross_page_captions_rebuilt_by_title_lookup": []
       }
     },
     {
@@ -607,7 +608,7 @@
         "manifest_source_fragments_sha256": "d6120ca1e365aa85b19278d88d99ea539aaa266dc48bbe2e4a5b9724348ba338",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-7",
+        "strict_layout_parser": "v082-final-8",
         "formula_blocks_detected": 2,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -632,7 +633,8 @@
         "tables_reconstructed": 0,
         "table_image_fallbacks": 0,
         "cross_page_captions_rebuilt": 0,
-        "continuation_blocks_missing": []
+        "continuation_blocks_missing": [],
+        "cross_page_captions_rebuilt_by_title_lookup": []
       }
     },
     {
@@ -756,7 +758,7 @@
         "manifest_source_fragments_sha256": "b5c970d8fe70ab6d66eb4a909fcf2e8f03b1e48cf35351c7d483eb577678d2af",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-7",
+        "strict_layout_parser": "v082-final-8",
         "formula_blocks_detected": 1,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -780,7 +782,8 @@
         "tables_reconstructed": 0,
         "table_image_fallbacks": 0,
         "cross_page_captions_rebuilt": 0,
-        "continuation_blocks_missing": []
+        "continuation_blocks_missing": [],
+        "cross_page_captions_rebuilt_by_title_lookup": []
       }
     },
     {
@@ -1193,7 +1196,7 @@
         "manifest_source_fragments_sha256": "e7de958d9ea3f196d17f0cabc7f752f8989bacc58e959ebe6d32cf289c0e2826",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-7",
+        "strict_layout_parser": "v082-final-8",
         "formula_blocks_detected": 11,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -1219,7 +1222,7 @@
         "source_outline_entries": 37,
         "figure_titles_corrected_from_pdf_toc": 0,
         "captions_trimmed": 2,
-        "caption_panel_evidence_blocks": 24,
+        "caption_panel_evidence_blocks": 31,
         "reference_repair_applied": true,
         "titles_extended_from_caption": 0,
         "uppercase_panel_evidence_blocks": 24,
@@ -1227,7 +1230,8 @@
         "tables_reconstructed": 1,
         "table_image_fallbacks": 0,
         "cross_page_captions_rebuilt": 1,
-        "continuation_blocks_missing": [
+        "continuation_blocks_missing": [],
+        "cross_page_captions_rebuilt_by_title_lookup": [
           "figure-3"
         ]
       }
@@ -1540,7 +1544,7 @@
         "manifest_source_fragments_sha256": "505c35a9d1d95b5875ba0b8302704b8796e5bfcbd7365293436cc3a0b19eea87",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": false,
-        "strict_layout_parser": "v082-final-7",
+        "strict_layout_parser": "v082-final-8",
         "formula_blocks_detected": 6,
         "formula_blocks_missing": 1,
         "formula_samples": [
@@ -1575,7 +1579,8 @@
         "tables_reconstructed": 0,
         "table_image_fallbacks": 0,
         "cross_page_captions_rebuilt": 0,
-        "continuation_blocks_missing": []
+        "continuation_blocks_missing": [],
+        "cross_page_captions_rebuilt_by_title_lookup": []
       }
     },
     {
@@ -1852,7 +1857,7 @@
         "manifest_source_fragments_sha256": "f5dfd0193808a3038593732ec63afc72581dccb9e36f1d6fbd94b80baadc9ac9",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": false,
-        "strict_layout_parser": "v082-final-7",
+        "strict_layout_parser": "v082-final-8",
         "formula_blocks_detected": 35,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -1897,7 +1902,8 @@
         "tables_reconstructed": 0,
         "table_image_fallbacks": 0,
         "cross_page_captions_rebuilt": 0,
-        "continuation_blocks_missing": []
+        "continuation_blocks_missing": [],
+        "cross_page_captions_rebuilt_by_title_lookup": []
       }
     },
     {
@@ -2140,7 +2146,7 @@
         "manifest_source_fragments_sha256": "668ec2b5018076529a5ff443d425a760500f84ae4a76c98d6408111283980554",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": false,
-        "strict_layout_parser": "v082-final-7",
+        "strict_layout_parser": "v082-final-8",
         "formula_blocks_detected": 9,
         "formula_blocks_missing": 4,
         "formula_samples": [
@@ -2181,7 +2187,8 @@
         "tables_reconstructed": 0,
         "table_image_fallbacks": 0,
         "cross_page_captions_rebuilt": 0,
-        "continuation_blocks_missing": []
+        "continuation_blocks_missing": [],
+        "cross_page_captions_rebuilt_by_title_lookup": []
       }
     },
     {
@@ -2458,7 +2465,7 @@
         "manifest_source_fragments_sha256": "281168ee361323167b4d93bf59ca5c05be52504c554fa90d26da353f8666267c",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-7",
+        "strict_layout_parser": "v082-final-8",
         "formula_blocks_detected": 0,
         "formula_blocks_missing": 0,
         "formula_samples": [],
@@ -2480,7 +2487,8 @@
         "tables_reconstructed": 0,
         "table_image_fallbacks": 0,
         "cross_page_captions_rebuilt": 0,
-        "continuation_blocks_missing": []
+        "continuation_blocks_missing": [],
+        "cross_page_captions_rebuilt_by_title_lookup": []
       }
     },
     {
@@ -2757,7 +2765,7 @@
         "manifest_source_fragments_sha256": "db391414ab8bd631e706d5e21392d465f37f12687deea30e89f0655e07e4e74e",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-7",
+        "strict_layout_parser": "v082-final-8",
         "formula_blocks_detected": 1,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -2781,7 +2789,8 @@
         "tables_reconstructed": 0,
         "table_image_fallbacks": 0,
         "cross_page_captions_rebuilt": 0,
-        "continuation_blocks_missing": []
+        "continuation_blocks_missing": [],
+        "cross_page_captions_rebuilt_by_title_lookup": []
       }
     },
     {
@@ -3058,7 +3067,7 @@
         "manifest_source_fragments_sha256": "6d886bd9ed65a268733d1e8a1ea33cc75c57062bdf91f960ac059de52f3f6229",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-7",
+        "strict_layout_parser": "v082-final-8",
         "formula_blocks_detected": 11,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -3092,7 +3101,8 @@
         "tables_reconstructed": 0,
         "table_image_fallbacks": 0,
         "cross_page_captions_rebuilt": 0,
-        "continuation_blocks_missing": []
+        "continuation_blocks_missing": [],
+        "cross_page_captions_rebuilt_by_title_lookup": []
       }
     }
   ],
