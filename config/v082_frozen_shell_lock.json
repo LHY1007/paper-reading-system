@@ -1,10 +1,10 @@
 {
-  "version": "v082-frozen-shell-lock-2",
+  "version": "v082-frozen-shell-lock-3",
   "canonical_source_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
   "normalized_master_sha256": "d72ad77c76487c39c699c420582ef8c102fa889bc77f68b83f277946802309cd",
   "normalized_master_bytes": 26007949,
-  "frozen_shell_sha256": "30b759fe814b293784cc4f5ff0233314e761c08200b0b3f6ceb92f14ab7c7e8d",
-  "frozen_shell_bytes": 227570,
+  "frozen_shell_sha256": "11d31c979fbb1bc14dc15d9b97c1615209c687f1d539c25e6c2ec60507f75847",
+  "frozen_shell_bytes": 238813,
   "fixed_shell_dom_sha256": "3ae17b77cd7ca23846794a13856181fd63c63ebcd01d72d414685382fcc79c13",
   "component_exemplars": {
     "sections": 1,
