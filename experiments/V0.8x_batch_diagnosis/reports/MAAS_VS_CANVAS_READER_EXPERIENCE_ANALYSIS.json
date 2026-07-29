@@ -1,0 +1,119 @@
+{
+  "version": "v082-reader-experience-comparison-1",
+  "baseline": "00 original V0.8.2 CANVAS HTML",
+  "candidate": "01 newly generated Maas HTML",
+  "source": "Maas 32-page Nature Genetics PDF",
+  "verdict": "REJECTED",
+  "reason": "The product shell is present, but reader-facing scientific content is not generated.",
+  "metrics": {
+    "paper_header": {
+      "original_canvas": {
+        "chinese_title": true,
+        "authors": 24,
+        "affiliations": 7,
+        "reader_metadata_fields": 8,
+        "machine_diagnostics_visible": 0
+      },
+      "maas": {
+        "chinese_title": false,
+        "authors": 0,
+        "author_placeholder": "Authors listed in the source PDF",
+        "affiliations": 0,
+        "reader_metadata_fields": 5,
+        "machine_diagnostics_visible": 2
+      }
+    },
+    "overview": {
+      "original_canvas": {
+        "questions": 6,
+        "reader_ready_chinese_answers": 6,
+        "method_is_ordered_workflow": true,
+        "specific_overall_conclusion": true
+      },
+      "maas": {
+        "questions": 6,
+        "reader_ready_chinese_answers": 0,
+        "research_question_is_front_page_dump": true,
+        "core_data_is_parser_statistics": true,
+        "input_output_is_ethics_and_nuclei_protocol": true,
+        "biology_and_clinical_answers_are_duplicates": true,
+        "limitation_is_generic_disclaimer": true
+      }
+    },
+    "body": {
+      "original_canvas": {
+        "bilingual_units": 111,
+        "identity_or_missing_chinese": 5,
+        "short_blocks_under_50_chars": 6,
+        "header_leaks": 0
+      },
+      "maas": {
+        "bilingual_units": 199,
+        "identity_or_missing_chinese": 199,
+        "short_blocks_under_50_chars": 48,
+        "fragment_like_blocks": 94,
+        "header_leaks": 2
+      }
+    },
+    "section_map": {
+      "original_canvas": {
+        "reader_facing_results_subsections": 7,
+        "figure_index_sections": 7
+      },
+      "maas": {
+        "real_results_subsections_preserved": 0,
+        "duplicate_references_sections": 6,
+        "figure_index_sections": 3,
+        "figures_grouped_under_references": 4
+      }
+    },
+    "figures": {
+      "original_canvas": {
+        "figure_cards": 14,
+        "table_cards": 5,
+        "generic_figure_titles": 0,
+        "untranslated_titles": 0,
+        "untranslated_captions": 0,
+        "median_embedded_image_width_px": 2394.5
+      },
+      "maas": {
+        "figure_cards": 16,
+        "table_cards": 0,
+        "generic_figure_titles": 16,
+        "untranslated_titles": 16,
+        "untranslated_captions": 16,
+        "median_embedded_image_width_px": 906
+      },
+      "source_pdf_expected": {
+        "main_figures": 6,
+        "extended_data_figures": 10,
+        "embedded_tables": 0,
+        "supplementary_tables_referenced_but_not_embedded": true
+      }
+    },
+    "references": {
+      "source_pdf": 86,
+      "maas_html": 82,
+      "body_paragraphs_misclassified_as_references_at_least": 10,
+      "source_numbering_preserved": false
+    }
+  },
+  "required_maas_reader_structure": {
+    "results_sections": [
+      "Cellular composition of the tumor microenvironment",
+      "Stromal signal contribution to meningioma ML classification",
+      "Stromal and neoplastic epigenetic signatures",
+      "Meningioma subclones",
+      "Clinical impact of TME composition"
+    ],
+    "main_figures": [
+      "Figure 1. Meningioma molecular classification models and snRNA cohort overview",
+      "Figure 2. Tumor-associated macrophages are the largest subset of non-neoplastic cells that differ in number and phenotype by meningioma grade and MC",
+      "Figure 3. NF2-mutant meningiomas contain a mixture of neoplastic and stromal epigenetic signatures",
+      "Figure 4. NF2-mutant meningioma is a spectrum rather than distinct tumor subtypes",
+      "Figure 5. The number of immune cells in a meningioma can predict the risk for recurrence",
+      "Figure 6. TAM cell quantification by immunohistochemical PU.1 staining can facilitate risk prediction in meningioma"
+    ]
+  },
+  "release_rule": "Do not render or label a paper as a candidate reader until the reader-facing content gate passes."
+}
