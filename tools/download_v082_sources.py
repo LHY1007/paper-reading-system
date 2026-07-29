@@ -191,7 +191,14 @@ def discover_pmc_urls(session: requests.Session, doi: str) -> tuple[list[str], d
         info["oa_error"] = f"{type(exc).__name__}: {exc}"
 
     article = f"https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/"
+    europe_candidates = [
+        f"https://europepmc.org/articles/{pmcid}?pdf=render",
+        f"https://europepmc.org/backend/ptpmcrender.fcgi?accid={pmcid}&blobtype=pdf",
+        f"https://www.ebi.ac.uk/europepmc/webservices/rest/{pmcid}/fullTextPDF",
+    ]
+    urls.extend(europe_candidates)
     urls.extend([article, f"{article}pdf/"])
+    info["europe_pmc_candidates"] = europe_candidates
     return dedupe(urls), info
 
 
