@@ -10,6 +10,7 @@ on:
       - "schemas/paper_content_manifest_v082.schema.json"
       - "tools/download_v082_sources.py"
       - "tools/download_v082_release_sources.py"
+      - "tools/prefetch_v082_blocked_sources.py"
       - "tools/build_pdf_native_manifest_v082.py"
       - "tools/build_pdf_native_manifest_v082_unpacked.py"
       - "tools/build_pdf_native_manifest_v082_final.py"
@@ -49,7 +50,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install source-audit dependencies
-        run: python -m pip install --disable-pip-version-check requests beautifulsoup4 PyMuPDF
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4 PyMuPDF curl_cffi
 
       - name: Locate immutable CANVAS source
         shell: bash
@@ -64,7 +65,19 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: .build/v082/pdfs
-          key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json') }}
+          key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json', 'tools/download_v082_sources.py', 'tools/download_v082_release_sources.py', 'tools/prefetch_v082_blocked_sources.py') }}
+          restore-keys: |
+            v082-source-pdfs-
+
+      - name: Prefetch publisher-blocked official PDFs
+        id: blocked_source_prefetch
+        continue-on-error: true
+        run: |
+          mkdir -p .build/v082/pdfs final/V0.8.2/reports
+          python tools/prefetch_v082_blocked_sources.py \
+            --registry config/v082_paper_sources.json \
+            --output-dir .build/v082/pdfs \
+            --report final/V0.8.2/reports/BLOCKED_SOURCE_PREFETCH.json
 
       - name: Audit CANVAS baseline and download non-CANVAS source PDFs
         id: source_audit
@@ -81,16 +94,17 @@ jobs:
             --report final/V0.8.2/reports/SOURCE_DOWNLOAD.json \
             --reuse
 
-      - name: Save partial audited PDF cache
+      - name: Save rolling audited PDF cache
         if: always() && steps.source_pdf_cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
           path: .build/v082/pdfs
-          key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json') }}
+          key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json', 'tools/download_v082_sources.py', 'tools/download_v082_release_sources.py', 'tools/prefetch_v082_blocked_sources.py') }}
 
       - name: Enforce source audit result
         if: steps.source_audit.outcome != 'success'
         run: |
+          cat final/V0.8.2/reports/BLOCKED_SOURCE_PREFETCH.json || true
           cat final/V0.8.2/reports/SOURCE_DOWNLOAD.json || true
           exit 1
 
