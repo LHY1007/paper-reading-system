@@ -1,0 +1,108 @@
+{
+  "schema_version": "0.8.2",
+  "paper": {
+    "key": "shell-smoke",
+    "title_en": "Fixed Shell Rendering Contract",
+    "title_zh": "固定壳层渲染契约",
+    "authors": ["System Test"],
+    "affiliations": ["Paper Reading System"],
+    "journal": "Template Validation",
+    "publisher": "Internal",
+    "year": 2026,
+    "doi": "10.0000/v082.shell.smoke",
+    "pages": 1,
+    "article_type": "Validation fixture",
+    "publication_timeline": "2026",
+    "citation": "Template Validation 1, 1–1",
+    "article_url": "https://doi.org/10.0000/v082.shell.smoke"
+  },
+  "overview": {
+    "qa": [
+      {"question": "What is fixed?", "answer": "Layout, controls, styling and interaction logic."},
+      {"question": "What varies?", "answer": "Validated paper data only."},
+      {"question": "Who creates HTML?", "answer": "The deterministic renderer."},
+      {"question": "What may AI emit?", "answer": "A schema-conforming manifest."},
+      {"question": "How is parity checked?", "answer": "By shell, component and browser gates."},
+      {"question": "What is prohibited?", "answer": "Paper-specific CSS, buttons and arbitrary DOM."}
+    ],
+    "method_heading": "Rendering route",
+    "method": "Manifest data are inserted into frozen CANVAS component exemplars.",
+    "story_label": "Contract result",
+    "story": "The UI remains invariant while paper content changes.",
+    "scope_note": "This fixture tests architecture rather than scientific content."
+  },
+  "sections": [
+    {
+      "id": "contract",
+      "title_en": "Contract",
+      "title_zh": "契约",
+      "level": 2,
+      "blocks": [
+        {
+          "type": "paragraph",
+          "id": "contract-p1",
+          "source_pages": "1",
+          "english": [{"text": "The fixed shell owns all repeatable product code.", "citation_ids": ["1"]}],
+          "chinese": [{"text": "固定壳层拥有全部重复性产品代码。", "citation_ids": ["1"]}],
+          "source_fragments": ["The fixed shell owns all repeatable product code."]
+        },
+        {"type": "asset", "asset_id": "fig-1"},
+        {"type": "asset", "asset_id": "table-1"}
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "fig-1",
+      "kind": "figure",
+      "group": "contract",
+      "title_en": "Figure 1. Fixed shell",
+      "title_zh": "图1 固定壳层",
+      "intro": "A renderer smoke-test figure card.",
+      "image_src": "",
+      "source_page": 1,
+      "image_format": "webp",
+      "hires": true,
+      "source_render": "fixture",
+      "caption_en": "The figure component is cloned from the CANVAS shell.",
+      "caption_zh": "图组件从 CANVAS 壳层克隆。",
+      "study": {
+        "overview": "The control is present and data-driven.",
+        "panels": [{"label": "A", "title": "Shell", "explanation": "The panel verifies the study entry point."}],
+        "conclusion": "Fixed interaction code is retained.",
+        "boundary": "No scientific claim is made."
+      }
+    },
+    {
+      "id": "table-1",
+      "kind": "table",
+      "group": "contract",
+      "title_en": "Table 1. Layer ownership",
+      "title_zh": "表1 层级归属",
+      "intro": "A renderer smoke-test table card.",
+      "caption_en": "The table component is cloned from the CANVAS shell.",
+      "caption_zh": "表组件从 CANVAS 壳层克隆。",
+      "table": {
+        "headers": ["Layer", "Owner"],
+        "rows": [["Shell", "Code"], ["Paper", "Manifest"]]
+      }
+    }
+  ],
+  "terms": [
+    {
+      "id": "fixed-shell",
+      "label": "fixed shell",
+      "definition_zh": "固定布局、组件与交互逻辑的确定性模板。",
+      "aliases": ["fixed shell"],
+      "category": "系统架构",
+      "level": 1
+    }
+  ],
+  "references": [
+    {
+      "id": "1",
+      "text": "Paper Reading System. V0.8.2 fixed-shell architecture specification.",
+      "url": "https://doi.org/10.0000/v082.shell.smoke"
+    }
+  ]
+}
