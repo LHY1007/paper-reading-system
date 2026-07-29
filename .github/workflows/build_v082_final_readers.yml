@@ -16,8 +16,12 @@ on:
       - "tools/build_pdf_native_manifest_v082_final.py"
       - "tools/translate_v082_manifest.py"
       - "tools/validate_v082_final_manifest.py"
+      - "tools/validate_v082_manifest_code_boundary.py"
       - "tools/normalize_v082_canvas_master.py"
+      - "tools/freeze_v082_canvas_shell*.py"
+      - "tools/render_v082_from_frozen_shell.py"
       - "tools/render_v082_canvas_component_locked*.py"
+      - "tools/validate_v082_frozen_shell.py"
       - "tools/validate_v082_canvas_shell_lock*.py"
       - "tools/validate_v082_canvas_components*.py"
       - "tools/browser_regression_v082.py"
@@ -121,25 +125,40 @@ jobs:
           python -m pip install --disable-pip-version-check torch --index-url https://download.pytorch.org/whl/cpu
           python -m playwright install --with-deps chromium
 
-      - name: Build normalized canonical final reader
+      - name: Build normalized CANVAS master and immutable product shell
         shell: bash
         run: |
           set -euo pipefail
           source /tmp/v082_final_paths
-          mkdir -p final/V0.8.2/readers final/V0.8.2/manifests final/V0.8.2/audits final/V0.8.2/reports final/V0.8.2/cache
+          mkdir -p \
+            .build/v082/templates \
+            final/V0.8.2/readers \
+            final/V0.8.2/manifests \
+            final/V0.8.2/audits \
+            final/V0.8.2/reports \
+            final/V0.8.2/cache
           MASTER=$(python - <<'PY'
           import json
           r=json.load(open('config/v082_paper_sources.json'))
           print('final/V0.8.2/readers/'+next(x['output'] for x in r['papers'] if x['order']==0))
           PY
           )
-          python tools/normalize_v082_canvas_master.py "$CANVAS_ORIGINAL" "$MASTER" --report final/V0.8.2/reports/NORMALIZED_MASTER.json
-          python tools/validate_v082_canvas_shell_lock.py "$MASTER" --canonical "$MASTER" --report final/V0.8.2/reports/00_CANVAS_SHELL.json
-          python tools/validate_v082_canvas_components.py "$MASTER" --report final/V0.8.2/reports/00_CANVAS_COMPONENTS.json
-          python tools/validate_reader_content_coverage.py "$MASTER" --baseline "$CANVAS_ORIGINAL" --report final/V0.8.2/reports/00_CANVAS_CONTENT.json
-          printf 'MASTER=%q\n' "$MASTER" >> /tmp/v082_final_paths
+          SHELL=.build/v082/templates/V082_CANVAS_FROZEN_SHELL.html
+          python tools/normalize_v082_canvas_master.py "$CANVAS_ORIGINAL" "$MASTER" \
+            --report final/V0.8.2/reports/NORMALIZED_MASTER.json
+          python tools/validate_v082_canvas_shell_lock.py "$MASTER" --canonical "$MASTER" \
+            --report final/V0.8.2/reports/00_CANVAS_SHELL.json
+          python tools/validate_v082_canvas_components.py "$MASTER" \
+            --report final/V0.8.2/reports/00_CANVAS_COMPONENTS.json
+          python tools/validate_reader_content_coverage.py "$MASTER" --baseline "$CANVAS_ORIGINAL" \
+            --report final/V0.8.2/reports/00_CANVAS_CONTENT.json
+          python tools/freeze_v082_canvas_shell_v2.py "$MASTER" "$SHELL" \
+            --report final/V0.8.2/reports/FROZEN_SHELL_BUILD.json
+          python tools/validate_v082_frozen_shell.py "$SHELL" --master "$MASTER" \
+            --report final/V0.8.2/reports/FROZEN_SHELL_GATE.json
+          printf 'MASTER=%q\nSHELL=%q\n' "$MASTER" "$SHELL" >> /tmp/v082_final_paths
 
-      - name: Sequentially build every non-CANVAS paper
+      - name: Sequentially build every non-CANVAS paper from manifest data only
         run: |
           set -euo pipefail
           source /tmp/v082_final_paths
@@ -152,6 +171,7 @@ jobs:
           glossary=root/'config/biomedical_glossary_zh.json'
           cache=root/'final/V0.8.2/cache/opus-mt-en-zh.json'
           master=next((root/'final/V0.8.2/readers').glob('00_V0.8.2_FINAL_CANVAS*.html'))
+          shell=root/'.build/v082/templates/V082_CANVAS_FROZEN_SHELL.html'
           raw_dir=root/'.build/v082/manifests_raw'
           raw_dir.mkdir(parents=True,exist_ok=True)
           final_manifest_dir=root/'final/V0.8.2/manifests'
@@ -162,19 +182,23 @@ jobs:
               if paper['order']==0:
                   continue
               key=paper['key']
+              prefix=f"{paper['order']:02d}_{key}"
               pdf=root/'.build/v082/pdfs'/f"{paper['order']:02d}_{key}.pdf"
               raw=raw_dir/f'{key}.json'
               manifest=final_manifest_dir/f'{key}.json'
               audit=audit_dir/f'{key}.json'
-              content_report=report_dir/f'{paper["order"]:02d}_{key}_CONTENT.json'
+              content_report=report_dir/f'{prefix}_CONTENT.json'
+              code_boundary_report=report_dir/f'{prefix}_MANIFEST_CODE_BOUNDARY.json'
+              render_report=report_dir/f'{prefix}_RENDER.json'
               output=reader_dir/paper['output']
-              shell_report=report_dir/f'{paper["order"]:02d}_{key}_SHELL.json'
-              component_report=report_dir/f'{paper["order"]:02d}_{key}_COMPONENTS.json'
+              shell_report=report_dir/f'{prefix}_SHELL.json'
+              component_report=report_dir/f'{prefix}_COMPONENTS.json'
               print(f'\n===== BUILD {paper["order"]:02d} {key} =====',flush=True)
               subprocess.run([sys.executable,'tools/build_pdf_native_manifest_v082.py',str(pdf),str(raw),'--registry','config/v082_paper_sources.json','--key',key,'--audit',str(audit)],check=True)
               subprocess.run([sys.executable,'tools/translate_v082_manifest.py',str(raw),str(manifest),'--glossary',str(glossary),'--cache',str(cache),'--batch-size','16'],check=True)
               subprocess.run([sys.executable,'tools/validate_v082_final_manifest.py',str(manifest),'--schema',str(schema),'--audit',str(audit),'--report',str(content_report)],check=True)
-              subprocess.run([sys.executable,'tools/render_v082_canvas_component_locked_v2.py',str(manifest),str(output),'--canonical',str(master),'--schema',str(schema)],check=True)
+              subprocess.run([sys.executable,'tools/validate_v082_manifest_code_boundary.py',str(manifest),'--report',str(code_boundary_report)],check=True)
+              subprocess.run([sys.executable,'tools/render_v082_from_frozen_shell.py',str(manifest),str(output),'--shell',str(shell),'--schema',str(schema),'--report',str(render_report)],check=True)
               subprocess.run([sys.executable,'tools/validate_v082_canvas_shell_lock.py',str(output),'--canonical',str(master),'--report',str(shell_report)],check=True)
               subprocess.run([sys.executable,'tools/validate_v082_canvas_components.py',str(output),'--report',str(component_report)],check=True)
           PY
@@ -196,15 +220,20 @@ jobs:
           registry=json.load(open('config/v082_paper_sources.json'))
           expected=[x['output'] for x in sorted(registry['papers'],key=lambda x:x['order'])]
           readers=sorted((root/'readers').glob('*.html'))
-          content=[]; shells=[]; components=[]
+          content=[]; shells=[]; components=[]; boundaries=[]; renders=[]
           for p in sorted((root/'reports').glob('*_CONTENT.json')):
               content.append({'report':p.name,**json.loads(p.read_text('utf-8'))})
           for p in sorted((root/'reports').glob('*_SHELL.json')):
               shells.append({'report':p.name,**json.loads(p.read_text('utf-8'))})
           for p in sorted((root/'reports').glob('*_COMPONENTS.json')):
               components.append({'report':p.name,**json.loads(p.read_text('utf-8'))})
+          for p in sorted((root/'reports').glob('*_MANIFEST_CODE_BOUNDARY.json')):
+              boundaries.append({'report':p.name,**json.loads(p.read_text('utf-8'))})
+          for p in sorted((root/'reports').glob('*_RENDER.json')):
+              renders.append({'report':p.name,**json.loads(p.read_text('utf-8'))})
           browser=json.loads((root/'reports/BROWSER_REGRESSION.json').read_text('utf-8'))
           sources=json.loads((root/'reports/SOURCE_DOWNLOAD.json').read_text('utf-8'))
+          frozen_shell=json.loads((root/'reports/FROZEN_SHELL_GATE.json').read_text('utf-8'))
           inventory=[]
           for p in readers:
               inventory.append({'file':p.name,'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()})
@@ -212,16 +241,26 @@ jobs:
           actual=[p.name for p in readers]
           if actual!=expected: errors.append({'reader_inventory':{'expected':expected,'actual':actual}})
           if not sources.get('passed'): errors.append('source input audit gate failed')
+          if not frozen_shell.get('passed'): errors.append('fixed product shell gate failed')
           if len(content)!=12 or not all(x.get('passed') for x in content): errors.append('content gate failed')
           if len(shells)!=12 or not all(x.get('passed') for x in shells): errors.append('shell-lock gate failed')
           if len(components)!=12 or not all(x.get('passed') for x in components): errors.append('component-contract gate failed')
+          if len(boundaries)!=11 or not all(x.get('passed') for x in boundaries): errors.append('manifest-only code boundary gate failed')
+          if len(renders)!=11: errors.append('fixed-shell render inventory failed')
+          expected_shell_sha=frozen_shell.get('shell_sha256')
+          if renders and any(x.get('shell_sha256')!=expected_shell_sha or x.get('renderer')!='v082-frozen-shell-1' for x in renders):
+              errors.append('reader shell provenance gate failed')
           if not browser.get('passed') or len(browser.get('files',[]))!=12: errors.append('browser regression gate failed')
           gate={
               'release':'V0.8.2 FINAL',
               'registry_version':registry['version'],
+              'architecture':'immutable CANVAS shell + validated paper manifest',
               'reader_count':len(readers),
               'inventory':inventory,
               'source_input_audit_passed':sources.get('passed'),
+              'frozen_shell_gate':frozen_shell,
+              'manifest_code_boundary_reports':boundaries,
+              'render_reports':renders,
               'content_reports':content,
               'shell_reports':shells,
               'component_reports':components,
@@ -230,7 +269,7 @@ jobs:
               'passed':not errors,
           }
           (root/'reports/FINAL_RELEASE_GATE.json').write_text(json.dumps(gate,ensure_ascii=False,indent=2)+'\n','utf-8')
-          (root/'RELEASE_INDEX.json').write_text(json.dumps({'release':'V0.8.2 FINAL','passed':not errors,'readers':inventory},ensure_ascii=False,indent=2)+'\n','utf-8')
+          (root/'RELEASE_INDEX.json').write_text(json.dumps({'release':'V0.8.2 FINAL','passed':not errors,'architecture':gate['architecture'],'readers':inventory},ensure_ascii=False,indent=2)+'\n','utf-8')
           print(json.dumps({'passed':not errors,'reader_count':len(readers),'errors':errors},ensure_ascii=False,indent=2))
           if errors: sys.exit(1)
           PY
