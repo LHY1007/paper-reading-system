@@ -22,6 +22,19 @@ core.DYNAMIC_SCRIPT_IDS.update({
 if "#crossRefPreviewStore" not in core.CONTENT_SELECTORS:
     core.CONTENT_SELECTORS.append("#crossRefPreviewStore")
 
+PAPER_META_KEYS = {
+    "description",
+    "citation_title",
+    "citation_author",
+    "citation_doi",
+    "citation_journal_title",
+    "citation_publication_date",
+    "og:title",
+    "og:description",
+    "twitter:title",
+    "twitter:description",
+}
+
 
 def neutralize(path: Path) -> tuple[str, dict]:
     raw = path.read_text("utf-8")
@@ -46,9 +59,22 @@ def neutralize(path: Path) -> tuple[str, dict]:
             node.clear()
             node.append(f"__CONTENT_SLOT__{selector}")
 
+    if soup.html:
+        for attr in ("data-v082-template", "data-v082-template-version", "data-v082-shell-sha256"):
+            soup.html.attrs.pop(attr, None)
+
     if soup.body:
         soup.body["data-paper-key"] = "__PAPER_KEY__"
         soup.body["data-mode"] = "bilingual"
+
+    for meta in soup.find_all("meta"):
+        key = str(meta.get("name") or meta.get("property") or "").lower()
+        if key in PAPER_META_KEYS:
+            meta["content"] = "__PAPER_META__"
+    for link in soup.find_all("link"):
+        rel = {str(value).lower() for value in (link.get("rel") or [])}
+        if "canonical" in rel:
+            link["href"] = "__PAPER_URL__"
 
     for tag in soup.find_all("script"):
         if tag.get("id") in core.DYNAMIC_SCRIPT_IDS or (tag.get("type") == "application/json" and not tag.get("id")):
