@@ -40,7 +40,7 @@ def validate(manifest: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any]:
             "path": "paper.publisher",
             "issue": "publisher evidence is missing",
         })
-    if not timeline or not re.search(r"(?:Received|Accepted|Published online)", timeline, re.I):
+    if not timeline or not re.search(r"(?:Received|Accepted|Published(?: online)?)", timeline, re.I):
         errors.append({
             "path": "paper.publication_timeline",
             "issue": "source publication dates were not recovered",
