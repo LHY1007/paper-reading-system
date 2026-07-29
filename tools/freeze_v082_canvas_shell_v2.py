@@ -13,6 +13,9 @@ from bs4 import BeautifulSoup, NavigableString, Tag
 import freeze_v082_canvas_shell as base
 
 
+ORIGINAL_SCRUB_FIGURE = base.scrub_figure
+
+
 def first(node: BeautifulSoup | Tag, selector: str) -> Tag:
     found = node.select_one(selector)
     if found is None:
@@ -66,6 +69,26 @@ def scrub_reference(reference: Tag) -> None:
         raise RuntimeError("failed to build reference exemplar")
     reference.append(bold)
     reference.append(NavigableString(" " + base.PLACEHOLDERS["reference"]))
+
+
+def retain_only_data_attribute(button: Tag | None, name: str) -> None:
+    if button is None:
+        return
+    for attr in ("data-card", "data-target", "data-figure-id", "data-figure"):
+        button.attrs.pop(attr, None)
+    button[name] = "__V082_FIGURE_ID__"
+
+
+def scrub_figure(card: Tag) -> None:
+    ORIGINAL_SCRUB_FIGURE(card)
+    heading = base.require_one(card, ":scope > .figure-heading")
+    retain_only_data_attribute(heading.select_one(".card-toggle"), "data-card")
+    retain_only_data_attribute(heading.select_one(".open-in-viewer"), "data-target")
+    retain_only_data_attribute(heading.select_one(".figure-study-button"), "data-figure-id")
+    zoom = heading.select_one(".zoom-button")
+    if zoom is not None:
+        for attr in ("data-card", "data-target", "data-figure-id", "data-figure"):
+            zoom.attrs.pop(attr, None)
 
 
 def scrub_bilingual_pane(soup: BeautifulSoup) -> None:
@@ -127,6 +150,7 @@ def clear_paper_images(soup: BeautifulSoup) -> int:
 def freeze(source: Path, output: Path) -> dict[str, Any]:
     base.scrub_hero = scrub_hero
     base.scrub_reference = scrub_reference
+    base.scrub_figure = scrub_figure
     base.scrub_bilingual_pane = scrub_bilingual_pane
     report = base.freeze(source, output)
 
