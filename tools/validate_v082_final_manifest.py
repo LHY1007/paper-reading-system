@@ -8,6 +8,8 @@ from pathlib import Path
 
 from jsonschema import Draft202012Validator
 
+from validate_v082_reader_content_quality import validate as validate_reader_content
+
 CJK_RE = re.compile(r"[\u3400-\u9fff]")
 HTML_TAG_RE = re.compile(r"<\/?(?:p|div|span|script|style|html|body)\b", re.I)
 
@@ -102,7 +104,7 @@ def validate(manifest: dict, schema: dict, audit: dict | None) -> dict:
     if audit is None:
         errors.append("missing independent PDF-native audit")
     else:
-        if audit.get("strict_layout_parser") != "v082-final-2":
+        if audit.get("strict_layout_parser") not in {"v082-final-2", "v082-final-3"}:
             errors.append("strict layout parser audit missing or obsolete")
         if not audit.get("passed"):
             errors.append("PDF-native extraction audit failed")
@@ -121,6 +123,14 @@ def validate(manifest: dict, schema: dict, audit: dict | None) -> dict:
         if audit.get("strict_errors"):
             errors.append({"strict_extraction_errors": audit.get("strict_errors")})
 
+    reader_quality = validate_reader_content(manifest)
+    if not reader_quality.get("passed"):
+        errors.append({
+            "reader_content_gate": "failed",
+            "error_count": reader_quality.get("error_count"),
+            "sample_errors": reader_quality.get("errors", [])[:100],
+        })
+
     return {
         "paper_key": manifest.get("paper", {}).get("key"),
         "pages": pages,
@@ -135,6 +145,7 @@ def validate(manifest: dict, schema: dict, audit: dict | None) -> dict:
         "formula_blocks_detected": audit.get("formula_blocks_detected") if audit else None,
         "cross_column_body_merges": audit.get("cross_column_body_merges") if audit else None,
         "cross_column_caption_merges": audit.get("cross_column_caption_merges") if audit else None,
+        "reader_content_quality": reader_quality,
         "errors": errors,
         "passed": not errors,
     }
