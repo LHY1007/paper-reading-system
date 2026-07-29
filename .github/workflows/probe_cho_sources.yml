@@ -1,0 +1,146 @@
+name: Probe Cho Science source
+
+on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - ".github/workflows/probe_cho_sources.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install probe dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+      - name: Probe official and institutional source metadata
+        run: |
+          mkdir -p final/V0.8.2/reports
+          python - <<'PY'
+          from __future__ import annotations
+          import json, re, time
+          from pathlib import Path
+          from urllib.parse import urljoin, quote
+          import requests
+          from bs4 import BeautifulSoup
+
+          doi='10.1126/science.adz2742'
+          pmid='42207882'
+          ua='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/149 Safari/537.36'
+          session=requests.Session(); session.headers.update({'User-Agent':ua,'Accept-Language':'en-US,en;q=0.9'})
+          report={}
+
+          interesting=('pdf','download','resource','document','file','media','attachment','viewcontent','fulltext','wp-content','gravity','form','science.org','doi.org')
+
+          def extract_urls(base, body):
+              urls=[]
+              soup=BeautifulSoup(body,'html.parser')
+              for node in soup.find_all(True):
+                  for key,value in node.attrs.items():
+                      values=value if isinstance(value,list) else [value]
+                      for raw in values:
+                          if not isinstance(raw,str):
+                              continue
+                          decoded=requests.utils.unquote(raw.replace('\\/','/'))
+                          if any(token in decoded.lower() for token in interesting):
+                              urls.append(urljoin(base,decoded))
+              for raw in re.findall(r'https?(?::|%3A)(?:\\?/|%2F){2}[^"\'<>\\s]+',body,flags=re.I):
+                  decoded=requests.utils.unquote(raw.replace('\\/','/')).rstrip('\\,;)')
+                  if any(token in decoded.lower() for token in interesting):
+                      urls.append(decoded)
+              return list(dict.fromkeys(urls))
+
+          def fetch(name,url,headers=None,method='get',data=None):
+              try:
+                  r=session.request(method,url,timeout=90,allow_redirects=True,headers=headers or {},data=data)
+                  body=r.text if len(r.content)<12_000_000 else ''
+                  urls=extract_urls(r.url,body) if body else []
+                  snippets=[]
+                  for pattern in [
+                      r'.{0,180}citation_pdf_url.{0,400}',r'.{0,180}download.{0,500}',r'.{0,180}wp-content.{0,500}',
+                      r'.{0,180}gravity.{0,500}',r'.{0,180}resource.{0,500}',r'.{0,180}document.{0,500}',
+                      r'.{0,180}science\.adz2742.{0,500}',r'.{0,180}eadz2742.{0,500}'
+                  ]:
+                      snippets.extend(' '.join(x.split()) for x in re.findall(pattern,body,flags=re.I|re.S)[:20])
+                  report[name]={
+                      'requested':url,'method':method,'status':r.status_code,'final_url':r.url,
+                      'content_type':r.headers.get('content-type',''),'bytes':len(r.content),
+                      'headers':{k:v for k,v in r.headers.items() if k.lower() in {'location','content-disposition','link','x-robots-tag','set-cookie'}},
+                      'candidate_urls':urls[:400],
+                      'markers':{key:body.lower().count(key) for key in ['pdf','download','wp-content','gravity','gform','resource','document','eadz2742','citation_pdf_url']},
+                      'body_snippets':list(dict.fromkeys(snippets))[:100],
+                  }
+                  return r
+              except Exception as exc:
+                  report[name]={'requested':url,'method':method,'error':f'{type(exc).__name__}: {exc}'}
+                  return None
+
+          lunaphore='https://lunaphore.com/resource-center/publications/pan-cancer-spatial-atlas-of-tertiary-lymphoid-structures/'
+          fetch('lunaphore_page',lunaphore)
+          fetch('lunaphore_wp_root','https://lunaphore.com/wp-json/')
+          fetch('lunaphore_wp_search','https://lunaphore.com/wp-json/wp/v2/search?search='+quote('Pan-cancer spatial atlas of tertiary lymphoid structures'))
+          for endpoint in ['posts','pages','publications','resource','resources','publication','resource-center']:
+              fetch('lunaphore_wp_'+endpoint,'https://lunaphore.com/wp-json/wp/v2/'+endpoint+'?search='+quote('Pan-cancer spatial atlas'))
+          fetch('lunaphore_oembed','https://lunaphore.com/wp-json/oembed/1.0/embed?url='+quote(lunaphore,safe=''))
+          fetch('lunaphore_sitemap','https://lunaphore.com/wp-sitemap.xml')
+          fetch('lunaphore_robots','https://lunaphore.com/robots.txt')
+
+          md='https://www.mdanderson.org/newsroom/ai-powered-atlas-reveals-new-insights-into-tertiary-lymphoid-structures-as-prognostic-and-response-biomarkers-in-cancer.h00-159855234.html'
+          fetch('mdanderson_press',md)
+          fetch('mdanderson_search','https://www.mdanderson.org/search-results.html?q='+quote('Pan-cancer spatial atlas of tertiary lymphoid structures'))
+          fetch('eurekalert','https://www.eurekalert.org/news-releases/1130038')
+          fetch('pcsa','https://pcsa.stomics.io/')
+          fetch('pcsa_paper','https://pcsa.stomics.io/paper')
+
+          fetch('crossref','https://api.crossref.org/works/'+doi)
+          fetch('datacite','https://api.datacite.org/dois/'+doi)
+          fetch('ncbi_elink',f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&id={pmid}&cmd=llinks')
+          fetch('ncbi_esummary',f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id={pmid}&retmode=json')
+          fetch('europepmc',f'https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:{pmid}&format=json&resultType=core')
+          fetch('openalex','https://api.openalex.org/works/https://doi.org/'+doi)
+          fetch('core_discovery','https://api.core.ac.uk/v3/search/works?q='+quote(doi))
+          fetch('base_search','https://api.base-search.net/cgi-bin/BaseHttpSearchInterface.fcgi?func=PerformSearch&query='+quote('dcdoi:'+doi)+'&format=json')
+          for identity in [f'DOI:{doi}',f'PMID:{pmid}']:
+              for attempt in range(3):
+                  r=fetch(f'semantic_{identity.split(":")[0]}_{attempt+1}',f'https://api.semanticscholar.org/graph/v1/paper/{identity}?fields=title,openAccessPdf,url,externalIds')
+                  if r is not None and r.status_code != 429:
+                      break
+                  time.sleep(4*(attempt+1))
+
+          for suffix in ['', '?download=true', '?download=1', '?af=R', '?download=pdf']:
+              fetch('science_pdf_'+re.sub(r'[^a-z0-9]+','_',suffix.lower()),f'https://www.science.org/doi/pdf/{doi}{suffix}',headers={'Accept':'application/pdf,text/html;q=0.8'})
+          for host in ['https://www.science.org','https://science.sciencemag.org']:
+              fetch('science_full_'+re.sub(r'[^a-z0-9]+','_',host.lower()),f'{host}/doi/full/{doi}')
+              fetch('science_epdf_'+re.sub(r'[^a-z0-9]+','_',host.lower()),f'{host}/doi/epdf/{doi}',headers={'Accept':'application/pdf,text/html;q=0.8'})
+
+          Path('final/V0.8.2/reports/CHO_SOURCE_PROBE.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n','utf-8')
+          print(json.dumps({name:{k:v for k,v in data.items() if k in ('status','final_url','content_type','bytes','candidate_urls','markers','body_snippets','error')} for name,data in report.items()},ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cho-source-probe
+          path: final/V0.8.2/reports/CHO_SOURCE_PROBE.json
+          retention-days: 14
+      - name: Commit source probe report
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add final/V0.8.2/reports/CHO_SOURCE_PROBE.json
+          if git diff --cached --quiet; then
+            echo "Probe report unchanged"
+          else
+            git commit -m "Record Cho source probe"
+            git push origin HEAD:v0.8x-batch-diagnosis
+          fi
