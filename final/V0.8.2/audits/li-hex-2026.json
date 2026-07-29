@@ -1,0 +1,354 @@
+{
+  "schema_version": "v082-pdf-native-audit-1",
+  "paper_key": "li-hex-2026",
+  "source_pdf": ".build/v082/pdfs/05_li-hex-2026.pdf",
+  "source_pdf_sha256": "8cb0b084388fab4389a4c8cfb986499bc09ed586fcf8ca04cdc2521f90ce8292",
+  "pages": 31,
+  "body_font_size": 8.245,
+  "raw_text_blocks": 937,
+  "kept_text_blocks": 876,
+  "repeated_header_footer_patterns": 4,
+  "events": {
+    "body": 69299,
+    "heading": 400,
+    "caption": 17604,
+    "reference": 11913
+  },
+  "paragraphs": 182,
+  "sections": 19,
+  "assets": 16,
+  "references": 66,
+  "asset_audit": [
+    {
+      "id": "figure-1",
+      "caption_sha256": "5a9477a4769d31ed126e52d5f5b1920c1075c76bf45e6423185b99fbff00865f",
+      "source_page": 2,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        612.61
+      ],
+      "pixels": [
+        906,
+        912
+      ],
+      "bytes": 309080,
+      "sha256": "226eb425c0a6afdb027a5039c5fa7b2721bfa07ebd2816007afc4e31427af8d7"
+    },
+    {
+      "id": "figure-2",
+      "caption_sha256": "a3572e4dd8681bfe9d3496ea5cfdfd79d4bbac3e1500a755626add5105953d71",
+      "source_page": 4,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        279.48
+      ],
+      "pixels": [
+        906,
+        379
+      ],
+      "bytes": 31134,
+      "sha256": "93477d7b777efdf433407b41fc5176bc6e4da38c88749798192bcca3a513ccb2"
+    },
+    {
+      "id": "figure-3",
+      "caption_sha256": "501fb3ba0d0531957a490f73dcab54ad0d5320eb86bd4c81a82bc946947dbfdc",
+      "source_page": 4,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 193774,
+      "sha256": "8e074d29432d93fe32674e66e647f5c6c1ab97d9b3b1e61faa3d93746265d4ad"
+    },
+    {
+      "id": "figure-4",
+      "caption_sha256": "d051bace158235352846c0d9ac9b827631b486abfed7ca5f0cd4d9b27bd31d37",
+      "source_page": 7,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        653.0
+      ],
+      "pixels": [
+        906,
+        976
+      ],
+      "bytes": 76398,
+      "sha256": "656985c75bc718cc4b27c7c05edbee3ff7ab9e8357bdf84adfb5403fee5337b8"
+    },
+    {
+      "id": "figure-5",
+      "caption_sha256": "e0e315801a05f1e54e8aa35fbd973419deceb7588a260c6611125a8f35862086",
+      "source_page": 9,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        623.18
+      ],
+      "pixels": [
+        906,
+        929
+      ],
+      "bytes": 120152,
+      "sha256": "72aa7694608b8b8509301739b2f4f61d90b922706828a7d09cc9418ee71ae89e"
+    },
+    {
+      "id": "figure-6",
+      "caption_sha256": "b401f55eaa58d93a00e015528de68b3a76cdc97ddfdc220077665c1a99db68cf",
+      "source_page": 10,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 104388,
+      "sha256": "d5706d970034c353b364ed202d5e9a7f7976c32a64e0d26ee1399fd35013378e"
+    },
+    {
+      "id": "extended-data-figure-1",
+      "caption_sha256": "66d59deff5e70c23fe760f0644458098cef379882a0f64def0bf9998b8b45383",
+      "source_page": 19,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        260.48
+      ],
+      "pixels": [
+        906,
+        348
+      ],
+      "bytes": 33428,
+      "sha256": "3f45b7e2fcb90a989a230869207fcc6d34c010a73900c1e710df4ca6ea27a5c5"
+    },
+    {
+      "id": "extended-data-figure-2",
+      "caption_sha256": "427b562aab96f7cd6f81941107543ec268d014e1f52fd573084d50648974c7f5",
+      "source_page": 20,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        444.08
+      ],
+      "pixels": [
+        906,
+        642
+      ],
+      "bytes": 26284,
+      "sha256": "674d16b8ef88284cbb1185b295bbc289e5a0fb5c320c48357acfc5288c27f553"
+    },
+    {
+      "id": "extended-data-figure-3",
+      "caption_sha256": "22e744c843e08fd98847d3dc5de898331f1c39acb25b3ca757cd29cebce077ca",
+      "source_page": 21,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        421.04
+      ],
+      "pixels": [
+        906,
+        605
+      ],
+      "bytes": 133278,
+      "sha256": "10aabcc587c6bb42532796f2dd88d7fe0c989655b8af76639f32c91812ca24c1"
+    },
+    {
+      "id": "extended-data-figure-4",
+      "caption_sha256": "ebf6950d7b73d2d669305a894b4bb364235f2e759d6fc7c8353e1bfe1c92e775",
+      "source_page": 21,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 151856,
+      "sha256": "3b268e0f06d55a38712811856c0b8e948c81e82c891292b4c548d455cf22fd1f"
+    },
+    {
+      "id": "extended-data-figure-5",
+      "caption_sha256": "ef80746bf05fa494174b4ce8e0017f1e7991a15e4922b150eea10e8270ef9d94",
+      "source_page": 23,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        283.04
+      ],
+      "pixels": [
+        906,
+        384
+      ],
+      "bytes": 22870,
+      "sha256": "edc16f588a08e05367ab6b55041284f4a62c26c9153954b2d6056567ce79c74f"
+    },
+    {
+      "id": "extended-data-figure-6",
+      "caption_sha256": "e04489d5707fbea9924a12c229272013ca4bcb4be6f8be1938fb559b34d0315c",
+      "source_page": 23,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 41860,
+      "sha256": "566d5e7dc28dcfa3d7cd53d90e16cdc37bb9a8babf5e2be2ca049d3923f2bbbb"
+    },
+    {
+      "id": "extended-data-figure-7",
+      "caption_sha256": "a7b85cb8ab52f35075cdac490cf94f3b8816bb47f141582eb9dd32bc43cc11be",
+      "source_page": 24,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 39786,
+      "sha256": "d3f075f2151d8723dbbee3da982e93e7c570f68e5050ca38ab4af9cd096ce981"
+    },
+    {
+      "id": "extended-data-figure-8",
+      "caption_sha256": "a37fac3f06fb2f94c7f5265fd82c80695ff1902a3b18d18d9387cd88312b2ca8",
+      "source_page": 25,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 40524,
+      "sha256": "2bd9508cdf2b0c461f4137abaff1e10288fcb5a6fe5c0b99317c50e78dd8a6cd"
+    },
+    {
+      "id": "extended-data-figure-9",
+      "caption_sha256": "040b289971d2a6c9fd841e833de77def392a6b1910de8626120f15ed18e1d6cf",
+      "source_page": 26,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 31068,
+      "sha256": "fc2c58818c97c3dff6a4964617f5239af547f8498fe9a75df7f032a52898ed43"
+    },
+    {
+      "id": "extended-data-figure-10",
+      "caption_sha256": "90482e4a5e147c82d3db453a73015a0265aa0a73d5424f94175aef7e6cc5b780",
+      "source_page": 27,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 20574,
+      "sha256": "7bfe380972b570b1fe2c98cd21677f53cbe004c90437da0a785e678cb1ccac66"
+    }
+  ],
+  "kept_text_sha256": "46363b8cb5a2c8c76b3d5f03f142941feb3d3dcd2489d65a41deddffdd985d04",
+  "manifest_source_fragments_sha256": "da2295ea300c225ac2e3a19c5ead2ac357eb85e2456d50f3d2cf11cf975f119d",
+  "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
+  "passed": false,
+  "strict_layout_parser": "v082-final-2",
+  "formula_blocks_detected": 51,
+  "formula_blocks_missing": 18,
+  "formula_samples": [
+    "(hi −μb) (hi −μb)",
+    "1% ≤ PD-L1 TPS < 50%",
+    "2 b (h −μb) +̄ μb",
+    "CD3e+/PanCK+ (virtual CODEX)",
+    "CD44+/EpCAM+ (virtual CODEX)",
+    "During inference, HEX scans across the entire tissue using a sliding window with a 224-pixel stride, sequentially generating predictions for each tile and stitching them together into a seamless, fully reconstructed virtual CODEX map. On standard hardware (8× NVIDIA L40S GPUs; batch size: 16), this process takes ~1.3 min per WSI at",
+    "For immunotherapy response prediction, MICA was trained using either cross-entropy loss (for objective response) or discrete survival loss (for PFS), using the Adam optimizer (learning rate: 2 × 10−4; weight decay: 1 × 10−5), with a batch size of 1 and eight gradient accumulation steps. Training was performed for 20 epochs, and all models were evaluated using fivefold cross-validation.",
+    "For prognosis prediction, MICA was trained using a discrete-time survival loss68 with the Adam optimizer (learning rate: 1 × 10−5; weight decay: 1 × 10−5), a batch size of 1 and eight gradient accumulation steps. The model weights of both MUSK and DINOv2 were frozen. No early stopping was applied, and all models were trained for 20 epochs with all parameters trainable.",
+    "HR: 0.58 (0.42–0.81) P = 0.0010",
+    "HR: 1.56 (1.14–2.13) P = 0.0050",
+    "HR: 1.64 (1.21–2.23) P = 0.0014",
+    "HR: 10.59 (2.50–44.85) P < 0.0001",
+    "HR: 2.27 (1.18–4.34) P = 0.0115",
+    "HR: 2.43 (1.72–3.43) P < 0.0001",
+    "HR: 2.65 (1.55–4.53) P = 0.0002",
+    "HR: 2.75 (1.20–6.28) P = 0.0133",
+    "HR: 2.99 (1.97–4.52) P < 0.0001",
+    "HR: 3.11 (2.11–4.57) P < 0.0001",
+    "HR: 3.33 (1.48–7.46) P = 0.0020",
+    "HR: 3.45 (1.69–7.04) P = 0.0003"
+  ],
+  "cross_column_body_merges": 5,
+  "cross_column_caption_merges": 2,
+  "source_chars": 69135,
+  "expected_reference_count": 69,
+  "expected_main_figures": 0,
+  "strict_errors": [
+    {
+      "missing_formula_blocks": [
+        "1% ≤ PD-L1 TPS < 50%",
+        "CD44+/EpCAM+ (virtual CODEX)",
+        "HR: 1.56 (1.14–2.13) P = 0.0050",
+        "HR: 2.27 (1.18–4.34) P = 0.0115",
+        "HR: 2.75 (1.20–6.28) P = 0.0133",
+        "HR: 2.99 (1.97–4.52) P < 0.0001",
+        "HR: 3.11 (2.11–4.57) P < 0.0001",
+        "HR: 3.33 (1.48–7.46) P = 0.0020",
+        "HR: 3.45 (1.69–7.04) P = 0.0003",
+        "HR: 3.57 (1.62–7.87) P = 0.0009",
+        "HR: 4.28 (1.79–10.24) P = 0.0004",
+        "Ki-67+/PanCK+ (virtual CODEX)",
+        "PD-L1 TPS = 0",
+        "PD-L1 TPS ≥ 50%",
+        "PD-L1 ≥50",
+        "WSI dataset (n = 10 WSIs); dots show individual folds and error bars indicate standard deviation. In b, bars represent point estimates and error bars indicate 95% bootstrap CIs (n = 1,000 resamples) from independent validation cohorts (Stanford-TMA n = 264 TMA cores; TA-TMA n = 108 TMA cores).",
+        "high resemblance to the true images across structural, immune, lineage and functional biomarkers. Visualizations were generated using the high-resolution version of HEX with a 14-pixel patch size to enhance the spatial details. Similar results were obtained in 372 cores. In a and b, the bars represent point estimates and the error bars indicate 95% bootstrap CIs (n = 1,000 resamples).",
+        "n = 264; TA-TMA, n = 108) and Keyence BZ-X710 (Bern, n = 206). c, Comparison of HEX with baseline models on the Bern dataset. In a–c, bars represent point estimates and error bars indicate 95% bootstrap CIs (n = 1,000 resamples)."
+      ]
+    },
+    "reference coverage incomplete: 66 < 69"
+  ]
+}

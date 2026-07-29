@@ -1,0 +1,356 @@
+{
+  "schema_version": "v082-pdf-native-audit-1",
+  "paper_key": "maas-2026",
+  "source_pdf": ".build/v082/pdfs/01_maas-2026.pdf",
+  "source_pdf_sha256": "6736c1c3f7096e758fbe071ef6d4513810037633ae442049f3904b462e530399",
+  "pages": 32,
+  "body_font_size": 8.249,
+  "raw_text_blocks": 1813,
+  "kept_text_blocks": 1737,
+  "repeated_header_footer_patterns": 4,
+  "events": {
+    "body": 76844,
+    "heading": 337,
+    "reference": 34787,
+    "caption": 36999
+  },
+  "paragraphs": 242,
+  "sections": 19,
+  "assets": 16,
+  "references": 82,
+  "asset_audit": [
+    {
+      "id": "figure-1",
+      "caption_sha256": "1061a1bf6a1327aeb6cb664d0d262a5b66d013cf932b6025d7aaaa01979f3e13",
+      "source_page": 1,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 218424,
+      "sha256": "fef4e29808e7f678d7ab3fef429d279a0c9da4edb2372469457bffc42f928b68"
+    },
+    {
+      "id": "figure-2",
+      "caption_sha256": "2e6798d383106da0299d901ef71c332759fd5eaafd034b65b52004718d8fd624",
+      "source_page": 3,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        502.05
+      ],
+      "pixels": [
+        906,
+        735
+      ],
+      "bytes": 271620,
+      "sha256": "8dde82431d9167ce52f20cd673fff6042ac9219a68788e7c120c0a5eda6bbadb"
+    },
+    {
+      "id": "figure-3",
+      "caption_sha256": "56ad3307aaaffbe819dfd2f1fc13bddea554f38038b19c0ac1ebfe88da205615",
+      "source_page": 6,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        622.99
+      ],
+      "pixels": [
+        906,
+        928
+      ],
+      "bytes": 120570,
+      "sha256": "34d1954291151ddd4e5c05161c8103fc59bc887afadb73d10ce2a9f9159d91a4"
+    },
+    {
+      "id": "figure-4",
+      "caption_sha256": "799c38b3fd81f003ebeb5ec021ad3701975c535410038cbbdc0e3889a6b0a51a",
+      "source_page": 7,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        562.52
+      ],
+      "pixels": [
+        906,
+        832
+      ],
+      "bytes": 303728,
+      "sha256": "7260105db88291218d43fe9d281b120d534abb8c9da93664bc8547c001b5906b"
+    },
+    {
+      "id": "figure-5",
+      "caption_sha256": "0d891f719f9b88fdac9029b032322e0a709bcc6e60b6d763fdfb722361cd82f6",
+      "source_page": 9,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        583.15
+      ],
+      "pixels": [
+        906,
+        865
+      ],
+      "bytes": 95396,
+      "sha256": "781f6d239e63fbcc079bacea1bfc316c75259d1a5b3e227089da5db4152f76b6"
+    },
+    {
+      "id": "figure-6",
+      "caption_sha256": "96e406cacf1250f878c4d3cc6c64df0d3cf06eb0559408ca6dcc3128d9579469",
+      "source_page": 10,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        573.05
+      ],
+      "pixels": [
+        906,
+        848
+      ],
+      "bytes": 90042,
+      "sha256": "e9e5144863d3ac24528809813ae3cf6837175e4a450cf7edebdd22d87df254ac"
+    },
+    {
+      "id": "extended-data-figure-1",
+      "caption_sha256": "871d7ef80b95353a8bd8fbda1107ec8beef5fb1bd18a6b37fa1047e8721b858b",
+      "source_page": 21,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 291016,
+      "sha256": "16b55f982b4ecfc3afebe74eea7626ddc908f2ba76b38df180b1b31987d6b62c"
+    },
+    {
+      "id": "extended-data-figure-2",
+      "caption_sha256": "36c66abb6e3eaae703f71baf9e4528cbcab40ca07eca9f01a673da540bd1b3be",
+      "source_page": 22,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 100336,
+      "sha256": "e14dcda8c70b178eeec41da936f82bd331cff76fc6ea87b4f5fa987bf0e5b9e4"
+    },
+    {
+      "id": "extended-data-figure-3",
+      "caption_sha256": "d538c6ca1e7d505e25e7790bea4481766cb4ba5e45a2066db2132547853f6d7c",
+      "source_page": 24,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 94016,
+      "sha256": "37f5a0e1a3287a5bbee23af71ae2d570ebca23afe147d41be9d886627f16f565"
+    },
+    {
+      "id": "extended-data-figure-4",
+      "caption_sha256": "3b5a064b359500191861b5b363499fadf33a1e025eb8ad76fd38c5637a0fecf4",
+      "source_page": 26,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        334.47
+      ],
+      "pixels": [
+        906,
+        467
+      ],
+      "bytes": 48892,
+      "sha256": "69e3b0ca2db40851868fd7fb1e10040215620a63f0295851ba0ca0cdd7845fda"
+    },
+    {
+      "id": "extended-data-figure-5",
+      "caption_sha256": "6dfc4dcdd6f2da8f63772da8ceccac5a1a76a66aa72bb4321277abbd745923c9",
+      "source_page": 26,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 138780,
+      "sha256": "542376f047e4a8ac1efb244aa1d002e3194857b6d04f2e286f6845322a4c3268"
+    },
+    {
+      "id": "extended-data-figure-6",
+      "caption_sha256": "d3d0a59a67e598fd47cdb37baffe1b618d3dd0f050c24a9fc3ba282a433062a8",
+      "source_page": 28,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        564.53
+      ],
+      "pixels": [
+        906,
+        835
+      ],
+      "bytes": 102766,
+      "sha256": "2690fdf1f48029d89f68e87da90674b5bbcd9cd26f4b76d33e714c7e30b32d34"
+    },
+    {
+      "id": "extended-data-figure-7",
+      "caption_sha256": "aef8eb515c67fd2eda110ec9f5c6a0b755b23c848be8045ab92801691273cf90",
+      "source_page": 29,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        707.02
+      ],
+      "pixels": [
+        906,
+        1063
+      ],
+      "bytes": 114526,
+      "sha256": "4e13b0ad2c988a697cabb9760a5fdde12d36aa4839807b711e0086bab72bc961"
+    },
+    {
+      "id": "extended-data-figure-8",
+      "caption_sha256": "80d925ffde481b94386e2fdb5476e361e987d567d5fb0b4fe53a877df5374a7d",
+      "source_page": 29,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 125044,
+      "sha256": "8b988cca24eb423246e95a797c5898736f204626ab22bf46d18d3a45427236a6"
+    },
+    {
+      "id": "extended-data-figure-9",
+      "caption_sha256": "03741b2947abc8e942a4c6b324e1956a49301807c766af0fced4d68654dd663c",
+      "source_page": 30,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 77468,
+      "sha256": "34d0b95429c798eb7bf042d91524d646ba378b4aa68cae60321c59cc0f5e534a"
+    },
+    {
+      "id": "extended-data-figure-10",
+      "caption_sha256": "941c7db57ca1e4eb295b77f49e1f209385d11a56bd6ef2151b5db4a77e06100b",
+      "source_page": 32,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        490.08
+      ],
+      "pixels": [
+        906,
+        716
+      ],
+      "bytes": 96686,
+      "sha256": "f949f19e150d2886b132dc32ed948650b1b64a0b4f09517e74bd90f04d876fb9"
+    }
+  ],
+  "kept_text_sha256": "76e2836c6f47a3ebda7bd6b2dbb98362a84c8974973a0b31f5a727d226dc63db",
+  "manifest_source_fragments_sha256": "c1f2ec28953e3ded05ffdf695c19f1bc327af3e001a9e2a6b6ac4833067c245d",
+  "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
+  "passed": false,
+  "strict_layout_parser": "v082-final-2",
+  "formula_blocks_detected": 169,
+  "formula_blocks_missing": 105,
+  "formula_samples": [
+    "(Choudhury et al.10)",
+    "(k) ij w(k)hj)",
+    "(n=10.000)",
+    "0 20 40 60 80 100 int-A 0.90-0.99 − n=496",
+    "2.37 × 10–5",
+    "4.74 × 10 –9",
+    "7.47 × 10 –7",
+    "A = WAHA = (BH+",
+    "A H(k)",
+    "ARMS CNS_NB_FOXR2",
+    "A_IDH A_IDH_HG ANTCON ARMS ATRT_MYC ATRT_SHH ATRT_TYR CHGL",
+    "Accuracy = Number of Correct Predictions",
+    "Area A CD68high: MC Ben-1, score 0.93 (immune enriched MG)",
+    "Area B CD68low: MC Int-A, score 0.99 (hypermitotic MG)",
+    "Ben-1 0.90-0.99 − n=329",
+    "Ben-1 ≥0.99 n = 989",
+    "Ben-1 ≥0.99 − n=989",
+    "Ben-3 0.90-0.99 − n=377",
+    "Ben-3 ≥0.99 − n=281",
+    "CD68 Hypomethylated (<-0.3) Ben-1 Hypomethylated"
+  ],
+  "cross_column_body_merges": 4,
+  "cross_column_caption_merges": 7,
+  "source_chars": 76844,
+  "expected_reference_count": 86,
+  "expected_main_figures": 0,
+  "strict_errors": [
+    {
+      "missing_formula_blocks": [
+        "(n=10.000)",
+        "0 20 40 60 80 100 int-A 0.90-0.99 − n=496",
+        "ARMS CNS_NB_FOXR2",
+        "A_IDH A_IDH_HG ANTCON ARMS ATRT_MYC ATRT_SHH ATRT_TYR CHGL",
+        "Ben-1 0.90-0.99 − n=329",
+        "Ben-1 ≥0.99 − n=989",
+        "Ben-3 0.90-0.99 − n=377",
+        "Ben-3 ≥0.99 − n=281",
+        "CD68 Hypomethylated (<-0.3) Ben-1 Hypomethylated",
+        "CHORDM CN CNS_NB_FOXR2 CNS_SARC_DICER CPC_A CPC_B CPH_ADM CPH_PAP",
+        "CHORDM PITAD_GON PITAD_ACTH",
+        "CPH_ADM",
+        "CPH_PAP PITAD_STH_SPARSE",
+        "CPP_AD CPP_INF CRINET CTRL_ADENOPIT CTRL_BLOOD CTRL_CBM CTRL_CORPCAL CTRL_HEMI",
+        "CPP_AD PITAD_TSH",
+        "CRINET CTRL_HYPOTHAL",
+        "CTRL_ADENOPIT",
+        "CTRL_CBM",
+        "CTRL_CORPCAL",
+        "CTRL_HEMI"
+      ]
+    },
+    "reference coverage incomplete: 82 < 86"
+  ]
+}

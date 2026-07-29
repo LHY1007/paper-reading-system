@@ -1,0 +1,304 @@
+{
+  "schema_version": "v082-pdf-native-audit-1",
+  "paper_key": "andani-2025",
+  "source_pdf": ".build/v082/pdfs/06_andani-2025.pdf",
+  "source_pdf_sha256": "7653d95f0e835b09ed1d9ff8054bc3c7cdbada594bccd069adc67961dc23aa90",
+  "pages": 28,
+  "body_font_size": 8.243,
+  "raw_text_blocks": 684,
+  "kept_text_blocks": 630,
+  "repeated_header_footer_patterns": 3,
+  "events": {
+    "body": 70273,
+    "heading": 473,
+    "caption": 7699,
+    "reference": 10212
+  },
+  "paragraphs": 318,
+  "sections": 17,
+  "assets": 14,
+  "references": 65,
+  "asset_audit": [
+    {
+      "id": "figure-1",
+      "caption_sha256": "70ce46f7d89e916d3f3f639b620c63924a57fa843b63ec961441b3cf230eb818",
+      "source_page": 3,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        586.16
+      ],
+      "pixels": [
+        906,
+        869
+      ],
+      "bytes": 80864,
+      "sha256": "524d4853bfe42daf026631e14e9a428ab0d0829ac4072e6816bcdb16283ccc2e"
+    },
+    {
+      "id": "figure-2",
+      "caption_sha256": "abda05f740a8bc7f591e2e98b853a42a6208ffb32648fcb2ae40e0a265e8f06a",
+      "source_page": 3,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 148370,
+      "sha256": "7bb547c5a45374c6836c59e46ebfa5d8302bbf9ee6ad4714d2d828219d049063"
+    },
+    {
+      "id": "figure-3",
+      "caption_sha256": "409dda42c4ae817c52e4107ad1d2590f6229423175900f1f29182dbd862585af",
+      "source_page": 4,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 236370,
+      "sha256": "91b4704fcb5fb660600197d4ca4e0824c189b241b4db0fdad7cfa5d1ec946660"
+    },
+    {
+      "id": "figure-4",
+      "caption_sha256": "d5295a707e0f5384ba3e36836816915a3806287b2fa35ae79d3cac8e5debe28f",
+      "source_page": 6,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        343.46
+      ],
+      "pixels": [
+        906,
+        481
+      ],
+      "bytes": 27898,
+      "sha256": "7214e4a9299cc746e8029a8f94aafe53fea05ce4b8d46b8e69b0ef6dbd60b1ee"
+    },
+    {
+      "id": "figure-5",
+      "caption_sha256": "bdc9438c39beac885f75431dd7eba80557d87a44776f4a3f0118c883c7090dbe",
+      "source_page": 6,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 241040,
+      "sha256": "5b052ed17f3d610b55437f6b98d8b472c1850a29d9c6b16e0e59b3bc2c8300ee"
+    },
+    {
+      "id": "figure-6",
+      "caption_sha256": "7ca8036afe1563b71840e8b5e06a5777310115455a7f564a1f3cf56f3e3f47e0",
+      "source_page": 8,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        316.72
+      ],
+      "pixels": [
+        906,
+        438
+      ],
+      "bytes": 42804,
+      "sha256": "89284f6fc5bcbdd6058e4cfd0596dd388657681995dbdbceb2262e610ff5eaa8"
+    },
+    {
+      "id": "extended-data-figure-1",
+      "caption_sha256": "17ad03a39dc57d436b927136d4b09dbbec9df7f79281647ae3b459c31db862e2",
+      "source_page": 17,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        522.56
+      ],
+      "pixels": [
+        906,
+        768
+      ],
+      "bytes": 31326,
+      "sha256": "1c3b94e7a5751dc98de7e0a468eaf52244557e9bc99d31d9a7a9508f6b69fb05"
+    },
+    {
+      "id": "extended-data-figure-2",
+      "caption_sha256": "5d0167031ed4a6a3fa55991f950a41f4f8b0d61607a97988c76a8862498e6286",
+      "source_page": 18,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        438.32
+      ],
+      "pixels": [
+        906,
+        633
+      ],
+      "bytes": 130182,
+      "sha256": "faef41c4567e980c7b83060c097ddabb232db15ad0b88940130269a084af2248"
+    },
+    {
+      "id": "extended-data-figure-3",
+      "caption_sha256": "a0590629622e5a6f6476526ebb9be0fafa51a78a5c7882c5060723e1a756c33c",
+      "source_page": 19,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 160890,
+      "sha256": "3cdf5ba58fc5366cfb562ff5be7b925462a1e98c23f7a4d694d1fce6d7a15927"
+    },
+    {
+      "id": "extended-data-figure-4",
+      "caption_sha256": "244c295deba8662a7acf45893d60d782f899049100e7ffe12e62cbda3464bf2c",
+      "source_page": 20,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 18880,
+      "sha256": "f49772aad8ae26e7ef321da6e7fc88885078589cf6c3804aa29c8b9101e25ea2"
+    },
+    {
+      "id": "extended-data-table-1",
+      "caption_sha256": "88a7802dcf7e7d4648a202df32280cbb5a22ed03195a18db9309648db42ab804",
+      "source_page": 21,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 44856,
+      "sha256": "0a51714f6dc98d872204967375d1faaf0cb61bffe02fd0312f0dc3018da5c947"
+    },
+    {
+      "id": "extended-data-table-2",
+      "caption_sha256": "5dd53cad7687be95324b0f315bc0a8cd536fc9ae9df5c40dc26a5876e0f8f0cb",
+      "source_page": 22,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 68872,
+      "sha256": "a1443c0c2390d4bdb357abedc9101220771d57a81fc6888aabbf3f5ce543f299"
+    },
+    {
+      "id": "extended-data-table-3",
+      "caption_sha256": "634518adb9abbd2b3b6981d62cf15f110f6f9749365775c04a97141c17f1335b",
+      "source_page": 23,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 57990,
+      "sha256": "2963dad3822af9376dde1d11fcbad8656416673b1c996b101c4cf38620c41c0b"
+    },
+    {
+      "id": "extended-data-table-4",
+      "caption_sha256": "f5ac498e01c4964199bfc7695e36068ebe59e34f0802b868a31afbf0d3829b6e",
+      "source_page": 24,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 31166,
+      "sha256": "e05b489e05ef9b6fe39bf0795ab545d82eec70149b038428ca2a75db5e423b7a"
+    }
+  ],
+  "kept_text_sha256": "6fd154d50915a45357a8ea59fcb5f2b7290e0f50200115a5ade77166c2c7782f",
+  "manifest_source_fragments_sha256": "39b130130ff287e9aadcbda346632ad0f2267dfd28f3dc852e7619a8eed20ce6",
+  "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
+  "passed": false,
+  "strict_layout_parser": "v082-final-2",
+  "formula_blocks_detected": 114,
+  "formula_blocks_missing": 2,
+  "formula_samples": [
+    "(I(i) −I′(i))",
+    "(I(xk + i, yk + j) −I′(xk + i, yk + j))",
+    "(SSIMj(I, I′))",
+    "(m) k ) . (13)",
+    "(n = 16) Desert (n = 10)",
+    "(n = 34) (n = 34)",
+    "(n = 8) Excluded",
+    "(−c(m) log ( fsurv (y(m)",
+    "+ (1 −c(m)) log ( fhazard (y(m)",
+    "+ (1 −c(m)) log ( fsurv (y(m)",
+    "0.194 ± 0.001",
+    "0.197 ± 0.004",
+    "0.202 ± 0.002",
+    "0.210 ± 0.002",
+    "0.214 ± 0.011",
+    "0.218 ± 0.001",
+    "0.260 ± 0.001",
+    "0.264 ± 0.016",
+    "0.276 ± 0.004",
+    "0.279 ± 0.002"
+  ],
+  "cross_column_body_merges": 2,
+  "cross_column_caption_merges": 4,
+  "source_chars": 70112,
+  "expected_reference_count": 66,
+  "expected_main_figures": 0,
+  "strict_errors": [
+    {
+      "missing_formula_blocks": [
+        "RMSE-SW (row 3) metrics. No adjustments were made for multiple comparisons. Significance levels are colour-coded: Not Significant (NS) (p≥0.05), Significant (p<0.05), and Strong Significant (p<0.01).",
+        "scores of 41.8% (±0.3%) for lymphocyte markers and 42.8% (±0.6%) for tumour markers. The generated images achieved HYPE scores of 61.6% (±1.3%) and 72.8% (±1.1%), indicating that the majority (>50%) were perceived as real by domain experts."
+      ]
+    },
+    "reference coverage incomplete: 65 < 66"
+  ]
+}

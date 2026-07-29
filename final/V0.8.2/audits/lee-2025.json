@@ -1,0 +1,145 @@
+{
+  "schema_version": "v082-pdf-native-audit-1",
+  "paper_key": "lee-2025",
+  "source_pdf": ".build/v082/pdfs/03_lee-2025.pdf",
+  "source_pdf_sha256": "0201a21d5f28c1a0a649da33f89fc42f9fc7661330e9c767964d9c0380bf0531",
+  "pages": 14,
+  "body_font_size": 8.219,
+  "raw_text_blocks": 976,
+  "kept_text_blocks": 947,
+  "repeated_header_footer_patterns": 3,
+  "events": {
+    "body": 57784,
+    "heading": 335,
+    "caption": 12624,
+    "reference": 10451
+  },
+  "paragraphs": 159,
+  "sections": 16,
+  "assets": 5,
+  "references": 62,
+  "asset_audit": [
+    {
+      "id": "figure-1",
+      "caption_sha256": "e519451d4e77299264442000987a89c0c9f512ff2ebf85d826b5d2acb835de93",
+      "source_page": 3,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        618.92
+      ],
+      "pixels": [
+        906,
+        922
+      ],
+      "bytes": 134648,
+      "sha256": "2d3cf3ac43c8f5850baffeea32f3a4a9c8f3b169be1c3a863a8a36147e8d379f"
+    },
+    {
+      "id": "figure-2",
+      "caption_sha256": "222ebb956b05eb0c7ee7d6cfd3ff73266e779870fa863a4d944b45f142b2ef65",
+      "source_page": 4,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 176348,
+      "sha256": "47b7410800c4557183594229950898d666c6ae910bb161160a1540b4ee0146d4"
+    },
+    {
+      "id": "figure-3",
+      "caption_sha256": "9cd24638a774c24969e4f41d111141cc09c5ffd782cd6f90d07159043b6f05ce",
+      "source_page": 6,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 151180,
+      "sha256": "fab99f75b2987bcc6f48e4927bc2e7ec5797b02a6099c1896468b94e8eac5cab"
+    },
+    {
+      "id": "figure-4",
+      "caption_sha256": "6ec80b3e047e69a05d8a5fc10ef61417ab800e11e3a46b8d4a70d43b18b6b1de",
+      "source_page": 8,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 196616,
+      "sha256": "8167e146519f522fd94641967744c273ca77a5e5b6d9df941b33c468acbd3838"
+    },
+    {
+      "id": "figure-5",
+      "caption_sha256": "ca3f4dd3fa7f89822e0496905aa28849f135c33dcff8b1e4ba8aa3384df0d155",
+      "source_page": 10,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 161366,
+      "sha256": "1f6f2e6c3a42e18af685fa80c43caf1f7e1873e013f8e0ddb26a6c44a921592d"
+    }
+  ],
+  "kept_text_sha256": "a3b2daa2d8152ce8d4228740a3fd37e21a78889aa6438d9d20fc473033e26d53",
+  "manifest_source_fragments_sha256": "f4f1b96814a3c5faa8bd99f5072f1f9cb1e782128927ed5f5e21c9f6246c4923",
+  "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
+  "passed": false,
+  "strict_layout_parser": "v082-final-2",
+  "formula_blocks_detected": 21,
+  "formula_blocks_missing": 0,
+  "formula_samples": [
+    "\b\u0010 \u001b\u0013\u0017-\u0011\u0019\u0018\u0019-\u0019A6 \u0019<<!\u0010\u0018",
+    "\u0015\u0019\u000f\u000f- # \u000f\u0019 0 * \u00196\u0017! -\u0011\u0019\u0018\u0019< \u0013&2'\u0002 6\u0017 \u0016?\u0017#",
+    "\u0019\u000f\u00176<\u0019=\u0013 \u0019\u0019- B!B\u0017\u000f",
+    "*\u0014!6\u0010\u0011\u0019\u0018\u0019<!< \u0013\u0013* \u0010A!\u0014\u0017 !\u0010\u0018 \u0013\u0017 #-\u0017 !\u0014-:\u0019 \u0017-\u0010A!\u0014\u0017 !\u0010\u0018",
+    "*\u0018 !\u0011\u0019\u0018-6 \u0010 \u0019<<!\u0018\u0011 \u0015,.*\u0005-6\u0017 \u0016?\u0017# $\u0018@\u000f\u0017\"\"\u0017 \u0010 #-6\u0017 \u0016?\u0017#",
+    "1$\u0013\u0004-6\u0017 \u0016?\u0017# 1#6\u0010A!\u0017 ,/\u0013%\u0002 \u0017 \u0011\u0019 < 3 /\u0013 \u0004 \"\u0019\u0014!\u0017 \u0019\u0014- \u0019\u000f\u000f-6 \u0010\u000f!@\u0019 \u0017 !\u0010\u0018 \u0019<6\u0010\u0018<\u0019- \u0010-,/\u0013%\u0002 \u0015! \u0017 \u0019- # \u000f\u0019-,\u0015*-\u0015# \u000f\u0019",
+    "D = maxðSCImmune, SCNF2wtÞ \u0002 maxðSCHyper, SCProÞ ð1Þ",
+    "For Hypermetabolism/Proliferative cells (i.e., D < 0), the x-axis was defined as:",
+    "Next, for Immune/NF2 WT cells (i.e., D > 0), the x-axis value was defined as:",
+    "P < 2.22 x 10-16 P < 2.22 x 10-16",
+    "P < 2.22 x 10-16 P = 3.6 x 10-15 P < 2.22 x 10-16",
+    "P = 1.23 x 10-21",
+    "R = 0.579 P = 0.000213",
+    "n=74,979 cells",
+    "p < 0.01",
+    "p < 2.2e-16",
+    "p > 0.05",
+    "p−value 0.01 < p < 0.05 p < 0.01",
+    "siRNA Transfection The cells were seeded (1.5 × 103 or 3 × 104 cells per well, respectively) in a 96-well or 12-well flat-bottom plate and incubated overnight. They were then transfected with siRNA using Lipofectamine RNAiMAX Transfection Reagent.",
+    "tSNE_1"
+  ],
+  "cross_column_body_merges": 1,
+  "cross_column_caption_merges": 0,
+  "source_chars": 57611,
+  "expected_reference_count": 64,
+  "expected_main_figures": 0,
+  "strict_errors": [
+    "reference coverage incomplete: 62 < 64"
+  ]
+}

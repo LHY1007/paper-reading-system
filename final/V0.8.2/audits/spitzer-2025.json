@@ -1,0 +1,287 @@
+{
+  "schema_version": "v082-pdf-native-audit-1",
+  "paper_key": "spitzer-2025",
+  "source_pdf": ".build/v082/pdfs/08_spitzer-2025.pdf",
+  "source_pdf_sha256": "9f60cb9535737621dc2ce34c120469374de4a5e5da6b2a8bd7fdc055428082cf",
+  "pages": 28,
+  "body_font_size": 8.242,
+  "raw_text_blocks": 1565,
+  "kept_text_blocks": 1506,
+  "repeated_header_footer_patterns": 3,
+  "events": {
+    "body": 58393,
+    "heading": 892,
+    "caption": 29500,
+    "reference": 35612
+  },
+  "paragraphs": 253,
+  "sections": 30,
+  "assets": 12,
+  "references": 53,
+  "asset_audit": [
+    {
+      "id": "figure-1",
+      "caption_sha256": "5572716cc0620110a85d8c300884d539b377a234bf7a8b2946c3760c82cbf5b7",
+      "source_page": 3,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        316.8
+      ],
+      "pixels": [
+        906,
+        438
+      ],
+      "bytes": 57494,
+      "sha256": "a02b9e18dc9d8fa567bd37c58ac8102aed634fb435c7bd0328bf56b52631b752"
+    },
+    {
+      "id": "figure-2",
+      "caption_sha256": "f311a67ef3fadc5199063f30a7b333b0759b0dc81452634847c031b0cb7dcd6e",
+      "source_page": 3,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 188496,
+      "sha256": "ddd9473c6cd943b0a381fcbec9afcbf64fc7ab66bdef94f210b5b9df89dc25f2"
+    },
+    {
+      "id": "figure-3",
+      "caption_sha256": "0242b748390bed85961039979204e5d47ef93a4588ce9b03c942411999d68a44",
+      "source_page": 5,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        279.33
+      ],
+      "pixels": [
+        906,
+        378
+      ],
+      "bytes": 36308,
+      "sha256": "44711aee3c47f7494fe0439fa9309fdd7fb36cd3c1bfc5d10b0736b3486e26f8"
+    },
+    {
+      "id": "figure-4",
+      "caption_sha256": "42d6de32c1862ef87f7bea5ecee875add7a69f50b6b4cb0c7309aef322f49d63",
+      "source_page": 7,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        250.44
+      ],
+      "pixels": [
+        906,
+        332
+      ],
+      "bytes": 24314,
+      "sha256": "5e1992849d0eb05da59e5441b5b183f930c872db7c994bc5597280d6b20d0623"
+    },
+    {
+      "id": "figure-5",
+      "caption_sha256": "afea582065478034c045b42cec3f13df50848c1666719aca39d3bb4ad64453bf",
+      "source_page": 7,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 202060,
+      "sha256": "de41766740cc02205628a05e8a3ae34411cec543986066afa29e8f047c971b7d"
+    },
+    {
+      "id": "figure-6",
+      "caption_sha256": "136a9a3857693cac8e308d2ce5073e8310bba19761326a6e591210c38e73e9eb",
+      "source_page": 9,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        374.1
+      ],
+      "pixels": [
+        906,
+        530
+      ],
+      "bytes": 120562,
+      "sha256": "9616b0bfabc392e7c961baf25b813e40eb56bfd9caa93fdae1afe27dac598a94"
+    },
+    {
+      "id": "extended-data-figure-1",
+      "caption_sha256": "7609eb3b6b98c143ed028c7c68fcf695d01cbe0dd27f1e73c6a11b802897f542",
+      "source_page": 16,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 248282,
+      "sha256": "410edda51ad186b8a9bc191a85c142a89e9cde4f44893487846ad1a49168ac9a"
+    },
+    {
+      "id": "extended-data-figure-2",
+      "caption_sha256": "aa2384a39b560ea81b4bd5293c5cf07f7d73113a0f148eb831e26556c2f769b0",
+      "source_page": 18,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 101960,
+      "sha256": "c962bcd9e1dddf7c020c29f4cb623d8e68b547fbdd9825eff9423f7ac7532602"
+    },
+    {
+      "id": "extended-data-figure-3",
+      "caption_sha256": "00ecc427f13142c4478795b8395e1817541f6ce9c3e73755a596c31ffee62668",
+      "source_page": 20,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 97746,
+      "sha256": "cc8a1ef0fdd488654e4593578e6b27da1e0a8bbf0e8926f4c45d8c0bc8012a1d"
+    },
+    {
+      "id": "extended-data-figure-4",
+      "caption_sha256": "c101519c70491ad9c88515a6bb8c2c023a17e83861db35c3140d04f3ca05f1ad",
+      "source_page": 22,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        352.99
+      ],
+      "pixels": [
+        906,
+        496
+      ],
+      "bytes": 26036,
+      "sha256": "7ed95cde333b63e6bfaa7e5d0d86a0498d5646ce45a6274bca0b5212ab19758e"
+    },
+    {
+      "id": "extended-data-figure-5",
+      "caption_sha256": "2b0af2d6792233c3bb24aed6fdb67a2d78d4e30921a82c942a2b80248b05df98",
+      "source_page": 23,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 142306,
+      "sha256": "716892b515971ac925030ce77015e8ed2ac27f928d7f2355f2a36abc657176ab"
+    },
+    {
+      "id": "extended-data-figure-6",
+      "caption_sha256": "4a01367736258ed7fd4f30a750412d7e48f5b8aae8fa832f8ae406f8f064b989",
+      "source_page": 24,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 74186,
+      "sha256": "b979cb0d4254605536d113d27820782ce83ac535e7aefc9be9983d6a58454c8f"
+    }
+  ],
+  "kept_text_sha256": "94dfa0b60cb079acdd859622443bc0fdcd392d19725cfe6c6a8d0fc561d0558c",
+  "manifest_source_fragments_sha256": "e492cfae19675148ad728aa24ef9d268ac429133738db6b4a6223209e68303ec",
+  "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
+  "passed": false,
+  "strict_layout_parser": "v082-final-2",
+  "formula_blocks_detected": 117,
+  "formula_blocks_missing": 54,
+  "formula_samples": [
+    "(N=1)",
+    "(N=10)",
+    "(N=12)",
+    "(N=13)",
+    "(N=14)",
+    "(N=15)",
+    "(N=16)",
+    "(N=17)",
+    "(N=22)",
+    "(N=24)",
+    "(N=28)",
+    "(N=36)",
+    "(N=37)",
+    "(N=44)",
+    "(N=49)",
+    "(N=5)",
+    "(N=52) (N=12)",
+    "(N=59) (N=8)",
+    "(N=6)",
+    "(N=8)"
+  ],
+  "cross_column_body_merges": 6,
+  "cross_column_caption_merges": 8,
+  "source_chars": 58360,
+  "expected_reference_count": 52,
+  "expected_main_figures": 0,
+  "strict_errors": [
+    {
+      "missing_formula_blocks": [
+        "*P = 0.012 *P = 0.00086",
+        "AC (n=13) GPC (n=5) MES/Hypoxia (n=6)",
+        "CONS_DN CONS_UP MGMT methylation status",
+        "Cilia-like AC-like MES-like Hypoxia Stress GPC-like OPC-like NPC-likeNEU-like Unresolved p=0.49 p=0.22 p=0.86 p=0.47 p=0.35 p=0.35 p=0.65 p=0.58 p=0.73 p=0.025",
+        "Cilia-like AC-like MES-like Hypoxia Stress GPC-like OPC-like NPC-likeNEU-like Unresolved p=0.65 p=0.071 p=0.67 p=0.21 p=0.23 p=0.27 p=0.38 p=0.15 p=0.52 p=0.96",
+        "GLASS − IDHwt (n = 138)",
+        "HMF (n=14) IMF (n=15) LMF−GN (n=12) LMF−OC (n=9) LMF−TAM (n=1) Mixed (n=8)",
+        "High/intermediate (n = 4)",
+        "LMF—GN (n = 12)",
+        "MES/hypoxia (n = 6) Others (n = 53)",
+        "MET (n = 4) NOS (n = 8) UM (n = 18)",
+        "MGMT_high MGMT_low",
+        "Mixed (n=10)",
+        "NEU (n=6) OPC/NPC (n=12)",
+        "OPC p=0.0018",
+        "Others (n = 47)",
+        "P = 0.0002",
+        "P = 0.0003",
+        "P = 0.0005",
+        "P = 0.0063"
+      ]
+    }
+  ]
+}

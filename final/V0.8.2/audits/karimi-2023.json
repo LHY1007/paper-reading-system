@@ -1,0 +1,317 @@
+{
+  "schema_version": "v082-pdf-native-audit-1",
+  "paper_key": "karimi-2023",
+  "source_pdf": ".build/v082/pdfs/11_karimi-2023.pdf",
+  "source_pdf_sha256": "3797f16efd80c878898a5ed235336579624c3053b19c7aa13716729027dd6cdb",
+  "pages": 28,
+  "body_font_size": 8.243,
+  "raw_text_blocks": 1200,
+  "kept_text_blocks": 1170,
+  "repeated_header_footer_patterns": 4,
+  "events": {
+    "heading": 633,
+    "body": 60928,
+    "caption": 22065,
+    "reference": 27466
+  },
+  "paragraphs": 253,
+  "sections": 22,
+  "assets": 14,
+  "references": 57,
+  "asset_audit": [
+    {
+      "id": "figure-1",
+      "caption_sha256": "e258a8e1f085b2db97d27b078e0adc2c1c6269e74eaa81418f79400e308d9e9a",
+      "source_page": 2,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        528.59
+      ],
+      "pixels": [
+        906,
+        777
+      ],
+      "bytes": 166560,
+      "sha256": "b7177dd6adcfdd78eaedf53df075af8e8497ee2ec48747eb7005403e0d7aefa5"
+    },
+    {
+      "id": "figure-2",
+      "caption_sha256": "5b03446c5d35d0682ded5038949fff074b4c968c477410e97f01e7053314b33f",
+      "source_page": 4,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        471.46
+      ],
+      "pixels": [
+        906,
+        686
+      ],
+      "bytes": 137104,
+      "sha256": "d8060065631d01a71e35235a387e976ce3e82a486d7a7366cd237e7c1960559c"
+    },
+    {
+      "id": "figure-3",
+      "caption_sha256": "a306cc3139562538cd28ea7d05c3ae1b0042f0cd32131229bb8419f5e0ec0491",
+      "source_page": 6,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        412.5
+      ],
+      "pixels": [
+        906,
+        591
+      ],
+      "bytes": 102352,
+      "sha256": "7a1ff26ead2a1273289a1ab3765a58c9f0e26a925f04bd014d819cece0343c94"
+    },
+    {
+      "id": "figure-4",
+      "caption_sha256": "c32696ac73484f0ffc164a71a84e3e89b0d214d2e9028a1805ee9b9b98ff2999",
+      "source_page": 7,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        440.07
+      ],
+      "pixels": [
+        906,
+        636
+      ],
+      "bytes": 108112,
+      "sha256": "9de2fda7fb68f0f4930ab30f7374078103d6117bca37a27b9b508c8f432f20f0"
+    },
+    {
+      "id": "extended-data-figure-1",
+      "caption_sha256": "2e63fd06792a4d9e9c39420774917f3e4cd8d455c25f63ca7aff76352a9eb487",
+      "source_page": 14,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        657.18
+      ],
+      "pixels": [
+        906,
+        983
+      ],
+      "bytes": 56162,
+      "sha256": "43104905f572509b1c9eb74372e7ef7c65509d7fe784947e924cfc92d648a1a5"
+    },
+    {
+      "id": "extended-data-figure-2",
+      "caption_sha256": "cc69ebcd5950dec2442b5243b824fadb56cf93d55d2b7a47e3db65c2bb2a70ad",
+      "source_page": 15,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        655.17
+      ],
+      "pixels": [
+        906,
+        980
+      ],
+      "bytes": 97504,
+      "sha256": "5a5d0abcc18d06ebe19b2cd371ee7354730eec4d5330fc529870027401b72c03"
+    },
+    {
+      "id": "extended-data-figure-3",
+      "caption_sha256": "bb3c5eaa339cbf354d8a05024c07e5647e70216daf073f2c62eee526d34048d9",
+      "source_page": 16,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        658.31
+      ],
+      "pixels": [
+        906,
+        985
+      ],
+      "bytes": 311876,
+      "sha256": "84a409ae146cddafc930457b844bcc328141c51d6c79baacd25b5161ad9c8ae9"
+    },
+    {
+      "id": "extended-data-figure-4",
+      "caption_sha256": "3b0d731d4aa38825c9a5c28b6486d8de71eaf6142b65ae37e5facff3d0e7e9a9",
+      "source_page": 16,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 322950,
+      "sha256": "7028a0615f33a8b9ac429ecdda8dd11bf83a2a7d16541f4bf6085918f6c20460"
+    },
+    {
+      "id": "extended-data-figure-5",
+      "caption_sha256": "cc156a16b2678057c5e186fdfb06d03387e2b3f02ae4e6f715e6ae6d790ba5e5",
+      "source_page": 18,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        662.23
+      ],
+      "pixels": [
+        906,
+        991
+      ],
+      "bytes": 256518,
+      "sha256": "5a43da990ec939344282a9470843414c3ee66076723088816bf9baa80a918cad"
+    },
+    {
+      "id": "extended-data-figure-6",
+      "caption_sha256": "9807577cf46cf237d109d4699b067f47811ef9a3ed26f22a8ae159c2cae6d887",
+      "source_page": 19,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        569.2
+      ],
+      "pixels": [
+        906,
+        842
+      ],
+      "bytes": 150458,
+      "sha256": "b64609ab7be4a9180cf2cb99850c087cdb2ce7a0c8d3d35ac00027583894f7be"
+    },
+    {
+      "id": "extended-data-figure-7",
+      "caption_sha256": "65979e9c401ecdc19addfb374412a804821eeb642efc0faed84e6e10f52beb00",
+      "source_page": 20,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        657.18
+      ],
+      "pixels": [
+        906,
+        983
+      ],
+      "bytes": 113584,
+      "sha256": "551dd8a08873faa894ecf3e9535d2015d162becfd9ae0e350001f640db5f0049"
+    },
+    {
+      "id": "extended-data-figure-8",
+      "caption_sha256": "5c3bf06216538f3f53e344b45e66bfbd3f5a34045ac9b33a75c82cbb93b0c9b7",
+      "source_page": 21,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        657.18
+      ],
+      "pixels": [
+        906,
+        983
+      ],
+      "bytes": 96860,
+      "sha256": "da5d6acc7462e38ed7547a19cbedf7cbdc0dcc4ec45d44250dedbd87e53d6b29"
+    },
+    {
+      "id": "extended-data-figure-9",
+      "caption_sha256": "47378020c91300c9420c36267b966e24d95518a3579fcdb09abca850f781c87a",
+      "source_page": 21,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 125810,
+      "sha256": "4bfb7183c129e5b62ec9fc6b60b02d583cd6001e1ee3a75061b61ca39991b212"
+    },
+    {
+      "id": "extended-data-figure-10",
+      "caption_sha256": "9730db0715c795e8ac2d84314b9c36e2589a39ca59037d89bf042039b7700920",
+      "source_page": 23,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 176880,
+      "sha256": "eedd4f6e6a8504bc01c35c5b7fd48f2b8873667e00eb70d3d890b754420c962d"
+    }
+  ],
+  "kept_text_sha256": "58604b4fadfea1426b1c1e6eebe099c1371bffa5ca75f41a519fdc20de465d30",
+  "manifest_source_fragments_sha256": "ce71a6d8143ceea05a5b2c20e891f0af5567fb9c119ff062a04ec78d19502e29",
+  "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
+  "passed": false,
+  "strict_layout_parser": "v082-final-2",
+  "formula_blocks_detected": 93,
+  "formula_blocks_missing": 15,
+  "formula_samples": [
+    "(n = 192 images), BrM-cores (n = 72 images) and BrM-margins (n = 47 images); data are mean ± s.e.m. Right: absolute number of cells (total across all images) in glioblastoma (n = 192 images), BrM-core (n = 72 images) and BrM-margin (n = 47 images).",
+    "<Mean age (n = 19)",
+    "<Mean age (n = 33)",
+    "<Mean age (n = 89)",
+    "<Mean age Breast",
+    ">Mean age (n = 21)",
+    ">Mean age (n = 27)",
+    ">Mean age (n = 94)",
+    "Adj norm (n = 18)",
+    "Adj norm IDH mut Recur MGMT unmeth Survival >3 yr Female >Mean age BrM-cores BrM-margins BrM-margins BrM-margins Lung Melanoma Melanoma Early recur Late recur Late recur With LMD Female >Mean age Lung Melanoma Melanoma Early recur Late recur Late recur With LMD Female >Mean age",
+    "BrM-cores (n = 72)",
+    "BrM-margins (n = 47)",
+    "Breast (n = 12)",
+    "Breast (n = 17)",
+    "CN high (n = 16) CN low (n = 16)",
+    "CN_high (n=13) CN_low (n=14)",
+    "Early recur (n = 6)",
+    "Early recur (n = 9)",
+    "Female (n = 33)",
+    "Female (n = 50)"
+  ],
+  "cross_column_body_merges": 3,
+  "cross_column_caption_merges": 2,
+  "source_chars": 60928,
+  "expected_reference_count": 62,
+  "expected_main_figures": 0,
+  "strict_errors": [
+    {
+      "missing_formula_blocks": [
+        "(n = 192 images), BrM-cores (n = 72 images) and BrM-margins (n = 47 images); data are mean ± s.e.m. Right: absolute number of cells (total across all images) in glioblastoma (n = 192 images), BrM-core (n = 72 images) and BrM-margin (n = 47 images).",
+        "High T Cells (>5% of TME) Low T Cells (<5% of TME)",
+        "Male Female >Mean age Lung Breast Melanoma",
+        "P = 0.0080",
+        "P = 0.0083 P = 0.0377 P = 0.0067",
+        "P = 0.0498",
+        "P<0.0001",
+        "P=0.0042",
+        "P=0.0126",
+        "P=0.0281",
+        "Survival <1 yr Survival >3 yr Male Female <Mean age >Mean age BrM-cores BrM-margins BrM-cores BrM-margins",
+        "With LMD (n = 30)",
+        "Without LMD (n = 12)",
+        "Without LMD With LMD Female >Mean age",
+        "glioblastoma (n = 192 images) and BrM-cores (n = 59 images) corresponding to Fig. 2c. P-values calculated by two-sided student’s t test. Colours indicate significantly greater interaction (red) or avoidance (blue) in BrM versus glioblastoma (upper table) or glioblastoma versus BrM (lower table)."
+      ]
+    },
+    "reference coverage incomplete: 57 < 62"
+  ]
+}
