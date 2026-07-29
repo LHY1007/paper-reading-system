@@ -1,0 +1,132 @@
+name: Inventory existing V0.8.2 assets
+
+on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - ".github/workflows/inventory_v082_existing_assets.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install parser
+        run: python -m pip install --disable-pip-version-check beautifulsoup4
+      - name: Inventory and compare existing readers
+        run: |
+          mkdir -p experiments/V0.8x_batch_diagnosis/reports
+          python - <<'PY'
+          from __future__ import annotations
+          import hashlib, json, re
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+
+          root=Path('.')
+          files=[]
+          for p in sorted(root.rglob('*')):
+              if not p.is_file() or '.git' in p.parts:
+                  continue
+              if p.suffix.lower() not in {'.html','.pdf','.json','.zip'}:
+                  continue
+              files.append({
+                  'path':p.as_posix(),
+                  'suffix':p.suffix.lower(),
+                  'bytes':p.stat().st_size,
+                  'sha256':hashlib.sha256(p.read_bytes()).hexdigest(),
+              })
+
+          root_html=sorted(p for p in root.glob('*.html') if p.is_file())
+          canvas=next((p for p in root_html if p.name.startswith('00_V0.8.2_CANVAS_')),None)
+          if canvas is None:
+              raise SystemExit('root CANVAS V0.8.2 HTML missing')
+
+          required_selectors=[
+              '.topbar','#quick-pane','#bilingual-pane','#overview','#overview-bilingual-folded',
+              '#figure-table-index','#settingsBtn','#settings','#settingsBackdrop','#viewer','#viewerContent',
+              '#v6Study','#v6AnnotationBtn','#v6EditBtn','#termTooltip','#referencePop',
+              '.mode-btn[data-mode="quick"]','.mode-btn[data-mode="bilingual"]',
+              '.left-resizer','.right-resizer','#sidebarEdgeReveal','#viewerEdgeReveal'
+          ]
+          count_selectors={
+              'bilingual_units':'#bilingual-pane .bilingual-unit',
+              'figure_cards':'#bilingual-pane .figure-card:not(.table-card)',
+              'table_cards':'#bilingual-pane .table-card',
+              'references':'#references > .reference-item',
+              'term_pops':'.term-pop',
+              'citations':'.citation',
+              'study_buttons':'.figure-study-button',
+              'viewer_buttons':'.open-in-viewer',
+              'figure_index_buttons':'#figure-table-index .figure-ref',
+              'paper_sections':'#bilingual-pane > section.paper-section',
+          }
+
+          def analyse(path:Path):
+              text=path.read_text('utf-8',errors='replace')
+              soup=BeautifulSoup(text,'html.parser')
+              selectors={selector:len(soup.select(selector)) for selector in required_selectors}
+              counts={name:len(soup.select(selector)) for name,selector in count_selectors.items()}
+              top_ids=[node.get('id') for node in soup.select('.topbar [id]')]
+              mode_values=[node.get('data-mode') for node in soup.select('.mode-btn[data-mode]')]
+              script_text='\n'.join(node.get_text() for node in soup.find_all('script') if not node.get('src'))
+              style_text='\n'.join(node.get_text() for node in soup.find_all('style'))
+              return {
+                  'path':path.as_posix(),'bytes':path.stat().st_size,
+                  'doctype':text.lstrip()[:32],
+                  'selectors':selectors,'counts':counts,'topbar_ids':top_ids,'modes':mode_values,
+                  'inline_script_sha256':hashlib.sha256(script_text.encode()).hexdigest(),
+                  'inline_style_sha256':hashlib.sha256(style_text.encode()).hexdigest(),
+                  'has_canvas_runtime_review':'__CANVAS_V080_REVIEW__' in text,
+                  'has_source_fragments':'source-fragments' in text,
+                  'has_dynamic_annotation':'v6AnnotationBtn' in text,
+                  'has_dynamic_edit':'v6EditBtn' in text,
+              }
+
+          baseline=analyse(canvas)
+          readers=[]
+          for p in root_html:
+              item=analyse(p)
+              missing=[s for s,n in item['selectors'].items() if n==0]
+              item['missing_required_selectors']=missing
+              item['style_matches_canvas']=item['inline_style_sha256']==baseline['inline_style_sha256']
+              item['script_matches_canvas']=item['inline_script_sha256']==baseline['inline_script_sha256']
+              item['component_presence_score']=round((len(required_selectors)-len(missing))/len(required_selectors),4)
+              readers.append(item)
+
+          report={
+              'canvas':baseline,
+              'required_selectors':required_selectors,
+              'root_html_count':len(root_html),
+              'root_html_readers':readers,
+              'all_relevant_files':files,
+          }
+          out=root/'experiments/V0.8x_batch_diagnosis/reports/EXISTING_ASSET_INVENTORY.json'
+          out.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n','utf-8')
+          print(json.dumps({
+              'root_html_count':len(root_html),
+              'pdf_count':sum(x['suffix']=='.pdf' for x in files),
+              'html':[{k:item[k] for k in ('path','bytes','counts','component_presence_score','missing_required_selectors')} for item in readers],
+              'pdfs':[x for x in files if x['suffix']=='.pdf'],
+          },ensure_ascii=False,indent=2))
+          PY
+      - name: Commit inventory report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/V0.8x_batch_diagnosis/reports/EXISTING_ASSET_INVENTORY.json
+          if git diff --cached --quiet; then
+            echo "Inventory unchanged"
+          else
+            git commit -m "Record existing V0.8.2 asset inventory"
+            git push origin HEAD:v0.8x-batch-diagnosis
+          fi
