@@ -60,7 +60,12 @@ def neutralize(path: Path) -> tuple[str, dict]:
             node.append(f"__CONTENT_SLOT__{selector}")
 
     if soup.html:
-        for attr in ("data-v082-template", "data-v082-template-version", "data-v082-shell-sha256"):
+        for attr in (
+            "data-v082-template",
+            "data-v082-template-version",
+            "data-v082-shell-sha256",
+            "data-v082-shell-lock",
+        ):
             soup.html.attrs.pop(attr, None)
 
     if soup.body:
