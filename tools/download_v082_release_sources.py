@@ -4,21 +4,46 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import time
 from pathlib import Path
+from urllib.parse import urlparse
 
 from bs4 import BeautifulSoup
 import requests
 
 import download_v082_sources as source_tools
 
+ORIGINAL_PUBLISHER_VARIANTS = source_tools.publisher_variants
+PMC_PDF_RE = re.compile(r"/articles/(PMC\d+)/pdf/([^/?#]+\.pdf)", re.I)
+PMC_ARTICLE_RE = re.compile(r"/articles/(PMC\d+)/?$", re.I)
 
-def sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
-    with path.open("rb") as handle:
-        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
-            digest.update(chunk)
-    return digest.hexdigest()
+
+def release_publisher_variants(url: str) -> list[str]:
+    variants = list(ORIGINAL_PUBLISHER_VARIANTS(url))
+    parsed = urlparse(url)
+    match = PMC_PDF_RE.search(parsed.path)
+    if match:
+        pmcid, filename = match.groups()
+        numeric = re.sub(r"\D", "", pmcid)
+        variants.extend([
+            f"https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/bin/{filename}",
+            f"https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/pdf/{filename}?download=1",
+            f"https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/pdf/{filename}?report=reader",
+            f"https://www.ncbi.nlm.nih.gov/pmc/articles/{pmcid}/pdf/{filename}",
+            f"https://pmc.ncbi.nlm.nih.gov/articles/instance/{numeric}/bin/{filename}",
+        ])
+    article_match = PMC_ARTICLE_RE.search(parsed.path)
+    if article_match:
+        pmcid = article_match.group(1)
+        variants.extend([
+            f"https://europepmc.org/articles/{pmcid}?pdf=render",
+            f"https://europepmc.org/backend/ptpmcrender.fcgi?accid={pmcid}&blobtype=pdf",
+        ])
+    return source_tools.dedupe(variants)
+
+
+source_tools.publisher_variants = release_publisher_variants
 
 
 def write_report(
@@ -107,7 +132,7 @@ def discover_candidates(session: requests.Session, paper: dict) -> tuple[list[st
             urls, info = discover()
             candidates.extend(urls)
             discovery[name] = info
-        except Exception as exc:  # discovery sources are redundant; all failures remain audited
+        except Exception as exc:
             discovery[name] = {"error": f"{type(exc).__name__}: {exc}"}
     candidates.extend(source_tools.discover_elsevier_urls(paper["doi"]))
     return source_tools.dedupe(candidates), discovery
