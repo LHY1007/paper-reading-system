@@ -296,7 +296,7 @@
   "manifest_source_fragments_sha256": "a24efd586bc43f857b3f2c633ac9774858e4a0d40632621a034cabfc38e880fe",
   "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
   "passed": true,
-  "strict_layout_parser": "v082-final-9",
+  "strict_layout_parser": "v082-final-10",
   "formula_blocks_detected": 20,
   "formula_blocks_missing": 0,
   "formula_samples": [
@@ -341,7 +341,10 @@
   "cross_page_captions_rebuilt": 0,
   "continuation_blocks_missing": [],
   "cross_page_captions_rebuilt_by_title_lookup": [],
-  "authors_extracted": 68,
+  "authors_extracted": 69,
   "affiliations_extracted": 74,
-  "publication_timeline_extracted": true
+  "publication_timeline_extracted": true,
+  "group_authors_extracted": [
+    "The German “Aggressive Meningiomas” Consortium (KAM)"
+  ]
 }
