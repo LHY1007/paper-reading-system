@@ -1,4 +1,4 @@
-name: Compare V0.8.2 fixed-shell generation
+name: Compare V0.8.2 reader generation
 
 on:
   pull_request:
@@ -7,10 +7,14 @@ on:
       - ".github/workflows/compare_v082_new_generation.yml"
       - "config/v082_paper_sources.json"
       - "config/v082_frozen_shell_lock.json"
-      - "config/biomedical_glossary_zh.json"
+      - "config/v082_reader_content_blueprint.json"
+      - "config/v082_reader_content_plans/**"
+      - "content/v082_manifests/**"
       - "schemas/paper_content_manifest_v082.schema.json"
       - "tools/build_pdf_native_manifest_v082*.py"
-      - "tools/translate_v082_manifest.py"
+      - "tools/build_v082_reader_content_task.py"
+      - "tools/build_v082_reader_if_ready*.py"
+      - "tools/audit_v082_reader_experience*.py"
       - "tools/render_v082_from_frozen_shell.py"
       - "tools/render_v082_canvas_component_locked*.py"
       - "tools/freeze_v082_canvas_shell*.py"
@@ -23,12 +27,10 @@ permissions:
   contents: read
 
 concurrency:
-  group: v082-generation-comparison
+  group: v082-reader-generation-comparison
   cancel-in-progress: true
 
 env:
-  HF_HUB_DISABLE_XET: "1"
-  TOKENIZERS_PARALLELISM: "false"
   PYTHONUNBUFFERED: "1"
 
 jobs:
@@ -45,65 +47,46 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Install parser and renderer dependencies
+      - name: Install source, manifest and reader-audit dependencies
         run: |
           python -m pip install --disable-pip-version-check \
             requests beautifulsoup4 PyMuPDF curl_cffi jsonschema lxml pillow
 
-      - name: Prepare comparison source registry and locate legacy readers
+      - name: Prepare comparison workspace and original CANVAS baseline
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p .build/v082-compare/{pdfs,raw,manifests,readers,reports,audits,cache,legacy}
+          mkdir -p .build/v082-compare/{pdfs,raw,tasks,manifests,readers,reports,audits,legacy}
           python - <<'PY'
           import json, pathlib, shutil
           root=pathlib.Path('.')
           registry=json.loads((root/'config/v082_paper_sources.json').read_text('utf-8'))
-          selected={'canvas','maas-2026','valanarasu-2026'}
-          subset={**registry,'version':registry['version']+'-comparison','papers':[p for p in registry['papers'] if p['key'] in selected]}
-          (root/'.build/v082-compare/registry.json').write_text(json.dumps(subset,ensure_ascii=False,indent=2)+'\n','utf-8')
-          htmls=list(root.glob('*.html'))
-          canvas=[p for p in htmls if p.name.startswith('00_V0.8.2_CANVAS')]
-          if len(canvas)!=1:
-              raise SystemExit(f'expected one original 0.82 CANVAS HTML, found {[p.name for p in canvas]}')
-          shutil.copy2(canvas[0],root/'.build/v082-compare/legacy/00_ORIGINAL_V082_CANVAS.html')
-          for key,tokens in {
-              'maas':['maas','risk_continuum','risk-continuum'],
-              'valanarasu':['valanarasu','gigatime','virtual_population'],
-          }.items():
-              candidates=[]
-              for p in htmls:
-                  low=p.name.lower()
-                  if p==canvas[0]:
-                      continue
-                  if any(token in low for token in tokens):
-                      candidates.append(p)
-              if candidates:
-                  chosen=max(candidates,key=lambda p:p.stat().st_size)
-                  shutil.copy2(chosen,root/f'.build/v082-compare/legacy/OLD_BATCH_{key.upper()}.html')
-          print(json.dumps({'canvas':canvas[0].name,'legacy':[p.name for p in (root/'.build/v082-compare/legacy').glob('*.html')]},ensure_ascii=False,indent=2))
+          selected={'maas-2026','valanarasu-2026'}
+          subset={
+              **registry,
+              'version':registry['version']+'-reader-comparison',
+              'papers':[paper for paper in registry['papers'] if paper['key'] in selected],
+          }
+          (root/'.build/v082-compare/registry.json').write_text(
+              json.dumps(subset,ensure_ascii=False,indent=2)+'\n','utf-8'
+          )
+          candidates=list(root.glob('00_V0.8.2_CANVAS*.html'))
+          if len(candidates)!=1:
+              raise SystemExit(f'expected one original CANVAS reader, found {[p.name for p in candidates]}')
+          shutil.copy2(candidates[0],root/'.build/v082-compare/legacy/00_ORIGINAL_V082_CANVAS.html')
+          print(json.dumps({'baseline':candidates[0].name,'papers':[p['key'] for p in subset['papers']]},indent=2))
           PY
 
-      - name: Download exact selected source PDFs
+      - name: Download exact comparison PDFs
+        id: source_download
+        continue-on-error: true
         run: |
           python tools/download_v082_sources.py \
             --registry .build/v082-compare/registry.json \
             --output-dir .build/v082-compare/pdfs \
             --report .build/v082-compare/reports/SOURCE_DOWNLOAD.json
 
-      - name: Cache translation model
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/huggingface
-          key: hf-opus-mt-en-zh-v1
-
-      - name: Install translation and browser dependencies
-        run: |
-          python -m pip install --disable-pip-version-check transformers sentencepiece sacremoses playwright
-          python -m pip install --disable-pip-version-check torch --index-url https://download.pytorch.org/whl/cpu
-          python -m playwright install --with-deps chromium
-
-      - name: Build normalized 0.82 master and immutable shell
+      - name: Build normalized CANVAS master and immutable shell
         shell: bash
         run: |
           set -euo pipefail
@@ -118,7 +101,8 @@ jobs:
             --lock config/v082_frozen_shell_lock.json \
             --report .build/v082-compare/reports/FROZEN_SHELL_GATE.json
 
-      - name: Generate CANVAS, Maas and Valanarasu through the same content-only pipeline
+      - name: Extract evidence, create paper-specific tasks, and render only eligible readers
+        if: steps.source_download.outcome == 'success'
         shell: bash
         run: |
           set -euo pipefail
@@ -127,135 +111,114 @@ jobs:
           root=pathlib.Path('.')
           work=root/'.build/v082-compare'
           registry=json.loads((work/'registry.json').read_text('utf-8'))
-          shell=work/'V082_CANVAS_FROZEN_SHELL.html'
-          master=work/'00_NORMALIZED_V082_CANVAS_MASTER.html'
-          schema=root/'schemas/paper_content_manifest_v082.schema.json'
-          glossary=root/'config/biomedical_glossary_zh.json'
-          lock=root/'config/v082_frozen_shell_lock.json'
-          cache=work/'cache/opus-mt-en-zh.json'
-          summary=[]
-          for paper in sorted(registry['papers'],key=lambda x:x['order']):
-              key=paper['key']; order=paper['order']
-              prefix=f'{order:02d}_{key}'
+          statuses=[]
+          for paper in sorted(registry['papers'],key=lambda item:item['order']):
+              key=paper['key']; order=paper['order']; prefix=f'{order:02d}_{key}'
               pdf=work/'pdfs'/f'{order:02d}_{key}.pdf'
               raw=work/'raw'/f'{key}.json'
+              task=work/'tasks'/f'{key}.json'
               manifest=work/'manifests'/f'{key}.json'
               audit=work/'audits'/f'{key}.json'
               output=work/'readers'/paper['output']
-              parser_run=subprocess.run([sys.executable,'tools/build_pdf_native_manifest_v082.py',str(pdf),str(raw),'--registry',str(work/'registry.json'),'--key',key,'--audit',str(audit)])
+              status=work/'reports'/f'{prefix}_BUILD_READINESS.json'
+              print(f'\n===== EVIDENCE AND READER READINESS {order:02d} {key} =====',flush=True)
+              parser=subprocess.run([
+                  sys.executable,'tools/build_pdf_native_manifest_v082.py',str(pdf),str(raw),
+                  '--registry',str(work/'registry.json'),'--key',key,'--audit',str(audit)
+              ])
               if not raw.exists():
-                  raise SystemExit(f'parser produced no manifest for {key}')
-              subprocess.run([sys.executable,'tools/translate_v082_manifest.py',str(raw),str(manifest),'--glossary',str(glossary),'--cache',str(cache),'--batch-size','16'],check=True)
-              content_report=work/'reports'/f'{prefix}_CONTENT.json'
-              content_run=subprocess.run([sys.executable,'tools/validate_v082_final_manifest.py',str(manifest),'--schema',str(schema),'--audit',str(audit),'--report',str(content_report)])
-              boundary=work/'reports'/f'{prefix}_MANIFEST_CODE_BOUNDARY.json'
-              subprocess.run([sys.executable,'tools/validate_v082_manifest_code_boundary.py',str(manifest),'--report',str(boundary)],check=True)
-              render=work/'reports'/f'{prefix}_RENDER.json'
-              subprocess.run([sys.executable,'tools/render_v082_from_frozen_shell.py',str(manifest),str(output),'--shell',str(shell),'--lock',str(lock),'--schema',str(schema),'--report',str(render)],check=True)
-              shell_report=work/'reports'/f'{prefix}_SHELL.json'
-              component_report=work/'reports'/f'{prefix}_COMPONENTS.json'
-              architecture_report=work/'reports'/f'{prefix}_ARCHITECTURE.json'
-              subprocess.run([sys.executable,'tools/validate_v082_canvas_shell_lock.py',str(output),'--canonical',str(master),'--report',str(shell_report)],check=True)
-              subprocess.run([sys.executable,'tools/validate_v082_canvas_components.py',str(output),'--report',str(component_report)],check=True)
-              subprocess.run([sys.executable,'tools/validate_v082_rendered_architecture.py',str(output),'--shell',str(shell),'--manifest',str(manifest),'--lock',str(lock),'--report',str(architecture_report)],check=True)
-              summary.append({'key':key,'parser_exit':parser_run.returncode,'content_exit':content_run.returncode,'output':str(output)})
-          (work/'reports/GENERATION_RUNS.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n','utf-8')
-          print(json.dumps(summary,ensure_ascii=False,indent=2))
+                  status.write_text(json.dumps({
+                      'paper_key':key,'rendered':False,'reason':'parser produced no evidence manifest',
+                      'parser_returncode':parser.returncode,
+                  },ensure_ascii=False,indent=2)+'\n','utf-8')
+                  statuses.append(json.loads(status.read_text('utf-8')))
+                  continue
+              subprocess.run([
+                  sys.executable,'tools/build_v082_reader_if_ready_v2.py',
+                  str(raw),str(audit),key,str(output),
+                  '--task-output',str(task),
+                  '--manifest-output',str(manifest),
+                  '--report-dir',str(work/'reports'),
+                  '--status-report',str(status),
+                  '--schema','schemas/paper_content_manifest_v082.schema.json',
+                  '--shell',str(work/'V082_CANVAS_FROZEN_SHELL.html'),
+                  '--lock','config/v082_frozen_shell_lock.json',
+                  '--master',str(work/'00_NORMALIZED_V082_CANVAS_MASTER.html'),
+                  '--baseline',str(work/'legacy/00_ORIGINAL_V082_CANVAS.html'),
+              ],check=False)
+              statuses.append(json.loads(status.read_text('utf-8')))
+          (work/'reports/READER_BUILD_READINESS.json').write_text(
+              json.dumps({'version':'v082-reader-comparison-readiness-1','papers':statuses},ensure_ascii=False,indent=2)+'\n','utf-8'
+          )
+          print(json.dumps(statuses,ensure_ascii=False,indent=2))
           PY
 
-      - name: Run browser regression on the three newly generated readers
+      - name: Record source-download failure without fabricating readers
+        if: steps.source_download.outcome != 'success'
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          path=pathlib.Path('.build/v082-compare/reports/READER_BUILD_READINESS.json')
+          path.write_text(json.dumps({
+              'version':'v082-reader-comparison-readiness-1',
+              'papers':[],
+              'source_download_failed':True,
+              'rule':'No reader HTML may be produced when the exact source PDF is unavailable.'
+          },ensure_ascii=False,indent=2)+'\n','utf-8')
+          PY
+
+      - name: Run browser regression only for readers that passed content gates
         continue-on-error: true
         shell: bash
         run: |
           set -euo pipefail
           mapfile -t READERS < <(find .build/v082-compare/readers -maxdepth 1 -name '*.html' -print | sort)
-          test "${#READERS[@]}" -eq 3
+          if [ "${#READERS[@]}" -eq 0 ]; then
+            printf '%s\n' '{"version":"v082-browser-regression","passed":false,"files":[],"reason":"no reader passed pre-render content gates"}' \
+              > .build/v082-compare/reports/BROWSER_REGRESSION.json
+            exit 0
+          fi
           python tools/browser_regression_v082.py "${READERS[@]}" \
             --root . \
             --report .build/v082-compare/reports/BROWSER_REGRESSION.json
 
-      - name: Compare new generation with original CANVAS and legacy batches
-        shell: bash
+      - name: Verify fail-closed behavior
         run: |
-          set -euo pipefail
           python - <<'PY'
-          import hashlib, json, pathlib
-          from bs4 import BeautifulSoup
-          root=pathlib.Path('.build/v082-compare')
-          def sha(path): return hashlib.sha256(path.read_bytes()).hexdigest()
-          def metric(path):
-              raw=path.read_text('utf-8'); soup=BeautifulSoup(raw,'html.parser')
-              return {
-                  'file':path.name,'bytes':path.stat().st_size,'sha256':sha(path),
-                  'paper_sections':len(soup.select('#bilingual-pane > section.paper-section')),
-                  'bilingual_units':len(soup.select('#bilingual-pane .bilingual-unit')),
-                  'figure_cards':len(soup.select('#bilingual-pane .figure-card:not(.table-card)')),
-                  'table_cards':len(soup.select('#bilingual-pane .table-card')),
-                  'references':len(soup.select('#references > .reference-item')),
-                  'citations':len(soup.select('#bilingual-pane .citation')),
-                  'all_buttons':len(soup.find_all('button')),
-                  'style_blocks':len(soup.find_all('style')),
-                  'script_blocks':len(soup.find_all('script')),
-                  'required_fixed_selectors':{
-                      s:len(soup.select(s)) for s in ['#topbar','#tocBtn','#searchBtn','#immersiveBtn','#settingsBtn','#annotationBtn','#pdfBtn','#printBtn','#sidebar','#viewer','.settings-backdrop','.annotation-toolbar','.annotation-drawer','.reference-pop','.modal .zoom-stage']
-                  },
-              }
-          original=metric(root/'legacy/00_ORIGINAL_V082_CANVAS.html')
-          normalized=metric(root/'00_NORMALIZED_V082_CANVAS_MASTER.html')
-          generated={p.stem:metric(p) for p in sorted((root/'readers').glob('*.html'))}
-          legacy={p.stem:metric(p) for p in sorted((root/'legacy').glob('OLD_BATCH_*.html'))}
-          reports={}
-          for p in sorted((root/'reports').glob('*_ARCHITECTURE.json')):
-              reports[p.stem]=json.loads(p.read_text('utf-8'))
-          contents={}
-          for p in sorted((root/'reports').glob('*_CONTENT.json')):
-              contents[p.stem]=json.loads(p.read_text('utf-8'))
-          browser_path=root/'reports/BROWSER_REGRESSION.json'
-          browser=json.loads(browser_path.read_text('utf-8')) if browser_path.exists() else {'passed':False,'missing':True}
-          generated_canvas=next(v for k,v in generated.items() if 'CANVAS' in v['file'])
-          canvas_delta={k:generated_canvas[k]-original[k] for k in ['bytes','paper_sections','bilingual_units','figure_cards','table_cards','references','citations','all_buttons']}
-          architecture_pass=all(r.get('passed') for r in reports.values()) and len(reports)==3
-          fixed_selector_pass=all(all(v==1 for v in item['required_fixed_selectors'].values()) for item in generated.values())
-          old_batch_degradation={}
-          for name,item in legacy.items():
-              old_batch_degradation[name]={
-                  'missing_fixed_selectors':[k for k,v in item['required_fixed_selectors'].items() if v!=1],
-                  'component_presence_score':sum(bool(item[k]) for k in ['bilingual_units','figure_cards','table_cards','references'])/4,
-                  'button_ratio_vs_original_canvas':round(item['all_buttons']/max(1,original['all_buttons']),4),
-              }
-          result={
-              'version':'v082-fixed-shell-generation-comparison-1',
-              'comparison_scope':['CANVAS PDF regenerated through manifest pipeline','Maas regenerated through same pipeline','Valanarasu regenerated through same pipeline','original V0.8.2 CANVAS HTML','legacy V0.8.2 batch HTML when present'],
-              'original_canvas':original,
-              'normalized_canvas_master':normalized,
-              'generated_readers':generated,
-              'legacy_batch_readers':legacy,
-              'generated_canvas_minus_original_canvas':canvas_delta,
-              'rendered_architecture_reports':reports,
-              'content_reports':contents,
-              'browser_regression':browser,
-              'architecture_passed_for_all_generated':architecture_pass,
-              'fixed_selectors_passed_for_all_generated':fixed_selector_pass,
-              'old_batch_degradation':old_batch_degradation,
-              'interpretation':{
-                  'product_shell':'pass' if architecture_pass and fixed_selector_pass else 'fail',
-                  'content_reproduction':'reported separately; failures are not hidden by product-shell success',
-                  'release_ready':False,
-              },
+          import json,pathlib
+          work=pathlib.Path('.build/v082-compare')
+          readiness=json.loads((work/'reports/READER_BUILD_READINESS.json').read_text('utf-8'))
+          readers=sorted((work/'readers').glob('*.html'))
+          rendered={item.get('paper_key') for item in readiness.get('papers',[]) if item.get('rendered')}
+          unexpected=[p.name for p in readers if not any(key in p.name.lower() for key in rendered)]
+          if unexpected:
+              raise SystemExit(f'HTML existed without a passed reader manifest: {unexpected}')
+          summary={
+              'version':'v082-fail-closed-comparison-1',
+              'source_download_failed':readiness.get('source_download_failed',False),
+              'rendered_papers':sorted(rendered),
+              'reader_files':[p.name for p in readers],
+              'blocked_papers':[
+                  {'paper_key':item.get('paper_key'),'reason':item.get('reason')}
+                  for item in readiness.get('papers',[]) if not item.get('rendered')
+              ],
+              'release_ready':False,
           }
-          (root/'reports/GENERATION_COMPARISON.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n','utf-8')
-          print(json.dumps({'architecture_passed':architecture_pass,'fixed_selectors_passed':fixed_selector_pass,'generated_canvas_delta':canvas_delta,'browser_passed':browser.get('passed'),'legacy_files':list(legacy)},ensure_ascii=False,indent=2))
-          if not architecture_pass or not fixed_selector_pass:
-              raise SystemExit(1)
+          (work/'reports/FAIL_CLOSED_COMPARISON.json').write_text(
+              json.dumps(summary,ensure_ascii=False,indent=2)+'\n','utf-8'
+          )
+          print(json.dumps(summary,ensure_ascii=False,indent=2))
           PY
 
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: v082-new-generation-comparison
+          name: v082-reader-generation-comparison
           path: |
-            .build/v082-compare/readers
+            .build/v082-compare/raw
+            .build/v082-compare/tasks
             .build/v082-compare/manifests
+            .build/v082-compare/readers
             .build/v082-compare/audits
             .build/v082-compare/reports
             .build/v082-compare/legacy
@@ -263,3 +226,13 @@ jobs:
             .build/v082-compare/V082_CANVAS_FROZEN_SHELL.html
           if-no-files-found: error
           retention-days: 14
+
+      - name: Keep the comparison red until every selected reader is genuinely complete
+        run: |
+          python - <<'PY'
+          import json,pathlib
+          report=json.loads(pathlib.Path('.build/v082-compare/reports/READER_BUILD_READINESS.json').read_text('utf-8'))
+          papers=report.get('papers',[])
+          if report.get('source_download_failed') or len(papers)!=2 or not all(item.get('rendered') for item in papers):
+              raise SystemExit('comparison remains incomplete: evidence/tasks are preserved, but invalid HTML was not generated')
+          PY
