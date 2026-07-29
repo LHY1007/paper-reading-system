@@ -1,0 +1,57 @@
+name: Unpack V0.8.2 parser source
+
+on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - ".github/workflows/unpack_v082_parser.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unpack-parser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Decode packed parser into reviewable source
+        run: |
+          python - <<'PY'
+          import ast
+          from pathlib import Path
+          import base64
+          import gzip
+
+          packed_path = Path('tools/build_pdf_native_manifest_v082.py')
+          tree = ast.parse(packed_path.read_text('utf-8'))
+          packed = None
+          for node in tree.body:
+              if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == 'PACKED' for t in node.targets):
+                  packed = ast.literal_eval(node.value)
+                  break
+          if not isinstance(packed, str):
+              raise SystemExit('PACKED payload not found')
+          source = gzip.decompress(base64.b64decode(packed)).decode('utf-8')
+          output = Path('tools/build_pdf_native_manifest_v082_unpacked.py')
+          output.write_text(source, 'utf-8')
+          compile(source, str(output), 'exec')
+          print({'bytes': len(source.encode('utf-8')), 'lines': len(source.splitlines())})
+          PY
+      - name: Commit reviewable parser source
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tools/build_pdf_native_manifest_v082_unpacked.py
+          if git diff --cached --quiet; then
+            echo "Unpacked parser already current"
+          else
+            git commit -m "Expose V0.8.2 PDF parser source for review"
+            git push origin HEAD:v0.8x-batch-diagnosis
+          fi
