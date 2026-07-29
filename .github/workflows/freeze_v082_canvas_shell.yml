@@ -11,6 +11,7 @@ on:
       - "tools/render_v082_canvas_component_locked*.py"
       - "tools/validate_v082_frozen_shell.py"
       - "tools/validate_v082_manifest_code_boundary.py"
+      - "tools/validate_v082_rendered_architecture.py"
       - "tools/validate_v082_canvas_shell_lock*.py"
       - "tools/validate_v082_canvas_components*.py"
       - "tools/normalize_v082_canvas_master.py"
@@ -70,11 +71,10 @@ jobs:
         run: |
           set -euo pipefail
           source /tmp/v082_shell_paths
-          python tools/validate_v082_manifest_code_boundary.py \
-            tests/fixtures/v082_shell_smoke_manifest.json \
+          MANIFEST=tests/fixtures/v082_shell_smoke_manifest.json
+          python tools/validate_v082_manifest_code_boundary.py "$MANIFEST" \
             --report reports/v082-shell/SMOKE_MANIFEST_CODE_BOUNDARY.json
-          python tools/render_v082_from_frozen_shell.py \
-            tests/fixtures/v082_shell_smoke_manifest.json "$OUTPUT" \
+          python tools/render_v082_from_frozen_shell.py "$MANIFEST" "$OUTPUT" \
             --shell "$SHELL" \
             --lock config/v082_frozen_shell_lock.json \
             --schema schemas/paper_content_manifest_v082.schema.json \
@@ -83,6 +83,11 @@ jobs:
             --report reports/v082-shell/SMOKE_SHELL_LOCK.json
           python tools/validate_v082_canvas_components.py "$OUTPUT" \
             --report reports/v082-shell/SMOKE_COMPONENTS.json
+          python tools/validate_v082_rendered_architecture.py "$OUTPUT" \
+            --shell "$SHELL" \
+            --manifest "$MANIFEST" \
+            --lock config/v082_frozen_shell_lock.json \
+            --report reports/v082-shell/SMOKE_RENDERED_ARCHITECTURE.json
 
       - name: Assert AI-to-HTML boundary
         shell: bash
@@ -96,6 +101,7 @@ jobs:
           manifest = pathlib.Path('tests/fixtures/v082_shell_smoke_manifest.json')
           lock = json.loads(pathlib.Path('config/v082_frozen_shell_lock.json').read_text('utf-8'))
           render = json.loads(pathlib.Path('reports/v082-shell/SMOKE_RENDER.json').read_text('utf-8'))
+          architecture = json.loads(pathlib.Path('reports/v082-shell/SMOKE_RENDERED_ARCHITECTURE.json').read_text('utf-8'))
           raw = output.read_text('utf-8')
           errors = []
           shell_sha = hashlib.sha256(shell.read_bytes()).hexdigest()
@@ -111,14 +117,18 @@ jobs:
               errors.append('runtime shell differs from version lock')
           if render.get('renderer') != 'v082-frozen-shell-2':
               errors.append('unexpected renderer version')
+          if not architecture.get('passed'):
+              errors.append('rendered architecture gate failed')
           gate = {
-              'version': 'v082-ai-html-boundary-2',
+              'version': 'v082-ai-html-boundary-3',
               'ai_permitted_input': str(manifest),
               'ai_permitted_format': 'JSON manifest only',
               'fixed_shell': str(shell),
               'fixed_shell_sha256': shell_sha,
               'fixed_shell_lock': lock.get('version'),
               'renderer': render.get('renderer'),
+              'rendered_architecture_gate': architecture.get('version'),
+              'fixed_global_button_count': architecture.get('fixed_global_button_count'),
               'rendered_output': str(output),
               'rendered_output_sha256': hashlib.sha256(output.read_bytes()).hexdigest(),
               'errors': errors,
