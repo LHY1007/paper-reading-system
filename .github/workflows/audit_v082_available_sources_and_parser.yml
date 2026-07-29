@@ -124,7 +124,9 @@ jobs:
           PY
       - name: Commit diagnostic audit reports
         if: always()
+        shell: bash
         run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add final/V0.8.2/reports/SOURCE_DOWNLOAD_AVAILABLE.json final/V0.8.2/reports/PDF_NATIVE_AVAILABLE_AUDIT.json final/V0.8.2/audits
@@ -132,5 +134,7 @@ jobs:
             echo "Available-source parser reports unchanged"
           else
             git commit -m "Audit available V0.8.2 source PDFs and parser"
+            git fetch origin v0.8x-batch-diagnosis
+            git rebase origin/v0.8x-batch-diagnosis
             git push origin HEAD:v0.8x-batch-diagnosis
           fi
