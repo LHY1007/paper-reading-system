@@ -11,7 +11,7 @@ from typing import Any
 GENERIC_FIGURE = re.compile(r"^(?:Fig\.?|Figure\s+[A-Za-z]?\d+\.?|Extended Data Figure\s+\d+\.?)$", re.I)
 PARSER_VERSION = re.compile(r"^v082-final-(?:[6-9]|[1-9]\d+)$")
 CONTAMINATION = re.compile(
-    r"(?:Nature Genetics|Nature Medicine|Nature Machine Intelligence|Nature Communications|Cell)\s*(?:\||\d)|Article\s+https?://|Received:\s+\d|Accepted:\s+\d",
+    r"(?:Nature Genetics|Nature Medicine|Nature Machine Intelligence|Nature Communications|Cell)\s*(?:\||\d)|Article\s+https?://|Received:\s+\d|Accepted:\s+\d|legend continued on next page",
     re.I,
 )
 
@@ -95,7 +95,7 @@ def validate(manifest: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any]:
     if generic_titles:
         add(errors, "assets.title_en", "descriptive figure titles were not recovered", generic_titles)
     if contaminated_captions:
-        add(errors, "assets.caption_en", "caption contains running header or adjacent body text", contaminated_captions)
+        add(errors, "assets.caption_en", "caption contains running header, continuation marker or adjacent body text", contaminated_captions)
     if panel_evidence_missing:
         add(errors, "assets.study.panels", "caption panel labels exist but no source panel evidence was extracted", panel_evidence_missing)
     if table_failures:
@@ -122,11 +122,14 @@ def validate(manifest: dict[str, Any], audit: dict[str, Any]) -> dict[str, Any]:
     repairs = manifest.get("evidence_repairs") or {}
     if int(repairs.get("reference_count", len(references)) or 0) != len(references):
         add(errors, "evidence_repairs.reference_count", "repair report is inconsistent with manifest references")
+    continuation_missing = [str(value) for value in repairs.get("continuation_blocks_missing") or []]
+    if continuation_missing:
+        add(errors, "evidence_repairs.continuation_blocks_missing", "cross-page figure legend continuation was not recovered", continuation_missing)
     if table_count and int(repairs.get("tables_reconstructed", 0) or 0) < table_count:
         warnings.append({"path": "evidence_repairs.tables_reconstructed", "issue": "not every table reports native reconstruction"})
 
     return {
-        "version": "v082-evidence-quality-1",
+        "version": "v082-evidence-quality-2",
         "paper_key": manifest.get("paper", {}).get("key"),
         "parser": parser_version,
         "outline_entries": len(outline),
