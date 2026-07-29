@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/freeze_v082_canvas_shell.yml"
+      - "config/v082_frozen_shell_lock.json"
       - "tools/freeze_v082_canvas_shell*.py"
       - "tools/render_v082_from_frozen_shell.py"
       - "tools/render_v082_canvas_component_locked*.py"
@@ -60,6 +61,7 @@ jobs:
           python tools/freeze_v082_canvas_shell_v2.py "$MASTER" "$SHELL" \
             --report reports/v082-shell/FROZEN_SHELL_BUILD.json
           python tools/validate_v082_frozen_shell.py "$SHELL" --master "$MASTER" \
+            --lock config/v082_frozen_shell_lock.json \
             --report reports/v082-shell/FROZEN_SHELL_GATE.json
           printf 'MASTER=%q\nSHELL=%q\nOUTPUT=%q\n' "$MASTER" "$SHELL" "$OUTPUT" >> /tmp/v082_shell_paths
 
@@ -74,6 +76,7 @@ jobs:
           python tools/render_v082_from_frozen_shell.py \
             tests/fixtures/v082_shell_smoke_manifest.json "$OUTPUT" \
             --shell "$SHELL" \
+            --lock config/v082_frozen_shell_lock.json \
             --schema schemas/paper_content_manifest_v082.schema.json \
             --report reports/v082-shell/SMOKE_RENDER.json
           python tools/validate_v082_canvas_shell_lock.py "$OUTPUT" --canonical "$MASTER" \
@@ -91,20 +94,31 @@ jobs:
           shell = pathlib.Path('.build/v082/shell/V082_CANVAS_FROZEN_SHELL.html')
           output = pathlib.Path('.build/v082/shell/V082_SHELL_SMOKE_READER.html')
           manifest = pathlib.Path('tests/fixtures/v082_shell_smoke_manifest.json')
+          lock = json.loads(pathlib.Path('config/v082_frozen_shell_lock.json').read_text('utf-8'))
+          render = json.loads(pathlib.Path('reports/v082-shell/SMOKE_RENDER.json').read_text('utf-8'))
           raw = output.read_text('utf-8')
           errors = []
+          shell_sha = hashlib.sha256(shell.read_bytes()).hexdigest()
           if '__V082_' in raw:
               errors.append('unresolved shell placeholder')
           if 'data-v082-template="frozen-shell-rendered"' not in raw:
               errors.append('rendered shell marker missing')
-          if hashlib.sha256(shell.read_bytes()).hexdigest() not in raw:
+          if shell_sha not in raw:
               errors.append('shell SHA provenance missing')
+          if f'data-v082-shell-lock="{lock["version"]}"' not in raw:
+              errors.append('shell lock provenance missing')
+          if shell_sha != lock.get('frozen_shell_sha256'):
+              errors.append('runtime shell differs from version lock')
+          if render.get('renderer') != 'v082-frozen-shell-2':
+              errors.append('unexpected renderer version')
           gate = {
-              'version': 'v082-ai-html-boundary-1',
+              'version': 'v082-ai-html-boundary-2',
               'ai_permitted_input': str(manifest),
               'ai_permitted_format': 'JSON manifest only',
               'fixed_shell': str(shell),
-              'fixed_shell_sha256': hashlib.sha256(shell.read_bytes()).hexdigest(),
+              'fixed_shell_sha256': shell_sha,
+              'fixed_shell_lock': lock.get('version'),
+              'renderer': render.get('renderer'),
               'rendered_output': str(output),
               'rendered_output_sha256': hashlib.sha256(output.read_bytes()).hexdigest(),
               'errors': errors,
