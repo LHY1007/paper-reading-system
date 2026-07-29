@@ -75,13 +75,18 @@ def publisher_variants(url: str) -> list[str]:
     low = url.lower()
     if "cell.com/" in low and "/pdf/" in low:
         variants.append(url + ("&" if "?" in url else "?") + "download=true")
-        match = re.search(r"/(S\d{16})\.pdf", url, flags=re.I)
+        filename = urlparse(url).path.rsplit("/", 1)[-1]
+        stem = filename[:-4] if filename.lower().endswith(".pdf") else filename
+        compact = re.sub(r"[^A-Za-z0-9]", "", stem)
+        match = re.fullmatch(r"S\d{16}", compact, flags=re.I)
         if match:
-            pii = match.group(1)
+            pii = match.group(0).upper()
             variants.extend(
                 [
                     f"https://www.sciencedirect.com/science/article/pii/{pii}/pdfft?isDTMRedir=true&download=true",
+                    f"https://www.sciencedirect.com/science/article/pii/{pii}/pdf",
                     f"https://api.elsevier.com/content/article/pii/{pii}?httpAccept=application/pdf",
+                    f"https://www.cell.com/cell/pdf/{pii}.pdf",
                 ]
             )
     if "science.org/doi/pdf/" in low:
@@ -216,6 +221,128 @@ def discover_crossref_urls(session: requests.Session, doi: str) -> tuple[list[st
     return dedupe(urls), {"crossref_links": len(urls)}
 
 
+def discover_unpaywall_urls(session: requests.Session, doi: str) -> tuple[list[str], dict]:
+    endpoint = f"https://api.unpaywall.org/v2/{quote(doi, safe='')}"
+    response = session.get(
+        endpoint,
+        params={"email": "noreply@example.com"},
+        timeout=60,
+        headers=request_headers(endpoint),
+    )
+    response.raise_for_status()
+    payload = response.json()
+    urls: list[str] = []
+    locations = []
+    best = payload.get("best_oa_location") or {}
+    all_locations = [best] + list(payload.get("oa_locations") or [])
+    for location in all_locations:
+        if not isinstance(location, dict):
+            continue
+        pdf_url = location.get("url_for_pdf")
+        landing_url = location.get("url")
+        if pdf_url:
+            urls.append(normalize_download_url(pdf_url))
+        if landing_url:
+            urls.append(normalize_download_url(landing_url))
+        if pdf_url or landing_url:
+            locations.append(
+                {
+                    "host_type": location.get("host_type"),
+                    "version": location.get("version"),
+                    "license": location.get("license"),
+                    "url_for_pdf": pdf_url,
+                    "url": landing_url,
+                }
+            )
+    return dedupe(urls), {"is_oa": payload.get("is_oa"), "locations": locations[:20]}
+
+
+def discover_openalex_urls(session: requests.Session, doi: str) -> tuple[list[str], dict]:
+    endpoint = f"https://api.openalex.org/works/https://doi.org/{quote(doi, safe='/:')}"
+    response = session.get(endpoint, timeout=60, headers=request_headers(endpoint))
+    response.raise_for_status()
+    payload = response.json()
+    urls: list[str] = []
+    locations = []
+    candidates = [payload.get("best_oa_location") or {}, payload.get("primary_location") or {}]
+    candidates.extend(payload.get("locations") or [])
+    for location in candidates:
+        if not isinstance(location, dict):
+            continue
+        pdf_url = location.get("pdf_url")
+        landing_url = location.get("landing_page_url")
+        if pdf_url:
+            urls.append(normalize_download_url(pdf_url))
+        if landing_url:
+            urls.append(normalize_download_url(landing_url))
+        if pdf_url or landing_url:
+            source = location.get("source") or {}
+            locations.append(
+                {
+                    "source": source.get("display_name"),
+                    "version": location.get("version"),
+                    "is_oa": location.get("is_oa"),
+                    "pdf_url": pdf_url,
+                    "landing_page_url": landing_url,
+                }
+            )
+    return dedupe(urls), {"open_access": payload.get("open_access"), "locations": locations[:30]}
+
+
+def discover_europepmc_metadata_urls(session: requests.Session, doi: str) -> tuple[list[str], dict]:
+    endpoint = "https://www.ebi.ac.uk/europepmc/webservices/rest/search"
+    response = session.get(
+        endpoint,
+        params={"query": f'DOI:"{doi}"', "format": "json", "resultType": "core", "pageSize": 5},
+        timeout=60,
+        headers=request_headers(endpoint),
+    )
+    response.raise_for_status()
+    results = response.json().get("resultList", {}).get("result", [])
+    urls: list[str] = []
+    records = []
+    for record in results:
+        record_urls = []
+        full_text_urls = ((record.get("fullTextUrlList") or {}).get("fullTextUrl") or [])
+        for item in full_text_urls:
+            url = item.get("url")
+            if url:
+                normalized = normalize_download_url(url)
+                urls.append(normalized)
+                record_urls.append(normalized)
+        pmcid = record.get("pmcid")
+        if pmcid:
+            urls.extend(
+                [
+                    f"https://europepmc.org/articles/{pmcid}?pdf=render",
+                    f"https://europepmc.org/backend/ptpmcrender.fcgi?accid={pmcid}&blobtype=pdf",
+                ]
+            )
+        records.append({"pmcid": pmcid, "pmid": record.get("pmid"), "urls": record_urls})
+    return dedupe(urls), {"records": records}
+
+
+def discover_semantic_scholar_urls(session: requests.Session, doi: str) -> tuple[list[str], dict]:
+    endpoint = f"https://api.semanticscholar.org/graph/v1/paper/DOI:{quote(doi, safe='')}"
+    response = session.get(
+        endpoint,
+        params={"fields": "title,openAccessPdf,url,externalIds"},
+        timeout=60,
+        headers=request_headers(endpoint),
+    )
+    if response.status_code == 404:
+        return [], {"found": False}
+    response.raise_for_status()
+    payload = response.json()
+    oa = payload.get("openAccessPdf") or {}
+    urls = [url for url in [oa.get("url"), payload.get("url")] if url]
+    return dedupe([normalize_download_url(url) for url in urls]), {
+        "found": True,
+        "title": payload.get("title"),
+        "openAccessPdf": oa,
+    }
+
+
 def discover_elsevier_urls(doi: str) -> list[str]:
     if not doi.startswith("10.1016/"):
         return []
@@ -324,6 +451,10 @@ def main() -> None:
         discovery: dict = {}
         for name, discover in [
             ("pmc", lambda: discover_pmc_urls(session, paper["doi"])),
+            ("europepmc", lambda: discover_europepmc_metadata_urls(session, paper["doi"])),
+            ("unpaywall", lambda: discover_unpaywall_urls(session, paper["doi"])),
+            ("openalex", lambda: discover_openalex_urls(session, paper["doi"])),
+            ("semantic_scholar", lambda: discover_semantic_scholar_urls(session, paper["doi"])),
             ("crossref", lambda: discover_crossref_urls(session, paper["doi"])),
             ("doi", lambda: discover_doi_urls(session, paper["doi"])),
         ]:
