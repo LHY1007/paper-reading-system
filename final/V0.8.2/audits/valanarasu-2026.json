@@ -17,7 +17,7 @@
   "paragraphs": 122,
   "sections": 24,
   "assets": 22,
-  "references": 54,
+  "references": 55,
   "asset_audit": [
     {
       "id": "graphical-abstract",
@@ -398,7 +398,7 @@
   "manifest_source_fragments_sha256": "e7de958d9ea3f196d17f0cabc7f752f8989bacc58e959ebe6d32cf289c0e2826",
   "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
   "passed": true,
-  "strict_layout_parser": "v082-final-5",
+  "strict_layout_parser": "v082-final-6",
   "formula_blocks_detected": 11,
   "formula_blocks_missing": 0,
   "formula_samples": [
@@ -427,5 +427,8 @@
   "caption_panel_evidence_blocks": 24,
   "reference_repair_applied": true,
   "titles_extended_from_caption": 0,
-  "uppercase_panel_evidence_blocks": 24
+  "uppercase_panel_evidence_blocks": 24,
+  "titles_completed_from_caption": 7,
+  "tables_reconstructed": 1,
+  "table_image_fallbacks": 0
 }
