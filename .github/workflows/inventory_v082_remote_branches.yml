@@ -1,0 +1,93 @@
+name: Inventory V0.8.2 assets across branches
+
+on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - ".github/workflows/inventory_v082_remote_branches.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Fetch all remote branches
+        run: git fetch --all --prune --no-tags
+      - name: Inventory relevant files in every branch
+        run: |
+          mkdir -p experiments/V0.8x_batch_diagnosis/reports
+          python - <<'PY'
+          from __future__ import annotations
+          import json, re, subprocess
+          from pathlib import Path
+
+          def run(*args):
+              return subprocess.check_output(args,text=True,errors='replace')
+
+          branches=[]
+          for line in run('git','for-each-ref','--format=%(refname:short)','refs/remotes/origin').splitlines():
+              if line == 'origin/HEAD':
+                  continue
+              branches.append(line)
+
+          keywords=('canvas','maas','landry','lee','valanarasu','gigatime','hex','andani','cho','spitzer','lucas','sorin','karimi')
+          records=[]
+          for branch in sorted(branches):
+              try:
+                  tree=run('git','ls-tree','-r','-l',branch)
+              except subprocess.CalledProcessError as exc:
+                  records.append({'branch':branch,'error':str(exc)})
+                  continue
+              files=[]
+              for raw in tree.splitlines():
+                  match=re.match(r'^(\d+)\s+(\w+)\s+([0-9a-f]+)\s+(\d+|-)\t(.+)$',raw)
+                  if not match:
+                      continue
+                  mode,kind,sha,size,path=match.groups()
+                  low=path.lower()
+                  suffix=Path(path).suffix.lower()
+                  relevant=(suffix in {'.html','.pdf','.zip'} and any(k in low for k in keywords)) or ('v0.8.2' in low and suffix in {'.json','.html','.pdf','.zip'})
+                  if relevant:
+                      files.append({'path':path,'suffix':suffix,'bytes':None if size=='-' else int(size),'blob_sha':sha})
+              records.append({'branch':branch,'file_count':len(files),'files':files})
+
+          by_paper={key:[] for key in keywords}
+          for record in records:
+              for item in record.get('files',[]):
+                  low=item['path'].lower()
+                  for key in keywords:
+                      if key in low:
+                          by_paper[key].append({'branch':record['branch'],**item})
+
+          report={'branches':records,'by_paper':by_paper}
+          out=Path('experiments/V0.8x_batch_diagnosis/reports/REMOTE_BRANCH_ASSET_INVENTORY.json')
+          out.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n','utf-8')
+          print(json.dumps({
+              'branch_count':len(records),
+              'branches_with_files':[{'branch':r['branch'],'file_count':r.get('file_count',0)} for r in records if r.get('file_count')],
+              'cho':by_paper['cho'],
+              'pdfs':[{'branch':r['branch'],**f} for r in records for f in r.get('files',[]) if f['suffix']=='.pdf'],
+          },ensure_ascii=False,indent=2))
+          PY
+      - name: Commit branch inventory
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/V0.8x_batch_diagnosis/reports/REMOTE_BRANCH_ASSET_INVENTORY.json
+          if git diff --cached --quiet; then
+            echo "Remote branch inventory unchanged"
+          else
+            git commit -m "Record V0.8.2 assets across remote branches"
+            git push origin HEAD:v0.8x-batch-diagnosis
+          fi
