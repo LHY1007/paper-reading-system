@@ -1,0 +1,847 @@
+{
+  "branches": [
+    {
+      "branch": "origin",
+      "file_count": 4,
+      "files": [
+        {
+          "path": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 26006635,
+          "blob_sha": "850ee7270177d31b88828c115261b59a31d999e9"
+        },
+        {
+          "path": "V0.8.1_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25958782,
+          "blob_sha": "a097f6fe19e83299fce64006c629190e3f453389"
+        },
+        {
+          "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25930345,
+          "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+        },
+        {
+          "path": "published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25948287,
+          "blob_sha": "d58ca64fdaab16802af33a4baeb5783df60a630d"
+        }
+      ]
+    },
+    {
+      "branch": "origin/main",
+      "file_count": 4,
+      "files": [
+        {
+          "path": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 26006635,
+          "blob_sha": "850ee7270177d31b88828c115261b59a31d999e9"
+        },
+        {
+          "path": "V0.8.1_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25958782,
+          "blob_sha": "a097f6fe19e83299fce64006c629190e3f453389"
+        },
+        {
+          "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25930345,
+          "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+        },
+        {
+          "path": "published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25948287,
+          "blob_sha": "d58ca64fdaab16802af33a4baeb5783df60a630d"
+        }
+      ]
+    },
+    {
+      "branch": "origin/v0.8-candidate",
+      "file_count": 1,
+      "files": [
+        {
+          "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25930345,
+          "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+        }
+      ]
+    },
+    {
+      "branch": "origin/v0.8-release",
+      "file_count": 1,
+      "files": [
+        {
+          "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25930345,
+          "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+        }
+      ]
+    },
+    {
+      "branch": "origin/v0.8.0-formal",
+      "file_count": 1,
+      "files": [
+        {
+          "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25930345,
+          "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+        }
+      ]
+    },
+    {
+      "branch": "origin/v0.8.1-candidate",
+      "file_count": 3,
+      "files": [
+        {
+          "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25930345,
+          "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+        },
+        {
+          "path": "published/V0.8.1_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25958782,
+          "blob_sha": "a097f6fe19e83299fce64006c629190e3f453389"
+        },
+        {
+          "path": "published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25948287,
+          "blob_sha": "d58ca64fdaab16802af33a4baeb5783df60a630d"
+        }
+      ]
+    },
+    {
+      "branch": "origin/v0.8.1-candidate-20260727",
+      "file_count": 1,
+      "files": [
+        {
+          "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25930345,
+          "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+        }
+      ]
+    },
+    {
+      "branch": "origin/v0.8.1-candidate-clean",
+      "file_count": 1,
+      "files": [
+        {
+          "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25930345,
+          "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+        }
+      ]
+    },
+    {
+      "branch": "origin/v0.8.1-candidate-final",
+      "file_count": 1,
+      "files": [
+        {
+          "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25930345,
+          "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+        }
+      ]
+    },
+    {
+      "branch": "origin/v0.8.1-final-review",
+      "file_count": 1,
+      "files": [
+        {
+          "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25930345,
+          "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+        }
+      ]
+    },
+    {
+      "branch": "origin/v0.8.1-review",
+      "file_count": 1,
+      "files": [
+        {
+          "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25930345,
+          "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+        }
+      ]
+    },
+    {
+      "branch": "origin/v0.8.2-candidate",
+      "file_count": 4,
+      "files": [
+        {
+          "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25930345,
+          "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+        },
+        {
+          "path": "published/V0.8.1_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25958782,
+          "blob_sha": "a097f6fe19e83299fce64006c629190e3f453389"
+        },
+        {
+          "path": "published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25948287,
+          "blob_sha": "d58ca64fdaab16802af33a4baeb5783df60a630d"
+        },
+        {
+          "path": "releases/V0.8.2/reports/SEQUENTIAL_17_PAPER_MANIFEST.json",
+          "suffix": ".json",
+          "bytes": 7551,
+          "blob_sha": "a66fa187b8bfae181aeb12e1d8eb4bac1ab5967a"
+        }
+      ]
+    },
+    {
+      "branch": "origin/v0.8x-batch-diagnosis",
+      "file_count": 43,
+      "files": [
+        {
+          "path": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 26006635,
+          "blob_sha": "850ee7270177d31b88828c115261b59a31d999e9"
+        },
+        {
+          "path": "V0.8.1_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25958782,
+          "blob_sha": "a097f6fe19e83299fce64006c629190e3f453389"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/fixtures/smoke_manifest.json",
+          "suffix": ".json",
+          "bytes": 5570,
+          "blob_sha": "b67c20e4116dd1fc9c59596617543c95bdc256d2"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/manifests/MAAS_LEGACY_CONTENT.json",
+          "suffix": ".json",
+          "bytes": 11977800,
+          "blob_sha": "b33ef9547528c6602996baf44521d6c3315fbfa1"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/manifests/VALANARASU_LEGACY_CONTENT.json",
+          "suffix": ".json",
+          "bytes": 5452216,
+          "blob_sha": "4e9de85dd6831eef4cee14921b37820ffa9d4465"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/output/V0.8.2_CANVAS_NORMALIZED_MASTER.html",
+          "suffix": ".html",
+          "bytes": 26009546,
+          "blob_sha": "f3867ce60546d2e9697ccfe8b7249732a8943d68"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
+          "suffix": ".html",
+          "bytes": 12246803,
+          "blob_sha": "32f2532d2f8f0d98531f0ae074dd120a80f49001"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_SMOKE.html",
+          "suffix": ".html",
+          "bytes": 247304,
+          "blob_sha": "551c50d7642cb67030b32bbc08f67126fb809400"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
+          "suffix": ".html",
+          "bytes": 5702551,
+          "blob_sha": "3566bf1764d874477f718a63f44c98dbabc27131"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/output/V0.8.2_LOCKED_SMOKE.html",
+          "suffix": ".html",
+          "bytes": 589370,
+          "blob_sha": "a7cda4de831ceb91fb7a45813d19011dacaf52f5"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/BROWSER_REGRESSION.json",
+          "suffix": ".json",
+          "bytes": 13276,
+          "blob_sha": "231b34cb8399188ad57ff6c7d1ca45a52eb7c614"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/CANVAS_COMPONENTS.json",
+          "suffix": ".json",
+          "bytes": 1784749,
+          "blob_sha": "eacb3e4b7b67413203514812472b9fdfb2eba4ca"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/CANVAS_COMPONENT_CONTRACT.json",
+          "suffix": ".json",
+          "bytes": 930,
+          "blob_sha": "cb704a295ae06c7a9bf2632bcb7f06f4b77c81e5"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/CANVAS_DOM.json",
+          "suffix": ".json",
+          "bytes": 672526,
+          "blob_sha": "86835ee3c7510c618bd6015b1cbedbd922cbf181"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/CANVAS_ORIGINAL_COMPONENT_DEVIATIONS.json",
+          "suffix": ".json",
+          "bytes": 930,
+          "blob_sha": "cb704a295ae06c7a9bf2632bcb7f06f4b77c81e5"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/CANVAS_SCRIPTS.json",
+          "suffix": ".json",
+          "bytes": 223354,
+          "blob_sha": "d74bce2cd206002a2ba04140fdc5a260cf3c4ae2"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/COMPONENT_LOCKED_SMOKE_COMPONENTS.json",
+          "suffix": ".json",
+          "bytes": 169,
+          "blob_sha": "b34da406caeebf64b0554ab18609c6b353f39d47"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/COMPONENT_LOCKED_SMOKE_ISOLATION.json",
+          "suffix": ".json",
+          "bytes": 226,
+          "blob_sha": "e20e2bbd03633386f7d8eb35d674b3b8a208685b"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/COMPONENT_LOCKED_SMOKE_SHELL.json",
+          "suffix": ".json",
+          "bytes": 4228,
+          "blob_sha": "88d386d3d07681578d4eee007dc9041daa000ecb"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/COMPONENT_LOCK_SUMMARY.json",
+          "suffix": ".json",
+          "bytes": 14472,
+          "blob_sha": "dc1f9d3bcc93d1fe518c2035830a1ddeabde1e02"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/LOCKED_SMOKE_SHELL.json",
+          "suffix": ".json",
+          "bytes": 4183,
+          "blob_sha": "085a4f87e13a4dff2e229770a6c7cc75526fc852"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/MAAS_BATCH_COMPONENT_FAILURE.json",
+          "suffix": ".json",
+          "bytes": 447,
+          "blob_sha": "4833aa029341a43c9e23ceadce21f99a583baa88"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/MAAS_BATCH_SHELL_FAILURE.json",
+          "suffix": ".json",
+          "bytes": 4893,
+          "blob_sha": "08f6ebddfb7632e468e518b4f4858c9bfad9eb19"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/MAAS_MIGRATED_COMPONENTS.json",
+          "suffix": ".json",
+          "bytes": 185,
+          "blob_sha": "b32c07c60bf0d3bad895b36ba9c0162fa0d7ef63"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/MAAS_MIGRATED_ISOLATION.json",
+          "suffix": ".json",
+          "bytes": 565,
+          "blob_sha": "c5af404eb68806da3d880adc9c702986e55def6b"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/MAAS_MIGRATED_SHELL.json",
+          "suffix": ".json",
+          "bytes": 4242,
+          "blob_sha": "de5aed7f1f1121341cc4ed1c3281ebbf82fa44a2"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/NORMALIZED_COMPONENT_LOCK_SUMMARY.json",
+          "suffix": ".json",
+          "bytes": 17196,
+          "blob_sha": "91ce70bf351a91b57c8541ddc88b95a56e69b47c"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/NORMALIZED_MASTER.json",
+          "suffix": ".json",
+          "bytes": 535,
+          "blob_sha": "58bd21f9cd79a7d8211d2f068b1518c5b03b4c01"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/NORMALIZED_MASTER_COMPONENTS.json",
+          "suffix": ".json",
+          "bytes": 176,
+          "blob_sha": "7bdc0fb2591bf84ce981a6e09980a9d13b0538ee"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/NORMALIZED_MASTER_SHELL_SELF.json",
+          "suffix": ".json",
+          "bytes": 4436,
+          "blob_sha": "1cf54508bded9f3d94b5acd56f1622c3c16b3a15"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/VALANARASU_BATCH_COMPONENT_FAILURE.json",
+          "suffix": ".json",
+          "bytes": 431,
+          "blob_sha": "61b25c8088a17f921a89d8b61bd043575e924fdc"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/VALANARASU_BATCH_SHELL_FAILURE.json",
+          "suffix": ".json",
+          "bytes": 4877,
+          "blob_sha": "53101d40069f0dca2825157bfcced1618178a5cf"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/VALANARASU_MIGRATED_COMPONENTS.json",
+          "suffix": ".json",
+          "bytes": 190,
+          "blob_sha": "530a23a4b46295464b9dcdf2394f154f1f2e75c2"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/VALANARASU_MIGRATED_ISOLATION.json",
+          "suffix": ".json",
+          "bytes": 391,
+          "blob_sha": "3a56da814a4c12d70fc810b572adbdf387de61b4"
+        },
+        {
+          "path": "experiments/V0.8.2_template_lock/reports/VALANARASU_MIGRATED_SHELL.json",
+          "suffix": ".json",
+          "bytes": 4248,
+          "blob_sha": "1f8dafd5a4d8b7aca7e191280b6022b20c222d1c"
+        },
+        {
+          "path": "experiments/V0.8x_batch_diagnosis/output/V0.8.0_EXPERIMENT_Valanarasu_batch_content.html",
+          "suffix": ".html",
+          "bytes": 5572147,
+          "blob_sha": "7280efc49310373709b1fd62eba7ed6f45aed60a"
+        },
+        {
+          "path": "experiments/V0.8x_batch_diagnosis/output/V0.8.1_EXPERIMENT_Valanarasu_batch_content.html",
+          "suffix": ".html",
+          "bytes": 5572376,
+          "blob_sha": "f662eee7ae08fdb73e00f6bbba72d74ae93a0b5f"
+        },
+        {
+          "path": "final/V0.8.2/reports/CHO_SOURCE_PROBE.json",
+          "suffix": ".json",
+          "bytes": 244388,
+          "blob_sha": "8d3a997b52ba8396e91271663fcd13844d413502"
+        },
+        {
+          "path": "final/V0.8.2/reports/PDF_NATIVE_AVAILABLE_AUDIT.json",
+          "suffix": ".json",
+          "bytes": 8416,
+          "blob_sha": "c114aaee70a2d0bf00a8049008eefd32df7cad96"
+        },
+        {
+          "path": "final/V0.8.2/reports/SOURCE_DOWNLOAD_AVAILABLE.json",
+          "suffix": ".json",
+          "bytes": 57070,
+          "blob_sha": "c877c8605810304c0643da3d03c29697dcdf90d3"
+        },
+        {
+          "path": "final/V0.8.2/reports/VALANARASU_SOURCE_PROBE.json",
+          "suffix": ".json",
+          "bytes": 24452,
+          "blob_sha": "4a4c898be4e3e828cccb22f6ec612e8f373d91dc"
+        },
+        {
+          "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25930345,
+          "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+        },
+        {
+          "path": "published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+          "suffix": ".html",
+          "bytes": 25948287,
+          "blob_sha": "d58ca64fdaab16802af33a4baeb5783df60a630d"
+        }
+      ]
+    }
+  ],
+  "by_paper": {
+    "canvas": [
+      {
+        "branch": "origin",
+        "path": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 26006635,
+        "blob_sha": "850ee7270177d31b88828c115261b59a31d999e9"
+      },
+      {
+        "branch": "origin",
+        "path": "V0.8.1_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25958782,
+        "blob_sha": "a097f6fe19e83299fce64006c629190e3f453389"
+      },
+      {
+        "branch": "origin",
+        "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25930345,
+        "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+      },
+      {
+        "branch": "origin",
+        "path": "published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25948287,
+        "blob_sha": "d58ca64fdaab16802af33a4baeb5783df60a630d"
+      },
+      {
+        "branch": "origin/main",
+        "path": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 26006635,
+        "blob_sha": "850ee7270177d31b88828c115261b59a31d999e9"
+      },
+      {
+        "branch": "origin/main",
+        "path": "V0.8.1_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25958782,
+        "blob_sha": "a097f6fe19e83299fce64006c629190e3f453389"
+      },
+      {
+        "branch": "origin/main",
+        "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25930345,
+        "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+      },
+      {
+        "branch": "origin/main",
+        "path": "published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25948287,
+        "blob_sha": "d58ca64fdaab16802af33a4baeb5783df60a630d"
+      },
+      {
+        "branch": "origin/v0.8-candidate",
+        "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25930345,
+        "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+      },
+      {
+        "branch": "origin/v0.8-release",
+        "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25930345,
+        "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+      },
+      {
+        "branch": "origin/v0.8.0-formal",
+        "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25930345,
+        "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+      },
+      {
+        "branch": "origin/v0.8.1-candidate",
+        "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25930345,
+        "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+      },
+      {
+        "branch": "origin/v0.8.1-candidate",
+        "path": "published/V0.8.1_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25958782,
+        "blob_sha": "a097f6fe19e83299fce64006c629190e3f453389"
+      },
+      {
+        "branch": "origin/v0.8.1-candidate",
+        "path": "published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25948287,
+        "blob_sha": "d58ca64fdaab16802af33a4baeb5783df60a630d"
+      },
+      {
+        "branch": "origin/v0.8.1-candidate-20260727",
+        "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25930345,
+        "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+      },
+      {
+        "branch": "origin/v0.8.1-candidate-clean",
+        "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25930345,
+        "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+      },
+      {
+        "branch": "origin/v0.8.1-candidate-final",
+        "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25930345,
+        "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+      },
+      {
+        "branch": "origin/v0.8.1-final-review",
+        "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25930345,
+        "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+      },
+      {
+        "branch": "origin/v0.8.1-review",
+        "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25930345,
+        "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+      },
+      {
+        "branch": "origin/v0.8.2-candidate",
+        "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25930345,
+        "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+      },
+      {
+        "branch": "origin/v0.8.2-candidate",
+        "path": "published/V0.8.1_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25958782,
+        "blob_sha": "a097f6fe19e83299fce64006c629190e3f453389"
+      },
+      {
+        "branch": "origin/v0.8.2-candidate",
+        "path": "published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25948287,
+        "blob_sha": "d58ca64fdaab16802af33a4baeb5783df60a630d"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 26006635,
+        "blob_sha": "850ee7270177d31b88828c115261b59a31d999e9"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "V0.8.1_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25958782,
+        "blob_sha": "a097f6fe19e83299fce64006c629190e3f453389"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/output/V0.8.2_CANVAS_NORMALIZED_MASTER.html",
+        "suffix": ".html",
+        "bytes": 26009546,
+        "blob_sha": "f3867ce60546d2e9697ccfe8b7249732a8943d68"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/reports/CANVAS_COMPONENTS.json",
+        "suffix": ".json",
+        "bytes": 1784749,
+        "blob_sha": "eacb3e4b7b67413203514812472b9fdfb2eba4ca"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/reports/CANVAS_COMPONENT_CONTRACT.json",
+        "suffix": ".json",
+        "bytes": 930,
+        "blob_sha": "cb704a295ae06c7a9bf2632bcb7f06f4b77c81e5"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/reports/CANVAS_DOM.json",
+        "suffix": ".json",
+        "bytes": 672526,
+        "blob_sha": "86835ee3c7510c618bd6015b1cbedbd922cbf181"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/reports/CANVAS_ORIGINAL_COMPONENT_DEVIATIONS.json",
+        "suffix": ".json",
+        "bytes": 930,
+        "blob_sha": "cb704a295ae06c7a9bf2632bcb7f06f4b77c81e5"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/reports/CANVAS_SCRIPTS.json",
+        "suffix": ".json",
+        "bytes": 223354,
+        "blob_sha": "d74bce2cd206002a2ba04140fdc5a260cf3c4ae2"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25930345,
+        "blob_sha": "4449ef9a67be13aef9a8b41325502d6f7d7fee64"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+        "suffix": ".html",
+        "bytes": 25948287,
+        "blob_sha": "d58ca64fdaab16802af33a4baeb5783df60a630d"
+      }
+    ],
+    "maas": [
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/manifests/MAAS_LEGACY_CONTENT.json",
+        "suffix": ".json",
+        "bytes": 11977800,
+        "blob_sha": "b33ef9547528c6602996baf44521d6c3315fbfa1"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
+        "suffix": ".html",
+        "bytes": 12246803,
+        "blob_sha": "32f2532d2f8f0d98531f0ae074dd120a80f49001"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/reports/MAAS_BATCH_COMPONENT_FAILURE.json",
+        "suffix": ".json",
+        "bytes": 447,
+        "blob_sha": "4833aa029341a43c9e23ceadce21f99a583baa88"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/reports/MAAS_BATCH_SHELL_FAILURE.json",
+        "suffix": ".json",
+        "bytes": 4893,
+        "blob_sha": "08f6ebddfb7632e468e518b4f4858c9bfad9eb19"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/reports/MAAS_MIGRATED_COMPONENTS.json",
+        "suffix": ".json",
+        "bytes": 185,
+        "blob_sha": "b32c07c60bf0d3bad895b36ba9c0162fa0d7ef63"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/reports/MAAS_MIGRATED_ISOLATION.json",
+        "suffix": ".json",
+        "bytes": 565,
+        "blob_sha": "c5af404eb68806da3d880adc9c702986e55def6b"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/reports/MAAS_MIGRATED_SHELL.json",
+        "suffix": ".json",
+        "bytes": 4242,
+        "blob_sha": "de5aed7f1f1121341cc4ed1c3281ebbf82fa44a2"
+      }
+    ],
+    "landry": [],
+    "lee": [],
+    "valanarasu": [
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/manifests/VALANARASU_LEGACY_CONTENT.json",
+        "suffix": ".json",
+        "bytes": 5452216,
+        "blob_sha": "4e9de85dd6831eef4cee14921b37820ffa9d4465"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
+        "suffix": ".html",
+        "bytes": 5702551,
+        "blob_sha": "3566bf1764d874477f718a63f44c98dbabc27131"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/reports/VALANARASU_BATCH_COMPONENT_FAILURE.json",
+        "suffix": ".json",
+        "bytes": 431,
+        "blob_sha": "61b25c8088a17f921a89d8b61bd043575e924fdc"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/reports/VALANARASU_BATCH_SHELL_FAILURE.json",
+        "suffix": ".json",
+        "bytes": 4877,
+        "blob_sha": "53101d40069f0dca2825157bfcced1618178a5cf"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/reports/VALANARASU_MIGRATED_COMPONENTS.json",
+        "suffix": ".json",
+        "bytes": 190,
+        "blob_sha": "530a23a4b46295464b9dcdf2394f154f1f2e75c2"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/reports/VALANARASU_MIGRATED_ISOLATION.json",
+        "suffix": ".json",
+        "bytes": 391,
+        "blob_sha": "3a56da814a4c12d70fc810b572adbdf387de61b4"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8.2_template_lock/reports/VALANARASU_MIGRATED_SHELL.json",
+        "suffix": ".json",
+        "bytes": 4248,
+        "blob_sha": "1f8dafd5a4d8b7aca7e191280b6022b20c222d1c"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8x_batch_diagnosis/output/V0.8.0_EXPERIMENT_Valanarasu_batch_content.html",
+        "suffix": ".html",
+        "bytes": 5572147,
+        "blob_sha": "7280efc49310373709b1fd62eba7ed6f45aed60a"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "experiments/V0.8x_batch_diagnosis/output/V0.8.1_EXPERIMENT_Valanarasu_batch_content.html",
+        "suffix": ".html",
+        "bytes": 5572376,
+        "blob_sha": "f662eee7ae08fdb73e00f6bbba72d74ae93a0b5f"
+      },
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "final/V0.8.2/reports/VALANARASU_SOURCE_PROBE.json",
+        "suffix": ".json",
+        "bytes": 24452,
+        "blob_sha": "4a4c898be4e3e828cccb22f6ec612e8f373d91dc"
+      }
+    ],
+    "gigatime": [],
+    "hex": [],
+    "andani": [],
+    "cho": [
+      {
+        "branch": "origin/v0.8x-batch-diagnosis",
+        "path": "final/V0.8.2/reports/CHO_SOURCE_PROBE.json",
+        "suffix": ".json",
+        "bytes": 244388,
+        "blob_sha": "8d3a997b52ba8396e91271663fcd13844d413502"
+      }
+    ],
+    "spitzer": [],
+    "lucas": [],
+    "sorin": [],
+    "karimi": []
+  }
+}
