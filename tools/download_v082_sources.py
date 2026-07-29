@@ -6,14 +6,16 @@ import hashlib
 import json
 import re
 import time
+from collections import deque
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import quote, urljoin, urlparse
 
 import fitz
 import requests
 from bs4 import BeautifulSoup
 
-UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/149 Safari/537.36"
+UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149 Safari/537.36"
+PDF_ACCEPT = "application/pdf,text/html;q=0.9,application/xhtml+xml;q=0.8,*/*;q=0.5"
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -24,60 +26,190 @@ def is_pdf(data: bytes, content_type: str = "") -> bool:
     return data.startswith(b"%PDF-") or "application/pdf" in content_type.lower()
 
 
-def discover_pdf_urls(session: requests.Session, doi: str) -> list[str]:
-    landing = f"https://doi.org/{doi}"
-    response = session.get(landing, timeout=90, allow_redirects=True)
-    response.raise_for_status()
-    urls: list[str] = []
-    ctype = response.headers.get("content-type", "")
-    if is_pdf(response.content, ctype):
-        return [response.url]
-    soup = BeautifulSoup(response.text, "html.parser")
-    for attr, value in [
-        ("name", "citation_pdf_url"),
-        ("name", "wkhealth_pdf_url"),
-        ("property", "og:pdf"),
-        ("name", "pdf_url"),
-    ]:
-        node = soup.find("meta", attrs={attr: value})
-        if node and node.get("content"):
-            urls.append(urljoin(response.url, node["content"]))
-    for link in soup.find_all("a", href=True):
-        href = urljoin(response.url, link["href"])
-        label = " ".join(link.get_text(" ", strip=True).split()).lower()
-        if any(token in href.lower() for token in ("/pdf/", ".pdf", "downloadpdf")) or "download pdf" in label or label == "pdf":
-            urls.append(href)
-    for match in re.findall(r'https?://[^"\'<> ]+(?:/pdf/[^"\'<> ]+|\.pdf(?:\?[^"\'<> ]*)?)', response.text):
-        urls.append(match.replace("\\/", "/"))
+def dedupe(values: list[str]) -> list[str]:
     seen: set[str] = set()
-    return [u for u in urls if not (u in seen or seen.add(u))]
+    out: list[str] = []
+    for value in values:
+        value = value.strip()
+        if value and value not in seen:
+            seen.add(value)
+            out.append(value)
+    return out
 
 
-def fetch_pdf(session: requests.Session, urls: list[str]) -> tuple[bytes, str, list[dict]]:
+def request_headers(url: str, *, pdf_only: bool = False) -> dict[str, str]:
+    host = urlparse(url).netloc.lower()
+    headers = {
+        "Accept": "application/pdf" if pdf_only else PDF_ACCEPT,
+        "User-Agent": UA,
+        "Accept-Language": "en-US,en;q=0.9",
+        "Cache-Control": "no-cache",
+    }
+    if "cell.com" in host or "sciencedirect.com" in host or "elsevier.com" in host:
+        headers["Referer"] = "https://www.sciencedirect.com/"
+    elif "science.org" in host:
+        headers["Referer"] = "https://www.science.org/"
+    elif "nature.com" in host:
+        headers["Referer"] = "https://www.nature.com/"
+    elif "pmc.ncbi.nlm.nih.gov" in host or "ncbi.nlm.nih.gov" in host:
+        headers["Referer"] = "https://pmc.ncbi.nlm.nih.gov/"
+    return headers
+
+
+def publisher_variants(url: str) -> list[str]:
+    variants = [url]
+    low = url.lower()
+    if "cell.com/" in low and "/pdf/" in low:
+        variants.extend([url + ("&" if "?" in url else "?") + "download=true"])
+        match = re.search(r"/(S\d{16})\.pdf", url, flags=re.I)
+        if match:
+            pii = match.group(1)
+            variants.extend([
+                f"https://www.sciencedirect.com/science/article/pii/{pii}/pdfft?isDTMRedir=true&download=true",
+                f"https://api.elsevier.com/content/article/pii/{pii}?httpAccept=application/pdf",
+            ])
+    if "science.org/doi/pdf/" in low:
+        variants.extend([
+            url + ("&" if "?" in url else "?") + "download=true",
+            url.replace("/doi/pdf/", "/doi/epdf/"),
+        ])
+    if "science.org/doi/" in low and "/pdf/" not in low and "/epdf/" not in low:
+        doi = url.split("/doi/", 1)[1].split("?", 1)[0]
+        variants.extend([
+            f"https://www.science.org/doi/pdf/{doi}?download=true",
+            f"https://www.science.org/doi/epdf/{doi}",
+        ])
+    return dedupe(variants)
+
+
+def extract_pdf_links(base_url: str, html: str) -> list[str]:
+    soup = BeautifulSoup(html, "html.parser")
+    urls: list[str] = []
+    selectors = [
+        'meta[name="citation_pdf_url"]',
+        'meta[name="wkhealth_pdf_url"]',
+        'meta[property="og:pdf"]',
+        'meta[name="pdf_url"]',
+        'link[type="application/pdf"]',
+        'a[href*=".pdf"]',
+        'a[href*="/pdf/"]',
+        'a[href*="/epdf/"]',
+        'iframe[src*=".pdf"]',
+        'iframe[src*="/pdf/"]',
+        'embed[src*=".pdf"]',
+    ]
+    for selector in selectors:
+        for node in soup.select(selector):
+            href = node.get("content") or node.get("href") or node.get("src")
+            if href:
+                urls.append(urljoin(base_url, href))
+    for link in soup.find_all("a", href=True):
+        href = urljoin(base_url, link["href"])
+        label = " ".join(link.get_text(" ", strip=True).split()).lower()
+        if "download pdf" in label or label == "pdf" or "full text pdf" in label:
+            urls.append(href)
+    for match in re.findall(r'https?://[^"\'<> ]+(?:/pdf/[^"\'<> ]+|/epdf/[^"\'<> ]+|\.pdf(?:\?[^"\'<> ]*)?)', html):
+        urls.append(match.replace("\\/", "/"))
+    return dedupe(urls)
+
+
+def discover_doi_urls(session: requests.Session, doi: str) -> tuple[list[str], dict]:
+    landing = f"https://doi.org/{doi}"
+    response = session.get(landing, timeout=90, allow_redirects=True, headers=request_headers(landing))
+    response.raise_for_status()
+    info = {
+        "doi_landing": landing,
+        "doi_final_url": response.url,
+        "doi_status": response.status_code,
+        "doi_content_type": response.headers.get("content-type", ""),
+    }
+    if is_pdf(response.content, info["doi_content_type"]):
+        return [response.url], info
+    return extract_pdf_links(response.url, response.text), info
+
+
+def discover_pmc_urls(session: requests.Session, doi: str) -> tuple[list[str], dict]:
+    endpoint = "https://www.ncbi.nlm.nih.gov/pmc/utils/idconv/v1.0/"
+    response = session.get(
+        endpoint,
+        params={"ids": doi, "format": "json", "tool": "paper-reading-system", "email": "noreply@example.com"},
+        timeout=60,
+        headers=request_headers(endpoint),
+    )
+    response.raise_for_status()
+    payload = response.json()
+    records = payload.get("records", [])
+    pmcid = next((record.get("pmcid") for record in records if record.get("pmcid")), None)
+    if not pmcid:
+        return [], {"pmc_found": False}
+    article = f"https://pmc.ncbi.nlm.nih.gov/articles/{pmcid}/"
+    return [f"{article}pdf/", article], {"pmc_found": True, "pmcid": pmcid}
+
+
+def discover_crossref_urls(session: requests.Session, doi: str) -> tuple[list[str], dict]:
+    endpoint = f"https://api.crossref.org/works/{quote(doi, safe='')}"
+    response = session.get(endpoint, timeout=60, headers=request_headers(endpoint))
+    response.raise_for_status()
+    message = response.json().get("message", {})
+    urls: list[str] = []
+    for link in message.get("link", []) or []:
+        url = link.get("URL")
+        content_type = (link.get("content-type") or "").lower()
+        if url and ("pdf" in content_type or ".pdf" in url.lower() or "/pdf/" in url.lower()):
+            urls.append(url)
+    return dedupe(urls), {"crossref_links": len(urls)}
+
+
+def discover_elsevier_urls(doi: str) -> list[str]:
+    if not doi.startswith("10.1016/"):
+        return []
+    return [
+        f"https://api.elsevier.com/content/article/doi/{doi}?httpAccept=application/pdf",
+        f"https://api.elsevier.com/content/article/doi/{doi}",
+    ]
+
+
+def fetch_pdf(session: requests.Session, urls: list[str], *, max_requests: int = 80) -> tuple[bytes, str, list[dict]]:
     attempts: list[dict] = []
+    queue: deque[str] = deque()
+    queued: set[str] = set()
     for url in urls:
+        for variant in publisher_variants(url):
+            if variant not in queued:
+                queued.add(variant)
+                queue.append(variant)
+
+    while queue and len(attempts) < max_requests:
+        url = queue.popleft()
         try:
-            r = session.get(url, timeout=180, allow_redirects=True, headers={"Accept": "application/pdf,text/html;q=0.8,*/*;q=0.5"})
-            ctype = r.headers.get("content-type", "")
-            attempts.append({"url": url, "final_url": r.url, "status": r.status_code, "content_type": ctype, "bytes": len(r.content)})
-            if r.ok and is_pdf(r.content, ctype) and len(r.content) > 10_000:
-                return r.content, r.url, attempts
-            if r.ok and "text/html" in ctype.lower():
-                soup = BeautifulSoup(r.text, "html.parser")
-                nested = []
-                for node in soup.select('meta[name="citation_pdf_url"],meta[property="og:pdf"],a[href*=".pdf"],a[href*="/pdf/"]'):
-                    href = node.get("content") or node.get("href")
-                    if href:
-                        nested.append(urljoin(r.url, href))
-                for nurl in nested:
-                    nr = session.get(nurl, timeout=180, allow_redirects=True, headers={"Accept": "application/pdf"})
-                    nctype = nr.headers.get("content-type", "")
-                    attempts.append({"url": nurl, "final_url": nr.url, "status": nr.status_code, "content_type": nctype, "bytes": len(nr.content)})
-                    if nr.ok and is_pdf(nr.content, nctype) and len(nr.content) > 10_000:
-                        return nr.content, nr.url, attempts
+            response = session.get(
+                url,
+                timeout=180,
+                allow_redirects=True,
+                headers=request_headers(url),
+            )
+            content_type = response.headers.get("content-type", "")
+            attempt = {
+                "url": url,
+                "final_url": response.url,
+                "status": response.status_code,
+                "content_type": content_type,
+                "bytes": len(response.content),
+            }
+            attempts.append(attempt)
+            if response.ok and is_pdf(response.content, content_type) and len(response.content) > 10_000:
+                return response.content, response.url, attempts
+            if response.ok and ("html" in content_type.lower() or response.text.lstrip().startswith("<")):
+                nested = extract_pdf_links(response.url, response.text)
+                attempt["nested_pdf_links"] = len(nested)
+                for nested_url in nested:
+                    for variant in publisher_variants(nested_url):
+                        if variant not in queued:
+                            queued.add(variant)
+                            queue.append(variant)
         except Exception as exc:
             attempts.append({"url": url, "error": f"{type(exc).__name__}: {exc}"})
-    raise RuntimeError("all PDF download candidates failed")
+    raise RuntimeError(f"all PDF download candidates failed after {len(attempts)} attempts")
 
 
 def validate_pdf(data: bytes, expected_pages: int) -> dict:
@@ -89,58 +221,98 @@ def validate_pdf(data: bytes, expected_pages: int) -> dict:
     return {"pages": pages, "first_page_text": first_text[:500]}
 
 
+def write_report(path: Path, registry_version: str, results: list[dict], failures: list[dict], expected: int) -> None:
+    report = {
+        "registry_version": registry_version,
+        "expected_papers": expected,
+        "completed_papers": len(results),
+        "papers": results,
+        "failures": failures,
+        "passed": len(results) == expected and not failures,
+    }
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", "utf-8")
+
+
 def main() -> None:
-    p = argparse.ArgumentParser(description="Download and validate the official PDFs used by the V0.8.2 final reader build")
-    p.add_argument("--registry", type=Path, required=True)
-    p.add_argument("--output-dir", type=Path, required=True)
-    p.add_argument("--report", type=Path, required=True)
-    p.add_argument("--reuse", action="store_true")
-    args = p.parse_args()
+    parser = argparse.ArgumentParser(description="Download and validate the audited PDFs used by the V0.8.2 final reader build")
+    parser.add_argument("--registry", type=Path, required=True)
+    parser.add_argument("--output-dir", type=Path, required=True)
+    parser.add_argument("--report", type=Path, required=True)
+    parser.add_argument("--reuse", action="store_true")
+    args = parser.parse_args()
 
     registry = json.loads(args.registry.read_text("utf-8"))
+    papers = sorted(registry["papers"], key=lambda item: item["order"])
     args.output_dir.mkdir(parents=True, exist_ok=True)
     session = requests.Session()
     session.headers.update({"User-Agent": UA})
-    results = []
-    for paper in sorted(registry["papers"], key=lambda x: x["order"]):
-        target = args.output_dir / f"{paper['order']:02d}_{paper['key']}.pdf"
+    results: list[dict] = []
+    failures: list[dict] = []
+
+    for paper in papers:
+        key = paper["key"]
+        target = args.output_dir / f"{paper['order']:02d}_{key}.pdf"
+        print(f"===== SOURCE {paper['order']:02d} {key} =====", flush=True)
         if args.reuse and target.exists():
             data = target.read_bytes()
             validation = validate_pdf(data, paper["expected_pages"])
-            results.append({"key": paper["key"], "path": str(target), "source": "reused", "sha256": sha256_bytes(data), **validation})
+            results.append({"key": key, "path": str(target), "source": "reused", "sha256": sha256_bytes(data), **validation})
+            write_report(args.report, registry["version"], results, failures, len(papers))
             continue
+
         candidates = list(paper.get("download_candidates", []))
-        doi_url = f"https://doi.org/{paper['doi']}"
-        candidates.append(doi_url)
+        candidates.append(f"https://doi.org/{paper['doi']}")
+        discovery: dict = {}
+        for name, discover in [
+            ("pmc", lambda: discover_pmc_urls(session, paper["doi"])),
+            ("crossref", lambda: discover_crossref_urls(session, paper["doi"])),
+            ("doi", lambda: discover_doi_urls(session, paper["doi"])),
+        ]:
+            try:
+                urls, info = discover()
+                candidates.extend(urls)
+                discovery[name] = info
+            except Exception as exc:
+                discovery[name] = {"error": f"{type(exc).__name__}: {exc}"}
+        candidates.extend(discover_elsevier_urls(paper["doi"]))
+        candidates = dedupe(candidates)
+
         try:
-            candidates.extend(discover_pdf_urls(session, paper["doi"]))
+            data, final_url, attempts = fetch_pdf(session, candidates)
+            validation = validate_pdf(data, paper["expected_pages"])
         except Exception as exc:
-            discovery_error = f"{type(exc).__name__}: {exc}"
-        else:
-            discovery_error = None
-        deduped: list[str] = []
-        for url in candidates:
-            if url not in deduped:
-                deduped.append(url)
-        data, final_url, attempts = fetch_pdf(session, deduped)
-        validation = validate_pdf(data, paper["expected_pages"])
+            failure = {
+                "order": paper["order"],
+                "key": key,
+                "doi": paper["doi"],
+                "error": f"{type(exc).__name__}: {exc}",
+                "discovery": discovery,
+                "candidates": candidates,
+                "attempts": locals().get("attempts", []),
+            }
+            failures.append(failure)
+            write_report(args.report, registry["version"], results, failures, len(papers))
+            print(json.dumps(failure, ensure_ascii=False, indent=2), flush=True)
+            raise
+
         target.write_bytes(data)
         results.append({
-            "key": paper["key"],
+            "order": paper["order"],
+            "key": key,
             "doi": paper["doi"],
             "path": str(target),
             "final_url": final_url,
             "sha256": sha256_bytes(data),
-            "discovery_error": discovery_error,
+            "discovery": discovery,
             "attempts": attempts,
             **validation,
         })
+        write_report(args.report, registry["version"], results, failures, len(papers))
+        print(json.dumps({"key": key, "pages": validation["pages"], "final_url": final_url}, ensure_ascii=False), flush=True)
         time.sleep(1)
 
-    report = {"registry_version": registry["version"], "papers": results, "passed": len(results) == len(registry["papers"])}
-    args.report.parent.mkdir(parents=True, exist_ok=True)
-    args.report.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", "utf-8")
-    print(json.dumps({"papers": len(results), "passed": report["passed"]}, ensure_ascii=False))
+    print(json.dumps({"papers": len(results), "passed": len(results) == len(papers)}, ensure_ascii=False))
 
 
 if __name__ == "__main__":
