@@ -57,18 +57,22 @@ def continued_legend(page: fitz.Page) -> str:
     return norm(" ".join(value for _, _, value in candidates))
 
 
-def repair_cross_page_caption(doc: fitz.Document, asset: dict[str, Any]) -> tuple[str, bool]:
+def repair_cross_page_caption(doc: fitz.Document, asset: dict[str, Any]) -> tuple[str, bool, bool]:
     caption = norm(asset.get("caption_en"))
     marker = LEGEND_CONTINUED.search(caption)
     if not marker:
-        return caption, False
+        return caption, False, True
     first = norm(caption[: marker.start()])
     source_page = int(asset.get("source_page", -1))
     next_page = source_page + 1
     if not (0 <= next_page < len(doc)):
-        return first, True
+        return first, True, False
     continuation = continued_legend(doc[next_page])
-    return norm(f"{first} {continuation}"), True
+    return norm(f"{first} {continuation}"), True, bool(continuation)
+
+
+def v5_panel_evidence(caption: str) -> list[dict[str, str]]:
+    return v6.v5.panel_evidence_from_caption(caption)
 
 
 def build_manifest_v7(pdf: Path, source: dict[str, Any], audit_path: Path | None = None) -> dict[str, Any]:
@@ -79,10 +83,10 @@ def build_manifest_v7(pdf: Path, source: dict[str, Any], audit_path: Path | None
     continuation_blocks_missing: list[str] = []
 
     for asset in manifest.get("assets", []):
-        repaired_caption, had_continuation = repair_cross_page_caption(doc, asset)
+        repaired_caption, had_continuation, continuation_found = repair_cross_page_caption(doc, asset)
         if had_continuation:
             cross_page_captions_rebuilt += 1
-            if repaired_caption == norm(asset.get("caption_en"))[: repaired_caption.find("(legend") if "(legend" in repaired_caption else len(repaired_caption)]:
+            if not continuation_found:
                 continuation_blocks_missing.append(str(asset.get("id")))
             asset["caption_en"] = repaired_caption
             panels = v5_panel_evidence(repaired_caption)
@@ -107,10 +111,6 @@ def build_manifest_v7(pdf: Path, source: dict[str, Any], audit_path: Path | None
     repairs["reference_count"] = len(manifest.get("references", []))
     manifest["evidence_repairs"] = repairs
     return manifest
-
-
-def v5_panel_evidence(caption: str) -> list[dict[str, str]]:
-    return v6.v5.panel_evidence_from_caption(caption)
 
 
 def augment_audit_v7(audit: dict[str, Any], manifest: dict[str, Any], source: dict[str, Any]) -> dict[str, Any]:
