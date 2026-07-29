@@ -7,10 +7,12 @@ from typing import Any
 import build_pdf_native_manifest_v082_final as base
 
 
-STAT_LABELS = {"p", "n", "hr", "or", "rr", "ci", "auc", "tps", "fdr", "q"}
-PROSE_PREFIX = re.compile(r"^(?:Figure|Fig\.|Table|Data|Comparison|Scatterplot|Bars|Boxplot|Patients|Samples|Cohort|High|Low|Male|Female|Discovery|Clinical|Validation)\b", re.I)
+STAT_LABELS = {"p", "n", "r", "rho", "hr", "or", "rr", "ci", "auc", "tps", "fdr", "q"}
+PROSE_PREFIX = re.compile(r"^(?:Figure|Fig\.|Table|Data|Comparison|Scatterplot|Bars|Boxplot|Patients|Samples|Cohort|High|Low|Male|Female|Discovery|Clinical|Validation|Probes)\b", re.I)
 STRONG_MATH = re.compile(r"(?:∑|∫|√|\blog\s*\(|\bln\s*\(|\bexp\s*\(|\bmax\s*\(|\bmin\s*\()", re.I)
 ASSIGNMENT = re.compile(r"^\s*([A-Za-zΑ-Ωα-ω][A-Za-zΑ-Ωα-ω0-9_{}()'\- ]{0,28})\s*=\s*(\S.*)$")
+COHORT_LABELS = re.compile(r"^(?:[A-Z]\d+\s*[-–—]\s*n\s*=\s*[\d,.]+\s*){1,6}$", re.I)
+SAMPLE_COUNT_PROSE = re.compile(r"\bn\s*=\s*[\d,.]+\b", re.I)
 QUESTIONS = [
     "研究解决什么问题？", "核心数据是什么？", "模型或分析的输入与输出是什么？",
     "主要生物学发现是什么？", "主要临床结果是什么？", "最重要的限制是什么？",
@@ -26,12 +28,15 @@ def is_formula_block(block: base.base.Block) -> bool:
     low = text.lower().strip(" :")
     if low in base.base.SECTION_EXACT or base.base.REFERENCE_HEADING_RE.fullmatch(low):
         return False
-    if PROSE_PREFIX.match(text):
+    if PROSE_PREFIX.match(text) or COHORT_LABELS.fullmatch(text):
         return False
     words = re.findall(r"[A-Za-zΑ-Ωα-ω]+", text)
     if len(words) > 18 or len(re.findall(r"[.!?;]", text)) >= 2:
         return False
-    if re.match(r"^\s*(?:P|p|n|HR|OR|RR|CI|AUC|TPS|FDR|q)\s*(?:=|:|<|>|≤|≥)", text):
+    if re.match(r"^\s*(?:P|p|n|r|R|rho|HR|OR|RR|CI|AUC|TPS|FDR|q)\s*(?:=|:|<|>|≤|≥)", text):
+        return False
+    operators = len(base.MATH_OPERATOR_RE.findall(text))
+    if SAMPLE_COUNT_PROSE.search(text) and len(words) >= 3 and operators <= 3:
         return False
     assignment = ASSIGNMENT.match(text)
     if assignment:
@@ -39,7 +44,6 @@ def is_formula_block(block: base.base.Block) -> bool:
         rhs = assignment.group(2)
         if lhs not in STAT_LABELS and re.search(r"[+\-−*/×÷^_∑∫√()]|\d", rhs):
             return True
-    operators = len(base.MATH_OPERATOR_RE.findall(text))
     math_font_chars = sum(len(span.text) for span in block.spans if base.MATH_FONT_RE.search(span.font))
     if STRONG_MATH.search(text) and operators >= 1 and len(words) <= 14:
         return True
