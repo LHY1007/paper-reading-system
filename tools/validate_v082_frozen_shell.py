@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 from typing import Any
 
@@ -49,6 +50,11 @@ REQUIRED_PLACEHOLDERS = {
     "__V082_TABLE__",
     "__V082_REFERENCE__",
 }
+
+PAPER_ASSET_ID_RE = re.compile(
+    r"(?<![A-Za-z0-9_])(?:graphical-abstract|figure-(?:[1-9][0-9]*|s[1-9][0-9]*)|table-(?:[1-9][0-9]*|s[1-9][0-9]*))(?![A-Za-z0-9_])",
+    re.I,
+)
 
 
 def sha256(path: Path) -> str:
@@ -97,6 +103,10 @@ def analyze(master: Path, shell: Path, lock_path: Path) -> dict[str, Any]:
     if residues:
         errors.append({"CANVAS_content_residues": residues})
 
+    paper_asset_id_residues = sorted(set(PAPER_ASSET_ID_RE.findall(raw)))
+    if paper_asset_id_residues:
+        errors.append({"paper_asset_id_residues": paper_asset_id_residues})
+
     master_sha = sha256(master)
     shell_sha = sha256(shell)
     source_bytes = master.stat().st_size
@@ -130,7 +140,7 @@ def analyze(master: Path, shell: Path, lock_path: Path) -> dict[str, Any]:
         errors.append("lock policy must prohibit AI-generated product code")
 
     return {
-        "version": "v082-frozen-shell-gate-2",
+        "version": "v082-frozen-shell-gate-3",
         "lock": str(lock_path),
         "lock_version": lock.get("version"),
         "master": str(master),
@@ -142,6 +152,7 @@ def analyze(master: Path, shell: Path, lock_path: Path) -> dict[str, Any]:
         "size_ratio": round(size_ratio, 6),
         "component_exemplars": exemplar_counts,
         "placeholder_count": raw.count("__V082_"),
+        "paper_asset_id_residues": paper_asset_id_residues,
         "fixed_shell_parity": parity,
         "locked_values": locked_values,
         "policy": policy,
