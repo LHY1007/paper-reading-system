@@ -22,25 +22,20 @@ def norm(value: Any) -> str:
 
 def title_search_key(asset: dict[str, Any]) -> str:
     title = norm(asset.get("title_en"))
-    if len(title) <= 100:
+    if len(title) <= 120:
         return title
-    return title[:100].rsplit(" ", 1)[0]
+    return title[:120].rsplit(" ", 1)[0]
 
 
 def locate_caption_start(doc: fitz.Document, asset: dict[str, Any]) -> tuple[int, str] | None:
     key = title_search_key(asset)
     if not key:
         return None
-    prefix = re.match(r"^(?:Figure|Fig\.)\s+[A-Za-z]?\d+\.", key, re.I)
-    candidates = [key, prefix.group(0) if prefix else ""]
     for page_index in range(len(doc)):
-        text = doc[page_index].get_text("text")
-        for candidate in candidates:
-            if not candidate:
-                continue
-            position = text.find(candidate)
-            if position >= 0:
-                return page_index, text[position:]
+        text = norm(doc[page_index].get_text("text"))
+        position = text.find(key)
+        if position >= 0:
+            return page_index, text[position:]
     return None
 
 
