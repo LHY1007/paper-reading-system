@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/freeze_v082_canvas_shell.yml"
       - "config/v082_frozen_shell_lock.json"
+      - "docs/V082_FIXED_SHELL_ARCHITECTURE.md"
       - "tools/freeze_v082_canvas_shell*.py"
       - "tools/render_v082_from_frozen_shell.py"
       - "tools/render_v082_canvas_component_locked*.py"
