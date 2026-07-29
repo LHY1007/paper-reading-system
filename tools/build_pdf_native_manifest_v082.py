@@ -10,9 +10,10 @@ The implementation is deliberately kept in reviewable source files:
 - build_pdf_native_manifest_v082_v6.py: native table reconstruction and Cell caption-title recovery
 - build_pdf_native_manifest_v082_v7.py: cross-page legend reconstruction and supplementary title boundaries
 - build_pdf_native_manifest_v082_v8.py: title-based recovery when asset page points to the continuation page
+- build_pdf_native_manifest_v082_v9.py: complete source authors, affiliations, publisher and publication dates
 """
 
-from build_pdf_native_manifest_v082_v8 import main
+from build_pdf_native_manifest_v082_v9 import main
 
 
 if __name__ == "__main__":
