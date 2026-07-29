@@ -1,0 +1,92 @@
+name: Trace V0.8.2 candidate artifacts
+
+on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - ".github/workflows/trace_v082_candidate_artifacts.yml"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  trace:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
+      - name: Fetch historical candidate branch
+        run: git fetch origin v0.8.2-candidate --no-tags
+      - name: Trace commits workflows runs and artifacts
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p experiments/V0.8x_batch_diagnosis/reports
+          python - <<'PY'
+          from __future__ import annotations
+          import json, os, subprocess
+          from pathlib import Path
+
+          def text(*args):
+              return subprocess.check_output(args,text=True,errors='replace')
+
+          branch='origin/v0.8.2-candidate'
+          commits=[]
+          for line in text('git','log','--format=%H%x09%aI%x09%an%x09%s','-n','100',branch).splitlines():
+              sha,date,author,subject=(line.split('\t',3)+['','','',''])[:4]
+              commits.append({'sha':sha,'date':date,'author':author,'subject':subject})
+
+          workflows=[]
+          for path in text('git','ls-tree','-r','--name-only',branch,'.github/workflows').splitlines():
+              if not path.endswith(('.yml','.yaml')):
+                  continue
+              try:
+                  content=text('git','show',f'{branch}:{path}')
+              except subprocess.CalledProcessError:
+                  content=''
+              workflows.append({'path':path,'content':content})
+
+          repo=os.environ['GITHUB_REPOSITORY']
+          raw_runs=subprocess.check_output([
+              'gh','api',f'repos/{repo}/actions/runs','-f','branch=v0.8.2-candidate','-f','per_page=100'
+          ],text=True)
+          runs_payload=json.loads(raw_runs)
+          runs=[]
+          for run in runs_payload.get('workflow_runs',[]):
+              item={key:run.get(key) for key in (
+                  'id','name','head_sha','event','status','conclusion','created_at','updated_at','run_number','html_url','artifacts_url'
+              )}
+              try:
+                  artifacts=json.loads(subprocess.check_output([
+                      'gh','api',f'repos/{repo}/actions/runs/{run["id"]}/artifacts','-f','per_page=100'
+                  ],text=True)).get('artifacts',[])
+              except subprocess.CalledProcessError as exc:
+                  artifacts=[]
+                  item['artifact_error']=str(exc)
+              item['artifacts']=[{key:a.get(key) for key in ('id','name','size_in_bytes','expired','created_at','expires_at','archive_download_url')} for a in artifacts]
+              runs.append(item)
+
+          report={'branch':branch,'commits':commits,'workflows':workflows,'runs':runs}
+          out=Path('experiments/V0.8x_batch_diagnosis/reports/V082_CANDIDATE_ARTIFACT_TRACE.json')
+          out.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n','utf-8')
+          print(json.dumps({
+              'commit_count':len(commits),
+              'workflow_paths':[w['path'] for w in workflows],
+              'runs':[{'id':r['id'],'name':r['name'],'conclusion':r['conclusion'],'head_sha':r['head_sha'],'artifacts':r['artifacts']} for r in runs]
+          },ensure_ascii=False,indent=2))
+          PY
+      - name: Commit artifact trace
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add experiments/V0.8x_batch_diagnosis/reports/V082_CANDIDATE_ARTIFACT_TRACE.json
+          if git diff --cached --quiet; then
+            echo "Artifact trace unchanged"
+          else
+            git commit -m "Trace historical V0.8.2 candidate artifacts"
+            git push origin HEAD:v0.8x-batch-diagnosis
+          fi
