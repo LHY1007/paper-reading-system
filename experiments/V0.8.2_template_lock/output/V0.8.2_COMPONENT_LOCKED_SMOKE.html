@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html data-reader-version="0.6.2" data-v082-canonical="normalized-master" lang="zh-CN">
+<html data-reader-version="0.6.2" lang="zh-CN">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width,initial-scale=1" name="viewport"/>
@@ -637,13 +637,10 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 #v6StudyDoc>details.v081-study-caption>div{padding:12px 14px}
 @media(max-width:760px){.v081-card-main{padding-right:0;padding-bottom:42px}.v081-asset-card .v6-asset-actions{left:96px;right:auto;top:auto;bottom:10px}.v081-asset-action{height:30px}}
 </style>
-<meta content="1" name="v082-canonical-normalized"/><style id="canvas-v082-normalized-mode-style">#readerModeSwitch{display:flex;align-items:center;gap:5px;flex:0 0 auto}
-#readerModeSwitch .mode-btn{min-width:74px;white-space:nowrap}
-#readerModeSwitch .mode-btn.active{color:#fff;background:linear-gradient(135deg,var(--ui-accent),var(--ui-accent-2));border-color:transparent}
-@media(max-width:980px){#readerModeSwitch{order:1;width:100%}#readerModeSwitch .mode-btn{flex:1}}</style></head>
+</head>
 <body data-mode="bilingual" data-paper-key="v082-template-lock-smoke">
 <header class="topbar" id="topbar">
-<button aria-label="目录" id="tocBtn">目录</button><div class="brand">Internal validation · Template-lock smoke test for the CANVAS paper reader</div><div aria-label="阅读模式" class="reader-mode-switch" id="readerModeSwitch" role="group"><button aria-pressed="false" class="mode-btn" data-mode="quick" type="button">快速了解</button><button aria-pressed="true" class="mode-btn active" data-mode="bilingual" type="button">双语精读</button></div>
+<button aria-label="目录" id="tocBtn">目录</button><div class="brand">Internal validation · Template-lock smoke test for the CANVAS paper reader</div>
 <div class="search"><input aria-label="搜索当前阅读模式" id="searchInput"/><button id="searchBtn">搜索</button></div>
 <button aria-pressed="false" id="immersiveBtn" title="沉浸阅读（Alt+I）" type="button">沉浸</button><button id="settingsBtn">阅读设置</button><button aria-label="批注" aria-pressed="false" id="annotationBtn" title="打开统一批注工具：划词批注、绘图和批注本" type="button">批注 <span id="annotationCount">0</span></button><button aria-hidden="true" aria-pressed="false" hidden="" id="docMarkupBtn" tabindex="-1" title="兼容入口" type="button"></button><button id="pdfBtn">转化为PDF</button><button id="printBtn">打印</button>
 </header>
@@ -1047,15 +1044,60 @@ svg.addEventListener('pointerup',end);svg.addEventListener('pointercancel',end);
 addEventListener('pointerdown',e=>{if(tools.classList.contains('open')&&tool==='select'&&!e.target.closest('#docMarkupTools,#docMarkupBtn,#annotationBtn'))setOpen(false)},{capture:true});
 })();
 </script>
-<script data-normalized-reason="duplicate-term-tooltip-retired" id="canvas-v071-patch-script">(function(){
-'use strict';
-// V0.7.1 formerly created #canvas-term-tooltip and intercepted term clicks in
-// capture phase. V0.8 already owns the canonical #termTooltip implementation.
-// Keeping two handlers made the visible tooltip diverge from the component
-// contract, so the legacy patch is intentionally retired in the normalized master.
-const duplicate=document.getElementById('canvas-term-tooltip');
-if(duplicate)duplicate.remove();
-})();</script>
+<script id="canvas-v071-patch-script">
+(function(){
+  const tooltip = document.createElement('div');
+  tooltip.id = 'canvas-term-tooltip';
+  tooltip.hidden = true;
+  tooltip.innerHTML = '<div class="term-id"></div><div class="term-tip"></div>';
+  document.body.appendChild(tooltip);
+  let activeEl = null;
+
+  function hideTip(){ tooltip.hidden = true; activeEl = null; }
+  function placeTip(target){
+    const rect = target.getBoundingClientRect();
+    tooltip.hidden = false;
+    const pad = 12;
+    const tipRect = tooltip.getBoundingClientRect();
+    let left = rect.left + rect.width/2 - tipRect.width/2;
+    let top = rect.bottom + 10;
+    if(left < pad) left = pad;
+    if(left + tipRect.width > window.innerWidth - pad) left = window.innerWidth - tipRect.width - pad;
+    if(top + tipRect.height > window.innerHeight - pad) top = rect.top - tipRect.height - 10;
+    if(top < pad) top = pad;
+    tooltip.style.left = left + 'px';
+    tooltip.style.top = top + 'px';
+  }
+  function showTip(target){
+    const tip = target.getAttribute('data-tip');
+    if(!tip) return;
+    activeEl = target;
+    tooltip.querySelector('.term-id').textContent = target.getAttribute('data-term-id') || '术语';
+    tooltip.querySelector('.term-tip').textContent = tip;
+    placeTip(target);
+  }
+  document.addEventListener('click', function(e){
+    const term = e.target.closest('.term-pop');
+    if(term){
+      e.preventDefault();
+      e.stopPropagation();
+      if(activeEl === term && !tooltip.hidden){ hideTip(); return; }
+      showTip(term);
+      return;
+    }
+    if(!tooltip.contains(e.target)) hideTip();
+  }, true);
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape') hideTip();
+    if((e.key === 'Enter' || e.key === ' ') && document.activeElement && document.activeElement.classList.contains('term-pop')){
+      e.preventDefault();
+      showTip(document.activeElement);
+    }
+  }, true);
+  window.addEventListener('resize', function(){ if(activeEl && !tooltip.hidden) placeTip(activeEl); });
+  window.addEventListener('scroll', function(){ if(activeEl && !tooltip.hidden) placeTip(activeEl); }, true);
+})();
+</script>
 <script id="canvas-v073-script">
 (function(){
 'use strict';
@@ -1390,11 +1432,4 @@ document.addEventListener('change',e=>{if(e.target?.id==='v6StudySelect')schedul
 window.__CANVAS_V082_CONTRACT__={version:V,termOntology:ONTOLOGY.length,termMatching:'longest alias + strict latin token boundaries',viewerStudy:'all supported figures; tables excluded',citationExtraction:'PDF layout spans classified before translation and HTML generation',citationFallback:'explicit source-aligned repair manifest',storageNamespace:'canvas-reader-canvas-v082'};
 })();
 </script>
-<script id="canvas-v082-normalized-mode-script">(function(){
-'use strict';
-const buttons=[...document.querySelectorAll('#readerModeSwitch .mode-btn[data-mode]')];
-function sync(){const mode=document.body.dataset.mode||'bilingual';buttons.forEach(b=>{const active=b.dataset.mode===mode;b.classList.toggle('active',active);b.setAttribute('aria-pressed',String(active));});}
-buttons.forEach(b=>b.addEventListener('click',()=>requestAnimationFrame(sync)));
-new MutationObserver(sync).observe(document.body,{attributes:true,attributeFilter:['data-mode']});
-sync();
-})();</script></body></html>
+</body></html>
