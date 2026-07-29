@@ -1,0 +1,95 @@
+name: Summarize V0.8.2 parser audit
+
+on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - ".github/workflows/summarize_v082_parser_audit.yml"
+      - "final/V0.8.2/reports/PDF_NATIVE_AVAILABLE_AUDIT.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: v082-parser-audit-summary
+  cancel-in-progress: true
+
+jobs:
+  summarize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
+      - name: Build compact parser failure report
+        run: |
+          python - <<'PY'
+          from __future__ import annotations
+          import json
+          from pathlib import Path
+
+          source=Path('final/V0.8.2/reports/PDF_NATIVE_AVAILABLE_AUDIT.json')
+          report=json.loads(source.read_text('utf-8'))
+          papers=[]
+          for result in report.get('results',[]):
+              audit=result.get('audit') or {}
+              stdout_summary={}
+              raw=result.get('stdout') or ''
+              if raw.strip():
+                  try:
+                      stdout_summary=json.loads(raw)
+                  except Exception:
+                      stdout_summary={'raw_tail':raw[-4000:]}
+              papers.append({
+                  'key':result.get('key'),
+                  'order':result.get('order'),
+                  'passed':result.get('passed'),
+                  'returncode':result.get('returncode'),
+                  'pages':audit.get('pages'),
+                  'sections':audit.get('sections'),
+                  'paragraphs':audit.get('paragraphs'),
+                  'assets':audit.get('assets'),
+                  'references':audit.get('references'),
+                  'expected_references':audit.get('expected_reference_count'),
+                  'reference_delta':(
+                      audit.get('references')-audit.get('expected_reference_count')
+                      if isinstance(audit.get('references'),int) and isinstance(audit.get('expected_reference_count'),int)
+                      else None
+                  ),
+                  'source_chars':audit.get('source_chars'),
+                  'formula_blocks_detected':audit.get('formula_blocks_detected'),
+                  'formula_blocks_missing':audit.get('formula_blocks_missing'),
+                  'formula_samples':audit.get('formula_samples',[])[:30],
+                  'cross_column_body_merges':audit.get('cross_column_body_merges'),
+                  'cross_column_caption_merges':audit.get('cross_column_caption_merges'),
+                  'strict_errors':audit.get('strict_errors',[]),
+                  'stdout_summary':stdout_summary,
+                  'stderr':result.get('stderr','')[-4000:],
+              })
+          compact={
+              'available_pdf_count':report.get('available_pdf_count'),
+              'passed_count':report.get('passed_count'),
+              'failed_count':report.get('failed_count'),
+              'papers':papers,
+          }
+          output=Path('final/V0.8.2/reports/PDF_NATIVE_AVAILABLE_AUDIT_COMPACT.json')
+          output.write_text(json.dumps(compact,ensure_ascii=False,indent=2)+'\n','utf-8')
+          print(json.dumps(compact,ensure_ascii=False,indent=2))
+          PY
+      - name: Commit compact audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add final/V0.8.2/reports/PDF_NATIVE_AVAILABLE_AUDIT_COMPACT.json
+          if git diff --cached --quiet; then
+            echo "Compact parser audit unchanged"
+          else
+            git commit -m "Summarize V0.8.2 parser audit failures"
+            git fetch origin v0.8x-batch-diagnosis
+            git rebase origin/v0.8x-batch-diagnosis
+            git push origin HEAD:v0.8x-batch-diagnosis
+          fi
