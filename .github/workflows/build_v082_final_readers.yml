@@ -9,7 +9,9 @@ on:
       - "config/biomedical_glossary_zh.json"
       - "schemas/paper_content_manifest_v082.schema.json"
       - "tools/download_v082_sources.py"
+      - "tools/download_v082_release_sources.py"
       - "tools/build_pdf_native_manifest_v082.py"
+      - "tools/build_pdf_native_manifest_v082_unpacked.py"
       - "tools/translate_v082_manifest.py"
       - "tools/validate_v082_final_manifest.py"
       - "tools/normalize_v082_canvas_master.py"
@@ -67,12 +69,15 @@ jobs:
           test -n "$CANVAS"
           printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_final_paths
 
-      - name: Download and verify all official source PDFs
+      - name: Audit CANVAS baseline and download non-CANVAS source PDFs
+        shell: bash
         run: |
           set -euo pipefail
+          source /tmp/v082_final_paths
           mkdir -p .build/v082/pdfs final/V0.8.2/reports
-          python tools/download_v082_sources.py \
+          python tools/download_v082_release_sources.py \
             --registry config/v082_paper_sources.json \
+            --canonical-html "$CANVAS_ORIGINAL" \
             --output-dir .build/v082/pdfs \
             --report final/V0.8.2/reports/SOURCE_DOWNLOAD.json
 
@@ -166,7 +171,7 @@ jobs:
           errors=[]
           actual=[p.name for p in readers]
           if actual!=expected: errors.append({'reader_inventory':{'expected':expected,'actual':actual}})
-          if not sources.get('passed'): errors.append('official source download gate failed')
+          if not sources.get('passed'): errors.append('source input audit gate failed')
           if len(content)!=12 or not all(x.get('passed') for x in content): errors.append('content gate failed')
           if len(shells)!=12 or not all(x.get('passed') for x in shells): errors.append('shell-lock gate failed')
           if len(components)!=12 or not all(x.get('passed') for x in components): errors.append('component-contract gate failed')
@@ -176,7 +181,7 @@ jobs:
               'registry_version':registry['version'],
               'reader_count':len(readers),
               'inventory':inventory,
-              'source_download_passed':sources.get('passed'),
+              'source_input_audit_passed':sources.get('passed'),
               'content_reports':content,
               'shell_reports':shells,
               'component_reports':components,
