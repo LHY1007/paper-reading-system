@@ -5,6 +5,7 @@ on:
     branches: [v0.8x-batch-diagnosis]
     paths:
       - ".github/v082-manifest-trigger"
+      - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
   workflow_dispatch:
 
 permissions:
