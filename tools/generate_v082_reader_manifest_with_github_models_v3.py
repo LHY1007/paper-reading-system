@@ -59,4 +59,4 @@ base.translate_records = translate_records_with_repairs
 
 
 if __name__ == "__main__":
-    runpy.run_module("generate_v082_reader_manifest_with_github_models_v5", run_name="__main__")
+    runpy.run_module("generate_v082_reader_manifest_with_github_models_v6", run_name="__main__")
