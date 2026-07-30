@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - ".github/workflows/generate_v082_reader_manifest_lee.yml"
-      - "tools/generate_v082_reader_manifest_with_github_models.py"
+      - "tools/generate_v082_reader_manifest_with_github_models*.py"
       - "tools/build_pdf_native_manifest_v082*.py"
       - "tools/v082_body_reconstruction*.py"
       - "tools/validate_v082_evidence_quality*.py"
@@ -47,7 +47,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: .build/v082/model-cache
-          key: v082-model-cache-lee-${{ hashFiles('tools/generate_v082_reader_manifest_with_github_models.py', 'config/v082_reader_content_plans/lee-2025.json') }}
+          key: v082-model-cache-lee-${{ hashFiles('tools/generate_v082_reader_manifest_with_github_models*.py', 'config/v082_reader_content_plans/lee-2025.json') }}
           restore-keys: |
             v082-model-cache-lee-
 
@@ -83,7 +83,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python tools/generate_v082_reader_manifest_with_github_models.py \
+          python tools/generate_v082_reader_manifest_with_github_models_v2.py \
             .build/v082/evidence/lee-2025.json \
             config/v082_reader_content_plans/lee-2025.json \
             content/v082_manifests/lee-2025.json \
