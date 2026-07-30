@@ -35,6 +35,7 @@ on:
 
 permissions:
   contents: write
+  models: read
 
 jobs:
   controlled-experiment:
@@ -130,7 +131,7 @@ jobs:
           python tools/validate_reader_content_coverage.py "$MAAS" --baseline "$BASE081" --expected-body-blocks 234 --diagnostic --report "$REPORTS/01_Maas_V082_batch.json"
           python tools/validate_reader_content_coverage.py "$VAL" --baseline "$BASE081" --expected-body-blocks 183 --diagnostic --report "$REPORTS/04_Valanarasu_V082_batch.json"
           python tools/validate_reader_content_coverage.py "$LOCK/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html" --baseline "$MASTER" --expected-body-blocks 234 --diagnostic --report "$REPORTS/01_Maas_component_locked_legacy_content.json"
-          python tools/validate_reader_content_coverage.py "$LOCK/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html" --baseline "$MASTER" --expected-body-blocks 183 --diagnostic --report "$REPORTS/04_Valanarasu_component_locked_legacy_content.json"
+          python tools/validate_reader_content_coverage.py "$LOCK/output/V0.8.2_COMPONENT_LOCKED_VALANASU_LEGACY_CONTENT.html" --baseline "$MASTER" --expected-body-blocks 183 --diagnostic --report "$REPORTS/04_Valanarasu_component_locked_legacy_content.json"
       - name: Aggregate diagnosis
         run: |
           python - <<'PY'
@@ -180,3 +181,117 @@ jobs:
             git commit -m "Build normalized V0.8.2 master and comparison artifacts"
             git push origin HEAD:v0.8x-batch-diagnosis
           fi
+
+  strict-manifest-generation:
+    if: github.event_name == 'push' && contains(github.event.head_commit.message, '[run-strict-manifests]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    concurrency:
+      group: v082-generate-all-manifests-strict-sequence
+      cancel-in-progress: false
+    env:
+      PYTHONUNBUFFERED: "1"
+      GITHUB_MODELS_MODEL: "openai/gpt-4.1"
+      GITHUB_MODELS_MIN_INTERVAL_SECONDS: "4"
+      CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install source, evidence and manifest dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            requests beautifulsoup4 PyMuPDF curl_cffi jsonschema lxml pillow
+      - name: Prepare strict sequential generation workspace
+        run: |
+          CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
+          test -n "$CANVAS"
+          printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_manifest_paths
+          mkdir -p .build/v082/{pdfs,cho-source,batch-evidence,batch-audits,batch-reports,generated-manifests,model-cache} content/v082_manifests
+      - name: Restore audited PDF cache
+        id: source-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/pdfs
+          key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json', 'tools/download_v082_sources.py', 'tools/download_v082_release_sources.py', 'tools/download_v082_release_sources_continue.py', 'tools/prefetch_v082_blocked_sources.py') }}
+          restore-keys: |
+            v082-source-pdfs-
+      - name: Restore user-supplied Cho source
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/cho-source
+          key: ${{ env.CHO_CACHE_KEY }}
+      - name: Inject Cho source and restore model caches
+        run: |
+          if [ -f .build/v082/cho-source/07_cho-2026.pdf ]; then
+            cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
+          fi
+      - name: Restore GitHub Models caches
+        id: model-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/model-cache
+          key: v082-model-cache-strict-all-${{ hashFiles('tools/generate_v082_reader_manifest_with_github_models*.py', 'config/v082_reader_content_plans/*.json') }}
+          restore-keys: |
+            v082-model-cache-strict-all-
+            v082-model-cache-all-
+            v082-model-cache-lee-
+      - name: Obtain every exact source PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          source /tmp/v082_manifest_paths
+          python tools/prefetch_v082_blocked_sources.py \
+            --registry config/v082_paper_sources.json \
+            --output-dir .build/v082/pdfs \
+            --report .build/v082/batch-reports/BLOCKED_SOURCE_PREFETCH.json || true
+          python tools/download_v082_release_sources_continue.py \
+            --registry config/v082_paper_sources.json \
+            --canonical-html "$CANVAS_ORIGINAL" \
+            --output-dir .build/v082/pdfs \
+            --report .build/v082/batch-reports/SOURCE_DOWNLOAD_AVAILABLE.json \
+            --reuse || true
+      - name: Generate and persist strictly one paper at a time
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python tools/run_v082_manifest_generation_sequentially_v2.py \
+            --registry config/v082_paper_sources.json \
+            --pdf-dir .build/v082/pdfs \
+            --evidence-dir .build/v082/batch-evidence \
+            --audit-dir .build/v082/batch-audits \
+            --report-dir .build/v082/batch-reports \
+            --generated-dir .build/v082/generated-manifests \
+            --manifest-dir content/v082_manifests \
+            --plans-dir config/v082_reader_content_plans \
+            --cache-dir .build/v082/model-cache \
+            --branch v0.8x-batch-diagnosis
+      - name: Save source and model caches
+        if: always()
+        run: echo "Caches are saved by the following actions even after fail-closed termination."
+      - uses: actions/cache/save@v4
+        if: always() && steps.source-cache.outputs.cache-hit != 'true'
+        with:
+          path: .build/v082/pdfs
+          key: ${{ steps.source-cache.outputs.cache-primary-key }}
+      - uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .build/v082/model-cache
+          key: ${{ steps.model-cache.outputs.cache-primary-key }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v082-strict-sequential-manifest-audit
+          path: |
+            content/v082_manifests
+            .build/v082/batch-evidence
+            .build/v082/batch-audits
+            .build/v082/batch-reports
+            .build/v082/generated-manifests
+          if-no-files-found: warn
+          retention-days: 30
