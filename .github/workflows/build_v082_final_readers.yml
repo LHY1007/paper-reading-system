@@ -14,6 +14,7 @@ on:
       - "tools/download_v082_sources.py"
       - "tools/download_v082_release_sources.py"
       - "tools/prefetch_v082_blocked_sources.py"
+      - "tools/prefetch_v082_adobe_shared_pdf.py"
       - "tools/build_pdf_native_manifest_v082*.py"
       - "tools/build_v082_reader_content_task.py"
       - "tools/build_v082_reader_if_ready*.py"
@@ -36,6 +37,7 @@ concurrency:
 
 env:
   PYTHONUNBUFFERED: "1"
+  CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
 
 jobs:
   final-build:
@@ -64,7 +66,7 @@ jobs:
           CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
           test -n "$CANVAS"
           printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_final_paths
-          mkdir -p .build/v082/pdfs final/V0.8.2/reports
+          mkdir -p .build/v082/{pdfs,cho-source} final/V0.8.2/reports
 
       - name: Restore audited source PDF cache
         id: source_pdf_cache
@@ -74,6 +76,19 @@ jobs:
           key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json', 'tools/download_v082_sources.py', 'tools/download_v082_release_sources.py', 'tools/prefetch_v082_blocked_sources.py') }}
           restore-keys: |
             v082-source-pdfs-
+
+      - name: Restore dedicated user-supplied Cho source cache
+        id: cho_cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/cho-source
+          key: ${{ env.CHO_CACHE_KEY }}
+
+      - name: Inject validated Cho source into the ordinary source directory
+        run: |
+          if [ -f .build/v082/cho-source/07_cho-2026.pdf ]; then
+            cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
+          fi
 
       - name: Prefetch publisher-blocked official PDFs
         id: blocked_source_prefetch
@@ -175,5 +190,7 @@ jobs:
             echo "Final release snapshot already current"
           else
             git commit -m "Build complete V0.8.2 final paper readers"
+            git fetch origin v0.8x-batch-diagnosis
+            git rebase origin/v0.8x-batch-diagnosis
             git push origin HEAD:v0.8x-batch-diagnosis
           fi
