@@ -44,7 +44,8 @@ jobs:
             requests beautifulsoup4 PyMuPDF curl_cffi jsonschema lxml pillow
 
       - name: Restore GitHub Models response cache
-        uses: actions/cache@v4
+        id: model-cache
+        uses: actions/cache/restore@v4
         with:
           path: .build/v082/model-cache
           key: v082-model-cache-lee-${{ hashFiles('tools/generate_v082_reader_manifest_with_github_models*.py', 'config/v082_reader_content_plans/lee-2025.json') }}
@@ -53,7 +54,7 @@ jobs:
 
       - name: Prepare the exact Lee source registry
         run: |
-          mkdir -p .build/v082/{pdfs,evidence,audits,reports} content/v082_manifests
+          mkdir -p .build/v082/{pdfs,evidence,audits,reports,model-cache} content/v082_manifests
           python - <<'PY'
           import json, pathlib
           source=json.load(open('config/v082_paper_sources.json'))
@@ -83,7 +84,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          python tools/generate_v082_reader_manifest_with_github_models_v2.py \
+          python tools/generate_v082_reader_manifest_with_github_models_v3.py \
             .build/v082/evidence/lee-2025.json \
             config/v082_reader_content_plans/lee-2025.json \
             content/v082_manifests/lee-2025.json \
@@ -112,6 +113,13 @@ jobs:
             git commit -m "Add validated V0.8.2 Lee bilingual reader manifest"
             git push origin HEAD:v0.8x-batch-diagnosis
           fi
+
+      - name: Save GitHub Models response cache even after a later gate failure
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .build/v082/model-cache
+          key: ${{ steps.model-cache.outputs.cache-primary-key }}
 
       - uses: actions/upload-artifact@v4
         if: always()
