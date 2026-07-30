@@ -31,7 +31,8 @@ jobs:
 
       - name: Install source and Chromium dependencies
         run: |
-          python -m pip install --disable-pip-version-check requests PyMuPDF playwright
+          python -m pip install --disable-pip-version-check \
+            requests beautifulsoup4 curl_cffi lxml PyMuPDF playwright
           python -m playwright install --with-deps chromium
 
       - name: Restore exact-source PDF cache
