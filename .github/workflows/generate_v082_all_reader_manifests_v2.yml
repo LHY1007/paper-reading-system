@@ -1,0 +1,149 @@
+name: Generate all V0.8.2 manifests strictly sequentially
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
+      - "tools/run_v082_manifest_generation_sequentially_v2.py"
+      - "tools/generate_v082_reader_manifest_with_github_models*.py"
+      - "tools/build_pdf_native_manifest_v082*.py"
+      - "tools/v082_body_reconstruction*.py"
+      - "tools/validate_v082_evidence_quality*.py"
+      - "tools/validate_v082_reader_content_quality.py"
+      - "tools/validate_v082_reader_semantics*.py"
+      - "tools/validate_v082_final_manifest.py"
+      - "tools/validate_v082_manifest_code_boundary.py"
+      - "config/v082_reader_content_plans/**"
+      - "config/v082_paper_sources.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  models: read
+
+concurrency:
+  group: v082-generate-all-manifests-strict-sequence
+  cancel-in-progress: true
+
+env:
+  PYTHONUNBUFFERED: "1"
+  GITHUB_MODELS_MODEL: "openai/gpt-4.1"
+  CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
+
+jobs:
+  generate-strictly-sequential:
+    runs-on: ubuntu-latest
+    timeout-minutes: 720
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install source, evidence and manifest dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            requests beautifulsoup4 PyMuPDF curl_cffi jsonschema lxml pillow
+
+      - name: Locate immutable CANVAS reader and prepare directories
+        run: |
+          CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
+          test -n "$CANVAS"
+          printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_manifest_paths
+          mkdir -p .build/v082/{pdfs,cho-source,batch-evidence,batch-audits,batch-reports,generated-manifests,model-cache} content/v082_manifests
+
+      - name: Restore audited PDF cache
+        id: source-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/pdfs
+          key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json', 'tools/download_v082_sources.py', 'tools/download_v082_release_sources.py', 'tools/download_v082_release_sources_continue.py', 'tools/prefetch_v082_blocked_sources.py') }}
+          restore-keys: |
+            v082-source-pdfs-
+
+      - name: Restore dedicated user-supplied Cho source cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/cho-source
+          key: ${{ env.CHO_CACHE_KEY }}
+
+      - name: Inject validated Cho source into the ordinary source directory
+        run: |
+          if [ -f .build/v082/cho-source/07_cho-2026.pdf ]; then
+            cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
+          fi
+
+      - name: Restore all GitHub Models response caches
+        id: model-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/model-cache
+          key: v082-model-cache-strict-all-${{ hashFiles('tools/generate_v082_reader_manifest_with_github_models*.py', 'config/v082_reader_content_plans/*.json') }}
+          restore-keys: |
+            v082-model-cache-strict-all-
+            v082-model-cache-all-
+            v082-model-cache-lee-
+
+      - name: Obtain every exact source PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          source /tmp/v082_manifest_paths
+          python tools/prefetch_v082_blocked_sources.py \
+            --registry config/v082_paper_sources.json \
+            --output-dir .build/v082/pdfs \
+            --report .build/v082/batch-reports/BLOCKED_SOURCE_PREFETCH.json || true
+          python tools/download_v082_release_sources_continue.py \
+            --registry config/v082_paper_sources.json \
+            --canonical-html "$CANVAS_ORIGINAL" \
+            --output-dir .build/v082/pdfs \
+            --report .build/v082/batch-reports/SOURCE_DOWNLOAD_AVAILABLE.json \
+            --reuse || true
+
+      - name: Generate, gate and persist one paper at a time
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          python tools/run_v082_manifest_generation_sequentially_v2.py \
+            --registry config/v082_paper_sources.json \
+            --pdf-dir .build/v082/pdfs \
+            --evidence-dir .build/v082/batch-evidence \
+            --audit-dir .build/v082/batch-audits \
+            --report-dir .build/v082/batch-reports \
+            --generated-dir .build/v082/generated-manifests \
+            --manifest-dir content/v082_manifests \
+            --plans-dir config/v082_reader_content_plans \
+            --cache-dir .build/v082/model-cache \
+            --branch v0.8x-batch-diagnosis
+
+      - name: Save rolling exact-source cache
+        if: always() && steps.source-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .build/v082/pdfs
+          key: ${{ steps.source-cache.outputs.cache-primary-key }}
+
+      - name: Save GitHub Models caches after every attempt
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .build/v082/model-cache
+          key: ${{ steps.model-cache.outputs.cache-primary-key }}
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v082-strict-sequential-manifest-audit
+          path: |
+            content/v082_manifests
+            .build/v082/batch-evidence
+            .build/v082/batch-audits
+            .build/v082/batch-reports
+            .build/v082/generated-manifests
+          if-no-files-found: warn
+          retention-days: 30
