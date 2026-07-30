@@ -1,20 +1,13 @@
 #!/usr/bin/env python3
 """Canonical entry point for the V0.8.2 PDF-native evidence builder.
 
-The implementation is deliberately kept in reviewable source files:
-- build_pdf_native_manifest_v082_unpacked.py: layout-aware extraction core
-- build_pdf_native_manifest_v082_final.py: cross-column and release gates
-- build_pdf_native_manifest_v082_v3.py: high-confidence standalone formula detection
-- build_pdf_native_manifest_v082_v4.py: PDF-outline titles, caption boundaries and original reference numbering
-- build_pdf_native_manifest_v082_v5.py: complete caption-derived titles and extended-figure panel evidence
-- build_pdf_native_manifest_v082_v6.py: native table reconstruction and Cell caption-title recovery
-- build_pdf_native_manifest_v082_v7.py: cross-page legend reconstruction and supplementary title boundaries
-- build_pdf_native_manifest_v082_v8.py: title-based recovery when asset page points to the continuation page
-- build_pdf_native_manifest_v082_v9.py: complete source authors, affiliations, publisher and publication dates
-- build_pdf_native_manifest_v082_v10.py: collaborative group authors and Cell publication-date fallback
+The v15 implementation preserves the verified author, figure, table and reference
+repairs from v10 and reconstructs natural body paragraphs from page geometry with
+per-page coverage diagnostics. Reader-facing Chinese content remains a separate,
+fail-closed manifest stage.
 """
 
-from build_pdf_native_manifest_v082_v10 import main
+from build_pdf_native_manifest_v082_v15 import main
 
 
 if __name__ == "__main__":
