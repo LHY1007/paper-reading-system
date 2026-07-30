@@ -13,6 +13,22 @@ import validate_v082_reader_semantics_v3 as semantic_gate
 
 _original_digest = grounded.collect_evidence_digest
 _original_studies = grounded.generate_grounded_studies
+_original_translate = grounded.base.translate_records
+
+
+def cache_compatible_translate(
+    records: list[dict[str, str]], *, token: str, model: str, cache_dir: Path,
+    cache_prefix: str, context: str,
+) -> dict[str, str]:
+    compatible_prefix = cache_prefix[:-3] if cache_prefix.endswith("-v5") else cache_prefix
+    return _original_translate(
+        records,
+        token=token,
+        model=model,
+        cache_dir=cache_dir,
+        cache_prefix=compatible_prefix,
+        context=context,
+    )
 
 
 def compact_digest(evidence: dict[str, Any], max_chars: int = 9000) -> dict[str, Any]:
@@ -75,6 +91,7 @@ def cli_paths(argv: list[str]) -> tuple[Path, Path]:
 
 def main() -> None:
     evidence_path, output_path = cli_paths(sys.argv)
+    grounded.base.translate_records = cache_compatible_translate
     grounded.collect_evidence_digest = compact_digest
     grounded.generate_grounded_studies = compact_studies
     grounded.main()
