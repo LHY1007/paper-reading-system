@@ -1,0 +1,48 @@
+{
+  "version": "v082-spitzer-reader-plan-1",
+  "status": "approved content plan; final manifest still required",
+  "paper": {
+    "key": "spitzer-2025",
+    "title_en": "Deciphering the longitudinal trajectories of glioblastoma ecosystems by integrative single-cell genomics",
+    "title_zh": "通过整合单细胞基因组学解析胶质母细胞瘤生态系统的纵向轨迹",
+    "journal": "Nature Genetics",
+    "publisher": "Springer Nature",
+    "doi": "10.1038/s41588-025-02168-4",
+    "article_type": "Article",
+    "publication_timeline": "Received 5 April 2024 · Accepted 17 March 2025 · Published online 9 May 2025",
+    "citation": "Nature Genetics 57, 1168–1178 (2025)",
+    "journal_scope": "Nature Genetics publishes high-impact genetics and genomics research, including cancer evolution and single-cell analysis.",
+    "field_positioning": "该研究属于胶质母细胞瘤复发、单细胞纵向组学、肿瘤生态系统共演化及治疗选择研究。"
+  },
+  "overview": {
+    "qa": [
+      {"question": "研究解决什么问题？", "answer": "标准治疗后GBM为何复发、肿瘤细胞状态和微环境是否沿统一方向演化仍不清楚。既往研究多为bulk或小规模单细胞队列，无法分别追踪恶性细胞、微环境和临床因素。"},
+      {"question": "核心数据是什么？", "answer": "CARE联盟分析59名患者的121个匹配原发和复发肿瘤，获得429,305个高质量单核细胞，并结合WES或WGS、MGMT状态、治疗和临床结局；另用25对独立纵向snRNA-seq和138对GLASS bulk RNA数据验证。"},
+      {"question": "模型或分析的输入与输出是什么？", "answer": "输入为配对时间点的snRNA-seq、DNA测序和临床信息；分析分解细胞组成、10种恶性细胞元程序、3种基线表达谱、配体受体关系和突变特征，输出每位患者的生态轨迹及其与MGMT、治疗相关突变和生存的关系。"},
+      {"question": "主要生物学发现是什么？", "answer": "最一致的复发变化是恶性细胞比例下降、少突胶质细胞和神经元等胶质—神经微环境增加。全队列不存在统一的恶性细胞状态转移，但患者亚群呈现特定轨迹，且恶性状态、基线谱和微环境变化相互镜像，体现生态系统共演化。"},
+      {"question": "主要临床结果是什么？", "answer": "复发时胶质—神经型微环境与第二次手术后更长生存相关，而MES-like或缺氧主导状态与较差结局相关。MGMT表达和治疗相关超突变或小缺失特征可改变具体轨迹。"},
+      {"question": "最重要的限制是什么？", "answer": "队列富集能够再次手术且状态较好的患者，样本时间点和治疗不完全一致；单核取样与肿瘤纯度会影响细胞比例，部分轨迹亚组较小，计算推断不能证明微环境直接驱动恶性状态变化。"}
+    ],
+    "method": "建立59例配对原发/复发单核和DNA队列 → 比较细胞组成 → 定义恶性细胞元程序和基线表达谱 → 评估全队列稳定性与逐患者轨迹 → 分析MGMT、治疗相关突变和细胞通讯修饰作用 → 在独立单细胞和GLASS队列验证",
+    "story": "文章拒绝把GBM复发概括为单一proneural-to-mesenchymal路径。群体层面最稳定的是肿瘤纯度下降和胶质—神经微环境增加，而恶性细胞状态变化高度个体化；只有结合基线生态、MGMT和治疗诱导基因组特征，才能解释不同患者的复发轨迹。"
+  },
+  "body_section_map": [
+    ["Introduction", "引言"], ["Longitudinal profiling of a clinically annotated GBM cohort", "具有临床注释的GBM纵向队列"],
+    ["Longitudinal changes in cell-type composition", "细胞类型组成的纵向变化"],
+    ["Longitudinal stability of transcriptional features", "转录特征的纵向稳定性"],
+    ["Divergence of individual sample pairs", "个体配对样本轨迹的分化"],
+    ["MGMT expression in GBM single cells influences recurrence trajectories", "GBM单细胞MGMT表达影响复发轨迹"],
+    ["Mutational signatures associated with recurrence trajectories", "复发轨迹相关突变特征"],
+    ["Discussion", "讨论"], ["Methods", "方法"], ["Data availability", "数据可用性"], ["Code availability", "代码可用性"]
+  ],
+  "main_figures": [
+    {"id": "figure-1", "title_en": "Figure 1. Longitudinal profiling of a clinically annotated GBM cohort", "title_zh": "图1：具有临床注释的GBM纵向队列", "reader_role": "介绍配对时间点、临床治疗、细胞图谱和基因组变化。", "panel_requirement": "解释59名患者设计、单核细胞类型、时间点组成和治疗相关基因组事件。"},
+    {"id": "figure-2", "title_en": "Figure 2. Prognostically significant longitudinal cell-type changes in the TME, global similarity of cell states between primary and recurrent tumors", "title_zh": "图2：具有预后意义的微环境纵向变化及原发与复发细胞状态的总体相似性", "reader_role": "展示恶性比例下降、胶质—神经微环境增加及细胞状态总体稳定。", "panel_requirement": "解释组成组、恶性状态和基线谱分组、生存以及跨层相关结构。"},
+    {"id": "figure-3", "title_en": "Figure 3. Divergence of individual sample pairs", "title_zh": "图3：个体配对样本轨迹的分化", "reader_role": "从群体平均转向逐患者轨迹，证明不存在单一演化方向。", "panel_requirement": "说明轨迹距离、方向、配对变化和不同生态层之间的一致或相反关系。"},
+    {"id": "figure-4", "title_en": "Figure 4. MGMT expression in GBM single cells influences recurrence trajectories", "title_zh": "图4：GBM单细胞MGMT表达影响复发轨迹", "reader_role": "连接MGMT启动子状态、细胞内表达、替莫唑胺选择和具体状态转移。", "panel_requirement": "区分启动子甲基化、表达细胞比例、治疗暴露和关联而非因果。"},
+    {"id": "figure-5", "title_en": "Figure 5. Mutational signatures associated with recurrence trajectories", "title_zh": "图5：复发轨迹相关的突变特征", "reader_role": "分析治疗相关超突变和小缺失表型如何修饰复发生态。", "panel_requirement": "说明突变签名定义、患者亚组、恶性状态和微环境变化方向。"},
+    {"id": "figure-6", "title_en": "Figure 6. Longitudinal GBM cell state trajectories", "title_zh": "图6：GBM细胞状态纵向轨迹总结", "reader_role": "概括稳定的群体变化、个体化恶性轨迹和治疗/微环境修饰因素。", "panel_requirement": "以整体模型解释，不把示意图中的方向当作所有患者的固定路径。"}
+  ],
+  "supplementary_source_requirement": "Extended Data Figures 1–6需保留独立验证、统计细节和配体受体证据；主文引用的Supplementary Tables必须明确为外部补充文件。",
+  "reference_requirement": {"expected_count": 52, "preserve_source_numbers": true, "reject_body_paragraphs": true}
+}
