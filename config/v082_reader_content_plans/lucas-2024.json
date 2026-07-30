@@ -1,0 +1,48 @@
+{
+  "version": "v082-lucas-reader-plan-1",
+  "status": "approved content plan; final manifest still required",
+  "paper": {
+    "key": "lucas-2024",
+    "title_en": "Spatial genomic, biochemical and cellular mechanisms underlying meningioma heterogeneity and evolution",
+    "title_zh": "脑膜瘤异质性与演化的空间基因组、生化和细胞机制",
+    "journal": "Nature Genetics",
+    "publisher": "Springer Nature",
+    "doi": "10.1038/s41588-024-01747-1",
+    "article_type": "Article",
+    "publication_timeline": "Received 4 May 2023 · Accepted 8 April 2024 · Published online 17 May 2024",
+    "citation": "Nature Genetics 56, 1121–1133 (2024)",
+    "journal_scope": "Nature Genetics publishes major advances in genetics and genomics, including cancer evolution, functional genomics and translational mechanisms.",
+    "field_positioning": "该研究整合脑膜瘤空间转录组、空间蛋白、单细胞反卷积、复发演化和CRISPRi药物验证。"
+  },
+  "overview": {
+    "qa": [
+      {"question": "研究解决什么问题？", "answer": "高级别脑膜瘤内部存在显著空间异质性，现有WHO和分子分类会把生物学不同的区域或肿瘤归入同一组，也不清楚治疗后哪些亚克隆和通路扩张。研究寻找连接空间异质性、复发演化和可药物靶向依赖的机制。"},
+      {"question": "核心数据是什么？", "answer": "研究分析9名患者的10个高级别脑膜瘤和16个样本，获得38,718个空间转录组区域、82个区域的72抗体空间蛋白数据，并纳入配对原发/复发及同一肿瘤不同区域；结果以seqIF、单细胞反卷积、502例bulk RNA和3D共培养验证。"},
+      {"question": "模型或分析的输入与输出是什么？", "answer": "输入包括空间转录组、空间蛋白、DNA/RNA测序、甲基化、IHC、seqIF、单细胞参考和细胞共培养；分析输出区域基因程序、亚克隆CNV、MAPK与PI3K–AKT信号、免疫浸润和增殖状态，并通过CRISPRi与药物组合寻找可同时抑制异质亚群的方案。"},
+      {"question": "主要生物学发现是什么？", "answer": "不同驱动事件的高级别脑膜瘤具有彼此分化的空间基因和蛋白程序。复发伴随耐药相关亚克隆CNV的空间扩张、免疫浸润和MAPK下降、PI3K–AKT及增殖上升；同一肿瘤不同区域也可由不同亚克隆和通路状态主导。"},
+      {"question": "主要临床结果是什么？", "answer": "研究提示单点或bulk取样可能遗漏高风险亚克隆，空间异质性应纳入复发风险和治疗设计。基于患者特异异质性建立的3D共培养筛选发现联合用药可覆盖不同细胞亚群，但尚未进行患者前瞻性治疗验证。"},
+      {"question": "最重要的限制是什么？", "answer": "空间深度研究队列很小且病例经过机制导向选择；不同平台的区域分辨率和取样不完全一致，复发关联不能完全分离治疗选择和自然演化；药物结果来自体外模型，不能直接等同于临床疗效。"}
+    ],
+    "method": "多区域临床样本的分级、甲基化和DNA/RNA表征 → 空间转录组与72抗体空间蛋白发现分子异质性 → 比较不同驱动肿瘤、配对原发/复发和同瘤不同区域 → 用seqIF、单细胞反卷积和502例RNA队列验证 → 构建3D异质共培养 → CRISPRi和药理筛选联合方案",
+    "story": "文章把脑膜瘤异质性分为分子、时间和空间三种尺度，并显示三者最终汇聚到亚克隆CNV、免疫浸润、MAPK/PI3K–AKT和增殖的区域组合。真正的治疗对象不是平均肿瘤，而是同一肿瘤内并存且可能在治疗后重新扩张的多个状态。"
+  },
+  "body_section_map": [
+    ["Introduction", "引言"], ["Experimental design and workflow", "实验设计与流程"],
+    ["Divergent intratumor gene and protein expression programs", "分化的肿瘤内基因和蛋白表达程序"],
+    ["Spatial subclonal CNVs, signaling mechanisms and cell types", "空间亚克隆CNV、信号机制和细胞类型"],
+    ["Regionally distinct subclonal spatial transcriptomes, signaling mechanisms and cell types", "区域特异亚克隆空间转录组、信号机制和细胞类型"],
+    ["Personalized systemic therapy to overcome intratumor heterogeneity", "克服肿瘤内异质性的个体化系统治疗"],
+    ["Discussion", "讨论"], ["Methods", "方法"], ["Data availability", "数据可用性"], ["Code availability", "代码可用性"]
+  ],
+  "main_figures": [
+    {"id": "figure-1", "title_en": "Figure 1. Experimental design and workflow", "title_zh": "图1：实验设计与流程", "reader_role": "总览16个样本、空间转录组、72抗体空间蛋白、分子/时间/空间演化和功能验证。", "panel_requirement": "解释队列、驱动改变、平台、三种演化问题和验证数据。"},
+    {"id": "figure-2", "title_en": "Figure 2. High-grade meningiomas are distinguished by divergent intratumor gene and protein expression programs", "title_zh": "图2：高级别脑膜瘤具有分化的肿瘤内基因和蛋白程序", "reader_role": "比较BAP1、CDKN2A/B和TERT相关高级别病例的空间程序。", "panel_requirement": "说明空间簇、形态、Ki-67、ECM、通路和不同驱动病例不可合并的原因。"},
+    {"id": "figure-3", "title_en": "Figure 3. Spatial expansion of subclonal CNVs underlies high-grade meningioma recurrence", "title_zh": "图3：亚克隆CNV的空间扩张参与高级别脑膜瘤复发", "reader_role": "用配对原发/复发揭示耐药亚克隆扩张。", "panel_requirement": "追踪具体CNV、区域比例、原发残留亚克隆和复发优势状态。"},
+    {"id": "figure-4", "title_en": "Figure 4. Decreased immune infiltration, decreased MAPK signaling, increased PI3K–AKT signaling and increased cell proliferation underlie high-grade meningioma recurrence", "title_zh": "图4：免疫和MAPK下降、PI3K–AKT与增殖上升构成复发机制", "reader_role": "把复发亚克隆变化连接到细胞和信号表型。", "panel_requirement": "说明seqIF/反卷积验证、方向、统计对象及关联边界。"},
+    {"id": "figure-5", "title_en": "Figure 5. Regionally distinct subclonal spatial transcriptomes underlie histological heterogeneity in high-grade meningioma", "title_zh": "图5：区域特异亚克隆空间转录组解释高级别脑膜瘤组织学异质性", "reader_role": "比较同一肿瘤内部不同区域的形态、CNV和转录程序。", "panel_requirement": "逐区域解释取样、亚克隆、组织学和基因程序的对应。"},
+    {"id": "figure-6", "title_en": "Figure 6. High-grade meningiomas are distinguished by regionally distinct intratumor immune infiltration, MAPK signaling, PI3K–AKT signaling and cell proliferation", "title_zh": "图6：高级别脑膜瘤内部存在区域特异的免疫、MAPK、PI3K–AKT和增殖状态", "reader_role": "用空间蛋白验证同瘤区域功能差异。", "panel_requirement": "说明各区域标志物、通路活性、免疫细胞和空间对应。"},
+    {"id": "figure-7", "title_en": "Figure 7. A preclinical platform for testing personalized systemic therapies to overcome intratumor heterogeneity in high-grade meningiomas", "title_zh": "图7：用于克服高级别脑膜瘤异质性的个体化系统治疗前临床平台", "reader_role": "展示异质共培养、CRISPRi和联合药物筛选。", "panel_requirement": "解释模型构建、靶点筛选、单药和联合用药、谱系追踪及临床转化限制。"}
+  ],
+  "supplementary_source_requirement": "Extended Data Figures 1–10必须保留空间平台质控、原发/复发CNV、区域蛋白和药物验证；不得把作者稿或45页非正式版本替代31页正式来源。",
+  "reference_requirement": {"expected_count": 66, "preserve_source_numbers": true, "reject_body_paragraphs": true}
+}
