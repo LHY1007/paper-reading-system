@@ -120,12 +120,12 @@ def main() -> None:
 
         if not pdf.exists():
             status["reason"] = "exact source PDF unavailable"
-            write(summary_path, {"papers": statuses})
-            continue
+            write(summary_path, {"papers": statuses, "stopped_at": key})
+            raise SystemExit(f"strict sequence stopped at {key}: exact source PDF unavailable")
         if not plan.exists():
             status["reason"] = "paper-specific content plan unavailable"
-            write(summary_path, {"papers": statuses})
-            continue
+            write(summary_path, {"papers": statuses, "stopped_at": key})
+            raise SystemExit(f"strict sequence stopped at {key}: paper-specific content plan unavailable")
 
         try:
             commands: list[tuple[str, list[str]]] = [
@@ -227,26 +227,26 @@ def main() -> None:
             status["committed"] = bool(commit.get("committed") or not commit.get("changed"))
             status["passed"] = True
             status["reason"] = "source evidence, grounded content, schema and code boundary passed; manifest persisted"
+            write(summary_path, {"papers": statuses, "last_completed": key})
         except Exception as exc:
             generated.unlink(missing_ok=True)
             status["reason"] = f"{type(exc).__name__}: {exc}"
             status["traceback"] = traceback.format_exc()[-6000:]
+            write(summary_path, {"papers": statuses, "stopped_at": key})
+            raise SystemExit(f"strict sequence stopped at {key}: {status['reason']}") from exc
 
-        write(summary_path, {"papers": statuses})
-
-    failed = [item["key"] for item in statuses if not item.get("passed")]
     summary = {
-        "version": "v082-strict-sequential-manifest-generation-2",
+        "version": "v082-strict-sequential-manifest-generation-3",
         "expected_non_canvas": len(papers),
         "passed_count": sum(bool(item.get("passed")) for item in statuses),
-        "failed_keys": failed,
-        "all_expected_passed": not failed and len(statuses) == len(papers),
+        "failed_keys": [],
+        "all_expected_passed": len(statuses) == len(papers) and all(item.get("passed") for item in statuses),
         "papers": statuses,
     }
     write(summary_path, summary)
     print(json.dumps(summary, ensure_ascii=False, indent=2))
-    if failed:
-        raise SystemExit("one or more papers failed strict sequential manifest generation: " + ", ".join(failed))
+    if not summary["all_expected_passed"]:
+        raise SystemExit("strict sequential manifest generation did not complete all expected papers")
 
 
 if __name__ == "__main__":
