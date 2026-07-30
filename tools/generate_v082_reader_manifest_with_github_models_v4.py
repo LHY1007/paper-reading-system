@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import hashlib
 import json
+import os
+import time
 from pathlib import Path
 from typing import Any
 
@@ -9,17 +12,35 @@ import generate_v082_reader_manifest_with_github_models_v3 as repaired
 
 base = repaired.base
 _original_call_model_json = base.call_model_json
+_last_uncached_request_at = 0.0
+
+
+def _cache_path(*, model: str, system: str, user_payload: Any, cache_dir: Path, cache_name: str) -> Path:
+    key_material = base.json_text({"model": model, "system": system, "payload": user_payload})
+    digest = hashlib.sha256(key_material.encode("utf-8")).hexdigest()
+    return cache_dir / f"{cache_name}-{digest}.json"
+
+
+def _throttle_uncached_request() -> None:
+    global _last_uncached_request_at
+    minimum_interval = max(0.0, float(os.environ.get("GITHUB_MODELS_MIN_INTERVAL_SECONDS", "4")))
+    now = time.monotonic()
+    delay = minimum_interval - (now - _last_uncached_request_at)
+    if delay > 0:
+        print(f"GitHub Models pacing: sleeping {delay:.1f}s before next uncached request", flush=True)
+        time.sleep(delay)
+    _last_uncached_request_at = time.monotonic()
 
 
 def call_model_json_with_syntax_retry(
     *, token: str, model: str, system: str, user_payload: Any, cache_dir: Path,
     cache_name: str, max_tokens: int = 32768, retries: int = 8,
 ) -> Any:
-    """Retry model output when the transport succeeds but JSON syntax is invalid.
+    """Retry malformed JSON and pace uncached GitHub Models requests.
 
-    The evidence, task and quality requirements remain unchanged. Only an explicit
-    strict-JSON reminder and a distinct cache key are added after a syntax failure,
-    so malformed output is never accepted or silently truncated.
+    Cached responses are returned without delay. Uncached requests are spaced so a
+    long paper cannot immediately exhaust the free inference endpoint's minute-level
+    quota. Scientific requirements and fail-closed behavior remain unchanged.
     """
     syntax_errors: list[str] = []
     for syntax_attempt in range(4):
@@ -35,6 +56,15 @@ def call_model_json_with_syntax_retry(
                 + f" This is JSON syntax retry {syntax_attempt}."
             )
             strict_cache_name = f"{cache_name}-strict-json-{syntax_attempt}"
+        cache_path = _cache_path(
+            model=model,
+            system=strict_system,
+            user_payload=user_payload,
+            cache_dir=cache_dir,
+            cache_name=strict_cache_name,
+        )
+        if not cache_path.exists():
+            _throttle_uncached_request()
         try:
             return _original_call_model_json(
                 token=token,
