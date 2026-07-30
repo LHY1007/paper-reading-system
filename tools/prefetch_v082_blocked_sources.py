@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 from urllib.parse import quote
 
@@ -30,24 +31,52 @@ BLOCKED_SOURCES = {
 }
 
 
+def normalized_words(value: object) -> list[str]:
+    text = str(value or "").replace("\u00ad", "").replace("\ufeff", " ")
+    return [token.lower() for token in re.findall(r"[A-Za-z0-9]+", text)]
+
+
+def title_matches(expected_title: str, document: fitz.Document, first_text: str, second_text: str) -> bool:
+    expected = normalized_words(expected_title)
+    if not expected:
+        return False
+    metadata = document.metadata or {}
+    candidates = [first_text + " " + second_text, metadata.get("title", ""), metadata.get("subject", "")]
+    for candidate in candidates:
+        words = normalized_words(candidate)
+        joined = " ".join(words)
+        if " ".join(expected) in joined:
+            return True
+        # Publisher PDF text extraction can split a hyphenated title or insert
+        # running-header tokens. Require all distinctive title terms instead of
+        # deleting a valid user-supplied source because one adjacency changed.
+        distinctive = [word for word in expected if len(word) >= 5]
+        if distinctive and all(word in words for word in distinctive):
+            return True
+    return False
+
+
 def validate_pdf(data: bytes, expected_pages: int, expected_title: str) -> dict:
     if not data.startswith(b"%PDF-"):
         raise RuntimeError("response is not a PDF")
     document = fitz.open(stream=data, filetype="pdf")
-    pages = len(document)
-    if pages != expected_pages:
-        raise RuntimeError(f"page count mismatch: {pages} != {expected_pages}")
-    first_text = " ".join(document[0].get_text("text").split())
-    second_text = " ".join(document[1].get_text("text").split()) if pages > 1 else ""
-    searchable = (first_text + " " + second_text).lower()
-    if expected_title.lower() not in searchable:
-        raise RuntimeError("expected article title not found on first two pages")
-    return {
-        "pages": pages,
-        "first_page_text": first_text[:600],
-        "sha256": hashlib.sha256(data).hexdigest(),
-        "bytes": len(data),
-    }
+    try:
+        pages = len(document)
+        if pages != expected_pages:
+            raise RuntimeError(f"page count mismatch: {pages} != {expected_pages}")
+        first_text = " ".join(document[0].get_text("text").split())
+        second_text = " ".join(document[1].get_text("text").split()) if pages > 1 else ""
+        if not title_matches(expected_title, document, first_text, second_text):
+            raise RuntimeError("expected article title not found in first pages or PDF metadata")
+        return {
+            "pages": pages,
+            "first_page_text": first_text[:600],
+            "metadata_title": (document.metadata or {}).get("title", ""),
+            "sha256": hashlib.sha256(data).hexdigest(),
+            "bytes": len(data),
+        }
+    finally:
+        document.close()
 
 
 def fetch_with_profile(profile: str, landing_urls: list[str], pdf_urls: list[str]) -> tuple[bytes, str, list[dict]]:
@@ -131,7 +160,13 @@ def main() -> None:
                 validation = validate_pdf(target.read_bytes(), paper["expected_pages"], source["expected_title"])
                 report["papers"].append({"key": key, "status": "reused", "path": str(target), **validation})
                 continue
-            except Exception:
+            except Exception as exc:
+                report["papers"].append({
+                    "key": key,
+                    "status": "cached_source_rejected",
+                    "path": str(target),
+                    "error": f"{type(exc).__name__}: {exc}",
+                })
                 target.unlink()
 
         all_attempts: list[dict] = []
