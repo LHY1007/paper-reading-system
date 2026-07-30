@@ -1,0 +1,43 @@
+{
+  "version": "v082-karimi-reader-plan-1",
+  "status": "approved content plan; final manifest still required",
+  "paper": {
+    "key": "karimi-2023",
+    "title_en": "Single-cell spatial immune landscapes of primary and metastatic brain tumours",
+    "title_zh": "原发与转移性脑肿瘤的单细胞空间免疫图谱",
+    "journal": "Nature",
+    "publisher": "Springer Nature",
+    "doi": "10.1038/s41586-022-05680-3",
+    "article_type": "Article",
+    "publication_timeline": "Received 24 March 2022 · Accepted 22 December 2022 · Published online 1 February 2023",
+    "citation": "Nature 614, 555–563 (2023)",
+    "journal_scope": "Nature publishes major advances of broad significance across the natural and biomedical sciences.",
+    "field_positioning": "该研究属于胶质母细胞瘤与脑转移瘤成像质谱、单细胞空间免疫邻域和生存标志物研究。"
+  },
+  "overview": {
+    "qa": [
+      {"question": "研究解决什么问题？", "answer": "原发脑肿瘤和来自不同器官的脑转移瘤具有不同免疫微环境，但多数单细胞研究丢失空间位置，难以解释哪些细胞邻域与结局相关。研究用IMC比较胶质瘤和脑转移瘤核心及边缘的空间免疫生态。"},
+      {"question": "核心数据是什么？", "answer": "研究分析139例高级别胶质瘤和46例脑转移瘤，共389张高维组织病理图像和超过110万个细胞；脑转移来源包括肺、乳腺、黑色素瘤等，并包含胶质母细胞瘤长期生存者。"},
+      {"question": "模型或分析的输入与输出是什么？", "answer": "输入为高通量IMC图像、细胞分割、临床来源和生存信息；分析输出肿瘤、星形胶质、血管及多种髓系和淋巴细胞类型，进一步构建细胞配对网络和空间邻域，并筛选与胶质母细胞瘤生存相关的细胞组合。"},
+      {"question": "主要生物学发现是什么？", "answer": "胶质瘤、脑转移核心和边缘具有不同的免疫组成与相互作用网络。髓系细胞占主导但状态多样，特定MPO阳性巨噬细胞邻域在长期生存胶质母细胞瘤中富集，并伴随更强细胞毒相关环境。"},
+      {"question": "主要临床结果是什么？", "answer": "空间细胞邻域比单纯细胞比例提供额外生存信息；MPO阳性巨噬细胞与长期生存相关，并通过独立组织染色和公开转录组进行支持，但尚未形成可直接用于临床的预测模型。"},
+      {"question": "最重要的限制是什么？", "answer": "不同肿瘤类别和脑转移原发来源的样本量不均，组织芯和有限抗体面板不能覆盖全部空间异质性；长期生存关联可能受治疗和临床选择影响，MPO阳性巨噬细胞的保护机制仍需功能实验验证。"}
+    ],
+    "method": "139例高级别胶质瘤与46例脑转移瘤IMC → 细胞分割和谱系鉴定 → 比较原发脑肿瘤、转移核心和边缘的细胞组成 → 构建细胞互作网络和空间邻域 → 关联胶质母细胞瘤生存 → 聚焦MPO阳性巨噬细胞并以组织荧光和公开RNA数据验证",
+    "story": "文章说明脑肿瘤微环境不能由单一巨噬细胞丰度概括：不同肿瘤来源、核心与边缘形成不同的空间网络，而某些邻域中的MPO阳性巨噬细胞反而与长期生存相关。空间上下文改变了对髓系细胞促癌或抗癌作用的判断。"
+  },
+  "body_section_map": [
+    ["Introduction", "引言"], ["Mapping the brain TME with IMC", "利用IMC绘制脑肿瘤微环境"],
+    ["Single-cell interaction networks", "单细胞相互作用网络"], ["Spatial cellular neighbourhoods", "空间细胞邻域"],
+    ["+MPO macrophages are associated with survival", "MPO阳性巨噬细胞与生存相关"],
+    ["Discussion", "讨论"], ["Methods", "方法"], ["Data availability", "数据可用性"], ["Code availability", "代码可用性"]
+  ],
+  "main_figures": [
+    {"id": "figure-1", "title_en": "Figure 1. IMC reveals cell dynamics within the brain TME", "title_zh": "图1：IMC揭示脑肿瘤微环境中的细胞动态", "reader_role": "建立胶质瘤和脑转移瘤核心/边缘的细胞图谱。", "panel_requirement": "解释IMC流程、标志物、细胞谱系、代表图和不同组织中的细胞比例。"},
+    {"id": "figure-2", "title_en": "Figure 2. Single-cell interaction networks in high-dimensional histopathology images represent clinical subgroups of patients with brain tumours", "title_zh": "图2：高维组织病理中的单细胞互作网络区分脑肿瘤临床亚组", "reader_role": "比较不同肿瘤类别和区域的细胞配对关系。", "panel_requirement": "说明相互作用计算、富集或排斥方向、网络差异和来源混杂。"},
+    {"id": "figure-3", "title_en": "Figure 3. Spatial cellular neighbourhoods relate to survival in glioblastoma", "title_zh": "图3：空间细胞邻域与胶质母细胞瘤生存相关", "reader_role": "识别与长期或短期生存相关的多细胞邻域。", "panel_requirement": "解释邻域聚类、组成、空间图、生存分析和独立于单细胞比例的信息。"},
+    {"id": "figure-4", "title_en": "Figure 4. MPO+ macrophages are enriched in LTS tumours and are associated with enhanced cytotoxic functions", "title_zh": "图4：MPO阳性巨噬细胞在长期生存肿瘤中富集并与增强的细胞毒功能相关", "reader_role": "聚焦MPO阳性巨噬细胞，展示空间定位、组织验证和功能关联。", "panel_requirement": "说明LTS/STS比较、MPO与髓系标志物、邻近细胞毒细胞、公开RNA支持及不能推断因果。"}
+  ],
+  "supplementary_source_requirement": "Extended Data Figures 1–10需保留抗体验证、脑转移来源、邻域参数、生存分析和MPO验证；主文未内嵌的补充表需明确来源。",
+  "reference_requirement": {"expected_count": 62, "preserve_source_numbers": true, "reject_body_paragraphs": true}
+}
