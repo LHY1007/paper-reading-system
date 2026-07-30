@@ -1,10 +1,21 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import sys
+from pathlib import Path
+
 import build_v082_reader_if_ready as base
 
 
 ORIGINAL_RUN = base.run
+
+
+def semantic_report_path(command: list[str]) -> Path:
+    try:
+        report = Path(command[command.index("--report") + 1])
+    except (ValueError, IndexError):
+        report = Path("final/V0.8.2/reports/READER_CONTENT.json")
+    return report.with_name(report.stem.replace("_READER_CONTENT", "_SEMANTIC_GROUNDING") + report.suffix)
 
 
 def run(command: list[str]):
@@ -16,6 +27,27 @@ def run(command: list[str]):
             rewritten[1] = "tools/build_v082_reader_content_task_v3.py"
         elif rewritten[1] == "tools/audit_v082_reader_experience.py":
             rewritten[1] = "tools/audit_v082_reader_experience_v2.py"
+        elif rewritten[1] == "tools/validate_v082_reader_content_quality.py":
+            if len(sys.argv) < 2:
+                return {
+                    "command": rewritten,
+                    "returncode": 98,
+                    "stdout_tail": "",
+                    "stderr_tail": "raw evidence path is unavailable for semantic validation",
+                }
+            manifest = rewritten[2]
+            semantic_command = [
+                sys.executable,
+                "tools/validate_v082_reader_semantics_v3.py",
+                manifest,
+                "--evidence",
+                sys.argv[1],
+                "--report",
+                str(semantic_report_path(rewritten)),
+            ]
+            semantic = ORIGINAL_RUN(semantic_command)
+            if semantic["returncode"] != 0:
+                return semantic
     return ORIGINAL_RUN(rewritten)
 
 
