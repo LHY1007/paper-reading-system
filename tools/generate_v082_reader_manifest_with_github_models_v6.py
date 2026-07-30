@@ -12,6 +12,7 @@ import validate_v082_reader_semantics_v3 as semantic_gate
 
 
 _original_digest = grounded.collect_evidence_digest
+_original_overview = grounded.generate_overview
 _original_studies = grounded.generate_grounded_studies
 _original_translate = grounded.base.translate_records
 
@@ -28,6 +29,38 @@ def cache_compatible_translate(
         cache_dir=cache_dir,
         cache_prefix=compatible_prefix,
         context=context,
+    )
+
+
+def plan_first_overview(
+    evidence: dict[str, Any], plan: dict[str, Any], *, token: str, model: str,
+    cache_dir: Path, cache_prefix: str,
+) -> dict[str, Any]:
+    source = copy.deepcopy(plan.get("overview") or {})
+    candidate = {
+        "qa": [
+            {
+                "question": grounded.norm(item.get("question")),
+                "answer": grounded.norm(item.get("answer")),
+            }
+            for item in source.get("qa") or []
+            if isinstance(item, dict)
+        ],
+        "method_heading": "方法流程概括",
+        "method": grounded.norm(source.get("method")),
+        "story_label": "整体结论",
+        "story": grounded.norm(source.get("story")),
+        "scope_note": "正文与图注严格保留来源证据；中文按自然段翻译；图表精读仅解释图中及正文明确支持的结果。",
+    }
+    if not grounded.overview_issues(candidate):
+        return candidate
+    return _original_overview(
+        evidence,
+        plan,
+        token=token,
+        model=model,
+        cache_dir=cache_dir,
+        cache_prefix=cache_prefix,
     )
 
 
@@ -92,6 +125,7 @@ def cli_paths(argv: list[str]) -> tuple[Path, Path]:
 def main() -> None:
     evidence_path, output_path = cli_paths(sys.argv)
     grounded.base.translate_records = cache_compatible_translate
+    grounded.generate_overview = plan_first_overview
     grounded.collect_evidence_digest = compact_digest
     grounded.generate_grounded_studies = compact_studies
     grounded.main()
