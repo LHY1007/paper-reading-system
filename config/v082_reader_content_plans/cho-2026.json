@@ -1,0 +1,51 @@
+{
+  "version": "v082-cho-reader-plan-1",
+  "status": "approved content plan; final manifest still required",
+  "paper": {
+    "key": "cho-2026",
+    "title_en": "Pan-cancer spatial atlas of tertiary lymphoid structures",
+    "title_zh": "泛癌三级淋巴结构空间图谱",
+    "journal": "Science",
+    "publisher": "American Association for the Advancement of Science (AAAS)",
+    "doi": "10.1126/science.adz2742",
+    "article_type": "Research Article",
+    "publication_timeline": "Submitted 25 May 2025 · Accepted 3 March 2026 · Published 28 May 2026",
+    "citation": "Science 392, eadz2742 (2026)",
+    "journal_scope": "Science publishes major advances of broad scientific significance across disciplines.",
+    "field_positioning": "该研究属于泛癌空间转录组、三级淋巴结构成熟、计算病理和免疫治疗患者分层研究。"
+  },
+  "overview": {
+    "qa": [
+      {"question": "研究解决什么问题？", "answer": "三级淋巴结构的存在通常与抗肿瘤免疫相关，但不同成熟阶段、相对肿瘤的位置以及这些特征在不同癌种中的临床意义尚缺乏统一框架。研究构建泛癌空间图谱，并开发可从常规H&E规模化识别TLS状态的AI体系。"},
+      {"question": "核心数据是什么？", "answer": "研究统一分析12个癌种的340张空间转录组切片和255名患者，识别695个空间转录组TLS；随后在10个独立队列的3,071张H&E全切片中识别和分类25,088个TLS，并结合超高通量空间成像、单细胞空间数据和治疗队列验证。"},
+      {"question": "模型或分析的输入与输出是什么？", "answer": "空间流程输入全切片空间转录组与H&E，通过TLS基因特征、无监督分割和肿瘤距离计算输出TLS边界、早期/初级/次级成熟状态及肿瘤内/周围/远端位置；AI流程输入H&E WSI，输出TLS检测和成熟分类，并汇总为患者级成熟组成评分。"},
+      {"question": "主要生物学发现是什么？", "answer": "TLS从早期聚集体到具有生发中心的成熟结构形成连续谱，并伴随B/T细胞分区、滤泡树突细胞网络、趋化因子及干扰素程序增强。肿瘤内TLS附近富集抗原呈递和IFN反应，远离TLS的区域更富集MYC、G2/M、EMT等增殖和侵袭程序。"},
+      {"question": "主要临床结果是什么？", "answer": "基于肿瘤内不同成熟TLS比例建立的复合评分，在多个癌种和治疗背景中比仅判断TLS有无或仅使用主导成熟状态更稳定地分层生存和治疗反应。"},
+      {"question": "最重要的限制是什么？", "answer": "不同癌种的空间样本量和组织取样深度不均，部分癌种TLS稀少；AI标签来自空间推断而非所有病例的直接免疫染色，临床分析主要为回顾性，距离梯度和成熟状态与肿瘤程序之间仍不能证明因果。"}
+    ],
+    "method": "统一处理340张空间转录组切片 → 基于TLS特征识别、分割并判断成熟与空间位置 → 比较细胞组成、转录程序和肿瘤距离梯度 → 用高通量和单细胞空间平台正交验证 → 训练H&E TLS检测与成熟分类模型 → 在3,071张WSI扩展 → 构建成熟组成复合评分并验证结局",
+    "story": "文章把TLS从二元有无标志物改写为具有成熟度和空间位置的免疫生态单元。空间组学揭示成熟过程中免疫组织化增强，并显示肿瘤程序随TLS距离形成梯度；AI将这些特征扩展到常规病理大队列，患者级复合评分则把TLS异质性转化为可验证的临床分层指标。"
+  },
+  "body_section_map": [
+    ["INTRODUCTION", "引言"], ["RATIONALE", "研究依据"], ["RESULTS", "结果摘要"], ["CONCLUSION", "结论摘要"],
+    ["ST reveals the landscape of TLSs across tissues", "空间转录组揭示跨组织TLS图景"],
+    ["TLS maturation states differ across cancer types", "不同癌种的TLS成熟状态存在差异"],
+    ["Transcriptional programs associated with TLS maturation", "TLS成熟相关转录程序"],
+    ["TLS proximity associates with spatial gradients of tumor signaling", "TLS距离与肿瘤信号空间梯度相关"],
+    ["Association between TLS maturation and tumor genomic and molecular subtypes", "TLS成熟与肿瘤基因组及分子亚型的关系"],
+    ["Scalable AI framework for TLS detection and maturation classification from H&E images", "从H&E检测TLS并分类成熟状态的可扩展AI框架"],
+    ["TLS maturation varies with tumor stage and tumor-immune genomic context", "TLS成熟随肿瘤分期和肿瘤免疫基因组背景变化"],
+    ["TLS maturation-aware composite scoring enables robust patient stratification", "成熟度感知复合评分实现稳健患者分层"],
+    ["Discussion", "讨论"], ["Materials and methods", "材料与方法"], ["Data availability", "数据可用性"]
+  ],
+  "main_figures": [
+    {"id": "figure-1", "title_en": "Figure 1. Study design and workflow for TLS detection and analysis", "title_zh": "图1：TLS检测与分析的研究设计和流程", "reader_role": "说明12癌种空间数据、TLS自动识别、成熟与位置标注及下游分析。", "panel_requirement": "解释样本构成、iStar/TLS评分、分割、IT/PT/DT定义、癌种间发生率和数量差异。"},
+    {"id": "figure-2", "title_en": "Figure 2. Systematic classification and spatial profiling of TLS maturation states", "title_zh": "图2：TLS成熟状态的系统分类与空间分析", "reader_role": "建立早期、初级滤泡样和次级滤泡样TLS的组织学及空间标准。", "panel_requirement": "逐子图说明成熟判定、大小、位置、癌种组成、内部异质性和统计比较。"},
+    {"id": "figure-3", "title_en": "Figure 3. Differential cellular composition and gene programs across TLS maturation states", "title_zh": "图3：不同TLS成熟状态的细胞组成和基因程序", "reader_role": "解析成熟过程中B/T分区、FDC网络和免疫激活。", "panel_requirement": "解释细胞组成、差异基因、通路、趋化因子和正交空间验证。"},
+    {"id": "figure-4", "title_en": "Figure 4. Spatial dynamics of tumor pathway activity relative to TLS proximity", "title_zh": "图4：肿瘤通路活性随TLS距离的空间变化", "reader_role": "展示TLS附近免疫激活和远端增殖侵袭程序的距离梯度。", "panel_requirement": "说明距离环带、肿瘤区域、通路评分、近端与远端方向及单细胞空间验证。"},
+    {"id": "figure-5", "title_en": "Figure 5. Association between TLS maturation states, tumor features, and driver mutation status across cancer cohorts", "title_zh": "图5：跨癌种TLS成熟状态与肿瘤特征及驱动突变的关系", "reader_role": "把TLS成熟放入癌种、分子亚型、突变和免疫背景中比较。", "panel_requirement": "按队列区分关联方向、混杂因素和不同癌种不可直接合并的部分。"},
+    {"id": "figure-6", "title_en": "Figure 6. AI-driven TLS classification and its prognostic relevance in TCGA cohorts", "title_zh": "图6：AI驱动的TLS分类及其在TCGA队列中的预后意义", "reader_role": "展示H&E模型、跨队列检测、成熟组成评分和患者分层。", "panel_requirement": "解释检测与分类性能、25,088个TLS的应用、评分构成、生存和治疗反应比较。"}
+  ],
+  "supplementary_source_requirement": "Science主PDF引用的tables S1–S4及其他补充材料属于独立文件；完整发布必须明确补充来源清单，不能把主PDF未内嵌内容默认为零。",
+  "reference_requirement": {"expected_count": 118, "preserve_source_numbers": true, "reject_body_paragraphs": true}
+}
