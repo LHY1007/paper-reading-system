@@ -10,6 +10,7 @@ on:
       - "config/v082_reader_content_blueprint.json"
       - "config/v082_reader_content_plans/**"
       - "content/v082_manifests/**"
+      - "templates/v082/V082_CANVAS_FROZEN_SHELL.html"
       - "schemas/paper_content_manifest_v082.schema.json"
       - "tools/download_v082_sources.py"
       - "tools/download_v082_release_sources.py"
@@ -18,7 +19,7 @@ on:
       - "tools/build_pdf_native_manifest_v082*.py"
       - "tools/build_v082_reader_content_task.py"
       - "tools/build_v082_reader_if_ready*.py"
-      - "tools/run_v082_final_reader_build.py"
+      - "tools/run_v082_final_reader_build*.py"
       - "tools/audit_v082_reader_experience*.py"
       - "tools/validate_v082_*.py"
       - "tools/normalize_v082_canvas_master.py"
@@ -26,6 +27,7 @@ on:
       - "tools/render_v082_from_frozen_shell.py"
       - "tools/render_v082_canvas_component_locked*.py"
       - "tools/browser_regression_v082.py"
+      - "tools/browser_layout_invariance_v082*.py"
   workflow_dispatch:
 
 permissions:
@@ -67,6 +69,7 @@ jobs:
           test -n "$CANVAS"
           printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_final_paths
           mkdir -p .build/v082/{pdfs,cho-source} final/V0.8.2/reports
+          test -f templates/v082/V082_CANVAS_FROZEN_SHELL.html
 
       - name: Restore audited source PDF cache
         id: source_pdf_cache
@@ -128,11 +131,12 @@ jobs:
         run: |
           set -euo pipefail
           source /tmp/v082_final_paths
-          python tools/run_v082_final_reader_build.py \
+          python tools/run_v082_final_reader_build_v3.py \
             --canonical "$CANVAS_ORIGINAL" \
             --pdf-dir .build/v082/pdfs \
             --output-root final/V0.8.2 \
-            --build-root .build/v082
+            --build-root .build/v082 \
+            --materialized-shell templates/v082/V082_CANVAS_FROZEN_SHELL.html
 
       - name: Package only a passed final release
         if: steps.reader_build.outcome == 'success'
@@ -143,6 +147,10 @@ jobs:
           gate=json.load(open('final/V0.8.2/reports/FINAL_RELEASE_GATE.json'))
           if not gate.get('passed'):
               raise SystemExit('FINAL_RELEASE_GATE.json did not pass')
+          if not (gate.get('layout_invariance') or {}).get('passed'):
+              raise SystemExit('browser layout invariance did not pass')
+          if not (gate.get('materialized_product_shell') or {}).get('passed'):
+              raise SystemExit('materialized product shell provenance did not pass')
           PY
           zip -9 -r .build/release/V0.8.2_FINAL_READERS.zip final/V0.8.2
 
@@ -168,7 +176,9 @@ jobs:
             exit 1
           fi
           if [ "${{ steps.reader_build.outcome }}" != "success" ]; then
+            cat final/V0.8.2/reports/PRODUCT_SHELL_PROVENANCE.json || true
             cat final/V0.8.2/reports/SEQUENTIAL_READER_BUILD.json || true
+            cat final/V0.8.2/reports/LAYOUT_INVARIANCE.json || true
             find final/V0.8.2/reports -maxdepth 1 -name '*_BUILD_READINESS.json' -print -exec cat {} \;
             exit 1
           fi
