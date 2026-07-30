@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 
 import generate_v082_reader_manifest_with_github_models_v5 as grounded
-import validate_v082_reader_semantics_v2 as semantic_gate
+import validate_v082_reader_semantics_v3 as semantic_gate
 
 
 _original_digest = grounded.collect_evidence_digest
