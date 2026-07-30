@@ -42,7 +42,6 @@ def compact_studies(
 
     compact_evidence = copy.deepcopy(evidence)
     for section in compact_evidence.get("sections") or []:
-        kept_related = 0
         for block in section.get("blocks") or []:
             if block.get("type") != "paragraph":
                 continue
@@ -53,11 +52,7 @@ def compact_studies(
             ]
             if not figure_ids:
                 continue
-            kept_related += 1
-            if kept_related > 8:
-                block["english"] = [{"text": ""}]
-                continue
-            text = grounded.paragraph_text(block)[:1100]
+            text = grounded.paragraph_text(block)[:900]
             block["english"] = [{"text": text, "figure_ids": list(dict.fromkeys(figure_ids))}]
 
     return _original_studies(
