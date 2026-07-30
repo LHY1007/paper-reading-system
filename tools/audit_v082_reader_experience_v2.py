@@ -100,7 +100,9 @@ def score_reader(reader: dict[str, Any], baseline: dict[str, Any] | None = None)
     modules = result["modules"]
 
     table_like_figures = reader.get("tables", {}).get("table_like_figure_ids", [])
-    modules["tables"] = 0 if table_like_figures else 5
+    structured_table_count = int(reader.get("tables", {}).get("count", 0) or 0)
+    unresolved_table_images = max(0, len(table_like_figures) - structured_table_count)
+    modules["tables"] = max(0, round(5 * (1 - unresolved_table_images / max(1, len(table_like_figures))), 1))
 
     reference_count = int(reader.get("references", {}).get("count", 0) or 0)
     suspicious_count = int(reader.get("references", {}).get("suspicious_count", 0) or 0)
@@ -116,7 +118,7 @@ def score_reader(reader: dict[str, Any], baseline: dict[str, Any] | None = None)
 
     result["total"] = round(sum(float(value) for value in modules.values()), 1)
     result["scoring_note"] = (
-        "Table and reference quantities are paper-specific. Tables lose points only when a source table is emitted as a figure; "
+        "Table and reference quantities are paper-specific. A table loses points only when its table-like figure has no corresponding structured table card; "
         "references lose points for bibliographically implausible body-text contamination. Figure score also includes source-image resolution."
     )
     return result
