@@ -14,10 +14,10 @@
     "caption": 7699,
     "reference": 10212
   },
-  "paragraphs": 103,
+  "paragraphs": 102,
   "sections": 17,
   "assets": 14,
-  "references": 65,
+  "references": 66,
   "asset_audit": [
     {
       "id": "figure-1",
@@ -261,8 +261,8 @@
   "kept_text_sha256": "6fd154d50915a45357a8ea59fcb5f2b7290e0f50200115a5ade77166c2c7782f",
   "manifest_source_fragments_sha256": "f5dfd0193808a3038593732ec63afc72581dccb9e36f1d6fbd94b80baadc9ac9",
   "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
-  "passed": false,
-  "strict_layout_parser": "v082-final-15",
+  "passed": true,
+  "strict_layout_parser": "v082-final-16",
   "formula_blocks_detected": 35,
   "formula_blocks_missing": 0,
   "formula_samples": [
@@ -289,12 +289,10 @@
   ],
   "cross_column_body_merges": 3,
   "cross_column_caption_merges": 4,
-  "source_chars": 56503,
+  "source_chars": 55652,
   "expected_reference_count": 66,
   "expected_main_figures": 0,
-  "strict_errors": [
-    "reference coverage incomplete: 65 < 66"
-  ],
+  "strict_errors": [],
   "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
   "source_outline_entries": 45,
   "figure_titles_corrected_from_pdf_toc": 10,
@@ -316,10 +314,10 @@
   "body_reconstruction": {
     "version": "v082-body-reconstruction-5",
     "body_font_size": 8.243,
-    "paragraphs": 103,
-    "source_chars": 56503,
-    "candidate_source_chars": 56464,
-    "accepted_source_chars": 56464,
+    "paragraphs": 102,
+    "source_chars": 55652,
+    "candidate_source_chars": 55613,
+    "accepted_source_chars": 55613,
     "page_candidate_chars": {
       "1": 2334,
       "2": 7940,
@@ -334,7 +332,7 @@
       "11": 4550,
       "12": 5621,
       "13": 3956,
-      "15": 5293
+      "15": 4442
     },
     "page_source_chars": {
       "1": 2334,
@@ -350,7 +348,7 @@
       "11": 4550,
       "12": 5621,
       "13": 3956,
-      "15": 5293
+      "15": 4442
     },
     "page_paragraphs": {
       "1": 2,
@@ -366,7 +364,7 @@
       "11": 39,
       "12": 27,
       "13": 9,
-      "15": 8
+      "15": 7
     },
     "page_coverage": {
       "1": 1.0,
@@ -419,5 +417,10 @@
       "Competing interests",
       "Additional information"
     ]
-  }
+  },
+  "fallback_authors_extracted": 4,
+  "fallback_affiliations_extracted": 0,
+  "titles_recovered_v16": 0,
+  "panel_evidence_recovered_v16": 16,
+  "layout_reference_repair_applied": true
 }

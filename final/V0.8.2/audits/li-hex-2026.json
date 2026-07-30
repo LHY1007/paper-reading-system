@@ -296,7 +296,7 @@
   "manifest_source_fragments_sha256": "505c35a9d1d95b5875ba0b8302704b8796e5bfcbd7365293436cc3a0b19eea87",
   "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
   "passed": true,
-  "strict_layout_parser": "v082-final-15",
+  "strict_layout_parser": "v082-final-16",
   "formula_blocks_detected": 6,
   "formula_blocks_missing": 0,
   "formula_samples": [
@@ -434,5 +434,10 @@
       "Author contributions",
       "Additional information"
     ]
-  }
+  },
+  "fallback_authors_extracted": 7,
+  "fallback_affiliations_extracted": 0,
+  "titles_recovered_v16": 1,
+  "panel_evidence_recovered_v16": 2,
+  "layout_reference_repair_applied": true
 }

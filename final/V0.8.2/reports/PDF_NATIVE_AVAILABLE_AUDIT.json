@@ -321,7 +321,7 @@
         "manifest_source_fragments_sha256": "a24efd586bc43f857b3f2c633ac9774858e4a0d40632621a034cabfc38e880fe",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-15",
+        "strict_layout_parser": "v082-final-16",
         "formula_blocks_detected": 20,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -484,7 +484,12 @@
             "Competing interests",
             "Additional information"
           ]
-        }
+        },
+        "fallback_authors_extracted": 9,
+        "fallback_affiliations_extracted": 0,
+        "titles_recovered_v16": 0,
+        "panel_evidence_recovered_v16": 14,
+        "layout_reference_repair_applied": true
       }
     },
     {
@@ -727,7 +732,7 @@
         "manifest_source_fragments_sha256": "d6120ca1e365aa85b19278d88d99ea539aaa266dc48bbe2e4a5b9724348ba338",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-15",
+        "strict_layout_parser": "v082-final-16",
         "formula_blocks_detected": 2,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -755,7 +760,7 @@
         "continuation_blocks_missing": [],
         "cross_page_captions_rebuilt_by_title_lookup": [],
         "authors_extracted": 18,
-        "affiliations_extracted": 0,
+        "affiliations_extracted": 9,
         "publication_timeline_extracted": true,
         "group_authors_extracted": [],
         "body_reconstruction": {
@@ -869,7 +874,12 @@
             "Author contributions",
             "Additional information"
           ]
-        }
+        },
+        "fallback_authors_extracted": 18,
+        "fallback_affiliations_extracted": 9,
+        "titles_recovered_v16": 0,
+        "panel_evidence_recovered_v16": 0,
+        "layout_reference_repair_applied": true
       }
     },
     {
@@ -877,7 +887,7 @@
       "order": 3,
       "pdf": ".build/v082/pdfs/03_lee-2025.pdf",
       "returncode": 0,
-      "stdout": "{\n  \"key\": \"lee-2025\",\n  \"sections\": 34,\n  \"paragraphs\": 61,\n  \"assets\": 5,\n  \"references\": 64,\n  \"formula_blocks\": 1,\n  \"cross_column_caption_merges\": 0,\n  \"passed\": true,\n  \"errors\": []\n}\n",
+      "stdout": "{\n  \"key\": \"lee-2025\",\n  \"sections\": 34,\n  \"paragraphs\": 60,\n  \"assets\": 5,\n  \"references\": 64,\n  \"formula_blocks\": 1,\n  \"cross_column_caption_merges\": 0,\n  \"passed\": true,\n  \"errors\": []\n}\n",
       "stderr": "",
       "manifest_exists": true,
       "audit_exists": true,
@@ -898,7 +908,7 @@
           "caption": 12624,
           "reference": 10451
         },
-        "paragraphs": 61,
+        "paragraphs": 60,
         "sections": 16,
         "assets": 5,
         "references": 64,
@@ -993,7 +1003,7 @@
         "manifest_source_fragments_sha256": "b5c970d8fe70ab6d66eb4a909fcf2e8f03b1e48cf35351c7d483eb577678d2af",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-15",
+        "strict_layout_parser": "v082-final-16",
         "formula_blocks_detected": 1,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -1001,7 +1011,7 @@
         ],
         "cross_column_body_merges": 1,
         "cross_column_caption_merges": 0,
-        "source_chars": 46645,
+        "source_chars": 45623,
         "expected_reference_count": 64,
         "expected_main_figures": 0,
         "strict_errors": [],
@@ -1019,17 +1029,17 @@
         "cross_page_captions_rebuilt": 0,
         "continuation_blocks_missing": [],
         "cross_page_captions_rebuilt_by_title_lookup": [],
-        "authors_extracted": 14,
+        "authors_extracted": 24,
         "affiliations_extracted": 7,
         "publication_timeline_extracted": true,
         "group_authors_extracted": [],
         "body_reconstruction": {
           "version": "v082-body-reconstruction-5",
           "body_font_size": 8.219,
-          "paragraphs": 61,
-          "source_chars": 46645,
-          "candidate_source_chars": 46633,
-          "accepted_source_chars": 46633,
+          "paragraphs": 60,
+          "source_chars": 45623,
+          "candidate_source_chars": 45611,
+          "accepted_source_chars": 45611,
           "page_candidate_chars": {
             "1": 2064,
             "2": 8257,
@@ -1044,7 +1054,7 @@
             "11": 4794,
             "12": 6505,
             "13": 95,
-            "14": 2613
+            "14": 1591
           },
           "page_source_chars": {
             "1": 2064,
@@ -1060,7 +1070,7 @@
             "11": 4794,
             "12": 6505,
             "13": 95,
-            "14": 2613
+            "14": 1591
           },
           "page_paragraphs": {
             "1": 3,
@@ -1076,7 +1086,7 @@
             "11": 14,
             "12": 13,
             "13": 1,
-            "14": 6
+            "14": 5
           },
           "page_coverage": {
             "1": 1.0,
@@ -1132,7 +1142,12 @@
             "Author contributions",
             "Additional information"
           ]
-        }
+        },
+        "fallback_authors_extracted": 24,
+        "fallback_affiliations_extracted": 0,
+        "titles_recovered_v16": 5,
+        "panel_evidence_recovered_v16": 22,
+        "layout_reference_repair_applied": true
       }
     },
     {
@@ -1545,7 +1560,7 @@
         "manifest_source_fragments_sha256": "e7de958d9ea3f196d17f0cabc7f752f8989bacc58e959ebe6d32cf289c0e2826",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-15",
+        "strict_layout_parser": "v082-final-16",
         "formula_blocks_detected": 11,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -1687,7 +1702,12 @@
             "Quantification and statistical analysis",
             "Additional resources"
           ]
-        }
+        },
+        "fallback_authors_extracted": 21,
+        "fallback_affiliations_extracted": 0,
+        "titles_recovered_v16": 0,
+        "panel_evidence_recovered_v16": 2,
+        "layout_reference_repair_applied": true
       }
     },
     {
@@ -1998,7 +2018,7 @@
         "manifest_source_fragments_sha256": "505c35a9d1d95b5875ba0b8302704b8796e5bfcbd7365293436cc3a0b19eea87",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
         "passed": true,
-        "strict_layout_parser": "v082-final-15",
+        "strict_layout_parser": "v082-final-16",
         "formula_blocks_detected": 6,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -2136,19 +2156,24 @@
             "Author contributions",
             "Additional information"
           ]
-        }
+        },
+        "fallback_authors_extracted": 7,
+        "fallback_affiliations_extracted": 0,
+        "titles_recovered_v16": 1,
+        "panel_evidence_recovered_v16": 2,
+        "layout_reference_repair_applied": true
       }
     },
     {
       "key": "andani-2025",
       "order": 6,
       "pdf": ".build/v082/pdfs/06_andani-2025.pdf",
-      "returncode": 1,
-      "stdout": "{\n  \"key\": \"andani-2025\",\n  \"sections\": 31,\n  \"paragraphs\": 103,\n  \"assets\": 14,\n  \"references\": 65,\n  \"formula_blocks\": 35,\n  \"cross_column_caption_merges\": 4,\n  \"passed\": false,\n  \"errors\": [\n    \"reference coverage incomplete: 65 < 66\"\n  ]\n}\n",
+      "returncode": 0,
+      "stdout": "{\n  \"key\": \"andani-2025\",\n  \"sections\": 31,\n  \"paragraphs\": 102,\n  \"assets\": 14,\n  \"references\": 66,\n  \"formula_blocks\": 35,\n  \"cross_column_caption_merges\": 4,\n  \"passed\": true,\n  \"errors\": []\n}\n",
       "stderr": "",
       "manifest_exists": true,
       "audit_exists": true,
-      "passed": false,
+      "passed": true,
       "audit": {
         "schema_version": "v082-pdf-native-audit-1",
         "paper_key": "andani-2025",
@@ -2165,10 +2190,10 @@
           "caption": 7699,
           "reference": 10212
         },
-        "paragraphs": 103,
+        "paragraphs": 102,
         "sections": 17,
         "assets": 14,
-        "references": 65,
+        "references": 66,
         "asset_audit": [
           {
             "id": "figure-1",
@@ -2412,8 +2437,8 @@
         "kept_text_sha256": "6fd154d50915a45357a8ea59fcb5f2b7290e0f50200115a5ade77166c2c7782f",
         "manifest_source_fragments_sha256": "f5dfd0193808a3038593732ec63afc72581dccb9e36f1d6fbd94b80baadc9ac9",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
-        "passed": false,
-        "strict_layout_parser": "v082-final-15",
+        "passed": true,
+        "strict_layout_parser": "v082-final-16",
         "formula_blocks_detected": 35,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -2440,12 +2465,10 @@
         ],
         "cross_column_body_merges": 3,
         "cross_column_caption_merges": 4,
-        "source_chars": 56503,
+        "source_chars": 55652,
         "expected_reference_count": 66,
         "expected_main_figures": 0,
-        "strict_errors": [
-          "reference coverage incomplete: 65 < 66"
-        ],
+        "strict_errors": [],
         "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
         "source_outline_entries": 45,
         "figure_titles_corrected_from_pdf_toc": 10,
@@ -2467,10 +2490,10 @@
         "body_reconstruction": {
           "version": "v082-body-reconstruction-5",
           "body_font_size": 8.243,
-          "paragraphs": 103,
-          "source_chars": 56503,
-          "candidate_source_chars": 56464,
-          "accepted_source_chars": 56464,
+          "paragraphs": 102,
+          "source_chars": 55652,
+          "candidate_source_chars": 55613,
+          "accepted_source_chars": 55613,
           "page_candidate_chars": {
             "1": 2334,
             "2": 7940,
@@ -2485,7 +2508,7 @@
             "11": 4550,
             "12": 5621,
             "13": 3956,
-            "15": 5293
+            "15": 4442
           },
           "page_source_chars": {
             "1": 2334,
@@ -2501,7 +2524,7 @@
             "11": 4550,
             "12": 5621,
             "13": 3956,
-            "15": 5293
+            "15": 4442
           },
           "page_paragraphs": {
             "1": 2,
@@ -2517,7 +2540,7 @@
             "11": 39,
             "12": 27,
             "13": 9,
-            "15": 8
+            "15": 7
           },
           "page_coverage": {
             "1": 1.0,
@@ -2570,19 +2593,24 @@
             "Competing interests",
             "Additional information"
           ]
-        }
+        },
+        "fallback_authors_extracted": 4,
+        "fallback_affiliations_extracted": 0,
+        "titles_recovered_v16": 0,
+        "panel_evidence_recovered_v16": 16,
+        "layout_reference_repair_applied": true
       }
     },
     {
       "key": "spitzer-2025",
       "order": 8,
       "pdf": ".build/v082/pdfs/08_spitzer-2025.pdf",
-      "returncode": 1,
-      "stdout": "{\n  \"key\": \"spitzer-2025\",\n  \"sections\": 17,\n  \"paragraphs\": 82,\n  \"assets\": 12,\n  \"references\": 52,\n  \"formula_blocks\": 9,\n  \"cross_column_caption_merges\": 8,\n  \"passed\": false,\n  \"errors\": [\n    {\n      \"missing_formula_blocks\": [\n        \"HMF (n=14) IMF (n=15) LMF−GN (n=12) LMF−OC (n=9) LMF−TAM (n=1) Mixed (n=8)\",\n        \"Mixed (n=10)\",\n        \"OPC p=0.0018\"\n      ]\n    }\n  ]\n}\n",
+      "returncode": 0,
+      "stdout": "{\n  \"key\": \"spitzer-2025\",\n  \"sections\": 17,\n  \"paragraphs\": 82,\n  \"assets\": 12,\n  \"references\": 52,\n  \"formula_blocks\": 9,\n  \"cross_column_caption_merges\": 8,\n  \"passed\": true,\n  \"errors\": []\n}\n",
       "stderr": "",
       "manifest_exists": true,
       "audit_exists": true,
-      "passed": false,
+      "passed": true,
       "audit": {
         "schema_version": "v082-pdf-native-audit-1",
         "paper_key": "spitzer-2025",
@@ -2812,10 +2840,10 @@
         "kept_text_sha256": "94dfa0b60cb079acdd859622443bc0fdcd392d19725cfe6c6a8d0fc561d0558c",
         "manifest_source_fragments_sha256": "668ec2b5018076529a5ff443d425a760500f84ae4a76c98d6408111283980554",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
-        "passed": false,
-        "strict_layout_parser": "v082-final-15",
+        "passed": true,
+        "strict_layout_parser": "v082-final-16",
         "formula_blocks_detected": 9,
-        "formula_blocks_missing": 3,
+        "formula_blocks_missing": 0,
         "formula_samples": [
           "HMF (n=14) IMF (n=15) LMF−GN (n=12) LMF−OC (n=9) LMF−TAM (n=1) Mixed (n=8)",
           "Mixed (n=10)",
@@ -2832,15 +2860,7 @@
         "source_chars": 65009,
         "expected_reference_count": 52,
         "expected_main_figures": 0,
-        "strict_errors": [
-          {
-            "missing_formula_blocks": [
-              "HMF (n=14) IMF (n=15) LMF−GN (n=12) LMF−OC (n=9) LMF−TAM (n=1) Mixed (n=8)",
-              "Mixed (n=10)",
-              "OPC p=0.0018"
-            ]
-          }
-        ],
+        "strict_errors": [],
         "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
         "source_outline_entries": 22,
         "figure_titles_corrected_from_pdf_toc": 12,
@@ -2951,19 +2971,24 @@
             "Competing interests",
             "Additional information"
           ]
-        }
+        },
+        "fallback_authors_extracted": 3,
+        "fallback_affiliations_extracted": 0,
+        "titles_recovered_v16": 0,
+        "panel_evidence_recovered_v16": 10,
+        "layout_reference_repair_applied": true
       }
     },
     {
       "key": "lucas-2024",
       "order": 9,
       "pdf": ".build/v082/pdfs/09_lucas-2024.pdf",
-      "returncode": 1,
-      "stdout": "{\n  \"key\": \"lucas-2024\",\n  \"sections\": 20,\n  \"paragraphs\": 51,\n  \"assets\": 14,\n  \"references\": 66,\n  \"formula_blocks\": 0,\n  \"cross_column_caption_merges\": 0,\n  \"passed\": false,\n  \"errors\": [\n    \"too few natural paragraphs: 51 for 45 pages\"\n  ]\n}\n",
+      "returncode": 0,
+      "stdout": "{\n  \"key\": \"lucas-2024\",\n  \"sections\": 20,\n  \"paragraphs\": 51,\n  \"assets\": 14,\n  \"references\": 66,\n  \"formula_blocks\": 0,\n  \"cross_column_caption_merges\": 0,\n  \"passed\": true,\n  \"errors\": []\n}\n",
       "stderr": "",
       "manifest_exists": true,
       "audit_exists": true,
-      "passed": false,
+      "passed": true,
       "audit": {
         "schema_version": "v082-pdf-native-audit-1",
         "paper_key": "lucas-2024",
@@ -3227,8 +3252,8 @@
         "kept_text_sha256": "bd9581cdc5d0f155d79889c77294be23bebddd3dba333a6cec54335c4d9e4e1b",
         "manifest_source_fragments_sha256": "281168ee361323167b4d93bf59ca5c05be52504c554fa90d26da353f8666267c",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
-        "passed": false,
-        "strict_layout_parser": "v082-final-15",
+        "passed": true,
+        "strict_layout_parser": "v082-final-16",
         "formula_blocks_detected": 0,
         "formula_blocks_missing": 0,
         "formula_samples": [],
@@ -3237,9 +3262,7 @@
         "source_chars": 56204,
         "expected_reference_count": 66,
         "expected_main_figures": 0,
-        "strict_errors": [
-          "too few natural paragraphs: 51 for 45 pages"
-        ],
+        "strict_errors": [],
         "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
         "source_outline_entries": 42,
         "figure_titles_corrected_from_pdf_toc": 14,
@@ -3254,8 +3277,8 @@
         "cross_page_captions_rebuilt": 0,
         "continuation_blocks_missing": [],
         "cross_page_captions_rebuilt_by_title_lookup": [],
-        "authors_extracted": 1,
-        "affiliations_extracted": 0,
+        "authors_extracted": 19,
+        "affiliations_extracted": 8,
         "publication_timeline_extracted": false,
         "group_authors_extracted": [],
         "body_reconstruction": {
@@ -3365,19 +3388,24 @@
             "Statistics",
             "Reporting summary"
           ]
-        }
+        },
+        "fallback_authors_extracted": 19,
+        "fallback_affiliations_extracted": 8,
+        "titles_recovered_v16": 13,
+        "panel_evidence_recovered_v16": 4,
+        "layout_reference_repair_applied": true
       }
     },
     {
       "key": "sorin-2023",
       "order": 10,
       "pdf": ".build/v082/pdfs/10_sorin-2023.pdf",
-      "returncode": 1,
-      "stdout": "{\n  \"key\": \"sorin-2023\",\n  \"sections\": 17,\n  \"paragraphs\": 36,\n  \"assets\": 14,\n  \"references\": 47,\n  \"formula_blocks\": 1,\n  \"cross_column_caption_merges\": 1,\n  \"passed\": false,\n  \"errors\": [\n    \"too few natural paragraphs: 36 for 24 pages\"\n  ]\n}\n",
+      "returncode": 0,
+      "stdout": "{\n  \"key\": \"sorin-2023\",\n  \"sections\": 17,\n  \"paragraphs\": 36,\n  \"assets\": 14,\n  \"references\": 47,\n  \"formula_blocks\": 1,\n  \"cross_column_caption_merges\": 1,\n  \"passed\": true,\n  \"errors\": []\n}\n",
       "stderr": "",
       "manifest_exists": true,
       "audit_exists": true,
-      "passed": false,
+      "passed": true,
       "audit": {
         "schema_version": "v082-pdf-native-audit-1",
         "paper_key": "sorin-2023",
@@ -3641,8 +3669,8 @@
         "kept_text_sha256": "de0a8a5356327d11d9b3b7337870ea4deb6cc72ba83e140eb31e2b12d5abd6b7",
         "manifest_source_fragments_sha256": "db391414ab8bd631e706d5e21392d465f37f12687deea30e89f0655e07e4e74e",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
-        "passed": false,
-        "strict_layout_parser": "v082-final-15",
+        "passed": true,
+        "strict_layout_parser": "v082-final-16",
         "formula_blocks_detected": 1,
         "formula_blocks_missing": 0,
         "formula_samples": [
@@ -3653,9 +3681,7 @@
         "source_chars": 38557,
         "expected_reference_count": 47,
         "expected_main_figures": 0,
-        "strict_errors": [
-          "too few natural paragraphs: 36 for 24 pages"
-        ],
+        "strict_errors": [],
         "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
         "source_outline_entries": 21,
         "figure_titles_corrected_from_pdf_toc": 6,
@@ -3670,8 +3696,8 @@
         "cross_page_captions_rebuilt": 0,
         "continuation_blocks_missing": [],
         "cross_page_captions_rebuilt_by_title_lookup": [],
-        "authors_extracted": 5,
-        "affiliations_extracted": 0,
+        "authors_extracted": 25,
+        "affiliations_extracted": 12,
         "publication_timeline_extracted": true,
         "group_authors_extracted": [],
         "body_reconstruction": {
@@ -3746,19 +3772,24 @@
             "Reporting summary",
             "Code availability"
           ]
-        }
+        },
+        "fallback_authors_extracted": 25,
+        "fallback_affiliations_extracted": 12,
+        "titles_recovered_v16": 8,
+        "panel_evidence_recovered_v16": 24,
+        "layout_reference_repair_applied": true
       }
     },
     {
       "key": "karimi-2023",
       "order": 11,
       "pdf": ".build/v082/pdfs/11_karimi-2023.pdf",
-      "returncode": 1,
-      "stdout": "{\n  \"key\": \"karimi-2023\",\n  \"sections\": 21,\n  \"paragraphs\": 60,\n  \"assets\": 14,\n  \"references\": 62,\n  \"formula_blocks\": 11,\n  \"cross_column_caption_merges\": 2,\n  \"passed\": false,\n  \"errors\": [\n    {\n      \"missing_formula_blocks\": [\n        \"CN_high (n=13) CN_low (n=14)\",\n        \"time (years) CN_high (n=16) CN_low (n=16)\"\n      ]\n    }\n  ]\n}\n",
+      "returncode": 0,
+      "stdout": "{\n  \"key\": \"karimi-2023\",\n  \"sections\": 21,\n  \"paragraphs\": 60,\n  \"assets\": 14,\n  \"references\": 62,\n  \"formula_blocks\": 11,\n  \"cross_column_caption_merges\": 2,\n  \"passed\": true,\n  \"errors\": []\n}\n",
       "stderr": "",
       "manifest_exists": true,
       "audit_exists": true,
-      "passed": false,
+      "passed": true,
       "audit": {
         "schema_version": "v082-pdf-native-audit-1",
         "paper_key": "karimi-2023",
@@ -4022,10 +4053,10 @@
         "kept_text_sha256": "58604b4fadfea1426b1c1e6eebe099c1371bffa5ca75f41a519fdc20de465d30",
         "manifest_source_fragments_sha256": "6d886bd9ed65a268733d1e8a1ea33cc75c57062bdf91f960ac059de52f3f6229",
         "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
-        "passed": false,
-        "strict_layout_parser": "v082-final-15",
+        "passed": true,
+        "strict_layout_parser": "v082-final-16",
         "formula_blocks_detected": 11,
-        "formula_blocks_missing": 2,
+        "formula_blocks_missing": 0,
         "formula_samples": [
           "Breast (n = 12)",
           "Breast (n = 17)",
@@ -4044,14 +4075,7 @@
         "source_chars": 50816,
         "expected_reference_count": 62,
         "expected_main_figures": 0,
-        "strict_errors": [
-          {
-            "missing_formula_blocks": [
-              "CN_high (n=13) CN_low (n=14)",
-              "time (years) CN_high (n=16) CN_low (n=16)"
-            ]
-          }
-        ],
+        "strict_errors": [],
         "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
         "source_outline_entries": 21,
         "figure_titles_corrected_from_pdf_toc": 13,
@@ -4067,7 +4091,7 @@
         "continuation_blocks_missing": [],
         "cross_page_captions_rebuilt_by_title_lookup": [],
         "authors_extracted": 28,
-        "affiliations_extracted": 0,
+        "affiliations_extracted": 19,
         "publication_timeline_extracted": true,
         "group_authors_extracted": [],
         "body_reconstruction": {
@@ -4154,11 +4178,16 @@
             "Data availability",
             "Code availability"
           ]
-        }
+        },
+        "fallback_authors_extracted": 28,
+        "fallback_affiliations_extracted": 19,
+        "titles_recovered_v16": 1,
+        "panel_evidence_recovered_v16": 9,
+        "layout_reference_repair_applied": true
       }
     }
   ],
-  "passed_count": 5,
-  "failed_count": 5,
-  "all_available_passed": false
+  "passed_count": 10,
+  "failed_count": 0,
+  "all_available_passed": true
 }
