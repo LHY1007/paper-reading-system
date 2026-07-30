@@ -22,7 +22,7 @@ permissions:
 
 concurrency:
   group: v082-generate-all-reader-manifests-sequentially
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   PYTHONUNBUFFERED: "1"
@@ -165,8 +165,6 @@ jobs:
                       if result.returncode != 0:
                           raise RuntimeError(f'{name} failed')
 
-                  # Regenerate deterministically from the evidence and model cache. An existing
-                  # manifest is never trusted without reproducing all source and reader gates.
                   result = run([
                       sys.executable, 'tools/generate_v082_reader_manifest_with_github_models_v3.py',
                       str(evidence), str(plan), str(manifest), '--cache-dir', '.build/v082/model-cache',
