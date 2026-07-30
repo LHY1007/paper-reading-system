@@ -1,21 +1,6 @@
 name: Generate all V0.8.2 manifests strictly sequentially
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
-      - "tools/run_v082_manifest_generation_sequentially_v2.py"
-      - "tools/generate_v082_reader_manifest_with_github_models*.py"
-      - "tools/build_pdf_native_manifest_v082*.py"
-      - "tools/v082_body_reconstruction*.py"
-      - "tools/validate_v082_evidence_quality*.py"
-      - "tools/validate_v082_reader_content_quality.py"
-      - "tools/validate_v082_reader_semantics*.py"
-      - "tools/validate_v082_final_manifest.py"
-      - "tools/validate_v082_manifest_code_boundary.py"
-      - "config/v082_reader_content_plans/**"
-      - "config/v082_paper_sources.json"
   workflow_dispatch:
 
 permissions:
@@ -24,7 +9,7 @@ permissions:
 
 concurrency:
   group: v082-generate-all-manifests-strict-sequence
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 env:
   PYTHONUNBUFFERED: "1"
