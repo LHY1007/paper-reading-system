@@ -35,7 +35,7 @@ def image_dimensions(source: str) -> tuple[int, int] | None:
 
 
 def suspicious_reference(text: str) -> bool:
-    value = base.normalized(text)
+    value = base.norm(text)
     value = re.sub(r"^\s*\d+[.)]?\s*", "", value)
     if not value:
         return True
@@ -72,7 +72,7 @@ def extract_reader(path: Path) -> dict[str, Any]:
         if width < 1600:
             low_resolution_ids.append(str(figure.get("id") or "unknown"))
 
-    references = [base.normalized(item.get_text(" ", strip=True)) for item in soup.select(".reference-item")]
+    references = [base.norm(item.get_text(" ", strip=True)) for item in soup.select(".reference-item")]
     suspicious_references = [
         {"index": index + 1, "text": text[:500]}
         for index, text in enumerate(references)
@@ -81,7 +81,7 @@ def extract_reader(path: Path) -> dict[str, Any]:
     table_like_figures = [
         item.get("id")
         for item in report.get("figures", {}).get("items", [])
-        if TABLE_TITLE_RE.match(base.normalized(item.get("title")))
+        if TABLE_TITLE_RE.match(base.norm(item.get("title")))
     ]
 
     report["figures"]["image_widths"] = widths
