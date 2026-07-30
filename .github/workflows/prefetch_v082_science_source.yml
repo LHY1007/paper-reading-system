@@ -1,0 +1,68 @@
+name: Prefetch V0.8.2 Science source with Chromium
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/prefetch_v082_science_source.yml"
+      - "tools/prefetch_v082_science_with_playwright.py"
+      - "config/v082_paper_sources.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v082-science-source-prefetch
+  cancel-in-progress: true
+
+jobs:
+  prefetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install source and Chromium dependencies
+        run: |
+          python -m pip install --disable-pip-version-check requests PyMuPDF playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Restore exact-source PDF cache
+        id: cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/pdfs
+          key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json', 'tools/download_v082_sources.py', 'tools/download_v082_release_sources.py', 'tools/download_v082_release_sources_continue.py', 'tools/prefetch_v082_blocked_sources.py') }}
+          restore-keys: |
+            v082-source-pdfs-
+
+      - name: Fetch and validate the 24-page Science PDF
+        run: |
+          mkdir -p .build/v082/pdfs .build/v082/science-prefetch
+          python tools/prefetch_v082_science_with_playwright.py \
+            --registry config/v082_paper_sources.json \
+            --key cho-2026 \
+            --output-dir .build/v082/pdfs \
+            --report .build/v082/science-prefetch/CHO_SOURCE.json
+
+      - name: Save exact-source PDF cache
+        if: success() && steps.cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .build/v082/pdfs
+          key: ${{ steps.cache.outputs.cache-primary-key }}
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v082-science-source-prefetch
+          path: .build/v082/science-prefetch
+          if-no-files-found: warn
+          retention-days: 30
