@@ -1,15 +1,6 @@
-name: Generate V0.8.2 Lee reader manifest
+name: Generate V0.8.2 Lee reader manifest (manual diagnostic)
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - ".github/workflows/generate_v082_reader_manifest_lee.yml"
-      - "tools/generate_v082_reader_manifest_with_github_models*.py"
-      - "tools/build_pdf_native_manifest_v082*.py"
-      - "tools/v082_body_reconstruction*.py"
-      - "tools/validate_v082_evidence_quality*.py"
-      - "config/v082_reader_content_plans/lee-2025.json"
   workflow_dispatch:
 
 permissions:
@@ -80,7 +71,7 @@ jobs:
           python tools/validate_v082_evidence_quality_v5.py "$EVIDENCE" \
             --audit "$AUDIT" --report .build/v082/reports/LEE_EVIDENCE_QUALITY.json
 
-      - name: Generate the complete bilingual manifest with GitHub Models
+      - name: Generate the complete bilingual manifest with grounded prompts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -93,7 +84,10 @@ jobs:
       - name: Enforce all reader-content gates
         run: |
           MANIFEST=content/v082_manifests/lee-2025.json
+          EVIDENCE=.build/v082/evidence/lee-2025.json
           AUDIT=.build/v082/audits/lee-2025.json
+          python tools/validate_v082_reader_semantics_v3.py "$MANIFEST" \
+            --evidence "$EVIDENCE" --report .build/v082/reports/LEE_SEMANTIC_GROUNDING.json
           python tools/validate_v082_reader_content_quality.py "$MANIFEST" \
             --report .build/v082/reports/LEE_READER_CONTENT.json
           python tools/validate_v082_final_manifest.py "$MANIFEST" \
@@ -111,6 +105,8 @@ jobs:
             echo "Lee manifest already current"
           else
             git commit -m "Add validated V0.8.2 Lee bilingual reader manifest"
+            git fetch origin v0.8x-batch-diagnosis
+            git rebase origin/v0.8x-batch-diagnosis
             git push origin HEAD:v0.8x-batch-diagnosis
           fi
 
