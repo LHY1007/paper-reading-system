@@ -6,6 +6,7 @@ from typing import Any
 import generate_v082_reader_manifest_with_github_models_v2 as constrained
 
 base = constrained.base
+_original_generate_studies = base.generate_studies
 
 
 def translate_records_with_repairs(
@@ -53,7 +54,120 @@ def translate_records_with_repairs(
     return translations
 
 
+def _expected_panel_labels(figure: dict[str, Any]) -> list[str]:
+    labels = [
+        base.norm(panel.get("label")) or "整图"
+        for panel in (figure.get("study") or {}).get("panels") or []
+    ]
+    return labels or ["整图"]
+
+
+def _study_issues(study: dict[str, Any], expected_labels: list[str]) -> list[str]:
+    issues: list[str] = []
+    if not base.CJK.search(base.norm(study.get("intro"))) or len(base.norm(study.get("intro"))) < 40:
+        issues.append("intro must contain at least 40 characters of substantive Chinese")
+    if not base.CJK.search(base.norm(study.get("overview"))) or len(base.norm(study.get("overview"))) < 90:
+        issues.append("overview must contain at least 90 characters of reader guidance in Chinese")
+    panels = study.get("panels") or []
+    labels = [base.norm(panel.get("label")) or "整图" for panel in panels if isinstance(panel, dict)]
+    if labels != expected_labels:
+        issues.append(f"panel labels must exactly match source order: {expected_labels}")
+    for index, panel in enumerate(panels):
+        if not isinstance(panel, dict):
+            issues.append(f"panel {index} is not an object")
+            continue
+        title = base.norm(panel.get("title"))
+        explanation = base.norm(panel.get("explanation"))
+        if not base.CJK.search(title) or len(title) < 4:
+            issues.append(f"panel {labels[index] if index < len(labels) else index} needs a specific Chinese title")
+        if not base.CJK.search(explanation) or len(explanation) < 110:
+            issues.append(f"panel {labels[index] if index < len(labels) else index} explanation must contain at least 110 characters of substantive Chinese")
+    if not base.CJK.search(base.norm(study.get("conclusion"))) or len(base.norm(study.get("conclusion"))) < 60:
+        issues.append("conclusion must contain at least 60 characters of Chinese synthesis")
+    if not base.CJK.search(base.norm(study.get("boundary"))) or len(base.norm(study.get("boundary"))) < 35:
+        issues.append("boundary must explicitly state the evidence boundary in Chinese")
+    return issues
+
+
+def _normalize_repaired_study(item: dict[str, Any]) -> dict[str, Any]:
+    return {
+        "intro": base.norm(item.get("intro")),
+        "overview": base.norm(item.get("overview")),
+        "panels": [
+            {
+                "label": base.norm(panel.get("label")) or "整图",
+                "title": base.norm(panel.get("title")) or "图中信息",
+                "explanation": base.norm(panel.get("explanation")),
+            }
+            for panel in item.get("panels") or [] if isinstance(panel, dict)
+        ],
+        "conclusion": base.norm(item.get("conclusion")),
+        "boundary": base.norm(item.get("boundary")),
+    }
+
+
+def generate_studies_with_repairs(
+    figures: list[dict[str, Any]], plan: dict[str, Any], *, token: str, model: str,
+    cache_dir, cache_prefix: str, paper_context: str,
+) -> dict[str, dict[str, Any]]:
+    output = _original_generate_studies(
+        figures, plan, token=token, model=model, cache_dir=cache_dir,
+        cache_prefix=cache_prefix, paper_context=paper_context,
+    )
+    plan_figures = {str(item.get("id")): item for item in plan.get("main_figures") or []}
+    repair_system = f"""You are repairing one scientific figure explanation for a publication-grade bilingual biomedical paper reader. Paper context: {paper_context}. Use only the supplied English source title, full legend, panel evidence and reader-role plan. Return the complete figure explanation in Simplified Chinese. Preserve the exact supplied panel labels and order, with no missing or added panels. The intro must explain the figure's role in the paper and contain at least 50 Chinese characters. The overview must explain the reading order and visual encodings and contain at least 120 Chinese characters. Each panel requires a specific Chinese title and an explanation of at least 140 Chinese characters covering the object, axes or encoding when applicable, comparison, observed result and evidence boundary. The conclusion must contain at least 80 Chinese characters and connect this figure to the paper's next argument. The boundary must explicitly distinguish association, computational inference, model prediction, in-vitro evidence and clinical or causal proof as applicable. Do not invent values, directions, methods or panels. Return JSON only: {{\"id\":\"...\",\"intro\":\"...\",\"overview\":\"...\",\"panels\":[{{\"label\":\"A\",\"title\":\"...\",\"explanation\":\"...\"}}],\"conclusion\":\"...\",\"boundary\":\"...\"}}."""
+    for figure in figures:
+        figure_id = str(figure.get("id"))
+        expected_labels = _expected_panel_labels(figure)
+        issues = _study_issues(output[figure_id], expected_labels)
+        if not issues:
+            continue
+        source_panels = [
+            {
+                "label": base.norm(panel.get("label")) or "整图",
+                "source_text": base.norm(panel.get("source_text") or panel.get("explanation") or panel.get("title")),
+            }
+            for panel in (figure.get("study") or {}).get("panels") or []
+        ] or [{"label": "整图", "source_text": base.norm(figure.get("caption_en"))}]
+        payload = {
+            "id": figure_id,
+            "title_en": base.norm(figure.get("title_en")),
+            "caption_en": base.norm(figure.get("caption_en")),
+            "source_panels": source_panels,
+            "expected_panel_labels": expected_labels,
+            "reader_role": (plan_figures.get(figure_id) or {}).get("reader_role"),
+            "panel_requirement": (plan_figures.get(figure_id) or {}).get("panel_requirement"),
+            "previous_answer": output[figure_id],
+            "validation_issues": issues,
+        }
+        repaired_study: dict[str, Any] | None = None
+        last_issues = issues
+        for attempt in range(2):
+            payload["validation_issues"] = last_issues
+            result = base.call_model_json(
+                token=token, model=model, system=repair_system,
+                user_payload=payload, cache_dir=cache_dir,
+                cache_name=f"{cache_prefix}-study-repair-{figure_id}-{attempt + 1}",
+                max_tokens=12000,
+            )
+            item = result.get("item") if isinstance(result, dict) and isinstance(result.get("item"), dict) else result
+            if not isinstance(item, dict):
+                last_issues = ["repair response is not a JSON object"]
+                continue
+            candidate = _normalize_repaired_study(item)
+            last_issues = _study_issues(candidate, expected_labels)
+            if not last_issues:
+                repaired_study = candidate
+                break
+            payload["previous_answer"] = candidate
+        if repaired_study is None:
+            raise RuntimeError(f"figure {figure_id} remains below reader-quality thresholds after repair: {last_issues}")
+        output[figure_id] = repaired_study
+    return output
+
+
 base.translate_records = translate_records_with_repairs
+base.generate_studies = generate_studies_with_repairs
 
 
 if __name__ == "__main__":
