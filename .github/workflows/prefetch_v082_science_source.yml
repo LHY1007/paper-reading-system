@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/prefetch_v082_science_source.yml"
       - "tools/prefetch_v082_science_with_playwright.py"
+      - "tools/prefetch_v082_adobe_shared_pdf.py"
       - "config/v082_paper_sources.json"
   workflow_dispatch:
 
@@ -16,10 +17,14 @@ concurrency:
   group: v082-science-source-prefetch
   cancel-in-progress: true
 
+env:
+  CHO_ADOBE_PREVIEW_URL: "https://to.adobe.com/phMsfMA7YPzZqvAdG8hYM4vE9jVf"
+  CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
+
 jobs:
   prefetch:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,30 +40,42 @@ jobs:
             requests beautifulsoup4 curl_cffi lxml PyMuPDF playwright
           python -m playwright install --with-deps chromium
 
-      - name: Restore exact-source PDF cache
-        id: cache
+      - name: Restore dedicated Cho source cache
+        id: cho-cache
         uses: actions/cache/restore@v4
         with:
-          path: .build/v082/pdfs
-          key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json', 'tools/download_v082_sources.py', 'tools/download_v082_release_sources.py', 'tools/download_v082_release_sources_continue.py', 'tools/prefetch_v082_blocked_sources.py') }}
-          restore-keys: |
-            v082-source-pdfs-
+          path: .build/v082/cho-source
+          key: ${{ env.CHO_CACHE_KEY }}
 
-      - name: Fetch and validate the 24-page Science PDF
+      - name: Materialize the user-supplied 24-page Science PDF through temporary Adobe share
+        if: steps.cho-cache.outputs.cache-hit != 'true'
         run: |
-          mkdir -p .build/v082/pdfs .build/v082/science-prefetch
-          python tools/prefetch_v082_science_with_playwright.py \
-            --registry config/v082_paper_sources.json \
-            --key cho-2026 \
-            --output-dir .build/v082/pdfs \
-            --report .build/v082/science-prefetch/CHO_SOURCE.json
+          mkdir -p .build/v082/cho-source .build/v082/science-prefetch
+          python tools/prefetch_v082_adobe_shared_pdf.py \
+            --url "$CHO_ADOBE_PREVIEW_URL" \
+            --output .build/v082/cho-source/07_cho-2026.pdf \
+            --report .build/v082/science-prefetch/CHO_ADOBE_SOURCE.json \
+            --expected-pages 24 \
+            --doi 10.1126/science.adz2742 \
+            --title-fragment "Pan-cancer spatial atlas of tertiary lymphoid structures"
 
-      - name: Save exact-source PDF cache
-        if: success() && steps.cache.outputs.cache-hit != 'true'
+      - name: Revalidate cached or newly materialized Cho source
+        run: |
+          mkdir -p .build/v082/science-prefetch
+          python tools/prefetch_v082_adobe_shared_pdf.py \
+            --url "$CHO_ADOBE_PREVIEW_URL" \
+            --output .build/v082/cho-source/07_cho-2026.pdf \
+            --report .build/v082/science-prefetch/CHO_SOURCE_FINAL.json \
+            --expected-pages 24 \
+            --doi 10.1126/science.adz2742 \
+            --title-fragment "Pan-cancer spatial atlas of tertiary lymphoid structures"
+
+      - name: Save dedicated Cho source cache
+        if: success() && steps.cho-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
-          path: .build/v082/pdfs
-          key: ${{ steps.cache.outputs.cache-primary-key }}
+          path: .build/v082/cho-source
+          key: ${{ env.CHO_CACHE_KEY }}
 
       - uses: actions/upload-artifact@v4
         if: always()
