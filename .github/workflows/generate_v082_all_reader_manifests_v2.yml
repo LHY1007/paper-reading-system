@@ -1,6 +1,10 @@
 name: Generate all V0.8.2 manifests strictly sequentially
 
 on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - ".github/v082-manifest-trigger"
   workflow_dispatch:
 
 permissions:
@@ -14,6 +18,7 @@ concurrency:
 env:
   PYTHONUNBUFFERED: "1"
   GITHUB_MODELS_MODEL: "openai/gpt-4.1"
+  GITHUB_MODELS_MIN_INTERVAL_SECONDS: "4"
   CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
 
 jobs:
