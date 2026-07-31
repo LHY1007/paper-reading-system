@@ -44,10 +44,13 @@ jobs:
           state = json.loads(trigger.read_text('utf-8'))
           if not state.get('all_reviewed_manifests_passed'):
               raise SystemExit('final build trigger was not armed by the complete strong-AI sequence')
+          if not state.get('independent_reviewer_acceptance_passed'):
+              raise SystemExit('final build trigger lacks explicit independent reviewer acceptance')
           registry = json.loads(Path('config/v082_paper_sources.json').read_text('utf-8'))
           keys = [p['key'] for p in registry['papers'] if int(p['order']) != 0]
           missing = []
           failed = []
+          reviewer_rejected = []
           for key in keys:
               manifest = Path(f'content/v082_manifests/{key}.json')
               review = Path(f'content/v082_reviews/{key}.json')
@@ -55,12 +58,18 @@ jobs:
                   missing.append(f'manifest:{key}')
               if not review.exists():
                   missing.append(f'review:{key}')
-              elif not json.loads(review.read_text('utf-8')).get('passed'):
+                  continue
+              review_state = json.loads(review.read_text('utf-8'))
+              if not review_state.get('passed'):
                   failed.append(key)
+              if not review_state.get('independent_reviewer_acceptance_passed'):
+                  reviewer_rejected.append(key)
           if missing:
               raise SystemExit('missing reviewed outputs: ' + ', '.join(missing))
           if failed:
               raise SystemExit('failed strong-AI reviews: ' + ', '.join(failed))
+          if reviewer_rejected:
+              raise SystemExit('independent reviewer acceptance missing: ' + ', '.join(reviewer_rejected))
           print(json.dumps({'reviewed_papers': len(keys), 'passed': True}, indent=2))
           PY
 
