@@ -11,6 +11,7 @@ import generate_v082_reader_manifest_with_copilot_sdk_v15 as v15
 
 v13 = v15.v13
 _ORIGINAL_GENERATE = v13.generate_figure_studies_strong
+PANEL_RANGE = re.compile(r"^([A-Za-z])\s*[-–—]\s*([A-Za-z])$")
 
 
 def norm(value: Any) -> str:
@@ -37,12 +38,25 @@ def normalize_label(value: Any) -> str:
     return label
 
 
+def expand_label(value: Any) -> list[str]:
+    label = normalize_label(value)
+    match = PANEL_RANGE.fullmatch(label)
+    if not match:
+        return [label]
+    start, end = match.groups()
+    start = start.upper()
+    end = end.upper()
+    if ord(end) < ord(start) or ord(end) - ord(start) > 15:
+        return [label]
+    return [chr(code) for code in range(ord(start), ord(end) + 1)]
+
+
 def normalize_labels(values: Any) -> list[str]:
     output: list[str] = []
     for value in values or []:
-        label = normalize_label(value)
-        if label not in output:
-            output.append(label)
+        for label in expand_label(value):
+            if label not in output:
+                output.append(label)
     if not output:
         return ["整图"]
     if len(output) > 1 and "整图" in output:
@@ -92,7 +106,7 @@ def inventory_one(
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     figure_id = str(figure.get("id"))
     image_src = norm(figure.get("image_src"))
-    parsed = parser_labels(figure)
+    parsed = normalize_labels(parser_labels(figure))
     if not image_src:
         return figure, {
             "id": figure_id,
@@ -111,7 +125,7 @@ def inventory_one(
     }
     detect_system = f"""你是生物医学论文图像结构标注员。论文题目：{paper_title}。
 只完成面板清点，不解释科学结论。直接查看原始图像，按阅读顺序列出所有明确可见的子图标签，例如A、B、C或a、b、c。不得根据图注推测图像中没有显示的标签，也不得把坐标轴刻度、分组名称或图例项目当成面板标签。
-若图像确实是一个没有面板标签的单一逻辑块，只返回整图。若图像包含多个未标字母但视觉上独立的逻辑块，使用逻辑块1、逻辑块2等名称。
+不要用A-D之类范围缩写，必须把A、B、C、D逐项列出。若图像确实是一个没有面板标签的单一逻辑块，只返回整图。若图像包含多个未标字母但视觉上独立的逻辑块，使用逻辑块1、逻辑块2等名称。
 返回严格JSON：{{"id":"...","labels":["A","B"],"notes":"简述识别依据"}}。"""
     draft = v13.call_multimodal_json(
         token=token,
@@ -124,7 +138,7 @@ def inventory_one(
         max_tokens=8000,
     )
     review_system = f"""你是第二位独立的论文图像面板审校者。论文题目：{paper_title}。
-重新查看原始图像，核对候选面板清单是否漏掉、重复或误把坐标轴/图例当作面板。解析器标签只作参考，不得盲从。最终标签必须与图像中实际可见结构一致并按阅读顺序排列。
+重新查看原始图像，核对候选面板清单是否漏掉、重复或误把坐标轴/图例当作面板。解析器标签只作参考，不得盲从。最终标签必须与图像中实际可见结构一致并按阅读顺序排列，且不得使用范围缩写。
 若解析器已识别多个明确面板，最终结果不得无证据地删掉这些面板；存在冲突时在issues中说明。
 返回严格JSON：{{"passed":true,"issues":[],"final":{{"id":"...","labels":["A","B"],"notes":"..."}}}}。"""
     reviewed = v13.call_multimodal_json(
