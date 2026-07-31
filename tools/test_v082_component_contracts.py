@@ -6,6 +6,7 @@ import copy
 import generate_v082_reader_manifest_with_copilot_sdk_v15 as v15
 import generate_v082_reader_manifest_with_copilot_sdk_v16 as v16
 import generate_v082_reader_manifest_with_copilot_sdk_v17 as v17
+import generate_v082_reader_manifest_with_copilot_sdk_v18 as v18
 import normalize_v082_paper_tables as table_normalizer
 import validate_v082_reader_semantics_v4 as semantics
 import validate_v082_strong_ai_review as strong_review
@@ -135,47 +136,109 @@ def test_component_specific_translation_completeness() -> None:
     assert "translation implausibly short" in body_issues, body_issues
 
 
-def test_review_asset_order_contract() -> None:
+def test_explicit_reviewer_acceptance_contract() -> None:
+    for category in v18.REVIEW_RESPONSES:
+        v18.REVIEW_RESPONSES[category].clear()
+    v18.REVIEW_RESPONSES["translation"]["paragraph/results/p-0001"] = {"passed": True}
+    v18.REVIEW_RESPONSES["figure"]["figure-1"] = {"passed": True}
+    v18.REVIEW_RESPONSES["table"]["extended-data-table-1"] = {"passed": True}
+    v18.REVIEW_RESPONSES["overview"]["paper"] = {"passed": True}
+    review_log = {
+        "translation": [{"id": "paragraph/results/p-0001"}],
+        "figures": [{"id": "figure-1"}],
+        "tables": [{"id": "extended-data-table-1"}],
+        "overview": {},
+    }
+    errors = v18.enforce_independent_reviewer_acceptance(review_log)
+    assert not errors, errors
+    assert review_log["translation"][0]["independent_reviewer_accepted"] is True
+    assert review_log["figures"][0]["independent_reviewer_accepted"] is True
+    assert review_log["tables"][0]["independent_reviewer_accepted"] is True
+    assert review_log["overview"]["independent_reviewer_accepted"] is True
+
+    v18.REVIEW_RESPONSES["figure"]["figure-1"] = {"passed": False}
+    rejected = {
+        "translation": [{"id": "paragraph/results/p-0001"}],
+        "figures": [{"id": "figure-1"}],
+        "tables": [{"id": "extended-data-table-1"}],
+        "overview": {},
+    }
+    errors = v18.enforce_independent_reviewer_acceptance(rejected)
+    assert any(item["component"] == "figure" for item in errors), errors
+
+
+def test_review_asset_order_and_exact_coverage_contract() -> None:
     manifest = {
         "paper": {"key": "andani-2025"},
         "overview": {},
-        "sections": [],
+        "sections": [{
+            "id": "results",
+            "blocks": [{"type": "paragraph", "id": "p-0001"}],
+        }],
         "terms": [],
         "references": [],
         "assets": [
-            {"id": "figure-1", "kind": "figure"},
+            {"id": "figure-1", "kind": "figure", "caption_en": "Figure one caption."},
             {
                 "id": "extended-data-table-1",
                 "kind": "table",
+                "caption_en": "Extended table caption.",
                 "source_render": "ai-verified-structured-table-transcription-v1",
+                "table": {
+                    "headers": ["Method（方法）", "PSNR"],
+                    "rows": [["HistoPlexer（HistoPlexer）", "14.206 ± 0.029"]],
+                },
             },
-            {"id": "figure-2", "kind": "figure"},
+            {"id": "figure-2", "kind": "figure", "caption_en": "Figure two caption."},
         ],
     }
+    required_translations = [
+        "paragraph/results/p-0001",
+        "asset-caption/figure-1",
+        "asset-caption/extended-data-table-1",
+        "asset-caption/figure-2",
+        "table/extended-data-table-1/h/0",
+        "table/extended-data-table-1/h/1",
+        "table/extended-data-table-1/r/0/0",
+    ]
     review = {
         "version": "v082-strong-ai-component-review-1",
         "paper_key": "andani-2025",
         "passed": True,
-        "translation": [],
+        "independent_reviewer_acceptance_passed": True,
+        "models": {"primary": "gpt-5.4", "reviewer": "gpt-5.4", "vision": "gpt-5.4"},
+        "translation": [
+            {"id": item, "passed": True, "independent_reviewer_accepted": True}
+            for item in required_translations
+        ],
         "figures": [
-            {"id": "figure-1", "passed": True, "source_image_present": True},
-            {"id": "extended-data-table-1", "passed": True, "source_image_present": True},
-            {"id": "figure-2", "passed": True, "source_image_present": True},
+            {"id": "figure-1", "passed": True, "source_image_present": True, "independent_reviewer_accepted": True},
+            {"id": "extended-data-table-1", "passed": True, "source_image_present": True, "independent_reviewer_accepted": True},
+            {"id": "figure-2", "passed": True, "source_image_present": True, "independent_reviewer_accepted": True},
         ],
         "tables": [
-            {"id": "extended-data-table-1", "passed": True, "source_image_present": True},
+            {"id": "extended-data-table-1", "passed": True, "source_image_present": True, "independent_reviewer_accepted": True},
         ],
-        "overview": {"passed": True},
+        "overview": {"passed": True, "independent_reviewer_accepted": True},
         "terms": {"passed": True, "accepted_count": 0},
         "references": {"passed": True, "total": 0},
     }
     result = strong_review.validate(manifest, review)
     assert result["passed"], result["errors"]
 
-    invalid = copy.deepcopy(review)
-    invalid["figures"] = [invalid["figures"][0], invalid["figures"][2], invalid["figures"][1]]
-    result = strong_review.validate(manifest, invalid)
+    invalid_order = copy.deepcopy(review)
+    invalid_order["figures"] = [
+        invalid_order["figures"][0],
+        invalid_order["figures"][2],
+        invalid_order["figures"][1],
+    ]
+    result = strong_review.validate(manifest, invalid_order)
     assert not result["passed"], "review order mismatch was not rejected"
+
+    missing_paragraph = copy.deepcopy(review)
+    missing_paragraph["translation"] = missing_paragraph["translation"][1:]
+    result = strong_review.validate(manifest, missing_paragraph)
+    assert not result["passed"], "missing paragraph review was not rejected"
 
 
 if __name__ == "__main__":
@@ -184,5 +247,6 @@ if __name__ == "__main__":
     test_panel_grounding_contract()
     test_visual_panel_inventory_normalization()
     test_component_specific_translation_completeness()
-    test_review_asset_order_contract()
+    test_explicit_reviewer_acceptance_contract()
+    test_review_asset_order_and_exact_coverage_contract()
     print("V0.8.2 component contracts passed")
