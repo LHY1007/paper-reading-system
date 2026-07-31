@@ -27,6 +27,10 @@ def validate(manifest: dict[str, Any], review: dict[str, Any]) -> dict[str, Any]
     translations = review.get("translation") or []
     figures = review.get("figures") or []
     tables = review.get("tables") or []
+    # A table-like source is first reviewed as a complete source image and then
+    # independently transcribed cell-by-cell. After conversion it is no longer a
+    # manifest figure, so both review records must be included in the expected total.
+    expected_source_image_reviews = expected_figures + len(tables)
 
     if review.get("version") != "v082-strong-ai-component-review-1":
         errors.append("unexpected strong-AI review version")
@@ -43,17 +47,19 @@ def validate(manifest: dict[str, Any], review: dict[str, Any]) -> dict[str, Any]
         })
     if any(not item.get("passed") for item in translations):
         errors.append("one or more paragraph/title/caption/table-cell translation reviews failed")
-    if len(figures) != expected_figures:
+    if len(figures) != expected_source_image_reviews:
         errors.append({
-            "figure_reviews": {
-                "expected": expected_figures,
+            "source_image_reviews": {
+                "expected_manifest_figures": expected_figures,
+                "expected_table_upgrades": len(tables),
+                "expected_total": expected_source_image_reviews,
                 "actual": len(figures),
             }
         })
     if any(not item.get("passed") for item in figures):
-        errors.append("one or more multimodal figure reviews failed")
+        errors.append("one or more multimodal source-image reviews failed")
     if any(not item.get("source_image_present") for item in figures):
-        errors.append("one or more figure reviews did not receive a source image")
+        errors.append("one or more source-image reviews did not receive the image")
     if any(not item.get("passed") for item in tables):
         errors.append("one or more table transcription reviews failed")
     if tables and any(not item.get("source_image_present") for item in tables):
@@ -71,10 +77,11 @@ def validate(manifest: dict[str, Any], review: dict[str, Any]) -> dict[str, Any]
         errors.append("reference review count differs from manifest")
 
     return {
-        "version": "v082-strong-ai-review-gate-1",
+        "version": "v082-strong-ai-review-gate-2",
         "paper_key": (manifest.get("paper") or {}).get("key"),
         "paragraphs": expected_paragraphs,
         "figures": expected_figures,
+        "reviewed_source_images": len(figures),
         "reviewed_table_upgrades": len(tables),
         "terms": len(manifest.get("terms") or []),
         "references": len(manifest.get("references") or []),
