@@ -201,6 +201,10 @@
         "label": "领域定位",
         "value": "该研究位于脑膜瘤分子分型、肿瘤微环境、DNA 甲基化分类器解释和临床风险分层的交叉方向。",
         "bold": false
+      },
+      {
+        "label": "内容整理",
+        "value": "逐段原文与翻译、逐图面板解读及术语表均按论文证据组织"
       }
     ]
   },
@@ -241,7 +245,7 @@
     {
       "id": "abstract",
       "title_en": "Abstract",
-      "title_zh": "抽象的",
+      "title_zh": "摘要",
       "level": 2,
       "blocks": [
         {
@@ -3527,26 +3531,26 @@
       "caption_en": "Fig. 1 | Meningioma molecular classification models and snRNA cohort overview. a, In general, meningioma tumors can be divided based on the NF2 status into NF2-wild-type and NF2-mutant meningioma. Multiple molecular subclassification models exist covering the spectrum of meningioma tumors with different granularity. b, From 26 meningiomas of different WHO grades and methylation classes or groups, single-nucleus RNA (snRNA) data were generated for further analyses. Primary/recurrent pairs are connected through a line. c, The Merlin intact UCSF group",
       "caption_zh": "图1|脑膜瘤分子分类模型和 snRNA 队列概述。 a，一般来说，脑膜瘤可根据NF2状态分为NF2野生型和NF2突变型脑膜瘤。存在多种分子亚分类模型，涵盖不同粒度的脑膜瘤肿瘤谱。 b，从不同 WHO 分级和甲基化类别或组的 26 个脑膜瘤中生成单核 RNA (snRNA) 数据以供进一步分析。主要/循环对通过一条线连接。 c、Merlin完整UCSF组",
       "study": {
-        "overview": "阅读时按照 A → B → C 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图1|脑膜瘤分子分类模型和 snRNA 队列概述。 a，一般来说，脑膜瘤可根据NF2状态分为NF2野生型和NF2突变型脑膜瘤。存在多种分子亚分类模型，涵盖不同粒度的脑膜瘤肿瘤谱。 b，从不同 WHO 分级和甲基化类别或组的 26 个脑膜瘤中生成单核 RNA (snRNA) 数据以供进一步分析。主要/循环对通过一条线连接。 c、Merlin完整UCSF组",
+        "overview": "这张图先把不同研究团队提出的脑膜瘤分型体系放到同一坐标中，再交代本文的样本和验证路线。阅读顺序应为：先看A理解NF2状态与各分型名称的对应，再看B确认26例snRNA-seq队列覆盖的风险范围，最后看C区分四个研究问题中的探索数据与验证数据。",
         "panels": [
           {
             "label": "A",
-            "title": "A：一般来说，脑膜瘤可根据 NF2 状态分为 NF2 野生型和 NF2 突变型脑膜瘤",
-            "explanation": "一般来说，脑膜瘤可根据 NF2 状态分为 NF2 野生型和 NF2 突变型脑膜瘤。存在多种分子亚分类模型，涵盖不同粒度的脑膜瘤肿瘤谱。 该部分属于图 1：脑膜瘤分子分类体系与单核 RNA 队列概览，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。本图的阅读要求是：A 解释 NF2 状态与各分类体系的对应；B 解释 26 例 snRNA 队列的 WHO、甲基化类别和 UCSF 分组；C 按四个研究问题逐块说明数据、样本量和探索/验证关系。。"
+            "title": "不同脑膜瘤分型体系的对应关系",
+            "explanation": "横向首先按NF2野生型和NF2突变型分开。UCSF、Toronto、Charleston与Heidelberg体系虽然粒度不同，但都能大致对应到NF2野生型低风险、NF2突变型免疫富集/低风险以及NF2突变型高增殖/高风险区域。Heidelberg进一步把连续风险区间拆成ben-1、int-A、int-B和mal，为后文检验这些类别是否真正彼此分离提供基础。"
           },
           {
             "label": "B",
-            "title": "B：从不同 WHO 分级和甲基化类别或组的 26 个脑膜瘤中生成单核 RNA (snRN",
-            "explanation": "从不同 WHO 分级和甲基化类别或组的 26 个脑膜瘤中生成单核 RNA (snRNA) 数据以供进一步分析。主要/循环对通过一条线连接。 该部分属于图 1：脑膜瘤分子分类体系与单核 RNA 队列概览，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。本图的阅读要求是：A 解释 NF2 状态与各分类体系的对应；B 解释 26 例 snRNA 队列的 WHO、甲基化类别和 UCSF 分组；C 按四个研究问题逐块说明数据、样本量和探索/验证关系。。"
+            "title": "26例单核转录组队列覆盖全风险谱",
+            "explanation": "圆环逐层编码WHO分级、性别、Heidelberg甲基化类别和UCSF分组；连线标出同一患者的原发与复发样本。该队列并非只包含某一等级，而是覆盖ben-1至mal及多个WHO等级，因此可同时比较肿瘤细胞、TAM和其他非肿瘤细胞随风险变化的状态。"
           },
           {
             "label": "C",
-            "title": "C：Merlin 完整的 UCSF 小组",
-            "explanation": "Merlin 完整的 UCSF 小组 该部分属于图 1：脑膜瘤分子分类体系与单核 RNA 队列概览，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。本图的阅读要求是：A 解释 NF2 状态与各分类体系的对应；B 解释 26 例 snRNA 队列的 WHO、甲基化类别和 UCSF 分组；C 按四个研究问题逐块说明数据、样本量和探索/验证关系。。"
+            "title": "四部分研究问题及探索—验证结构",
+            "explanation": "全文被组织为四条证据链：I描述脑膜瘤TME，II解析TME对甲基化分类器的贡献，III分析亚克隆与原发—复发变化，IV检验TME组成的临床影响。每一列上方是探索分析，下方是独立技术或队列验证；样本量从26例snRNA-seq扩展到4,502例甲基化发现集、7,495例跨肿瘤参考集和1,378例PU.1 TMA。"
           }
         ],
-        "conclusion": "综合各子图，先统一不同分型体系之间的对应关系，再说明全文四部分实验和各数据集分别用于探索还是验证。。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以图 1：脑膜瘤分子分类体系与单核 RNA 队列概览的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "图1确立了文章的核心设计：不是依赖单一组学重新命名亚型，而是用单细胞、空间、甲基化和临床队列逐层判断分类信号中有多少来自肿瘤细胞、有多少来自微环境，并验证这种混合信号是否对应连续复发风险。",
+        "boundary": "图中各分型体系只能做近似映射，不能视为完全等价；探索与验证队列的样本构成、检测平台和终点不同，后续结论必须由对应子图和正文分别支持。"
       }
     },
     {
@@ -3564,41 +3568,61 @@
       "caption_en": "Fig. 2 | Tumor-associated macrophages are the largest subset of nonneoplastic cells that differ in number and phenotype by meningioma grade and MC. a, UMAP of 44,266 meningioma scRNA nuclei identified multiple cellular clusters of different origins. Neoplastic cells, determined based on the presence of CNVs and/or SSTR2A expression, are the largest set of cells, followed by tumor-associated macrophages (TAMs), as determined by CD68 expression. b, CNV analysis of all neoplastic cells of a representative case identified five CNV clusters, for example based on the presence of an additional loss of chromosome 10 in a subset of cells (top panel). MC or methylation group (MG) prediction for cells within a CNV cluster based on RNA expression levels as shown on the y-axis (bottom panel). c, Within the non-neoplastic clusters, for example TAMs, cells from different MCs cluster together, indicating differences in TAM gene expression between MCs. d, Number of TAMs, as determined by snRNA expression levels, decreased with an increase in meningioma aggressiveness as determined by WHO grade or MC. Percentage of TAMs relative to all cells within each sample is displayed. Significance levels were tested with two-sided Mann- Whitney U tests (snRNA cohort composition in Fig. 1b). e, At the protein level, MC ben-1 NF2-mutant benign meningioma likewise contain the highest level of CD68-positive TAMs, as quantified by the CD68-positive surface area per case. Furthermore, the dotted CD68 staining pattern in low-risk meningioma indicates an enrichment of microglia-like cells in those cases. Significance levels were tested with two-sided ANOVA tests (MC ben-1 n = 25, ben-2 n = 23, ben-3 n = 31, int-A n = 21, int-B n = 8 and mal n = 12). f, A multiplex antibody panel performed on meningioma from six different patients dividing TAMs into microglia-like cells aggressive MC mal microglia-like cells was minimal, MC mal macrophages showed significant enrichment of multiple proliferation/ mitosis-associated sets (Extended Data Fig. 3a, b). Additionally, MC mal macrophages showed increased expression of interleukin-10 (IL- 10) and IL-4/IL-13 pathways, both described to be associated with a TAM tumor-supportive phenotype in multiple neoplasia, including diffuse glioma (Extended Data Fig. 3b)31–33. These results suggest that in low-risk NF2-mutant meningioma, innate immune cells are mostly of microglia or microglia-like phenotype, whereas in high-risk cases, those cells are less abundant, but myeloid-derived proliferative macrophages are enriched. At a functional level, these myeloid-derived cells show characteristics associated with tumor growth (that is, IL-10 and IL-4/ IL-13 pathways) and therapy resistance (that is, SPP1).",
       "caption_zh": "图2|肿瘤相关巨噬细胞是最大的非肿瘤细胞亚群，其数量和表型因脑膜瘤级别和 MC 的不同而不同。 a，44,266 个脑膜瘤 scRNA 核的 UMAP 识别出多个不同来源的细胞簇。根据 CNV 的存在和/或 SSTR2A 表达确定，肿瘤细胞是最大的细胞组，其次是肿瘤相关巨噬细胞 (TAM)，根据 CD68 表达确定。 b，对代表性病例的所有肿瘤细胞的 CNV 分析确定了 5 个 CNV 簇，例如基于细胞子集中 10 号染色体的额外丢失（上图）。根据 Y 轴（下图）所示的 RNA 表达水平，对 CNV 簇内的细胞进行 MC 或甲基化组 (MG) 预测。 c，在非肿瘤簇内，例如 TAM，来自不同 MC 的细胞聚集在一起，表明 MC 之间 TAM 基因表达存在差异。 d，由 snRNA 表达水平确定的 TAM 数量随着 WHO 分级或 MC 确定的脑膜瘤侵袭性的增加而减少。显示 TAM 相对于每个样本中所有细胞的百分比。显着性水平通过双边 Mann-Whitney U 检验进行测试（图 1b 中的 snRNA 队列组成）。 e，在蛋白质水平上，MC ben-1 NF2 突变良性脑膜瘤同样含有最高水平的 CD68 阳性 TAM，根据每个病例的 CD68 阳性表面积进行量化。此外，低风险脑膜瘤中的点状 CD68 染色模式表明这些病例中小胶质细胞样细胞的富集。显着性水平采用双边方差分析检验（MC ben-1 n = 25、ben-2 n = 23、ben-3 n = 31、int-A n = 21、int-B n = 8 和 mal n = 12）。 f，对六名不同患者的脑膜瘤进行多重抗体检测，将 TAM 分为小胶质细胞样细胞，侵袭性 MC mal 小胶质细胞样细胞极少，MC mal 巨噬细胞显示出多种增殖/有丝分裂相关组的显着富集（扩展数据图 3a、b）。此外，MC mal 巨噬细胞显示白介素 10 (IL-10) 和 IL-4/IL-13 通路表达增加，这两种通路均与多种肿瘤（包括弥漫性神经胶质瘤）中的 TAM 肿瘤支持表型相关（扩展数据图 3b）31-33。这些结果表明，在低风险的 NF2 突变脑膜瘤中，先天免疫细胞大多是小胶质细胞或小胶质细胞样表型，而在高风险病例中，这些细胞数量较少，但骨髓来源的增殖性巨噬细胞丰富。在功能水平上，这些骨髓来源的细胞表现出与肿瘤生长（即 IL-10 和 IL-4/IL-13 途径）和治疗耐药性（即 SPP1）相关的特征。",
       "study": {
-        "overview": "阅读时按照 A → B → C → D → E → F 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图2|肿瘤相关巨噬细胞是最大的非肿瘤细胞亚群，其数量和表型因脑膜瘤级别和 MC 的不同而不同。 a，44,266 个脑膜瘤 scRNA 核的 UMAP 识别出多个不同来源的细胞簇。根据 CNV 的存在和/或 SSTR2A 表达确定，肿瘤细胞是最大的细胞组，其次是肿瘤相关巨噬细胞 (TAM)，根据 CD68 表达确定。 b，对代表性病例的所有肿瘤细胞的 CNV 分析确定了 5 个 CNV 簇，例如基于细胞子集中 10 号染色体的额外丢失（上图）。根据 Y 轴（下图）所示的 RNA 表达水平，对 CNV 簇内的细胞进行 MC 或甲基化组 (MG) 预测。 c，在非肿瘤簇内，例如 TAM，来自不同 MC 的细胞聚集在一起，表明 MC 之间 TAM 基因表达存在差异。 d，由 snRNA 表达水平确定的 TAM 数量随着 WHO 分级或 MC 确定的脑膜瘤侵袭性的增加而减少。显示 TAM 相对于每个样本中所有细胞的百分比。显着性水平通过双边 Mann-Whitney U 检验进行测试（图 1b 中的 snRNA 队列组成）。 e，在蛋白质水平上，MC ben-1 NF2 突变良性脑膜瘤同样含有最高水平的 CD68 阳性 TAM，根据每个病例的 CD68 阳性表面积进行量化。此外，低风险脑膜瘤中的点状 CD68 染色模式表明这些病例中小胶质细胞样细胞的富集。显着性水平采用双边方差分析检验（MC ben-1 n = 25、ben-2 n = 23、ben-3 n = 31、int-A n = 21、int-B n = 8 和 mal n = 12）。 f，对六名不同患者的脑膜瘤进行多重抗体检测，将 TAM 分为小胶质细胞样细胞，侵袭性 MC mal 小胶质细胞样细胞极少，MC mal 巨噬细胞显示出多种增殖/有丝分裂相关组的显着富集（扩展数据图 3a、b）。此外，MC mal 巨噬细胞显示白介素 10 (IL-10) 和 IL-4/IL-13 通路表达增加，这两种通路均与多种肿瘤（包括弥漫性神经胶质瘤）中的 TAM 肿瘤支持表型相关（扩展数据图 3b）31-33。这些结果表明，在低风险的 NF2 突变脑膜瘤中，先天免疫细胞大多是小胶质细胞或小胶质细胞样表型，而在高风险病例中，这些细胞数量较少，但骨髓来源的增殖性巨噬细胞丰富。在功能水平上，这些骨髓来源的细胞表现出与肿瘤生长（即 IL-10 和 IL-4/IL-13 途径）和治疗耐药性（即 SPP1）相关的特征。",
+        "overview": "这张图从单核转录组、常规IHC、MIBI和空间转录组四个层面建立同一方向的证据：TAM是最主要的非肿瘤细胞，但其总量和来源随脑膜瘤风险改变。阅读时应区分两个概念：高风险病例并非TAM更多，而是TAM总量下降，同时剩余细胞更偏向外周髓系来源、增殖和肿瘤支持性巨噬细胞。",
         "panels": [
           {
             "label": "A",
-            "title": "A：44,266 个脑膜瘤 scRNA 核的 UMAP 识别出多个不同来源的细胞簇",
-            "explanation": "44,266 个脑膜瘤 scRNA 核的 UMAP 识别出多个不同来源的细胞簇。根据 CNV 的存在和/或 SSTR2A 表达确定，肿瘤细胞是最大的细胞组，其次是肿瘤相关巨噬细胞 (TAM)，根据 CD68 表达确定。 该部分属于图 2：TAM 是最主要的非肿瘤细胞，其数量和表型随脑膜瘤分级及甲基化类别变化，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。本图的阅读要求是：按 a–c 的细胞构成、d–g 的 snRNA/IHC/MIBI/标志基因验证、h–j 的空间与反卷积证据三层解释，明确低风险微胶质样细胞与高风险浸润性巨噬细胞的方向。。"
+            "title": "单核图谱确定肿瘤细胞与TAM的相对规模",
+            "explanation": "44,266个细胞核的UMAP显示肿瘤细胞占最大群体，CD68阳性的巨噬细胞群是第二大群体；SSTR2A和CNV用于支持肿瘤细胞身份。该图提供后续所有TAM数量和状态比较的细胞学基线。"
           },
           {
             "label": "B",
-            "title": "B：对代表性病例的所有肿瘤细胞的 CNV 分析确定了 5 个 CNV 簇，例如基于细胞子",
-            "explanation": "对代表性病例的所有肿瘤细胞的 CNV 分析确定了 5 个 CNV 簇，例如基于细胞子集中 10 号染色体额外丢失的情况（上图）。根据 Y 轴（下图）所示的 RNA 表达水平，对 CNV 簇内的细胞进行 MC 或甲基化组 (MG) 预测。 该部分属于图 2：TAM 是最主要的非肿瘤细胞，其数量和表型随脑膜瘤分级及甲基化类别变化，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。本图的阅读要求是：按 a–c 的细胞构成、d–g 的 snRNA/IHC/MIBI/标志基因验证、h–j 的空间与反卷积证据三层解释，明确低风险微胶质样细胞与高风险浸润性巨噬细胞的方向。。"
+            "title": "同一肿瘤内存在不同CNV亚克隆和分类倾向",
+            "explanation": "代表性病例被分成A–E五个CNV簇，其中部分细胞额外丢失10号染色体。下方小提琴图显示各CNV簇按RNA表达得到的MC/MG分数并不完全相同，说明同一肿瘤内部的基因组亚克隆可以带有不同程度的高风险转录特征。"
           },
           {
             "label": "C",
-            "title": "C：在非肿瘤簇（例如 TAM）内，来自不同 MC 的细胞聚集在一起，表明 MC 之间 T",
-            "explanation": "在非肿瘤簇（例如 TAM）内，来自不同 MC 的细胞聚集在一起，表明 MC 之间 TAM 基因表达存在差异。 该部分属于图 2：TAM 是最主要的非肿瘤细胞，其数量和表型随脑膜瘤分级及甲基化类别变化，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。本图的阅读要求是：按 a–c 的细胞构成、d–g 的 snRNA/IHC/MIBI/标志基因验证、h–j 的空间与反卷积证据三层解释，明确低风险微胶质样细胞与高风险浸润性巨噬细胞的方向。。"
+            "title": "TAM转录状态随甲基化类别系统变化",
+            "explanation": "按MC着色后，非肿瘤TAM并非随机混合，而是在UMAP中出现与ben-1、int-A/int-B和mal相关的区域。这里显示的是TAM表达状态的差异，而不是把TAM误当作肿瘤亚克隆。"
           },
           {
             "label": "D",
-            "title": "D：由 snRNA 表达水平确定的 TAM 数量随着 WHO 分级或 MC 确定的脑膜瘤",
-            "explanation": "由 snRNA 表达水平确定的 TAM 数量随着 WHO 分级或 MC 确定的脑膜瘤侵袭性的增加而减少。显示 TAM 相对于每个样本中所有细胞的百分比。显着性水平通过双边 Mann-Whitney U 检验进行测试（图 1b 中的 snRNA 队列组成）。"
+            "title": "TAM总比例随WHO等级和MC风险升高而下降",
+            "explanation": "左图从WHO 1级到3级、右图从ben-1到mal均显示TAM占全部细胞的比例总体下降。关键方向是低风险脑膜瘤含有更多TAM；该趋势与弥漫性胶质瘤中TAM随等级增加的常见模式不同。"
           },
           {
             "label": "E",
-            "title": "E：在蛋白质水平上，MC ben-1 NF2 突变良性脑膜瘤同样含有最高水平的 CD68",
-            "explanation": "在蛋白质水平上，MC ben-1 NF2 突变良性脑膜瘤同样含有最高水平的 CD68 阳性 TAM，根据每个病例的 CD68 阳性表面积进行量化。此外，低风险脑膜瘤中的点状 CD68 染色模式表明这些病例中小胶质细胞样细胞的富集。显着性水平采用双边方差分析检验（MC ben-1 n = 25、ben-2 n = 23、ben-3 n = 31、int-A n = 21、int-B n = 8 和 mal n = 12）。"
+            "title": "CD68蛋白验证低风险ben-1富含TAM",
+            "explanation": "代表性IHC和面积定量显示ben-1的CD68阳性比例最高，而其他MC明显较低。ben-1中的点状/条索状CD68形态提示这些细胞中包含较多脑驻留微胶质样成分，但单凭CD68不能确定细胞来源。"
           },
           {
             "label": "F",
-            "title": "F：对六名不同患者的脑膜瘤进行多重抗体检测，将 TAM 分为小胶质细胞样细胞，侵袭性 M",
-            "explanation": "对六名不同患者的脑膜瘤进行多重抗体检测，将 TAM 分为小胶质细胞样细胞，侵袭性 MC mal 小胶质细胞样细胞极少，MC mal 巨噬细胞显示出多种增殖/有丝分裂相关组的显着富集（扩展数据图 3a、b）。此外，MC mal 巨噬细胞显示白介素 10 (IL-10) 和 IL-4/IL-13 通路表达增加，这两种通路均与多种肿瘤（包括弥漫性神经胶质瘤）中的 TAM 肿瘤支持表型相关（扩展数据图 3b）31-33。这些结果表明，在低风险的 NF2 突变脑膜瘤中，先天免疫细胞大多是小胶质细胞或小胶质细胞样表型，而在高风险病例中，这些细胞数量较少，但骨髓来源的增殖性巨噬细胞丰富。在功能水平上，这些骨髓来源的细胞表现出与肿瘤生长（即 IL-10 和 IL-4/IL-13 途径）和治疗耐药性（即 SPP1）相关的特征。"
+            "title": "MIBI区分微胶质样细胞与浸润性巨噬细胞",
+            "explanation": "WHO 2级样本中可见CD68较低、IBA1/TMEM119/P2RY12阳性的微胶质样细胞；WHO 3级样本中更多是CD68高、IBA1阳性但TMEM119和P2RY12阴性的浸润性巨噬细胞。联合标志物把数量下降和组成替换两个现象分开。"
+          },
+          {
+            "label": "G",
+            "title": "单核数据再次验证微胶质样TAM随风险减少",
+            "explanation": "在总TAM内部计算微胶质样细胞比例后，WHO等级升高及由ben-1向mal过渡时比例下降，mal最低。该结果与MIBI的来源判定方向一致，说明低风险病例的高TAM量主要由微胶质样细胞贡献。"
+          },
+          {
+            "label": "H",
+            "title": "空间子图模型连接局部TME与MC",
+            "explanation": "作者从空间RNA-seq构建3-hop邻域子图，用图注意力网络预测局部MC。混淆矩阵显示训练集分类较好，独立验证集下降；潜在空间UMAP仍显示子图TME与其来源MC有对应关系，因此模型用于捕捉局部生态而非替代整例诊断。"
+          },
+          {
+            "label": "I",
+            "title": "不同风险类别的局部细胞组成实例",
+            "explanation": "Cell2location把三个代表性子图反卷积为脑膜瘤细胞、内皮/其他细胞、微胶质样细胞和巨噬细胞。ben-1子图含较多微胶质样细胞，mal子图以肿瘤细胞为主且微胶质样成分减少，直观展示局部微环境重排。"
+          },
+          {
+            "label": "J",
+            "title": "局部分类分数与细胞丰度的相关方向",
+            "explanation": "气泡图把各MC的子图logit分数与细胞类型丰度相关联。ben-1分数与微胶质样细胞富集方向一致，高风险类别更接近肿瘤细胞或巨噬细胞相关构成；气泡表示相关而非细胞间因果作用。"
           }
         ],
-        "conclusion": "综合各子图，证明低风险与高风险脑膜瘤的差异不仅来自肿瘤细胞，也包括 TAM 数量、来源和状态的系统变化。。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以图 2：TAM 是最主要的非肿瘤细胞，其数量和表型随脑膜瘤分级及甲基化类别变化的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "图2支持一个贯穿全文的生物学模型：NF2突变型脑膜瘤由低风险、微胶质样TAM丰富的生态逐渐转向高风险、TAM总量较少但浸润性和肿瘤支持性巨噬细胞占比更高的生态。分类器因此可能同时读取肿瘤内在改变和微环境组成。",
+        "boundary": "样本量、显著性和模型性能应按各技术分别解释；CD68不是来源特异标志物，空间模型在独立验证集表现下降，所有相关分析均不能单独证明TAM变化驱动恶性进展。"
       }
     },
     {
@@ -3616,41 +3640,41 @@
       "caption_en": "Fig. 3 | NF2-mutant meningiomas contain a mixture of neoplastic and stromal epigenetic signatures. a, Deconvolution using non-negative least squares (NNLS) and NMF analyses on a set of 4,502 meningiomas excluding (clinical) reference cases or epigenetic profiles from the snRNA cohort was performed to identify deconvoluted epigenetic neoplastic and stromal signatures. b, By matching the six neoplastic and seven stromal signatures to methylation profiles obtained from published isolated cell types, the signatures were annotated accordingly. c, UMAP visualization of 4,431 meningiomas using data from all signatures, or neoplastic signatures or stromal signatures alone, respectively, confirmed that TME stromal signatures contribute to subgrouping of meningioma (c, left panel). Mean pairwise cosine distance within or between MC Endothelial Glioneural Microglia A Microglia B Stromal A Stromal B Stromal C 0.1 Unknown Clear cell Unknown Clear cell Unknown Clear cell Unknown Proliferative 3p del Immunogenic Inflammatory Proliferative 3p del Immunogenic Inflammatory Proliferative 3p del Immunogenic Inflammatory Proliferative 0.2 0.3 0.4 0.5 (c, right panel). d,e, CNV profiles obtained from bulk methylomes dominated by a specific signature confirm either the high-risk profiles with multiple CNVs for the N2 proliferative signature (d) or the absence of many CNVs except for 22q where the NF2 gene is located for S4 Microglia(-like) B stromal signature (e). f, Twodimensional dotplots showing the dominant stromal and neoplastic signatures identified that the NF2-wild-type ben-2 and clear cell meningiomas feature a relatively homogeneous signature profile. The NF2-mutant meningioma, however, shares signals with multiple neoplastic and stromal signatures; the immunogenic signature peaks in MC ben-1, the low-grade NF2-mutant, and vanishes toward MC mal, in which the proliferative signature is dominant. del, deletion.",
       "caption_zh": "图3| NF2 突变脑膜瘤包含肿瘤性和基质表观遗传特征的混合物。 a，使用非负最小二乘法 (NNLS) 和 NMF 对一组 4,502 个脑膜瘤进行解卷积，排除 snRNA 队列中的（临床）参考病例或表观遗传特征，以识别解卷积的表观遗传肿瘤和基质特征。 b，通过将六个肿瘤特征和七个基质特征与从已发表的分离细胞类型获得的甲基化特征进行匹配，对特征进行了相应的注释。 c，分别使用所有特征、肿瘤特征或基质特征的数据对 4,431 个脑膜瘤进行 UMAP 可视化，证实 TME 基质特征有助于脑膜瘤的亚组（c，左图）。 MC 内或之间的平均成对余弦距离 内皮细胞 胶质神经细胞 小胶质细胞 A 小胶质细胞 B 基质 A 基质 B 基质 C 0.1 未知 透明细胞 未知 透明细胞 未知 透明细胞 未知 增殖 3p del 免疫原性炎症增殖 3p del 免疫原性炎症增殖 3p del 免疫原性炎症增殖 0.2 0.3 0.4 0.5（c，右图）。 d,e，从以特定特征为主的大量甲基化组中获得的 CNV 谱证实了 N2 增殖特征具有多个 CNV 的高风险特征 (d)，或者除了 22q 之外不存在许多 CNV，其中 NF2 基因位于 S4 小胶质细胞（样）B 基质特征 (e)。 f，显示主要基质和肿瘤特征的二维点图，表明 NF2 野生型 ben-2 和透明细胞脑膜瘤具有相对均匀的特征特征。然而，NF2 突变脑膜瘤与多种肿瘤和间质特征共享信号。免疫原性特征在 MC ben-1（低级 NF2 突变体）中达到峰值，并在 MC mal 中消失，其中增殖特征占主导地位。 del，删除。",
       "study": {
-        "overview": "阅读时按照 A → B → C → D → E → F 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图3| NF2 突变脑膜瘤包含肿瘤性和基质表观遗传特征的混合物。 a，使用非负最小二乘法 (NNLS) 和 NMF 对一组 4,502 个脑膜瘤进行解卷积，排除 snRNA 队列中的（临床）参考病例或表观遗传特征，以识别解卷积的表观遗传肿瘤和基质特征。 b，通过将六个肿瘤特征和七个基质特征与从已发表的分离细胞类型获得的甲基化特征进行匹配，对特征进行了相应的注释。 c，分别使用所有特征、肿瘤特征或基质特征的数据对 4,431 个脑膜瘤进行 UMAP 可视化，证实 TME 基质特征有助于脑膜瘤的亚组（c，左图）。 MC 内或之间的平均成对余弦距离 内皮细胞 胶质神经细胞 小胶质细胞 A 小胶质细胞 B 基质 A 基质 B 基质 C 0.1 未知 透明细胞 未知 透明细胞 未知 透明细胞 未知 增殖 3p del 免疫原性炎症增殖 3p del 免疫原性炎症增殖 3p del 免疫原性炎症增殖 0.2 0.3 0.4 0.5（c，右图）。 d,e，从以特定特征为主的大量甲基化组中获得的 CNV 谱证实了 N2 增殖特征具有多个 CNV 的高风险特征 (d)，或者除了 22q 之外不存在许多 CNV，其中 NF2 基因位于 S4 小胶质细胞（样）B 基质特征 (e)。 f，显示主要基质和肿瘤特征的二维点图，表明 NF2 野生型 ben-2 和透明细胞脑膜瘤具有相对均匀的特征特征。然而，NF2 突变脑膜瘤与多种肿瘤和间质特征共享信号。免疫原性特征在 MC ben-1（低级 NF2 突变体）中达到峰值，并在 MC mal 中消失，其中增殖特征占主导地位。 del，删除。",
+        "overview": "这张图把4,502例甲基化数据拆成肿瘤细胞来源和基质来源特征，并用细胞类型参考、UMAP、余弦距离和CNV验证这些特征的含义。阅读重点是：NF2野生型类别相对单一，而NF2突变型类别同时混合多个肿瘤与基质信号，且混合比例沿风险连续变化。",
         "panels": [
           {
             "label": "A",
-            "title": "A：a，使用非负最小二乘法 (NNLS) 和 NMF 对一组 4,502 个脑膜瘤进行解",
-            "explanation": "a，使用非负最小二乘法 (NNLS) 和 NMF 对一组 4,502 个脑膜瘤进行解卷积，排除 snRNA 队列中的（临床）参考病例或表观遗传特征，以识别解卷积的表观遗传肿瘤和基质特征。 该部分属于图 3：NF2 突变型脑膜瘤同时包含肿瘤细胞和基质来源的表观遗传信号，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "从大规模甲基化数据学习并投影表观遗传特征",
+            "explanation": "作者先对4,502例脑膜瘤和130例对照组织做NMF，得到可重复特征及聚类；再利用26例snRNA参考和NNLS把这些特征投影到970例临床队列。流程的输出不是新的单一类别，而是每例样本中多个肿瘤和基质成分的分数。"
           },
           {
             "label": "B",
-            "title": "B：b，通过将六个肿瘤特征和七个基质特征与从已发表的分离细胞类型获得的甲基化特征进行匹配",
-            "explanation": "b，通过将六个肿瘤特征和七个基质特征与从已发表的分离细胞类型获得的甲基化特征进行匹配，对特征进行了相应的注释。 该部分属于图 3：NF2 突变型脑膜瘤同时包含肿瘤细胞和基质来源的表观遗传信号，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "六个肿瘤特征与七个基质特征的细胞来源注释",
+            "explanation": "左侧显示各样本中不同特征的比例，右侧将特征与分离细胞甲基化参考匹配。N1–N6代表透明细胞、3p缺失、免疫原性、增殖等肿瘤程序；S1–S7对应基质、微胶质样、胶质神经和内皮来源。"
           },
           {
             "label": "C",
-            "title": "C：c，分别使用所有特征、肿瘤特征或基质特征的数据对 4,431 个脑膜瘤进行 UMAP",
-            "explanation": "c，分别使用所有特征、肿瘤特征或基质特征的数据对 4,431 个脑膜瘤进行 UMAP 可视化，证实 TME 基质特征有助于脑膜瘤的亚组（c，左图）。 该部分属于图 3：NF2 突变型脑膜瘤同时包含肿瘤细胞和基质来源的表观遗传信号，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "基质特征本身即可影响MC的分组边界",
+            "explanation": "4,431例的UMAP分别使用全部、仅肿瘤或仅基质特征。只看肿瘤特征和只看基质特征都保留一定MC结构；右侧余弦距离进一步显示去除某一类信号会改变类内与类间分离，证明TME并非分类器中的无关噪声。"
           },
           {
             "label": "D",
-            "title": "D：d,e，从以特定特征为主的大量甲基化组中获得的 CNV 谱证实了 N2 增殖特征具有",
-            "explanation": "d,e，从以特定特征为主的大量甲基化组中获得的 CNV 谱证实了 N2 增殖特征具有多个 CNV 的高风险特征 (d)，或者除了 22q 之外不存在许多 CNV，其中 NF2 基因位于 S4 小胶质细胞（样）B 基质特征 (e)。 该部分属于图 3：NF2 突变型脑膜瘤同时包含肿瘤细胞和基质来源的表观遗传信号，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "增殖肿瘤特征对应多重高风险CNV",
+            "explanation": "由N2增殖特征主导的496例显示多条染色体扩增和缺失，包括高风险脑膜瘤常见的广泛基因组不稳定。该子图把N2从纯统计因子锚定到高风险肿瘤内在改变。这里的广泛染色体异常说明该特征主要追踪肿瘤细胞的高风险基因组背景，而不是单纯由免疫细胞比例升高造成。"
           },
           {
             "label": "E",
-            "title": "E：d,e，从以特定特征为主的大量甲基化组中获得的 CNV 谱证实了 N2 增殖特征具有",
-            "explanation": "d,e，从以特定特征为主的大量甲基化组中获得的 CNV 谱证实了 N2 增殖特征具有多个 CNV 的高风险特征 (d)，或者除了 22q 之外不存在许多 CNV，其中 NF2 基因位于 S4 小胶质细胞（样）B 基质特征 (e)。 该部分属于图 3：NF2 突变型脑膜瘤同时包含肿瘤细胞和基质来源的表观遗传信号，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "微胶质样基质特征对应较简单的CNV背景",
+            "explanation": "由S4 microglia B特征主导的497例除22q/NF2区域外缺少广泛CNV，符合低风险NF2突变型背景。它说明一个样本的分类分数可以被丰富的微环境信号显著影响，而不必伴随大量恶性CNV。"
           },
           {
             "label": "F",
-            "title": "F：f，显示主要基质和肿瘤特征的二维点图，表明 NF2 野生型 ben-2 和透明细胞脑",
-            "explanation": "f，显示主要基质和肿瘤特征的二维点图，表明 NF2 野生型 ben-2 和透明细胞脑膜瘤具有相对均匀的特征特征。 该部分属于图 3：NF2 突变型脑膜瘤同时包含肿瘤细胞和基质来源的表观遗传信号，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "NF2突变型类别呈肿瘤—基质混合连续谱",
+            "explanation": "二维气泡图显示ben-2和透明细胞脑膜瘤相对由单一肿瘤特征主导；ben-1至mal则同时包含多个基质和肿瘤特征。免疫原性/微胶质样信号在ben-1最高，随后逐渐减弱，增殖信号向mal方向增强。"
           }
         ],
-        "conclusion": "综合各子图，把甲基化分类器的信号分解为肿瘤内在与微环境成分，解释同一类别为何出现连续和混合的分类分数。。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以图 3：NF2 突变型脑膜瘤同时包含肿瘤细胞和基质来源的表观遗传信号的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "图3直接解释了分类器为何出现模糊或中间分数：NF2突变型脑膜瘤的甲基化信号是肿瘤亚克隆、免疫/基质成分共同形成的混合量，而不是每个病例都属于一个纯净、互斥的亚型。",
+        "boundary": "NMF和NNLS给出的是统计分解及细胞来源注释；特征与细胞类型的匹配依赖参考数据，不能把每个特征等同于单一细胞群，也不能从横断面混合比例直接推断时间演化。"
       }
     },
     {
@@ -3668,26 +3692,51 @@
       "caption_en": "Fig. 4 | NF2-mutant meningioma is a spectrum rather than distinct tumor subtypes. a, To investigate if meningioma MCs are distinct tumor subtypes similar to the subtypes of ependymoma and medulloblastoma defined by different molecular driver alterations, 3,076 meningioma, ependymoma and medulloblastoma were plotted in a UMAP space. Medulloblastoma and ependymoma subtypes cluster individually, whereas meningioma MCs are confluent (spine, spinal NF2-mutant ependymoma; PFA/PFB, posterior fossa ependymoma type A/B; MPE, myxopapillary ependymoma; YAP, YAP1-fusionpositive ependymoma; ZFTA, ZFTA-fusion-positive ependymoma; sonic hedgehog (SHH) inf, medulloblastoma, SHH activated, infant type; SHH CHL AD, medulloblastoma SHH-activated adult; WNT, medulloblastoma WNT activated; G3/G4, medulloblastoma non-WNT, non-SHH group 3/group 4). b, Although meningiomas show this overlap at the epigenetic level, distinct CNVs are present in cases with a high, unequivocal prediction score of ≥0.99. c, In the clinical cohorts of 970 cases, a total of 928 cases have a score of ≥0.5 for one of the MCs. The majority of those cases have a score for one of the MCs of ≥0.9 (left panel). In a minority of the cases, there is a score between 0.5 and 0.9 for one MC and a lower score for one or multiple other MCs (middle panel). The NF2-mutant MCs involving ben-1 and int-B. MC mal was generally homogeneously distributed in malignant samples, suggesting an homogeneous “end stage” of progression (Fig. 4h). This finding underscores the fact that meningioma can be heterogeneous with different subclones that individually may match to separate MCs.",
       "caption_zh": "图4| NF2 突变脑膜瘤是一个谱系，而不是不同的肿瘤亚型。 a，为了研究脑膜瘤 MC 是否是与由不同分子驱动改变定义的室管膜瘤和髓母细胞瘤亚型相似的不同肿瘤亚型，在 UMAP 空间中绘制了 3,076 个脑膜瘤、室管膜瘤和髓母细胞瘤。髓母细胞瘤和室管膜瘤亚型分别聚类，而脑膜瘤 MC 是融合的（脊柱、脊髓 NF2 突变型室管膜瘤；PFA/PFB、后颅窝室管膜瘤 A/B 型；MPE、粘液乳头型室管膜瘤；YAP、YAP1 融合阳性室管膜瘤；ZFTA、ZFTA 融合阳性室管膜瘤；音刺猬 (SHH) inf，髓母细胞瘤，SHH 激活，婴儿型；SHH CHL AD，髓母细胞瘤 SHH 激活成人；WNT，髓母细胞瘤 WNT 激活；G3/G4，髓母细胞瘤非 WNT，非 SHH 组 3/组 4)。 b，尽管脑膜瘤在表观遗传水平上表现出这种重叠，但在明确预测评分≥0.99的病例中存在不同的CNV。 c，在970例临床队列中，共有928例病例其中1个MC评分≥0.5。大多数病例的其中一个 MC 得分≥0.9（左图）。在少数情况下，一个 MC 的得分在 0.5 到 0.9 之间，而一个或多个其他 MC 的得分较低（中图）。 NF2 突变 MC 涉及 ben-1 和 int-B。 MC mal 在恶性样本中通常均匀分布，表明进展的同质“末期”（图 4h）。这一发现强调了这样一个事实，即脑膜瘤可能具有异质性，具有不同的亚克隆，这些亚克隆各自可能与不同的 MC 相匹配。",
       "study": {
-        "overview": "阅读时按照 A → B → C 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图4| NF2 突变脑膜瘤是一个谱系，而不是不同的肿瘤亚型。 a，为了研究脑膜瘤 MC 是否是与由不同分子驱动改变定义的室管膜瘤和髓母细胞瘤亚型相似的不同肿瘤亚型，在 UMAP 空间中绘制了 3,076 个脑膜瘤、室管膜瘤和髓母细胞瘤。髓母细胞瘤和室管膜瘤亚型分别聚类，而脑膜瘤 MC 是融合的（脊柱、脊髓 NF2 突变型室管膜瘤；PFA/PFB、后颅窝室管膜瘤 A/B 型；MPE、粘液乳头型室管膜瘤；YAP、YAP1 融合阳性室管膜瘤；ZFTA、ZFTA 融合阳性室管膜瘤；音刺猬 (SHH) inf，髓母细胞瘤，SHH 激活，婴儿型；SHH CHL AD，髓母细胞瘤 SHH 激活成人；WNT，髓母细胞瘤 WNT 激活；G3/G4，髓母细胞瘤非 WNT，非 SHH 组 3/组 4)。 b，尽管脑膜瘤在表观遗传水平上表现出这种重叠，但在明确预测评分≥0.99的病例中存在不同的CNV。 c，在970例临床队列中，共有928例病例其中1个MC评分≥0.5。大多数病例的其中一个 MC 得分≥0.9（左图）。在少数情况下，一个 MC 的得分在 0.5 到 0.9 之间，而一个或多个其他 MC 的得分较低（中图）。 NF2 突变 MC 涉及 ben-1 和 int-B。 MC mal 在恶性样本中通常均匀分布，表明进展的同质“末期”（图 4h）。这一发现强调了这样一个事实，即脑膜瘤可能具有异质性，具有不同的亚克隆，这些亚克隆各自可能与不同的 MC 相匹配。",
+        "overview": "这张图从跨肿瘤聚类、分类置信度、区域取样和空间亚克隆四个角度检验离散亚型假设。A–C先证明脑膜瘤MC之间边界较连续；D–H再展示同一肿瘤内部的TAM异质性、CNV亚克隆和局部MC分数可以并存。",
         "panels": [
           {
             "label": "A",
-            "title": "A：为了研究脑膜瘤 MC 是否是与由不同分子驱动改变定义的室管膜瘤和髓母细胞瘤亚型相似的",
-            "explanation": "为了研究脑膜瘤 MC 是否是与由不同分子驱动改变定义的室管膜瘤和髓母细胞瘤亚型相似的不同肿瘤亚型，在 UMAP 空间中绘制了 3,076 个脑膜瘤、室管膜瘤和髓母细胞瘤。髓母细胞瘤和室管膜瘤亚型分别聚类，而脑膜瘤 MC 是融合的（脊柱、脊髓 NF2 突变型室管膜瘤；PFA/PFB、后颅窝室管膜瘤 A/B 型；MPE、粘液乳头型室管膜瘤；YAP、YAP1 融合阳性室管膜瘤；ZFTA、ZFTA 融合阳性室管膜瘤；音刺猬 (SHH) inf，髓母细胞瘤，SHH 激活，婴儿型；SHH CHL AD，髓母细胞瘤 SHH 激活成人；WNT，髓母细胞瘤 WNT 激活；G3/G4，髓母细胞瘤非 WNT，非 SHH 组 3/组 4)。"
+            "title": "脑膜瘤MC不像MB和EPN亚型那样清楚分离",
+            "explanation": "3,076例脑膜瘤、室管膜瘤和髓母细胞瘤进入同一UMAP。MB和EPN的驱动型亚组形成相对独立簇，而脑膜瘤ben-1、int-A、int-B和mal彼此连续重叠，支持其更像风险轴上的相邻状态。"
           },
           {
             "label": "B",
-            "title": "B：尽管脑膜瘤在表观遗传水平上表现出这种重叠，但在明确预测评分≥0.99的病例中存在不同",
-            "explanation": "尽管脑膜瘤在表观遗传水平上表现出这种重叠，但在明确预测评分≥0.99的病例中存在不同的CNV。 该部分属于图 4：NF2 突变型脑膜瘤更符合连续谱，而不是彼此独立的肿瘤亚型，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "高置信MC仍对应不同CNV风险背景",
+            "explanation": "只选校准分类分数≥0.99的病例后，ben-1、int-A和mal表现出不同CNV图谱；风险升高伴随更广泛的染色体缺失。该图说明连续不等于没有肿瘤内在差异，而是这些差异未形成完全断裂的表观遗传簇。"
           },
           {
             "label": "C",
-            "title": "C：在970例临床队列中，共有928例病例其中一项MC评分≥0.5",
-            "explanation": "在970例临床队列中，共有928例病例其中一项MC评分≥0.5。大多数病例的其中一个 MC 得分≥0.9（左图）。在少数情况下，一个 MC 的得分在 0.5 到 0.9 之间，而一个或多个其他 MC 的得分较低（中图）。 NF2 突变 MC 涉及 ben-1 和 int-B。 MC mal 在恶性样本中通常均匀分布，表明进展的同质“末期”（图 4h）。这一发现强调了这样一个事实，即脑膜瘤可能具有异质性，具有不同的亚克隆，这些亚克隆各自可能与不同的 MC 相匹配。"
+            "title": "中等分类分数揭示NF2突变类别间的残余信号",
+            "explanation": "970例临床队列中多数病例单一MC分数≥0.9；201例最高分仅0.5–0.9时，常同时保留其他NF2突变MC分数。相比NF2野生型ben-2，这种混合在ben-1、int-A、int-B和mal之间更明显。"
+          },
+          {
+            "label": "D",
+            "title": "同一切片中CD68高低区域并存",
+            "explanation": "代表性脑膜瘤的CD68染色显示TAM空间分布不均，作者分别取TAM丰富的区域A和TAM稀少的区域B。该设计用于直接检验局部微环境差异是否能改变同一肿瘤的甲基化分类。"
+          },
+          {
+            "label": "E",
+            "title": "局部TAM差异对应不同MC与CNV结果",
+            "explanation": "区域A的CD68高区域得到ben-1/immune-enriched倾向，区域B的CD68低区域得到int-A/hypermitotic倾向，并出现额外1p缺失。说明整块组织的分类可能平均掉具有不同风险的局部生态与亚克隆。"
+          },
+          {
+            "label": "F",
+            "title": "基因组亚克隆在同一肿瘤中具有空间边界",
+            "explanation": "CNV热图和层次聚类识别四个肿瘤内亚克隆，右侧组织图显示这些克隆在切片中占据不同区域。肿瘤内连续性因此同时包含遗传亚克隆混合，而不仅是免疫细胞比例变化。组织空间图与CNV聚类的一一对应，使后续局部MC预测能够在明确的遗传亚克隆框架下解释。"
+          },
+          {
+            "label": "G",
+            "title": "空间MC预测与髓系和缺氧信号共定位",
+            "explanation": "图神经网络在切片上给出ben-1、int-A和mal的局部logit热图。mal高分区与CD68巨噬细胞和缺氧GSEA信号共定位，而P2RY12微胶质样信号分布不同，连接了局部风险状态与TME组成。"
+          },
+          {
+            "label": "H",
+            "title": "不同克隆内部仍可包含多个MC分数",
+            "explanation": "16个肿瘤的克隆级MC logit热图和多样性指标显示，同一遗传克隆内部也可出现多种表观遗传分类倾向；部分肿瘤在多个克隆间高度异质。分类连续谱由克隆组成和微环境共同塑造。"
           }
         ],
-        "conclusion": "综合各子图，比较脑膜瘤与髓母细胞瘤、室管膜瘤的聚类边界，并结合分类分数、CNV、复发转换、空间亚克隆和 TAM 组成说明连续谱的来源。。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以图 4：NF2 突变型脑膜瘤更符合连续谱，而不是彼此独立的肿瘤亚型的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "图4把连续谱具体化为可测量的组织现象：NF2突变型病例在整体分类空间中相互过渡，同一肿瘤内又存在不同CNV克隆、TAM密度和局部MC状态；单次bulk取样可能只得到这些成分的加权平均。",
+        "boundary": "空间共定位和分类分数只能说明局部关联；图中代表性病例不能估计所有脑膜瘤的异质性频率，区域取样差异也可能受肿瘤纯度和技术因素影响。"
       }
     },
     {
@@ -3705,36 +3754,41 @@
       "caption_en": "Fig. 5 | The number of immune cells in a meningioma can predict the risk for recurrence. a, To investigate the predictive value of the immune component in the different MCs, three previously described clinical cohorts, including a retrospective discovery, retrospective validation and prospective validation cohort, were investigated harboring cases from each WHO grade, MC, UCSF subgroup, stromal and neoplastic signature. For each case, the stromal and neoplastic signature with the highest score is annotated. b, Similar to the snRNA data, the number of immune cells as determined by methylation deconvolution decreased with aggressiveness of the WHO grade or MC (WHO grade 1 n = 527, grade 2 n = 353 and grade 3 n = 90. MC ben-1 n = 178, ben-2 n = 252, ben-3 n = 68, int-A n = 330, int-B n = 56 and mal n = 86). c,d, Kaplan-Meier analysis of progression-free survival for cases stratified by the quartile distribution of immune cell presence into a high (top quartile) or low (bottom)/intermediate (middle two quartiles) group resulted in a significantly different outcome in the discovery (log-rank test, Χ2 test statistic = 23.7, 1 degree of freedom) (c) and c d Highest quartile % immune cells Med/Low (other quartiles) P = 0.0045 0 50 100 150 200 0 100 200 300 No. at risk: Time (months) 127 22 1 0 High 64 53 25 10 1 379 49 1 0 Int/Low 117 74 28 6 1 Hazard ratio for int/low vs. high adjusted for WHO grade n Rec.",
       "caption_zh": "图5 |脑膜瘤中免疫细胞的数量可以预测复发的风险。 a，为了研究不同 MC 中免疫成分的预测价值，对三个先前描述的临床队列（包括回顾性发现、回顾性验证和前瞻性验证队列）进行了研究，其中包含来自每个 WHO 级别、MC、UCSF 亚组、间质和肿瘤特征的病例。对于每种情况，都会注释得分最高的间质和肿瘤特征。 b，与snRNA数据类似，通过甲基化解卷积确定的免疫细胞数量随着WHO等级或MC的侵袭性而减少（WHO等级1 n = 527，等级2 n = 353和等级3 n = 90。MC ben-1 n = 178，ben-2 n = 252，ben-3 n = 68，int-A n = 330，int-B n = 56且马尔 n = 86)。 c,d，对按免疫细胞存在的四分位数分布分层为高（顶部四分位数）或低（底部）/中间（中间两个四分位数）组的病例进行无进展生存的 Kaplan-Meier 分析，结果发现显着不同（对数秩检验，Χ2 检验统计量 = 23.7，1 个自由度）(c) 和 c d 最高四分位免疫细胞百分比中/低（其他）四分位数） P = 0.0045 0 50 100 150 200 0 100 200 300 面临风险的人数： 时间（月） 127 22 1 0 高 64 53 25 10 1 379 49 1 0 中/低 117 74 28 6 1 int/低与高根据 WHO 等级 n Rec 进行调整。",
       "study": {
-        "overview": "阅读时按照 A → B → C → D → N 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图5 |脑膜瘤中免疫细胞的数量可以预测复发的风险。 a，为了研究不同 MC 中免疫成分的预测价值，对三个先前描述的临床队列（包括回顾性发现、回顾性验证和前瞻性验证队列）进行了研究，其中包含来自每个 WHO 级别、MC、UCSF 亚组、间质和肿瘤特征的病例。对于每种情况，都会注释得分最高的间质和肿瘤特征。 b，与snRNA数据类似，通过甲基化解卷积确定的免疫细胞数量随着WHO等级或MC的侵袭性而减少（WHO等级1 n = 527，等级2 n = 353和等级3 n = 90。MC ben-1 n = 178，ben-2 n = 252，ben-3 n = 68，int-A n = 330，int-B n = 56且马尔 n = 86)。 c,d，对按免疫细胞存在的四分位数分布分层为高（顶部四分位数）或低（底部）/中间（中间两个四分位数）组的病例进行无进展生存的 Kaplan-Meier 分析，结果发现显着不同（对数秩检验，Χ2 检验统计量 = 23.7，1 个自由度）(c) 和 c d 最高四分位免疫细胞百分比中/低（其他）四分位数） P = 0.0045 0 50 100 150 200 0 100 200 300 面临风险的人数： 时间（月） 127 22 1 0 高 64 53 25 10 1 379 49 1 0 中/低 117 74 28 6 1 int/低与高根据 WHO 等级 n Rec 进行调整。",
+        "overview": "这张图把前面的微环境发现转向临床结局。A–B定义三个人群队列并量化免疫成分，C–E用Kaplan–Meier曲线显示高免疫组结局更好，F通过校正WHO等级的Cox模型检验该信息是否独立存在。",
         "panels": [
           {
             "label": "A",
-            "title": "A：a，为了研究不同 MC 中免疫成分的预测价值，对三个先前描述的临床队列（包括回顾性发",
-            "explanation": "a，为了研究不同 MC 中免疫成分的预测价值，对三个先前描述的临床队列（包括回顾性发现、回顾性验证和前瞻性验证队列）进行了研究，其中包含来自每个 WHO 级别、MC、UCSF 亚组、间质和肿瘤特征的病例。 该部分属于图 5：脑膜瘤中的免疫细胞数量可预测复发风险，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "三队列病例的分子、临床和免疫全景",
+            "explanation": "热图同时排列MC、WHO等级、UCSF组、肿瘤/基质特征、综合风险、关键CNV、免疫分组和免疫比例。发现队列、回顾性验证队列和前瞻性验证队列均覆盖多个风险层级，为跨队列验证提供基础。"
           },
           {
             "label": "B",
-            "title": "B：b，与 snRNA 数据类似，通过甲基化解卷积确定的免疫细胞数量随着 WHO 等级或",
-            "explanation": "b，与 snRNA 数据类似，通过甲基化解卷积确定的免疫细胞数量随着 WHO 等级或 MC 的侵袭性而减少（WHO 1 级 n = 527、2 级 n = 353 和 3 级 n = 90。 该部分属于图 5：脑膜瘤中的免疫细胞数量可预测复发风险，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "甲基化反卷积的免疫比例随风险升高而下降",
+            "explanation": "按WHO等级或MC分组后，免疫细胞比例总体从低风险向高风险减少，方向与snRNA和CD68结果一致。ben-1免疫比例最高，mal较低，说明大样本甲基化数据能复现TAM/淋巴细胞总体减少。"
           },
           {
             "label": "C",
-            "title": "C：研究对象、比较方式与直接结果",
-            "explanation": "c,d，对按免疫细胞存在的四分位数分布分层为高（顶部四分位数）或低（底部）/中间（中间两个四分位数）组的病例进行无进展生存的 Kaplan-Meier 分析，结果发现显着不同（对数秩检验，Χ2 检验统计量 = 23.7，1 个自由度）(c) 和 c d 最高四分位免疫细胞百分比中/低（其他）四分位数) P = 0.0045 0 50 100 150 200 0 100 200 300"
+            "title": "发现队列中高免疫组无进展生存更好",
+            "explanation": "按免疫比例四分位数将最高四分位定义为high，其余合并为intermediate/low。发现队列中蓝色高免疫曲线明显高于红色组，log-rank P=1.16×10^-6，显示免疫丰富与较低复发风险相关。"
           },
           {
             "label": "D",
-            "title": "D：研究对象、比较方式与直接结果",
-            "explanation": "c,d，对按免疫细胞存在的四分位数分布分层为高（顶部四分位数）或低（底部）/中间（中间两个四分位数）组的病例进行无进展生存的 Kaplan-Meier 分析，结果发现显着不同（对数秩检验，Χ2 检验统计量 = 23.7，1 个自由度）(c) 和 c d 最高四分位免疫细胞百分比中/低（其他）四分位数) P = 0.0045 0 50 100 150 200 0 100 200 300"
+            "title": "回顾性验证队列重复生存分层",
+            "explanation": "相同分组规则在独立回顾性队列中仍得到高免疫组更好的无进展生存，P=0.0045。效应幅度小于发现集，但方向一致，减少了单队列过拟合的可能。风险表下方仍保留较多随访患者，说明该差异并非只由极少数早期事件形成。"
           },
           {
-            "label": "N",
-            "title": "N：根据 WHO 等级 n ​​Rec 进行高调整",
-            "explanation": "根据 WHO 等级 n ​​Rec 进行高调整。 该部分属于图 5：脑膜瘤中的免疫细胞数量可预测复发风险，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。 该部分属于图 5：脑膜瘤中的免疫细胞数量可预测复发风险，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "label": "E",
+            "title": "免疫比例可细化WHO 1–2级风险",
+            "explanation": "联合WHO等级和免疫组后，WHO 2级高免疫病例的曲线并不比WHO 1级低/中免疫病例差，说明静态WHO等级内部仍有可由TME解释的风险差异。图中比较主要针对1–2级，不能外推到样本很少的3级。"
+          },
+          {
+            "label": "F",
+            "title": "校正WHO等级后免疫成分仍有预测价值",
+            "explanation": "三个队列的森林图均以低/中免疫相对高免疫给出HR>1：发现集3.73、回顾验证1.95、前瞻验证7.73，置信区间和P值见图。结果支持免疫成分在WHO分级之外提供附加信息，但前瞻队列事件少、区间很宽。"
           }
         ],
-        "conclusion": "综合各子图，在发现和验证队列中检验免疫成分是否在 WHO 分级之外提供复发风险信息，并明确高免疫与低/中免疫组的方向。。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以图 5：脑膜瘤中的免疫细胞数量可预测复发风险的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "图5证明微环境连续变化具有临床对应：较少的免疫/TAM成分与更高复发风险相关，并可在WHO 1–2级内部重新排序部分病例。这个结论在三个独立队列方向一致。",
+        "boundary": "研究采用观察性生存分析，未对所有比较进行多重校正；免疫比例来自甲基化反卷积而非直接计数，队列事件数和随访不同，尤其前瞻队列的效应估计不稳定。"
       }
     },
     {
@@ -3752,41 +3806,41 @@
       "caption_en": "Fig. 6 | TAM cell quantification by immunohistochemical PU.1 staining can facilitate risk prediction in meningioma. a, The number of TAMs was quantified using CD68 and PU.1 immunohistochemical staining. PU.1, a nuclear staining, was selected for further evaluation of TAMs in a separate meningioma cohort of 1,378 patients. b, The percentage of PU.1 cells decrease with an increase of the WHO grade (WHO grade 1 n = 1104, grade 2 n = 254 and grade 3 n = 20). c, Kaplan-Meier analysis of progression-free survival for cases stratified by the quartile distribution of TAM/PU.1 cell percentage into a high (top quartile), or low (bottom)/intermediate (middle two quartiles). Log-rank tests, all with 1 degree of freedom. Χ2 test statistic: 1.Int/low versus 1.High = 6.5, 2.Int/low versus 2.High = 16.4, 3.Int/low versus 3.High = 0.9, 1.Int/low versus 2.High = 0.3. d, Forest plot indicating that the immunohistochemical PU.1 TAM quantification add significant value in WHO grade 1 and 2 cases. Cox proportional hazard regression models were fitted to test the immune cell component using the Wald test. All tests were two sided, and no adjustment for multiple testing was done. Points indicate the hazard ratio, and horizontal lines indicate the corresponding 95% confidence intervals as estimated by the Cox proportional WHO grade & PU.1% 100% Grade 1 - High Grade 1 - Int/Low Grade 2 - High Grade 2 - Int/Low Grade 3 - High Grade 3 - Int/Low 75% 50% 0.01 P-value Group2 25% Group1 1.Int/Low 1.High 2.Int/Low 2.High 5.25 × 10 –5 3.Int/Low 3.High 0.34 1.Int/Low 2.High 0.60 0% 0 24 48 72 96 120 144 168 Months 276 159 101 49 26 12 4 4 828 499 326 207 125 66 22 14 67 39 28 17 9 7 2 1 187 103 57 33 20 9 3 1 2 0 0 0 0 0 0 0 18 1 1 1 0 0 0 0 e 30% Null WHO grade WHO grade & PU.1% 22.5% Brier score 15% 7.5% 0% 0 24 48 72 96 0.25 0.50 1.0 2.0 4.0 Months HR [low/med vs high] test on heterogeneity P = 0.01 WHO grade WHO & PU.1 P-value Cindex 0.63 0.66 0.0003 + 0 – MC Int-A 1p 6q 22q MC Mal Microglia-like Macrophage hazard regression model. e, Brier prediction score analysis shows lower error rate, thus higher prediction accuracy in WHO grade 1 and 2 cases, for WHO + PU.1 versus WHO grading alone. There is also a significant difference in c-index accuracy observed (z-score test statistic −3.64). f, Graphical summary: NF2-mutant meningioma form a spectrum from benign low-risk tumors to malignant, high-risk meningioma. Within this spectrum, subclones of MC ben-1 (yellow), MC int-A (light blue), MC int-B (pink) and MC mal (red) exist as well as differences in both the number and composition of TAMs (that is, microglia-like dominated in benign cases to a limited number of macrophages in malignant meningioma). When only a limited number of malignant tumor cells are present that harbor CNVs associated with higher risk (for example, loss of 1p and/or 6q), these changes may not be detected in the bulk CNV plot but are present in individual aggressive subclones. For panels c and e, all tests were two sided. Boxplots represent the upper and lower quartiles, whereas whiskers reach to the most outlying samples that are within 1.5 IQR of the quartiles. Median values are labeled as horizontal lines in the boxes. benign course for both WHO grade 1 and 2 cases, although the number of events was low (Fig. 5e). For the retrospective and prospective validation cohorts, the number of immune cells again separated cases within the WHO grades, but this was only significant for grade 1 in the retrospective and grade 2 in the prospective cohort (Supplementary Fig. 3b, c). Nevertheless, for WHO grade 1 or 2 cases, in each clinical cohort there was an increased risk for recurrence in intermediate/low immune cell meningioma, even when adjusting for the WHO grade (Fig. 5f). This effect is even more pronounced when leaving out the NF2-wild-type MC ben-2 cases (Supplementary Fig. 3d).",
       "caption_zh": "图 6 |通过免疫组织化学 PU.1 染色对 TAM 细胞进行定量可以促进脑膜瘤的风险预测。 a，使用 CD68 和 PU.1 免疫组织化学染色对 TAM 的数量进行定量。选择 PU.1（一种核染色剂）来进一步评估由 1,378 名患者组成的单独脑膜瘤队列中的 TAM。 b，PU.1细胞的百分比随着WHO等级的增加而降低（WHO等级1 n = 1104，等级2 n = 254和等级3 n = 20）。 c，按 TAM/PU.1 细胞百分比四分位数分布分层为高（顶部四分位数）或低（底部）/中间（中间两个四分位数）的病例的无进展生存期的 Kaplan-Meier 分析。对数秩检验，全部具有 1 个自由度。 Χ2 检验统计量：1.Int/low 与 1.High = 6.5，2.Int/low 与 2.High = 16.4，3.Int/low 与 3.High = 0.9，1.Int/low 与 2.High = 0.3。 d，森林图，表明免疫组织化学 PU.1 TAM 定量在 WHO 1 级和 2 级病例中具有显着价值。使用 Wald 检验拟合 Cox 比例风险回归模型来测试免疫细胞成分。所有测试都是两侧的，并且没有对多重测试进行调整。点表示风险比，水平线表示根据 Cox 比例 WHO 等级和 PU 估计的相应 95% 置信区间。1% 100% 1 级 - 高 1 级 - 中级/低 2 级 - 高 2 级 - 中级/低 3 级 - 高 3 级 - 中级/低 75% 50% 0.01 P 值 Group2 25% Group1 1.Int/Low 1.High 2.中/低 2.高 5.25 × 10 –5 3.中/低 3.高 0.34 1.中/低 2.高 0.60 0% 0 24 48 72 96 120 144 168 个月 276 159 101 49 26 12 4 4 828 499 326 207 125 66 22 14 67 39 28 17 9 7 2 1 187 103 57 33 20 9 3 1 2 0 0 0 0 0 0 0 18 1 1 1 0 0 0 0 e 30% 空 WHO 等级 WHO 等级 & PU.1% 22.5% Brier 评分 15% 7.5% 0% 0 24 48 72 96 0.25 0.50 1.0 2.0 4.0 个月 HR [低/中 vs 高] 异质性测试 P = 0.01 WHO 等级 WHO & PU.1 P 值 Cindex 0.63 0.66 0.0003 + 0 – MC Int-A 1p 6q 22q MC Mal 小胶质细胞样巨噬细胞风险回归模型。 e，Brier 预测评分分析显示，与单独的 WHO 分级相比，对于 WHO + PU.1，WHO 1 级和 2 级病例的错误率较低，因此预测准确性较高。观察到的 c 指数准确性也存在显着差异（z 得分检验统计量 -3.64）。 f，图解总结：NF2 突变脑膜瘤形成从良性低风险肿瘤到恶性高风险脑膜瘤的谱系。在此谱系中，存在 MC ben-1（黄色）、MC int-A（浅蓝色）、MC int-B（粉色）和 MC mal（红色）的亚克隆，并且 TAM 的数量和组成存在差异（即良性病例中以小胶质细胞样为主，恶性脑膜瘤中以有限数量的巨噬细胞为主）。当仅存在有限数量的含有与较高风险相关的 CNV（例如，1p 和/或 6q 丢失）的恶性肿瘤细胞时，这些变化可能无法在整体 CNV 图中检测到，但存在于单个侵袭性亚克隆中。对于面板 c 和 e，所有测试都是双面的。箱线图代表上四分位数和下四分位数，而晶须则到达四分位数 1.5 IQR 以内的最外围样本。中值在框中标记为水平线。尽管事件数量较少，但 WHO 1 级和 2 级病例均为良性病程（图 5e）。对于回顾性和前瞻性验证队列，免疫细胞数量再次将 WHO 分级内的病例分开，但这仅对回顾性队列中的 1 级和前瞻性队列中的 2 级显着（补充图 3b、c）。然而，对于 WHO 1 级或 2 级病例，在每个临床队列中，中/低免疫细胞脑膜瘤的复发风险增加，即使根据 WHO 等级进行调整（图 5f）。当排除 NF2 野生型 MC ben-2 病例时，这种效应更加明显（补充图 3d）。",
       "study": {
-        "overview": "阅读时按照 A → B → C → D → E → F 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图 6 |通过免疫组织化学 PU.1 染色对 TAM 细胞进行定量可以促进脑膜瘤的风险预测。 a，使用 CD68 和 PU.1 免疫组织化学染色对 TAM 的数量进行定量。选择 PU.1（一种核染色剂）来进一步评估由 1,378 名患者组成的单独脑膜瘤队列中的 TAM。 b，PU.1细胞的百分比随着WHO等级的增加而降低（WHO等级1 n = 1104，等级2 n = 254和等级3 n = 20）。 c，按 TAM/PU.1 细胞百分比四分位数分布分层为高（顶部四分位数）或低（底部）/中间（中间两个四分位数）的病例的无进展生存期的 Kaplan-Meier 分析。对数秩检验，全部具有 1 个自由度。 Χ2 检验统计量：1.Int/low 与 1.High = 6.5，2.Int/low 与 2.High = 16.4，3.Int/low 与 3.High = 0.9，1.Int/low 与 2.High = 0.3。 d，森林图，表明免疫组织化学 PU.1 TAM 定量在 WHO 1 级和 2 级病例中具有显着价值。使用 Wald 检验拟合 Cox 比例风险回归模型来测试免疫细胞成分。所有测试都是两侧的，并且没有对多重测试进行调整。点表示风险比，水平线表示根据 Cox 比例 WHO 等级和 PU 估计的相应 95% 置信区间。1% 100% 1 级 - 高 1 级 - 中级/低 2 级 - 高 2 级 - 中级/低 3 级 - 高 3 级 - 中级/低 75% 50% 0.01 P 值 Group2 25% Group1 1.Int/Low 1.High 2.中/低 2.高 5.25 × 10 –5 3.中/低 3.高 0.34 1.中/低 2.高 0.60 0% 0 24 48 72 96 120 144 168 个月 276 159 101 49 26 12 4 4 828 499 326 207 125 66 22 14 67 39 28 17 9 7 2 1 187 103 57 33 20 9 3 1 2 0 0 0 0 0 0 0 18 1 1 1 0 0 0 0 e 30% 空 WHO 等级 WHO 等级 & PU.1% 22.5% Brier 评分 15% 7.5% 0% 0 24 48 72 96 0.25 0.50 1.0 2.0 4.0 个月 HR [低/中 vs 高] 异质性测试 P = 0.01 WHO 等级 WHO & PU.1 P 值 Cindex 0.63 0.66 0.0003 + 0 – MC Int-A 1p 6q 22q MC Mal 小胶质细胞样巨噬细胞风险回归模型。 e，Brier 预测评分分析显示，与单独的 WHO 分级相比，对于 WHO + PU.1，WHO 1 级和 2 级病例的错误率较低，因此预测准确性较高。观察到的 c 指数准确性也存在显着差异（z 得分检验统计量 -3.64）。 f，图解总结：NF2 突变脑膜瘤形成从良性低风险肿瘤到恶性高风险脑膜瘤的谱系。在此谱系中，存在 MC ben-1（黄色）、MC int-A（浅蓝色）、MC int-B（粉色）和 MC mal（红色）的亚克隆，并且 TAM 的数量和组成存在差异（即良性病例中以小胶质细胞样为主，恶性脑膜瘤中以有限数量的巨噬细胞为主）。当仅存在有限数量的含有与较高风险相关的 CNV（例如，1p 和/或 6q 丢失）的恶性肿瘤细胞时，这些变化可能无法在整体 CNV 图中检测到，但存在于单个侵袭性亚克隆中。对于面板 c 和 e，所有测试都是双面的。箱线图代表上四分位数和下四分位数，而晶须则到达四分位数 1.5 IQR 以内的最外围样本。中值在框中标记为水平线。尽管事件数量较少，但 WHO 1 级和 2 级病例均为良性病程（图 5e）。对于回顾性和前瞻性验证队列，免疫细胞数量再次将 WHO 分级内的病例分开，但这仅对回顾性队列中的 1 级和前瞻性队列中的 2 级显着（补充图 3b、c）。然而，对于 WHO 1 级或 2 级病例，在每个临床队列中，中/低免疫细胞脑膜瘤的复发风险增加，即使根据 WHO 等级进行调整（图 5f）。当排除 NF2 野生型 MC ben-2 病例时，这种效应更加明显（补充图 3d）。",
+        "overview": "这张图测试能否把复杂多组学发现压缩成病理科可执行的PU.1核染色指标。A建立自动计数流程，B–D检验PU.1与等级和复发的关系，E比较模型性能，F用示意图汇总NF2突变型风险连续谱。",
         "panels": [
           {
             "label": "A",
-            "title": "A：使用 CD68 和 PU.1 免疫组织化学染色对 TAM 的数量进行定量",
-            "explanation": "使用 CD68 和 PU.1 免疫组织化学染色对 TAM 的数量进行定量。选择 PU.1（一种核染色剂）来进一步评估由 1,378 名患者组成的单独脑膜瘤队列中的 TAM。 该部分属于图 6：通过 PU.1 免疫组化量化 TAM 可改善脑膜瘤风险预测，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "从TMA核心到PU.1自动TAM计数",
+            "explanation": "作者比较CD68和PU.1后选择核定位更清楚的PU.1进行自动定量。3,334个TMA核心中保留≥1,000个细胞的3,282个核心，汇总为1,378例患者，为临床验证提供大样本。"
           },
           {
             "label": "B",
-            "title": "B：PU.1细胞的百分比随着WHO等级的增加而降低（WHO等级1 n = 1104，等级",
-            "explanation": "PU.1细胞的百分比随着WHO等级的增加而降低（WHO等级1 n = 1104，等级2 n = 254和等级3 n = 20）。 该部分属于图 6：通过 PU.1 免疫组化量化 TAM 可改善脑膜瘤风险预测，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "PU.1阳性细胞比例随WHO等级升高而下降",
+            "explanation": "箱线图显示WHO 1级和2级的PU.1比例较高，3级最低；样本量分别为1,104、254和20。趋势复现了前面低风险病例TAM更多的发现，但3级数量很少。由于3级仅20例，图中最可靠的信息是总体下降方向，而不是3级分布的精确估计。"
           },
           {
             "label": "C",
-            "title": "C：对病例的无进展生存进行 Kaplan-Meier 分析，按 TAM/PU.1 细胞百",
-            "explanation": "对病例的无进展生存进行 Kaplan-Meier 分析，按 TAM/PU.1 细胞百分比的四分位数分布分为高（上四分位数）或低（下四分位数）/中（中间两个四分位数）。对数秩检验，全部具有 1 个自由度。 Χ2 检验统计量：1.Int/low 与 1.High = 6.5，2.Int/low 与 2.High = 16.4，3.Int/low 与 3.High = 0.9，1.Int/low 与 2.High = 0.3。"
+            "title": "PU.1高低在WHO 1级和2级内分层复发",
+            "explanation": "按PU.1比例四分位数分组后，WHO 1级和2级中高PU.1组复发无事件生存更好；WHO 2级差异最明显。WHO 3级比较不显著，主要受病例与事件数不足限制。曲线同时按WHO等级分层，因此PU.1的作用是在等级内部细化风险，而不是用单一阈值取代分级。"
           },
           {
             "label": "D",
-            "title": "D：森林图表明免疫组织化学 PU.1 TAM 定量在 WHO 1 级和 2 级病例中具有",
-            "explanation": "森林图表明免疫组织化学 PU.1 TAM 定量在 WHO 1 级和 2 级病例中具有显着价值。使用 Wald 检验拟合 Cox 比例风险回归模型来测试免疫细胞成分。所有测试都是两侧的，并且没有对多重测试进行调整。点表示风险比，水平线表示根据 Cox 比例 WHO 等级和 PU 估计的相应 95% 置信区间。1% 100% 1 级 - 高 1 级 - 中级/低 2 级 - 高 2 级 - 中级/低 3 级 - 高 3 级 - 中级/低 75% 50% 0.01 P 值 Group2 25% Group1 1.Int/Low 1.High 2.中/低 2.高 5.25 × 10 –5 3.中/低 3.高 0.34 1.中/低 2.高 0.60 0% 0 24 48 72 96 120 144 168 个月 276 159 101 49 26 12 4 4 828 499 326 207 125 66 22 14 67 39 28 17 9 7 2 1 187 103 57 33 20 9 3 1 2 0 0 0 0 0 0 0 18 1 1 1 0 0 0 0 e 30% 空 WHO 等级 WHO 等级 & PU.1% 22.5% Brier 评分 15% 7.5% 0% 0 24 48 72 96 0.25 0.50 1.0 2.0 4.0 个月 HR [低/中 vs 高] 异质性测试 P = 0.01 WHO 等级 WHO & PU.1 P 值 Cindex 0.63 0.66 0.0003 + 0 – MC Int-A 1p 6q 22q MC Mal 小胶质细胞样巨噬细胞风险回归模型。"
+            "title": "PU.1对WHO 1–2级提供额外风险信息",
+            "explanation": "森林图显示低/中PU.1相对高PU.1在全队列HR=2.00，WHO 1级HR=1.71，WHO 2级HR=2.91；WHO 3级估计不稳定且不显著。异质性检验提示效应在等级间并非完全相同。"
           },
           {
             "label": "E",
-            "title": "E：Brier 预测评分分析显示，与单独的 WHO 分级相比，对于 WHO + PU.1",
-            "explanation": "Brier 预测评分分析显示，与单独的 WHO 分级相比，对于 WHO + PU.1，WHO 1 级和 2 级病例的错误率较低，因此预测准确性更高。观察到的 c 指数准确性也存在显着差异（z 得分检验统计量 -3.64）。 该部分属于图 6：通过 PU.1 免疫组化量化 TAM 可改善脑膜瘤风险预测，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "加入PU.1降低预测误差并提高C-index",
+            "explanation": "Brier曲线显示WHO+PU.1模型总体误差略低于单独WHO等级；在WHO 1–2级病例中C-index从0.63提高到0.66，P=0.0003。增益数值不大，但证明简单IHC指标可以承接多组学发现。"
           },
           {
             "label": "F",
-            "title": "F：图解总结：NF2 突变脑膜瘤形成从良性低风险肿瘤到恶性高风险脑膜瘤的谱系",
-            "explanation": "图解总结：NF2 突变脑膜瘤形成从良性低风险肿瘤到恶性高风险脑膜瘤的谱系。在此谱系中，存在 MC ben-1（黄色）、MC int-A（浅蓝色）、MC int-B（粉色）和 MC mal（红色）的亚克隆，并且 TAM 的数量和组成存在差异（即良性病例中以小胶质细胞样为主，恶性脑膜瘤中以有限数量的巨噬细胞为主）。当仅存在有限数量的含有与较高风险相关的 CNV（例如，1p 和/或 6q 丢失）的恶性肿瘤细胞时，这些变化可能无法在整体 CNV 图中检测到，但存在于单个侵袭性亚克隆中。对于面板 c 和 e，所有测试都是双面的。箱线图代表上四分位数和下四分位数，而晶须则到达四分位数 1.5 IQR 以内的最外围样本。中值在框中标记为水平线。尽管事件数量较少，但 WHO 1 级和 2 级病例均为良性病程（图 5e）。对于回顾性和前瞻性验证队列，免疫细胞数量再次将 WHO 分级内的病例分开，但这仅对回顾性队列中的 1 级和前瞻性队列中的 2 级显着（补充图 3b、c）。然而，对于 WHO 1 级或 2 级病例，在每个临床队列中，中/低免疫细胞脑膜瘤的复发风险增加，即使根据 WHO 等级进行调整（图 5f）。当排除 NF2 野生型 MC ben-2 病例时，这种效应更加明显（补充图 3d）。"
+            "title": "风险连续谱的综合模型",
+            "explanation": "示意图从ben-1低风险、微胶质样细胞丰富的肿瘤过渡到int-A/int-B和mal高风险状态。随着恶性亚克隆和1p/6q等CNV出现，TAM总量减少、组成转向巨噬细胞；少量高风险亚克隆可能被bulk CNV和整体分类平均掉。"
           }
         ],
-        "conclusion": "综合各子图，把多组学发现转化为临床可执行的核染色指标，展示 1,378 例队列中的自动量化、生存分层、WHO 2 级风险、Cox 模型、C-index 和预测误差改善。。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以图 6：通过 PU.1 免疫组化量化 TAM 可改善脑膜瘤风险预测的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "图6完成文章的转化闭环：PU.1不是新的独立分型体系，而是一个可自动量化的TAM代理指标，可在WHO 1–2级脑膜瘤中对复发风险作小幅但统计显著的补充。",
+        "boundary": "PU.1并非脑膜瘤特异标志物，阈值与算法需要跨中心和前瞻性验证；C-index增幅有限，不能替代WHO分级、分子检测或临床判断，WHO 3级结果尤其缺乏统计把握度。"
       }
     },
     {
@@ -3804,41 +3858,41 @@
       "caption_en": "Extended Data Fig. 1 | snRNA meningioma sample visualization and tumourassociated macrophage quantification. Uniform Manifold Approximation and Projection (UMAP) visualizations of the individual samples of the 26 cases from which nuclei were isolated (A), the different methylation groups (B, left panel) or the different WHO grades (B, right panel). In one illustrative case, within the neoplastic cells, five CNV clusters were identified. Cells from CNV cluster C are located away from the other neoplastic cells (C). Distribution of the number of combined tumour-associated macrophages (TAMs) as calculated by the TAM percentage for each individual sample (D), the percentage of surface area WHO Grades UCSF Groups Grade 1 WHO Grade Merlin intact UCSF Group Immune enrich Grade 2 Hypermitotic Grade 3 UMAP 1 UMAP 1 D E F 0.0026 Merlin intact UCSF Group 1 80 0.0011 0.5 Immune enrich 0.18 Hypermitotic 0.18 0.4 60 Positive Stained Pixel Percentage % microglia of TAM 0.3 40 0.2 20 0.1 0 0.0 positively stained for CD68 for each individual sample (E) and percentage of microglia-like cells within the overarching TAM population for each sample (F) for the methylation groups. Boxplots represent the upper and lower quartiles, while whiskers reach to the most outlying samples that are within 1.5 interquartile ranges (IQR) from the quartiles. Median values are labeled as horizontal lines in the boxes. For subfigures D and F, Immune enriched n = 10, Merlin intact n = 3 and Hypermitotic n = 13. For subfigure E, Immune enriched n = 22, Merlin intact n = 49 and Hypermitotic n = 49. Myeloid Markers CD14 FCGR3A CD68 CD163 SPP1 C1QC CD83 MAF AIF1 CSF1R TOP2A MKI67 C 100% 80% 60% 40% TAM-NOS Subtype 20% TAM-SPP1/CD83 TAM-Fibroblast-like TAM-Cycling Mφ 0%",
       "caption_zh": "扩展数据图 1 | snRNA 脑膜瘤样本可视化和肿瘤相关巨噬细胞定量。统一流形近似和投影 (UMAP) 可视化 26 个病例的单个样本（A）、不同甲基化组（B，左图）或不同 WHO 等级（B，右图）。在一个说明性的案例中，在肿瘤细胞内，鉴定出了五个 CNV 簇。 CNV 簇 C 的细胞远离其他肿瘤细胞 (C)。肿瘤相关巨噬细胞 (TAM) 数量的分布，按每个样本的 TAM 百分比 (D) 计算，表面积百分比 WHO 等级 UCSF 组 1 级 WHO 等级 Merlin 完整 UCSF 组 免疫富集 2 级 有丝分裂 3 级 UMAP 1 UMAP 1 D E F 0.0026 Merlin 完整 UCSF 组 1 80 0.0011 0.5 免疫富集0.18 有丝分裂过度 0.18 0.4 60 阳性染色像素百分比 TAM 小胶质细胞百分比 0.3 40 0.2 20 0.1 0 0.0 每个单独样品 (E) 的 CD68 呈阳性染色，以及甲基化组的每个样品 (F) 总体 TAM 群体内小胶质细胞样细胞的百分比。箱线图代表上四分位数和下四分位数，而须线则到达距四分位数 1.5 个四分位数范围 (IQR) 内的最外围样本。中值在框中标记为水平线。对于子图 D 和 F，免疫富集 n = 10，Merlin 完整 n = 3，有丝分裂过度 n = 13。 对于子图 E，免疫富集 n = 22，Merlin 完整 n = 49，有丝分裂过度 n = 49。 骨髓标记物 CD14 FCGR3A CD68 CD163 SPP1 C1QC CD83 MAF AIF1 CSF1R TOP2A MKI67 C 100% 80% 60% 40% TAM-NOS 亚型 20% TAM-SPP1/CD83 TAM-成纤维细胞样 TAM-循环 Mφ 0%",
       "study": {
-        "overview": "阅读时按照 A → B → C → D → E → F 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：扩展数据图 1 | snRNA 脑膜瘤样本可视化和肿瘤相关巨噬细胞定量。统一流形近似和投影 (UMAP) 可视化 26 个病例的单个样本（A）、不同甲基化组（B，左图）或不同 WHO 等级（B，右图）。在一个说明性的案例中，在肿瘤细胞内，鉴定出了五个 CNV 簇。 CNV 簇 C 的细胞远离其他肿瘤细胞 (C)。肿瘤相关巨噬细胞 (TAM) 数量的分布，按每个样本的 TAM 百分比 (D) 计算，表面积百分比 WHO 等级 UCSF 组 1 级 WHO 等级 Merlin 完整 UCSF 组 免疫富集 2 级 有丝分裂 3 级 UMAP 1 UMAP 1 D E F 0.0026 Merlin 完整 UCSF 组 1 80 0.0011 0.5 免疫富集0.18 有丝分裂过度 0.18 0.4 60 阳性染色像素百分比 TAM 小胶质细胞百分比 0.3 40 0.2 20 0.1 0 0.0 每个单独样品 (E) 的 CD68 呈阳性染色，以及甲基化组的每个样品 (F) 总体 TAM 群体内小胶质细胞样细胞的百分比。箱线图代表上四分位数和下四分位数，而须线则到达距四分位数 1.5 个四分位数范围 (IQR) 内的最外围样本。中值在框中标记为水平线。对于子图 D 和 F，免疫富集 n = 10，Merlin 完整 n = 3，有丝分裂过度 n = 13。 对于子图 E，免疫富集 n = 22，Merlin 完整 n = 49，有丝分裂过度 n = 49。 骨髓标记物 CD14 FCGR3A CD68 CD163 SPP1 C1QC CD83 MAF AIF1 CSF1R TOP2A MKI67 C 100% 80% 60% 40% TAM-NOS 亚型 20% TAM-SPP1/CD83 TAM-成纤维细胞样 TAM-循环 Mφ 0%",
+        "overview": "扩展数据图1补充图2的基础质量控制和分组比较。A–C说明单核图谱中的个体、MC、WHO等级及CNV亚克隆结构；D–F分别从snRNA、CD68面积和微胶质样比例验证不同UCSF分组的TAM差异。",
         "panels": [
           {
             "label": "A",
-            "title": "A：统一流形近似和投影 (UMAP) 可视化 26 个病例的单个样本（A）、不同甲基化组",
-            "explanation": "统一流形近似和投影 (UMAP) 可视化 26 个病例的单个样本（A）、不同甲基化组（B，左图）或不同 WHO 等级（B，右图）。 该部分属于扩展数据 图 1. snRNA 脑膜瘤样本可视化和肿瘤相关巨噬细胞定量，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "26例样本在单核UMAP中的分布",
+            "explanation": "逐病例着色用于检查细胞簇是否完全由单一样本驱动。肿瘤细胞保留明显个体差异，而非肿瘤细胞在多个病例间共享表达空间，为跨样本比较TAM提供前提。这种分布也显示作者后续分析需要在模型中区分患者特异的肿瘤表达与跨患者共享的微环境状态。"
           },
           {
             "label": "B",
-            "title": "B：统一流形近似和投影 (UMAP) 可视化 26 个病例的单个样本（A）、不同甲基化组",
-            "explanation": "统一流形近似和投影 (UMAP) 可视化 26 个病例的单个样本（A）、不同甲基化组（B，左图）或不同 WHO 等级（B，右图）。 该部分属于扩展数据 图 1. snRNA 脑膜瘤样本可视化和肿瘤相关巨噬细胞定量，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "按甲基化组和WHO等级观察细胞状态",
+            "explanation": "左图按UCSF MG、右图按WHO等级着色，显示高风险病例的细胞状态在UMAP中具有共同趋势，但并非形成绝对边界；这与文章的连续谱解释一致。两种着色方式均出现渐变和重叠，说明等级或甲基化类别不能完全解释所有细胞层面的异质性。"
           },
           {
             "label": "C",
-            "title": "C：CNV 簇 C 的细胞远离其他肿瘤细胞 (C)",
-            "explanation": "CNV 簇 C 的细胞远离其他肿瘤细胞 (C)。 该部分属于扩展数据 图 1. snRNA 脑膜瘤样本可视化和肿瘤相关巨噬细胞定量，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。 该部分属于扩展数据 图 1. snRNA 脑膜瘤样本可视化和肿瘤相关巨噬细胞定量，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "CNV cluster C与其他肿瘤亚克隆分离",
+            "explanation": "代表性病例的五个CNV簇中，cluster C在UMAP上远离其他肿瘤细胞，并具有较少CNV及更偏基质/低风险的表达分数，提示肿瘤纯度和混合身份需谨慎判定。该簇的特殊位置说明低CNV细胞身份必须结合SSTR2A、表达分类分数和空间证据综合判断。"
           },
           {
             "label": "D",
-            "title": "D：肿瘤相关巨噬细胞 (TAM) 数量的分布，按每个样本的 TAM 百分比 (D) 计算",
-            "explanation": "肿瘤相关巨噬细胞 (TAM) 数量的分布，按每个样本的 TAM 百分比 (D) 计算，表面积百分比 WHO 等级 UCSF 组 1 级 WHO 等级 Merlin 完整 UCSF 组 免疫富集 2 级 有丝分裂 3 级 UMAP 1 UMAP 1 D E F 0.0026 Merlin 完整 UCSF 组 1 80 0.0011 0.5 免疫富集0.18 有丝分裂过度 0.18 0.4 60 阳性染色像素百分比 TAM 小胶质细胞百分比 0.3 40 0.2 20 0.1 0 0.0 每个单独样品 (E) 的 CD68 呈阳性染色，以及甲基化组的每个样品 (F) 总体 TAM 群体内小胶质细胞样细胞的百分比。"
+            "title": "snRNA估计的TAM比例按UCSF组变化",
+            "explanation": "immune-enriched组的TAM比例高于Merlin-intact和hypermitotic组，复现ben-1低风险微环境富集方向。该数值来自每个样本中TAM占全部细胞的比例，提供与主图按MC分析互补的UCSF分组结果。"
           },
           {
             "label": "E",
-            "title": "E：肿瘤相关巨噬细胞 (TAM) 数量的分布，按每个样本的 TAM 百分比 (D) 计算",
-            "explanation": "肿瘤相关巨噬细胞 (TAM) 数量的分布，按每个样本的 TAM 百分比 (D) 计算，表面积百分比 WHO 等级 UCSF 组 1 级 WHO 等级 Merlin 完整 UCSF 组 免疫富集 2 级 有丝分裂 3 级 UMAP 1 UMAP 1 D E F 0.0026 Merlin 完整 UCSF 组 1 80 0.0011 0.5 免疫富集0.18 有丝分裂过度 0.18 0.4 60 阳性染色像素百分比 TAM 小胶质细胞百分比 0.3 40 0.2 20 0.1 0 0.0 每个单独样品 (E) 的 CD68 呈阳性染色，以及甲基化组的每个样品 (F) 总体 TAM 群体内小胶质细胞样细胞的百分比。"
+            "title": "CD68阳性面积在独立IHC中验证",
+            "explanation": "蛋白层面的CD68阳性面积同样在immune-enriched组较高，说明单核数据中的TAM差异并非仅由核提取偏差造成。与单核结果方向一致的蛋白证据提高了TAM丰度差异的可信度。"
           },
           {
             "label": "F",
-            "title": "F：肿瘤相关巨噬细胞 (TAM) 数量的分布，按每个样本的 TAM 百分比 (D) 计算",
-            "explanation": "肿瘤相关巨噬细胞 (TAM) 数量的分布，按每个样本的 TAM 百分比 (D) 计算，表面积百分比 WHO 等级 UCSF 组 1 级 WHO 等级 Merlin 完整 UCSF 组 免疫富集 2 级 有丝分裂 3 级 UMAP 1 UMAP 1 D E F 0.0026 Merlin 完整 UCSF 组 1 80 0.0011 0.5 免疫富集0.18 有丝分裂过度 0.18 0.4 60 阳性染色像素百分比 TAM 小胶质细胞百分比 0.3 40 0.2 20 0.1 0 0.0 每个单独样品 (E) 的 CD68 呈阳性染色，以及甲基化组的每个样品 (F) 总体 TAM 群体内小胶质细胞样细胞的百分比。"
+            "title": "TAM内部微胶质样细胞比例的组间差异",
+            "explanation": "immune-enriched病例的微胶质样TAM比例更高，hypermitotic组更低；结果把TAM总量差异进一步分解为细胞来源和状态差异。因此组间差异不仅是TAM多少，还包括脑驻留样与外周浸润样成分的比例。"
           }
         ],
-        "conclusion": "综合各子图，通过扩展数据 图 1. snRNA 脑膜瘤样本可视化和肿瘤相关巨噬细胞定量建立这一组结果在全文论证链中的位置，并把实验对象、比较方式和直接结论对应起来。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以扩展数据 图 1. snRNA 脑膜瘤样本可视化和肿瘤相关巨噬细胞定量的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "扩展数据图1显示TAM差异可在单细胞、IHC和细胞来源比例三个层面重复，并同时提醒读者：部分低CNV细胞可能位于肿瘤与基质身份的边界。",
+        "boundary": "样本量在Merlin-intact等小组较少，箱线图反映分布而非因果；单核捕获效率和IHC面积均可能受组织质量影响。"
       }
     },
     {
@@ -3856,26 +3910,26 @@
       "caption_en": "Extended Data Fig. 2 | snRNA meningioma tumour-associated macrophage analyses. Further investigation of the tumour-associated macrophages (TAMs) in a separate clustering analysis including different myeloid (A) and fibroid-like Fibroid-like Markers PTPRC CD68 CD14 CD163 PDGFRB COL1A2 DCN ACTA2 FBLN1 UCSF Groups Methylation Classes Int-A Int-B Mal Merlin-intact Ben-1 Ben-2 Hypermitotic Immune-enriched (B). Four separate clusters were identified (C, left panel). Subgroup distribution and relative quantification of the myeloid clusters for the methylation classes and methylation groups (C, right panel). A Microglia Microglia 1 MCs NES Ben-1 ben-2 Int-A Int-B Mal 0.5 MC * * * * * * * * * * * * * * * * * Beta Defensins 0 Defensins Scavenging Of Heme From Plasma −0.5 Nonsense Mediated Decay Nmd Eukaryotic Translation Elongation −1 Srp Dependent Cotranslational Protein Targeting To Membrane Olfactory Signaling Pathway Peptide Ligand Binding Receptors Class A 1 Rhodopsin Like Receptors Gpcr Ligand Binding Keratinization Formation Of The Cornified Envelope Cell Surface Interactions At The Vascular Wall Extracellular Matrix Organization Mitochondrial Translation C UCSF Validation Cohort 2 5 4 3 137 Mal 0 1 1 176 3 Int-B 2 4 36 3 3 Int-A 1 106 2 2 1 Ben-3 90 7 3 1 0 Ben-1 Ben-1 Ben-3 Int-A Int-B Mal D MACROPHAGE ACTIVATION MACROPHAGE_CHEMOTAXIS MICROGLIAL_CELL_ACTIVATION MICROGLIA_DIFFERENTIATION Ben-1 Ben-2 Ben-3 Int-A Int-B Mal",
       "caption_zh": "扩展数据图 2 | snRNA 脑膜瘤肿瘤相关巨噬细胞分析。在单独的聚类分析中进一步研究肿瘤相关巨噬细胞 (TAM)，包括不同的骨髓 (A) 和肌瘤样肌瘤样标记 PTPRC CD68 CD14 CD163 PDGFRB COL1A2 DCN ACTA2 FBLN1 UCSF 组 甲基化类别 Int-A Int-B Mal Merlin 完整 Ben-1 Ben-2 有丝分裂 免疫富集（二）。确定了四个独立的簇（C，左图）。甲基化类别和甲基化组的骨髓簇的亚组分布和相对定量（C，右图）。 A 小胶质细胞 小胶质细胞 1 MC NES Ben-1 ben-2 Int-A Int-B Mal 0.5 MC * * * * * * * * * * * * * * * * * Beta 防御素 0 防御素从血浆中清除血红素 -0.5 无意义介导的衰变 Nmd 真核翻译延伸 -1 Srp 依赖性共翻译蛋白靶向膜嗅觉信号通路 肽 配体结合受体 A 1 类视紫红质受体 Gpcr 配体结合 角化 角化 血管壁细胞表面相互作用 细胞外基质组织 线粒体翻译 C UCSF 验证队列 2 5 4 3 137 Mal 0 1 1 176 3 Int-B 2 4 36 3 3 Int-A 1 106 2 2 1 Ben-3 90 7 3 1 0 Ben-1 Ben-1 Ben-3 Int-A Int-B Mal D 巨噬细胞激活 巨噬细胞_趋化性 微胶质_细胞_激活 微胶质_分化 Ben-1 Ben-2 Ben-3 Int-A Int-B Mal",
       "study": {
-        "overview": "阅读时按照 A → B → C 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：扩展数据图 2 | snRNA 脑膜瘤肿瘤相关巨噬细胞分析。在单独的聚类分析中进一步研究肿瘤相关巨噬细胞 (TAM)，包括不同的骨髓 (A) 和肌瘤样肌瘤样标记 PTPRC CD68 CD14 CD163 PDGFRB COL1A2 DCN ACTA2 FBLN1 UCSF 组 甲基化类别 Int-A Int-B Mal Merlin 完整 Ben-1 Ben-2 有丝分裂 免疫富集（二）。确定了四个独立的簇（C，左图）。甲基化类别和甲基化组的骨髓簇的亚组分布和相对定量（C，右图）。 A 小胶质细胞 小胶质细胞 1 MC NES Ben-1 ben-2 Int-A Int-B Mal 0.5 MC * * * * * * * * * * * * * * * * * Beta 防御素 0 防御素从血浆中清除血红素 -0.5 无意义介导的衰变 Nmd 真核翻译延伸 -1 Srp 依赖性共翻译蛋白靶向膜嗅觉信号通路 肽 配体结合受体 A 1 类视紫红质受体 Gpcr 配体结合 角化 角化 血管壁细胞表面相互作用 细胞外基质组织 线粒体翻译 C UCSF 验证队列 2 5 4 3 137 Mal 0 1 1 176 3 Int-B 2 4 36 3 3 Int-A 1 106 2 2 1 Ben-3 90 7 3 1 0 Ben-1 Ben-1 Ben-3 Int-A Int-B Mal D 巨噬细胞激活 巨噬细胞_趋化性 微胶质_细胞_激活 微胶质_分化 Ben-1 Ben-2 Ben-3 Int-A Int-B Mal",
+        "overview": "扩展数据图2对TAM群单独重聚类，避免其状态被肿瘤细胞主导的全图UMAP掩盖。A–B分别展示髓系和纤维样标志，C给出四个TAM/相关细胞簇在MC和UCSF组中的组成。",
         "panels": [
           {
             "label": "A",
-            "title": "A：在单独的聚类分析中进一步研究肿瘤相关巨噬细胞 (TAM)，包括不同的骨髓 (A) 和",
-            "explanation": "在单独的聚类分析中进一步研究肿瘤相关巨噬细胞 (TAM)，包括不同的骨髓 (A) 和肌瘤样肌瘤样标记 PTPRC CD68 CD14 CD163 PDGFRB COL1A2 DCN ACTA2 FBLN1 UCSF 组 甲基化类别 Int-A Int-B Mal Merlin 完整 Ben-1 Ben-2 有丝分裂 免疫富集（二）。"
+            "title": "髓系标志界定TAM相关细胞",
+            "explanation": "PTPRC、CD68、CD14和CD163等表达帮助识别髓系来源及不同巨噬细胞状态，说明主图中的TAM群内部仍存在明显异质性。这些标志的组合而非任何一个单独基因用于支持髓系身份和状态划分。"
           },
           {
             "label": "B",
-            "title": "B：在单独的聚类分析中进一步研究肿瘤相关巨噬细胞 (TAM)，包括不同的骨髓 (A) 和",
-            "explanation": "在单独的聚类分析中进一步研究肿瘤相关巨噬细胞 (TAM)，包括不同的骨髓 (A) 和肌瘤样肌瘤样标记 PTPRC CD68 CD14 CD163 PDGFRB COL1A2 DCN ACTA2 FBLN1 UCSF 组 甲基化类别 Int-A Int-B Mal Merlin 完整 Ben-1 Ben-2 有丝分裂 免疫富集（二）。"
+            "title": "纤维样标志识别与TAM相邻的基质状态",
+            "explanation": "PDGFRB、COL1A2、DCN、ACTA2和FBLN1等标志用于区分纤维样/周细胞样成分，避免将相邻基质细胞错误计入TAM。该排除步骤对避免把周细胞或成纤维细胞程序误解为巨噬细胞活化尤其重要。"
           },
           {
             "label": "C",
-            "title": "C：确定了四个独立的簇（C，左图）",
-            "explanation": "确定了四个独立的簇（C，左图）。 该部分属于扩展数据 图 2. snRNA 脑膜瘤肿瘤相关巨噬细胞分析，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。 该部分属于扩展数据 图 2. snRNA 脑膜瘤肿瘤相关巨噬细胞分析，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "四个重聚类状态在分型组中的比例不同",
+            "explanation": "左侧识别四个独立簇，右侧堆叠图比较它们在ben-1至mal以及Merlin-intact、immune-enriched、hypermitotic组中的相对比例。不同风险组不仅TAM总量不同，内部状态构成也发生重排。"
           }
         ],
-        "conclusion": "综合各子图，通过扩展数据 图 2. snRNA 脑膜瘤肿瘤相关巨噬细胞分析建立这一组结果在全文论证链中的位置，并把实验对象、比较方式和直接结论对应起来。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以扩展数据 图 2. snRNA 脑膜瘤肿瘤相关巨噬细胞分析的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "该图支持对TAM进行状态层面的分析，而非把所有CD68相关细胞视为同质群体；这为后续微胶质样、增殖和SPP1相关巨噬细胞比较提供细胞簇基础。",
+        "boundary": "重聚类和标志基因注释依赖转录表达，不能完全替代蛋白与空间验证；稀有簇的比例更容易受采样深度影响。"
       }
     },
     {
@@ -3893,31 +3947,31 @@
       "caption_en": "Extended Data Fig. 3 | Gene set enrichment analyses of meningioma microglialike cells and macrophages. Gene set enrichment analysis (GSEA) comparing snRNA differential expression between microglia-like (A) and macrophage-like cells (B) from different methylation classes. Macrophages from MC mal show increased expression of proliferation and mitotic pathways as well as the known tumour-supportive macrophage activation states of the interleukin-10 (IL-10) and interleukin-/13 (IL-4/IL-13) pathways. Confusion matrix of the predicted (from spatial transcriptomics) vs ground truth (MC from epigenetic profiling) for the validation cohort (C). Correlation plot from spatial analysis in the discovery set indicating microglia differentiation and activation in MC ben-1 and macrophage activation in MC mal. Diameter and color both represent the correlation (D). Normalized enrichment score (NES). Astrix (*) indicates a false discovery rate (FDR) adjusted p-value < 0.05. Meningioma classifier v2.4 −0.6 −0.4 −0.2 0.0 0.2 0.4 0.6 Probes in Decision Trees Correlation CD68 to all (n=10.000) Per probe Variable Example Location on genome Probe cg20428976 TTR 3’ UTR Ben-1 0.43 Ben-1 vs. all -58450 Average beta-value per MC Number of times in tree comparing MCs and value C D CD68 Hypomethylated (<-0.3) Ben-1 Hypomethylated -0.04 0.00 0.04 0.08 0.12 E −0.6 −0.3 0.0 0.3 0.6 Correlation CD68 to all −0.6 −0.3 0.0 0.3 0.6 r = 0.439 r = −0.241 −60000 −30000 0 30000 MC Ben-1 vs. Other MNG MCs",
       "caption_zh": "扩展数据图 3 |脑膜瘤小胶质细胞和巨噬细胞的基因集富集分析。基因集富集分析 (GSEA) 比较来自不同甲基化类别的小胶质细胞样细胞 (A) 和巨噬细胞样细胞 (B) 之间的 snRNA 差异表达。来自 MC mal 的巨噬细胞表现出增殖和有丝分裂途径表达增加，以及已知的白介素-10 (IL-10) 和白细胞介素-/13 (IL-4/IL-13) 途径的肿瘤支持巨噬细胞激活状态。验证队列的预测（来自空间转录组学）与真实情况（来自表观遗传分析的 MC）的混淆矩阵 (C)。发现集中空间分析的相关图表明 MC ben-1 中的小胶质细胞分化和激活以及 MC mal 中的巨噬细胞激活。直径和颜色都代表相关性（D）。标准化富集评分（NES）。 Astrix (*) 表示错误发现率 (FDR) 调整后的 p 值 < 0.05。脑膜瘤分类器 v2.4 -0.6 -0.4 -0.2 0.0 0.2 0.4 0.6 决策树中的探针 CD68 与所有探针的相关性 (n=10.000) 每个探针变量示例 基因组上的位置 探针 cg20428976 TTR 3’ UTR Ben-1 0.43 Ben-1 与所有 -58450 每个 MC 数的平均 beta 值树中比较 MC 和值的次数 C D CD68 低甲基化 (<-0.3) Ben-1 低甲基化 -0.04 0.00 0.04 0.08 0.12 E −0.6 −0.3 0.0 0.3 0.6 CD68 与所有相关性 −0.6 −0.3 0.0 0.3 0.6 r = 0.439 r = −0.241 −60000 −30000 0 30000 MC Ben-1 对比其他 MNG MC",
       "study": {
-        "overview": "阅读时按照 A → B → C → D 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：扩展数据图 3 |脑膜瘤小胶质细胞和巨噬细胞的基因集富集分析。基因集富集分析 (GSEA) 比较来自不同甲基化类别的小胶质细胞样细胞 (A) 和巨噬细胞样细胞 (B) 之间的 snRNA 差异表达。来自 MC mal 的巨噬细胞表现出增殖和有丝分裂途径表达增加，以及已知的白介素-10 (IL-10) 和白细胞介素-/13 (IL-4/IL-13) 途径的肿瘤支持巨噬细胞激活状态。验证队列的预测（来自空间转录组学）与真实情况（来自表观遗传分析的 MC）的混淆矩阵 (C)。发现集中空间分析的相关图表明 MC ben-1 中的小胶质细胞分化和激活以及 MC mal 中的巨噬细胞激活。直径和颜色都代表相关性（D）。标准化富集评分（NES）。 Astrix (*) 表示错误发现率 (FDR) 调整后的 p 值 < 0.05。脑膜瘤分类器 v2.4 -0.6 -0.4 -0.2 0.0 0.2 0.4 0.6 决策树中的探针 CD68 与所有探针的相关性 (n=10.000) 每个探针变量示例 基因组上的位置 探针 cg20428976 TTR 3’ UTR Ben-1 0.43 Ben-1 与所有 -58450 每个 MC 数的平均 beta 值树中比较 MC 和值的次数 C D CD68 低甲基化 (<-0.3) Ben-1 低甲基化 -0.04 0.00 0.04 0.08 0.12 E −0.6 −0.3 0.0 0.3 0.6 CD68 与所有相关性 −0.6 −0.3 0.0 0.3 0.6 r = 0.439 r = −0.241 −60000 −30000 0 30000 MC Ben-1 对比其他 MNG MC",
+        "overview": "扩展数据图3比较微胶质样细胞和巨噬细胞在不同MC中的功能程序，并给出空间分类的验证。A–B是GSEA，C是空间模型混淆矩阵，D把局部MC分数与髓系分化/激活程序联系起来。",
         "panels": [
           {
             "label": "A",
-            "title": "A：基因集富集分析 (GSEA) 比较来自不同甲基化类别的小胶质细胞样细胞 (A) 和巨",
-            "explanation": "基因集富集分析 (GSEA) 比较来自不同甲基化类别的小胶质细胞样细胞 (A) 和巨噬细胞样细胞 (B) 之间的 snRNA 差异表达。 该部分属于扩展数据 图 3. 脑膜瘤小胶质细胞样细胞和巨噬细胞的基因集富集分析，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "微胶质样细胞的MC间通路差异有限",
+            "explanation": "不同MC的微胶质样细胞GSEA显示整体功能差异较少，提示低风险与高风险间最显著的改变更多来自细胞比例和外周巨噬细胞状态，而非微胶质样细胞全面重编程。这与主文中数量和来源变化大于微胶质样细胞内部功能变化的解释相互支持。"
           },
           {
             "label": "B",
-            "title": "B：基因集富集分析 (GSEA) 比较来自不同甲基化类别的小胶质细胞样细胞 (A) 和巨",
-            "explanation": "基因集富集分析 (GSEA) 比较来自不同甲基化类别的小胶质细胞样细胞 (A) 和巨噬细胞样细胞 (B) 之间的 snRNA 差异表达。 该部分属于扩展数据 图 3. 脑膜瘤小胶质细胞样细胞和巨噬细胞的基因集富集分析，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "MC mal巨噬细胞富集增殖和肿瘤支持通路",
+            "explanation": "高风险mal巨噬细胞显著富集细胞周期/有丝分裂以及IL-10、IL-4/IL-13等程序，符合增殖性、免疫抑制和肿瘤支持性状态。星号表示FDR校正P<0.05，因而应优先关注达到校正阈值的通路。"
           },
           {
             "label": "C",
-            "title": "C：验证队列的预测（来自空间转录组学）与真实情况（来自表观遗传分析的 MC）的混淆矩阵 ",
-            "explanation": "验证队列的预测（来自空间转录组学）与真实情况（来自表观遗传分析的 MC）的混淆矩阵 (C)。 该部分属于扩展数据 图 3. 脑膜瘤小胶质细胞样细胞和巨噬细胞的基因集富集分析，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "独立空间队列的MC预测混淆矩阵",
+            "explanation": "预测类别与甲基化真值的混淆矩阵显示空间模型保留一定分类能力，但错误多于训练集。该验证限制了对图2H空间预测结果的过度解读。因此主文报告训练集高准确率时，必须同时考虑独立验证集的精度、召回率和F1下降。"
           },
           {
             "label": "D",
-            "title": "D：直径和颜色都代表相关性（D）",
-            "explanation": "直径和颜色都代表相关性（D）。 该部分属于扩展数据 图 3. 脑膜瘤小胶质细胞样细胞和巨噬细胞的基因集富集分析，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。 该部分属于扩展数据 图 3. 脑膜瘤小胶质细胞样细胞和巨噬细胞的基因集富集分析，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "局部MC分数与髓系分化和激活相关",
+            "explanation": "相关气泡图显示ben-1局部生态更接近微胶质分化/激活，高风险mal更接近巨噬细胞激活程序。颜色和直径编码相关强度，不表示直接细胞因果。该方向与Cell2location估计的局部细胞组成及MIBI标志物结果一致。"
           }
         ],
-        "conclusion": "综合各子图，通过扩展数据 图 3. 脑膜瘤小胶质细胞样细胞和巨噬细胞的基因集富集分析建立这一组结果在全文论证链中的位置，并把实验对象、比较方式和直接结论对应起来。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以扩展数据 图 3. 脑膜瘤小胶质细胞样细胞和巨噬细胞的基因集富集分析的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "扩展数据图3把细胞来源变化延伸到功能状态：高风险脑膜瘤中剩余巨噬细胞更活跃于增殖和肿瘤支持程序，而低风险局部生态更保留微胶质样特征。",
+        "boundary": "GSEA依赖基因集和差异表达模型；空间分类验证性能有限，相关气泡不能确定信号由哪一细胞群直接驱动。"
       }
     },
     {
@@ -3935,46 +3989,46 @@
       "caption_en": "Extended Data Fig. 4 | Meningioma classifier probes usage and CD68 staining patterns. Example of the working of the dedicated meningioma classifier that is based on 10,000 individual methylation probes. Probe usage values are inferred from the trained classifier, with probes that are used more often providing a better separation between classes. Negative values indicate that probes are hypomethylated, positive values indicate that probes are hypermethylated in the indicated class (A). Scatter-plot showing the correlation between the methylation probe beta-value and CD68 staining levels (y-axis) versus the probe usage in the classifier to separate MC ben-1 from other classes (x-axis). Scatterplot on the right is showing the comparison of MC mal to other classes. (B). Genes associated with probes that are negatively correlated with CD68 protein level (that is, hypomethylated in samples with high CD68 abundance) show increased -0.05 0.00 0.05 0.10 0.15 r = 0.401 r = −0.219 −60000 −20000 0 20000 60000 −30000 −10000 0 10000 30000 MC Ben-1 vs. Other MNG MCs MC Mal vs. Other MNG MCs F 1000 CPM CD81 Mal Hypomethylated 500 G 750 CPM SPP1 500 250 0 int-A int-B mal ben-1 ben-2 ben-3 −20000 −10000 0 10000 MC Mal vs. Other MNG MCs gene expression in TAMs (C). Visualization of snRNA gene expression in TAMs for genes associated with hypomethylated probes that separate MC ben-1 and mal (D). Genes with RNA-seq differential expression values of Log2FC > 1 or <1 and false discovery rate (FDR) adjusted p-value of 0.1 mapped to predictive probes for MC ben-1 (left) or mal (right) determination (E). Bulk RNA-seq expression levels show high expression of CD81 in MC ben-1 (F) and high expression of SPP1 in MC mal cases (G). Boxplots represent the upper and lower quartiles, while whiskers reach to the most outlying samples that are within 1.5 interquartile ranges (IQR) from the quartiles. Median values are labeled as horizontal lines in the boxes. For subfigures F and G, ben-1 n = 8, ben-2 n = 10, ben-3 n = 2, int-A n = 5, int-B n = 1 and mal n = 9. A N1 N2 N3 RB MB_G34_II MB_SHH_4 MPNST_Typ LGG_MYB_C PPTID_A RGNT OLIGOSARC_IDH EPN_SPINE_SE_B CRINET CTRL_HYPOTHAL ERMS ETMR_C19MC GBM_pedRTK1a GBM_pedRTK1c PIN_RB ATRT_SHH ATRT_TYR PGNT LGG_MYB_A LGG_MYB_B NB_2wo2s EPN_PFA_1f GBM_RTK2 EPN_ST_SE EPN_SPINE_SE_A CTRL_HEMI ARMS CNS_NB_FOXR2 CTRL_PONS 0 25 50 75100 0 25 50 75100 0 25 50 75100 S2 S3 S4 LCH MB_SHH_4 INFLAM_ENV MB_G34_V MB_G34_VI MB_G34_VII MB_G34_VIII DLBCL CTRL_BLOOD GCT_GERM_A GCT_GERM_B SFT_HMPC MB_G34_II MB_G34_III MB_G34_IV PLASMACYT SCHW SCHW_MEL CTRL_REACTIVE EPN_PFA_1a EPN_PFA_2a 0 25 50 75100 0 25 50 75100 0 25 50 75100 B C N2 - n=6 N3 - n=8 N4 - n=5 N6 - n=7 D N1 N2 N3 N4 N5 N6 S1 S2 S3 S4 S5 S6 S7",
       "caption_zh": "扩展数据图 4 |脑膜瘤分类器探针的使用和 CD68 染色模式。基于 10,000 个单独甲基化探针的专用脑膜瘤分类器的工作示例。探针使用值是从经过训练的分类器中推断出来的，使用更频繁的探针可以提供更好的类之间的分离。负值表示探针甲基化程度低，正值表示探针在指定类别 (A) 中甲基化程度高。散点图显示甲基化探针 beta 值和 CD68 染色水平（y 轴）与分类器中用于将 MC ben-1 与其他类别分开的探针使用（x 轴）之间的相关性。右侧的散点图显示了 MC mal 与其他类别的比较。 （二）。与 CD68 蛋白水平负相关的探针相关基因（即在高 CD68 丰度的样品中低甲基化）显示增加 -0.05 0.00 0.05 0.10 0.15 r = 0.401 r = -0.219 -60000 -20000 0 20000 60000 -30000 -10000 0 10000 30000 MC Ben-1 对比其他 MNG MC MC Mal 对比其他 MNG MC F 1000 CPM CD81 Mal 低甲基化 500 G 750 CPM SPP1 500 250 0 int-A int-B mal ben-1 ben-2 ben-3 −20000 −10000 0 10000 MC Mal 与其他 MNG MC 在 TAM 中的基因表达 (C)。 TAM 中 snRNA 基因表达的可视化，了解与分离 MC ben-1 和 mal 的低甲基化探针相关的基因 (D)。 RNA-seq 差异表达值 Log2FC > 1 或 <1 且错误发现率 (FDR) 调整 p 值为 0.1 的基因映射到用于 MC ben-1（左）或 mal（右）测定的预测探针 (E)。 Bulk RNA-seq 表达水平显示 MC ben-1 (F) 中 CD81 高表达，MC​​ mal 病例 (G) 中 SPP1 高表达。箱线图代表上四分位数和下四分位数，而须线则到达距四分位数 1.5 个四分位数范围 (IQR) 内的最外围样本。中值在框中标记为水平线。对于子图 F 和 G，ben-1 n = 8、ben-2 n = 10、ben-3 n = 2、int-A n = 5、int-B n = 1 和 mal n = 9。 A N1 N2 N3 RB MB_G34_II MB_SHH_4 MPNST_Typ LGG_MYB_C PPTID_A RGNT OLIGOSARC_IDH EPN_SPINE_SE_B CRINET CTRL_HYPOTHAL ERMS ETMR_C19MC GBM_pedRTK1a GBM_pedRTK1c PIN_RB ATRT_SHH ATRT_TYR PGNT LGG_MYB_A LGG_MYB_B NB_2wo2s EPN_PFA_1f GBM_RTK2 EPN_ST_SE EPN_SPINE_SE_A CTRL_HEMI ARMS CNS_NB_FOXR2 CTRL_PONS 0 25 50 75100 0 25 50 75100 0 25 50 75100 S2 S3 S4 LCH MB_SHH_4 INFLAM_ENV MB_G34_V MB_G34_VI MB_G34_VII MB_G34_VIII DLBCL CTRL_BLOOD GCT_GERM_A GCT_GERM_B SFT_HMPC MB_G34_II MB_G34_III MB_G34_IV PLASMACYT SCHW SCHW_MEL CTRL_REACTIVE EPN_PFA_1a EPN_PFA_2a 0 25 50 75100 0 25 50 75100 0 25 50 75100 B C N2 - n=6 N3 - n=8 N4 - n=5 N6 - n=7 D N1 N2 N3 N4 N5 N6 S1 S2 S3 S4 S5 S6 S7",
       "study": {
-        "overview": "阅读时按照 A → B → C → D → E → F → G 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：扩展数据图 4 |脑膜瘤分类器探针的使用和 CD68 染色模式。基于 10,000 个单独甲基化探针的专用脑膜瘤分类器的工作示例。探针使用值是从经过训练的分类器中推断出来的，使用更频繁的探针可以提供更好的类之间的分离。负值表示探针甲基化程度低，正值表示探针在指定类别 (A) 中甲基化程度高。散点图显示甲基化探针 beta 值和 CD68 染色水平（y 轴）与分类器中用于将 MC ben-1 与其他类别分开的探针使用（x 轴）之间的相关性。右侧的散点图显示了 MC mal 与其他类别的比较。 （二）。与 CD68 蛋白水平负相关的探针相关基因（即在高 CD68 丰度的样品中低甲基化）显示增加 -0.05 0.00 0.05 0.10 0.15 r = 0.401 r = -0.219 -60000 -20000 0 20000 60000 -30000 -10000 0 10000 30000 MC Ben-1 对比其他 MNG MC MC Mal 对比其他 MNG MC F 1000 CPM CD81 Mal 低甲基化 500 G 750 CPM SPP1 500 250 0 int-A int-B mal ben-1 ben-2 ben-3 −20000 −10000 0 10000 MC Mal 与其他 MNG MC 在 TAM 中的基因表达 (C)。 TAM 中 snRNA 基因表达的可视化，了解与分离 MC ben-1 和 mal 的低甲基化探针相关的基因 (D)。 RNA-seq 差异表达值 Log2FC > 1 或 <1 且错误发现率 (FDR) 调整 p 值为 0.1 的基因映射到用于 MC ben-1（左）或 mal（右）测定的预测探针 (E)。 Bulk RNA-seq 表达水平显示 MC ben-1 (F) 中 CD81 高表达，MC​​ mal 病例 (G) 中 SPP1 高表达。箱线图代表上四分位数和下四分位数，而须线则到达距四分位数 1.5 个四分位数范围 (IQR) 内的最外围样本。中值在框中标记为水平线。对于子图 F 和 G，ben-1 n = 8、ben-2 n = 10、ben-3 n = 2、int-A n = 5、int-B n = 1 和 mal n = 9。 A N1 N2 N3 RB MB_G34_II MB_SHH_4 MPNST_Typ LGG_MYB_C PPTID_A RGNT OLIGOSARC_IDH EPN_SPINE_SE_B CRINET CTRL_HYPOTHAL ERMS ETMR_C19MC GBM_pedRTK1a GBM_pedRTK1c PIN_RB ATRT_SHH ATRT_TYR PGNT LGG_MYB_A LGG_MYB_B NB_2wo2s EPN_PFA_1f GBM_RTK2 EPN_ST_SE EPN_SPINE_SE_A CTRL_HEMI ARMS CNS_NB_FOXR2 CTRL_PONS 0 25 50 75100 0 25 50 75100 0 25 50 75100 S2 S3 S4 LCH MB_SHH_4 INFLAM_ENV MB_G34_V MB_G34_VI MB_G34_VII MB_G34_VIII DLBCL CTRL_BLOOD GCT_GERM_A GCT_GERM_B SFT_HMPC MB_G34_II MB_G34_III MB_G34_IV PLASMACYT SCHW SCHW_MEL CTRL_REACTIVE EPN_PFA_1a EPN_PFA_2a 0 25 50 75100 0 25 50 75100 0 25 50 75100 B C N2 - n=6 N3 - n=8 N4 - n=5 N6 - n=7 D N1 N2 N3 N4 N5 N6 S1 S2 S3 S4 S5 S6 S7",
+        "overview": "扩展数据图4拆解10,000探针脑膜瘤甲基化分类器如何使用与TAM相关的位点。A说明探针使用值，B连接探针甲基化与CD68，C–E用单核和bulk RNA表达定位相关基因，F–G验证CD81与SPP1的风险方向。",
         "panels": [
           {
             "label": "A",
-            "title": "A：负值表示探针甲基化程度低，正值表示探针在指定类别 (A) 中甲基化程度高",
-            "explanation": "负值表示探针甲基化程度低，正值表示探针在指定类别 (A) 中甲基化程度高。 该部分属于扩展数据 图 4. 脑膜瘤分类器探针的使用和 CD68 染色模式，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "分类器探针使用值的含义",
+            "explanation": "分类器中使用更频繁的探针对类别分离贡献更大；负值表示目标类别中相对低甲基化，正值表示相对高甲基化。该图建立后续探针—CD68相关分析的坐标。这里的使用值描述模型决策贡献，不等同于单个位点的生物效应大小。"
           },
           {
             "label": "B",
-            "title": "B：研究对象、比较方式与直接结果",
-            "explanation": "（二）。 该部分属于扩展数据 图 4. 脑膜瘤分类器探针的使用和 CD68 染色模式，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。 该部分属于扩展数据 图 4. 脑膜瘤分类器探针的使用和 CD68 染色模式，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "高权重分类探针与CD68丰度相关",
+            "explanation": "散点图比较探针使用值、甲基化beta值与CD68蛋白水平。ben-1相关探针中存在与高CD68一致的低甲基化位点，而mal相关方向不同，直接说明分类器部分读取了TAM丰度及其相关细胞程序。"
           },
           {
             "label": "C",
-            "title": "C：TAM 中的其他 MNG MC 基因表达 (C)",
-            "explanation": "TAM 中的其他 MNG MC 基因表达 (C)。 该部分属于扩展数据 图 4. 脑膜瘤分类器探针的使用和 CD68 染色模式，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。 该部分属于扩展数据 图 4. 脑膜瘤分类器探针的使用和 CD68 染色模式，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "CD68负相关低甲基化探针对应TAM高表达基因",
+            "explanation": "将与CD68水平负相关的甲基化探针映射到基因后，这些基因在TAM中表达更高。结果把bulk甲基化信号连接到实际细胞类型，而非仅停留在统计相关。这一对应关系说明分类器中的部分低甲基化信号可由TAM转录活性解释。"
           },
           {
             "label": "D",
-            "title": "D：TAM 中 snRNA 基因表达的可视化，了解与分离 MC ben-1 和 mal ",
-            "explanation": "TAM 中 snRNA 基因表达的可视化，了解与分离 MC ben-1 和 mal 的低甲基化探针相关的基因 (D)。 该部分属于扩展数据 图 4. 脑膜瘤分类器探针的使用和 CD68 染色模式，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "单核数据定位ben-1与mal相关探针基因",
+            "explanation": "UMAP或表达图显示相关基因在TAM群中的分布，并比较ben-1与mal方向。分类器区分两类时使用的部分位点确实来自不同TAM表达程序。与UMAP细胞群的重合为这些探针的细胞来源提供单核分辨率证据。"
           },
           {
             "label": "E",
-            "title": "E：RNA-seq 差异表达值 Log2FC > 1 或 <1 且错误发现率 (FDR)",
-            "explanation": "RNA-seq 差异表达值 Log2FC > 1 或 <1 且错误发现率 (FDR) 调整 p 值为 0.1 的基因映射到用于 MC ben-1（左）或 mal（右）测定的预测探针 (E)。 该部分属于扩展数据 图 4. 脑膜瘤分类器探针的使用和 CD68 染色模式，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "bulk RNA差异基因与预测探针交叉验证",
+            "explanation": "作者筛选Log2FC和FDR达到条件的bulk RNA差异基因，并与ben-1或mal预测探针对应。交集支持甲基化位点与转录程序具有一致的风险方向。两类证据的交集减少了仅凭甲基化相关性给基因作功能注释的风险。"
           },
           {
             "label": "F",
-            "title": "F：Bulk RNA-seq 表达水平显示 MC ben-1 (F) 中 CD81 高表",
-            "explanation": "Bulk RNA-seq 表达水平显示 MC ben-1 (F) 中 CD81 高表达，MC​​ mal 病例 (G) 中 SPP1 高表达。 该部分属于扩展数据 图 4. 脑膜瘤分类器探针的使用和 CD68 染色模式，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "CD81在低风险ben-1中高表达",
+            "explanation": "bulk RNA箱线图显示CD81在ben-1较高，符合免疫/微胶质样成分丰富的低风险生态。该标志用于说明分类器中的基质信号具有可解释的基因表达来源。该结果与低风险病例中较高免疫细胞和微胶质样细胞比例相互印证。"
           },
           {
             "label": "G",
-            "title": "G：Bulk RNA-seq 表达水平显示 MC ben-1 (F) 中 CD81 高表",
-            "explanation": "Bulk RNA-seq 表达水平显示 MC ben-1 (F) 中 CD81 高表达，MC​​ mal 病例 (G) 中 SPP1 高表达。 该部分属于扩展数据 图 4. 脑膜瘤分类器探针的使用和 CD68 染色模式，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "SPP1在高风险mal中高表达",
+            "explanation": "SPP1在mal病例中升高，与主文中肿瘤支持性、治疗耐受相关巨噬细胞状态一致。它代表TAM数量减少同时状态更恶性的方向。该方向与单核分析中SPP1/CD83阳性、增殖性巨噬细胞在mal富集相互支持。"
           }
         ],
-        "conclusion": "综合各子图，通过扩展数据 图 4. 脑膜瘤分类器探针的使用和 CD68 染色模式建立这一组结果在全文论证链中的位置，并把实验对象、比较方式和直接结论对应起来。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以扩展数据 图 4. 脑膜瘤分类器探针的使用和 CD68 染色模式的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "扩展数据图4表明甲基化分类器不是只依赖肿瘤细胞CNV；一部分高权重探针追踪TAM数量和状态，因此样本微环境变化会直接改变分类分数。",
+        "boundary": "探针—基因映射和相关分析不能证明某一细胞直接决定整个分类；bulk RNA和IHC仍受肿瘤纯度及共变临床因素影响。"
       }
     },
     {
@@ -3992,26 +4046,31 @@
       "caption_en": "Extended Data Fig. 5 | Deconvoluted neoplastic and stromal signatures in different epigenetic tumors and controls. The presence of the identified stromal and neoplastic signatures was investigated in 184 different (brain) tumour classes and control tissue in 7,495 methylation samples (A). Overlaying the location of cells originating from samples dominated by a specific neoplastic or stromal signature onto the snRNA UMAP identifies that cells from specific S2 - n=13 S4 - n=3 S5 - n=4 N4 N5 N6 CTRL_CBM PTPR_A GG CHORDM PITAD_GON PITAD_ACTH CPH_PAP PITAD_STH_SPARSE CTRL_CORPCAL EPN_MPE EPN_PFB_4 DMG_K27 PITUI PIN_CYT EPN_PFB_5 EPN_PFA_1e CPP_AD PITAD_TSH DNET CPH_ADM EPN_PFB_5 PITAD_STH_DENSE1 EPN_PFA_1a PGG CTRL_REACTIVE EPN_PFA_2a CTRL_ADENOPIT 0 25 50 75100 0 25 50 75100 0 25 50 75100 S5 S7 SFT_HMPC EFT_CIC HGNET_ND_C HMB 0 25 50 75100 0 25 50 75100 S6 - n=4 S7 - n=2 Macrophage Celltype Mast cell Endothelial cell Lymphocyte Prediction 0.7 Ben−1 0.6 Ben−2 0.5 Ben−3 0.4 Int−A 0.3 Int−B 0.2 Mal 0.1 N1 N2 N3 N4 N5 N6 S1 S2 S3 S4 S5 S6 S7 signatures cluster together confirming different expression patterns for the different signatures (B and C). Hierarchical clustering based on either combined (left panel), neoplastic (middle panel) or stromal signatures (right panel) identify that MC intermediate (int-A/int-B) and mal cluster together based on neoplastic signatures whereas benign MC cases cluster based on stromal signatures (D). N1 − Clear Cell − n=113 0 20 40 60 80 100 0 20 40 60 80 100 % of alterations % of alterations −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 N3 − Immunogenic − n=1163 0 20 40 60 80 100 0 20 40 60 80 100 % of alterations % of alterations 0 −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 N4 − 3p Loss − n=840 0 20 40 60 80 100 0 20 40 60 80 100 % of alterations % of alterations −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 N5 − Unkown − n=244 0 20 40 60 80 100 0 20 40 60 80 100 % of alterations % of alterations 0 −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 N6 − Inflammatory − n=1646 0 20 40 60 80 100 0 20 40 60 80 100 % of alterations % of alterations −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 1 3 5 7 9 11 13 15 17 19 22 1 3 5 7 9 11 13 15 17 19 22 Gain CNV-status Segmental Gain Loss Segmental Loss S1 − Stromal A − n=187 S2 − Microglia A − n=1126 S3 − Stromal B − n=166 S5 − Stromal C − n=609 S6 − Glioneuronal − n=1279 S7 − Endothelial − n=638 1 3 5 7 9 11 13 15 17 19 22 1 3 5 7 9 11 13 15 17 19 22",
       "caption_zh": "扩展数据图 5 |不同表观遗传肿瘤和对照中的去卷积肿瘤和基质特征。在 184 种不同的（脑）肿瘤类别和 7,495 个甲基化样本的对照组织中研究了已识别的间质和肿瘤特征的存在 (A)。将源自以特定肿瘤或间质特征为主的样本的细胞位置叠加到 snRNA UMAP 上，可识别来自特定 S2 - n=13 S4 - n=3 S5 - n=4 N4 N5 N6 CTRL_CBM PTPR_A GG CHORDM PITAD_GON PITAD_ACTH CPH_PAP PITAD_STH_SPARSE CTRL_CORPCAL EPN_MPE 的细胞EPN_PFB_4 DMG_K27 PITUI PIN_CYT EPN_PFB_5 EPN_PFA_1e CPP_AD PITAD_TSH DNET CPH_ADM EPN_PFB_5 PITAD_STH_DENSE1 EPN_PFA_1a PGG CTRL_REACTIVE EPN_PFA_2a CTRL_ADENOPIT 0 25 50 75100 0 25 50 75100 0 25 50 75100 S5 S7 SFT_HMPC EFT_CIC HGNET_ND_C HMB 0 25 50 75100 0 25 50 75100 S6 - n=4 S7 - n=2 巨噬细胞类型 肥大细胞 内皮细胞 淋巴细胞 预测 0.7 Ben−1 0.6 Ben−2 0.5 Ben−3 0.4 Int−A 0.3 Int−B 0.2 Mal 0.1 N1 N2 N3 N4 N5 N6 S1 S2 S3 S4 S5 S6 S7 特征聚集在一起，确认不同特征（B 和 C）的不同表达模式。基于组合（左图）、肿瘤性（中图）或基质特征（右图）的分层聚类根据肿瘤特征识别 MC 中间体（int-A/int-B）和 mal 聚类在一起，而良性 MC 病例则基于基质特征聚类（D）。 N1 − 透明细胞 − n=113 0 20 40 60 80 100 0 20 40 60 80 100 变化百分比 变化百分比 −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 N3 − 免疫原性 − n=1163 0 20 40 60 80 100 0 20 40 60 80 100 变化百分比 变化百分比 0 −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 N4 − 3p 损失 − n=840 0 20 40 60 80 100 0 20 40 60 80 100 %变化数量 变化百分比 -80 -60 -40 -20 -80 -60 -40 -20 -100 -100 N5 - 未知 - n=244 0 20 40 60 80 100 0 20 40 60 80 100 变化% 变化百分比 0 -80 -60 -40 -20 -80 -60 −40 −20 −100 −100 N6 − 炎症 − n=1646 0 20 40 60 80 100 0 20 40 60 80 100 改变百分比 改变百分比 −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 1 3 5 7 9 11 13 15 17 19 22 1 3 5 7 9 11 13 15 17 19 22 增益 CNV 状态 节段增益 损失 节段损失 S1 − 基质 A − n=187 S2 − 小胶质细胞 A − n=1126 S3 − 基质 B − n=166 S5 − 基质 C − n=609 S6 – 胶质神经元 – n=1279 S7 – 内皮细胞 – n=638 1 3 5 7 9 11 13 15 17 19 22 1 3 5 7 9 11 13 15 17 19 22",
       "study": {
-        "overview": "阅读时按照 A → B → D 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：扩展数据图 5 |不同表观遗传肿瘤和对照中的去卷积肿瘤和基质特征。在 184 种不同的（脑）肿瘤类别和 7,495 个甲基化样本的对照组织中研究了已识别的间质和肿瘤特征的存在 (A)。将源自以特定肿瘤或间质特征为主的样本的细胞位置叠加到 snRNA UMAP 上，可识别来自特定 S2 - n=13 S4 - n=3 S5 - n=4 N4 N5 N6 CTRL_CBM PTPR_A GG CHORDM PITAD_GON PITAD_ACTH CPH_PAP PITAD_STH_SPARSE CTRL_CORPCAL EPN_MPE 的细胞EPN_PFB_4 DMG_K27 PITUI PIN_CYT EPN_PFB_5 EPN_PFA_1e CPP_AD PITAD_TSH DNET CPH_ADM EPN_PFB_5 PITAD_STH_DENSE1 EPN_PFA_1a PGG CTRL_REACTIVE EPN_PFA_2a CTRL_ADENOPIT 0 25 50 75100 0 25 50 75100 0 25 50 75100 S5 S7 SFT_HMPC EFT_CIC HGNET_ND_C HMB 0 25 50 75100 0 25 50 75100 S6 - n=4 S7 - n=2 巨噬细胞类型 肥大细胞 内皮细胞 淋巴细胞 预测 0.7 Ben−1 0.6 Ben−2 0.5 Ben−3 0.4 Int−A 0.3 Int−B 0.2 Mal 0.1 N1 N2 N3 N4 N5 N6 S1 S2 S3 S4 S5 S6 S7 特征聚集在一起，确认不同特征（B 和 C）的不同表达模式。基于组合（左图）、肿瘤性（中图）或基质特征（右图）的分层聚类根据肿瘤特征识别 MC 中间体（int-A/int-B）和 mal 聚类在一起，而良性 MC 病例则基于基质特征聚类（D）。 N1 − 透明细胞 − n=113 0 20 40 60 80 100 0 20 40 60 80 100 变化百分比 变化百分比 −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 N3 − 免疫原性 − n=1163 0 20 40 60 80 100 0 20 40 60 80 100 变化百分比 变化百分比 0 −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 N4 − 3p 损失 − n=840 0 20 40 60 80 100 0 20 40 60 80 100 %变化数量 变化百分比 -80 -60 -40 -20 -80 -60 -40 -20 -100 -100 N5 - 未知 - n=244 0 20 40 60 80 100 0 20 40 60 80 100 变化% 变化百分比 0 -80 -60 -40 -20 -80 -60 −40 −20 −100 −100 N6 − 炎症 − n=1646 0 20 40 60 80 100 0 20 40 60 80 100 改变百分比 改变百分比 −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 1 3 5 7 9 11 13 15 17 19 22 1 3 5 7 9 11 13 15 17 19 22 增益 CNV 状态 节段增益 损失 节段损失 S1 − 基质 A − n=187 S2 − 小胶质细胞 A − n=1126 S3 − 基质 B − n=166 S5 − 基质 C − n=609 S6 – 胶质神经元 – n=1279 S7 – 内皮细胞 – n=638 1 3 5 7 9 11 13 15 17 19 22 1 3 5 7 9 11 13 15 17 19 22",
+        "overview": "扩展数据图5检验分解得到的13个肿瘤/基质特征是否只在脑膜瘤中成立。A扩展到7,495例、184个脑肿瘤及对照类别，B–C回投到snRNA UMAP，D比较使用全部、肿瘤或基质特征时的层次聚类。",
         "panels": [
           {
             "label": "A",
-            "title": "A：在 184 种不同的（脑）肿瘤类别和 7,495 个甲基化样本的对照组织中研究了已识",
-            "explanation": "在 184 种不同的（脑）肿瘤类别和 7,495 个甲基化样本的对照组织中研究了已识别的间质和肿瘤特征的存在 (A)。 该部分属于扩展数据 图 5. 不同表观遗传肿瘤和对照中解卷积的肿瘤和基质特征，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "13个特征在184个表观遗传类别中的分布",
+            "explanation": "二维点图显示各特征并非平均存在于所有脑肿瘤和正常组织，而是在特定类别中富集。跨肿瘤参考帮助识别内皮、胶质神经、微胶质和肿瘤内在成分。若特征只在训练脑膜瘤中出现而缺乏合理参照分布，其生物学命名就不应被接受。该比较覆盖7,495个甲基化样本和184个脑肿瘤或对照类别。"
           },
           {
             "label": "B",
-            "title": "B：将源自以特定肿瘤或间质特征为主的样本的细胞位置叠加到 snRNA UMAP 上，可识",
-            "explanation": "将源自以特定肿瘤或间质特征为主的样本的细胞位置叠加到 snRNA UMAP 上，可识别来自特定 S2 - n=13 S4 - n=3 S5 - n=4 N4 N5 N6 CTRL_CBM PTPR_A GG CHORDM PITAD_GON PITAD_ACTH CPH_PAP PITAD_STH_SPARSE CTRL_CORPCAL EPN_MPE 的细胞EPN_PFB_4 DMG_K27 PITUI PIN_CYT EPN_PFB_5 EPN_PFA_1e CPP_AD PITAD_TSH DNET CPH_ADM EPN_PFB_5 PITAD_STH_DENSE1 EPN_PFA_1a PGG CTRL_REACTIVE EPN_PFA_2a CTRL_ADENOPIT 0 25 50 75100 0 25 50 75100 0 25 50 75100 S5 S7 SFT_HMPC EFT_CIC HGNET_ND_C HMB 0 25 50 75100 0 25 50 75100 S6 - n=4 S7 - n=2 巨噬细胞类型 肥大细胞 内皮细胞 淋巴细胞 预测 0.7 Ben−1 0.6 Ben−2 0.5 Ben−3 0.4 Int−A 0.3 Int−B 0.2 Mal 0.1 N1 N2 N3 N4 N5 N6 S1 S2 S3 S4 S5 S6 S7 特征聚集在一起，确认不同特征（B 和 C）的不同表达模式。"
+            "title": "肿瘤特征回投到单核表达空间",
+            "explanation": "由特定肿瘤甲基化特征主导病例的细胞，在snRNA UMAP中落入相近肿瘤细胞状态，支持N1–N6并非任意数学分量。这种空间重合把bulk甲基化因子与具体肿瘤细胞表达状态连接起来。"
+          },
+          {
+            "label": "C",
+            "title": "基质特征回投到对应非肿瘤细胞群",
+            "explanation": "微胶质、内皮和其他基质特征主导病例的细胞分别靠近相应非肿瘤群，提供独立的细胞来源注释依据。该结果是S1–S7细胞来源命名的重要正交依据，其与独立甲基化参考和组织学背景的一致性，使基质特征不再只是抽象的分解因子。"
           },
           {
             "label": "D",
-            "title": "D：基于组合（左图）、肿瘤性（中图）或基质特征（右图）的分层聚类根据肿瘤特征识别 MC ",
-            "explanation": "基于组合（左图）、肿瘤性（中图）或基质特征（右图）的分层聚类根据肿瘤特征识别 MC 中间体（int-A/int-B）和 mal 聚类在一起，而良性 MC 病例则基于基质特征聚类（D）。 该部分属于扩展数据 图 5. 不同表观遗传肿瘤和对照中解卷积的肿瘤和基质特征，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "肿瘤和基质特征对聚类贡献不同",
+            "explanation": "全部特征、仅肿瘤特征和仅基质特征的层次聚类结果不同：int-A/int-B和mal更受肿瘤特征聚合，良性MC之间的结构更受基质特征影响。因而良性类别间的可分性很大程度来自TME，而恶性类别更受肿瘤内在程序牵引。"
           }
         ],
-        "conclusion": "综合各子图，通过扩展数据 图 5. 不同表观遗传肿瘤和对照中解卷积的肿瘤和基质特征建立这一组结果在全文论证链中的位置，并把实验对象、比较方式和直接结论对应起来。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以扩展数据 图 5. 不同表观遗传肿瘤和对照中解卷积的肿瘤和基质特征的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "该图证明分解特征在跨肿瘤参考和单核表达空间中具有可解释性，并进一步显示低风险分类边界尤其容易受到微环境成分影响。",
+        "boundary": "跨肿瘤甲基化类别的样本制备和肿瘤纯度不同；回投一致性支持注释但不保证每个病例中的分量都来自单一细胞类型。"
       }
     },
     {
@@ -4029,21 +4088,21 @@
       "caption_en": "Extended Data Fig. 6 | Copy-number profiles of cases dominated by specific neoplastic or stromal signatures. Meningioma cases dominated by a specific neoplastic (A) or stromal (B) signature were identified and corresponding copy-number profiles were plotted. A_IDH A_IDH_HG ANTCON ARMS ATRT_MYC ATRT_SHH ATRT_TYR CHGL Stromal B Endothelial Microglia A Fraction 0.25 0.50 0.75 CHORDM CN CNS_NB_FOXR2 CNS_SARC_DICER CPC_A CPC_B CPH_ADM CPH_PAP Stromal B Endothelial Microglia A 1.00 CPP_AD CPP_INF CRINET CTRL_ADENOPIT CTRL_BLOOD CTRL_CBM CTRL_CORPCAL CTRL_HEMI Stromal B Endothelial Microglia A CTRL_HYPOTHAL CTRL_OPTIC CTRL_PIN CTRL_PONS CTRL_REACTIVE DGONC DLBCL DLGNT_1 Stromal B Endothelial Microglia A DLGNT_2 DMG_K27 DNET EFT_CIC EMB_ND_A ENB EPN_MPE EPN_PF_SE Stromal B Endothelial Microglia A EPN_PFA_1a EPN_PFA_1b EPN_PFA_1c EPN_PFA_1d EPN_PFA_1e EPN_PFA_1f EPN_PFA_2a EPN_PFA_2b Stromal B Endothelial Microglia A EPN_PFA_2c EPN_PFB_1 EPN_PFB_2 EPN_PFB_3 EPN_PFB_4 EPN_PFB_5 EPN_SPINE EPN_SPINE_MYCN Stromal B Endothelial Microglia A EPN_SPINE_SE_A EPN_SPINE_SE_B EPN_ST_ND_A EPN_ST_SE EPN_YAP EPN_ZFTA_Like_A EPN_ZFTA_Like_B EPN_ZFTA_Like_C Stromal B Endothelial Microglia A ERMS ETMR_Atyp ETMR_C19MC EVNCYT EWS GBM_CBM GBM_G34 GBM_MES_Atyp Stromal B Stromal C Endothelial Microglia A GBM_MES_Typ GBM_ped_ND_A GBM_ped_ND_B GBM_pedMYCN GBM_pedRTK1a GBM_pedRTK1b GBM_pedRTK1c GBM_pedRTK2a Stromal B Stromal C Endothelial Microglia A GBM_pedRTK2b GBM_RTK1 GBM_RTK2 GBM_THAL_EGFR GCT_GERM_A GCT_GERM_B GCT_TERA GCT_YOLKSAC Stromal B Stromal C Endothelial Microglia A GG GNT_ND HGAP HGNET_BCOR_Fus HGNET_BCOR_ITD HGNET_BEND2 HGNET_CXXC5 HGNET_ND_A Stromal B Stromal C Endothelial Microglia A HGNET_ND_B HGNET_ND_C HGNET_ND_D HGNET_PATZ HGNET_PLAG HMB IHG INFLAM_ENV Stromal B Stromal C Endothelial Microglia A IO_MEPL LCH LGG_DIG_DIA LGG_MYB_A LGG_MYB_B LGG_MYB_C LGG_MYB_D LIPN Stromal B Stromal C Endothelial Microglia A MB_G34_I MB_G34_II MB_G34_III MB_G34_IV MB_G34_V MB_G34_VI MB_G34_VII MB_G34_VIII Stromal B Stromal C Endothelial Microglia A MB_MYO MB_SHH_1 MB_SHH_2 MB_SHH_3 MB_SHH_4 MB_SHH_IDH MB_WNT MELN Stromal B Stromal C Endothelial Microglia A MET_MEL MNG_ben−1 MNG_ben−2 MNG_ben−3 MNG_int−A MNG_int−B MNG_mal MNG_SMARCE1 Endothelial Glioneural Microglia A Microglia B Stromal A Stromal B Stromal C MPNST_Atyp MPNST_Typ MYXGNT NB_1 NB_2s NB_2wo2s NFIB_PLEX O_IDH Endothelial Glioneural Microglia A Microglia B Stromal A Stromal B Stromal C OLIGOSARC_IDH PA_CORT PA_INF PA_INF_FGFR PA_MID PB_FOXR2 PB_Grp1A PB_Grp1B Endothelial Glioneural Microglia A Microglia B Stromal A Stromal B Stromal C PB_Grp2 PGG PGNT PIN_CYT PIN_RB PITAD_ACTH PITAD_GON PITAD_PRL Endothelial Glioneural Microglia A Microglia B Stromal A Stromal B Stromal C PITAD_STH_DENSE1 PITAD_STH_DENSE2 PITAD_STH_SPARSE PITAD_TSH PITUI PLASMACYT PLNTY PPTID_A Endothelial Glioneural Microglia A Microglia B Stromal A Stromal B Stromal C PPTID_B PTPR_A PTPR_B PXA RB RB_MYCN RGNT RMS_MYOD1 Endothelial Glioneural Microglia A Microglia B Stromal A Stromal B Stromal C SCHW SCHW_MEL SEGA SFT_HMPC SNUC_IDH2 ST_EPN_ZFTA_A ST_EPN_ZFTA_B VGLL Endothelial Glioneural Microglia A Microglia B Stromal A Stromal B Stromal C Proliferative Proliferative 3p del Clear cell Immunogenic Inflammatory Unknown 3p del Immunogenic Inflammatory Unknown Proliferative Clear cell Immunogenic Proliferative 3p del Inflammatory Unknown Immunogenic Clear",
       "caption_zh": "扩展数据图 6 |以特定肿瘤或间质特征为主的病例的拷贝数概况。识别出以特定肿瘤 (A) 或基质 (B) 特征为主的脑膜瘤病例，并绘制相应的拷贝数图谱。 A_IDH A_IDH_HG ANTCON ARMS ATRT_MYC ATRT_SHH ATRT_TYR CHGL 基质 B 内皮小胶质细胞 A 分数 0.25 0.50 0.75 CHORDM CN CNS_NB_FOXR2 CNS_SARC_DICER CPC_A CPC_B CPH_ADM CPH_PAP 基质 B 内皮小胶质细胞 A 1.00 CPP_AD CPP_INF CRINET CTRL_ADENOPIT CTRL_BLOOD CTRL_CBM CTRL_CORPCAL CTRL_HEMI 基质 B 内皮小胶质细胞 A CTRL_HYPOTHAL CTRL_OPTIC CTRL_PIN CTRL_PONS CTRL_REACTIVE DGONC DLBCL DLGNT_1 基质 B 内皮小胶质细胞 A DLGNT_2 DMG_K27 DNET EFT_CIC EMB_ND_A ENB EPN_MPE EPN_PF_SE 基质 B 内皮 小胶质细胞 A EPN_PFA_1a EPN_PFA_1b EPN_PFA_1c EPN_PFA_1d EPN_PFA_1e EPN_PFA_1f EPN_PFA_2a EPN_PFA_2b 基质 B 内皮小胶质细胞 A EPN_PFA_2c EPN_PFB_1 EPN_PFB_2 EPN_PFB_3 EPN_PFB_4 EPN_PFB_5 EPN_SPINE EPN_SPINE_MYCN 基质 B 内皮细胞 小胶质细胞 A EPN_SPINE_SE_A EPN_SPINE_SE_B EPN_ST_ND_A EPN_ST_SE EPN_YAP EPN_ZFTA_Like_A EPN_ZFTA_Like_B EPN_ZFTA_Like_C 基质 B 内皮小胶质细胞 A ERMS ETMR_Atyp ETMR_C19MC EVNCYT EWS GBM_CBM GBM_G34 GBM_MES_Atyp 基质 B 基质 C 内皮小胶质细胞 A GBM_MES_Typ GBM_ped_ND_A GBM_ped_ND_B GBM_pedMYCN GBM_pedRTK1a GBM_pedRTK1b GBM_pedRTK1c GBM_pedRTK2a 基质 B 基质 C 内皮小胶质细胞 A GBM_pedRTK2b GBM_RTK1 GBM_RTK2 GBM_THAL_EGFR GCT_GERM_A GCT_GERM_B GCT_TERA GCT_YOLKSAC 基质 B 基质 C 内皮小胶质细胞 A GG GNT_ND HGAP HGNET_BCOR_Fus HGNET_BCOR_ITD HGNET_BEND2 HGNET_CXXC5 HGNET_ND_A 基质 B 基质 C 内皮小胶质细胞 A HGNET_ND_B HGNET_ND_C HGNET_ND_D HGNET_PATZ HGNET_PLAG HMB IHG INFLAM_ENV 基质 B 基质 C 内皮小胶质细胞 A IO_MEPL LCH LGG_DIG_DIA LGG_MYB_A LGG_MYB_B LGG_MYB_C LGG_MYB_D LIPN 基质 B 基质 C 内皮小胶质细胞 A MB_G34_I MB_G34_II MB_G34_III MB_G34_IV MB_G34_V MB_G34_VI MB_G34_VII MB_G34_VIII 基质 B 基质 C 内皮小胶质细胞 A MB_MYO MB_SHH_1 MB_SHH_2 MB_SHH_3 MB_SHH_4 MB_SHH_IDH MB_WNT MELN 基质 B 基质 C 内皮小胶质细胞 A MET_MEL MNG_ben−1 MNG_ben−2 MNG_ben−3 MNG_int−A MNG_int−B MNG_mal MNG_SMARCE1 内皮细胞 胶质神经细胞 小胶质细胞 A 小胶质细胞 B 基质 A 基质 B 基质 C MPNST_Atyp MPNST_Typ MYXGNT NB_1 NB_2s NB_2wo2s NFIB_PLEX O_IDH 内皮细胞胶质神经小胶质细胞 A 小胶质细胞 B 基质 A 基质 B 基质 C OLIGOSARC_IDH PA_CORT PA_INF PA_INF_FGFR PA_MID PB_FOXR2 PB_Grp1A PB_Grp1B 内皮胶质神经小胶质细胞 A 小胶质细胞 B 基质 A 基质 B 基质 C PB_Grp2 PGG PGNT PIN_CYT PIN_RB PITAD_ACTH PITAD_GON PITAD_PRL 内皮胶质神经小胶质细胞 A 小胶质细胞 B 基质 A 基质 B 基质 C PITAD_STH_DENSE1 PITAD_STH_DENSE2 PITAD_STH_SPARSE PITAD_TSH PITUI PLASMACYT PLNTY PPTID_A 内皮胶质神经小胶质细胞 A小胶质细胞 B 基质 A 基质 B 基质 C PPTID_B PTPR_A PTPR_B PXA RB RB_MYCN RGNT RMS_MYOD1 内皮胶质神经小胶质细胞 A 小胶质细胞 B 基质 A 基质 B 基质 C SCHW SCHW_MEL SEGA SFT_HMPC SNUC_IDH2 ST_EPN_ZFTA_A ST_EPN_ZFTA_B VGLL 内皮胶质细胞 小胶质细胞 A 小胶质细胞 B 基质 A 基质 B 基质 C 增殖性增殖 3p del 透明细胞 免疫原性炎症未知 3p del 免疫原性炎症未知 增殖性透明细胞 免疫原性增殖 3p del 炎症性未知 免疫原性透明",
       "study": {
-        "overview": "阅读时按照 A → B 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：扩展数据图 6 |以特定肿瘤或间质特征为主的病例的拷贝数概况。识别出以特定肿瘤 (A) 或基质 (B) 特征为主的脑膜瘤病例，并绘制相应的拷贝数图谱。 A_IDH A_IDH_HG ANTCON ARMS ATRT_MYC ATRT_SHH ATRT_TYR CHGL 基质 B 内皮小胶质细胞 A 分数 0.25 0.50 0.75 CHORDM CN CNS_NB_FOXR2 CNS_SARC_DICER CPC_A CPC_B CPH_ADM CPH_PAP 基质 B 内皮小胶质细胞 A 1.00 CPP_AD CPP_INF CRINET CTRL_ADENOPIT CTRL_BLOOD CTRL_CBM CTRL_CORPCAL CTRL_HEMI 基质 B 内皮小胶质细胞 A CTRL_HYPOTHAL CTRL_OPTIC CTRL_PIN CTRL_PONS CTRL_REACTIVE DGONC DLBCL DLGNT_1 基质 B 内皮小胶质细胞 A DLGNT_2 DMG_K27 DNET EFT_CIC EMB_ND_A ENB EPN_MPE EPN_PF_SE 基质 B 内皮 小胶质细胞 A EPN_PFA_1a EPN_PFA_1b EPN_PFA_1c EPN_PFA_1d EPN_PFA_1e EPN_PFA_1f EPN_PFA_2a EPN_PFA_2b 基质 B 内皮小胶质细胞 A EPN_PFA_2c EPN_PFB_1 EPN_PFB_2 EPN_PFB_3 EPN_PFB_4 EPN_PFB_5 EPN_SPINE EPN_SPINE_MYCN 基质 B 内皮细胞 小胶质细胞 A EPN_SPINE_SE_A EPN_SPINE_SE_B EPN_ST_ND_A EPN_ST_SE EPN_YAP EPN_ZFTA_Like_A EPN_ZFTA_Like_B EPN_ZFTA_Like_C 基质 B 内皮小胶质细胞 A ERMS ETMR_Atyp ETMR_C19MC EVNCYT EWS GBM_CBM GBM_G34 GBM_MES_Atyp 基质 B 基质 C 内皮小胶质细胞 A GBM_MES_Typ GBM_ped_ND_A GBM_ped_ND_B GBM_pedMYCN GBM_pedRTK1a GBM_pedRTK1b GBM_pedRTK1c GBM_pedRTK2a 基质 B 基质 C 内皮小胶质细胞 A GBM_pedRTK2b GBM_RTK1 GBM_RTK2 GBM_THAL_EGFR GCT_GERM_A GCT_GERM_B GCT_TERA GCT_YOLKSAC 基质 B 基质 C 内皮小胶质细胞 A GG GNT_ND HGAP HGNET_BCOR_Fus HGNET_BCOR_ITD HGNET_BEND2 HGNET_CXXC5 HGNET_ND_A 基质 B 基质 C 内皮小胶质细胞 A HGNET_ND_B HGNET_ND_C HGNET_ND_D HGNET_PATZ HGNET_PLAG HMB IHG INFLAM_ENV 基质 B 基质 C 内皮小胶质细胞 A IO_MEPL LCH LGG_DIG_DIA LGG_MYB_A LGG_MYB_B LGG_MYB_C LGG_MYB_D LIPN 基质 B 基质 C 内皮小胶质细胞 A MB_G34_I MB_G34_II MB_G34_III MB_G34_IV MB_G34_V MB_G34_VI MB_G34_VII MB_G34_VIII 基质 B 基质 C 内皮小胶质细胞 A MB_MYO MB_SHH_1 MB_SHH_2 MB_SHH_3 MB_SHH_4 MB_SHH_IDH MB_WNT MELN 基质 B 基质 C 内皮小胶质细胞 A MET_MEL MNG_ben−1 MNG_ben−2 MNG_ben−3 MNG_int−A MNG_int−B MNG_mal MNG_SMARCE1 内皮细胞 胶质神经细胞 小胶质细胞 A 小胶质细胞 B 基质 A 基质 B 基质 C MPNST_Atyp MPNST_Typ MYXGNT NB_1 NB_2s NB_2wo2s NFIB_PLEX O_IDH 内皮细胞胶质神经小胶质细胞 A 小胶质细胞 B 基质 A 基质 B 基质 C OLIGOSARC_IDH PA_CORT PA_INF PA_INF_FGFR PA_MID PB_FOXR2 PB_Grp1A PB_Grp1B 内皮胶质神经小胶质细胞 A 小胶质细胞 B 基质 A 基质 B 基质 C PB_Grp2 PGG PGNT PIN_CYT PIN_RB PITAD_ACTH PITAD_GON PITAD_PRL 内皮胶质神经小胶质细胞 A 小胶质细胞 B 基质 A 基质 B 基质 C PITAD_STH_DENSE1 PITAD_STH_DENSE2 PITAD_STH_SPARSE PITAD_TSH PITUI PLASMACYT PLNTY PPTID_A 内皮胶质神经小胶质细胞 A小胶质细胞 B 基质 A 基质 B 基质 C PPTID_B PTPR_A PTPR_B PXA RB RB_MYCN RGNT RMS_MYOD1 内皮胶质神经小胶质细胞 A 小胶质细胞 B 基质 A 基质 B 基质 C SCHW SCHW_MEL SEGA SFT_HMPC SNUC_IDH2 ST_EPN_ZFTA_A ST_EPN_ZFTA_B VGLL 内皮胶质细胞 小胶质细胞 A 小胶质细胞 B 基质 A 基质 B 基质 C 增殖性增殖 3p del 透明细胞 免疫原性炎症未知 3p del 免疫原性炎症未知 增殖性透明细胞 免疫原性增殖 3p del 炎症性未知 免疫原性透明",
+        "overview": "扩展数据图6用CNV轮廓验证每个肿瘤或基质特征的基因组背景。阅读时应比较A中肿瘤特征是否伴随特定高风险缺失/扩增，以及B中基质特征主导病例是否保留较简单的肿瘤CNV。",
         "panels": [
           {
             "label": "A",
-            "title": "A：识别出以特定肿瘤 (A) 或基质 (B) 特征为主的脑膜瘤病例，并绘制相应的拷贝数图",
-            "explanation": "识别出以特定肿瘤 (A) 或基质 (B) 特征为主的脑膜瘤病例，并绘制相应的拷贝数图谱。 该部分属于扩展数据 图 6. 以特定肿瘤或间质特征为主的病例的拷贝数概况，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "肿瘤特征主导病例的CNV轮廓",
+            "explanation": "不同N特征对应不同染色体改变组合，增殖等高风险特征伴随更广泛缺失和扩增。CNV一致性为肿瘤内在特征提供基因组锚点。不同轮廓也说明六个肿瘤特征并非同一个恶性分数的重复表达。"
           },
           {
             "label": "B",
-            "title": "B：识别出以特定肿瘤 (A) 或基质 (B) 特征为主的脑膜瘤病例，并绘制相应的拷贝数图",
-            "explanation": "识别出以特定肿瘤 (A) 或基质 (B) 特征为主的脑膜瘤病例，并绘制相应的拷贝数图谱。 该部分属于扩展数据 图 6. 以特定肿瘤或间质特征为主的病例的拷贝数概况，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "基质特征主导病例的CNV轮廓",
+            "explanation": "S特征主导病例总体CNV较少或以22q/NF2相关改变为主，说明高基质分数并不等同于高肿瘤基因组负荷。这类样本的bulk甲基化分类更容易受到非肿瘤细胞比例变化影响。"
           }
         ],
-        "conclusion": "综合各子图，通过扩展数据 图 6. 以特定肿瘤或间质特征为主的病例的拷贝数概况建立这一组结果在全文论证链中的位置，并把实验对象、比较方式和直接结论对应起来。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以扩展数据 图 6. 以特定肿瘤或间质特征为主的病例的拷贝数概况的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "CNV图谱进一步区分了肿瘤内在与微环境来源信号：高风险肿瘤特征伴随复杂基因组改变，而微胶质/基质特征可在相对简单CNV背景中主导bulk分类。",
+        "boundary": "特征主导按bulk分数定义，仍可能包含混合细胞与亚克隆；CNV图不能解析细胞级别的共存关系。"
       }
     },
     {
@@ -4061,16 +4120,16 @@
       "caption_en": "Extended Data Fig. 7 | Stromal and neoplastic signatures identified in 184 different epigenetic classes. Two-dimensional dotplots showing the presence of the stromal and neoplastic signatures in 184 different (brain) tumour classes and control tissue in a total of 7,495 methylation samples. A Ben−1 Ben−2 Ben−3 Int−A Int−B Mal Fraction Stromal C Dominant stromal component Stromal B Stromal A Microglia B Microglia A Glioneural Endothelial Immunogenic Immunogenic Immunogenic Inflammatory Inflammatory Inflammatory Proliferative Proliferative Clear cell Unknown Clear cell Unknown Clear",
       "caption_zh": "扩展数据图 7 |在 184 种不同的表观遗传类别中鉴定出基质和肿瘤特征。二维点图显示了总共 7,495 个甲基化样本中 184 个不同（脑）肿瘤类别和对照组织中存在基质和肿瘤特征。 A Ben−1 Ben−2 Ben−3 Int−A Int−B Mal Fraction 基质 C 主要基质成分 基质 B 基质 A 小胶质细胞 B 小胶质细胞 A 胶质神经内皮 免疫原性 免疫原性 免疫原性 炎症 炎症 炎症 增殖 增殖 透明细胞 未知 透明细胞 未知 透明",
       "study": {
-        "overview": "阅读时按照 整图 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：扩展数据图 7 |在 184 种不同的表观遗传类别中鉴定出基质和肿瘤特征。二维点图显示了总共 7,495 个甲基化样本中 184 个不同（脑）肿瘤类别和对照组织中存在基质和肿瘤特征。 A Ben−1 Ben−2 Ben−3 Int−A Int−B Mal Fraction 基质 C 主要基质成分 基质 B 基质 A 小胶质细胞 B 小胶质细胞 A 胶质神经内皮 免疫原性 免疫原性 免疫原性 炎症 炎症 炎症 增殖 增殖 透明细胞 未知 透明细胞 未知 透明",
+        "overview": "这张全景点图把六个肿瘤特征和七个基质特征放到184个甲基化类别与正常对照中。阅读重点不是逐一记住所有类别，而是检查某一特征是否具有合理的组织/细胞特异性，以及脑膜瘤特征是否在相邻疾病中重复出现。",
         "panels": [
           {
             "label": "整图",
-            "title": "整图：扩展数据图 7 |在 184 种不同的表观遗传类别中鉴定出基质和肿瘤特征",
-            "explanation": "扩展数据图 7 |在 184 种不同的表观遗传类别中鉴定出基质和肿瘤特征。二维点图显示了总共 7,495 个甲基化样本中 184 个不同（脑）肿瘤类别和对照组织中存在基质和肿瘤特征。 A Ben−1 Ben−2 Ben−3 Int−A Int−B Mal Fraction 基质 C 主要基质成分 基质 B 基质 A 小胶质细胞 B 小胶质细胞 A 胶质神经内皮 免疫原性 免疫原性 免疫原性 炎症 炎症 炎症 增殖 增殖 透明细胞 未知 透明细胞 未知 透明"
+            "title": "跨184类的肿瘤与基质特征全景",
+            "explanation": "每一行对应一个甲基化类别或对照组织，横向同时显示肿瘤内在和基质成分；点大小和颜色表示特征占比。内皮、胶质神经和微胶质相关特征在相应正常或肿瘤类别中富集，而脑膜瘤的免疫原性、增殖和3p缺失等特征呈疾病相关组合。全景图汇总7,495个甲基化样本中的184个类别。"
           }
         ],
-        "conclusion": "综合各子图，通过扩展数据 图 7. 在 184 个不同表观遗传类别中鉴定出的间质和肿瘤特征建立这一组结果在全文论证链中的位置，并把实验对象、比较方式和直接结论对应起来。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以扩展数据 图 7. 在 184 个不同表观遗传类别中鉴定出的间质和肿瘤特征的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "扩展数据图7为特征命名提供跨疾病参照，证明这些成分具有组织学和细胞学可解释性，而非只为拟合脑膜瘤分组而产生。",
+        "boundary": "点图用于注释和比较，不是诊断性能评估；不同类别的样本量和纯度不均，弱信号不能直接视为该细胞类型缺失。"
       }
     },
     {
@@ -4088,26 +4147,26 @@
       "caption_en": "Extended Data Fig. 8 | Stromal and neoplastic signatures in the methylation classes and methylation groups. Two-dimensional dotplots showing the presence of the stromal and neoplastic signatures in the methylation classes for Clinical Validation Cohorts - n=970 0.1 0.2 0.3 0.4 0.5 Immunogenic Immunogenic Immunogenic Inflammatory Inflammatory Inflammatory Proliferative Proliferative Proliferative Proliferative Unknown Clear cell Unknown Clear cell Unknown Clear cell Unknown 3p del 3p del 3p del Dominant neoplastic component Clinical Validation Cohorts - n=970 Immune−enriched Hypermitotic Merlin−intact Stromal C Dominant stromal component Stromal B Fraction Stromal A 0.1 Microglia B 0.2 Microglia A 0.3 Glioneural Endothelial Inflammatory Inflammatory Inflammatory 3p del Clear cell Immunogenic Proliferative Unknown 3p del Clear cell Immunogenic Proliferative Unknown 3p del Clear cell Immunogenic Proliferative Unknown Dominant neoplastic component 970 cases from the clinical validation cohorts (A), the UCSF methylation groups in the discovery set of 4,502 cases (B) or the UCSF methylation groups in the clinical validation cohorts (C). A B Between−class distance − one vs. all within category MB, SHH CHL AD MB, SHH INF 0.07 MB, WNT MB, G3 MB, G4 0.06 Mean pairwise cosine distance EPN, MPE EPN, ZFTA EPN, YAP 0.05 EPN, PFA EPN, SPINE EPN, PFB 0.04 MNG, Mal 0.03 MNG, Int−B MNG, ben−1 MNG, Int−A 0.02 EPN MB MNG",
       "caption_zh": "扩展数据图 8 |甲基化类别和甲基化组中的基质和肿瘤特征。二维点图显示临床验证队列的甲基化类别中存在间质和肿瘤特征 - n=970 0.1 0.2 0.3 0.4 0.5 免疫原性 免疫原性 免疫原性炎症 炎症性增殖 增殖性增殖 增殖性 未知 透明细胞未知 透明细胞未知 透明细胞未知 3p del 3p del 3p del 主要肿瘤成分临床验证队列 - n=970 免疫富集的有丝分裂 Merlin完整基质 C 主要基质成分 基质 B 分数 基质 A 0.1 小胶质细胞 B 0.2 小胶质细胞 A 0.3 胶质神经内皮炎症 炎症 炎症 3p del 透明细胞 免疫原性增殖未知 3p del Clear cell 免疫原性增殖未知 3p del Clear cell 免疫原性增殖未知 主要肿瘤成分 来自临床验证队列的 970 例 (A)、发现组 4,502 例中的 UCSF 甲基化组 (B) 或临床验证队列中的 UCSF 甲基化组 (C)。 A B 类间距离 - 类别内的一对一与全部 MB、SHH CHL AD MB、SHH INF 0.07 MB、WNT MB、G3 MB、G4 0.06 平均成对余弦距离 EPN、MPE EPN、ZFTA EPN、YAP 0.05 EPN、PFA EPN、SPINE EPN、PFB 0.04 MNG、Mal 0.03 MNG、Int−B MNG、 ben−1 MNG，Int−A 0.02 EPN MB MNG",
       "study": {
-        "overview": "阅读时按照 A → B → C 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：扩展数据图 8 |甲基化类别和甲基化组中的基质和肿瘤特征。二维点图显示临床验证队列的甲基化类别中存在间质和肿瘤特征 - n=970 0.1 0.2 0.3 0.4 0.5 免疫原性 免疫原性 免疫原性炎症 炎症性增殖 增殖性增殖 增殖性 未知 透明细胞未知 透明细胞未知 透明细胞未知 3p del 3p del 3p del 主要肿瘤成分临床验证队列 - n=970 免疫富集的有丝分裂 Merlin完整基质 C 主要基质成分 基质 B 分数 基质 A 0.1 小胶质细胞 B 0.2 小胶质细胞 A 0.3 胶质神经内皮炎症 炎症 炎症 3p del 透明细胞 免疫原性增殖未知 3p del Clear cell 免疫原性增殖未知 3p del Clear cell 免疫原性增殖未知 主要肿瘤成分 来自临床验证队列的 970 例 (A)、发现组 4,502 例中的 UCSF 甲基化组 (B) 或临床验证队列中的 UCSF 甲基化组 (C)。 A B 类间距离 - 类别内的一对一与全部 MB、SHH CHL AD MB、SHH INF 0.07 MB、WNT MB、G3 MB、G4 0.06 平均成对余弦距离 EPN、MPE EPN、ZFTA EPN、YAP 0.05 EPN、PFA EPN、SPINE EPN、PFB 0.04 MNG、Mal 0.03 MNG、Int−B MNG、 ben−1 MNG，Int−A 0.02 EPN MB MNG",
+        "overview": "扩展数据图8检验肿瘤/基质特征在发现集和临床验证集、Heidelberg MC和UCSF MG之间是否保持同一方向。A使用970例临床队列，B使用4,502例发现集，C回到临床队列的UCSF分组。",
         "panels": [
           {
             "label": "A",
-            "title": "A：二维点图显示临床验证队列的甲基化类别中存在间质和肿瘤特征 - n=970 0.1 0",
-            "explanation": "二维点图显示临床验证队列的甲基化类别中存在间质和肿瘤特征 - n=970 0.1 0.2 0.3 0.4 0.5 免疫原性 免疫原性 免疫原性炎症 炎症性增殖 增殖性增殖 增殖性 未知 透明细胞未知 透明细胞未知 透明细胞未知 3p del 3p del 3p del 主要肿瘤成分临床验证队列 - n=970 免疫富集的有丝分裂 Merlin完整基质 C 主要基质成分 基质 B 分数 基质 A 0.1 小胶质细胞 B 0.2 小胶质细胞 A 0.3 胶质神经内皮炎症 炎症 炎症 3p del 透明细胞 免疫原性增殖未知 3p del Clear cell 免疫原性增殖未知 3p del Clear cell 免疫原性增殖未知 主要肿瘤成分 来自临床验证队列的 970 例 (A)、发现组 4,502 例中的 UCSF 甲基化组 (B) 或临床验证队列中的 UCSF 甲基化组 (C)。"
+            "title": "970例临床队列中的MC特征组合",
+            "explanation": "ben-1至mal的二维点图显示低风险类别更富免疫原性和微胶质/基质特征，高风险类别逐渐由增殖肿瘤特征主导，复现发现集的连续变化。同一渐变在独立临床病例中出现，支持特征组合具有可重复性。"
           },
           {
             "label": "B",
-            "title": "B：二维点图显示临床验证队列的甲基化类别中存在间质和肿瘤特征 - n=970 0.1 0",
-            "explanation": "二维点图显示临床验证队列的甲基化类别中存在间质和肿瘤特征 - n=970 0.1 0.2 0.3 0.4 0.5 免疫原性 免疫原性 免疫原性炎症 炎症性增殖 增殖性增殖 增殖性 未知 透明细胞未知 透明细胞未知 透明细胞未知 3p del 3p del 3p del 主要肿瘤成分临床验证队列 - n=970 免疫富集的有丝分裂 Merlin完整基质 C 主要基质成分 基质 B 分数 基质 A 0.1 小胶质细胞 B 0.2 小胶质细胞 A 0.3 胶质神经内皮炎症 炎症 炎症 3p del 透明细胞 免疫原性增殖未知 3p del Clear cell 免疫原性增殖未知 3p del Clear cell 免疫原性增殖未知 主要肿瘤成分 来自临床验证队列的 970 例 (A)、发现组 4,502 例中的 UCSF 甲基化组 (B) 或临床验证队列中的 UCSF 甲基化组 (C)。"
+            "title": "4,502例发现集中UCSF分组的特征组合",
+            "explanation": "immune-enriched组富含免疫和微胶质相关特征，hypermitotic组富含增殖及高风险肿瘤特征，Merlin-intact具有不同的NF2野生型构成。三组的特征组合说明不同分类命名可以投射到同一肿瘤—微环境轴。"
           },
           {
             "label": "C",
-            "title": "C：二维点图显示临床验证队列的甲基化类别中存在间质和肿瘤特征 - n=970 0.1 0",
-            "explanation": "二维点图显示临床验证队列的甲基化类别中存在间质和肿瘤特征 - n=970 0.1 0.2 0.3 0.4 0.5 免疫原性 免疫原性 免疫原性炎症 炎症性增殖 增殖性增殖 增殖性 未知 透明细胞未知 透明细胞未知 透明细胞未知 3p del 3p del 3p del 主要肿瘤成分临床验证队列 - n=970 免疫富集的有丝分裂 Merlin完整基质 C 主要基质成分 基质 B 分数 基质 A 0.1 小胶质细胞 B 0.2 小胶质细胞 A 0.3 胶质神经内皮炎症 炎症 炎症 3p del 透明细胞 免疫原性增殖未知 3p del Clear cell 免疫原性增殖未知 3p del Clear cell 免疫原性增殖未知 主要肿瘤成分 来自临床验证队列的 970 例 (A)、发现组 4,502 例中的 UCSF 甲基化组 (B) 或临床验证队列中的 UCSF 甲基化组 (C)。"
+            "title": "临床验证队列中UCSF分组重复同一结构",
+            "explanation": "将验证病例按UCSF MG重排后，三组的特征方向与发现集一致，说明连续谱并非某一种分类命名或单一队列的产物。这为不同分型体系之间的对应关系提供了成分层面的解释。"
           }
         ],
-        "conclusion": "综合各子图，通过扩展数据图 8. 甲基化类别和甲基化组中的间质和肿瘤特征建立这一组结果在全文论证链中的位置，并把实验对象、比较方式和直接结论对应起来。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以扩展数据图 8. 甲基化类别和甲基化组中的间质和肿瘤特征的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "该图完成特征层面的跨体系和跨队列复现：不同分类体系虽然名称不同，但都读取到从免疫/微胶质丰富到增殖高风险的共同轴。",
+        "boundary": "分组之间仍存在重叠，点图展示群体平均构成，不能据此给单个病例作确定性分类。"
       }
     },
     {
@@ -4125,21 +4184,21 @@
       "caption_en": "Extended Data Fig. 9 | Hierarchical clustering and mean pairwise cosine distance analyses. We performed hierarchical clustering across 3,076 meningioma (MNG), ependymoma (EPN) and medulloblastoma (MB) cases which demonstrates how subclasses of MB and EPN cluster more neatly than those of MNG. An example of tree cut clustering (k = 20) shows that MB and EPN divide into subclusters whereas MNG stays uniform (A). The mean pairwise cosine distance for each methylation class within one disease group (ependymoma, Ependymoma Medulloblastoma Superclass Meningioma Methylation Class Meningioma Ben-1 Int-A Int-B Mal Ben-2 Ben-3 Spine Ependymoma YAP ZFTA PFB MPE PFA WNT Medulloblastoma SHH CHL G3 SHH INF G4 MNG, Ben−3 MNG, Ben−2 medulloblastoma or meningioma). Spine – spinal NF2-mutant ependymoma, PFA/PFB – posterior fossa ependymoma type A/B, MPE – myxopapillary ependymoma, YAP – YAP1-fusion positive ependymoma, ZFTA – ZFTA-fusion positive ependymoma, sonis hedgehog (SHH) inf – medulloblastoma, SHH activated, infant type, SHH CHL AD – medulloblastoma SHH-activated adult, WNT – medulloblastoma WNT activated, G3/G4 – medulloblastoma non-WNT, non-SHH group 3/group 4 (B). Ben-1 0.90-0.99 − n=329 0 20 40 60 80 100 0 20 40 60 80 100 % of cases −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 Ben-3 0.90-0.99 − n=377 0 20 40 60 80 100 0 20 40 60 80 100 % of cases −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 0 20 40 60 80 100 int-A 0.90-0.99 − n=496 0 20 40 60 80 100 % of cases −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 int-B 0.90-0.99 − n=94 0 20 40 60 80 100 0 20 40 60 80 100 % of cases −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 Mal 0.90-0.99 − n=140 0 20 40 60 80 100 0 20 40 60 80 100 % of cases −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 1 3 5 7 9 11 13 15 17 19 22 1 3 5 7 9 11 13 15 17 19 22 Gain CNV-status Segmental Gain Loss Segmental Loss Ben-1 ≥0.99 − n=989 Ben-3 ≥0.99 − n=281 int-A ≥0.99 − n=412 int-B ≥0.99 − n=168 Mal ≥0.99 − n=115 1 3 5 7 9 11 13 15 17 19 22 1 3 5 7 9 11 13 15 17 19 22",
       "caption_zh": "扩展数据图 9 |层次聚类和平均成对余弦距离分析。我们对 3,076 例脑膜瘤 (MNG)、室管膜瘤 (EPN) 和髓母细胞瘤 (MB) 病例进行了层次聚类，这表明 MB 和 EPN 的亚类比 MNG 的亚类聚类得更整齐。树切割聚类的示例 (k = 20) 显示 MB 和 EPN 划分为子簇，而 MNG 保持均匀 (A)。一个疾病组内每个甲基化类别的平均成对余弦距离（室管膜瘤、室管膜瘤髓母细胞瘤超类脑膜瘤甲基化类别脑膜瘤 Ben-1 Int-A Int-B Mal Ben-2 Ben-3 脊柱室管膜瘤 YAP ZFTA PFB MPE PFA WNT 髓母细胞瘤 SHH CHL G3 SHH INF G4 MNG、Ben−3 MNG、Ben−2髓母细胞瘤或脑膜瘤）。脊柱 – 脊髓 NF2 突变型室管膜瘤、PFA/PFB – 后颅窝室管膜瘤 A/B 型、MPE – 粘液乳头型室管膜瘤、YAP – YAP1 融合阳性室管膜瘤、ZFTA – ZFTA 融合阳性室管膜瘤、sonis hidehog (SHH) inf – 髓母细胞瘤、SHH 激活、婴儿型、SHH CHL AD – 髓母细胞瘤 SHH 激活成人，WNT – 髓母细胞瘤 WNT 激活，G3/G4 – 髓母细胞瘤非 WNT，非 SHH 组 3/组 4 (B)。 Ben-1 0.90-0.99 − n=329 0 20 40 60 80 100 0 20 40 60 80 100 病例百分比 −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 Ben-3 0.90-0.99 − n=377 0 20 40 60 80 100 0 20 40 60 80 100 % 病例 -80 -60 -40 -20 -80 -60 -40 -20 -100 -100 0 20 40 60 80 100 int-A 0.90-0.99 - n=496 0 20 40 60 80 100 % 案例 -80 -60 -40 -20 -80 -60 -40 -20 -100 -100 int-B 0.90-0.99 - n=94 0 20 40 60 80 100 0 20 40 60 80 100 % 案例 -80 -60 -40 -20 -80 −60 −40 −20 −100 −100 Mal 0.90-0.99 − n=140 0 20 40 60 80 100 0 20 40 60 80 100 病例百分比 −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 1 3 5 7 9 11 13 15 17 19 22 1 3 5 7 9 11 13 15 17 19 22 增益 CNV 状态 分段增益 损失 分段损失 Ben-1 ≥0.99 − n=989 Ben-3 ≥0.99 − n=281 int-A ≥0.99 − n=412 int-B ≥0.99 − n=168 马尔 ≥0.99 − n=115 1 3 5 7 9 11 13 15 17 19 22 1 3 5 7 9 11 13 15 17 19 22",
       "study": {
-        "overview": "阅读时按照 A → B 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：扩展数据图 9 |层次聚类和平均成对余弦距离分析。我们对 3,076 例脑膜瘤 (MNG)、室管膜瘤 (EPN) 和髓母细胞瘤 (MB) 病例进行了层次聚类，这表明 MB 和 EPN 的亚类比 MNG 的亚类聚类得更整齐。树切割聚类的示例 (k = 20) 显示 MB 和 EPN 划分为子簇，而 MNG 保持均匀 (A)。一个疾病组内每个甲基化类别的平均成对余弦距离（室管膜瘤、室管膜瘤髓母细胞瘤超类脑膜瘤甲基化类别脑膜瘤 Ben-1 Int-A Int-B Mal Ben-2 Ben-3 脊柱室管膜瘤 YAP ZFTA PFB MPE PFA WNT 髓母细胞瘤 SHH CHL G3 SHH INF G4 MNG、Ben−3 MNG、Ben−2髓母细胞瘤或脑膜瘤）。脊柱 – 脊髓 NF2 突变型室管膜瘤、PFA/PFB – 后颅窝室管膜瘤 A/B 型、MPE – 粘液乳头型室管膜瘤、YAP – YAP1 融合阳性室管膜瘤、ZFTA – ZFTA 融合阳性室管膜瘤、sonis hidehog (SHH) inf – 髓母细胞瘤、SHH 激活、婴儿型、SHH CHL AD – 髓母细胞瘤 SHH 激活成人，WNT – 髓母细胞瘤 WNT 激活，G3/G4 – 髓母细胞瘤非 WNT，非 SHH 组 3/组 4 (B)。 Ben-1 0.90-0.99 − n=329 0 20 40 60 80 100 0 20 40 60 80 100 病例百分比 −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 Ben-3 0.90-0.99 − n=377 0 20 40 60 80 100 0 20 40 60 80 100 % 病例 -80 -60 -40 -20 -80 -60 -40 -20 -100 -100 0 20 40 60 80 100 int-A 0.90-0.99 - n=496 0 20 40 60 80 100 % 案例 -80 -60 -40 -20 -80 -60 -40 -20 -100 -100 int-B 0.90-0.99 - n=94 0 20 40 60 80 100 0 20 40 60 80 100 % 案例 -80 -60 -40 -20 -80 −60 −40 −20 −100 −100 Mal 0.90-0.99 − n=140 0 20 40 60 80 100 0 20 40 60 80 100 病例百分比 −80 −60 −40 −20 −80 −60 −40 −20 −100 −100 1 3 5 7 9 11 13 15 17 19 22 1 3 5 7 9 11 13 15 17 19 22 增益 CNV 状态 分段增益 损失 分段损失 Ben-1 ≥0.99 − n=989 Ben-3 ≥0.99 − n=281 int-A ≥0.99 − n=412 int-B ≥0.99 − n=168 马尔 ≥0.99 − n=115 1 3 5 7 9 11 13 15 17 19 22 1 3 5 7 9 11 13 15 17 19 22",
+        "overview": "扩展数据图9用层次聚类和类内余弦距离定量比较脑膜瘤、室管膜瘤和髓母细胞瘤的亚型边界。A展示树切割结果，B比较同一疾病内部各甲基化类别的离散程度。",
         "panels": [
           {
             "label": "A",
-            "title": "A：树切割聚类的示例 (k = 20) 显示 MB 和 EPN 划分为子簇，而 MNG ",
-            "explanation": "树切割聚类的示例 (k = 20) 显示 MB 和 EPN 划分为子簇，而 MNG 保持均匀 (A)。 该部分属于扩展数据图 9. 层次聚类和平均成对余弦距离分析，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "层次聚类显示MNG类别边界更连续",
+            "explanation": "在3,076例中进行层次聚类并以k=20切树后，MB和EPN可分成多个相对独立子簇，而脑膜瘤MC大多保持在连续的大分支内，支持主图4A的UMAP观察。结果与主图4A的二维可视化一致，但不依赖UMAP投影。"
           },
           {
             "label": "B",
-            "title": "B：脊柱 – 脊髓 NF2 突变型室管膜瘤、PFA/PFB – 后颅窝室管膜瘤 A/B ",
-            "explanation": "脊柱 – 脊髓 NF2 突变型室管膜瘤、PFA/PFB – 后颅窝室管膜瘤 A/B 型、MPE – 粘液乳头型室管膜瘤、YAP – YAP1 融合阳性室管膜瘤、ZFTA – ZFTA 融合阳性室管膜瘤、sonis hidehog (SHH) inf – 髓母细胞瘤、SHH 激活、婴儿型、SHH CHL AD – 髓母细胞瘤 SHH 激活成人，WNT – 髓母细胞瘤 WNT 激活，G3/G4 – 髓母细胞瘤非 WNT，非 SHH 组 3/组 4 (B)。"
+            "title": "脑膜瘤MC的类内距离模式不同于驱动型亚组",
+            "explanation": "各疾病内的平均成对余弦距离显示MB/EPN部分亚型内部更紧密、类别之间更分离；脑膜瘤各MC的距离更连续，难以找到自然断点。该定量结果说明脑膜瘤MC之间缺少与驱动型脑肿瘤亚组相当的自然间隔。"
           }
         ],
-        "conclusion": "综合各子图，通过扩展数据图 9. 层次聚类和平均成对余弦距离分析建立这一组结果在全文论证链中的位置，并把实验对象、比较方式和直接结论对应起来。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以扩展数据图 9. 层次聚类和平均成对余弦距离分析的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "扩展数据图9用非UMAP的方法重复证明：脑膜瘤MC不像由明确分子驱动的MB/EPN亚型那样天然分成互斥簇，更适合解释为连续风险结构。",
+        "boundary": "聚类结果依赖所选甲基化特征、距离和切树参数；连续聚类不否认某些CNV或驱动突变具有临床分层价值。"
       }
     },
     {
@@ -4157,25 +4216,224 @@
       "caption_en": "Extended Data Fig. 10 | Copy-number variation (CNV) profiles in the different meningioma methylation classes divided by prediction score. Meningioma cases identified by calibrated prediction scores over the 0.9 threshold were split based on a score of 0.9-0.99 and ≥0.99. The corresponding CNV profiles were plotted for the different 0.9-0.99 cases (A) or the ≥0.99 cases (B).",
       "caption_zh": "扩展数据图 10 |不同脑膜瘤甲基化类别中的拷贝数变异 (CNV) 谱除以预测分数。通过校准预测分数超过 0.9 阈值确定的脑膜瘤病例根据 0.9-0.99 和 ≥0.99 的分数进行划分。针对不同的 0.9-0.99 病例 (A) 或 ≥0.99 病例 (B) 绘制了相应的 CNV 概况。",
       "study": {
-        "overview": "阅读时按照 A → B 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：扩展数据图 10 |不同脑膜瘤甲基化类别中的拷贝数变异 (CNV) 谱除以预测分数。通过校准预测分数超过 0.9 阈值确定的脑膜瘤病例根据 0.9-0.99 和 ≥0.99 的分数进行划分。针对不同的 0.9-0.99 病例 (A) 或 ≥0.99 病例 (B) 绘制了相应的 CNV 概况。",
+        "overview": "扩展数据图10把分类分数刚超过阈值的病例与高度确定病例分开，比较各MC的CNV轮廓。A是0.9–0.99，B是≥0.99，用于判断模糊分类是否伴随更混合的基因组背景。",
         "panels": [
           {
             "label": "A",
-            "title": "A：针对不同的 0.9-0.99 病例 (A) 或 ≥0.99 病例 (B) 绘制了相应",
-            "explanation": "针对不同的 0.9-0.99 病例 (A) 或 ≥0.99 病例 (B) 绘制了相应的 CNV 概况。 该部分属于扩展数据 图 10. 不同脑膜瘤甲基化类别中的拷贝数变异 (CNV) 谱除以预测分数，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "0.9–0.99病例的CNV更异质",
+            "explanation": "刚达到高分阈值的病例在同一MC内仍显示较多混合或不典型CNV，提示bulk分类分数可能受亚克隆比例和微环境成分影响。这些病例正是临床分类中最可能出现亚型边界和取样不稳定性的群体。"
           },
           {
             "label": "B",
-            "title": "B：针对不同的 0.9-0.99 病例 (A) 或 ≥0.99 病例 (B) 绘制了相应",
-            "explanation": "针对不同的 0.9-0.99 病例 (A) 或 ≥0.99 病例 (B) 绘制了相应的 CNV 概况。 该部分属于扩展数据 图 10. 不同脑膜瘤甲基化类别中的拷贝数变异 (CNV) 谱除以预测分数，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "≥0.99病例呈更典型的MC相关CNV",
+            "explanation": "高度确定病例的CNV轮廓更符合各MC预期风险方向，例如mal具有更多高风险缺失。该结果说明类别具有生物学锚点，但低置信病例处于过渡和混合区域。高置信类别因此可作为风险端点参照，而不能代表全部中间病例。"
           }
         ],
-        "conclusion": "综合各子图，通过扩展数据 图 10. 不同脑膜瘤甲基化类别中的拷贝数变异 (CNV) 谱除以预测分数建立这一组结果在全文论证链中的位置，并把实验对象、比较方式和直接结论对应起来。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
-        "boundary": "证据边界以扩展数据 图 10. 不同脑膜瘤甲基化类别中的拷贝数变异 (CNV) 谱除以预测分数的图注、图中编码和正文明确报告的分析为限；观察性关联、计算推断和模型预测均不被扩展为未经实验验证的因果结论。"
+        "conclusion": "该图协调了连续谱与类别有临床意义两点：极高置信病例可呈典型CNV，而接近阈值的病例更容易混合，连续性主要集中在真实世界中间状态。",
+        "boundary": "分类分数与CNV都来自bulk组织，无法区分低肿瘤纯度和真实亚克隆混合；阈值分组是分析选择，不代表天然生物学界线。"
       }
     }
   ],
-  "terms": [],
+  "terms": [
+    {
+      "id": "TME",
+      "label": "TME",
+      "definition_zh": "肿瘤微环境，由肿瘤细胞之外的免疫、血管、基质及其他非肿瘤细胞和分子环境共同构成。本文重点分析这些成分如何影响脑膜瘤分类与复发风险。",
+      "aliases": [
+        "tumor microenvironment",
+        "tumour microenvironment",
+        "肿瘤微环境"
+      ],
+      "category": "微环境",
+      "level": 1
+    },
+    {
+      "id": "TAM",
+      "label": "TAM",
+      "definition_zh": "肿瘤相关巨噬细胞。本文为简化表述，将CD68阳性的髓系来源细胞统称为TAM，并进一步区分微胶质样细胞与外周髓系来源的浸润性巨噬细胞。",
+      "aliases": [
+        "tumor-associated macrophage",
+        "tumour-associated macrophage",
+        "肿瘤相关巨噬细胞"
+      ],
+      "category": "细胞类型",
+      "level": 1
+    },
+    {
+      "id": "MC",
+      "label": "MC",
+      "definition_zh": "甲基化类别，即Heidelberg脑肿瘤分类器定义的脑膜瘤类别，包括ben-1、ben-2、ben-3、int-A、int-B和mal。本文检验这些类别是离散亚型还是连续风险状态。",
+      "aliases": [
+        "methylation class",
+        "甲基化类别",
+        "ben-1",
+        "ben-2",
+        "ben-3",
+        "int-A",
+        "int-B",
+        "mal"
+      ],
+      "category": "分子分型",
+      "level": 1
+    },
+    {
+      "id": "MG",
+      "label": "MG",
+      "definition_zh": "UCSF甲基化分组，主要包括Merlin intact、immune enriched和hypermitotic。文章将其与Heidelberg MC及Toronto等其他分型体系进行对应比较。",
+      "aliases": [
+        "methylation group",
+        "甲基化组",
+        "UCSF group"
+      ],
+      "category": "分子分型",
+      "level": 2
+    },
+    {
+      "id": "NF2",
+      "label": "NF2",
+      "definition_zh": "编码Merlin的抑癌基因。脑膜瘤首先可按NF2野生型和NF2突变型区分；本文的风险连续谱主要发生在NF2突变型脑膜瘤内部。",
+      "aliases": [
+        "NF2-mutant",
+        "NF2-wild-type",
+        "Merlin"
+      ],
+      "category": "基因与分型",
+      "level": 1
+    },
+    {
+      "id": "snRNA-seq",
+      "label": "snRNA-seq",
+      "definition_zh": "单核RNA测序，适用于冻存组织并在单核分辨率描述肿瘤细胞和非肿瘤细胞的转录状态。本文用26例脑膜瘤建立细胞组成和TAM状态参考。",
+      "aliases": [
+        "single-nucleus RNA sequencing",
+        "snRNA",
+        "单核RNA测序"
+      ],
+      "category": "技术",
+      "level": 1
+    },
+    {
+      "id": "NMF",
+      "label": "NMF",
+      "definition_zh": "非负矩阵分解。本文用于把大规模甲基化数据分解为可重复出现的肿瘤细胞来源和基质来源表观遗传特征。",
+      "aliases": [
+        "non-negative matrix factorization",
+        "非负矩阵分解"
+      ],
+      "category": "计算方法",
+      "level": 2
+    },
+    {
+      "id": "NNLS",
+      "label": "NNLS",
+      "definition_zh": "非负最小二乘。作者使用已识别的特征对独立病例进行非负解卷积，估计每个病例中不同肿瘤和基质成分的比例。",
+      "aliases": [
+        "non-negative least squares",
+        "非负最小二乘"
+      ],
+      "category": "计算方法",
+      "level": 2
+    },
+    {
+      "id": "CNV",
+      "label": "CNV",
+      "definition_zh": "拷贝数变异，包括染色体片段扩增或缺失。本文使用1p、6q、22q等改变描述脑膜瘤亚克隆和高风险肿瘤内在演化。",
+      "aliases": [
+        "copy-number variation",
+        "copy-number variant",
+        "拷贝数变异"
+      ],
+      "category": "基因组",
+      "level": 1
+    },
+    {
+      "id": "MIBI",
+      "label": "MIBI",
+      "definition_zh": "多重离子束成像，可在同一组织区域检测多种蛋白。本文用CD68、IBA1、TMEM119和P2RY12正交区分微胶质样细胞与浸润性巨噬细胞。",
+      "aliases": [
+        "multiplexed ion beam imaging",
+        "多重离子束成像"
+      ],
+      "category": "空间蛋白技术",
+      "level": 2
+    },
+    {
+      "id": "PU.1",
+      "label": "PU.1",
+      "definition_zh": "髓系细胞核转录因子标志物。因其核染色便于自动计数，文章在1,378例TMA队列中将PU.1作为临床可实施的TAM定量指标。",
+      "aliases": [
+        "SPI1",
+        "PU1"
+      ],
+      "category": "标志物",
+      "level": 1
+    },
+    {
+      "id": "CD68",
+      "label": "CD68",
+      "definition_zh": "常用髓系/巨噬细胞标志物。本文既用其估计TAM数量，也利用染色形态和联合标志物识别微胶质样与浸润性巨噬细胞，但CD68本身并不专属于某一来源。",
+      "aliases": [
+        "CD68-positive",
+        "CD68阳性"
+      ],
+      "category": "标志物",
+      "level": 1
+    },
+    {
+      "id": "P2RY12",
+      "label": "P2RY12",
+      "definition_zh": "脑驻留微胶质相关标志物。与TMEM119、IBA1及较低CD68表达联合出现时，支持微胶质样TAM身份。",
+      "aliases": [
+        "P2RY12-positive",
+        "P2RY12阳性"
+      ],
+      "category": "标志物",
+      "level": 2
+    },
+    {
+      "id": "TMEM119",
+      "label": "TMEM119",
+      "definition_zh": "微胶质相关膜蛋白标志物。本文将TMEM119与P2RY12、IBA1联合用于区分脑驻留微胶质样细胞和外周来源巨噬细胞。",
+      "aliases": [
+        "TMEM119-positive",
+        "TMEM119阳性"
+      ],
+      "category": "标志物",
+      "level": 2
+    },
+    {
+      "id": "SPP1",
+      "label": "SPP1",
+      "definition_zh": "与肿瘤支持、治疗耐受和进展相关的巨噬细胞程序标志基因。高风险MC mal中的巨噬细胞更富集SPP1相关状态。",
+      "aliases": [
+        "osteopontin"
+      ],
+      "category": "功能程序",
+      "level": 2
+    },
+    {
+      "id": "Cell2location",
+      "label": "Cell2location",
+      "definition_zh": "利用单细胞参考对空间转录组位置进行细胞类型反卷积的方法。本文用它估计空间子图中肿瘤细胞、内皮细胞、微胶质样细胞和巨噬细胞的组成。",
+      "aliases": [
+        "cell2location",
+        "空间反卷积"
+      ],
+      "category": "计算方法",
+      "level": 2
+    },
+    {
+      "id": "C-index",
+      "label": "C-index",
+      "definition_zh": "一致性指数，用于衡量生存风险模型对结局排序的准确性。本文中加入PU.1后，WHO 1–2级病例的C-index由0.63提高到0.66。",
+      "aliases": [
+        "concordance index",
+        "一致性指数"
+      ],
+      "category": "临床统计",
+      "level": 2
+    }
+  ],
   "references": [
     {
       "id": "1",

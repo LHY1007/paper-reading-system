@@ -1,0 +1,45 @@
+{
+  "version": "v082-content-review-2",
+  "paper_key": "maas-2026",
+  "review_mode": "source-grounded-curation",
+  "passed": true,
+  "independent_reviewer_acceptance_passed": false,
+  "source_audited_curated_acceptance_passed": true,
+  "exact_source_preservation_passed": true,
+  "authoritative_pdf_panel_audit_passed": true,
+  "manifest_sha256": "fe0d5dfc276b7bc9a1020c46c1664c3c77dde0759c7a226ab0b93f6cdb6ba02a",
+  "workflow_run_id": "30659462903",
+  "workflow_head_sha": "4d3c2eef76d44466b5b5a5115087f7eacc522571",
+  "reports": {
+    "EVIDENCE_QUALITY.json": {
+      "version": "v082-evidence-quality-5",
+      "passed": true,
+      "error_count": 0
+    },
+    "FINAL_MANIFEST.json": {
+      "version": null,
+      "passed": true,
+      "error_count": 0
+    },
+    "CODE_BOUNDARY.json": {
+      "version": "v082-manifest-code-boundary-1",
+      "passed": true,
+      "error_count": 0
+    },
+    "SEMANTIC_GROUNDING.json": {
+      "version": "v082-reader-semantics-5",
+      "passed": true,
+      "error_count": 0
+    },
+    "READER_CONTENT.json": {
+      "version": "v082-reader-content-quality-1",
+      "passed": true,
+      "error_count": 0
+    },
+    "CONTENT_PROVENANCE.json": {
+      "version": "v082-source-grounded-curation-1",
+      "passed": true,
+      "error_count": 0
+    }
+  }
+}
