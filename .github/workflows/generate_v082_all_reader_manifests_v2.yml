@@ -1,16 +1,12 @@
 name: Generate all V0.8.2 manifests strictly sequentially
 
 on:
-  pull_request:
-    branches: [main]
+  push:
+    branches: [v0.8x-batch-diagnosis]
     paths:
-      - ".github/v082-manifest-trigger"
+      - ".github/v082-manifest-trigger-v11"
       - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
-      - "tools/generate_v082_reader_manifest_with_github_models_v7.py"
-      - "tools/generate_v082_reader_manifest_with_google_translate_v8.py"
-      - "tools/generate_v082_reader_manifest_with_google_translate_v9.py"
-      - "tools/generate_v082_reader_manifest_with_google_translate_v10.py"
-      - "tools/run_v082_manifest_generation_sequentially_v2.py"
+      - "tools/generate_v082_reader_manifest_with_google_translate_v11.py"
   workflow_dispatch:
 
 permissions:
@@ -18,11 +14,11 @@ permissions:
 
 concurrency:
   group: v082-generate-pr-v10-observable
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   PYTHONUNBUFFERED: "1"
-  V082_TRANSLATE_INTERVAL_SECONDS: "0.20"
+  V082_TRANSLATE_INTERVAL_SECONDS: "0.05"
   CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
 
 jobs:
@@ -35,32 +31,20 @@ jobs:
           ref: v0.8x-batch-diagnosis
           fetch-depth: 0
 
-      - name: Determine explicit generation trigger
-        id: gate
-        shell: bash
-        run: |
-          MESSAGE=$(git log -1 --pretty=%s)
-          printf 'head_message=%s\n' "$MESSAGE"
-          if [[ "$MESSAGE" == Run\ strict\ V0.8.2* ]]; then
-            echo 'run=true' >> "$GITHUB_OUTPUT"
-          else
-            echo 'run=false' >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Record active workflow run
-        if: steps.gate.outputs.run == 'true'
         env:
           RUN_ID: ${{ github.run_id }}
           RUN_ATTEMPT: ${{ github.run_attempt }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_SHA: ${{ github.sha }}
         run: |
           mkdir -p status
           python - <<'PY'
           import json, os
           from pathlib import Path
           Path('status/v082_generation_status.json').write_text(json.dumps({
-              'version': 'v082-generation-observer-1',
+              'version': 'v082-generation-observer-2',
               'state': 'running',
+              'generator': 'v11-batched-google-translate',
               'run_id': int(os.environ['RUN_ID']),
               'run_attempt': int(os.environ['RUN_ATTEMPT']),
               'trigger_sha': os.environ['HEAD_SHA'],
@@ -69,24 +53,21 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add status/v082_generation_status.json
-          git commit -m "Record active V0.8.2 manifest run ${RUN_ID}" || true
+          git commit -m "Record active V0.8.2 v11 manifest run ${RUN_ID}" || true
           git fetch origin v0.8x-batch-diagnosis
           git rebase origin/v0.8x-batch-diagnosis
           git push origin HEAD:v0.8x-batch-diagnosis
 
       - uses: actions/setup-python@v5
-        if: steps.gate.outputs.run == 'true'
         with:
           python-version: "3.12"
 
       - name: Install source, evidence and manifest dependencies
-        if: steps.gate.outputs.run == 'true'
         run: |
           python -m pip install --disable-pip-version-check \
             requests beautifulsoup4 PyMuPDF curl_cffi jsonschema lxml pillow
 
       - name: Locate immutable CANVAS reader and prepare directories
-        if: steps.gate.outputs.run == 'true'
         run: |
           CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
           test -n "$CANVAS"
@@ -94,7 +75,6 @@ jobs:
           mkdir -p .build/v082/{pdfs,cho-source,batch-evidence,batch-audits,batch-reports,generated-manifests,model-cache} content/v082_manifests
 
       - name: Restore audited PDF cache
-        if: steps.gate.outputs.run == 'true'
         id: source-cache
         uses: actions/cache/restore@v4
         with:
@@ -104,33 +84,29 @@ jobs:
             v082-source-pdfs-
 
       - name: Restore dedicated user-supplied Cho source cache
-        if: steps.gate.outputs.run == 'true'
         uses: actions/cache/restore@v4
         with:
           path: .build/v082/cho-source
           key: ${{ env.CHO_CACHE_KEY }}
 
       - name: Inject validated Cho source into the ordinary source directory
-        if: steps.gate.outputs.run == 'true'
         run: |
           if [ -f .build/v082/cho-source/07_cho-2026.pdf ]; then
             cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
           fi
 
       - name: Restore translation caches
-        if: steps.gate.outputs.run == 'true'
-        id: translation-cache
         uses: actions/cache/restore@v4
         with:
           path: .build/v082/model-cache
-          key: v082-google-translation-v10-${{ hashFiles('tools/generate_v082_reader_manifest_with_google_translate_v8.py', 'tools/generate_v082_reader_manifest_with_google_translate_v9.py', 'tools/generate_v082_reader_manifest_with_google_translate_v10.py', 'config/v082_reader_content_plans/*.json') }}
+          key: v082-google-translation-v11-${{ hashFiles('tools/generate_v082_reader_manifest_with_google_translate_v11.py', 'config/v082_reader_content_plans/*.json') }}
           restore-keys: |
+            v082-google-translation-v11-
             v082-google-translation-v10-
             v082-google-translation-v9-
             v082-google-translation-v8-
 
       - name: Obtain every exact source PDF
-        if: steps.gate.outputs.run == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -147,7 +123,6 @@ jobs:
             --reuse || true
 
       - name: Generate, gate and persist one paper at a time
-        if: steps.gate.outputs.run == 'true'
         id: generate
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -162,27 +137,27 @@ jobs:
             --manifest-dir content/v082_manifests \
             --plans-dir config/v082_reader_content_plans \
             --cache-dir .build/v082/model-cache \
-            --generator tools/generate_v082_reader_manifest_with_google_translate_v10.py \
+            --generator tools/generate_v082_reader_manifest_with_google_translate_v11.py \
             --branch v0.8x-batch-diagnosis
 
       - name: Save rolling exact-source cache
-        if: always() && steps.gate.outputs.run == 'true' && steps.source-cache.outputs.cache-hit != 'true'
+        if: always() && steps.source-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
           path: .build/v082/pdfs
           key: ${{ steps.source-cache.outputs.cache-primary-key }}
 
       - name: Save translation caches after every attempt
-        if: always() && steps.gate.outputs.run == 'true' && steps.translation-cache.outputs.cache-hit != 'true'
+        if: always()
         uses: actions/cache/save@v4
         with:
           path: .build/v082/model-cache
-          key: ${{ steps.translation-cache.outputs.cache-primary-key }}
+          key: v082-google-translation-v11-run-${{ github.run_id }}
 
       - uses: actions/upload-artifact@v4
-        if: always() && steps.gate.outputs.run == 'true'
+        if: always()
         with:
-          name: v082-strict-sequential-manifest-audit
+          name: v082-strict-sequential-manifest-audit-v11
           path: |
             content/v082_manifests
             .build/v082/batch-evidence
@@ -195,7 +170,7 @@ jobs:
           retention-days: 30
 
       - name: Record terminal workflow state
-        if: always() && steps.gate.outputs.run == 'true'
+        if: always()
         env:
           RUN_ID: ${{ github.run_id }}
           RUN_ATTEMPT: ${{ github.run_attempt }}
@@ -208,8 +183,9 @@ jobs:
           summary_path = Path('.build/v082/batch-reports/SEQUENTIAL_MANIFEST_GENERATION.json')
           summary = json.loads(summary_path.read_text('utf-8')) if summary_path.exists() else None
           Path('status/v082_generation_status.json').write_text(json.dumps({
-              'version': 'v082-generation-observer-1',
+              'version': 'v082-generation-observer-2',
               'state': 'completed',
+              'generator': 'v11-batched-google-translate',
               'run_id': int(os.environ['RUN_ID']),
               'run_attempt': int(os.environ['RUN_ATTEMPT']),
               'generation_outcome': os.environ.get('GENERATION_OUTCOME'),
@@ -221,7 +197,7 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add status/v082_generation_status.json
-          git commit -m "Record V0.8.2 manifest run ${RUN_ID} outcome" || true
+          git commit -m "Record V0.8.2 v11 manifest run ${RUN_ID} outcome" || true
           git fetch origin v0.8x-batch-diagnosis
           git rebase origin/v0.8x-batch-diagnosis
           git push origin HEAD:v0.8x-batch-diagnosis
