@@ -11,6 +11,34 @@ def load(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text("utf-8"))
 
 
+def load_curated(path: Path) -> dict[str, Any]:
+    if path.is_file():
+        return load(path)
+    if not path.is_dir():
+        raise SystemExit(f"curated content path does not exist: {path}")
+    files = sorted(path.glob("*.json"))
+    if not files:
+        raise SystemExit(f"curated content directory contains no JSON files: {path}")
+    merged: dict[str, Any] = {"paper_key": "", "terms": [], "studies": {}}
+    for file in files:
+        part = load(file)
+        part_key = str(part.get("paper_key") or "")
+        if merged["paper_key"] and part_key != merged["paper_key"]:
+            raise SystemExit(
+                f"curated paper key mismatch in {file}: {part_key!r} != {merged['paper_key']!r}"
+            )
+        if part_key:
+            merged["paper_key"] = part_key
+        if part.get("version"):
+            merged["version"] = part["version"]
+        merged["terms"].extend(part.get("terms") or [])
+        for asset_id, study in (part.get("studies") or {}).items():
+            if asset_id in merged["studies"]:
+                raise SystemExit(f"duplicate curated study {asset_id} in {file}")
+            merged["studies"][asset_id] = study
+    return merged
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description="Apply source-audited curated reader content to a V0.8.2 manifest"
@@ -21,7 +49,7 @@ def main() -> None:
     args = parser.parse_args()
 
     manifest = load(args.manifest)
-    curated = load(args.curated)
+    curated = load_curated(args.curated)
     paper_key = str((manifest.get("paper") or {}).get("key") or "")
     if paper_key != str(curated.get("paper_key") or ""):
         raise SystemExit(
