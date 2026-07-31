@@ -7,12 +7,12 @@ on:
       - ".github/v082-manifest-trigger"
       - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
       - "tools/generate_v082_reader_manifest_with_github_models_v7.py"
+      - "tools/generate_v082_reader_manifest_with_google_translate_v8.py"
       - "tools/run_v082_manifest_generation_sequentially_v2.py"
   workflow_dispatch:
 
 permissions:
   contents: write
-  models: read
 
 concurrency:
   group: v082-generate-all-manifests-strict-sequence
@@ -20,8 +20,7 @@ concurrency:
 
 env:
   PYTHONUNBUFFERED: "1"
-  GITHUB_MODELS_MODEL: "openai/gpt-4.1-mini"
-  GITHUB_MODELS_MIN_INTERVAL_SECONDS: "2"
+  V082_TRANSLATE_INTERVAL_SECONDS: "0.20"
   CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
 
 jobs:
@@ -71,16 +70,14 @@ jobs:
             cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
           fi
 
-      - name: Restore all GitHub Models response caches
-        id: model-cache
+      - name: Restore translation caches
+        id: translation-cache
         uses: actions/cache/restore@v4
         with:
           path: .build/v082/model-cache
-          key: v082-model-cache-strict-all-${{ hashFiles('tools/generate_v082_reader_manifest_with_github_models*.py', 'config/v082_reader_content_plans/*.json') }}
+          key: v082-google-translation-v8-${{ hashFiles('tools/generate_v082_reader_manifest_with_google_translate_v8.py', 'config/v082_reader_content_plans/*.json') }}
           restore-keys: |
-            v082-model-cache-strict-all-
-            v082-model-cache-all-
-            v082-model-cache-lee-
+            v082-google-translation-v8-
 
       - name: Obtain every exact source PDF
         shell: bash
@@ -112,7 +109,7 @@ jobs:
             --manifest-dir content/v082_manifests \
             --plans-dir config/v082_reader_content_plans \
             --cache-dir .build/v082/model-cache \
-            --generator tools/generate_v082_reader_manifest_with_github_models_v7.py \
+            --generator tools/generate_v082_reader_manifest_with_google_translate_v8.py \
             --branch v0.8x-batch-diagnosis
 
       - name: Save rolling exact-source cache
@@ -122,12 +119,12 @@ jobs:
           path: .build/v082/pdfs
           key: ${{ steps.source-cache.outputs.cache-primary-key }}
 
-      - name: Save GitHub Models caches after every attempt
-        if: always()
+      - name: Save translation caches after every attempt
+        if: always() && steps.translation-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
           path: .build/v082/model-cache
-          key: ${{ steps.model-cache.outputs.cache-primary-key }}
+          key: ${{ steps.translation-cache.outputs.cache-primary-key }}
 
       - uses: actions/upload-artifact@v4
         if: always()
