@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import re
 from pathlib import Path
 from typing import Any
 
@@ -8,6 +9,11 @@ import generate_v082_reader_manifest_with_copilot_sdk_v16 as v16
 
 
 v13 = v16.v13
+# Preserve scientific abbreviations themselves without treating adjacent English
+# hyphenation punctuation as part of the abbreviation (for example TME-determined).
+v13.ABBREVIATION = re.compile(
+    r"\b[A-Z][A-Z0-9α-ωΑ-Ω]*(?:[./+\-][A-Z0-9α-ωΑ-Ω]+)*\b"
+)
 _ORIGINAL_VALIDATE_TRANSLATION = v13.validate_translation
 _ORIGINAL_TRANSLATE_ONE = v13.translate_one
 _CURRENT_ITEM_ID = ""
