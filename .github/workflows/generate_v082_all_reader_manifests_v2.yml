@@ -1,8 +1,8 @@
 name: Generate all V0.8.2 manifests strictly sequentially
 
 on:
-  push:
-    branches: [v0.8x-batch-diagnosis]
+  pull_request:
+    branches: [main]
     paths:
       - ".github/v082-manifest-trigger"
       - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
@@ -17,7 +17,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: v082-generate-all-manifests-strict-sequence
+  group: v082-generate-pr-v10-observable
   cancel-in-progress: false
 
 env:
@@ -35,11 +35,24 @@ jobs:
           ref: v0.8x-batch-diagnosis
           fetch-depth: 0
 
+      - name: Determine explicit generation trigger
+        id: gate
+        shell: bash
+        run: |
+          MESSAGE=$(git log -1 --pretty=%s)
+          printf 'head_message=%s\n' "$MESSAGE"
+          if [[ "$MESSAGE" == Run\ strict\ V0.8.2* ]]; then
+            echo 'run=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'run=false' >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Record active workflow run
+        if: steps.gate.outputs.run == 'true'
         env:
           RUN_ID: ${{ github.run_id }}
           RUN_ATTEMPT: ${{ github.run_attempt }}
-          HEAD_SHA: ${{ github.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
           mkdir -p status
           python - <<'PY'
@@ -62,15 +75,18 @@ jobs:
           git push origin HEAD:v0.8x-batch-diagnosis
 
       - uses: actions/setup-python@v5
+        if: steps.gate.outputs.run == 'true'
         with:
           python-version: "3.12"
 
       - name: Install source, evidence and manifest dependencies
+        if: steps.gate.outputs.run == 'true'
         run: |
           python -m pip install --disable-pip-version-check \
             requests beautifulsoup4 PyMuPDF curl_cffi jsonschema lxml pillow
 
       - name: Locate immutable CANVAS reader and prepare directories
+        if: steps.gate.outputs.run == 'true'
         run: |
           CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
           test -n "$CANVAS"
@@ -78,6 +94,7 @@ jobs:
           mkdir -p .build/v082/{pdfs,cho-source,batch-evidence,batch-audits,batch-reports,generated-manifests,model-cache} content/v082_manifests
 
       - name: Restore audited PDF cache
+        if: steps.gate.outputs.run == 'true'
         id: source-cache
         uses: actions/cache/restore@v4
         with:
@@ -87,18 +104,21 @@ jobs:
             v082-source-pdfs-
 
       - name: Restore dedicated user-supplied Cho source cache
+        if: steps.gate.outputs.run == 'true'
         uses: actions/cache/restore@v4
         with:
           path: .build/v082/cho-source
           key: ${{ env.CHO_CACHE_KEY }}
 
       - name: Inject validated Cho source into the ordinary source directory
+        if: steps.gate.outputs.run == 'true'
         run: |
           if [ -f .build/v082/cho-source/07_cho-2026.pdf ]; then
             cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
           fi
 
       - name: Restore translation caches
+        if: steps.gate.outputs.run == 'true'
         id: translation-cache
         uses: actions/cache/restore@v4
         with:
@@ -110,6 +130,7 @@ jobs:
             v082-google-translation-v8-
 
       - name: Obtain every exact source PDF
+        if: steps.gate.outputs.run == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -126,6 +147,7 @@ jobs:
             --reuse || true
 
       - name: Generate, gate and persist one paper at a time
+        if: steps.gate.outputs.run == 'true'
         id: generate
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -144,21 +166,21 @@ jobs:
             --branch v0.8x-batch-diagnosis
 
       - name: Save rolling exact-source cache
-        if: always() && steps.source-cache.outputs.cache-hit != 'true'
+        if: always() && steps.gate.outputs.run == 'true' && steps.source-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
           path: .build/v082/pdfs
           key: ${{ steps.source-cache.outputs.cache-primary-key }}
 
       - name: Save translation caches after every attempt
-        if: always() && steps.translation-cache.outputs.cache-hit != 'true'
+        if: always() && steps.gate.outputs.run == 'true' && steps.translation-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
           path: .build/v082/model-cache
           key: ${{ steps.translation-cache.outputs.cache-primary-key }}
 
       - uses: actions/upload-artifact@v4
-        if: always()
+        if: always() && steps.gate.outputs.run == 'true'
         with:
           name: v082-strict-sequential-manifest-audit
           path: |
@@ -173,7 +195,7 @@ jobs:
           retention-days: 30
 
       - name: Record terminal workflow state
-        if: always()
+        if: always() && steps.gate.outputs.run == 'true'
         env:
           RUN_ID: ${{ github.run_id }}
           RUN_ATTEMPT: ${{ github.run_attempt }}
