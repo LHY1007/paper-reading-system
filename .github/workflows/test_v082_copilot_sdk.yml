@@ -38,10 +38,13 @@ jobs:
         run: |
           python - <<'PY'
           import os
+          import sys
           from pathlib import Path
-          from tools.generate_v082_reader_manifest_with_github_models_v4 import base
 
-          result = base.call_model_json(
+          sys.path.insert(0, str(Path('tools').resolve()))
+          import generate_v082_reader_manifest_with_github_models_v4 as provider
+
+          result = provider.base.call_model_json(
               token=os.environ['GITHUB_TOKEN'],
               model='openai/gpt-5',
               system='Return the integer sum in strict JSON: {"sum": integer}.',
