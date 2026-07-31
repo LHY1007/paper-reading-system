@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import inspect
 import json
 
-import copilot_sdk_json_provider as provider
+import copilot_sdk_json_provider_v2 as provider
 
 
 def test_valid_json() -> None:
@@ -33,10 +34,17 @@ def test_balanced_extraction() -> None:
     assert value == {"a": [1, 2, {"b": "c"}]}, value
 
 
+def test_sdk_idle_timeout_override_is_active() -> None:
+    signature = inspect.signature(provider._call_once_with_configured_idle_timeout)
+    assert "idle_timeout" in signature.parameters
+    assert provider.CopilotSDKJsonProvider.call_text is provider.call_text_with_configured_idle_timeout
+
+
 if __name__ == "__main__":
     test_valid_json()
     test_markdown_fence()
     test_missing_comma_repair()
     test_truncated_object_repair()
     test_balanced_extraction()
-    print(json.dumps({"provider_json_contracts": 5, "passed": True}, indent=2))
+    test_sdk_idle_timeout_override_is_active()
+    print(json.dumps({"provider_contracts": 6, "passed": True}, indent=2))
