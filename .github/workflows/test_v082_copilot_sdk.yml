@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/test_v082_copilot_sdk.yml"
       - "tools/copilot_sdk_json_provider.py"
+      - "tools/test_copilot_json_provider.py"
   workflow_dispatch:
 
 permissions:
@@ -23,12 +24,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install --disable-pip-version-check github-copilot-sdk
+      - run: pip install --disable-pip-version-check github-copilot-sdk json-repair
+      - name: Validate deterministic malformed-JSON recovery
+        run: python tools/test_copilot_json_provider.py
       - name: Send isolated strict-JSON request
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COPILOT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           V082_REASONING_EFFORT: high
+          V082_COPILOT_COMPONENT_TIMEOUT_SECONDS: "180"
         run: |
           python - <<'PY'
           from pathlib import Path
@@ -39,7 +43,7 @@ jobs:
               payload={'a': 19, 'b': 23},
               cache_dir=Path('.build/copilot-smoke'),
               cache_name='sum',
-              retries=1,
+              retries=2,
           )
           assert result == {'sum': 42}, result
           provider().close()
