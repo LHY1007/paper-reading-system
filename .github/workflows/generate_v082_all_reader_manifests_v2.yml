@@ -4,10 +4,11 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - ".github/v082-manifest-trigger-v16"
+      - ".github/v082-manifest-trigger-v17"
       - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
       - ".github/workflows/generate_v082_one_paper_strong.yml"
       - "tools/copilot_sdk_json_provider.py"
+      - "tools/generate_v082_reader_manifest_with_copilot_sdk_v17.py"
       - "tools/generate_v082_reader_manifest_with_copilot_sdk_v16.py"
       - "tools/generate_v082_reader_manifest_with_copilot_sdk_v15.py"
       - "tools/generate_v082_reader_manifest_with_copilot_sdk_v14.py"
@@ -25,7 +26,7 @@ permissions:
   copilot-requests: write
 
 concurrency:
-  group: v082-strong-ai-v16-strict-sequence
+  group: v082-strong-ai-v17-strict-sequence
   cancel-in-progress: true
 
 jobs:
