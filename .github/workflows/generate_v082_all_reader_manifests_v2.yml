@@ -4,10 +4,11 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - ".github/v082-manifest-trigger-v17"
+      - ".github/v082-manifest-trigger-v18"
       - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
       - ".github/workflows/generate_v082_one_paper_strong.yml"
       - "tools/copilot_sdk_json_provider.py"
+      - "tools/generate_v082_reader_manifest_with_copilot_sdk_v18.py"
       - "tools/generate_v082_reader_manifest_with_copilot_sdk_v17.py"
       - "tools/generate_v082_reader_manifest_with_copilot_sdk_v16.py"
       - "tools/generate_v082_reader_manifest_with_copilot_sdk_v15.py"
@@ -26,7 +27,7 @@ permissions:
   copilot-requests: write
 
 concurrency:
-  group: v082-strong-ai-v17-strict-sequence
+  group: v082-strong-ai-v18-strict-sequence
   cancel-in-progress: true
 
 jobs:
@@ -124,6 +125,7 @@ jobs:
           keys = [p['key'] for p in registry['papers'] if int(p['order']) != 0]
           missing = []
           failed = []
+          reviewer_rejected = []
           for key in keys:
               manifest = Path(f'content/v082_manifests/{key}.json')
               review = Path(f'content/v082_reviews/{key}.json')
@@ -131,12 +133,18 @@ jobs:
                   missing.append(f'manifest:{key}')
               if not review.exists():
                   missing.append(f'review:{key}')
-              elif not json.loads(review.read_text('utf-8')).get('passed'):
+                  continue
+              state = json.loads(review.read_text('utf-8'))
+              if not state.get('passed'):
                   failed.append(key)
+              if not state.get('independent_reviewer_acceptance_passed'):
+                  reviewer_rejected.append(key)
           if missing:
               raise SystemExit('missing reviewed outputs: ' + ', '.join(missing))
           if failed:
               raise SystemExit('strong-AI reviews did not pass: ' + ', '.join(failed))
+          if reviewer_rejected:
+              raise SystemExit('independent reviewer acceptance missing: ' + ', '.join(reviewer_rejected))
           print(json.dumps({'reviewed_papers': len(keys), 'passed': True}, indent=2))
           PY
 
@@ -149,10 +157,11 @@ jobs:
           import json, os
           from pathlib import Path
           Path('.github/v082-final-build-trigger').write_text(json.dumps({
-              'version': 'v082-final-build-trigger-2',
+              'version': 'v082-final-build-trigger-3',
               'strong_ai_sequence_run_id': int(os.environ['RUN_ID']),
               'trigger_sha': os.environ['HEAD_SHA'],
               'all_reviewed_manifests_passed': True,
+              'independent_reviewer_acceptance_passed': True,
           }, indent=2) + '\n', 'utf-8')
           PY
           git config user.name github-actions[bot]
