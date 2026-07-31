@@ -21,12 +21,17 @@ _CURRENT_ITEM_ID = ""
 SHORT_TITLE_PREFIXES = ("section-title/", "asset-title/")
 
 # PDF extraction commonly flattens superscript bibliography citations into the
-# surrounding prose, for example meningiomas2, proposed4–12 or enrichment6,9.
-# Those IDs are carried separately in citation_ids and are validated by the
-# manifest/semantic gates. They must not be treated as scientific measurements.
+# surrounding prose, for example meningiomas2, proposed4–12, enrichment6,9 or
+# ``et al.62``. Those IDs are carried separately in citation_ids and are validated
+# by the manifest/semantic gates. They must not be treated as measurements.
 EXPLICIT_REFERENCE = re.compile(
     r"\brefs?\.?\s*\d+(?:\s*[–—-]\s*\d+)?(?:\s*,\s*\d+(?:\s*[–—-]\s*\d+)?)*",
     re.I,
+)
+AFTER_PERIOD_REFERENCE = re.compile(
+    r"(?P<prefix>[A-Za-z]\.)"
+    r"(?P<cites>\d+(?:[–—-]\d+)?(?:,\d+(?:[–—-]\d+)?)*)"
+    r"(?=$|[\s,.;:)\]])"
 )
 ATTACHED_REFERENCE = re.compile(
     r"(?P<prefix>[A-Za-z\)])"
@@ -50,6 +55,7 @@ def strip_inline_reference_ids(value: str) -> str:
     previous = None
     while previous != text:
         previous = text
+        text = AFTER_PERIOD_REFERENCE.sub(lambda match: match.group("prefix"), text)
         text = ATTACHED_REFERENCE.sub(lambda match: match.group("prefix"), text)
     return text
 
