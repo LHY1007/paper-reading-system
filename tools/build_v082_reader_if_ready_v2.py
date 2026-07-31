@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -18,6 +19,14 @@ def semantic_report_path(command: list[str]) -> Path:
     except (ValueError, IndexError):
         report = Path("final/V0.8.2/reports/READER_CONTENT.json")
     return report.with_name(report.stem.replace("_READER_CONTENT", "_SEMANTIC_GROUNDING") + report.suffix)
+
+
+def strong_review_report_path(command: list[str]) -> Path:
+    try:
+        report = Path(command[command.index("--report") + 1])
+    except (ValueError, IndexError):
+        report = Path("final/V0.8.2/reports/READER_CONTENT.json")
+    return report.with_name(report.stem.replace("_READER_CONTENT", "_STRONG_AI_REVIEW") + report.suffix)
 
 
 def copy2_and_normalize(source, destination, *args, **kwargs):
@@ -54,11 +63,28 @@ def run(command: list[str]):
                     "stdout_tail": "",
                     "stderr_tail": "raw evidence path is unavailable for semantic validation",
                 }
-            manifest = rewritten[2]
+            manifest = Path(rewritten[2])
+            try:
+                paper_key = str((json.loads(manifest.read_text("utf-8")).get("paper") or {}).get("key"))
+            except Exception:
+                paper_key = ""
+            review_path = Path("content/v082_reviews") / f"{paper_key}.json"
+            strong_command = [
+                sys.executable,
+                "tools/validate_v082_strong_ai_review.py",
+                str(manifest),
+                "--review",
+                str(review_path),
+                "--report",
+                str(strong_review_report_path(rewritten)),
+            ]
+            strong = ORIGINAL_RUN(strong_command)
+            if strong["returncode"] != 0:
+                return strong
             semantic_command = [
                 sys.executable,
-                "tools/validate_v082_reader_semantics_v3.py",
-                manifest,
+                "tools/validate_v082_reader_semantics_v4.py",
+                str(manifest),
                 "--evidence",
                 sys.argv[1],
                 "--report",
