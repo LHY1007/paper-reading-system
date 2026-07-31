@@ -4,7 +4,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any
 
-import copilot_sdk_json_provider as provider
+import copilot_sdk_json_provider_v2 as provider
 import generate_v082_reader_manifest_with_strong_ai_v13 as v13
 
 
