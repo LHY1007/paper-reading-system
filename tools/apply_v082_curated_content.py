@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import copy
 import json
 from pathlib import Path
 from typing import Any
@@ -19,7 +20,12 @@ def load_curated(path: Path) -> dict[str, Any]:
     files = sorted(path.glob("*.json"))
     if not files:
         raise SystemExit(f"curated content directory contains no JSON files: {path}")
-    merged: dict[str, Any] = {"paper_key": "", "terms": [], "studies": {}}
+    merged: dict[str, Any] = {
+        "paper_key": "",
+        "terms": [],
+        "studies": {},
+        "panel_patches": {},
+    }
     for file in files:
         part = load(file)
         part_key = str(part.get("paper_key") or "")
@@ -36,7 +42,42 @@ def load_curated(path: Path) -> dict[str, Any]:
             if asset_id in merged["studies"]:
                 raise SystemExit(f"duplicate curated study {asset_id} in {file}")
             merged["studies"][asset_id] = study
+        for asset_id, patches in (part.get("panel_patches") or {}).items():
+            target = merged["panel_patches"].setdefault(asset_id, {})
+            for label, patch in (patches or {}).items():
+                if label in target:
+                    raise SystemExit(f"duplicate panel patch {asset_id}/{label} in {file}")
+                target[label] = patch
     return merged
+
+
+def apply_panel_patches(studies: dict[str, Any], patches: dict[str, Any]) -> int:
+    applied = 0
+    for asset_id, asset_patches in patches.items():
+        if asset_id not in studies:
+            raise SystemExit(f"panel patch references unknown curated study: {asset_id}")
+        panels = studies[asset_id].get("panels") or []
+        by_label = {str(panel.get("label") or ""): panel for panel in panels}
+        for label, patch in (asset_patches or {}).items():
+            if label not in by_label:
+                raise SystemExit(f"panel patch references unknown panel: {asset_id}/{label}")
+            if not isinstance(patch, dict):
+                raise SystemExit(f"panel patch must be an object: {asset_id}/{label}")
+            panel = by_label[label]
+            allowed = {"title", "explanation", "append_explanation"}
+            unknown = set(patch) - allowed
+            if unknown:
+                raise SystemExit(f"unsupported panel patch fields for {asset_id}/{label}: {sorted(unknown)}")
+            if "title" in patch:
+                panel["title"] = str(patch["title"]).strip()
+            if "explanation" in patch:
+                panel["explanation"] = str(patch["explanation"]).strip()
+            if "append_explanation" in patch:
+                suffix = str(patch["append_explanation"]).strip()
+                if suffix and suffix not in str(panel.get("explanation") or ""):
+                    panel["explanation"] = str(panel.get("explanation") or "").rstrip() + suffix
+            applied += 1
+    return applied
 
 
 def main() -> None:
@@ -56,7 +97,8 @@ def main() -> None:
             f"paper key mismatch: manifest={paper_key!r} curated={curated.get('paper_key')!r}"
         )
 
-    studies = curated.get("studies") or {}
+    studies = copy.deepcopy(curated.get("studies") or {})
+    patches_applied = apply_panel_patches(studies, curated.get("panel_patches") or {})
     figure_assets = [
         asset for asset in manifest.get("assets") or [] if asset.get("kind") == "figure"
     ]
@@ -112,6 +154,7 @@ def main() -> None:
                     len((asset.get("study") or {}).get("panels") or [])
                     for asset in figure_assets
                 ),
+                "panel_patches_applied": patches_applied,
                 "terms": len(terms),
                 "output": str(args.output),
                 "passed": True,
