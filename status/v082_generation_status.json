@@ -1,8 +1,65 @@
 {
   "version": "v082-generation-observer-4",
-  "state": "running",
+  "state": "completed",
   "generator": "v11-batched-google-translate-pr-exact-sources",
   "run_id": 30621319412,
   "run_attempt": 1,
-  "trigger_sha": "bc5c0ccf820cf7e23e69f60e7fb46621a13f5d9a"
+  "generation_outcome": "cancelled",
+  "manifest_count": 8,
+  "manifests": [
+    "andani-2025",
+    "cho-2026",
+    "landry-2026",
+    "lee-2025",
+    "li-hex-2026",
+    "maas-2026",
+    "spitzer-2025",
+    "valanarasu-2026"
+  ],
+  "summary": {
+    "papers": [
+      {
+        "order": 1,
+        "key": "maas-2026",
+        "pdf": ".build/v082/pdfs/01_maas-2026.pdf",
+        "pdf_available": true,
+        "plan_available": true,
+        "generated_manifest": ".build/v082/generated-manifests/maas-2026.json",
+        "curated_manifest": "content/v082_manifests/maas-2026.json",
+        "passed": true,
+        "committed": true,
+        "steps": {
+          "evidence": {
+            "returncode": 0
+          },
+          "evidence_quality": {
+            "returncode": 0
+          },
+          "generation": {
+            "returncode": 0
+          },
+          "semantic_grounding": {
+            "returncode": 0
+          },
+          "reader_content": {
+            "returncode": 0
+          },
+          "final_manifest": {
+            "returncode": 0
+          },
+          "code_boundary": {
+            "returncode": 0
+          }
+        },
+        "commit": {
+          "changed": false,
+          "committed": false,
+          "pushed": false,
+          "reason": "manifest already current"
+        },
+        "reason": "source evidence, grounded content, schema and code boundary passed; manifest persisted"
+      }
+    ],
+    "last_completed": "maas-2026"
+  }
 }
