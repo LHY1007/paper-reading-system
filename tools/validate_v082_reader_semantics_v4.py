@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -17,10 +18,18 @@ UPGRADE_ISSUES = {
     "translated table changed column count",
     "translated table changed row count",
 }
+PROMOTED_FIGURE_ISSUES = {
+    "panel explanation contains no traceable source entity or value",
+    "figure explanations are suspiciously templated/repeated",
+}
 
 
 def norm(value: Any) -> str:
     return base.base.norm(value)
+
+
+def digest(value: Any) -> str:
+    return hashlib.sha256(str(value or "").encode("utf-8")).hexdigest()
 
 
 def allowed_table_upgrade(target: dict[str, Any], source: dict[str, Any]) -> tuple[bool, list[str]]:
@@ -32,25 +41,40 @@ def allowed_table_upgrade(target: dict[str, Any], source: dict[str, Any]) -> tup
         or TABLE_LIKE.match(norm(source.get("id")).replace("-", " "))
     ):
         errors.append("source asset is not explicitly table-like")
-    if PROVENANCE not in norm(target.get("source_render")):
+    source_render = norm(target.get("source_render"))
+    if PROVENANCE not in source_render:
         errors.append("structured-table provenance marker is missing")
+    if "source-image-retained" not in source_render:
+        errors.append("source-image-retained provenance flag is missing")
     if norm(target.get("title_en")) != norm(source.get("title_en")):
         errors.append("source table title changed")
     if norm(target.get("caption_en")) != norm(source.get("caption_en")):
         errors.append("source table caption changed")
     if target.get("source_page") != source.get("source_page"):
         errors.append("source page changed")
+
+    target_image = norm(target.get("image_src"))
+    source_image = norm(source.get("image_src"))
+    if not target_image:
+        errors.append("original source table image is not retained")
+    elif source_image and digest(target_image) != digest(source_image):
+        errors.append("retained table image differs from source evidence")
+
     table = target.get("table") or {}
-    headers = table.get("headers") or []
-    rows = table.get("rows") or []
+    headers = [norm(value) for value in table.get("headers") or []]
+    rows = [[norm(value) for value in row] for row in table.get("rows") or []]
     if len(headers) < 2:
         errors.append("structured table has fewer than two headers")
     if not rows:
         errors.append("structured table has no rows")
     if headers and any(len(row) != len(headers) for row in rows):
         errors.append("structured table contains ragged rows")
-    if not norm(target.get("image_src")):
-        errors.append("original source table image is not retained")
+    if headers and any(not value for value in headers):
+        errors.append("structured table contains an empty header")
+    if rows and any(all(not value for value in row) for row in rows):
+        errors.append("structured table contains an empty row")
+    if len({tuple(row) for row in rows}) != len(rows):
+        errors.append("structured table contains duplicate rows")
     return not errors, errors
 
 
@@ -79,12 +103,24 @@ def validate(manifest: dict[str, Any], evidence: dict[str, Any]) -> dict[str, An
     for item in result.get("errors") or []:
         path = str(item.get("path") or "")
         issue = item.get("issue")
-        if issue in UPGRADE_ISSUES and any(path.startswith(f"assets/{asset_id}/") for asset_id in allowed):
+        if issue in UPGRADE_ISSUES and any(
+            path.startswith(f"assets/{asset_id}/") for asset_id in allowed
+        ):
             continue
         hard_errors.append(item)
     hard_errors.extend(upgrade_errors)
 
-    warnings = list(result.get("warnings") or [])
+    warnings: list[dict[str, Any]] = []
+    for item in result.get("warnings") or []:
+        if item.get("issue") in PROMOTED_FIGURE_ISSUES:
+            hard_errors.append({
+                **item,
+                "severity": "error",
+                "reason": "panel-specific explanations must be source-traceable and non-templated",
+            })
+        else:
+            warnings.append(item)
+
     for asset_id in sorted(allowed):
         warnings.append({
             "path": f"assets/{asset_id}",
@@ -95,6 +131,7 @@ def validate(manifest: dict[str, Any], evidence: dict[str, Any]) -> dict[str, An
     result.update({
         "version": "v082-reader-semantics-4",
         "allowed_structured_table_upgrades": sorted(allowed),
+        "promoted_figure_grounding_issues": sorted(PROMOTED_FIGURE_ISSUES),
         "errors": hard_errors,
         "warnings": warnings,
         "passed": not hard_errors,
@@ -103,7 +140,9 @@ def validate(manifest: dict[str, Any], evidence: dict[str, Any]) -> dict[str, An
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Validate scientific grounding while allowing audited source-image-to-structured-table recovery")
+    parser = argparse.ArgumentParser(
+        description="Validate source-grounded reader content, audited table recovery and panel-specific figure explanations"
+    )
     parser.add_argument("manifest", type=Path)
     parser.add_argument("--evidence", type=Path, required=True)
     parser.add_argument("--report", type=Path)
