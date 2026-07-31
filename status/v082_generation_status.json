@@ -1,23 +1,8 @@
 {
   "version": "v082-generation-observer-4",
-  "state": "completed",
+  "state": "running",
   "generator": "v11-batched-google-translate-pr-exact-sources",
-  "run_id": 30626998711,
+  "run_id": 30627026583,
   "run_attempt": 1,
-  "generation_outcome": "skipped",
-  "manifest_count": 11,
-  "manifests": [
-    "andani-2025",
-    "cho-2026",
-    "karimi-2023",
-    "landry-2026",
-    "lee-2025",
-    "li-hex-2026",
-    "lucas-2024",
-    "maas-2026",
-    "sorin-2023",
-    "spitzer-2025",
-    "valanarasu-2026"
-  ],
-  "summary": null
+  "trigger_sha": "5d2d8a1fa213396aed61ff182a835860a5b7706c"
 }
