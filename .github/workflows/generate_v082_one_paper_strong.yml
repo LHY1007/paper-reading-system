@@ -88,9 +88,9 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: .build/v082/model-cache
-          key: v082-strong-ai-v15-${{ inputs.paper_key || github.event.inputs.paper_key }}-${{ hashFiles('tools/copilot_sdk_json_provider.py', 'tools/generate_v082_reader_manifest_with_copilot_sdk_v15.py', 'tools/generate_v082_reader_manifest_with_copilot_sdk_v14.py', 'tools/generate_v082_reader_manifest_with_strong_ai_v13.py', 'tools/validate_v082_reader_semantics_v4.py', 'tools/normalize_v082_paper_tables.py', 'config/v082_reader_content_plans/*.json') }}
+          key: v082-strong-ai-v16-${{ inputs.paper_key || github.event.inputs.paper_key }}-${{ hashFiles('tools/copilot_sdk_json_provider.py', 'tools/generate_v082_reader_manifest_with_copilot_sdk_v16.py', 'tools/generate_v082_reader_manifest_with_copilot_sdk_v15.py', 'tools/generate_v082_reader_manifest_with_copilot_sdk_v14.py', 'tools/generate_v082_reader_manifest_with_strong_ai_v13.py', 'tools/validate_v082_reader_semantics_v4.py', 'tools/normalize_v082_paper_tables.py', 'config/v082_reader_content_plans/*.json') }}
           restore-keys: |
-            v082-strong-ai-v15-${{ inputs.paper_key || github.event.inputs.paper_key }}-
+            v082-strong-ai-v16-${{ inputs.paper_key || github.event.inputs.paper_key }}-
 
       - name: Obtain and inject exact source PDFs
         run: |
@@ -126,14 +126,14 @@ jobs:
             --work-root .build/v082/strong-one \
             --cache-dir .build/v082/model-cache \
             --branch v0.8x-batch-diagnosis \
-            --generator tools/generate_v082_reader_manifest_with_copilot_sdk_v15.py
+            --generator tools/generate_v082_reader_manifest_with_copilot_sdk_v16.py
 
       - name: Save paper-specific model and reference cache
         if: always()
         uses: actions/cache/save@v4
         with:
           path: .build/v082/model-cache
-          key: v082-strong-ai-v15-${{ inputs.paper_key || github.event.inputs.paper_key }}-${{ github.run_id }}-${{ github.run_attempt }}
+          key: v082-strong-ai-v16-${{ inputs.paper_key || github.event.inputs.paper_key }}-${{ github.run_id }}-${{ github.run_attempt }}
 
       - name: Upload complete per-paper audit
         if: always()
