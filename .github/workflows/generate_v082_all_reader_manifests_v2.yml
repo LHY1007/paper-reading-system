@@ -1,179 +1,18 @@
-name: Generate all V0.8.2 manifests by sequential strong-AI review
+name: Generate all V0.8.2 manifests by sequential strong-AI review (retired)
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - ".github/v082-manifest-trigger-v18"
-      - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
-      - ".github/workflows/generate_v082_one_paper_strong.yml"
-      - "tools/copilot_sdk_json_provider.py"
-      - "tools/generate_v082_reader_manifest_with_copilot_sdk_v18.py"
-      - "tools/generate_v082_reader_manifest_with_copilot_sdk_v17.py"
-      - "tools/generate_v082_reader_manifest_with_copilot_sdk_v16.py"
-      - "tools/generate_v082_reader_manifest_with_copilot_sdk_v15.py"
-      - "tools/generate_v082_reader_manifest_with_copilot_sdk_v14.py"
-      - "tools/generate_v082_reader_manifest_with_strong_ai_v13.py"
-      - "tools/run_v082_manifest_generation_one_strong.py"
-      - "tools/test_v082_component_contracts.py"
-      - "tools/normalize_v082_paper_tables.py"
-      - "tools/validate_v082_strong_ai_review.py"
-      - "tools/validate_v082_reader_semantics_v4.py"
-      - "config/v082_reader_content_plans/*.json"
   workflow_dispatch:
 
 permissions:
-  contents: write
-  copilot-requests: write
-
-concurrency:
-  group: v082-strong-ai-v18-strict-sequence
-  cancel-in-progress: true
+  contents: read
 
 jobs:
-  maas:
-    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
-    with:
-      paper_key: maas-2026
-    secrets: inherit
-
-  landry:
-    needs: maas
-    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
-    with:
-      paper_key: landry-2026
-    secrets: inherit
-
-  lee:
-    needs: landry
-    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
-    with:
-      paper_key: lee-2025
-    secrets: inherit
-
-  valanarasu:
-    needs: lee
-    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
-    with:
-      paper_key: valanarasu-2026
-    secrets: inherit
-
-  li_hex:
-    needs: valanarasu
-    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
-    with:
-      paper_key: li-hex-2026
-    secrets: inherit
-
-  andani:
-    needs: li_hex
-    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
-    with:
-      paper_key: andani-2025
-    secrets: inherit
-
-  cho:
-    needs: andani
-    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
-    with:
-      paper_key: cho-2026
-    secrets: inherit
-
-  spitzer:
-    needs: cho
-    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
-    with:
-      paper_key: spitzer-2025
-    secrets: inherit
-
-  lucas:
-    needs: spitzer
-    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
-    with:
-      paper_key: lucas-2024
-    secrets: inherit
-
-  sorin:
-    needs: lucas
-    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
-    with:
-      paper_key: sorin-2023
-    secrets: inherit
-
-  karimi:
-    needs: sorin
-    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
-    with:
-      paper_key: karimi-2023
-    secrets: inherit
-
-  complete:
-    needs: karimi
+  retired:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: v0.8x-batch-diagnosis
-          fetch-depth: 0
-
-      - name: Verify all reviewed manifests exist and passed
+      - name: Explain retired path
         run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-          registry = json.loads(Path('config/v082_paper_sources.json').read_text('utf-8'))
-          keys = [p['key'] for p in registry['papers'] if int(p['order']) != 0]
-          missing = []
-          failed = []
-          reviewer_rejected = []
-          for key in keys:
-              manifest = Path(f'content/v082_manifests/{key}.json')
-              review = Path(f'content/v082_reviews/{key}.json')
-              if not manifest.exists():
-                  missing.append(f'manifest:{key}')
-              if not review.exists():
-                  missing.append(f'review:{key}')
-                  continue
-              state = json.loads(review.read_text('utf-8'))
-              if not state.get('passed'):
-                  failed.append(key)
-              if not state.get('independent_reviewer_acceptance_passed'):
-                  reviewer_rejected.append(key)
-          if missing:
-              raise SystemExit('missing reviewed outputs: ' + ', '.join(missing))
-          if failed:
-              raise SystemExit('strong-AI reviews did not pass: ' + ', '.join(failed))
-          if reviewer_rejected:
-              raise SystemExit('independent reviewer acceptance missing: ' + ', '.join(reviewer_rejected))
-          print(json.dumps({'reviewed_papers': len(keys), 'passed': True}, indent=2))
-          PY
-
-      - name: Arm final reader build only after complete review set
-        env:
-          RUN_ID: ${{ github.run_id }}
-          HEAD_SHA: ${{ github.sha }}
-        run: |
-          python - <<'PY'
-          import json, os
-          from pathlib import Path
-          Path('.github/v082-final-build-trigger').write_text(json.dumps({
-              'version': 'v082-final-build-trigger-3',
-              'strong_ai_sequence_run_id': int(os.environ['RUN_ID']),
-              'trigger_sha': os.environ['HEAD_SHA'],
-              'all_reviewed_manifests_passed': True,
-              'independent_reviewer_acceptance_passed': True,
-          }, indent=2) + '\n', 'utf-8')
-          PY
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add .github/v082-final-build-trigger
-          git commit -m "Arm V0.8.2 final build after complete strong-AI review"
-          for attempt in 1 2 3 4; do
-            git fetch origin v0.8x-batch-diagnosis
-            if git rebase origin/v0.8x-batch-diagnosis && git push origin HEAD:v0.8x-batch-diagnosis; then
-              exit 0
-            fi
-            git rebase --abort || true
-            sleep $((attempt * 5))
-          done
+          echo "This workflow is retained only for audit history."
+          echo "GitHub Models has been retired and the repository Copilot premium quota is exhausted."
+          echo "Current reader manifests are built sequentially from exact PDF evidence, deterministic translation, source-audited paper-specific curation, and fail-closed validators."
           exit 1
