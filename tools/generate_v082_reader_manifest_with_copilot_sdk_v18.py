@@ -14,6 +14,7 @@ _ORIGINAL_MULTIMODAL_CALL = v13.call_multimodal_json
 _ORIGINAL_POSTPROCESS = v13.postprocess_manifest
 REVIEW_RESPONSES: dict[str, dict[str, Any]] = {
     "translation": {},
+    "panel_inventory": {},
     "figure": {},
     "table": {},
     "overview": {},
@@ -46,14 +47,15 @@ def record_multimodal_review(*args, **kwargs):
     result = _ORIGINAL_MULTIMODAL_CALL(*args, **kwargs)
     cache_name = str(kwargs.get("cache_name") or "")
     payload = kwargs.get("payload") or {}
-    if cache_name.startswith("figure-review-") or cache_name.startswith("figure-repair-"):
-        source = payload.get("source") or {}
-        item_id = str(source.get("id") or "")
+    source = payload.get("source") or {}
+    item_id = str(source.get("id") or "")
+    if cache_name.startswith("panel-inventory-review-") or cache_name.startswith("panel-inventory-repair-"):
+        if item_id:
+            REVIEW_RESPONSES["panel_inventory"][item_id] = result
+    elif cache_name.startswith("figure-review-") or cache_name.startswith("figure-repair-"):
         if item_id:
             REVIEW_RESPONSES["figure"][item_id] = result
     elif cache_name.startswith("table-review-"):
-        source = payload.get("source") or {}
-        item_id = str(source.get("id") or "")
         if item_id:
             REVIEW_RESPONSES["table"][item_id] = result
     return result
@@ -78,6 +80,21 @@ def enforce_independent_reviewer_acceptance(review_log: dict[str, Any]) -> list[
                     "issue": "independent reviewer did not explicitly accept the final corrected component",
                     "review_response_present": response is not None,
                 })
+
+    for item in review_log.get("figures") or []:
+        item_id = str(item.get("id") or "")
+        inventory = item.get("panel_inventory") or {}
+        response = REVIEW_RESPONSES["panel_inventory"].get(item_id)
+        accepted = reviewer_accepted(response)
+        inventory["independent_reviewer_accepted"] = accepted
+        item["panel_inventory"] = inventory
+        if not accepted:
+            errors.append({
+                "component": "panel_inventory",
+                "id": item_id,
+                "issue": "independent reviewer did not explicitly accept the final visual panel inventory",
+                "review_response_present": response is not None,
+            })
 
     overview_response = REVIEW_RESPONSES["overview"].get("paper")
     overview_accepted = reviewer_accepted(overview_response)
