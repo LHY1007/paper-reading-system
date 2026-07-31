@@ -7,14 +7,11 @@ on:
       - ".github/workflows/test_v082_copilot_sdk.yml"
       - "tools/copilot_sdk_json_provider.py"
       - "tools/copilot_sdk_json_provider_v2.py"
-      - "tools/generate_v082_reader_manifest_with_github_models.py"
-      - "tools/generate_v082_reader_manifest_with_github_models_v4.py"
       - "tools/test_copilot_json_provider.py"
   workflow_dispatch:
 
 permissions:
   contents: read
-  models: read
   copilot-requests: write
 
 jobs:
@@ -31,29 +28,26 @@ jobs:
       - run: pip install --disable-pip-version-check github-copilot-sdk json-repair
       - name: Validate deterministic malformed-JSON and idle-timeout recovery
         run: python tools/test_copilot_json_provider.py
-      - name: Send isolated GitHub Models strict-JSON request
+      - name: Send isolated strict-JSON request with included model
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_MODELS_MIN_INTERVAL_SECONDS: "0"
+          COPILOT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          V082_REASONING_EFFORT: high
+          V082_COPILOT_COMPONENT_TIMEOUT_SECONDS: "240"
+          V082_COPILOT_IDLE_TIMEOUT_SECONDS: "180"
         run: |
           python - <<'PY'
-          import os
-          import sys
           from pathlib import Path
-
-          sys.path.insert(0, str(Path('tools').resolve()))
-          import generate_v082_reader_manifest_with_github_models_v4 as provider
-
-          result = provider.base.call_model_json(
-              token=os.environ['GITHUB_TOKEN'],
-              model='openai/gpt-5',
+          from tools.copilot_sdk_json_provider_v2 import call_json, provider
+          result = call_json(
+              model='gpt-5-mini',
               system='Return the integer sum in strict JSON: {"sum": integer}.',
-              user_payload={'a': 19, 'b': 23},
-              cache_dir=Path('.build/github-models-smoke'),
-              cache_name='sum',
-              max_tokens=2000,
+              payload={'a': 19, 'b': 23},
+              cache_dir=Path('.build/copilot-smoke'),
+              cache_name='included-model-sum',
               retries=2,
           )
           assert result == {'sum': 42}, result
+          provider().close()
           print(result)
           PY
