@@ -52,8 +52,10 @@ jobs:
           print('github-copilot-sdk and json-repair imports passed')
           PY
 
-      - name: Verify table, panel, translation and reviewer contracts
-        run: python tools/test_v082_component_contracts.py
+      - name: Verify JSON, table, panel, translation and reviewer contracts
+        run: |
+          python tools/test_copilot_json_provider.py
+          python tools/test_v082_component_contracts.py
 
       - name: Locate CANVAS and prepare directories
         run: |
