@@ -97,6 +97,34 @@ def model_is_gpt54(value: Any) -> bool:
     return str(value or "").strip().lower().endswith("gpt-5.4")
 
 
+def validate_panel_inventories(figures: list[dict[str, Any]]) -> list[Any]:
+    errors: list[Any] = []
+    for figure in figures:
+        figure_id = str(figure.get("id") or "")
+        inventory = figure.get("panel_inventory") or {}
+        if not inventory:
+            errors.append({"panel_inventory": figure_id, "issue": "missing visual panel inventory"})
+            continue
+        if not inventory.get("passed"):
+            errors.append({"panel_inventory": figure_id, "issue": "visual panel inventory did not pass"})
+        if inventory.get("independent_reviewer_accepted") is not True:
+            errors.append({"panel_inventory": figure_id, "issue": "visual panel inventory lacks explicit independent reviewer acceptance"})
+        if inventory.get("source_image_present") is not True:
+            errors.append({"panel_inventory": figure_id, "issue": "visual panel inventory did not receive the source image"})
+        visual_labels = [str(value) for value in inventory.get("visual_labels") or []]
+        panel_labels = [str(value) for value in figure.get("panel_labels") or []]
+        if not visual_labels:
+            errors.append({"panel_inventory": figure_id, "issue": "visual panel inventory is empty"})
+        if visual_labels != panel_labels:
+            errors.append({
+                "panel_inventory": figure_id,
+                "issue": "final figure panel labels differ from independently reviewed visual inventory",
+                "visual_labels": visual_labels,
+                "final_panel_labels": panel_labels,
+            })
+    return errors
+
+
 def validate(manifest: dict[str, Any], review: dict[str, Any]) -> dict[str, Any]:
     errors: list[Any] = []
     expected_paragraphs = paragraph_count(manifest)
@@ -178,6 +206,8 @@ def validate(manifest: dict[str, Any], review: dict[str, Any]) -> dict[str, Any]
         errors.append("one or more figure reviews lack explicit independent reviewer acceptance")
     if any(not item.get("source_image_present") for item in figures):
         errors.append("one or more source-image reviews did not receive the image")
+    errors.extend(validate_panel_inventories(figures))
+
     if any(not item.get("passed") for item in tables):
         errors.append("one or more table transcription reviews failed")
     if any(item.get("independent_reviewer_accepted") is not True for item in tables):
@@ -201,7 +231,7 @@ def validate(manifest: dict[str, Any], review: dict[str, Any]) -> dict[str, Any]
         errors.append("reference review count differs from manifest")
 
     return {
-        "version": "v082-strong-ai-review-gate-5",
+        "version": "v082-strong-ai-review-gate-6",
         "paper_key": (manifest.get("paper") or {}).get("key"),
         "paragraphs": expected_paragraphs,
         "required_paragraph_review_ids": len(paragraph_ids),
@@ -213,6 +243,7 @@ def validate(manifest: dict[str, Any], review: dict[str, Any]) -> dict[str, Any]
         "expected_source_image_ids": expected_source_image_ids,
         "reviewed_source_image_ids": reviewed_figure_ids,
         "reviewed_table_ids": reviewed_table_ids,
+        "reviewed_panel_inventories": len(figures),
         "terms": len(manifest.get("terms") or []),
         "references": len(manifest.get("references") or []),
         "models": models,
