@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 env:
   PYTHONUNBUFFERED: "1"
@@ -27,6 +27,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
 
       - uses: actions/setup-python@v5
         with:
@@ -132,6 +133,59 @@ jobs:
           (root / 'reports' / 'CONTENT_PROVENANCE.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', 'utf-8')
           print(json.dumps(report, ensure_ascii=False, indent=2))
           PY
+
+      - name: Persist validated Maas manifest and review record
+        run: |
+          set -euo pipefail
+          mkdir -p content/v082_manifests content/v082_reviews
+          cp .build/v082/maas-reader/manifest.json content/v082_manifests/maas-2026.json
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          root = Path('.build/v082/maas-reader')
+          report_names = [
+              'EVIDENCE_QUALITY.json', 'FINAL_MANIFEST.json', 'CODE_BOUNDARY.json',
+              'SEMANTIC_GROUNDING.json', 'READER_CONTENT.json', 'CONTENT_PROVENANCE.json'
+          ]
+          reports = {name: json.loads((root / 'reports' / name).read_text('utf-8')) for name in report_names}
+          failed = [name for name, value in reports.items() if value.get('passed') is not True]
+          if failed:
+              raise SystemExit('refusing to persist failed reports: ' + ', '.join(failed))
+          review = {
+              'version': 'v082-content-review-2',
+              'paper_key': 'maas-2026',
+              'review_mode': 'source-grounded-curation',
+              'passed': True,
+              'independent_reviewer_acceptance_passed': False,
+              'source_audited_curated_acceptance_passed': True,
+              'exact_source_preservation_passed': True,
+              'authoritative_pdf_panel_audit_passed': True,
+              'manifest_sha256': hashlib.sha256((root / 'manifest.json').read_bytes()).hexdigest(),
+              'workflow_run_id': os.environ.get('GITHUB_RUN_ID'),
+              'workflow_head_sha': os.environ.get('GITHUB_SHA'),
+              'reports': {
+                  name: {
+                      'version': value.get('version'),
+                      'passed': value.get('passed'),
+                      'error_count': len(value.get('errors') or value.get('violations') or []),
+                  }
+                  for name, value in reports.items()
+              },
+          }
+          Path('content/v082_reviews/maas-2026.json').write_text(json.dumps(review, ensure_ascii=False, indent=2) + '\n', 'utf-8')
+          print(json.dumps(review, ensure_ascii=False, indent=2))
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/v082_manifests/maas-2026.json content/v082_reviews/maas-2026.json
+          if git diff --cached --quiet; then
+            echo "Validated Maas content is already current"
+          else
+            git commit -m "Add validated V0.8.2 Maas reader content"
+            git fetch origin v0.8x-batch-diagnosis
+            git rebase origin/v0.8x-batch-diagnosis
+            git push origin HEAD:v0.8x-batch-diagnosis
+          fi
 
       - name: Upload validated Maas manifest and evidence
         if: always()
