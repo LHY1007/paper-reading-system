@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import subprocess
 import sys
 from pathlib import Path
 
@@ -8,6 +9,7 @@ import build_v082_reader_if_ready as base
 
 
 ORIGINAL_RUN = base.run
+ORIGINAL_COPY2 = base.shutil.copy2
 
 
 def semantic_report_path(command: list[str]) -> Path:
@@ -16,6 +18,23 @@ def semantic_report_path(command: list[str]) -> Path:
     except (ValueError, IndexError):
         report = Path("final/V0.8.2/reports/READER_CONTENT.json")
     return report.with_name(report.stem.replace("_READER_CONTENT", "_SEMANTIC_GROUNDING") + report.suffix)
+
+
+def copy2_and_normalize(source, destination, *args, **kwargs):
+    result = ORIGINAL_COPY2(source, destination, *args, **kwargs)
+    command = [
+        sys.executable,
+        "tools/normalize_v082_paper_tables.py",
+        str(destination),
+    ]
+    completed = subprocess.run(command, text=True, capture_output=True)
+    if completed.stdout:
+        print(completed.stdout, end="")
+    if completed.stderr:
+        print(completed.stderr, end="", file=sys.stderr)
+    if completed.returncode != 0:
+        raise RuntimeError(f"paper-specific structured table normalization failed for {destination}")
+    return result
 
 
 def run(command: list[str]):
@@ -52,6 +71,7 @@ def run(command: list[str]):
 
 
 base.run = run
+base.shutil.copy2 = copy2_and_normalize
 
 
 if __name__ == "__main__":
