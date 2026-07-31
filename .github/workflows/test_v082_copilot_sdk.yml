@@ -8,6 +8,7 @@ on:
       - "tools/generate_v082_reader_manifest_with_google_translate_v12.py"
       - "tools/generate_v082_reader_manifest_with_google_translate_v11.py"
       - "tools/apply_v082_curated_content.py"
+      - "tools/validate_v082_reader_semantics_v5.py"
       - "config/v082_reader_content_plans/maas-2026.json"
       - "config/v082_curated_content/maas-2026/**"
   workflow_dispatch:
@@ -93,9 +94,10 @@ jobs:
           python tools/validate_v082_manifest_code_boundary.py \
             .build/v082/maas-reader/manifest.json \
             --report .build/v082/maas-reader/reports/CODE_BOUNDARY.json
-          python tools/validate_v082_reader_semantics_v4.py \
+          python tools/validate_v082_reader_semantics_v5.py \
             .build/v082/maas-reader/manifest.json \
             --evidence .build/v082/maas-reader/evidence.json \
+            --curated-audit config/v082_curated_content/maas-2026/panel-audit.json \
             --report .build/v082/maas-reader/reports/SEMANTIC_GROUNDING.json
           python tools/validate_v082_reader_content_quality.py \
             .build/v082/maas-reader/manifest.json \
@@ -109,6 +111,7 @@ jobs:
           root = Path('.build/v082/maas-reader')
           manifest = json.loads((root / 'manifest.json').read_text('utf-8'))
           evidence = json.loads((root / 'evidence.json').read_text('utf-8'))
+          semantic = json.loads((root / 'reports' / 'SEMANTIC_GROUNDING.json').read_text('utf-8'))
           figures = [a for a in manifest['assets'] if a['kind'] == 'figure']
           report = {
               'version': 'v082-source-grounded-curation-1',
@@ -120,6 +123,7 @@ jobs:
               'paragraphs': sum(1 for s in manifest['sections'] for b in s['blocks'] if b.get('type') == 'paragraph'),
               'figures': len(figures),
               'curated_panels': sum(len((a.get('study') or {}).get('panels') or []) for a in figures),
+              'curated_panel_audit_passed': semantic.get('passed') is True,
               'terms': len(manifest['terms']),
               'references': len(manifest['references']),
               'manifest_sha256': hashlib.sha256((root / 'manifest.json').read_bytes()).hexdigest(),
