@@ -6,6 +6,7 @@ on:
     paths:
       - ".github/workflows/test_v082_copilot_sdk.yml"
       - "tools/copilot_sdk_json_provider.py"
+      - "tools/copilot_sdk_json_provider_v2.py"
       - "tools/test_copilot_json_provider.py"
   workflow_dispatch:
 
@@ -25,18 +26,19 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install --disable-pip-version-check github-copilot-sdk json-repair
-      - name: Validate deterministic malformed-JSON recovery
+      - name: Validate deterministic malformed-JSON and idle-timeout recovery
         run: python tools/test_copilot_json_provider.py
       - name: Send isolated strict-JSON request
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           COPILOT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           V082_REASONING_EFFORT: high
-          V082_COPILOT_COMPONENT_TIMEOUT_SECONDS: "180"
+          V082_COPILOT_COMPONENT_TIMEOUT_SECONDS: "240"
+          V082_COPILOT_IDLE_TIMEOUT_SECONDS: "180"
         run: |
           python - <<'PY'
           from pathlib import Path
-          from tools.copilot_sdk_json_provider import call_json, provider
+          from tools.copilot_sdk_json_provider_v2 import call_json, provider
           result = call_json(
               model='gpt-5.4',
               system='Return the integer sum in strict JSON: {"sum": integer}.',
