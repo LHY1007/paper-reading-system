@@ -1,8 +1,17 @@
 {
   "version": "v082-generation-observer-2",
-  "state": "running",
+  "state": "completed",
   "generator": "v11-batched-google-translate",
   "run_id": 30619333822,
   "run_attempt": 1,
-  "trigger_sha": "af04dd57d23b3e177e2f619ac9fcdba47a58fba1"
+  "generation_outcome": "skipped",
+  "manifest_count": 5,
+  "manifests": [
+    "landry-2026",
+    "lee-2025",
+    "li-hex-2026",
+    "maas-2026",
+    "valanarasu-2026"
+  ],
+  "summary": null
 }
