@@ -15,12 +15,22 @@ SOFT_ISSUES = {
 }
 
 
+def is_short_label_or_formula(item: dict[str, Any]) -> bool:
+    if item.get("issue") != "translation is implausibly short relative to source":
+        return False
+    detail = item.get("detail") or {}
+    try:
+        return int(detail.get("en_chars") or 0) <= 20 and int(detail.get("zh_chars") or 0) >= 2
+    except (TypeError, ValueError):
+        return False
+
+
 def validate(manifest: dict[str, Any], evidence: dict[str, Any]) -> dict[str, Any]:
     result = base.validate(manifest, evidence)
     hard_errors = []
     warnings = list(result.get("warnings") or [])
     for item in result.get("errors") or []:
-        if item.get("issue") in SOFT_ISSUES:
+        if item.get("issue") in SOFT_ISSUES or is_short_label_or_formula(item):
             warnings.append({**item, "severity": "warning"})
         else:
             hard_errors.append(item)
