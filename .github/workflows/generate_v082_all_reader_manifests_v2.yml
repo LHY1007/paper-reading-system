@@ -7,19 +7,21 @@ on:
       - ".github/v082-manifest-trigger-v11"
       - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
       - "tools/generate_v082_reader_manifest_with_google_translate_v11.py"
+      - "config/v082_reader_content_plans/*.json"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: v082-generate-pr-v10-observable
+  group: v082-generate-pr-v11-observable
   cancel-in-progress: true
 
 env:
   PYTHONUNBUFFERED: "1"
   V082_TRANSLATE_INTERVAL_SECONDS: "0.05"
-  CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
+  CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-branch-v1"
+  CHO_ADOBE_PREVIEW_URL: "https://to.adobe.com/phMsfMA7YPzZqvAdG8hYM4vE9jVf"
 
 jobs:
   generate-strictly-sequential:
@@ -65,14 +67,15 @@ jobs:
       - name: Install source, evidence and manifest dependencies
         run: |
           python -m pip install --disable-pip-version-check \
-            requests beautifulsoup4 PyMuPDF curl_cffi jsonschema lxml pillow
+            requests beautifulsoup4 PyMuPDF curl_cffi jsonschema lxml pillow playwright
+          python -m playwright install --with-deps chromium
 
       - name: Locate immutable CANVAS reader and prepare directories
         run: |
           CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
           test -n "$CANVAS"
           printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_manifest_paths
-          mkdir -p .build/v082/{pdfs,cho-source,batch-evidence,batch-audits,batch-reports,generated-manifests,model-cache} content/v082_manifests
+          mkdir -p .build/v082/{pdfs,cho-source,science-prefetch,batch-evidence,batch-audits,batch-reports,generated-manifests,model-cache} content/v082_manifests
 
       - name: Restore audited PDF cache
         id: source-cache
@@ -84,16 +87,32 @@ jobs:
             v082-source-pdfs-
 
       - name: Restore dedicated user-supplied Cho source cache
+        id: cho-cache
         uses: actions/cache/restore@v4
         with:
           path: .build/v082/cho-source
           key: ${{ env.CHO_CACHE_KEY }}
 
-      - name: Inject validated Cho source into the ordinary source directory
+      - name: Materialize and inject validated Cho source
         run: |
-          if [ -f .build/v082/cho-source/07_cho-2026.pdf ]; then
-            cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
+          if [ ! -f .build/v082/cho-source/07_cho-2026.pdf ]; then
+            python tools/prefetch_v082_adobe_shared_pdf.py \
+              --url "$CHO_ADOBE_PREVIEW_URL" \
+              --output .build/v082/cho-source/07_cho-2026.pdf \
+              --report .build/v082/science-prefetch/CHO_SOURCE_FINAL.json \
+              --expected-pages 24 \
+              --doi 10.1126/science.adz2742 \
+              --title-fragment "Pan-cancer spatial atlas of tertiary lymphoid structures"
           fi
+          test -s .build/v082/cho-source/07_cho-2026.pdf
+          cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
+
+      - name: Save dedicated Cho source cache
+        if: steps.cho-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .build/v082/cho-source
+          key: ${{ env.CHO_CACHE_KEY }}
 
       - name: Restore translation caches
         uses: actions/cache/restore@v4
@@ -152,7 +171,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: .build/v082/model-cache
-          key: v082-google-translation-v11-run-${{ github.run_id }}
+          key: v082-google-translation-v11-run-${{ github.run_id }}-${{ github.run_attempt }}
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -160,6 +179,7 @@ jobs:
           name: v082-strict-sequential-manifest-audit-v11
           path: |
             content/v082_manifests
+            .build/v082/science-prefetch
             .build/v082/batch-evidence
             .build/v082/batch-audits
             .build/v082/batch-reports
