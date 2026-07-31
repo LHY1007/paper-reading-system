@@ -5,30 +5,6 @@ on:
     branches: [main]
     paths:
       - ".github/v082-final-build-trigger"
-      - ".github/workflows/build_v082_final_readers.yml"
-      - "config/v082_paper_sources.json"
-      - "config/v082_frozen_shell_lock.json"
-      - "config/v082_reader_content_blueprint.json"
-      - "config/v082_reader_content_plans/**"
-      - "content/v082_manifests/**"
-      - "templates/v082/V082_CANVAS_FROZEN_SHELL.html"
-      - "schemas/paper_content_manifest_v082.schema.json"
-      - "tools/download_v082_sources.py"
-      - "tools/download_v082_release_sources.py"
-      - "tools/prefetch_v082_blocked_sources.py"
-      - "tools/prefetch_v082_adobe_shared_pdf.py"
-      - "tools/build_pdf_native_manifest_v082*.py"
-      - "tools/build_v082_reader_content_task.py"
-      - "tools/build_v082_reader_if_ready*.py"
-      - "tools/run_v082_final_reader_build*.py"
-      - "tools/audit_v082_reader_experience*.py"
-      - "tools/validate_v082_*.py"
-      - "tools/normalize_v082_canvas_master.py"
-      - "tools/freeze_v082_canvas_shell*.py"
-      - "tools/render_v082_from_frozen_shell.py"
-      - "tools/render_v082_canvas_component_locked*.py"
-      - "tools/browser_regression_v082.py"
-      - "tools/browser_layout_invariance_v082*.py"
   workflow_dispatch:
 
 permissions:
@@ -56,6 +32,37 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+
+      - name: Require completed strong-AI review set
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          trigger = Path('.github/v082-final-build-trigger')
+          if not trigger.exists():
+              raise SystemExit('final build trigger is missing')
+          state = json.loads(trigger.read_text('utf-8'))
+          if not state.get('all_reviewed_manifests_passed'):
+              raise SystemExit('final build trigger was not armed by the complete strong-AI sequence')
+          registry = json.loads(Path('config/v082_paper_sources.json').read_text('utf-8'))
+          keys = [p['key'] for p in registry['papers'] if int(p['order']) != 0]
+          missing = []
+          failed = []
+          for key in keys:
+              manifest = Path(f'content/v082_manifests/{key}.json')
+              review = Path(f'content/v082_reviews/{key}.json')
+              if not manifest.exists():
+                  missing.append(f'manifest:{key}')
+              if not review.exists():
+                  missing.append(f'review:{key}')
+              elif not json.loads(review.read_text('utf-8')).get('passed'):
+                  failed.append(key)
+          if missing:
+              raise SystemExit('missing reviewed outputs: ' + ', '.join(missing))
+          if failed:
+              raise SystemExit('failed strong-AI reviews: ' + ', '.join(failed))
+          print(json.dumps({'reviewed_papers': len(keys), 'passed': True}, indent=2))
+          PY
 
       - name: Install source, manifest and browser dependencies
         run: |
