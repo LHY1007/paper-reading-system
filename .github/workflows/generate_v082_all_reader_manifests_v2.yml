@@ -1,8 +1,8 @@
 name: Generate all V0.8.2 manifests strictly sequentially
 
 on:
-  pull_request:
-    branches: [main]
+  push:
+    branches: [v0.8x-batch-diagnosis]
     paths:
       - ".github/v082-manifest-trigger"
       - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
@@ -18,7 +18,7 @@ permissions:
 
 concurrency:
   group: v082-generate-all-manifests-strict-sequence
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 env:
   PYTHONUNBUFFERED: "1"
