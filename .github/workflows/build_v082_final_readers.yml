@@ -4,6 +4,7 @@ on:
   pull_request:
     branches: [main]
     paths:
+      - ".github/v082-final-build-trigger"
       - ".github/workflows/build_v082_final_readers.yml"
       - "config/v082_paper_sources.json"
       - "config/v082_frozen_shell_lock.json"
@@ -40,6 +41,7 @@ concurrency:
 env:
   PYTHONUNBUFFERED: "1"
   CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
+  LUCAS_CACHE_KEY: "v082-lucas-source-s41588-024-01747-1-31p-v1"
 
 jobs:
   final-build:
@@ -68,7 +70,7 @@ jobs:
           CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
           test -n "$CANVAS"
           printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_final_paths
-          mkdir -p .build/v082/{pdfs,cho-source} final/V0.8.2/reports
+          mkdir -p .build/v082/{pdfs,cho-source,lucas-source} final/V0.8.2/reports
           test -f templates/v082/V082_CANVAS_FROZEN_SHELL.html
 
       - name: Restore audited source PDF cache
@@ -87,11 +89,22 @@ jobs:
           path: .build/v082/cho-source
           key: ${{ env.CHO_CACHE_KEY }}
 
-      - name: Inject validated Cho source into the ordinary source directory
+      - name: Restore dedicated user-supplied Lucas source cache
+        id: lucas_cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/lucas-source
+          key: ${{ env.LUCAS_CACHE_KEY }}
+
+      - name: Inject validated exact sources before source audit
         run: |
-          if [ -f .build/v082/cho-source/07_cho-2026.pdf ]; then
-            cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
-          fi
+          set -euo pipefail
+          test "${{ steps.cho_cache.outputs.cache-hit }}" = "true"
+          test "${{ steps.lucas_cache.outputs.cache-hit }}" = "true"
+          test -s .build/v082/cho-source/07_cho-2026.pdf
+          test -s .build/v082/lucas-source/09_lucas-2024.pdf
+          cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
+          cp .build/v082/lucas-source/09_lucas-2024.pdf .build/v082/pdfs/09_lucas-2024.pdf
 
       - name: Prefetch publisher-blocked official PDFs
         id: blocked_source_prefetch
@@ -115,6 +128,31 @@ jobs:
             --output-dir .build/v082/pdfs \
             --report final/V0.8.2/reports/SOURCE_DOWNLOAD.json \
             --reuse
+
+      - name: Reinject and verify exact user-supplied sources
+        if: always()
+        run: |
+          set -euo pipefail
+          cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
+          cp .build/v082/lucas-source/09_lucas-2024.pdf .build/v082/pdfs/09_lucas-2024.pdf
+          python - <<'PY'
+          import fitz
+          from pathlib import Path
+          expected = {
+              Path('.build/v082/pdfs/07_cho-2026.pdf'): (24, '10.1126/science.adz2742'),
+              Path('.build/v082/pdfs/09_lucas-2024.pdf'): (31, '10.1038/s41588-024-01747-1'),
+          }
+          for path, (pages, doi) in expected.items():
+              doc = fitz.open(path)
+              try:
+                  assert doc.page_count == pages, (path, doc.page_count, pages)
+                  probe = {0, 1, doc.page_count - 1}
+                  text = '\n'.join(doc.load_page(i).get_text('text') for i in probe).lower()
+                  metadata = ' '.join(str(value or '') for value in doc.metadata.values()).lower()
+                  assert doi.lower() in text or doi.lower() in metadata, (path, doi)
+              finally:
+                  doc.close()
+          PY
 
       - name: Save rolling exact-source cache
         if: always() && steps.source_pdf_cache.outputs.cache-hit != 'true'
