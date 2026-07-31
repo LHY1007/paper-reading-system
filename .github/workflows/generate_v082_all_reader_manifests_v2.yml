@@ -8,6 +8,7 @@ on:
       - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
       - "tools/generate_v082_reader_manifest_with_github_models_v7.py"
       - "tools/generate_v082_reader_manifest_with_google_translate_v8.py"
+      - "tools/generate_v082_reader_manifest_with_google_translate_v9.py"
       - "tools/run_v082_manifest_generation_sequentially_v2.py"
   workflow_dispatch:
 
@@ -75,8 +76,9 @@ jobs:
         uses: actions/cache/restore@v4
         with:
           path: .build/v082/model-cache
-          key: v082-google-translation-v8-${{ hashFiles('tools/generate_v082_reader_manifest_with_google_translate_v8.py', 'config/v082_reader_content_plans/*.json') }}
+          key: v082-google-translation-v9-${{ hashFiles('tools/generate_v082_reader_manifest_with_google_translate_v8.py', 'tools/generate_v082_reader_manifest_with_google_translate_v9.py', 'config/v082_reader_content_plans/*.json') }}
           restore-keys: |
+            v082-google-translation-v9-
             v082-google-translation-v8-
 
       - name: Obtain every exact source PDF
@@ -109,7 +111,7 @@ jobs:
             --manifest-dir content/v082_manifests \
             --plans-dir config/v082_reader_content_plans \
             --cache-dir .build/v082/model-cache \
-            --generator tools/generate_v082_reader_manifest_with_google_translate_v8.py \
+            --generator tools/generate_v082_reader_manifest_with_google_translate_v9.py \
             --branch v0.8x-batch-diagnosis
 
       - name: Save rolling exact-source cache
