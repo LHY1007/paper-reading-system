@@ -18,6 +18,11 @@ REVIEW_RESPONSES: dict[str, dict[str, Any]] = {
     "table": {},
     "overview": {},
 }
+REVIEW_LOG_KEYS = {
+    "translation": "translation",
+    "figure": "figures",
+    "table": "tables",
+}
 
 
 def norm(value: Any) -> str:
@@ -60,15 +65,15 @@ def reviewer_accepted(result: Any) -> bool:
 
 def enforce_independent_reviewer_acceptance(review_log: dict[str, Any]) -> list[dict[str, Any]]:
     errors: list[dict[str, Any]] = []
-    for category in ("translation", "figure", "table"):
-        for item in review_log.get(category) or []:
+    for response_category, log_key in REVIEW_LOG_KEYS.items():
+        for item in review_log.get(log_key) or []:
             item_id = str(item.get("id") or "")
-            response = REVIEW_RESPONSES[category].get(item_id)
+            response = REVIEW_RESPONSES[response_category].get(item_id)
             accepted = reviewer_accepted(response)
             item["independent_reviewer_accepted"] = accepted
             if not accepted:
                 errors.append({
-                    "component": category,
+                    "component": response_category,
                     "id": item_id,
                     "issue": "independent reviewer did not explicitly accept the final corrected component",
                     "review_response_present": response is not None,
@@ -98,6 +103,7 @@ def postprocess_with_acceptance(
     if errors:
         v13.REVIEW_LOG.setdefault("errors", []).extend(errors)
         v13.REVIEW_LOG["passed"] = False
+        v13.REVIEW_LOG["independent_reviewer_acceptance_passed"] = False
     else:
         v13.REVIEW_LOG["independent_reviewer_acceptance_passed"] = True
         v13.REVIEW_LOG["passed"] = bool(v13.REVIEW_LOG.get("passed"))
