@@ -1,0 +1,139 @@
+name: Generate one V0.8.2 paper with strong AI review
+
+on:
+  workflow_call:
+    inputs:
+      paper_key:
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      paper_key:
+        description: Registered paper key
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  models: read
+
+env:
+  PYTHONUNBUFFERED: "1"
+  V082_PRIMARY_MODEL: "openai/gpt-5"
+  V082_REVIEW_MODEL: "openai/gpt-5"
+  V082_VISION_MODEL: "openai/gpt-5"
+  V082_REFERENCE_INTERVAL_SECONDS: "0.08"
+  CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
+  LUCAS_CACHE_KEY: "v082-lucas-source-s41588-024-01747-1-31p-v1"
+
+jobs:
+  generate-one:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install evidence and strong-AI dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            requests beautifulsoup4 PyMuPDF curl_cffi jsonschema lxml pillow
+
+      - name: Locate CANVAS and prepare directories
+        run: |
+          set -euo pipefail
+          CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
+          test -n "$CANVAS"
+          printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_strong_ai_paths
+          mkdir -p .build/v082/{pdfs,cho-source,lucas-source,model-cache,strong-one}
+
+      - name: Restore audited source PDF cache
+        id: source-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/pdfs
+          key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json', 'tools/download_v082_sources.py', 'tools/download_v082_release_sources.py', 'tools/download_v082_release_sources_continue.py', 'tools/prefetch_v082_blocked_sources.py') }}
+          restore-keys: |
+            v082-source-pdfs-
+
+      - name: Restore exact Cho source
+        id: cho-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/cho-source
+          key: ${{ env.CHO_CACHE_KEY }}
+
+      - name: Restore exact Lucas source
+        id: lucas-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/lucas-source
+          key: ${{ env.LUCAS_CACHE_KEY }}
+
+      - name: Restore paper-specific strong-AI cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/model-cache
+          key: v082-strong-ai-v13-${{ inputs.paper_key || github.event.inputs.paper_key }}-${{ hashFiles('tools/generate_v082_reader_manifest_with_strong_ai_v13.py', 'config/v082_reader_content_plans/*.json') }}
+          restore-keys: |
+            v082-strong-ai-v13-${{ inputs.paper_key || github.event.inputs.paper_key }}-
+
+      - name: Obtain and inject exact source PDFs
+        run: |
+          set -euo pipefail
+          source /tmp/v082_strong_ai_paths
+          python tools/prefetch_v082_blocked_sources.py \
+            --registry config/v082_paper_sources.json \
+            --output-dir .build/v082/pdfs \
+            --report .build/v082/strong-one/BLOCKED_SOURCE_PREFETCH.json || true
+          python tools/download_v082_release_sources_continue.py \
+            --registry config/v082_paper_sources.json \
+            --canonical-html "$CANVAS_ORIGINAL" \
+            --output-dir .build/v082/pdfs \
+            --report .build/v082/strong-one/SOURCE_DOWNLOAD_AVAILABLE.json \
+            --reuse || true
+          test "${{ steps.cho-cache.outputs.cache-hit }}" = "true"
+          test "${{ steps.lucas-cache.outputs.cache-hit }}" = "true"
+          cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
+          cp .build/v082/lucas-source/09_lucas-2024.pdf .build/v082/pdfs/09_lucas-2024.pdf
+
+      - name: Generate and independently review every variable component
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAPER_KEY: ${{ inputs.paper_key || github.event.inputs.paper_key }}
+        run: |
+          python tools/run_v082_manifest_generation_one_strong.py "$PAPER_KEY" \
+            --registry config/v082_paper_sources.json \
+            --pdf-dir .build/v082/pdfs \
+            --plans-dir config/v082_reader_content_plans \
+            --manifest-dir content/v082_manifests \
+            --review-dir content/v082_reviews \
+            --work-root .build/v082/strong-one \
+            --cache-dir .build/v082/model-cache \
+            --branch v0.8x-batch-diagnosis
+
+      - name: Save paper-specific model and reference cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .build/v082/model-cache
+          key: v082-strong-ai-v13-${{ inputs.paper_key || github.event.inputs.paper_key }}-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Upload complete per-paper audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v082-strong-ai-${{ inputs.paper_key || github.event.inputs.paper_key }}
+          path: |
+            .build/v082/strong-one/${{ inputs.paper_key || github.event.inputs.paper_key }}
+            content/v082_manifests/${{ inputs.paper_key || github.event.inputs.paper_key }}.json
+            content/v082_reviews/${{ inputs.paper_key || github.event.inputs.paper_key }}.json
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30
