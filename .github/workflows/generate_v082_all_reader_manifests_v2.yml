@@ -1,235 +1,128 @@
-name: Generate all V0.8.2 manifests strictly sequentially
+name: Generate all V0.8.2 manifests by sequential strong-AI review
 
 on:
   pull_request:
     branches: [main]
     paths:
-      - ".github/v082-manifest-trigger-v11"
+      - ".github/v082-manifest-trigger-v13"
       - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
-      - "tools/generate_v082_reader_manifest_with_google_translate_v11.py"
-      - "tools/validate_v082_reader_semantics_v3.py"
+      - ".github/workflows/generate_v082_one_paper_strong.yml"
+      - "tools/generate_v082_reader_manifest_with_strong_ai_v13.py"
+      - "tools/run_v082_manifest_generation_one_strong.py"
+      - "tools/validate_v082_strong_ai_review.py"
+      - "tools/validate_v082_reader_semantics_v4.py"
       - "config/v082_reader_content_plans/*.json"
   workflow_dispatch:
 
 permissions:
   contents: write
+  models: read
 
 concurrency:
-  group: v082-generate-pr-v11-sequential
+  group: v082-strong-ai-v13-strict-sequence
   cancel-in-progress: true
 
-env:
-  PYTHONUNBUFFERED: "1"
-  V082_TRANSLATE_INTERVAL_SECONDS: "0.05"
-  CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
-  LUCAS_CACHE_KEY: "v082-lucas-source-s41588-024-01747-1-31p-v1"
-
 jobs:
-  generate-strictly-sequential:
+  maas:
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: maas-2026
+    secrets: inherit
+
+  landry:
+    needs: maas
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: landry-2026
+    secrets: inherit
+
+  lee:
+    needs: landry
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: lee-2025
+    secrets: inherit
+
+  valanarasu:
+    needs: lee
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: valanarasu-2026
+    secrets: inherit
+
+  li_hex:
+    needs: valanarasu
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: li-hex-2026
+    secrets: inherit
+
+  andani:
+    needs: li_hex
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: andani-2025
+    secrets: inherit
+
+  cho:
+    needs: andani
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: cho-2026
+    secrets: inherit
+
+  spitzer:
+    needs: cho
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: spitzer-2025
+    secrets: inherit
+
+  lucas:
+    needs: spitzer
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: lucas-2024
+    secrets: inherit
+
+  sorin:
+    needs: lucas
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: sorin-2023
+    secrets: inherit
+
+  karimi:
+    needs: sorin
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: karimi-2023
+    secrets: inherit
+
+  complete:
+    needs: karimi
     runs-on: ubuntu-latest
-    timeout-minutes: 720
     steps:
       - uses: actions/checkout@v4
         with:
           ref: v0.8x-batch-diagnosis
           fetch-depth: 0
-
-      - name: Record active workflow run
-        env:
-          RUN_ID: ${{ github.run_id }}
-          RUN_ATTEMPT: ${{ github.run_attempt }}
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: |
-          mkdir -p status
-          python - <<'PY'
-          import json, os
-          from pathlib import Path
-          Path('status/v082_generation_status.json').write_text(json.dumps({
-              'version': 'v082-generation-observer-4',
-              'state': 'running',
-              'generator': 'v11-batched-google-translate-pr-exact-sources',
-              'run_id': int(os.environ['RUN_ID']),
-              'run_attempt': int(os.environ['RUN_ATTEMPT']),
-              'trigger_sha': os.environ['HEAD_SHA'],
-          }, ensure_ascii=False, indent=2) + '\n', 'utf-8')
-          PY
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add status/v082_generation_status.json
-          git commit -m "Record active V0.8.2 manifest run ${RUN_ID}" || true
-          git fetch origin v0.8x-batch-diagnosis
-          git rebase origin/v0.8x-batch-diagnosis
-          git push origin HEAD:v0.8x-batch-diagnosis
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
-
-      - name: Install source, evidence and manifest dependencies
-        run: |
-          python -m pip install --disable-pip-version-check \
-            requests beautifulsoup4 PyMuPDF curl_cffi jsonschema lxml pillow
-
-      - name: Locate immutable CANVAS reader and prepare directories
-        run: |
-          CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
-          test -n "$CANVAS"
-          printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_manifest_paths
-          mkdir -p .build/v082/{pdfs,cho-source,lucas-source,batch-evidence,batch-audits,batch-reports,generated-manifests,model-cache} content/v082_manifests
-
-      - name: Restore audited PDF cache
-        id: source-cache
-        uses: actions/cache/restore@v4
-        with:
-          path: .build/v082/pdfs
-          key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json', 'tools/download_v082_sources.py', 'tools/download_v082_release_sources.py', 'tools/download_v082_release_sources_continue.py', 'tools/prefetch_v082_blocked_sources.py') }}
-          restore-keys: |
-            v082-source-pdfs-
-
-      - name: Restore validated user-supplied Cho source cache
-        id: cho-cache
-        uses: actions/cache/restore@v4
-        with:
-          path: .build/v082/cho-source
-          key: ${{ env.CHO_CACHE_KEY }}
-
-      - name: Restore validated user-supplied Lucas source cache
-        id: lucas-cache
-        uses: actions/cache/restore@v4
-        with:
-          path: .build/v082/lucas-source
-          key: ${{ env.LUCAS_CACHE_KEY }}
-
-      - name: Restore translation caches
-        uses: actions/cache/restore@v4
-        with:
-          path: .build/v082/model-cache
-          key: v082-google-translation-v11-${{ hashFiles('tools/generate_v082_reader_manifest_with_google_translate_v11.py', 'config/v082_reader_content_plans/*.json') }}
-          restore-keys: |
-            v082-google-translation-v11-
-            v082-google-translation-v10-
-            v082-google-translation-v9-
-            v082-google-translation-v8-
-
-      - name: Obtain every downloadable source PDF
-        shell: bash
-        run: |
-          set -euo pipefail
-          source /tmp/v082_manifest_paths
-          python tools/prefetch_v082_blocked_sources.py \
-            --registry config/v082_paper_sources.json \
-            --output-dir .build/v082/pdfs \
-            --report .build/v082/batch-reports/BLOCKED_SOURCE_PREFETCH.json || true
-          python tools/download_v082_release_sources_continue.py \
-            --registry config/v082_paper_sources.json \
-            --canonical-html "$CANVAS_ORIGINAL" \
-            --output-dir .build/v082/pdfs \
-            --report .build/v082/batch-reports/SOURCE_DOWNLOAD_AVAILABLE.json \
-            --reuse || true
-
-      - name: Inject and verify exact user-supplied sources
-        run: |
-          set -euo pipefail
-          test "${{ steps.cho-cache.outputs.cache-hit }}" = "true"
-          test "${{ steps.lucas-cache.outputs.cache-hit }}" = "true"
-          test -s .build/v082/cho-source/07_cho-2026.pdf
-          test -s .build/v082/lucas-source/09_lucas-2024.pdf
-          cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
-          cp .build/v082/lucas-source/09_lucas-2024.pdf .build/v082/pdfs/09_lucas-2024.pdf
-          python - <<'PY'
-          import fitz
-          from pathlib import Path
-          expected = {
-              Path('.build/v082/pdfs/07_cho-2026.pdf'): (24, '10.1126/science.adz2742'),
-              Path('.build/v082/pdfs/09_lucas-2024.pdf'): (31, '10.1038/s41588-024-01747-1'),
-          }
-          for path, (pages, doi) in expected.items():
-              doc = fitz.open(path)
-              try:
-                  assert doc.page_count == pages, (path, doc.page_count, pages)
-                  text = '\n'.join(doc.load_page(i).get_text('text') for i in {0, 1, doc.page_count - 1}).lower()
-                  metadata = ' '.join(str(value or '') for value in doc.metadata.values()).lower()
-                  assert doi.lower() in text or doi.lower() in metadata, (path, doi)
-              finally:
-                  doc.close()
-          PY
-
-      - name: Generate, gate and persist one paper at a time
-        id: generate
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          python tools/run_v082_manifest_generation_sequentially_v2.py \
-            --registry config/v082_paper_sources.json \
-            --pdf-dir .build/v082/pdfs \
-            --evidence-dir .build/v082/batch-evidence \
-            --audit-dir .build/v082/batch-audits \
-            --report-dir .build/v082/batch-reports \
-            --generated-dir .build/v082/generated-manifests \
-            --manifest-dir content/v082_manifests \
-            --plans-dir config/v082_reader_content_plans \
-            --cache-dir .build/v082/model-cache \
-            --generator tools/generate_v082_reader_manifest_with_google_translate_v11.py \
-            --branch v0.8x-batch-diagnosis
-
-      - name: Save rolling exact-source cache
-        if: always() && steps.source-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: .build/v082/pdfs
-          key: ${{ steps.source-cache.outputs.cache-primary-key }}
-
-      - name: Save translation caches after every attempt
-        if: always()
-        uses: actions/cache/save@v4
-        with:
-          path: .build/v082/model-cache
-          key: v082-google-translation-v11-pr-${{ github.run_id }}-${{ github.run_attempt }}
-
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: v082-strict-sequential-manifest-audit-v11
-          path: |
-            content/v082_manifests
-            .build/v082/batch-evidence
-            .build/v082/batch-audits
-            .build/v082/batch-reports
-            .build/v082/generated-manifests
-            .build/v082/model-cache
-          if-no-files-found: warn
-          include-hidden-files: true
-          retention-days: 30
-
-      - name: Record terminal workflow state
-        if: always()
-        env:
-          RUN_ID: ${{ github.run_id }}
-          RUN_ATTEMPT: ${{ github.run_attempt }}
-          GENERATION_OUTCOME: ${{ steps.generate.outcome }}
+      - name: Verify all reviewed manifests exist
         run: |
           python - <<'PY'
-          import json, os
+          import json
           from pathlib import Path
-          manifests = sorted(path.stem for path in Path('content/v082_manifests').glob('*.json'))
-          summary_path = Path('.build/v082/batch-reports/SEQUENTIAL_MANIFEST_GENERATION.json')
-          summary = json.loads(summary_path.read_text('utf-8')) if summary_path.exists() else None
-          Path('status/v082_generation_status.json').write_text(json.dumps({
-              'version': 'v082-generation-observer-4',
-              'state': 'completed',
-              'generator': 'v11-batched-google-translate-pr-exact-sources',
-              'run_id': int(os.environ['RUN_ID']),
-              'run_attempt': int(os.environ['RUN_ATTEMPT']),
-              'generation_outcome': os.environ.get('GENERATION_OUTCOME'),
-              'manifest_count': len(manifests),
-              'manifests': manifests,
-              'summary': summary,
-          }, ensure_ascii=False, indent=2) + '\n', 'utf-8')
+          registry = json.loads(Path('config/v082_paper_sources.json').read_text('utf-8'))
+          keys = [p['key'] for p in registry['papers'] if int(p['order']) != 0]
+          missing = []
+          for key in keys:
+              if not Path(f'content/v082_manifests/{key}.json').exists():
+                  missing.append(f'manifest:{key}')
+              if not Path(f'content/v082_reviews/{key}.json').exists():
+                  missing.append(f'review:{key}')
+          if missing:
+              raise SystemExit('missing reviewed outputs: ' + ', '.join(missing))
+          if any(not json.loads(Path(f'content/v082_reviews/{key}.json').read_text('utf-8')).get('passed') for key in keys):
+              raise SystemExit('one or more persisted strong-AI reviews did not pass')
+          print(json.dumps({'reviewed_papers': len(keys), 'passed': True}, indent=2))
           PY
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add status/v082_generation_status.json
-          git commit -m "Record V0.8.2 manifest run ${RUN_ID} outcome" || true
-          git fetch origin v0.8x-batch-diagnosis
-          git rebase origin/v0.8x-batch-diagnosis
-          git push origin HEAD:v0.8x-batch-diagnosis
