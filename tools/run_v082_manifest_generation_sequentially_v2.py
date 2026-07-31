@@ -71,6 +71,11 @@ def main() -> None:
     parser.add_argument("--cache-dir", type=pathlib.Path, default=pathlib.Path(".build/v082/model-cache"))
     parser.add_argument("--branch", default="v0.8x-batch-diagnosis")
     parser.add_argument("--generator", default="tools/generate_v082_reader_manifest_with_github_models_v3.py")
+    parser.add_argument(
+        "--regenerate-existing",
+        action="store_true",
+        help="Regenerate manifests already committed after a previous complete gate pass.",
+    )
     args = parser.parse_args()
 
     if not (os.environ.get("GITHUB_TOKEN") or os.environ.get("GITHUB_MODELS_TOKEN")):
@@ -126,6 +131,21 @@ def main() -> None:
             status["reason"] = "paper-specific content plan unavailable"
             write(summary_path, {"papers": statuses, "stopped_at": key})
             raise SystemExit(f"strict sequence stopped at {key}: paper-specific content plan unavailable")
+
+        # A curated manifest enters this directory only after the complete evidence,
+        # semantic, reader-content, schema and code-boundary gate has passed and the
+        # workflow has pushed it. Preserve that validated checkpoint on fail-first
+        # continuation runs instead of repeatedly regenerating already accepted papers.
+        if curated.exists() and not args.regenerate_existing:
+            status.update({
+                "passed": True,
+                "committed": True,
+                "reused_validated_checkpoint": True,
+                "steps": {"validated_checkpoint": {"returncode": 0}},
+                "reason": "previously validated and committed manifest retained",
+            })
+            write(summary_path, {"papers": statuses, "last_completed": key})
+            continue
 
         try:
             commands: list[tuple[str, list[str]]] = [
@@ -236,9 +256,10 @@ def main() -> None:
             raise SystemExit(f"strict sequence stopped at {key}: {status['reason']}") from exc
 
     summary = {
-        "version": "v082-strict-sequential-manifest-generation-3",
+        "version": "v082-strict-sequential-manifest-generation-4",
         "expected_non_canvas": len(papers),
         "passed_count": sum(bool(item.get("passed")) for item in statuses),
+        "reused_count": sum(bool(item.get("reused_validated_checkpoint")) for item in statuses),
         "failed_keys": [],
         "all_expected_passed": len(statuses) == len(papers) and all(item.get("passed") for item in statuses),
         "papers": statuses,
