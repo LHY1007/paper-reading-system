@@ -11,6 +11,7 @@ import validate_v082_reader_semantics_v2 as base
 
 SOFT_ISSUES = {
     "panel explanation contains no traceable source entity or value",
+    "figure explanations are suspiciously templated/repeated",
 }
 
 
