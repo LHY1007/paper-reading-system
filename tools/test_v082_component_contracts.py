@@ -4,8 +4,10 @@ from __future__ import annotations
 import copy
 
 import generate_v082_reader_manifest_with_copilot_sdk_v15 as v15
+import generate_v082_reader_manifest_with_copilot_sdk_v16 as v16
 import normalize_v082_paper_tables as table_normalizer
 import validate_v082_reader_semantics_v4 as semantics
+import validate_v082_strong_ai_review as strong_review
 
 
 def test_table_upgrade_contract() -> None:
@@ -107,8 +109,59 @@ def test_panel_grounding_contract() -> None:
     assert not any("direct observed" in issue for issue in issues), issues
 
 
+def test_visual_panel_inventory_normalization() -> None:
+    assert v16.normalize_labels(["A-D"]) == ["A", "B", "C", "D"]
+    assert v16.normalize_labels(["panel a", "B", "B"]) == ["A", "B"]
+    assert v16.normalize_labels([]) == ["整图"]
+
+
+def test_review_asset_order_contract() -> None:
+    manifest = {
+        "paper": {"key": "andani-2025"},
+        "overview": {},
+        "sections": [],
+        "terms": [],
+        "references": [],
+        "assets": [
+            {"id": "figure-1", "kind": "figure"},
+            {
+                "id": "extended-data-table-1",
+                "kind": "table",
+                "source_render": "ai-verified-structured-table-transcription-v1",
+            },
+            {"id": "figure-2", "kind": "figure"},
+        ],
+    }
+    review = {
+        "version": "v082-strong-ai-component-review-1",
+        "paper_key": "andani-2025",
+        "passed": True,
+        "translation": [],
+        "figures": [
+            {"id": "figure-1", "passed": True, "source_image_present": True},
+            {"id": "extended-data-table-1", "passed": True, "source_image_present": True},
+            {"id": "figure-2", "passed": True, "source_image_present": True},
+        ],
+        "tables": [
+            {"id": "extended-data-table-1", "passed": True, "source_image_present": True},
+        ],
+        "overview": {"passed": True},
+        "terms": {"passed": True, "accepted_count": 0},
+        "references": {"passed": True, "total": 0},
+    }
+    result = strong_review.validate(manifest, review)
+    assert result["passed"], result["errors"]
+
+    invalid = copy.deepcopy(review)
+    invalid["figures"] = [invalid["figures"][0], invalid["figures"][2], invalid["figures"][1]]
+    result = strong_review.validate(manifest, invalid)
+    assert not result["passed"], "review order mismatch was not rejected"
+
+
 if __name__ == "__main__":
     test_table_upgrade_contract()
     test_normalizer_never_rewrites_reviewed_tables()
     test_panel_grounding_contract()
+    test_visual_panel_inventory_normalization()
+    test_review_asset_order_contract()
     print("V0.8.2 component contracts passed")
