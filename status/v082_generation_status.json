@@ -1,7 +1,100 @@
 {
   "version": "v082-generation-observer-1",
-  "state": "running",
+  "state": "completed",
   "run_id": 30614842957,
   "run_attempt": 1,
-  "trigger_sha": "2f03e430db377c2805070fcd67c7545eec0970f6"
+  "generation_outcome": "cancelled",
+  "manifest_count": 3,
+  "manifests": [
+    "landry-2026",
+    "lee-2025",
+    "maas-2026"
+  ],
+  "summary": {
+    "papers": [
+      {
+        "order": 1,
+        "key": "maas-2026",
+        "pdf": ".build/v082/pdfs/01_maas-2026.pdf",
+        "pdf_available": true,
+        "plan_available": true,
+        "generated_manifest": ".build/v082/generated-manifests/maas-2026.json",
+        "curated_manifest": "content/v082_manifests/maas-2026.json",
+        "passed": true,
+        "committed": true,
+        "steps": {
+          "evidence": {
+            "returncode": 0
+          },
+          "evidence_quality": {
+            "returncode": 0
+          },
+          "generation": {
+            "returncode": 0
+          },
+          "semantic_grounding": {
+            "returncode": 0
+          },
+          "reader_content": {
+            "returncode": 0
+          },
+          "final_manifest": {
+            "returncode": 0
+          },
+          "code_boundary": {
+            "returncode": 0
+          }
+        },
+        "commit": {
+          "changed": true,
+          "committed": true,
+          "pushed": true,
+          "attempt": 1
+        },
+        "reason": "source evidence, grounded content, schema and code boundary passed; manifest persisted"
+      },
+      {
+        "order": 2,
+        "key": "landry-2026",
+        "pdf": ".build/v082/pdfs/02_landry-2026.pdf",
+        "pdf_available": true,
+        "plan_available": true,
+        "generated_manifest": ".build/v082/generated-manifests/landry-2026.json",
+        "curated_manifest": "content/v082_manifests/landry-2026.json",
+        "passed": true,
+        "committed": true,
+        "steps": {
+          "evidence": {
+            "returncode": 0
+          },
+          "evidence_quality": {
+            "returncode": 0
+          },
+          "generation": {
+            "returncode": 0
+          },
+          "semantic_grounding": {
+            "returncode": 0
+          },
+          "reader_content": {
+            "returncode": 0
+          },
+          "final_manifest": {
+            "returncode": 0
+          },
+          "code_boundary": {
+            "returncode": 0
+          }
+        },
+        "commit": {
+          "changed": true,
+          "committed": true,
+          "pushed": true,
+          "attempt": 1
+        },
+        "reason": "source evidence, grounded content, schema and code boundary passed; manifest persisted"
+      }
+    ],
+    "last_completed": "landry-2026"
+  }
 }
