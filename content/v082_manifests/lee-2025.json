@@ -129,7 +129,7 @@
     {
       "id": "abstract",
       "title_en": "Abstract",
-      "title_zh": "摘要",
+      "title_zh": "抽象的",
       "level": 2,
       "blocks": [
         {
@@ -701,7 +701,7 @@
           ],
           "chinese": [
             {
-              "text": "此外，我们分析了一个独立的外部队列，该队列由来自原发性和复发性肿瘤的 112 个脑膜瘤 RNA-seq 样本组成14。该分析显示，与原发性肿瘤相比，复发样本中 COL6A3 的表达显着升高（Wilcoxon 检验，p = 0.0054）（图 3f）。为了进一步评估 COL6A3 是否会增加脑膜瘤复发的可能性，我们分析了另一组由 110 名脑膜瘤患者组成的外部队列，包括 RNA 测序数据和临床结果31。值得注意的是，COL6A3 mRNA 高表达的患者表现出明显较差的无复发生存（RFS）概率（图 3g）。通过体外测定的功能验证进一步支持了这些发现，因为 siRNA 介导的 COL6A3 沉默显着降低了 IOMM-Lee 和 SF3061 脑膜瘤细胞系的细胞增殖（图 3h）。此外，COL6A3敲低导致细胞周期活性显着降低，凸显了其在肿瘤进展和增殖中的重要作用（图3i）。为了证实这些结果，我们对 18 个原发样本和 18 个复发样本（包括 12 对匹配的患者）进行了 COL6A3 的免疫组织化学 (IHC) 染色。与我们之前的发现一致，与原发性肿瘤相比，复发性肿瘤表现出显着更高的 COL6A3 表达水平（图 3j，k）。此外，三个独立外部队列（GSE183653、GSE197763 和 GSE136661）的转录组分析证实，与原发性肿瘤和高级别脑膜瘤相比，复发性肿瘤中的 COL6A3 表达显着升高（补充图 S5A、B）14,32。总的来说，这些发现强调了 COL6A3 在肿瘤进展和复发中的关键作用。鉴于其对肿瘤细胞增殖和复发的贡献，COL6A3 代表了高风险复发性脑膜瘤的一个有前途的治疗靶点。",
+              "text": "此外，我们分析了一个独立的外部队列，该队列由来自原发性和复发性肿瘤的 112 个脑膜瘤 RNA-seq 样本组成14。该分析显示，与原发性肿瘤相比，复发样本中 COL6A3 的表达显着升高（Wilcoxon 检验，p = 0.0054）（图 3f）。为了进一步评估 COL6A3 是否会增加脑膜瘤复发的可能性，我们分析了另一组由 110 名脑膜瘤患者组成的外部队列，包括 RNA 测序数据和临床结果31。值得注意的是，COL6A3 mRNA 高表达的患者表现出明显较差的无复发生存（RFS）概率（图3g）。通过体外测定的功能验证进一步支持了这些发现，因为 siRNA 介导的 COL6A3 沉默显着降低了 IOMM-Lee 和 SF3061 脑膜瘤细胞系的细胞增殖（图 3h）。此外，COL6A3敲低导致细胞周期活性显着降低，凸显了其在肿瘤进展和增殖中的重要作用（图3i）。为了证实这些结果，我们对 18 个原发样本和 18 个复发样本（包括 12 对匹配的患者）进行了 COL6A3 的免疫组织化学 (IHC) 染色。与我们之前的发现一致，与原发性肿瘤相比，复发性肿瘤表现出显着更高的 COL6A3 表达水平（图 3j，k）。此外，三个独立外部队列（GSE183653、GSE197763 和 GSE136661）的转录组分析证实，与原发性肿瘤和高级别脑膜瘤相比，复发性肿瘤中的 COL6A3 表达显着升高（补充图 S5A、B）14,32。总的来说，这些发现强调了 COL6A3 在肿瘤进展和复发中的关键作用。鉴于其对肿瘤细胞增殖和复发的贡献，COL6A3 代表了高风险复发性脑膜瘤的一个有前途的治疗靶点。",
               "citation_ids": [
                 "14",
                 "31",
@@ -1132,7 +1132,7 @@
           ],
           "chinese": [
             {
-              "text": "样本采集和处理 经机构审查委员会 (IRB) 适当批准，从三星医疗中心接受手术的患者身上采集脑膜瘤样本。该研究方案得到了我们机构伦理委员会（三星医疗"
+              "text": "原文术语与标记：Sample collection and processing With appropriate approval from the institutional review board (IRB), meningioma specimens were collected from patients undergoing surgery at Samsung Medical Center. The study protocol was sanctioned by our institution’s ethical committees (Samsung Medical"
             }
           ],
           "source_fragments": [
@@ -1150,7 +1150,7 @@
           ],
           "chinese": [
             {
-              "text": "中心），并获得了所有参与者的书面知情同意书。"
+              "text": "原文术语与标记：Center), and written informed consent was obtained from all participants."
             }
           ],
           "source_fragments": [
@@ -1163,7 +1163,7 @@
     {
       "id": "single-nuclei-rna-sequencing-data-process-and-analysis",
       "title_en": "Single-nuclei RNA-sequencing data process and analysis",
-      "title_zh": "单核RNA测序数据处理和分析",
+      "title_zh": "原文术语与标记：Single-nuclei RNA-sequencing data process and analysis",
       "level": 3,
       "blocks": [
         {
@@ -1176,7 +1176,7 @@
           ],
           "chinese": [
             {
-              "text": "为了处理 snRNA-seq，我们利用 10x Genomics with Count 功能的 Cell Ranger (v.5.0.0) 将读数与预构建的 GRCh38 基因组参考 v.2020-A (refdata-gex-GRCh38-2020-A) 进行比对。"
+              "text": "原文术语与标记：To process snRNA-seq, we utilized Cell Ranger (v.5.0.0) from 10x Genomics with Count functionality for aligning reads to the prebuilt GRCh38 genome reference v.2020-A (refdata-gex-GRCh38-2020-A)."
             }
           ],
           "source_fragments": [
@@ -1198,7 +1198,7 @@
           ],
           "chinese": [
             {
-              "text": "然后，R 包 Seurat (v.4.0.5)53 将生成的基因逐细胞唯一分子标识符 (UMI) 计数矩阵用于后续分析。采用质量控制措施去除属于特定类别的条形码：可能代表碎片（表达 < 200 个基因）、潜在双联体（表达 > 3700 个基因）和显示应激或凋亡迹象的细胞（线粒体基因表达 > 10%）。细胞过滤后，原始特征计数被对数归一化、缩放，并使用主成分分析 (PCA) 进行线性降维。为了纠正不同样本之间的批次效应，Harmony (v.0.1.0) 被应用于 PCA 嵌入54。基于 PCA 空间中的欧几里德距离计算的 K 最近邻 (KNN) 图模型来识别细胞簇，并使用 t 分布随机邻域嵌入 (tSNE) 算法进行可视化。通过在每个簇内进行差异基因表达分析并根据特征标记的表达进行注释来分配细胞类型身份。",
+              "text": "原文术语与标记：The resulting gene-by-cell unique molecular identifier (UMI) count matrix was then employed by the R package Seurat (v.4.0.5)53 for subsequent analysis. Quality control measures were applied to remove barcodes falling into specific categories: those likely representing debris (expressing < 200 genes), potential doublets (expressing > 3700 genes), and cells showing signs of stress or apoptosis (with > 10% mitochondrial gene expression). Following cell filtering, raw feature counts were log-normalized, scaled, and underwent linear dimensional reduction using principal component analysis (PCA). To correct for batch effects across different samples, the Harmony (v.0.1.0) was applied to the PCA embeddings54. Cell clusters were identified based on a K-nearest neighbor (KNN) graph model computed on Euclidean distances in PCA space, and visualization was performed using the t-distributed stochastic neighbor embedding (tSNE) algorithm. Cell type identities were assigned by performing differential gene expression analysis within each cluster and annotating based on the expression of characteristic markers.",
               "citation_ids": [
                 "53",
                 "54"
@@ -1219,7 +1219,7 @@
     {
       "id": "copy-number-alteration-analysis",
       "title_en": "Copy number alteration analysis",
-      "title_zh": "拷贝数变异分析",
+      "title_zh": "原文术语与标记：Copy number alteration analysis",
       "level": 3,
       "blocks": [
         {
@@ -1235,7 +1235,7 @@
           ],
           "chinese": [
             {
-              "text": "为了使用 snRNA-seq 数据检测大规模染色体拷贝数变异 (CNV)，我们采用了 inferCNV (v.1.6.0)，其默认参数建议用于 10x 基因组数据55。该分析是使用质量控制后过滤后获得的原始计数矩阵在样本水平上进行的。在对所有样本运行 inferCNV 之前，我们使用“ulimit -s unlimited”调整了 bash 环境，并在 R 中设置了特定选项（表达式 = 500000）。",
+              "text": "原文术语与标记：To detect large-scale chromosomal copy number variations (CNVs) using snRNA-seq data, we employed inferCNV (v.1.6.0) with default parameters recommended for 10x Genomics data55. This analysis was conducted at the sample level using the raw counts matrix obtained after post-quality-control filtering. Prior to running inferCNV across all samples, we adjusted the bash environment with ‘ulimit -s unlimited’ and set specific options (expressions = 500000) within R.",
               "citation_ids": [
                 "55"
               ]
@@ -1251,7 +1251,7 @@
     {
       "id": "differential-expression-analysis",
       "title_en": "Differential expression analysis",
-      "title_zh": "差异表达分析",
+      "title_zh": "原文术语与标记：Differential expression analysis",
       "level": 3,
       "blocks": [
         {
@@ -1264,7 +1264,7 @@
           ],
           "chinese": [
             {
-              "text": "为了识别不同簇之间的差异表达基因，我们利用了 Seurat 中的 t.test 函数，通过 Benjamini-Hochberg 程序应用多重假设校正。调整后的 p 值 < 0.05 且绝对 log2 倍变化大于 1 的基因被认为是差异表达的。 Log2 倍变化是根据组间 log​​2 转换平均计数的差异计算的。"
+              "text": "原文术语与标记：For identifying differentially expressed genes between distinct clusters, we utilized the t.test function in Seurat, applying multiple hypothesis correction via the Benjamini–Hochberg procedure. Genes with an adjusted p-value < 0.05 and an absolute log2-fold change greater than 1 were considered differentially expressed. Log2-fold changes were computed based on the difference in log2-transformed mean counts between groups."
             }
           ],
           "source_fragments": [
@@ -1277,7 +1277,7 @@
     {
       "id": "rna-velocity-analysis",
       "title_en": "RNA velocity analysis",
-      "title_zh": "RNA速度分析",
+      "title_zh": "原文术语与标记：RNA velocity analysis",
       "level": 3,
       "blocks": [
         {
@@ -1294,7 +1294,7 @@
           ],
           "chinese": [
             {
-              "text": "为了量化每个细胞每个基因的剪接和未剪接的独特分子标识符（UMIs），我们使用了Python包velocyto56；接下来使用 scanpy 和 scvelo19 进行后续分析。对于每个细胞，我们使用 scv.pp.moments 计算归一化剪接和未剪接计数的矩（均值和非中心方差）。 RNA 速度估计是使用 scv.tl.velocity 使用“动态”模式进行的，并使用 scvelo.tl.velocity_graph 构建了描述转移概率的速度图。",
+              "text": "原文术语与标记：To quantify spliced and unspliced unique molecular identifiers (UMIs) per gene per cell, we employed the Python package velocyto56; followed by subsequent analyses using scanpy and scvelo19. For each cell, we computed moments (means and uncentered variances) of normalized spliced and unspliced counts using scv.pp.moments. RNA velocity estimation was performed with scv.tl.velocity using the ‘dynamical’ mode, and a velocity graph depicting transition probabilities was constructed using scvelo.tl.velocity_graph.",
               "citation_ids": [
                 "56",
                 "19"
@@ -1311,7 +1311,7 @@
     {
       "id": "molecular-subtype-classification",
       "title_en": "Molecular subtype classification",
-      "title_zh": "分子亚型分类",
+      "title_zh": "原文术语与标记：Molecular subtype classification",
       "level": 3,
       "blocks": [
         {
@@ -1327,7 +1327,7 @@
           ],
           "chinese": [
             {
-              "text": "使用先前研究10中每个亚组的分子基因集，应用 ssGSEA 方法来量化单个肿瘤细胞内每个分子亚型的活性。所有基因根据其表达水平进行排名，并通过计算运行总和统计来计算每个分子亚型的富集分数，该统计评估每个亚型基因集中的基因与未包含的基因相比是否富集在排名列表的顶部。这使得能够对单个肿瘤细胞的四种分子亚型的活性进行量化和比较。为了减轻潜在的技术偏差，对分子亚型评分进行了标准化，以确保基因集大小的差异不会扭曲结果。",
+              "text": "原文术语与标记：Using the molecular gene set for each subgroup from the previous study10, the ssGSEA method was applied to quantify the activity of each molecular subtype within individual tumor cells. All genes were ranked based on their expression levels, and enrichment scores for each molecular subtype were computed by calculating a running sum statistic that evaluates whether genes in each subtype gene set are enriched at the top of a ranked list compared to genes not included. This enabled quantification and comparison of the activity of the four molecular subtypes across individual tumor cells. To mitigate potential technical biases, molecular subtype scores were normalized to ensure that differences in gene set size did not skew the results.",
               "citation_ids": [
                 "10"
               ]
@@ -1374,7 +1374,7 @@
           ],
           "chinese": [
             {
-              "text": "相关术语或标记：D = maxðSCImmune, SCNF2wtÞ maxðSCHyper, SCProÞ ð1Þ"
+              "text": "相关术语或标记：D = maxðSCImmune、SCNF2wtÞ maxðSCHyper、SCProÞ ð1Þ"
             }
           ],
           "source_fragments": [
@@ -2156,9 +2156,9 @@
       "hires": true,
       "source_render": "pdf-caption-guided-region",
       "caption_en": "Fig. 3 | Risk signature analysis of primary and recurrent tumor cells identified COL6A3 as a driver of risk vulnerability. a Risk score (“high-risk” and “low-risk”) comparison between primary and recurrent meningioma tumor cells (n = 37,460). Box plots show the median, interquartile range, and 1.5 × IQR whiskers; outliers are shown as individual points. Statistical significance was assessed using the two-sided Wilcoxon rank-sum test. Source data are provided as a Source Data file. b Comparison of higher risk score (left) and lower risk score (right) in primary tumor cells categorized by early and late latent time groups (n = 5,733). Box plots show the median, interquartile range, and 1.5 × IQR whiskers; outliers are shown as individual points. Statistical significance was assessed using the two-sided Wilcoxon rank-sum test. Source data are provided as a Source Data file. c Top genes associated with latent time identified through the elastic-net regression model. The x-axis indicates the correlation between gene expression and latent time across individual cells, and the y-axis shows the frequency of selection across 100 bootstrap iterations of the elastic-net model. p-values were calculated by Spearman correlation tests. Source data are provided as a Source Data file. d Expression level of COL6A3 gene according to risk score groups. Each group of tumor cells were selected based on “high-risk” (top) or “low-risk” (bottom) signatures and termed “top 25% tumors” and “bottom 25% tumors” based on their risk signature activities. e Log2 normalized gene expression level of COL6A3 between primary and recurrent tumor cells based on molecular subtype (two-sided Wilcoxon rank-sum test). Asterisks indicate statistical significance: p < 0.0001 (****). f Violin plot showing the comparison of COL6A3 expression levelsbetween primary and recurrent samples in of TAM infiltration in recurrent tumors (Fig. 4e). These findings highlight that recurrent tumors are characterized by a more pronounced pro-tumorigenic potential through the infiltration of M2 and C1Q + macrophages.",
-      "caption_zh": "图3|原发性和复发性肿瘤细胞的风险特征分析确定 COL6A3 是风险脆弱性的驱动因素。 a 原发性脑膜瘤肿瘤细胞和复发性脑膜瘤肿瘤细胞之间的风险评分（“高风险”和“低风险”）比较（n = 37,460）。箱线图显示中位数、四分位数范围和 1.5 × IQR 晶须；异常值显示为单独的点。使用双边 Wilcoxon 秩和检验评估统计显着性。源数据作为源数据文件提供。 b 按早期和晚期潜伏时间组分类的原发性肿瘤细胞的较高风险评分（左）和较低风险评分（右）的比较（n = 5,733）。箱线图显示中位数、四分位距和 1.5 × IQR 晶须；异常值显示为单独的点。使用双边 Wilcoxon 秩和检验评估统计显着性。源数据作为源数据文件提供。 c 通过弹性网络回归模型识别出与潜伏时间相关的顶级基因。 x 轴表示基因表达与各个细胞的潜伏时间之间的相关性，y 轴表示弹性网络模型 100 次引导迭代中的选择频率。 p 值通过 Spearman 相关性检验计算。源数据作为源数据文件提供。 d 根据风险评分组的 COL6A3 基因表达水平。每组肿瘤细胞均根据“高风险”（顶部）或“低风险”（底部）特征进行选择，并根据其风险特征活动称为“前 25% 肿瘤”和“后 25% 肿瘤”。 e Log2 根据分子亚型（双边 Wilcoxon 秩和检验）对原发性肿瘤细胞和复发性肿瘤细胞之间的 COL6A3 基因表达水平进行归一化。星号表示统计显着性：p < 0.0001 (****)。 f 小提琴图，显示复发肿瘤中 TAM 浸润的原发样本和复发样本之间 COL6A3 表达水平的比较（图 4e）。这些发现强调，复发性肿瘤的特点是通过 M2 和 C1Q + 巨噬细胞的浸润具有更明显的促肿瘤潜力。",
+      "caption_zh": "图3|原发性和复发性肿瘤细胞的风险特征分析确定 COL6A3 是风险脆弱性的驱动因素。 a 原发性脑膜瘤肿瘤细胞和复发性脑膜瘤肿瘤细胞之间的风险评分（“高风险”和“低风险”）比较（n = 37,460）。箱线图显示中位数、四分位数范围和 1.5 × IQR 晶须；异常值显示为单独的点。使用双边 Wilcoxon 秩和检验评估统计显着性。源数据作为源数据文件提供。 b 按早期和晚期潜伏时间组分类的原发性肿瘤细胞的较高风险评分（左）和较低风险评分（右）的比较（n = 5,733）。箱线图显示中位数、四分位数范围和 1.5 × IQR 晶须；异常值显示为单独的点。使用双边 Wilcoxon 秩和检验评估统计显着性。源数据作为源数据文件提供。 c 通过弹性网络回归模型识别出与潜伏时间相关的顶级基因。 x 轴表示基因表达与各个细胞的潜伏时间之间的相关性，y 轴表示弹性网络模型 100 次引导迭代中的选择频率。 p 值通过 Spearman 相关性检验计算。源数据作为源数据文件提供。 d 根据风险评分组的 COL6A3 基因表达水平。每组肿瘤细胞均根据“高风险”（顶部）或“低风险”（底部）特征进行选择，并根据其风险特征活动称为“前 25% 肿瘤”和“后 25% 肿瘤”。 e Log2 根据分子亚型（双边 Wilcoxon 秩和检验）对原发性肿瘤细胞和复发性肿瘤细胞之间的 COL6A3 基因表达水平进行归一化。星号表示统计显着性：p < 0.0001 (****)。 f 小提琴图，显示复发肿瘤中 TAM 浸润的原发样本和复发样本之间 COL6A3 表达水平的比较（图 4e）。这些发现强调，复发性肿瘤的特点是通过 M2 和 C1Q + 巨噬细胞的浸润具有更明显的促肿瘤潜力。",
       "study": {
-        "overview": "阅读时按照 A → B → C → D → E → F 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图3|原发性和复发性肿瘤细胞的风险特征分析确定 COL6A3 是风险脆弱性的驱动因素。 a 原发性脑膜瘤肿瘤细胞和复发性脑膜瘤肿瘤细胞之间的风险评分（“高风险”和“低风险”）比较（n = 37,460）。箱线图显示中位数、四分位数范围和 1.5 × IQR 晶须；异常值显示为单独的点。使用双边 Wilcoxon 秩和检验评估统计显着性。源数据作为源数据文件提供。 b 按早期和晚期潜伏时间组分类的原发性肿瘤细胞的较高风险评分（左）和较低风险评分（右）的比较（n = 5,733）。箱线图显示中位数、四分位距和 1.5 × IQR 晶须；异常值显示为单独的点。使用双边 Wilcoxon 秩和检验评估统计显着性。源数据作为源数据文件提供。 c 通过弹性网络回归模型识别出与潜伏时间相关的顶级基因。 x 轴表示基因表达与各个细胞的潜伏时间之间的相关性，y 轴表示弹性网络模型 100 次引导迭代中的选择频率。 p 值通过 Spearman 相关性检验计算。源数据作为源数据文件提供。 d 根据风险评分组的 COL6A3 基因表达水平。每组肿瘤细胞均根据“高风险”（顶部）或“低风险”（底部）特征进行选择，并根据其风险特征活动称为“前 25% 肿瘤”和“后 25% 肿瘤”。 e Log2 根据分子亚型（双边 Wilcoxon 秩和检验）对原发性肿瘤细胞和复发性肿瘤细胞之间的 COL6A3 基因表达水平进行归一化。星号表示统计显着性：p < 0.0001 (****)。 f 小提琴图，显示复发肿瘤中 TAM 浸润的原发样本和复发样本之间 COL6A3 表达水平的比较（图 4e）。这些发现强调，复发性肿瘤的特点是通过 M2 和 C1Q + 巨噬细胞的浸润具有更明显的促肿瘤潜力。",
+        "overview": "阅读时按照 A → B → C → D → E → F 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图3|原发性和复发性肿瘤细胞的风险特征分析确定 COL6A3 是风险脆弱性的驱动因素。 a 原发性脑膜瘤肿瘤细胞和复发性脑膜瘤肿瘤细胞之间的风险评分（“高风险”和“低风险”）比较（n = 37,460）。箱线图显示中位数、四分位数范围和 1.5 × IQR 晶须；异常值显示为单独的点。使用双边 Wilcoxon 秩和检验评估统计显着性。源数据作为源数据文件提供。 b 按早期和晚期潜伏时间组分类的原发性肿瘤细胞的较高风险评分（左）和较低风险评分（右）的比较（n = 5,733）。箱线图显示中位数、四分位数范围和 1.5 × IQR 晶须；异常值显示为单独的点。使用双边 Wilcoxon 秩和检验评估统计显着性。源数据作为源数据文件提供。 c 通过弹性网络回归模型识别出与潜伏时间相关的顶级基因。 x 轴表示基因表达与各个细胞的潜伏时间之间的相关性，y 轴表示弹性网络模型 100 次引导迭代中的选择频率。 p 值通过 Spearman 相关性检验计算。源数据作为源数据文件提供。 d 根据风险评分组的 COL6A3 基因表达水平。每组肿瘤细胞均根据“高风险”（顶部）或“低风险”（底部）特征进行选择，并根据其风险特征活动称为“前 25% 肿瘤”和“后 25% 肿瘤”。 e Log2 根据分子亚型（双边 Wilcoxon 秩和检验）对原发性肿瘤细胞和复发性肿瘤细胞之间的 COL6A3 基因表达水平进行归一化。星号表示统计显着性：p < 0.0001 (****)。 f 小提琴图，显示复发肿瘤中 TAM 浸润的原发样本和复发样本之间 COL6A3 表达水平的比较（图 4e）。这些发现强调，复发性肿瘤的特点是通过 M2 和 C1Q + 巨噬细胞的浸润具有更明显的促肿瘤潜力。",
         "panels": [
           {
             "label": "A",
