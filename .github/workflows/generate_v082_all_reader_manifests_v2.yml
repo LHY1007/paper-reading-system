@@ -4,13 +4,16 @@ on:
   pull_request:
     branches: [main]
     paths:
-      - ".github/v082-manifest-trigger-v14"
+      - ".github/v082-manifest-trigger-v15"
       - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
       - ".github/workflows/generate_v082_one_paper_strong.yml"
       - "tools/copilot_sdk_json_provider.py"
+      - "tools/generate_v082_reader_manifest_with_copilot_sdk_v15.py"
       - "tools/generate_v082_reader_manifest_with_copilot_sdk_v14.py"
       - "tools/generate_v082_reader_manifest_with_strong_ai_v13.py"
       - "tools/run_v082_manifest_generation_one_strong.py"
+      - "tools/test_v082_component_contracts.py"
+      - "tools/normalize_v082_paper_tables.py"
       - "tools/validate_v082_strong_ai_review.py"
       - "tools/validate_v082_reader_semantics_v4.py"
       - "config/v082_reader_content_plans/*.json"
@@ -21,7 +24,7 @@ permissions:
   copilot-requests: write
 
 concurrency:
-  group: v082-strong-ai-v14-strict-sequence
+  group: v082-strong-ai-v15-strict-sequence
   cancel-in-progress: true
 
 jobs:
@@ -109,7 +112,8 @@ jobs:
         with:
           ref: v0.8x-batch-diagnosis
           fetch-depth: 0
-      - name: Verify all reviewed manifests exist
+
+      - name: Verify all reviewed manifests exist and passed
         run: |
           python - <<'PY'
           import json
@@ -117,14 +121,48 @@ jobs:
           registry = json.loads(Path('config/v082_paper_sources.json').read_text('utf-8'))
           keys = [p['key'] for p in registry['papers'] if int(p['order']) != 0]
           missing = []
+          failed = []
           for key in keys:
-              if not Path(f'content/v082_manifests/{key}.json').exists():
+              manifest = Path(f'content/v082_manifests/{key}.json')
+              review = Path(f'content/v082_reviews/{key}.json')
+              if not manifest.exists():
                   missing.append(f'manifest:{key}')
-              if not Path(f'content/v082_reviews/{key}.json').exists():
+              if not review.exists():
                   missing.append(f'review:{key}')
+              elif not json.loads(review.read_text('utf-8')).get('passed'):
+                  failed.append(key)
           if missing:
               raise SystemExit('missing reviewed outputs: ' + ', '.join(missing))
-          if any(not json.loads(Path(f'content/v082_reviews/{key}.json').read_text('utf-8')).get('passed') for key in keys):
-              raise SystemExit('one or more persisted strong-AI reviews did not pass')
+          if failed:
+              raise SystemExit('strong-AI reviews did not pass: ' + ', '.join(failed))
           print(json.dumps({'reviewed_papers': len(keys), 'passed': True}, indent=2))
           PY
+
+      - name: Arm final reader build only after complete review set
+        env:
+          RUN_ID: ${{ github.run_id }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          Path('.github/v082-final-build-trigger').write_text(json.dumps({
+              'version': 'v082-final-build-trigger-2',
+              'strong_ai_sequence_run_id': int(os.environ['RUN_ID']),
+              'trigger_sha': os.environ['HEAD_SHA'],
+              'all_reviewed_manifests_passed': True,
+          }, indent=2) + '\n', 'utf-8')
+          PY
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .github/v082-final-build-trigger
+          git commit -m "Arm V0.8.2 final build after complete strong-AI review"
+          for attempt in 1 2 3 4; do
+            git fetch origin v0.8x-batch-diagnosis
+            if git rebase origin/v0.8x-batch-diagnosis && git push origin HEAD:v0.8x-batch-diagnosis; then
+              exit 0
+            fi
+            git rebase --abort || true
+            sleep $((attempt * 5))
+          done
+          exit 1
