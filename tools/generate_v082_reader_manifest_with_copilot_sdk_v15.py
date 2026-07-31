@@ -62,8 +62,8 @@ def study_issues_grounded(study: dict[str, Any], labels: list[str]) -> list[str]
     issues = list(_ORIGINAL_STUDY_ISSUES(study, labels))
     payload = _CURRENT_PAYLOAD
     source_panels = payload.get("source_panels") or []
-    nearby = " ".join(payload.get("nearby_body_evidence") or [])
     caption = norm(payload.get("caption_en"))
+    nearby = " ".join(payload.get("nearby_body_evidence") or [])
 
     for index, panel in enumerate(study.get("panels") or []):
         label = norm(panel.get("label")) or "整图"
@@ -72,11 +72,24 @@ def study_issues_grounded(study: dict[str, Any], labels: list[str]) -> list[str]
         source_text = ""
         if index < len(source_panels):
             source_text = norm(source_panels[index].get("source_text"))
-        anchors = traceable_anchors(" ".join([source_text, caption, nearby]))
+
+        # Prefer anchors that belong to this exact panel. Only fall back to the
+        # full legend/body when the panel evidence itself contains no robust
+        # identifier or numeric value. This prevents a repeated figure-wide term
+        # from making every panel explanation appear grounded.
+        anchors = traceable_anchors(source_text)
+        anchor_scope = "panel evidence"
+        if not anchors:
+            anchors = traceable_anchors(caption)
+            anchor_scope = "full figure legend"
+        if not anchors:
+            anchors = traceable_anchors(nearby)
+            anchor_scope = "figure-linked body evidence"
+
         matched = [anchor for anchor in anchors if anchor.lower() in explanation.lower()]
         if anchors and not matched:
             issues.append(
-                f"panel {label} lacks a source-traceable identifier or value; "
+                f"panel {label} lacks a source-traceable identifier or value from {anchor_scope}; "
                 f"use at least one of: {', '.join(anchors[:12])}"
             )
         if GENERIC_PANEL_TITLE.match(title):
