@@ -1,0 +1,85 @@
+name: Prefetch V0.8.2 Lucas final source
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/prefetch_v082_lucas_source.yml"
+      - ".github/v082-lucas-source-trigger"
+      - "tools/prefetch_v082_adobe_shared_pdf.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v082-lucas-final-source-prefetch
+  cancel-in-progress: true
+
+env:
+  LUCAS_ADOBE_URL: "https://at.adobe.com/7lRkqBUBDXjL38Lv"
+  LUCAS_CACHE_KEY: "v082-lucas-source-s41588-024-01747-1-31p-v1"
+
+jobs:
+  prefetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install source and Chromium dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            requests beautifulsoup4 lxml PyMuPDF playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Restore dedicated Lucas final-source cache
+        id: lucas-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/lucas-source
+          key: ${{ env.LUCAS_CACHE_KEY }}
+
+      - name: Materialize the user-supplied 31-page final Nature Genetics PDF
+        if: steps.lucas-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .build/v082/lucas-source .build/v082/lucas-prefetch
+          python tools/prefetch_v082_adobe_shared_pdf.py \
+            --url "$LUCAS_ADOBE_URL" \
+            --output .build/v082/lucas-source/09_lucas-2024.pdf \
+            --report .build/v082/lucas-prefetch/LUCAS_ADOBE_SOURCE.json \
+            --expected-pages 31 \
+            --doi 10.1038/s41588-024-01747-1 \
+            --title-fragment "Spatial genomic biochemical and cellular mechanisms underlying meningioma heterogeneity and evolution"
+
+      - name: Revalidate cached or newly materialized Lucas source
+        run: |
+          mkdir -p .build/v082/lucas-prefetch
+          python tools/prefetch_v082_adobe_shared_pdf.py \
+            --url "$LUCAS_ADOBE_URL" \
+            --output .build/v082/lucas-source/09_lucas-2024.pdf \
+            --report .build/v082/lucas-prefetch/LUCAS_SOURCE_FINAL.json \
+            --expected-pages 31 \
+            --doi 10.1038/s41588-024-01747-1 \
+            --title-fragment "Spatial genomic biochemical and cellular mechanisms underlying meningioma heterogeneity and evolution"
+
+      - name: Save dedicated Lucas final-source cache
+        if: success() && steps.lucas-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .build/v082/lucas-source
+          key: ${{ env.LUCAS_CACHE_KEY }}
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v082-lucas-final-source-prefetch
+          path: .build/v082/lucas-prefetch
+          if-no-files-found: warn
+          retention-days: 30
