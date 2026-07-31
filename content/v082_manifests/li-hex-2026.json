@@ -232,7 +232,7 @@
           ],
           "chinese": [
             {
-              "text": "从组织学图像预测空间蛋白表达的可行性已得到证明。以前的工作依赖于未配对或配对的 H&E 和免疫组织化学 (IHC)18,19、配对 IHC 和多重免疫荧光20，或自发荧光和多重免疫荧光图像21。鉴于传统多重成像测定的固有局限性，这些研究仅集中于少数蛋白质生物标志物。重要的是，如果没有广泛的临床验证来预测仅可获得 H&E 图像的大量患者的治疗结果，则尚未确定转化价值。",
+              "text": "从组织学图像预测空间蛋白质表达的可行性已得到证明。以前的工作依赖于未配对或配对的 H&E 和免疫组织化学 (IHC)18,19、配对 IHC 和多重免疫荧光20，或自发荧光和多重免疫荧光图像21。鉴于传统多重成像测定的固有局限性，这些研究仅集中于少数蛋白质生物标志物。重要的是，如果没有广泛的临床验证来预测仅可获得 H&E 图像的大量患者的治疗结果，则尚未确定转化价值。",
               "citation_ids": [
                 "18",
                 "19",
@@ -1492,7 +1492,7 @@
           ],
           "chinese": [
             {
-              "text": "通过对 13 种癌症类型的 7,300 多名患者进行广泛的临床评估，我们证明，将组织学与虚拟空间蛋白质组学相结合，为改善治疗反应和预后预测提供了一种有前景的方法。对于切除的 NSCLC 患者，区分仅通过手术治愈的患者与复发风险高且需要辅助治疗的患者非常重要。目前，早期NSCLC是否接受辅助治疗的决定是基于临床病理标准（即肿瘤大小≥4 cm或淋巴结受累）。然而，这些预后因素相当粗略，无法准确预测疾病复发。与临床危险因素相比，HEX将预后预测的准确性提高了20%以上。因此，它可用于细化风险分层并指导早期非小细胞肺癌的个性化辅助治疗。"
+              "text": "通过对 13 种癌症类型的 7,300 多名患者进行广泛的临床评估，我们证明，将组织学与虚拟空间蛋白质组学相结合，为改善治疗反应和预后预测提供了一种有前途的方法。对于切除的 NSCLC 患者，区分仅通过手术治愈的患者与复发风险高且需要辅助治疗的患者非常重要。目前，早期NSCLC是否接受辅助治疗的决定是基于临床病理标准（即肿瘤大小≥4 cm或淋巴结受累）。然而，这些预后因素相当粗略，无法准确预测疾病复发。与临床危险因素相比，HEX将预后预测的准确性提高了20%以上。因此，它可用于细化风险分层并指导早期非小细胞肺癌的个性化辅助治疗。"
             }
           ],
           "source_fragments": [
@@ -1599,7 +1599,7 @@
           ],
           "chinese": [
             {
-              "text": "与空间转录组学相比，另一种空间分析技术——空间蛋白质组学，具有多种优势。首先，蛋白质比 RNA 转录本与细胞功能的关系更为密切。其次，从实用角度来看，蛋白质在临床福尔马林固定石蜡包埋样品中保持更稳定，并且图像更容易被病理学家解释。相比之下，空间转录组学可以对整个转录组进行空间分析，并提供更全面的组织结构图。先前的研究尝试从 H&E 图像预测空间基因表达 53-55。然而，技术性能受到限制，平均 Pearson r 约为 0.2，部分原因是噪声和高维基因表达数据56。相比之下，我们的 HEX 模型对目标蛋白表达的预测更加准确，r 值为 0.73-0.79。",
+              "text": "与空间转录组学相比，另一种空间分析技术——空间蛋白质组学，具有多种优势。首先，蛋白质比 RNA 转录本与细胞功能的关系更为密切。其次，从实用角度来看，蛋白质在临床福尔马林固定石蜡包埋样品中保持更稳定，并且图像更容易被病理学家解释。相比之下，空间转录组学可以对整个转录组进行空间分析，并提供更全面的组织结构图。先前的研究尝试从 H&E 图像预测空间基因表达53-55。然而，技术性能受到限制，平均 Pearson r 约为 0.2，部分原因是噪声和高维基因表达数据56。相比之下，我们的 HEX 模型对目标蛋白表达的预测更加准确，r 值为 0.73-0.79。",
               "citation_ids": [
                 "53",
                 "55",
@@ -1832,7 +1832,7 @@
           ],
           "chinese": [
             {
-              "text": "PhenoCycler 成像后，将载玻片储存在 PhenoCycler-Fusion 染色试剂盒随附的储存缓冲液中，温度为 4 °C。根据制造商的说明从载玻片上取下流通池。用 1× PhenoCycler 缓冲液充分清洗后，用标准 H&E 方案对载玻片进行染色，并在 Leica Aperio AT2 扫描仪上以 40× 放大倍率成像。"
+              "text": "PhenoCycler 成像后，将载玻片储存在 4 °C 下的 PhenoCycler-Fusion 染色试剂盒随附的储存缓冲液中。根据制造商的说明从载玻片上取下流通池。用 1× PhenoCycler 缓冲液充分清洗后，用标准 H&E 方案对载玻片进行染色，并在 Leica Aperio AT2 扫描仪上以 40× 放大倍率成像。"
             }
           ],
           "source_fragments": [
@@ -1882,7 +1882,7 @@
           ],
           "chinese": [
             {
-              "text": "为了评估 CODEX-H&E 联合配准的空间准确性，我们使用斯坦福 WSI 的特定模态管道对每种模态进行独立的细胞分割。然后应用 PALOM 计算的变换将 CODEX 单元质心映射到 H&E 坐标系中。对于 H&E 图像中的每个单元，我们计算了到最近映射的 CODEX 单元的欧几里德距离。我们还测量了每个细胞核的直径作为生物参考尺度。如补充图 30 所示，H&E 和 CODEX 之间 99.2% 的细胞间距离小于中位细胞核直径，表明通过亚细胞分辨率实现了准确的跨模态比对。"
+              "text": "为了评估 CODEX-H&E 联合配准的空间准确性，我们使用斯坦福 WSI 的特定模态管道对每种模态进行独立的细胞分割。然后应用 PALOM 计算的变换将 CODEX 单元质心映射到 H&E 坐标系中。对于 H&E 图像中的每个单元，我们计算了到最近映射的 CODEX 单元的欧几里得距离。我们还测量了每个细胞核的直径作为生物参考尺度。如补充图 30 所示，H&E 和 CODEX 之间 99.2% 的细胞间距离小于中位细胞核直径，表明通过亚细胞分辨率实现了准确的跨模态比对。"
             }
           ],
           "source_fragments": [
@@ -2961,9 +2961,9 @@
       "hires": true,
       "source_render": "pdf-caption-guided-region",
       "caption_en": "Fig. 6 | MICA improves immunotherapy response prediction and identifies spatial proteomic signatures in advanced NSCLC. a, Comparison of model performance for predicting objective response. Left, AUC point estimates for the models based on H&E, virtual CODEX and MICA. Right, ROC curves comparing MICA with PD-L1 expression and TMB. b, Comparison of model performance for predicting PFS. Left, C-index point estimates for the models based on H&E, virtual CODEX and MICA. Right, forest plot displaying multivariable Cox regression, including MICA-derived risk scores and clinical covariates. The points denote log[HR] point estimates and the horizontal bars represent 95% CIs. Statistical significance was determined by two-sided Wald test. For the bar graphs in a and b, the error bars indicate 95% bootstrapped CIs (n = 1,000 resamples) derived from aggregated patient-level risk predictions, and statistical significance was assessed using two-sided Wilcoxon signed-rank tests. c, Kaplan–Meier analysis of PFS stratified by MICA-predicted risk scores across all patients and PD-L1 expression subgroups (tumor proportion score (TPS) = 0, exhaustively screening all of the possible combinations, we took a biologically informed approach by focusing on six dual-marker pairs based on their established functional relevance32–37. We found that the low-risk group was significantly enriched in granzyme B+/CD8+ (cytotoxic effector T cells), TCF-1+/CD4+ (T helper cells) and PD-1+/CD8+ (exhausted T cells) (all P < 0.001). In contrast, the high-risk group was enriched for CD66b+/MMP9+ (pro-tumor neutrophils), FAP+/collagen IV+ (extracellular-matrix-remodeling fibroblasts) and CD163+/MMP9+ (M2-like tumor-associated macrophages), reflecting distinct tumor microenvironments between the two groups.",
-      "caption_zh": "图 6 | MICA 改善了晚期 NSCLC 的免疫治疗反应预测并识别空间蛋白质组特征。 a，预测客观响应的模型性能比较。左图是基于 H&E、虚拟 CODEX 和 MICA 的模型的 AUC 点估计。右图是 MICA 与 PD-L1 表达和 TMB 的比较 ROC 曲线。 b，预测 PFS 的模型性能比较。左图是基于 H&E、虚拟 CODEX 和 MICA 的模型的 C 指数点估计。右图显示多变量 Cox 回归的森林图，包括 MICA 衍生的风险评分和临床协变量。这些点表示 log[HR] 点估计值，水平条表示 95% CI。通过双边 Wald 检验确定统计显着性。对于 a 和 b 中的条形图，误差线表示 95% 自举 CI（n = 1,000 次重采样）源自汇总的患者水平风险预测，并使用双边 Wilcoxon 符号秩检验评估统计显着性。 c，根据 MICA 预测的所有患者和 PD-L1 表达亚组的风险评分对 PFS 进行 Kaplan-Meier 分析（肿瘤比例评分 (TPS) = 0，详尽筛选所有可能的组合，我们根据其已建立的功能相关性，通过关注六个双标记对，采取了一种生物学方法）32-37。我们发现低风险组的颗粒酶 B+/CD8+（细胞毒性效应 T 细胞）显着富集， TCF-1+/CD4+（辅助性 T 细胞）和 PD-1+/CD8+（耗尽的 T 细胞）（所有 P < 0.001）相比之下，高风险组富含 CD66b+/MMP9+（促肿瘤中性粒细胞）、FAP+/胶原 IV+（细胞外基质重塑成纤维细胞）和 CD163+/MMP9+（M2 样细胞）。肿瘤相关巨噬细胞），反映了两组之间不同的肿瘤微环境。",
+      "caption_zh": "图 6 | MICA 改善了晚期 NSCLC 中的免疫治疗反应预测并识别空间蛋白质组特征。 a，预测客观响应的模型性能比较。左图是基于 H&E、虚拟 CODEX 和 MICA 的模型的 AUC 点估计。右图是 MICA 与 PD-L1 表达和 TMB 的比较 ROC 曲线。 b，预测 PFS 的模型性能比较。左图是基于 H&E、虚拟 CODEX 和 MICA 的模型的 C 指数点估计。右图显示多变量 Cox 回归的森林图，包括 MICA 衍生的风险评分和临床协变量。这些点表示 log[HR] 点估计值，水平条表示 95% CI。通过双边 Wald 检验确定统计显着性。对于 a 和 b 中的条形图，误差线表示 95% 自举 CI（n = 1,000 次重采样）源自汇总的患者水平风险预测，并使用双边 Wilcoxon 符号秩检验评估统计显着性。 c，根据 MICA 预测的所有患者和 PD-L1 表达亚组的风险评分对 PFS 进行 Kaplan-Meier 分析（肿瘤比例评分 (TPS) = 0，详尽筛选所有可能的组合，我们根据其已建立的功能相关性，通过关注六个双标记对，采取了一种生物学方法）32-37。我们发现低风险组的颗粒酶 B+/CD8+（细胞毒性效应 T 细胞）显着富集， TCF-1+/CD4+（辅助性 T 细胞）和 PD-1+/CD8+（耗尽的 T 细胞）（所有 P < 0.001）相比之下，高风险组富含 CD66b+/MMP9+（促肿瘤中性粒细胞）、FAP+/胶原 IV+（细胞外基质重塑成纤维细胞）和 CD163+/MMP9+（M2 样细胞）。肿瘤相关巨噬细胞），反映了两组之间不同的肿瘤微环境。",
       "study": {
-        "overview": "阅读时按照 A → B → C 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图 6 | MICA 改善了晚期 NSCLC 的免疫治疗反应预测并识别空间蛋白质组特征。 a，预测客观响应的模型性能比较。左图是基于 H&E、虚拟 CODEX 和 MICA 的模型的 AUC 点估计。右图是 MICA 与 PD-L1 表达和 TMB 的比较 ROC 曲线。 b，预测 PFS 的模型性能比较。左图是基于 H&E、虚拟 CODEX 和 MICA 的模型的 C 指数点估计。右图显示多变量 Cox 回归的森林图，包括 MICA 衍生的风险评分和临床协变量。这些点表示 log[HR] 点估计值，水平条表示 95% CI。通过双边 Wald 检验确定统计显着性。对于 a 和 b 中的条形图，误差线表示 95% 自举 CI（n = 1,000 次重采样）源自汇总的患者水平风险预测，并使用双边 Wilcoxon 符号秩检验评估统计显着性。 c，根据 MICA 预测的所有患者和 PD-L1 表达亚组的风险评分对 PFS 进行 Kaplan-Meier 分析（肿瘤比例评分 (TPS) = 0，详尽筛选所有可能的组合，我们根据其已建立的功能相关性，通过关注六个双标记对，采取了一种生物学方法）32-37。我们发现低风险组的颗粒酶 B+/CD8+（细胞毒性效应 T 细胞）显着富集， TCF-1+/CD4+（辅助性 T 细胞）和 PD-1+/CD8+（耗尽的 T 细胞）（所有 P < 0.001）相比之下，高风险组富含 CD66b+/MMP9+（促肿瘤中性粒细胞）、FAP+/胶原 IV+（细胞外基质重塑成纤维细胞）和 CD163+/MMP9+（M2 样细胞）。肿瘤相关巨噬细胞），反映了两组之间不同的肿瘤微环境。",
+        "overview": "阅读时按照 A → B → C 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图 6 | MICA 改善了晚期 NSCLC 中的免疫治疗反应预测并识别空间蛋白质组特征。 a，预测客观响应的模型性能比较。左图是基于 H&E、虚拟 CODEX 和 MICA 的模型的 AUC 点估计。右图是 MICA 与 PD-L1 表达和 TMB 的比较 ROC 曲线。 b，预测 PFS 的模型性能比较。左图是基于 H&E、虚拟 CODEX 和 MICA 的模型的 C 指数点估计。右图显示多变量 Cox 回归的森林图，包括 MICA 衍生的风险评分和临床协变量。这些点表示 log[HR] 点估计值，水平条表示 95% CI。通过双边 Wald 检验确定统计显着性。对于 a 和 b 中的条形图，误差线表示 95% 自举 CI（n = 1,000 次重采样）源自汇总的患者水平风险预测，并使用双边 Wilcoxon 符号秩检验评估统计显着性。 c，根据 MICA 预测的所有患者和 PD-L1 表达亚组的风险评分对 PFS 进行 Kaplan-Meier 分析（肿瘤比例评分 (TPS) = 0，详尽筛选所有可能的组合，我们根据其已建立的功能相关性，通过关注六个双标记对，采取了一种生物学方法）32-37。我们发现低风险组的颗粒酶 B+/CD8+（细胞毒性效应 T 细胞）显着富集， TCF-1+/CD4+（辅助性 T 细胞）和 PD-1+/CD8+（耗尽的 T 细胞）（所有 P < 0.001）相比之下，高风险组富含 CD66b+/MMP9+（促肿瘤中性粒细胞）、FAP+/胶原 IV+（细胞外基质重塑成纤维细胞）和 CD163+/MMP9+（M2 样细胞）。肿瘤相关巨噬细胞），反映了两组之间不同的肿瘤微环境。",
         "panels": [
           {
             "label": "A",
