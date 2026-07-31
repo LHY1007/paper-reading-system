@@ -56,6 +56,7 @@ jobs:
       - name: Verify JSON, table, panel, translation and reviewer contracts
         run: |
           python tools/test_copilot_json_provider.py
+          python tools/test_v082_translation_tokens.py
           python tools/test_v082_component_contracts.py
 
       - name: Locate CANVAS and prepare directories
