@@ -5,6 +5,7 @@ import copy
 
 import generate_v082_reader_manifest_with_copilot_sdk_v15 as v15
 import generate_v082_reader_manifest_with_copilot_sdk_v16 as v16
+import generate_v082_reader_manifest_with_copilot_sdk_v17 as v17
 import normalize_v082_paper_tables as table_normalizer
 import validate_v082_reader_semantics_v4 as semantics
 import validate_v082_strong_ai_review as strong_review
@@ -115,6 +116,25 @@ def test_visual_panel_inventory_normalization() -> None:
     assert v16.normalize_labels([]) == ["整图"]
 
 
+def test_component_specific_translation_completeness() -> None:
+    title_issues = v17.component_translation_issues(
+        "section-title/abstract", "Abstract", "摘要"
+    )
+    assert "translation implausibly short" not in title_issues, title_issues
+
+    asset_title_issues = v17.component_translation_issues(
+        "asset-title/figure-1", "Results", "结果"
+    )
+    assert "translation implausibly short" not in asset_title_issues, asset_title_issues
+
+    body_issues = v17.component_translation_issues(
+        "paragraph/results/p-0001",
+        "The complete paragraph contains substantially more scientific information than this translation.",
+        "结果",
+    )
+    assert "translation implausibly short" in body_issues, body_issues
+
+
 def test_review_asset_order_contract() -> None:
     manifest = {
         "paper": {"key": "andani-2025"},
@@ -163,5 +183,6 @@ if __name__ == "__main__":
     test_normalizer_never_rewrites_reviewed_tables()
     test_panel_grounding_contract()
     test_visual_panel_inventory_normalization()
+    test_component_specific_translation_completeness()
     test_review_asset_order_contract()
     print("V0.8.2 component contracts passed")
