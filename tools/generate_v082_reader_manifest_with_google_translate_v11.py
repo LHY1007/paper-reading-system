@@ -6,6 +6,7 @@ import json
 import os
 import re
 import sys
+import tempfile
 import time
 from pathlib import Path
 from typing import Any
@@ -199,10 +200,30 @@ def specific_chinese_first_clause(text: str, limit: int = 42) -> str:
     return value
 
 
+def normalize_evidence_levels(source: Path) -> Path:
+    data = json.loads(source.read_text("utf-8"))
+    changed = False
+    for section in data.get("sections") or []:
+        level = int(section.get("level") or 2)
+        normalized = min(4, max(2, level))
+        if normalized != level:
+            section["level"] = normalized
+            changed = True
+    if not changed:
+        return source
+    handle = tempfile.NamedTemporaryFile(prefix="v082-evidence-", suffix=".json", delete=False)
+    target = Path(handle.name)
+    handle.close()
+    target.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", "utf-8")
+    return target
+
+
 v8.first_clause = specific_chinese_first_clause
 v8.v7.translate_all = batched_translate_all
 v8.v7.generate_figure_studies = v8.deterministic_figure_studies
 
 if __name__ == "__main__":
+    if len(sys.argv) >= 2:
+        sys.argv[1] = str(normalize_evidence_levels(Path(sys.argv[1])))
     sys.argv[0] = str(Path(__file__).name)
     v8.v7.main()
