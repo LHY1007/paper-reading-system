@@ -1,0 +1,15 @@
+{
+  "paper_key": "maas-2026",
+  "panel_patches": {
+    "extended-data-figure-5": {
+      "A": {
+        "append_explanation": "该比较覆盖7,495个甲基化样本和184个脑肿瘤或对照类别。"
+      }
+    },
+    "extended-data-figure-7": {
+      "整图": {
+        "append_explanation": "全景图汇总7,495个甲基化样本中的184个类别。"
+      }
+    }
+  }
+}
