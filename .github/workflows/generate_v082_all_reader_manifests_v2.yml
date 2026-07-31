@@ -6,6 +6,8 @@ on:
     paths:
       - ".github/v082-manifest-trigger"
       - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
+      - "tools/generate_v082_reader_manifest_with_github_models_v7.py"
+      - "tools/run_v082_manifest_generation_sequentially_v2.py"
   workflow_dispatch:
 
 permissions:
@@ -18,14 +20,14 @@ concurrency:
 
 env:
   PYTHONUNBUFFERED: "1"
-  GITHUB_MODELS_MODEL: "openai/gpt-4.1"
-  GITHUB_MODELS_MIN_INTERVAL_SECONDS: "4"
+  GITHUB_MODELS_MODEL: "openai/gpt-4.1-mini"
+  GITHUB_MODELS_MIN_INTERVAL_SECONDS: "2"
   CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
 
 jobs:
   generate-strictly-sequential:
     runs-on: ubuntu-latest
-    timeout-minutes: 360
+    timeout-minutes: 720
     steps:
       - uses: actions/checkout@v4
         with:
@@ -110,6 +112,7 @@ jobs:
             --manifest-dir content/v082_manifests \
             --plans-dir config/v082_reader_content_plans \
             --cache-dir .build/v082/model-cache \
+            --generator tools/generate_v082_reader_manifest_with_github_models_v7.py \
             --branch v0.8x-batch-diagnosis
 
       - name: Save rolling exact-source cache
