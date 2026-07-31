@@ -16,12 +16,13 @@ permissions:
 
 concurrency:
   group: v082-generate-pr-v11-sequential
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 env:
   PYTHONUNBUFFERED: "1"
   V082_TRANSLATE_INTERVAL_SECONDS: "0.05"
   CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
+  LUCAS_CACHE_KEY: "v082-lucas-source-s41588-024-01747-1-31p-v1"
 
 jobs:
   generate-strictly-sequential:
@@ -44,9 +45,9 @@ jobs:
           import json, os
           from pathlib import Path
           Path('status/v082_generation_status.json').write_text(json.dumps({
-              'version': 'v082-generation-observer-3',
+              'version': 'v082-generation-observer-4',
               'state': 'running',
-              'generator': 'v11-batched-google-translate-pr-cache',
+              'generator': 'v11-batched-google-translate-pr-exact-sources',
               'run_id': int(os.environ['RUN_ID']),
               'run_attempt': int(os.environ['RUN_ATTEMPT']),
               'trigger_sha': os.environ['HEAD_SHA'],
@@ -74,7 +75,7 @@ jobs:
           CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
           test -n "$CANVAS"
           printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_manifest_paths
-          mkdir -p .build/v082/{pdfs,cho-source,batch-evidence,batch-audits,batch-reports,generated-manifests,model-cache} content/v082_manifests
+          mkdir -p .build/v082/{pdfs,cho-source,lucas-source,batch-evidence,batch-audits,batch-reports,generated-manifests,model-cache} content/v082_manifests
 
       - name: Restore audited PDF cache
         id: source-cache
@@ -92,11 +93,12 @@ jobs:
           path: .build/v082/cho-source
           key: ${{ env.CHO_CACHE_KEY }}
 
-      - name: Require and inject validated Cho source
-        run: |
-          test "${{ steps.cho-cache.outputs.cache-hit }}" = "true"
-          test -s .build/v082/cho-source/07_cho-2026.pdf
-          cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
+      - name: Restore validated user-supplied Lucas source cache
+        id: lucas-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/lucas-source
+          key: ${{ env.LUCAS_CACHE_KEY }}
 
       - name: Restore translation caches
         uses: actions/cache/restore@v4
@@ -109,7 +111,7 @@ jobs:
             v082-google-translation-v9-
             v082-google-translation-v8-
 
-      - name: Obtain every exact source PDF
+      - name: Obtain every downloadable source PDF
         shell: bash
         run: |
           set -euo pipefail
@@ -124,7 +126,33 @@ jobs:
             --output-dir .build/v082/pdfs \
             --report .build/v082/batch-reports/SOURCE_DOWNLOAD_AVAILABLE.json \
             --reuse || true
-          test -s .build/v082/pdfs/07_cho-2026.pdf
+
+      - name: Inject and verify exact user-supplied sources
+        run: |
+          set -euo pipefail
+          test "${{ steps.cho-cache.outputs.cache-hit }}" = "true"
+          test "${{ steps.lucas-cache.outputs.cache-hit }}" = "true"
+          test -s .build/v082/cho-source/07_cho-2026.pdf
+          test -s .build/v082/lucas-source/09_lucas-2024.pdf
+          cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
+          cp .build/v082/lucas-source/09_lucas-2024.pdf .build/v082/pdfs/09_lucas-2024.pdf
+          python - <<'PY'
+          import fitz
+          from pathlib import Path
+          expected = {
+              Path('.build/v082/pdfs/07_cho-2026.pdf'): (24, '10.1126/science.adz2742'),
+              Path('.build/v082/pdfs/09_lucas-2024.pdf'): (31, '10.1038/s41588-024-01747-1'),
+          }
+          for path, (pages, doi) in expected.items():
+              doc = fitz.open(path)
+              try:
+                  assert doc.page_count == pages, (path, doc.page_count, pages)
+                  text = '\n'.join(doc.load_page(i).get_text('text') for i in {0, 1, doc.page_count - 1}).lower()
+                  metadata = ' '.join(str(value or '') for value in doc.metadata.values()).lower()
+                  assert doi.lower() in text or doi.lower() in metadata, (path, doi)
+              finally:
+                  doc.close()
+          PY
 
       - name: Generate, gate and persist one paper at a time
         id: generate
@@ -187,9 +215,9 @@ jobs:
           summary_path = Path('.build/v082/batch-reports/SEQUENTIAL_MANIFEST_GENERATION.json')
           summary = json.loads(summary_path.read_text('utf-8')) if summary_path.exists() else None
           Path('status/v082_generation_status.json').write_text(json.dumps({
-              'version': 'v082-generation-observer-3',
+              'version': 'v082-generation-observer-4',
               'state': 'completed',
-              'generator': 'v11-batched-google-translate-pr-cache',
+              'generator': 'v11-batched-google-translate-pr-exact-sources',
               'run_id': int(os.environ['RUN_ID']),
               'run_attempt': int(os.environ['RUN_ATTEMPT']),
               'generation_outcome': os.environ.get('GENERATION_OUTCOME'),
