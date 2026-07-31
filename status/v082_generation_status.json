@@ -1,8 +1,8 @@
 {
-  "version": "v082-generation-observer-2",
+  "version": "v082-generation-observer-3",
   "state": "running",
-  "generator": "v11-batched-google-translate",
-  "run_id": 30616678151,
-  "run_attempt": 5,
-  "trigger_sha": "47f60200cc29d2f1a3da4a73b72a8a13ce629bf0"
+  "generator": "v11-batched-google-translate-pr-cache",
+  "run_id": 30619717703,
+  "run_attempt": 1,
+  "trigger_sha": "d39fc3d163a4d65912a21a341becfc1ebc1fbfd9"
 }
