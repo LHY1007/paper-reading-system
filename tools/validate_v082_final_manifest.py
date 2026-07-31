@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import re
 from pathlib import Path
 
@@ -39,8 +40,15 @@ def validate(manifest: dict, schema: dict, audit: dict | None) -> dict:
     cjk_chars = sum(len(CJK_RE.findall(plain(block.get("chinese", [])))) for block in paragraphs)
     cjk_ratio = cjk_chars / max(1, translated_chars)
 
-    if len(paragraphs) < max(20, pages * 2):
-        errors.append(f"too few paragraph blocks: {len(paragraphs)} for {pages} pages")
+    # Full-page figures, tables and reference pages make a rigid two-paragraphs-per-page
+    # rule reject complete Nature-family articles with long, source-faithful paragraphs.
+    # Keep a substantial structural floor while independently enforcing character coverage.
+    minimum_paragraphs = max(20, math.ceil(pages * 1.5))
+    if len(paragraphs) < minimum_paragraphs:
+        errors.append(
+            f"too few paragraph blocks: {len(paragraphs)} for {pages} pages "
+            f"(minimum {minimum_paragraphs})"
+        )
     if source_chars < pages * 1200:
         errors.append(f"source text coverage too low: {source_chars} characters for {pages} pages")
     if not assets:
@@ -138,6 +146,7 @@ def validate(manifest: dict, schema: dict, audit: dict | None) -> dict:
         "pages": pages,
         "sections": len(manifest.get("sections", [])),
         "paragraphs": len(paragraphs),
+        "minimum_paragraphs": minimum_paragraphs,
         "assets": len(assets),
         "references": len(references),
         "source_chars": source_chars,
