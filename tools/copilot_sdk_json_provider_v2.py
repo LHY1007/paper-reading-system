@@ -6,7 +6,10 @@ import time
 import uuid
 from typing import Any
 
-import copilot_sdk_json_provider as base
+try:
+    import copilot_sdk_json_provider as base
+except ModuleNotFoundError:
+    from tools import copilot_sdk_json_provider as base
 from copilot.session import PermissionHandler
 
 
