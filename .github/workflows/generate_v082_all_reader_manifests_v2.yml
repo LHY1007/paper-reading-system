@@ -1,12 +1,13 @@
 name: Generate all V0.8.2 manifests strictly sequentially
 
 on:
-  push:
-    branches: [v0.8x-batch-diagnosis]
+  pull_request:
+    branches: [main]
     paths:
       - ".github/v082-manifest-trigger-v11"
       - ".github/workflows/generate_v082_all_reader_manifests_v2.yml"
       - "tools/generate_v082_reader_manifest_with_google_translate_v11.py"
+      - "tools/validate_v082_reader_semantics_v3.py"
       - "config/v082_reader_content_plans/*.json"
   workflow_dispatch:
 
@@ -14,14 +15,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: v082-generate-pr-v11-observable
-  cancel-in-progress: true
+  group: v082-generate-pr-v11-sequential
+  cancel-in-progress: false
 
 env:
   PYTHONUNBUFFERED: "1"
   V082_TRANSLATE_INTERVAL_SECONDS: "0.05"
-  CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-branch-v1"
-  CHO_ADOBE_PREVIEW_URL: "https://to.adobe.com/phMsfMA7YPzZqvAdG8hYM4vE9jVf"
+  CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
 
 jobs:
   generate-strictly-sequential:
@@ -37,16 +37,16 @@ jobs:
         env:
           RUN_ID: ${{ github.run_id }}
           RUN_ATTEMPT: ${{ github.run_attempt }}
-          HEAD_SHA: ${{ github.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
           mkdir -p status
           python - <<'PY'
           import json, os
           from pathlib import Path
           Path('status/v082_generation_status.json').write_text(json.dumps({
-              'version': 'v082-generation-observer-2',
+              'version': 'v082-generation-observer-3',
               'state': 'running',
-              'generator': 'v11-batched-google-translate',
+              'generator': 'v11-batched-google-translate-pr-cache',
               'run_id': int(os.environ['RUN_ID']),
               'run_attempt': int(os.environ['RUN_ATTEMPT']),
               'trigger_sha': os.environ['HEAD_SHA'],
@@ -55,7 +55,7 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add status/v082_generation_status.json
-          git commit -m "Record active V0.8.2 v11 manifest run ${RUN_ID}" || true
+          git commit -m "Record active V0.8.2 manifest run ${RUN_ID}" || true
           git fetch origin v0.8x-batch-diagnosis
           git rebase origin/v0.8x-batch-diagnosis
           git push origin HEAD:v0.8x-batch-diagnosis
@@ -67,15 +67,14 @@ jobs:
       - name: Install source, evidence and manifest dependencies
         run: |
           python -m pip install --disable-pip-version-check \
-            requests beautifulsoup4 PyMuPDF curl_cffi jsonschema lxml pillow playwright
-          python -m playwright install --with-deps chromium
+            requests beautifulsoup4 PyMuPDF curl_cffi jsonschema lxml pillow
 
       - name: Locate immutable CANVAS reader and prepare directories
         run: |
           CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
           test -n "$CANVAS"
           printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_manifest_paths
-          mkdir -p .build/v082/{pdfs,cho-source,science-prefetch,batch-evidence,batch-audits,batch-reports,generated-manifests,model-cache} content/v082_manifests
+          mkdir -p .build/v082/{pdfs,cho-source,batch-evidence,batch-audits,batch-reports,generated-manifests,model-cache} content/v082_manifests
 
       - name: Restore audited PDF cache
         id: source-cache
@@ -86,33 +85,18 @@ jobs:
           restore-keys: |
             v082-source-pdfs-
 
-      - name: Restore dedicated user-supplied Cho source cache
+      - name: Restore validated user-supplied Cho source cache
         id: cho-cache
         uses: actions/cache/restore@v4
         with:
           path: .build/v082/cho-source
           key: ${{ env.CHO_CACHE_KEY }}
 
-      - name: Materialize and inject validated Cho source
+      - name: Require and inject validated Cho source
         run: |
-          if [ ! -f .build/v082/cho-source/07_cho-2026.pdf ]; then
-            python tools/prefetch_v082_adobe_shared_pdf.py \
-              --url "$CHO_ADOBE_PREVIEW_URL" \
-              --output .build/v082/cho-source/07_cho-2026.pdf \
-              --report .build/v082/science-prefetch/CHO_SOURCE_FINAL.json \
-              --expected-pages 24 \
-              --doi 10.1126/science.adz2742 \
-              --title-fragment "Pan-cancer spatial atlas of tertiary lymphoid structures"
-          fi
+          test "${{ steps.cho-cache.outputs.cache-hit }}" = "true"
           test -s .build/v082/cho-source/07_cho-2026.pdf
           cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
-
-      - name: Save dedicated Cho source cache
-        if: steps.cho-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: .build/v082/cho-source
-          key: ${{ env.CHO_CACHE_KEY }}
 
       - name: Restore translation caches
         uses: actions/cache/restore@v4
@@ -140,6 +124,7 @@ jobs:
             --output-dir .build/v082/pdfs \
             --report .build/v082/batch-reports/SOURCE_DOWNLOAD_AVAILABLE.json \
             --reuse || true
+          test -s .build/v082/pdfs/07_cho-2026.pdf
 
       - name: Generate, gate and persist one paper at a time
         id: generate
@@ -171,7 +156,7 @@ jobs:
         uses: actions/cache/save@v4
         with:
           path: .build/v082/model-cache
-          key: v082-google-translation-v11-run-${{ github.run_id }}-${{ github.run_attempt }}
+          key: v082-google-translation-v11-pr-${{ github.run_id }}-${{ github.run_attempt }}
 
       - uses: actions/upload-artifact@v4
         if: always()
@@ -179,7 +164,6 @@ jobs:
           name: v082-strict-sequential-manifest-audit-v11
           path: |
             content/v082_manifests
-            .build/v082/science-prefetch
             .build/v082/batch-evidence
             .build/v082/batch-audits
             .build/v082/batch-reports
@@ -203,9 +187,9 @@ jobs:
           summary_path = Path('.build/v082/batch-reports/SEQUENTIAL_MANIFEST_GENERATION.json')
           summary = json.loads(summary_path.read_text('utf-8')) if summary_path.exists() else None
           Path('status/v082_generation_status.json').write_text(json.dumps({
-              'version': 'v082-generation-observer-2',
+              'version': 'v082-generation-observer-3',
               'state': 'completed',
-              'generator': 'v11-batched-google-translate',
+              'generator': 'v11-batched-google-translate-pr-cache',
               'run_id': int(os.environ['RUN_ID']),
               'run_attempt': int(os.environ['RUN_ATTEMPT']),
               'generation_outcome': os.environ.get('GENERATION_OUTCOME'),
@@ -217,7 +201,7 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add status/v082_generation_status.json
-          git commit -m "Record V0.8.2 v11 manifest run ${RUN_ID} outcome" || true
+          git commit -m "Record V0.8.2 manifest run ${RUN_ID} outcome" || true
           git fetch origin v0.8x-batch-diagnosis
           git rebase origin/v0.8x-batch-diagnosis
           git push origin HEAD:v0.8x-batch-diagnosis
