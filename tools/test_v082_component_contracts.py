@@ -140,12 +140,13 @@ def test_explicit_reviewer_acceptance_contract() -> None:
     for category in v18.REVIEW_RESPONSES:
         v18.REVIEW_RESPONSES[category].clear()
     v18.REVIEW_RESPONSES["translation"]["paragraph/results/p-0001"] = {"passed": True}
+    v18.REVIEW_RESPONSES["panel_inventory"]["figure-1"] = {"passed": True}
     v18.REVIEW_RESPONSES["figure"]["figure-1"] = {"passed": True}
     v18.REVIEW_RESPONSES["table"]["extended-data-table-1"] = {"passed": True}
     v18.REVIEW_RESPONSES["overview"]["paper"] = {"passed": True}
     review_log = {
         "translation": [{"id": "paragraph/results/p-0001"}],
-        "figures": [{"id": "figure-1"}],
+        "figures": [{"id": "figure-1", "panel_inventory": {"passed": True}}],
         "tables": [{"id": "extended-data-table-1"}],
         "overview": {},
     }
@@ -153,18 +154,35 @@ def test_explicit_reviewer_acceptance_contract() -> None:
     assert not errors, errors
     assert review_log["translation"][0]["independent_reviewer_accepted"] is True
     assert review_log["figures"][0]["independent_reviewer_accepted"] is True
+    assert review_log["figures"][0]["panel_inventory"]["independent_reviewer_accepted"] is True
     assert review_log["tables"][0]["independent_reviewer_accepted"] is True
     assert review_log["overview"]["independent_reviewer_accepted"] is True
 
     v18.REVIEW_RESPONSES["figure"]["figure-1"] = {"passed": False}
     rejected = {
         "translation": [{"id": "paragraph/results/p-0001"}],
-        "figures": [{"id": "figure-1"}],
+        "figures": [{"id": "figure-1", "panel_inventory": {"passed": True}}],
         "tables": [{"id": "extended-data-table-1"}],
         "overview": {},
     }
     errors = v18.enforce_independent_reviewer_acceptance(rejected)
     assert any(item["component"] == "figure" for item in errors), errors
+
+
+def reviewed_figure(asset_id: str, labels: list[str]) -> dict:
+    return {
+        "id": asset_id,
+        "passed": True,
+        "source_image_present": True,
+        "independent_reviewer_accepted": True,
+        "panel_labels": labels,
+        "panel_inventory": {
+            "passed": True,
+            "source_image_present": True,
+            "visual_labels": labels,
+            "independent_reviewer_accepted": True,
+        },
+    }
 
 
 def test_review_asset_order_and_exact_coverage_contract() -> None:
@@ -212,9 +230,9 @@ def test_review_asset_order_and_exact_coverage_contract() -> None:
             for item in required_translations
         ],
         "figures": [
-            {"id": "figure-1", "passed": True, "source_image_present": True, "independent_reviewer_accepted": True},
-            {"id": "extended-data-table-1", "passed": True, "source_image_present": True, "independent_reviewer_accepted": True},
-            {"id": "figure-2", "passed": True, "source_image_present": True, "independent_reviewer_accepted": True},
+            reviewed_figure("figure-1", ["A"]),
+            reviewed_figure("extended-data-table-1", ["整图"]),
+            reviewed_figure("figure-2", ["A", "B"]),
         ],
         "tables": [
             {"id": "extended-data-table-1", "passed": True, "source_image_present": True, "independent_reviewer_accepted": True},
@@ -239,6 +257,11 @@ def test_review_asset_order_and_exact_coverage_contract() -> None:
     missing_paragraph["translation"] = missing_paragraph["translation"][1:]
     result = strong_review.validate(manifest, missing_paragraph)
     assert not result["passed"], "missing paragraph review was not rejected"
+
+    wrong_panel_inventory = copy.deepcopy(review)
+    wrong_panel_inventory["figures"][2]["panel_inventory"]["visual_labels"] = ["A"]
+    result = strong_review.validate(manifest, wrong_panel_inventory)
+    assert not result["passed"], "panel inventory mismatch was not rejected"
 
 
 if __name__ == "__main__":
