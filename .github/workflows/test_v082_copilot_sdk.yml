@@ -1,0 +1,47 @@
+name: Test V0.8.2 Copilot SDK provider
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/test_v082_copilot_sdk.yml"
+      - "tools/copilot_sdk_json_provider.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  copilot-requests: write
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install --disable-pip-version-check github-copilot-sdk
+      - name: Send isolated strict-JSON request
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COPILOT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          V082_REASONING_EFFORT: high
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from tools.copilot_sdk_json_provider import call_json, provider
+          result = call_json(
+              model='gpt-5.4',
+              system='Return the integer sum in strict JSON: {"sum": integer}.',
+              payload={'a': 19, 'b': 23},
+              cache_dir=Path('.build/copilot-smoke'),
+              cache_name='sum',
+              retries=1,
+          )
+          assert result == {'sum': 42}, result
+          provider().close()
+          print(result)
+          PY
