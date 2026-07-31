@@ -370,7 +370,7 @@
           ],
           "chinese": [
             {
-              "text": "在非肿瘤细胞中，鉴定出七种骨髓 MP。其中一种在肥大细胞中独特表达（占骨髓细胞的<0.5%）。其余六种由（1）细胞周期途径（循环）定义； (2) 干扰素相关途径（干扰素/监测）； (3) 混合途径激活，对 EMT 具有一定的特异性； (4)炎症或TNF相关途径(TNF/炎症)； (5)组织修复相关通路，包括IL-6和JAK-STAT（组织修复）； (6)核糖体和氧化磷酸化相关基因（代谢）（图1d）。同样，鉴定出六种淋巴 MP（代谢型、循环型、IL-2、初始 T 细胞、B 细胞和自然杀伤细胞；补充图 1b）和四种内皮 MP（代谢型、TNF/缺氧、补体和细胞外基质 (ECM)/EMT；补充图 1c）。尽管一种罕见的肿瘤性 MP（MP7）和一种淋巴样 MP（B 细胞）的环境 RNA 含量中位数 >0.2（补充图 3），但似乎没有 MP 是由环境 RNA 污染驱动的。鉴于这种淋巴样 MP 明显与明确的细胞类型相关，因此人们认为根据推断的环境 RNA 含量去除细胞有可能会去除有意义的生物信号。"
+              "text": "在非肿瘤细胞中，鉴定出七种骨髓 MP。其中一种在肥大细胞中独特表达（占骨髓细胞的<0.5%）。其余六种由（1）细胞周期途径（循环）定义； (2) 干扰素相关途径（干扰素/监测）； (3) 混合途径激活，对 EMT 有一定的特异性； (4)炎症或TNF相关途径(TNF/炎症)； (5)组织修复相关通路，包括IL-6和JAK-STAT（组织修复）； (6)核糖体和氧化磷酸化相关基因（代谢）（图1d）。同样，鉴定出六种淋巴 MP（代谢型、循环型、IL-2、初始 T 细胞、B 细胞和自然杀伤细胞；补充图 1b）和四种内皮 MP（代谢型、TNF/缺氧、补体和细胞外基质 (ECM)/EMT；补充图 1c）。尽管一种罕见的肿瘤性 MP（MP7）和一种淋巴样 MP（B 细胞）的环境 RNA 含量中位数 >0.2（补充图 3），但似乎没有 MP 是由环境 RNA 污染驱动的。鉴于这种淋巴样 MP 明显与明确的细胞类型相关，因此人们认为根据推断的环境 RNA 含量去除细胞有可能会去除有意义的生物信号。"
             }
           ],
           "source_fragments": [
@@ -1621,7 +1621,7 @@
           ],
           "chinese": [
             {
-              "text": "RNA-seq 使用 Illumina HiSeq 2500 对提取的 RNA 进行双端测序，目标是每个样本 7000 万个读数。使用 Trim Galore (v.0.5.0) 进行接头修剪，并使用 STAR 对准器 (v.2.7.9a)50 将修剪后的读数与 GRCh38 人类参考基因组进行比对。使用 HTSeq51 (v.0.11.0) 进行基因表达定量，以生成下游分析的计数。最后，应用edgeR52包（v.4.2.1）将这些原始计数转换为经过对数转换的每百万计数，并进行M归一化的修剪平均值。根据应用，原始计数和后处理的 log2（每百万计数）数据均用于下游分析。正如我们之前发布的那样，我们计算了所有样本的基因表达风险评分53。具体来说，该模型在公开可用的 UCSF 队列上进行训练，使用其最初发布的方法，通过计算预定义的 34 个基因特征及其各自的 LASSO 正则化 Cox 回归系数的加权和。通过最大化约登指数来将高风险组和低风险组一分为二。",
+              "text": "RNA-seq 使用 Illumina HiSeq 2500 对提取的 RNA 进行双端测序，目标是每个样本 7000 万个读数。使用 Trim Galore (v.0.5.0) 进行接头修剪，并使用 STAR 对准器 (v.2.7.9a)50 将修剪后的读数与 GRCh38 人类参考基因组进行比对。使用 HTSeq51 (v.0.11.0) 进行基因表达定量，以生成下游分析的计数。最后，应用edgeR52包（v.4.2.1）将这些原始计数转换为经过对数转换的每百万计数，并进行M归一化的修剪平均值。根据应用，原始计数和后处理的 log2（每百万计数）数据均用于下游分析。正如我们之前发布的那样，我们计算了所有样本的基因表达风险评分53。具体来说，该模型在公开可用的 UCSF 队列上进行训练，使用其最初发布的方法，通过计算预定义的 34 个基因特征及其各自的 LASSO 正则化 Cox 回归系数的加权和。通过最大化约登指数来将高风险组和低风险组二分为二。",
               "citation_ids": [
                 "50",
                 "51",
@@ -1654,7 +1654,7 @@
           ],
           "chinese": [
             {
-              "text": "SnRNA-seq 在冷冻组织上进行，目标为 6,000 个细胞核和 60,000 个读数。使用 10x Genomics Chromium Nuclei Isolation Kit 裂解缓冲液与 Miltenyi Anti-Nucleus 珠子和手动解离来分离细胞核。用细胞核分离柱除去剩余的组织，并将所得沉淀重悬于细胞核分离缓冲液中。然后将 Miltenyi 抗核珠添加到样品中，将细胞核在冰上孵育 15 分钟，然后将样品通过连接到带有 QuadroMACS 分离器的 MACS MultiStand 的 LS 柱。洗涤纯化的细胞核，并将 10,000 个细胞核的目标装载到 10x Genomics Chromium 3' GEM-X 芯片上。液滴生成后，将样品转移至预冷的带状管（USA Scientific）中并在 Bio-Rad 热循环仪中孵育。使用 10x Genomics 提供的 Recovery Agent 回收样品 cDNA，并使用 Silane DynaBead (Thermo Fisher) 混合物进行清理。纯化的 cDNA 扩增 11 个循环，然后使用 SPRIselect 珠子 (Beckman Coulter) 进行清理。样品在生物分析仪（安捷伦科技）上运行以确定 cDNA 浓度。按照 Chromium GEM-X Single Cell 3' Reagent Kit v.4 用户指南中的概述制备 cDNA 文库，并根据计算的 cDNA 浓度对 PCR 循环进行修改。然后在 Illumina 的 NovaSeqX 上对基因表达文库进行测序，并使用 Cell Ranger 管道 (10x Genomics) 处理输出。在我们的完整队列中，每个细胞的平均原始读取数为 81,154.14，标准差为 62,576.79，最少为 24,111 个读取。映射到基因组的读数的平均 (s.d.) 比例为 96.4% (2.6%)，每个细胞的独特分子标识符 (UMI) 的平均中位数为 4,619.6 (2,187.7)，表明我们的队列有足够的测序深度。"
+              "text": "SnRNA-seq 在冷冻组织上进行，目标为 6,000 个细胞核和 60,000 个读数。使用 10x Genomics Chromium Nuclei Isolation Kit 裂解缓冲液和 Miltenyi Anti-Nucleus 珠子并手动解离来分离细胞核。用细胞核分离柱除去剩余的组织，并将所得沉淀重悬于细胞核分离缓冲液中。然后将 Miltenyi 抗核珠添加到样品中，将细胞核在冰上孵育 15 分钟，然后将样品通过连接到带有 QuadroMACS 分离器的 MACS MultiStand 的 LS 柱。洗涤纯化的细胞核，并将 10,000 个细胞核的目标装载到 10x Genomics Chromium 3' GEM-X 芯片上。液滴生成后，将样品转移至预冷的带状管（USA Scientific）中并在 Bio-Rad 热循环仪中孵育。使用 10x Genomics 提供的 Recovery Agent 回收样品 cDNA，并使用 Silane DynaBead (Thermo Fisher) 混合物进行清理。纯化的 cDNA 扩增 11 个循环，然后使用 SPRIselect 珠子 (Beckman Coulter) 进行清理。样品在生物分析仪（安捷伦科技）上运行以确定 cDNA 浓度。按照 Chromium GEM-X Single Cell 3' Reagent Kit v.4 用户指南中的概述制备 cDNA 文库，并根据计算的 cDNA 浓度对 PCR 循环进行修改。然后在 Illumina 的 NovaSeqX 上对基因表达文库进行测序，并使用 Cell Ranger 管道 (10x Genomics) 处理输出。在我们的完整队列中，每个细胞的平均原始读取数为 81,154.14，标准差为 62,576.79，最少为 24,111 个读取。映射到基因组的读数的平均 (s.d.) 比例为 96.4% (2.6%)，每个细胞的独特分子标识符 (UMI) 的平均中位数为 4,619.6 (2,187.7)，表明我们的队列有足够的测序深度。"
             }
           ],
           "source_fragments": [
@@ -1677,7 +1677,7 @@
           ],
           "chinese": [
             {
-              "text": "输出原始计数经过过滤，仅包含具有至少 1,000 个 UMI 的细胞，以确保足够的文库复杂性。我们还排除了超过 3% 转录本属于线粒体基因的细胞，以确保只保留高质量的细胞。使用 scDblFinder (v.1.18.0) 和默认参数54 预测并删除双联体。使用已建立的 R 包 Celda (v.1.20.0; DecontX)55 和 DIEM56 (v.2.4.1) 以及默认参数推断环境 RNA 含量，并在感兴趣的组之间比较值。",
+              "text": "输出原始计数经过过滤，仅包含具有至少 1,000 个 UMI 的细胞，以确保足够的文库复杂性。我们还排除了超过 3% 转录本属于线粒体基因的细胞，以确保只保留高质量的细胞。使用带有默认参数的 scDblFinder (v.1.18.0) 预测并删除双联体54。使用已建立的 R 包 Celda (v.1.20.0; DecontX)55 和 DIEM56 (v.2.4.1) 以及默认参数推断环境 RNA 含量，并在感兴趣的组之间比较值。",
               "citation_ids": [
                 "54",
                 "55",
@@ -2660,9 +2660,9 @@
       "hires": true,
       "source_render": "pdf-caption-guided-region",
       "caption_en": "Fig. 4 | Each myeloid cell state is associated with unique neoplastic–myeloid interactions and spatial dependencies. a, Myeloid state-specific receptor– ligand interactions with neoplastic cells overall. The left tileplot depicts interactions in which myeloid cells express ligands and neoplastic cells express receptors, and the right tileplot depicts interactions in which neoplastic cells express ligands and myeloid cells express receptors. Only interactions with P < 0.01 (one-sided permutation test as implemented in CellChat) are shown. Interaction strength is proportional to tile color. b, Myeloid state-specific expression of various ligands and receptors identified using CellChat (n = 685 cells MP1; 2,062 MP2; 5,890 MP3; 5,509 MP4; 50,374 MP5; 22,962 MP6). c, Graphic depicting cell type assignments within a single Visium HD slide (inset H&E image; single example from 43 similar samples). d, Graphic illustration demonstrating the principle of myeloid neighborhood analysis, whereby the expression of all neoplastic cells within 50 μm of a particular myeloid cell is averaged (repeated on all 43 Visium HD samples). e, Symmetric heatmap depicting the degree of overlap (overlap coefficient) between myeloid MP-correlated neoplastic genes. f, Heatmap depicting the overlap coefficient between myeloid MPcorrelated neoplastic genes and myeloid MP-defining genes. g, Heatmaps depicting the top three myeloid state-specific receptor–ligand interactions between myeloid and neoplastic cells based on the greatest associated change in myeloid MP expression compared to baseline of all interactions present in at least 50 myeloid–neoplastic pairs. Only values with adjusted P < 0.05 (two-sided Wilcoxon-rank sum test adjusted using the Benjamini–Hochberg method). Two progression through state-specific myeloid–neoplastic interactions, as has been shown in other brain tumors16–18. Indeed, we used CellChat33 to infer multiple myeloid (ligand)–neoplastic (receptor) interactions that were specific to each myeloid state, including multiple that have previously been associated with cancer progression and/or the establishment of a pro-tumoral microenvironment, suggesting a potential targetable role for myeloid cells in meningioma progression34–45 (Fig. 4a,b and Supplementary Note).",
-      "caption_zh": "图4|每个骨髓细胞状态都与独特的肿瘤-骨髓相互作用和空间依赖性相关。 a，骨髓状态特异性受体-配体与肿瘤细胞的总体相互作用。左侧图块图描绘了骨髓细胞表达配体和肿瘤细胞表达受体的相互作用，右侧图块图描绘了肿瘤细胞表达配体和骨髓细胞表达受体的相互作用。仅显示 P < 0.01 的交互作用（在 CellChat 中实现的单边排列测试）。交互强度与图块颜色成正比。 b，使用 CellChat 鉴定的各种配体和受体的骨髓状态特异性表达（n = 685 个细胞 MP1；2,062 个 MP2；5,890 个 MP3；5,509 个 MP4；50,374 个 MP5；22,962 个 MP6）。 c，描绘单张 Visium HD 载玻片内细胞类型分配的图形（插图 H&E 图像；来自 43 个相似样本的单个示例）。 d，图示说明了骨髓邻域分析的原理，即对特定骨髓细胞 50 μm 内的所有肿瘤细胞的表达进行平均（在所有 43 个 Visium HD 样本上重复）。 e，对称热图，描述骨髓 MP 相关肿瘤基因之间的重叠程度（重叠系数）。 f，热图描绘了髓样 MP 相关肿瘤基因和髓样 MP 定义基因之间的重叠系数。 g，热图描绘了骨髓细胞和肿瘤细胞之间前三个骨髓状态特异性受体-配体相互作用，基于与至少50个骨髓-肿瘤对中存在的所有相互作用的基线相比，骨髓MP表达的最大相关变化。仅调整 P < 0.05 的值（使用 Benjamini-Hochberg 方法调整的两侧 Wilcoxon 秩和检验）。正如其他脑肿瘤中所显示的那样，通过状态特异性骨髓-肿瘤相互作用进行两种进展16-18。事实上，我们使用 CellChat33 推断了每种骨髓状态特有的多种骨髓（配体）-肿瘤（受体）相互作用，包括先前与癌症进展和/或促肿瘤微环境的建立相关的多种相互作用，表明骨髓细胞在脑膜瘤进展中具有潜在的靶向作用34-45（图4a，b和补​​充说明）。",
+      "caption_zh": "图4|每个骨髓细胞状态都与独特的肿瘤-骨髓相互作用和空间依赖性相关。 a，骨髓状态特异性受体-配体与肿瘤细胞的总体相互作用。左侧图块图描绘了骨髓细胞表达配体和肿瘤细胞表达受体的相互作用，右侧图块图描绘了肿瘤细胞表达配体和骨髓细胞表达受体的相互作用。仅显示 P < 0.01 的交互作用（在 CellChat 中实现的单边排列测试）。交互强度与图块颜色成正比。 b，使用 CellChat 鉴定的各种配体和受体的骨髓状态特异性表达（n = 685 个细胞 MP1；2,062 个 MP2；5,890 个 MP3；5,509 个 MP4；50,374 个 MP5；22,962 个 MP6）。 c，在单个 Visium HD 幻灯片中描绘细胞类型分配的图形（插图 H&E 图像；来自 43 个相似样本的单个示例）。 d，图示说明了骨髓邻域分析的原理，即对特定骨髓细胞 50 μm 内的所有肿瘤细胞的表达进行平均（在所有 43 个 Visium HD 样本上重复）。 e，对称热图，描述骨髓 MP 相关肿瘤基因之间的重叠程度（重叠系数）。 f，热图描绘了髓样 MP 相关肿瘤基因和髓样 MP 定义基因之间的重叠系数。 g，热图描绘了骨髓细胞和肿瘤细胞之间前三个骨髓状态特异性受体-配体相互作用，基于与至少50个骨髓-肿瘤对中存在的所有相互作用的基线相比，骨髓MP表达的最大相关变化。仅调整后的 P < 0.05 的值（使用 Benjamini-Hochberg 方法调整的两侧 Wilcoxon 秩和检验）。正如其他脑肿瘤中所显示的那样，通过状态特异性骨髓-肿瘤相互作用进行两种进展16-18。事实上，我们使用 CellChat33 推断了每种骨髓状态特有的多种骨髓（配体）-肿瘤（受体）相互作用，包括先前与癌症进展和/或促肿瘤微环境的建立相关的多种相互作用，表明骨髓细胞在脑膜瘤进展中具有潜在的靶向作用34-45（图4a，b和补​​充说明）。",
       "study": {
-        "overview": "阅读时按照 A → B → C → D → E → F → G 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图4|每个骨髓细胞状态都与独特的肿瘤-骨髓相互作用和空间依赖性相关。 a，骨髓状态特异性受体-配体与肿瘤细胞的总体相互作用。左侧图块图描绘了骨髓细胞表达配体和肿瘤细胞表达受体的相互作用，右侧图块图描绘了肿瘤细胞表达配体和骨髓细胞表达受体的相互作用。仅显示 P < 0.01 的交互作用（在 CellChat 中实现的单边排列测试）。交互强度与图块颜色成正比。 b，使用 CellChat 鉴定的各种配体和受体的骨髓状态特异性表达（n = 685 个细胞 MP1；2,062 个 MP2；5,890 个 MP3；5,509 个 MP4；50,374 个 MP5；22,962 个 MP6）。 c，描绘单张 Visium HD 载玻片内细胞类型分配的图形（插图 H&E 图像；来自 43 个相似样本的单个示例）。 d，图示说明了骨髓邻域分析的原理，即对特定骨髓细胞 50 μm 内的所有肿瘤细胞的表达进行平均（在所有 43 个 Visium HD 样本上重复）。 e，对称热图，描述骨髓 MP 相关肿瘤基因之间的重叠程度（重叠系数）。 f，热图描绘了髓样 MP 相关肿瘤基因和髓样 MP 定义基因之间的重叠系数。 g，热图描绘了骨髓细胞和肿瘤细胞之间前三个骨髓状态特异性受体-配体相互作用，基于与至少50个骨髓-肿瘤对中存在的所有相互作用的基线相比，骨髓MP表达的最大相关变化。仅调整 P < 0.05 的值（使用 Benjamini-Hochberg 方法调整的两侧 Wilcoxon 秩和检验）。正如其他脑肿瘤中所显示的那样，通过状态特异性骨髓-肿瘤相互作用进行两种进展16-18。事实上，我们使用 CellChat33 推断了每种骨髓状态特有的多种骨髓（配体）-肿瘤（受体）相互作用，包括先前与癌症进展和/或促肿瘤微环境的建立相关的多种相互作用，表明骨髓细胞在脑膜瘤进展中具有潜在的靶向作用34-45（图4a，b和补​​充说明）。",
+        "overview": "阅读时按照 A → B → C → D → E → F → G 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图4|每个骨髓细胞状态都与独特的肿瘤-骨髓相互作用和空间依赖性相关。 a，骨髓状态特异性受体-配体与肿瘤细胞的总体相互作用。左侧图块图描绘了骨髓细胞表达配体和肿瘤细胞表达受体的相互作用，右侧图块图描绘了肿瘤细胞表达配体和骨髓细胞表达受体的相互作用。仅显示 P < 0.01 的交互作用（在 CellChat 中实现的单边排列测试）。交互强度与图块颜色成正比。 b，使用 CellChat 鉴定的各种配体和受体的骨髓状态特异性表达（n = 685 个细胞 MP1；2,062 个 MP2；5,890 个 MP3；5,509 个 MP4；50,374 个 MP5；22,962 个 MP6）。 c，在单个 Visium HD 幻灯片中描绘细胞类型分配的图形（插图 H&E 图像；来自 43 个相似样本的单个示例）。 d，图示说明了骨髓邻域分析的原理，即对特定骨髓细胞 50 μm 内的所有肿瘤细胞的表达进行平均（在所有 43 个 Visium HD 样本上重复）。 e，对称热图，描述骨髓 MP 相关肿瘤基因之间的重叠程度（重叠系数）。 f，热图描绘了髓样 MP 相关肿瘤基因和髓样 MP 定义基因之间的重叠系数。 g，热图描绘了骨髓细胞和肿瘤细胞之间前三个骨髓状态特异性受体-配体相互作用，基于与至少50个骨髓-肿瘤对中存在的所有相互作用的基线相比，骨髓MP表达的最大相关变化。仅调整后的 P < 0.05 的值（使用 Benjamini-Hochberg 方法调整的两侧 Wilcoxon 秩和检验）。正如其他脑肿瘤中所显示的那样，通过状态特异性骨髓-肿瘤相互作用进行两种进展16-18。事实上，我们使用 CellChat33 推断了每种骨髓状态特有的多种骨髓（配体）-肿瘤（受体）相互作用，包括先前与癌症进展和/或促肿瘤微环境的建立相关的多种相互作用，表明骨髓细胞在脑膜瘤进展中具有潜在的靶向作用34-45（图4a，b和补​​充说明）。",
         "panels": [
           {
             "label": "A",
@@ -2697,7 +2697,7 @@
           {
             "label": "G",
             "title": "G：与至少 50 个骨髓-肿瘤细胞对中存在的所有相互作用的基线相比，根据骨髓 MP 表达",
-            "explanation": "与至少 50 个骨髓-肿瘤细胞对中存在的所有相互作用的基线相比，根据骨髓 MP 表达的最大相关变化，描绘了骨髓细胞和肿瘤细胞之间前三个骨髓状态特异性受体-配体相互作用的热图。仅调整 P < 0.05 的值（使用 Benjamini-Hochberg 方法调整的两侧 Wilcoxon 秩和检验）。正如其他脑肿瘤中所显示的那样，通过状态特异性骨髓-肿瘤相互作用进行两种进展16-18。事实上，我们使用 CellChat33 推断了每种骨髓状态特有的多种骨髓（配体）-肿瘤（受体）相互作用，包括先前与癌症进展和/或促肿瘤微环境的建立相关的多种相互作用，表明骨髓细胞在脑膜瘤进展中具有潜在的靶向作用34-45（图4a，b和补​​充说明）。"
+            "explanation": "与至少 50 个骨髓-肿瘤细胞对中存在的所有相互作用的基线相比，根据骨髓 MP 表达的最大相关变化，描绘了骨髓细胞和肿瘤细胞之间前三个骨髓状态特异性受体-配体相互作用的热图。仅调整后的 P < 0.05 的值（使用 Benjamini-Hochberg 方法调整的两侧 Wilcoxon 秩和检验）。正如其他脑肿瘤中所显示的那样，通过状态特异性骨髓-肿瘤相互作用进行两种进展16-18。事实上，我们使用 CellChat33 推断了每种骨髓状态特有的多种骨髓（配体）-肿瘤（受体）相互作用，包括先前与癌症进展和/或促肿瘤微环境的建立相关的多种相互作用，表明骨髓细胞在脑膜瘤进展中具有潜在的靶向作用34-45（图4a，b和补​​充说明）。"
           }
         ],
         "conclusion": "综合各子图，把髓系状态与配体受体关系、肿瘤程序和空间共定位连接起来。。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
@@ -2812,8 +2812,8 @@
           },
           {
             "label": "C",
-            "title": "C：所选典型标记基因在同一 UMAP 内每个细胞中的表达，如 (A) 所示",
-            "explanation": "所选典型标记基因在同一 UMAP 内每个细胞中的表达，如 (A) 所示。 该部分属于扩展数据 图 1. 细胞类型分配的验证，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。 该部分属于扩展数据 图 1. 细胞类型分配的验证，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
+            "title": "C：所选典型标记基因在同一 UMAP 内的每个细胞中的表达，如 (A) 所示",
+            "explanation": "所选典型标记基因在同一 UMAP 内的每个细胞中的表达，如 (A) 所示。 该部分属于扩展数据 图 1. 细胞类型分配的验证，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。 该部分属于扩展数据 图 1. 细胞类型分配的验证，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。"
           }
         ],
         "conclusion": "综合各子图，通过扩展数据 图 1. 细胞类型分配的验证建立这一组结果在全文论证链中的位置，并把实验对象、比较方式和直接结论对应起来。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
