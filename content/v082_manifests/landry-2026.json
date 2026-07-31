@@ -125,7 +125,7 @@
     {
       "id": "abstract",
       "title_en": "Abstract",
-      "title_zh": "抽象的",
+      "title_zh": "摘要",
       "level": 2,
       "blocks": [
         {
@@ -1222,7 +1222,7 @@
           ],
           "chinese": [
             {
-              "text": "笔记）。将 Cell-NEST 推断的受体-配体相互作用与 snRNA-seq 推断的受体-配体相互作用进行比较，IGF1（骨髓）-IGF1R（肿瘤）相互作用在两种数据类型中都与组织修复 MP 密切相关，从而强化了其与这种骨髓状态的相关性"
+              "text": "注）。将 Cell-NEST 推断的受体-配体相互作用与 snRNA-seq 推断的受体-配体相互作用进行比较，IGF1（骨髓）-IGF1R（肿瘤）相互作用在两种数据类型中都与组织修复 MP 密切相关，从而强化了其与这种骨髓状态的相关性"
             }
           ],
           "source_fragments": [
@@ -1621,7 +1621,7 @@
           ],
           "chinese": [
             {
-              "text": "RNA-seq 使用 Illumina HiSeq 2500 对提取的 RNA 进行双端测序，目标是每个样本 7000 万个读数。使用 Trim Galore (v.0.5.0) 进行接头修剪，并使用 STAR 对准器 (v.2.7.9a)50 将修剪后的读数与 GRCh38 人类参考基因组进行比对。使用 HTSeq51 (v.0.11.0) 进行基因表达定量，以生成下游分析的计数。最后，应用edgeR52包（v.4.2.1）将这些原始计数转换为经过对数转换的每百万计数，并进行M归一化的修剪平均值。根据应用，原始计数和后处理的 log2（每百万计数）数据均用于下游分析。正如我们之前发布的那样，我们计算了所有样本的基因表达风险评分53。具体来说，该模型在公开可用的 UCSF 队列上进行训练，使用其最初发布的方法，通过计算预定义的 34 个基因特征及其各自的 LASSO 正则化 Cox 回归系数的加权和。通过最大化约登指数来将高风险组和低风险组二分为二。",
+              "text": "RNA-seq 使用 Illumina HiSeq 2500 对提取的 RNA 进行双端测序，目标是每个样本 7000 万个读数。使用 Trim Galore (v.0.5.0) 进行接头修剪，并使用 STAR 对准器 (v.2.7.9a)50 将修剪后的读数与 GRCh38 人类参考基因组进行比对。使用 HTSeq51 (v.0.11.0) 进行基因表达定量，以生成下游分析的计数。最后，应用edgeR52包（v.4.2.1）将这些原始计数转换为经过对数转换的每百万计数，并进行M归一化的修剪平均值。根据应用，原始计数和后处理的 log2（每百万计数）数据均用于下游分析。正如我们之前发布的那样，我们计算了所有样本的基因表达风险评分53。具体来说，该模型在公开可用的 UCSF 队列上进行训练，使用其最初发布的方法，通过计算预定义的 34 个基因特征及其各自的 LASSO 正则化 Cox 回归系数的加权和。通过最大化约登指数来将高风险组和低风险组一分为二。",
               "citation_ids": [
                 "50",
                 "51",
@@ -1654,7 +1654,7 @@
           ],
           "chinese": [
             {
-              "text": "SnRNA-seq 在冷冻组织上进行，目标为 6,000 个细胞核和 60,000 个读数。使用 10x Genomics Chromium Nuclei Isolation Kit 裂解缓冲液和 Miltenyi Anti-Nucleus 珠子并手动解离来分离细胞核。用细胞核分离柱除去剩余的组织，并将所得沉淀重悬于细胞核分离缓冲液中。然后将 Miltenyi 抗核珠添加到样品中，将细胞核在冰上孵育 15 分钟，然后将样品通过连接到带有 QuadroMACS 分离器的 MACS MultiStand 的 LS 柱。洗涤纯化的细胞核，并将 10,000 个细胞核的目标装载到 10x Genomics Chromium 3' GEM-X 芯片上。液滴生成后，将样品转移至预冷的带状管（USA Scientific）中并在 Bio-Rad 热循环仪中孵育。使用 10x Genomics 提供的 Recovery Agent 回收样品 cDNA，并使用 Silane DynaBead (Thermo Fisher) 混合物进行清理。纯化的 cDNA 扩增 11 个循环，然后使用 SPRIselect 珠子 (Beckman Coulter) 进行清理。样品在生物分析仪（安捷伦科技）上运行以确定 cDNA 浓度。按照 Chromium GEM-X Single Cell 3' Reagent Kit v.4 用户指南中的概述制备 cDNA 文库，并根据计算的 cDNA 浓度对 PCR 循环进行修改。然后在 Illumina 的 NovaSeqX 上对基因表达文库进行测序，并使用 Cell Ranger 管道 (10x Genomics) 处理输出。在我们的完整队列中，每个细胞的平均原始读取数为 81,154.14，标准差为 62,576.79，最少为 24,111 个读取。映射到基因组的读数的平均 (s.d.) 比例为 96.4% (2.6%)，每个细胞的独特分子标识符 (UMI) 的平均中位数为 4,619.6 (2,187.7)，表明我们的队列有足够的测序深度。"
+              "text": "SnRNA-seq 在冷冻组织上进行，目标为 6,000 个细胞核和 60,000 个读数。使用 10x Genomics Chromium Nuclei Isolation Kit 裂解缓冲液与 Miltenyi Anti-Nucleus 珠子和手动解离来分离细胞核。用细胞核分离柱除去剩余的组织，并将所得沉淀重悬于细胞核分离缓冲液中。然后将 Miltenyi 抗核珠添加到样品中，将细胞核在冰上孵育 15 分钟，然后将样品通过连接到带有 QuadroMACS 分离器的 MACS MultiStand 的 LS 柱。洗涤纯化的细胞核，并将 10,000 个细胞核的目标装载到 10x Genomics Chromium 3' GEM-X 芯片上。液滴生成后，将样品转移至预冷的带状管（USA Scientific）中并在 Bio-Rad 热循环仪中孵育。使用 10x Genomics 提供的 Recovery Agent 回收样品 cDNA，并使用 Silane DynaBead (Thermo Fisher) 混合物进行清理。纯化的 cDNA 扩增 11 个循环，然后使用 SPRIselect 珠子 (Beckman Coulter) 进行清理。样品在生物分析仪（安捷伦科技）上运行以确定 cDNA 浓度。按照 Chromium GEM-X Single Cell 3' Reagent Kit v.4 用户指南中的概述制备 cDNA 文库，并根据计算的 cDNA 浓度对 PCR 循环进行修改。然后在 Illumina 的 NovaSeqX 上对基因表达文库进行测序，并使用 Cell Ranger 管道 (10x Genomics) 处理输出。在我们的完整队列中，每个细胞的平均原始读取数为 81,154.14，标准差为 62,576.79，最少为 24,111 个读取。映射到基因组的读数的平均 (s.d.) 比例为 96.4% (2.6%)，每个细胞的独特分子标识符 (UMI) 的平均中位数为 4,619.6 (2,187.7)，表明我们的队列有足够的测序深度。"
             }
           ],
           "source_fragments": [
@@ -1677,7 +1677,7 @@
           ],
           "chinese": [
             {
-              "text": "输出原始计数经过过滤，仅包含具有至少 1,000 个 UMI 的细胞，以确保足够的文库复杂性。我们还排除了超过 3% 转录本属于线粒体基因的细胞，以确保只保留高质量的细胞。使用带有默认参数的 scDblFinder (v.1.18.0) 预测并删除双联体54。使用已建立的 R 包 Celda (v.1.20.0; DecontX)55 和 DIEM56 (v.2.4.1) 以及默认参数推断环境 RNA 含量，并在感兴趣的组之间比较值。",
+              "text": "输出原始计数经过过滤，仅包含具有至少 1,000 个 UMI 的细胞，以确保足够的文库复杂性。我们还排除了超过 3% 转录本属于线粒体基因的细胞，以确保只保留高质量的细胞。使用 scDblFinder (v.1.18.0) 和默认参数54 预测并删除双联体。使用已建立的 R 包 Celda (v.1.20.0; DecontX)55 和 DIEM56 (v.2.4.1) 以及默认参数推断环境 RNA 含量，并在感兴趣的组之间比较值。",
               "citation_ids": [
                 "54",
                 "55",
@@ -1771,7 +1771,7 @@
           ],
           "chinese": [
             {
-              "text": "样本 NMF 分别应用于我们图谱中的每种细胞类型，以识别内在和重复的基因程序。仅包含特定细胞类型中至少 50 个细胞的样本以避免偏差。排名 (k) 范围从 6 到 9，每个单独的程序均由 NMF 分数定义，使用其前 50 个基因。然后对这些程序进行过滤，仅包括跨多个等级的程序，以确保鲁棒性，并删除那些跨等级冗余或单个样本独有的程序。然后通过 Jaccard 索引对过滤后的程序进行聚类，以识别重复的共享程序（具有重叠基因的程序簇；即 MP）。然后根据至少 25% 的组成程序中存在的基因来定义 MP。然后使用 AUCell58 (v.1.26.0) 根据这些 MP 特异性签名计算每个细胞内每个 MP 的表达。这些 MP 使用先前发表的单细胞脑膜瘤数据 23-25 进行了进一步验证，并且原始数据以与研究队列相同的方式进行预处理。 NMF 用于识别每项研究中的 MP，其方式与在图谱队列中识别 MP 的方式相同。如果具有 50 个细胞的独特样本少于 4 个，则将特定细胞类型的队列排除在分析之外。然后使用 AUCell 对图谱队列中每个 MP 的表达进行量化，并生成皮尔逊相关值，以将每个 MP 与从图谱队列生成的 MP 进行比较。",
+              "text": "样本 NMF 分别应用于我们图谱中的每种细胞类型，以识别内在和重复的基因程序。仅包含特定细胞类型中至少 50 个细胞的样本以避免偏差。排名 (k) 范围从 6 到 9，每个单独的程序均由 NMF 分数定义，使用其前 50 个基因。然后对这些程序进行过滤，仅包括跨多个等级的程序，以确保鲁棒性，并删除那些跨等级冗余或单个样本独有的程序。然后通过 Jaccard 索引对过滤后的程序进行聚类，以识别重复的共享程序（具有重叠基因的程序簇；即 MP）。然后根据至少 25% 的组成程序中存在的基因来定义 MP。然后使用 AUCell58 (v.1.26.0) 根据这些 MP 特异性签名计算每个细胞内每个 MP 的表达。这些 MP 使用先前发表的单细胞脑膜瘤数据 23-25 进行了进一步验证，并且原始数据以与研究队列相同的方式进行预处理。 NMF 用于识别每项研究中的 MP，其方式与在图谱队列中识别 MP 的方式相同。如果具有 50 个细胞的独特样本少于四个，则将特定细胞类型的队列排除在分析之外。然后使用 AUCell 对图谱队列中每个 MP 的表达进行量化，并生成皮尔逊相关值，以将每个 MP 与从图谱队列生成的 MP 进行比较。",
               "citation_ids": [
                 "58",
                 "23",
@@ -1916,7 +1916,7 @@
           ],
           "chinese": [
             {
-              "text": "除去 HCl 后，加入去交联缓冲液，然后进行探针杂交混合物，在 50°C 下放置 18 小时。然后添加洗涤缓冲液，然后添加探针连接混合物和另外的洗涤缓冲液。然后将载玻片从 Visium 盒中取出并用 10% 伊红染色，然后用探针释放混合物加载到 Visium CytAssist 上。然后准备 Visium HD 载玻片并将其与探针延伸混合物一起添加到盒中。然后使用 Illumina NovaSeq 对每个捕获区域 500 万个读数的样本进行测序。值得注意的是，SpaceRanger 管道平均每个样本生成 432,817,149 个（标准差，81,927,495）个总读数，每个 8 μm 方箱平均有 899.9 (428.7) 个读数和 132.8 (80.4) 个 UMI，这表明我们的样本有足够的测序深度。"
+              "text": "除去 HCl 后，加入去交联缓冲液，然后进行探针杂交混合物，在 50°C 下放置 18 小时。然后添加洗涤缓冲液，然后添加探针连接混合物和额外的洗涤缓冲液。然后将载玻片从 Visium 盒中取出并用 10% 伊红染色，然后用探针释放混合物加载到 Visium CytAssist 上。然后准备 Visium HD 载玻片并将其与探针延伸混合物一起添加到盒中。然后使用 Illumina NovaSeq 对每个捕获区域 500 万个读数的样本进行测序。值得注意的是，SpaceRanger 管道平均每个样本生成 432,817,149 个（标准差，81,927,495）个总读数，每个 8 μm 方箱平均有 899.9 (428.7) 个读数和 132.8 (80.4) 个 UMI，这表明我们的样本有足够的测序深度。"
             }
           ],
           "source_fragments": [
@@ -2052,7 +2052,7 @@
           ],
           "chinese": [
             {
-              "text": "300、400、500、600、700、800、900 和 1,000 μm）。对于每个长度尺度的每个样本，计算每个参考细胞类型和目标细胞类型的 z 分数。使用三个排列的空背景与空间随机性进行比较，并对每个输出 z 分数进行平均。超出范围 (−1.96, 1.96) 的 Z 分数被认为具有统计显着性，正值与空间共定位相关，负值与空间损耗相关。使用 spatstat R 软件包 (v.3.3-0)，还计算了整个队列的 Ripley 不均匀 L 交叉函数，以骨髓细胞作为参考，肿瘤细胞作为目标，r 间隔为 10 μm，最高可达 1,000 μm。"
+              "text": "300、400、500、600、700、800、900 和 1,000 μm）。对于每个长度尺度的每个样本，计算每个参考细胞类型和目标细胞类型的 z 分数。使用三个排列的空背景与空间随机性进行比较，并对每个输出 z 得分进行平均。超出范围 (−1.96, 1.96) 的 Z 分数被认为具有统计显着性，正值与空间共定位相关，负值与空间损耗相关。使用 spatstat R 软件包 (v.3.3-0)，还计算了整个队列的 Ripley 不均匀 L 交叉函数，以骨髓细胞作为参考，肿瘤细胞作为目标，r 间隔为 10 μm，最高可达 1,000 μm。"
             }
           ],
           "source_fragments": [
@@ -2206,7 +2206,7 @@
           ],
           "chinese": [
             {
-              "text": "在样品预处理和测序过程中，样品对临床数据不知情。由于研究设计的原因，实验不是随机的。"
+              "text": "在样品预处理和测序过程中，样品对临床数据不知情。由于研究设计的原因，这些实验不是随机的。"
             }
           ],
           "source_fragments": [
@@ -2362,7 +2362,7 @@
           ],
           "chinese": [
             {
-              "text": "A.P.L 撰写并修改了手稿，并进行了数据分析和图表准备。 J.L., V.P. and L.S.Y.进行了额外的分析和数据处理。 A.P.L., L.S.Y. and J.Z.W.进行了样品采集和处理。 A.P.L.、L.S.Y.、J.Z.W.、A.A.、C.G.、Y.E.、C.Q.D.、Q.W.、S.M. and O.S.进行基因组提取、定量和处理。 A.A.C.-G.提供了脑膜瘤样本和元数据的子集。 A.G. and K.A.进行了病理检查。 D.S.T.提供了机构回顾性脑膜瘤病例的放射治疗数据。 A.P.L., F.N. and G.Z.负责研究设计和构思。所有作者都审阅了手稿并同意其提交。"
+              "text": "A.P.L 撰写并修改了手稿，并进行了数据分析和图表准备。 J.L.，副总裁和 L.S.Y。进行了额外的分析和数据处理。 A.P.L.、L.S.Y.和 J.Z.W.进行了样品采集和处理。 A.P.L.、L.S.Y.、J.Z.W.、A.A.、C.G.、Y.E.、C.Q.D.、Q.W.、S.M.和O.S.进行基因组提取、定量和处理。 A.A.C.-G。提供了脑膜瘤样本和元数据的子集。 A.G. 和 K.A.进行了病理检查。夏令时提供了机构回顾性脑膜瘤病例的放射治疗数据。 A.P.L.、F.N.和G.Z.负责研究设计和构思。所有作者都审阅了手稿并同意其提交。"
             }
           ],
           "source_fragments": [
@@ -2696,8 +2696,8 @@
           },
           {
             "label": "G",
-            "title": "G：研究对象、比较方式与直接结果",
-            "explanation": "Heatmaps depicting the top three myeloid state-specific receptor–ligand interactions between myeloid and neoplastic cells based on the greatest associated change in myeloid MP expression compared to baseline of all interactions present in at least 50 myeloid–neoplastic pairs.仅调整 P < 0.05 的值（使用 Benjamini-Hochberg 方法调整的两侧 Wilcoxon 秩和检验）。正如其他脑肿瘤中所显示的那样，通过状态特异性骨髓-肿瘤相互作用进行两种进展16-18。事实上，我们使用 CellChat33 推断了每种骨髓状态特有的多种骨髓（配体）-肿瘤（受体）相互作用，包括先前与癌症进展和/或促肿瘤微环境的建立相关的多种相互作用，表明骨髓细胞在脑膜瘤进展中具有潜在的靶向作用34-45（图4a，b和补​​充说明）。"
+            "title": "G：与至少 50 个骨髓-肿瘤细胞对中存在的所有相互作用的基线相比，根据骨髓 MP 表达",
+            "explanation": "与至少 50 个骨髓-肿瘤细胞对中存在的所有相互作用的基线相比，根据骨髓 MP 表达的最大相关变化，描绘了骨髓细胞和肿瘤细胞之间前三个骨髓状态特异性受体-配体相互作用的热图。仅调整 P < 0.05 的值（使用 Benjamini-Hochberg 方法调整的两侧 Wilcoxon 秩和检验）。正如其他脑肿瘤中所显示的那样，通过状态特异性骨髓-肿瘤相互作用进行两种进展16-18。事实上，我们使用 CellChat33 推断了每种骨髓状态特有的多种骨髓（配体）-肿瘤（受体）相互作用，包括先前与癌症进展和/或促肿瘤微环境的建立相关的多种相互作用，表明骨髓细胞在脑膜瘤进展中具有潜在的靶向作用34-45（图4a，b和补​​充说明）。"
           }
         ],
         "conclusion": "综合各子图，把髓系状态与配体受体关系、肿瘤程序和空间共定位连接起来。。因此本图承担的是将具体测量、比较或模型结果组织成论文可继续验证的证据链，而不是用单一子图代替全文结论。",
@@ -2717,9 +2717,9 @@
       "hires": true,
       "source_render": "pdf-caption-guided-region",
       "caption_en": "Fig. 5 | Multiple cell states are prognostic and can be used to refine outcome prediction beyond existing molecular tools. a, Kaplan–Meier curves depicting progression-free survival outcomes of patients when stratified by the median expression of multiple myeloid MPs. b, Kaplan–Meier curves depicting progression-free survival outcomes of a subset of patients from a, stratified by WHO grade. c, Kaplan–Meier curve depicting outcomes stratified by the median plasma methylation signature of the cycling myeloid MP. d, Brier curves comparing outcome prediction error based on WHO grade alone, MG alone and the integration of MG and seven prognostic MPs. e, Forrest plot depicting outputs of a multivariable Cox regression model with post-surgical PFS as the Cycling MP (plasma) Note). Comparing inferred receptor–ligand interactions from Cell- NEST to those inferred from snRNA-seq, the IGF1 (myeloid)–IGF1R (neoplastic) interaction was strongly associated with the tissue repair MP in both data types, reinforcing its relevance to this myeloid state EMT MP d Integrated outcome prediction WHO grade 2 0.20 0.15 Brier score 0.10 0.05 MG only (0.163) 2021 WHO grade (0.174) 0 10 20 MG + ICS (0.150) Years 0 Number at risk 0 5 10 15 Years ICS risk Low High Methylation risk groups Molecular groups 1.00 0.75 0.50 MG1 (P = 0.001) MG2 (P = 0.001) MG3 (P = 0.002) MG4 (P = 4.5 × 10 0.25 –5) High (P = 1.5 5 10 Low (P = 3.8 × 10 –7) –4) 0 RNA risk groups RT response predictor 1.00 0.75 0.50 0.25 –5) High (P = 0.45) 0 –5) High (P < 2.0 × 10 Low (P = 3.8 × 10 Low (P = 4.0 × 10 –16) 0 2 4 6 8 10 0 2 4 6 8 10 Time (years) target variable and ICS risk group, WHO grade, extent of resection (EOR), receipt of adjuvant radiotherapy (RT) and MG as regressors. P values were generated from the Wald test (two-sided). f, Kaplan–Meier curves depicting the added outcome granularity provided by the ICS risk groups in the context of existing bulk molecular classification tools. Each subgroup is further stratified by ICS risk, with dotted lines representing high risk and solid lines representing low risk. Notably, the Kaplan–Meier on the bottom right includes only cases that underwent adjuvant RT, with outcome representing time to recurrent post RT (n = 122). Two-sided log-rank P values are presented in a, b, c and f. (Fig. 4a,g). Multiple interactions involving myeloid receptors were also present in both data types, most commonly involving the tissue repair MP, including two involving the MERTK receptor (Fig. 4h and Supplementary Note). Stable chromsomal CNVs Biological and spatial evolution Neoplastic Meningioma TME Cell types Neoplastic Myeloid Lymphoid Neoplastic + myeloid State-specific interactions Spatial organization of TME",
-      "caption_zh": "图5 |多种细胞状态具有预后意义，可用于完善现有分子工具之外的结果预测。 a，Kaplan-Meier 曲线描绘了按多个骨髓 MP 的中值表达进行分层时患者的无进展生存结果。 b，Kaplan-Meier 曲线描绘了 a 中一部分患者的无进展生存结果，按 WHO 分级分层。 c，Kaplan-Meier 曲线描绘了按循环骨髓 MP 的中值血浆甲基化特征分层的结果。 d，Brier 曲线，比较仅基于 WHO 分级、仅 MG 以及 MG 和七个预后 MP 的整合的结果预测误差。 e，Forrest 图描绘了多变量 Cox 回归模型的输出，其中术后 PFS 作为循环 MP（血浆）注）。将 Cell-NEST 推断的受体-配体相互作用与 snRNA-seq 推断的受体-配体相互作用进行比较，IGF1（骨髓）-IGF1R（肿瘤）相互作用与两种数据类型中的组织修复 MP 密切相关，加强了其与这种骨髓状态 EMT MP d 综合结果预测 WHO 2 级 0.20 0.15 Brier 评分 0.10 0.05 仅 MG (0.163) 2021 WHO 等级 (0.174) 0 10 20 MG + ICS (0.150) 年 0 面临风险的人数 0 5 10 15 年 ICS 风险 低 高 甲基化风险群体 分子群体 1.00 0.75 0.50 MG1 (P = 0.001) MG2 (P = 0.001) MG3 (P = 0.002) MG4 (P = 4.5 × 10 0.25 –5) 高 (P = 1.5 5 10 低 (P = 3.8 × 10 –7) –4) 0 RNA 风险组 RT 反应预测因子 1.00 0.75 0.50 0.25 –5) 高 (P = 0.45) 0 –5) 高 (P < 2.0 × 10 低（P = 3.8 × 10 低（P = 4.0 × 10 –16） 0 2 4 6 8 10 0 2 4 6 8 10 时间（年）目标变量和 ICS 风险组、WHO 分级、切除范围 (EOR)、接受辅助放疗 (RT) 和 MG 作为回归量。P 值由 Wald 检验（两侧）生成。f, Kaplan-Meier 曲线描述了 ICS 风险组在现有大分子分类工具背景下提供的附加结果粒度，每个亚组均按 ICS 风险进一步分层，其中虚线代表高风险，实线代表低风险。值得注意的是，右下角的 Kaplan-Meier 曲线仅包括接受辅助 RT 的病例，结果代表 RT 后复发的时间（n = 122）。 （图 4a，g）两种数据类型中也存在涉及骨髓受体的多种相互作用，最常见的是涉及组织修复 MP，包括涉及 MERTK 受体的两种相互作用（图 4h 和补充说明） 稳定染色体 CNV 生物学和空间进化 肿瘤性脑膜瘤 TME 细胞类型 肿瘤性髓样淋巴样肿瘤 + 髓样状态特异性相互作用 TME 的空间组织。",
+      "caption_zh": "图5 |多种细胞状态具有预后意义，可用于完善现有分子工具之外的结果预测。 a，Kaplan-Meier 曲线描绘了按多个骨髓 MP 的中值表达进行分层时患者的无进展生存结果。 b，Kaplan-Meier 曲线描绘了 a 中一部分患者的无进展生存结果，按 WHO 分级分层。 c，Kaplan-Meier 曲线描绘了按循环骨髓 MP 的中值血浆甲基化特征分层的结果。 d，Brier 曲线，比较仅基于 WHO 分级、仅 MG 以及 MG 和 7 个预后 MP 的整合的结果预测误差。 e，Forrest 图描绘了多变量 Cox 回归模型的输出，其中术后 PFS 作为循环 MP（血浆）注）。将 Cell-NEST 推断的受体-配体相互作用与 snRNA-seq 推断的受体-配体相互作用进行比较，IGF1（骨髓）-IGF1R（肿瘤）相互作用与两种数据类型中的组织修复 MP 密切相关，加强了其与这种骨髓状态 EMT MP d 综合结果预测 WHO 2 级 0.20 0.15 Brier 评分 0.10 0.05 仅 MG (0.163) 2021 WHO 等级 (0.174) 0 10 20 MG + ICS (0.150) 年 0 面临风险的人数 0 5 10 15 年 ICS 风险 低 高 甲基化风险群体 分子群体 1.00 0.75 0.50 MG1 (P = 0.001) MG2 (P = 0.001) MG3 (P = 0.002) MG4 (P = 4.5 × 10 0.25 –5) 高 (P = 1.5 5 10 低 (P = 3.8 × 10 –7) –4) 0 RNA 风险组 RT 反应预测因子 1.00 0.75 0.50 0.25 –5) 高 (P = 0.45) 0 –5) 高 (P < 2.0 × 10 低（P = 3.8 × 10 低（P = 4.0 × 10 –16） 0 2 4 6 8 10 0 2 4 6 8 10 时间（年）目标变量和 ICS 风险组、WHO 分级、切除范围 (EOR)、接受辅助放疗 (RT) 和 MG 作为回归量。P 值由 Wald 检验（两侧）生成。f, Kaplan-Meier 曲线描述了 ICS 风险组在现有大分子分类工具背景下提供的附加结果粒度，每个亚组均按 ICS 风险进一步分层，其中虚线代表高风险，实线代表低风险。值得注意的是，右下角的 Kaplan-Meier 曲线仅包括接受辅助 RT 的病例，结果代表 RT 后复发的时间（n = 122）。 （图 4a，g）两种数据类型中也存在涉及骨髓受体的多种相互作用，最常见的是涉及组织修复 MP，包括涉及 MERTK 受体的两种相互作用（图 4h 和补充说明） 稳定染色体 CNV 生物学和空间进化 肿瘤性脑膜瘤 TME 细胞类型 肿瘤性髓样淋巴样肿瘤 + 髓样状态特异性相互作用 TME 的空间组织。",
       "study": {
-        "overview": "阅读时按照 A → B → C → D → E → F 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图5 |多种细胞状态具有预后意义，可用于完善现有分子工具之外的结果预测。 a，Kaplan-Meier 曲线描绘了按多个骨髓 MP 的中值表达进行分层时患者的无进展生存结果。 b，Kaplan-Meier 曲线描绘了 a 中一部分患者的无进展生存结果，按 WHO 分级分层。 c，Kaplan-Meier 曲线描绘了按循环骨髓 MP 的中值血浆甲基化特征分层的结果。 d，Brier 曲线，比较仅基于 WHO 分级、仅 MG 以及 MG 和七个预后 MP 的整合的结果预测误差。 e，Forrest 图描绘了多变量 Cox 回归模型的输出，其中术后 PFS 作为循环 MP（血浆）注）。将 Cell-NEST 推断的受体-配体相互作用与 snRNA-seq 推断的受体-配体相互作用进行比较，IGF1（骨髓）-IGF1R（肿瘤）相互作用与两种数据类型中的组织修复 MP 密切相关，加强了其与这种骨髓状态 EMT MP d 综合结果预测 WHO 2 级 0.20 0.15 Brier 评分 0.10 0.05 仅 MG (0.163) 2021 WHO 等级 (0.174) 0 10 20 MG + ICS (0.150) 年 0 面临风险的人数 0 5 10 15 年 ICS 风险 低 高 甲基化风险群体 分子群体 1.00 0.75 0.50 MG1 (P = 0.001) MG2 (P = 0.001) MG3 (P = 0.002) MG4 (P = 4.5 × 10 0.25 –5) 高 (P = 1.5 5 10 低 (P = 3.8 × 10 –7) –4) 0 RNA 风险组 RT 反应预测因子 1.00 0.75 0.50 0.25 –5) 高 (P = 0.45) 0 –5) 高 (P < 2.0 × 10 低（P = 3.8 × 10 低（P = 4.0 × 10 –16） 0 2 4 6 8 10 0 2 4 6 8 10 时间（年）目标变量和 ICS 风险组、WHO 分级、切除范围 (EOR)、接受辅助放疗 (RT) 和 MG 作为回归量。P 值由 Wald 检验（两侧）生成。f, Kaplan-Meier 曲线描述了 ICS 风险组在现有大分子分类工具背景下提供的附加结果粒度，每个亚组均按 ICS 风险进一步分层，其中虚线代表高风险，实线代表低风险。值得注意的是，右下角的 Kaplan-Meier 曲线仅包括接受辅助 RT 的病例，结果代表 RT 后复发的时间（n = 122）。 （图 4a，g）两种数据类型中也存在涉及骨髓受体的多种相互作用，最常见的是涉及组织修复 MP，包括涉及 MERTK 受体的两种相互作用（图 4h 和补充说明） 稳定染色体 CNV 生物学和空间进化 肿瘤性脑膜瘤 TME 细胞类型 肿瘤性髓样淋巴样肿瘤 + 髓样状态特异性相互作用 TME 的空间组织。",
+        "overview": "阅读时按照 A → B → C → D → E → F 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图5 |多种细胞状态具有预后意义，可用于完善现有分子工具之外的结果预测。 a，Kaplan-Meier 曲线描绘了按多个骨髓 MP 的中值表达进行分层时患者的无进展生存结果。 b，Kaplan-Meier 曲线描绘了 a 中一部分患者的无进展生存结果，按 WHO 分级分层。 c，Kaplan-Meier 曲线描绘了按循环骨髓 MP 的中值血浆甲基化特征分层的结果。 d，Brier 曲线，比较仅基于 WHO 分级、仅 MG 以及 MG 和 7 个预后 MP 的整合的结果预测误差。 e，Forrest 图描绘了多变量 Cox 回归模型的输出，其中术后 PFS 作为循环 MP（血浆）注）。将 Cell-NEST 推断的受体-配体相互作用与 snRNA-seq 推断的受体-配体相互作用进行比较，IGF1（骨髓）-IGF1R（肿瘤）相互作用与两种数据类型中的组织修复 MP 密切相关，加强了其与这种骨髓状态 EMT MP d 综合结果预测 WHO 2 级 0.20 0.15 Brier 评分 0.10 0.05 仅 MG (0.163) 2021 WHO 等级 (0.174) 0 10 20 MG + ICS (0.150) 年 0 面临风险的人数 0 5 10 15 年 ICS 风险 低 高 甲基化风险群体 分子群体 1.00 0.75 0.50 MG1 (P = 0.001) MG2 (P = 0.001) MG3 (P = 0.002) MG4 (P = 4.5 × 10 0.25 –5) 高 (P = 1.5 5 10 低 (P = 3.8 × 10 –7) –4) 0 RNA 风险组 RT 反应预测因子 1.00 0.75 0.50 0.25 –5) 高 (P = 0.45) 0 –5) 高 (P < 2.0 × 10 低（P = 3.8 × 10 低（P = 4.0 × 10 –16） 0 2 4 6 8 10 0 2 4 6 8 10 时间（年）目标变量和 ICS 风险组、WHO 分级、切除范围 (EOR)、接受辅助放疗 (RT) 和 MG 作为回归量。P 值由 Wald 检验（两侧）生成。f, Kaplan-Meier 曲线描述了 ICS 风险组在现有大分子分类工具背景下提供的附加结果粒度，每个亚组均按 ICS 风险进一步分层，其中虚线代表高风险，实线代表低风险。值得注意的是，右下角的 Kaplan-Meier 曲线仅包括接受辅助 RT 的病例，结果代表 RT 后复发的时间（n = 122）。 （图 4a，g）两种数据类型中也存在涉及骨髓受体的多种相互作用，最常见的是涉及组织修复 MP，包括涉及 MERTK 受体的两种相互作用（图 4h 和补充说明） 稳定染色体 CNV 生物学和空间进化 肿瘤性脑膜瘤 TME 细胞类型 肿瘤性髓样淋巴样肿瘤 + 髓样状态特异性相互作用 TME 的空间组织。",
         "panels": [
           {
             "label": "A",
@@ -2728,8 +2728,8 @@
           },
           {
             "label": "B",
-            "title": "B：Kaplan-Meier 曲线描绘了按 WHO 分级分层的一部分患者的无进展生存结果",
-            "explanation": "Kaplan-Meier 曲线描绘了按 WHO 分级分层的一部分患者的无进展生存结果。 该部分属于图5：多种细胞状态具有预后价值，并可在现有分子工具之外改善结局预测，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。本图的阅读要求是：解释生存曲线、单变量和多变量结果、风险模型增益及验证范围。。"
+            "title": "B：Kaplan-Meier 曲线描述了按 WHO 分级分层的一部分患者的无进展生存结果",
+            "explanation": "Kaplan-Meier 曲线描述了按 WHO 分级分层的一部分患者的无进展生存结果。 该部分属于图5：多种细胞状态具有预后价值，并可在现有分子工具之外改善结局预测，应结合其标注、坐标、颜色、分组和相邻子图读取。它在本图中的作用是把直接观察或计算结果与全文要回答的问题连接起来。本图的阅读要求是：解释生存曲线、单变量和多变量结果、风险模型增益及验证范围。。"
           },
           {
             "label": "C",
@@ -2769,9 +2769,9 @@
       "hires": true,
       "source_render": "pdf-caption-guided-region",
       "caption_en": "Fig. 6 | Graphical overview of findings. Profiling of the meningioma tumor microenvironment at high resolution yielded insights into the spatial variability of clinically important chromosomal alterations, the evolution of myeloid cell states between molecular groups and across the meningioma–dura border, the complexity and spatial dependence of interactions between neoplastic and Interestingly, we also found that myeloid and neoplastic MP expression correlated with both myeloid and neoplastic cell density (Fig. 4i). Specifically, local density of both cell types correlated most strongly with the myeloid TNF MP, with weak positive associations also noted with the EMT, tissue repair and metabolic MPs. Taken together, these findings demonstrate that myeloid cells have an important role in shaping the meningioma microenvironment, which may explain the observed tumor-specific differences in myeloid recruitment and activation.",
-      "caption_zh": "图 6 | Graphical overview of findings.对脑膜瘤肿瘤微环境的高分辨率分析可以深入了解临床上重要的染色体改变的空间变异性、分子组之间以及脑膜瘤-硬脑膜边界上的骨髓细胞状态的演变、肿瘤细胞和肿瘤细胞之间相互作用的复杂性和空间依赖性。有趣的是，我们还发现骨髓细胞和肿瘤细胞的 MP 表达与骨髓细胞和肿瘤细胞密度相关（图 4i）。具体而言，两种细胞类型的局部密度与骨髓 TNF MP 相关性最强，与 EMT、组织修复和代谢 MP 也呈弱正相关。总而言之，这些发现表明骨髓细胞在塑造脑膜瘤微环境中发挥着重要作用，这可能解释了观察到的骨髓募集和激活方面的肿瘤特异性差异。",
+      "caption_zh": "图 6 |结果的图形概述。对脑膜瘤肿瘤微环境的高分辨率分析可以深入了解临床上重要的染色体改变的空间变异性、分子组之间以及脑膜瘤-硬脑膜边界上的骨髓细胞状态的演变、肿瘤细胞和肿瘤细胞之间相互作用的复杂性和空间依赖性。有趣的是，我们还发现骨髓细胞和肿瘤细胞的 MP 表达与骨髓细胞和肿瘤细胞密度相关（图 4i）。具体而言，两种细胞类型的局部密度与骨髓 TNF MP 相关性最强，与 EMT、组织修复和代谢 MP 也呈弱正相关。总而言之，这些发现表明骨髓细胞在塑造脑膜瘤微环境中发挥着重要作用，这可能解释了观察到的骨髓募集和激活方面的肿瘤特异性差异。",
       "study": {
-        "overview": "阅读时按照 整图 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图 6 | Graphical overview of findings.对脑膜瘤肿瘤微环境的高分辨率分析可以深入了解临床上重要的染色体改变的空间变异性、分子组之间以及脑膜瘤-硬脑膜边界上的骨髓细胞状态的演变、肿瘤细胞和肿瘤细胞之间相互作用的复杂性和空间依赖性。有趣的是，我们还发现骨髓细胞和肿瘤细胞的 MP 表达与骨髓细胞和肿瘤细胞密度相关（图 4i）。具体而言，两种细胞类型的局部密度与骨髓 TNF MP 相关性最强，与 EMT、组织修复和代谢 MP 也呈弱正相关。总而言之，这些发现表明骨髓细胞在塑造脑膜瘤微环境中发挥着重要作用，这可能解释了观察到的骨髓募集和激活方面的肿瘤特异性差异。",
+        "overview": "阅读时按照 整图 的顺序展开，先确认每个子图的研究对象和分组，再核对坐标、颜色、空间位置或模型输出，最后将子图之间的递进关系与正文结论对应。完整图注提供的范围是：图 6 |结果的图形概述。对脑膜瘤肿瘤微环境的高分辨率分析可以深入了解临床上重要的染色体改变的空间变异性、分子组之间以及脑膜瘤-硬脑膜边界上的骨髓细胞状态的演变、肿瘤细胞和肿瘤细胞之间相互作用的复杂性和空间依赖性。有趣的是，我们还发现骨髓细胞和肿瘤细胞的 MP 表达与骨髓细胞和肿瘤细胞密度相关（图 4i）。具体而言，两种细胞类型的局部密度与骨髓 TNF MP 相关性最强，与 EMT、组织修复和代谢 MP 也呈弱正相关。总而言之，这些发现表明骨髓细胞在塑造脑膜瘤微环境中发挥着重要作用，这可能解释了观察到的骨髓募集和激活方面的肿瘤特异性差异。",
         "panels": [
           {
             "label": "整图",
