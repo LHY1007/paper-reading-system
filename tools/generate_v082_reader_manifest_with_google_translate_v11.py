@@ -219,6 +219,7 @@ def normalize_evidence_levels(source: Path) -> Path:
 
 
 v8.first_clause = specific_chinese_first_clause
+v8.google_translate_all = batched_translate_all
 v8.v7.translate_all = batched_translate_all
 v8.v7.generate_figure_studies = v8.deterministic_figure_studies
 
