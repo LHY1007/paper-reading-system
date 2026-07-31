@@ -1,2 +1,2 @@
-latest-strict-sequence-trigger: 2026-07-31T01:00:00+08:00
-purpose: run fail-first grounded per-paper manifest generation with immutable shell separation
+latest-strict-sequence-trigger: 2026-07-31T15:35:00+08:00
+purpose: run fail-first model-independent per-paper manifest generation with immutable shell separation
