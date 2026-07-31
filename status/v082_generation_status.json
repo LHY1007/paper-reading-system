@@ -1,9 +1,9 @@
 {
-  "version": "v082-generation-observer-2",
+  "version": "v082-generation-observer-3",
   "state": "completed",
-  "generator": "v11-batched-google-translate",
-  "run_id": 30616678151,
-  "run_attempt": 5,
+  "generator": "v11-batched-google-translate-pr-cache",
+  "run_id": 30619717703,
+  "run_attempt": 1,
   "generation_outcome": "failure",
   "manifest_count": 5,
   "manifests": [
@@ -134,7 +134,7 @@
           "changed": true,
           "committed": true,
           "pushed": true,
-          "attempt": 1
+          "attempt": 2
         },
         "reason": "source evidence, grounded content, schema and code boundary passed; manifest persisted"
       },
@@ -213,10 +213,10 @@
           }
         },
         "commit": {
-          "changed": false,
-          "committed": false,
-          "pushed": false,
-          "reason": "manifest already current"
+          "changed": true,
+          "committed": true,
+          "pushed": true,
+          "attempt": 1
         },
         "reason": "source evidence, grounded content, schema and code boundary passed; manifest persisted"
       },
