@@ -27,17 +27,32 @@ def ids(items: list[dict[str, Any]]) -> list[str]:
     return [str(item.get("id") or "") for item in items]
 
 
+def is_reviewed_table_upgrade(asset: dict[str, Any]) -> bool:
+    return (
+        asset.get("kind") == "table"
+        and TABLE_PROVENANCE in str(asset.get("source_render") or "")
+    )
+
+
 def validate(manifest: dict[str, Any], review: dict[str, Any]) -> dict[str, Any]:
     errors: list[Any] = []
     expected_paragraphs = paragraph_count(manifest)
     assets = manifest.get("assets") or []
-    expected_figure_ids = [str(item.get("id")) for item in assets if item.get("kind") == "figure"]
+    expected_figure_ids = [
+        str(item.get("id")) for item in assets if item.get("kind") == "figure"
+    ]
     expected_table_upgrade_ids = [
+        str(item.get("id")) for item in assets if is_reviewed_table_upgrade(item)
+    ]
+    # Preserve the original asset order. Table-like sources are reviewed as images
+    # before they are transcribed, so their image-review IDs remain interleaved with
+    # ordinary figures rather than being appended after all figures.
+    expected_source_image_ids = [
         str(item.get("id"))
         for item in assets
-        if item.get("kind") == "table"
-        and TABLE_PROVENANCE in str(item.get("source_render") or "")
+        if item.get("kind") == "figure" or is_reviewed_table_upgrade(item)
     ]
+
     translations = review.get("translation") or []
     figures = review.get("figures") or []
     tables = review.get("tables") or []
@@ -60,10 +75,6 @@ def validate(manifest: dict[str, Any], review: dict[str, Any]) -> dict[str, Any]
     if any(not item.get("passed") for item in translations):
         errors.append("one or more paragraph/title/caption/table-cell translation reviews failed")
 
-    # Every final figure must have one multimodal review. A table-like source is
-    # first reviewed as a source image and then independently transcribed, so its
-    # ID is expected in both the source-image reviews and table reviews.
-    expected_source_image_ids = expected_figure_ids + expected_table_upgrade_ids
     if reviewed_figure_ids != expected_source_image_ids:
         errors.append({
             "source_image_review_ids": {
@@ -104,11 +115,12 @@ def validate(manifest: dict[str, Any], review: dict[str, Any]) -> dict[str, Any]
         errors.append("reference review count differs from manifest")
 
     return {
-        "version": "v082-strong-ai-review-gate-3",
+        "version": "v082-strong-ai-review-gate-4",
         "paper_key": (manifest.get("paper") or {}).get("key"),
         "paragraphs": expected_paragraphs,
         "figure_ids": expected_figure_ids,
         "table_upgrade_ids": expected_table_upgrade_ids,
+        "expected_source_image_ids": expected_source_image_ids,
         "reviewed_source_image_ids": reviewed_figure_ids,
         "reviewed_table_ids": reviewed_table_ids,
         "terms": len(manifest.get("terms") or []),
