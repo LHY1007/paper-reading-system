@@ -23,6 +23,23 @@ def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def forward_args(argv: list[str]) -> list[str]:
+    """Remove wrapper-only arguments before invoking the legacy final builder."""
+    forwarded: list[str] = []
+    index = 0
+    while index < len(argv):
+        value = argv[index]
+        if value == "--materialized-shell":
+            index += 2
+            continue
+        if value.startswith("--materialized-shell="):
+            index += 1
+            continue
+        forwarded.append(value)
+        index += 1
+    return forwarded
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(add_help=False)
     parser.add_argument("--output-root", type=Path, default=Path("final/V0.8.2"))
@@ -71,7 +88,11 @@ def main() -> None:
     if preflight_errors:
         raise SystemExit("materialized product shell preflight failed")
 
-    command = [sys.executable, "tools/run_v082_final_reader_build.py", *sys.argv[1:]]
+    command = [
+        sys.executable,
+        "tools/run_v082_final_reader_build.py",
+        *forward_args(sys.argv[1:]),
+    ]
     print("+", " ".join(command), flush=True)
     result = subprocess.run(command, text=True)
     if result.returncode != 0:
@@ -122,7 +143,10 @@ def main() -> None:
     gate = load(gate_path)
     gate["architecture"] = "committed immutable CANVAS product shell + schema-only paper data + deterministic component renderer"
     gate["materialized_product_shell"] = provenance
-    gate["runtime_shell_matches_materialized"] = not any(isinstance(item, dict) and "runtime_vs_materialized_shell" in item for item in post_errors)
+    gate["runtime_shell_matches_materialized"] = not any(
+        isinstance(item, dict) and "runtime_vs_materialized_shell" in item
+        for item in post_errors
+    )
     gate["layout_invariance"] = layout
     existing_errors = list(gate.get("errors") or [])
     existing_errors.extend(post_errors)
