@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: v082-exact-blocked-source-autorun
@@ -114,4 +114,47 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
-# autorun trigger: 2026-08-01T17:12+08:00
+  record-result:
+    if: always()
+    needs: [prefetch-cho, prefetch-lucas]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
+      - name: Record exact-source cache result
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          CHO_RESULT: ${{ needs.prefetch-cho.result }}
+          LUCAS_RESULT: ${{ needs.prefetch-lucas.result }}
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git fetch origin v0.8x-batch-diagnosis
+          git reset --hard origin/v0.8x-batch-diagnosis
+          mkdir -p status
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          cho = os.environ['CHO_RESULT']
+          lucas = os.environ['LUCAS_RESULT']
+          value = {
+              'version': 'v082-exact-source-cache-autorun-1',
+              'run_id': os.environ['RUN_ID'],
+              'run_attempt': os.environ['RUN_ATTEMPT'],
+              'cho_result': cho,
+              'lucas_result': lucas,
+              'passed': cho == 'success' and lucas == 'success',
+          }
+          Path('status/v082_exact_source_cache_autorun.json').write_text(
+              json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+          )
+          PY
+          git add status/v082_exact_source_cache_autorun.json
+          git commit -m "ci(v0.8.2): record exact source cache run $RUN_ID"
+          git push origin HEAD:v0.8x-batch-diagnosis
+
+# autorun trigger: 2026-08-01T17:58+08:00
