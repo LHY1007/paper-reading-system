@@ -1,29 +1,28 @@
-name: Diagnose V0.8x batch generation
+name: Apply V0.8.2 sentence-pair upgrade from PR gate
 
 on:
   pull_request:
-    branches: [main]
+    branches:
+      - main
+    types:
+      - synchronize
     paths:
-      - ".github/workflows/diagnose_v08x_batch.yml"
-  workflow_dispatch:
+      - .github/workflows/diagnose_v08x_batch.yml
 
 permissions:
   contents: write
-  models: read
+
+concurrency:
+  group: v082-sentence-pair-pr-gate
+  cancel-in-progress: false
 
 jobs:
-  strict-manifest-generation:
-    if: github.event_name == 'pull_request'
+  apply:
+    if: github.event.pull_request.head.ref == 'v0.8x-batch-diagnosis'
     runs-on: ubuntu-latest
-    timeout-minutes: 360
-    concurrency:
-      group: v082-generate-all-manifests-strict-sequence
-      cancel-in-progress: true
+    timeout-minutes: 45
     env:
-      PYTHONUNBUFFERED: "1"
-      GITHUB_MODELS_MODEL: "openai/gpt-4.1"
-      GITHUB_MODELS_MIN_INTERVAL_SECONDS: "4"
-      CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
+      TRIGGER_HEAD: ${{ github.event.pull_request.head.sha }}
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,93 +31,47 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Install source, evidence and manifest dependencies
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 jsonschema lxml
+      - name: Apply verified sentence upgrade bundle
+        run: python tools/apply_v082_sentence_pair_upgrade.py
+      - name: Prove sentence-level source reconstruction and pairing
         run: |
-          python -m pip install --disable-pip-version-check \
-            requests beautifulsoup4 PyMuPDF curl_cffi jsonschema lxml pillow
-      - name: Prepare strict sequential generation workspace
-        run: |
-          CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
-          test -n "$CANVAS"
-          printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_manifest_paths
-          mkdir -p .build/v082/{pdfs,cho-source,batch-evidence,batch-audits,batch-reports,generated-manifests,model-cache} content/v082_manifests
-      - name: Restore audited PDF cache
-        id: source-cache
-        uses: actions/cache/restore@v4
-        with:
-          path: .build/v082/pdfs
-          key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json', 'tools/download_v082_sources.py', 'tools/download_v082_release_sources.py', 'tools/download_v082_release_sources_continue.py', 'tools/prefetch_v082_blocked_sources.py') }}
-          restore-keys: |
-            v082-source-pdfs-
-      - name: Restore user-supplied Cho source
-        uses: actions/cache/restore@v4
-        with:
-          path: .build/v082/cho-source
-          key: ${{ env.CHO_CACHE_KEY }}
-      - name: Inject Cho source
-        run: |
-          if [ -f .build/v082/cho-source/07_cho-2026.pdf ]; then
-            cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
-          fi
-      - name: Restore GitHub Models caches
-        id: model-cache
-        uses: actions/cache/restore@v4
-        with:
-          path: .build/v082/model-cache
-          key: v082-model-cache-strict-all-${{ hashFiles('tools/generate_v082_reader_manifest_with_github_models*.py', 'config/v082_reader_content_plans/*.json') }}
-          restore-keys: |
-            v082-model-cache-strict-all-
-            v082-model-cache-all-
-            v082-model-cache-lee-
-      - name: Obtain every exact source PDF
+          python tools/test_v082_sentence_pairs.py
+          python tools/validate_v082_sentence_pairs.py tests/fixtures/v082_shell_smoke_manifest.json --report /tmp/SENTENCE_PAIR_GATE.json
+          python tools/validate_v082_manifest_code_boundary.py tests/fixtures/v082_shell_smoke_manifest.json --report /tmp/MANIFEST_CODE_BOUNDARY.json
+          python tools/render_v082_from_frozen_shell.py tests/fixtures/v082_shell_smoke_manifest.json /tmp/V082_SENTENCE_SMOKE_READER.html --shell templates/v082/V082_CANVAS_FROZEN_SHELL.html --lock config/v082_frozen_shell_lock.json --schema schemas/paper_content_manifest_v082.schema.json --report /tmp/SMOKE_RENDER.json
+          python tools/validate_v082_rendered_architecture.py /tmp/V082_SENTENCE_SMOKE_READER.html --shell templates/v082/V082_CANVAS_FROZEN_SHELL.html --manifest tests/fixtures/v082_shell_smoke_manifest.json --lock config/v082_frozen_shell_lock.json --report /tmp/SMOKE_RENDERED_ARCHITECTURE.json
+      - name: Restore the normal PR workflow and publish proven files
         shell: bash
         run: |
           set -euo pipefail
-          source /tmp/v082_manifest_paths
-          python tools/prefetch_v082_blocked_sources.py \
-            --registry config/v082_paper_sources.json \
-            --output-dir .build/v082/pdfs \
-            --report .build/v082/batch-reports/BLOCKED_SOURCE_PREFETCH.json || true
-          python tools/download_v082_release_sources_continue.py \
-            --registry config/v082_paper_sources.json \
-            --canonical-html "$CANVAS_ORIGINAL" \
-            --output-dir .build/v082/pdfs \
-            --report .build/v082/batch-reports/SOURCE_DOWNLOAD_AVAILABLE.json \
-            --reuse || true
-      - name: Generate and persist strictly one paper at a time
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          python tools/run_v082_manifest_generation_sequentially_v2.py \
-            --registry config/v082_paper_sources.json \
-            --pdf-dir .build/v082/pdfs \
-            --evidence-dir .build/v082/batch-evidence \
-            --audit-dir .build/v082/batch-audits \
-            --report-dir .build/v082/batch-reports \
-            --generated-dir .build/v082/generated-manifests \
-            --manifest-dir content/v082_manifests \
-            --plans-dir config/v082_reader_content_plans \
-            --cache-dir .build/v082/model-cache \
-            --branch v0.8x-batch-diagnosis
-      - uses: actions/cache/save@v4
-        if: always() && steps.source-cache.outputs.cache-hit != 'true'
-        with:
-          path: .build/v082/pdfs
-          key: ${{ steps.source-cache.outputs.cache-primary-key }}
-      - uses: actions/cache/save@v4
-        if: always()
-        with:
-          path: .build/v082/model-cache
-          key: ${{ steps.model-cache.outputs.cache-primary-key }}
+          git show "$TRIGGER_HEAD^:.github/workflows/diagnose_v08x_batch.yml" > .github/workflows/diagnose_v08x_batch.yml
+          rm -rf .github/v082-sentence-upgrade
+          rm -f tools/apply_v082_sentence_pair_upgrade.py
+          rm -f .github/workflows/apply_v082_sentence_pair_upgrade.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Enforce sentence-paired bilingual V0.8.2 readers"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin v0.8x-batch-diagnosis
+            if git rebase origin/v0.8x-batch-diagnosis && git push origin HEAD:v0.8x-batch-diagnosis; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 4))
+          done
+          exit 1
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: v082-strict-sequential-manifest-audit
+          name: v082-sentence-pair-pr-gate-proof
           path: |
-            content/v082_manifests
-            .build/v082/batch-evidence
-            .build/v082/batch-audits
-            .build/v082/batch-reports
-            .build/v082/generated-manifests
+            /tmp/SENTENCE_PAIR_GATE.json
+            /tmp/MANIFEST_CODE_BOUNDARY.json
+            /tmp/SMOKE_RENDER.json
+            /tmp/SMOKE_RENDERED_ARCHITECTURE.json
+            /tmp/V082_SENTENCE_SMOKE_READER.html
           if-no-files-found: warn
-          retention-days: 30
+          retention-days: 14
