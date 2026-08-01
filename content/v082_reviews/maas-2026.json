@@ -7,9 +7,9 @@
   "source_audited_curated_acceptance_passed": true,
   "exact_source_preservation_passed": true,
   "authoritative_pdf_panel_audit_passed": true,
-  "manifest_sha256": "4279152d45cfbc79dc94be66b0d0ed1cbc413c9291323a9d5b35234086aecd13",
-  "workflow_run_id": "30709062645",
-  "workflow_head_sha": "da0c4dda487fddaeb5aefa5dbba46d13b56566f9",
+  "manifest_sha256": "fe0d5dfc276b7bc9a1020c46c1664c3c77dde0759c7a226ab0b93f6cdb6ba02a",
+  "workflow_run_id": "30709112640",
+  "workflow_head_sha": "a4435d75d6ed1ebd0ba5b55110d9ba4d68ff701f",
   "reports": {
     "EVIDENCE_QUALITY.json": {
       "version": "v082-evidence-quality-5",
