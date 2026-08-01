@@ -8,8 +8,8 @@
   "exact_source_preservation_passed": true,
   "authoritative_pdf_panel_audit_passed": true,
   "manifest_sha256": "fe0d5dfc276b7bc9a1020c46c1664c3c77dde0759c7a226ab0b93f6cdb6ba02a",
-  "workflow_run_id": "30708392629",
-  "workflow_head_sha": "7f84e5bb18d23fb9af5d1b7e002a4355dea3c360",
+  "workflow_run_id": "30708560897",
+  "workflow_head_sha": "b917dd078673fa08e1aa3866c7a016dd821ce892",
   "reports": {
     "EVIDENCE_QUALITY.json": {
       "version": "v082-evidence-quality-5",
