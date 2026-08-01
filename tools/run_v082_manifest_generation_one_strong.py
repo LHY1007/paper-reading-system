@@ -96,7 +96,7 @@ def main() -> None:
     reports.mkdir(parents=True, exist_ok=True)
     status_path = reports / "COMPONENT_BUILD_STATUS.json"
     status: dict[str, Any] = {
-        "version": "v082-one-paper-strong-ai-build-1",
+        "version": "v082-one-paper-strong-ai-build-2",
         "paper_key": args.paper_key,
         "order": order,
         "source_pdf": str(pdf),
@@ -149,7 +149,11 @@ def main() -> None:
     try:
         for name, command in commands:
             result = run(command, check=False)
-            status["steps"][name] = {"returncode": result.returncode}
+            status["steps"][name] = {
+                "returncode": result.returncode,
+                "stdout_tail": (result.stdout or "")[-6000:],
+                "stderr_tail": (result.stderr or "")[-6000:],
+            }
             write(status_path, status)
             if result.returncode != 0:
                 raise RuntimeError(f"{name} failed")
@@ -165,8 +169,12 @@ def main() -> None:
         status["reason"] = "every variable component was generated one at a time, independently reviewed, grounded, validated and committed"
         write(status_path, status)
     except Exception as exc:
-        generated.unlink(missing_ok=True)
-        review.unlink(missing_ok=True)
+        status["failed_artifacts"] = {
+            "manifest_retained": generated.exists(),
+            "review_retained": review.exists(),
+            "manifest_path": str(generated),
+            "review_path": str(review),
+        }
         status["reason"] = f"{type(exc).__name__}: {exc}"
         status["traceback"] = traceback.format_exc()[-8000:]
         write(status_path, status)
