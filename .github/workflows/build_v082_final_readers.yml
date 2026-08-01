@@ -1,6 +1,10 @@
 name: Build V0.8.2 final readers
 
 on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - ".github/v082-final-build-trigger"
   pull_request:
     branches: [main]
     paths:
