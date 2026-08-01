@@ -1,4 +1,4 @@
-name: Generate V0.8.2 Landry reader with strong AI
+name: Apply V0.8.2 sentence-pair upgrade through Landry gate
 
 on:
   push:
@@ -9,98 +9,96 @@ on:
 
 permissions:
   contents: write
-  copilot-requests: write
 
 concurrency:
-  group: v082-landry-strong-autorun
-  cancel-in-progress: true
+  group: v082-sentence-pair-upgrade-through-landry
+  cancel-in-progress: false
 
 jobs:
-  record-start:
+  apply-and-prove:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
         with:
           ref: v0.8x-batch-diagnosis
           fetch-depth: 0
-      - name: Record Landry run identity
-        env:
-          RUN_ID: ${{ github.run_id }}
-          RUN_ATTEMPT: ${{ github.run_attempt }}
-          HEAD_SHA: ${{ github.sha }}
-        run: |
-          set -euo pipefail
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          mkdir -p status
-          python - <<'PY'
-          import json, os
-          from pathlib import Path
-          value = {
-              "version": "v082-landry-strong-autorun-1",
-              "paper_key": "landry-2026",
-              "run_id": os.environ["RUN_ID"],
-              "run_attempt": os.environ["RUN_ATTEMPT"],
-              "trigger_sha": os.environ["HEAD_SHA"],
-              "status": "started"
-          }
-          Path("status/v082_landry_strong_autorun.json").write_text(
-              json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-          )
-          PY
-          git add status/v082_landry_strong_autorun.json
-          git commit -m "ci(v0.8.2): record Landry strong run $RUN_ID"
-          git push origin HEAD:v0.8x-batch-diagnosis
-
-  generate-landry:
-    needs: record-start
-    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
-    with:
-      paper_key: landry-2026
-    secrets: inherit
-
-  record-finish:
-    if: always()
-    needs: [record-start, generate-landry]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          ref: v0.8x-batch-diagnosis
-          fetch-depth: 0
-      - name: Record Landry run result
-        env:
-          RUN_ID: ${{ github.run_id }}
-          RUN_ATTEMPT: ${{ github.run_attempt }}
-          HEAD_SHA: ${{ github.sha }}
-          GENERATION_RESULT: ${{ needs.generate-landry.result }}
+          python-version: "3.12"
+      - name: Install deterministic validation dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 jsonschema lxml
+      - name: Verify and apply staged sentence upgrade
+        run: python tools/apply_v082_sentence_pair_upgrade.py
+      - name: Prove sentence reconstruction and exact bilingual pairing
+        shell: bash
         run: |
           set -euo pipefail
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git fetch origin v0.8x-batch-diagnosis
-          git reset --hard origin/v0.8x-batch-diagnosis
-          mkdir -p status
+          python tools/test_v082_sentence_pairs.py
+          python tools/validate_v082_sentence_pairs.py tests/fixtures/v082_shell_smoke_manifest.json --report /tmp/SENTENCE_PAIR_GATE.json
+          python tools/validate_v082_manifest_code_boundary.py tests/fixtures/v082_shell_smoke_manifest.json --report /tmp/MANIFEST_CODE_BOUNDARY.json
+          python tools/render_v082_from_frozen_shell.py \
+            tests/fixtures/v082_shell_smoke_manifest.json \
+            /tmp/V082_SENTENCE_SMOKE_READER.html \
+            --shell templates/v082/V082_CANVAS_FROZEN_SHELL.html \
+            --lock config/v082_frozen_shell_lock.json \
+            --schema schemas/paper_content_manifest_v082.schema.json \
+            --report /tmp/SMOKE_RENDER.json
+          python tools/validate_v082_rendered_architecture.py \
+            /tmp/V082_SENTENCE_SMOKE_READER.html \
+            --shell templates/v082/V082_CANVAS_FROZEN_SHELL.html \
+            --manifest tests/fixtures/v082_shell_smoke_manifest.json \
+            --lock config/v082_frozen_shell_lock.json \
+            --report /tmp/SMOKE_RENDERED_ARCHITECTURE.json
           python - <<'PY'
-          import json, os
+          from collections import defaultdict
           from pathlib import Path
-          result = os.environ["GENERATION_RESULT"]
-          value = {
-              "version": "v082-landry-strong-autorun-1",
-              "paper_key": "landry-2026",
-              "run_id": os.environ["RUN_ID"],
-              "run_attempt": os.environ["RUN_ATTEMPT"],
-              "trigger_sha": os.environ["HEAD_SHA"],
-              "status": "completed",
-              "generation_result": result,
-              "passed": result == "success"
-          }
-          Path("status/v082_landry_strong_autorun.json").write_text(
-              json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
-          )
+          from bs4 import BeautifulSoup
+          path = Path('/tmp/V082_SENTENCE_SMOKE_READER.html')
+          text = path.read_text('utf-8')
+          soup = BeautifulSoup(text, 'html.parser')
+          assert soup.body and soup.body.get('data-mode') == 'bilingual'
+          quick = soup.select_one('#quick-pane')
+          assert quick is None or quick.has_attr('hidden')
+          switch = soup.select_one('#readerModeSwitch')
+          assert switch is None or switch.has_attr('hidden')
+          groups = defaultdict(list)
+          for piece in soup.select('#bilingual-pane .sentence-piece[data-sentence-group]'):
+              groups[piece['data-sentence-group']].append(piece)
+          assert groups and all(len(items) == 2 for items in groups.values())
+          assert all(all(item.get_text(' ', strip=True) for item in items) for items in groups.values())
+          assert 'dataset.sentenceGroup' in text
+          print(f'validated {len(groups)} exact clickable bilingual sentence groups')
           PY
-          git add status/v082_landry_strong_autorun.json
-          git commit -m "ci(v0.8.2): record Landry strong result $RUN_ID"
-          git push origin HEAD:v0.8x-batch-diagnosis
-
-# autorun trigger: 2026-08-01T17:03+08:00
+      - name: Commit proven upgrade and restore the Landry strong-AI workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .github/v082-sentence-upgrade
+          rm -f tools/apply_v082_sentence_pair_upgrade.py
+          rm -f .github/workflows/apply_v082_sentence_pair_upgrade.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Enforce sentence-paired bilingual V0.8.2 readers"
+          for attempt in 1 2 3 4 5; do
+            git fetch origin v0.8x-batch-diagnosis
+            if git rebase origin/v0.8x-batch-diagnosis && git push origin HEAD:v0.8x-batch-diagnosis; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            sleep $((attempt * 4))
+          done
+          exit 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v082-sentence-pair-upgrade-proof
+          path: |
+            /tmp/SENTENCE_PAIR_GATE.json
+            /tmp/MANIFEST_CODE_BOUNDARY.json
+            /tmp/SMOKE_RENDER.json
+            /tmp/SMOKE_RENDERED_ARCHITECTURE.json
+            /tmp/V082_SENTENCE_SMOKE_READER.html
+          if-no-files-found: warn
+          retention-days: 14
