@@ -15,9 +15,9 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  CHO_ADOBE_PREVIEW_URL: "https://to.adobe.com/phMsfMA7YPzZqvAdG8hYM4vE9jVf"
+  CHO_ADOBE_PREVIEW_URL: "https://at.adobe.com/JYEnRTXVnTrlRZrZ"
   CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
-  LUCAS_ADOBE_URL: "https://at.adobe.com/7lRkqBUBDXjL38Lv"
+  LUCAS_ADOBE_URL: "https://at.adobe.com/dVJ5OnBf6w8dqKtZ"
   LUCAS_CACHE_KEY: "v082-lucas-source-s41588-024-01747-1-31p-v1"
 
 jobs:
@@ -68,6 +68,7 @@ jobs:
           retention-days: 30
 
   prefetch-lucas:
+    if: always()
     needs: prefetch-cho
     runs-on: ubuntu-latest
     timeout-minutes: 25
@@ -157,4 +158,4 @@ jobs:
           git commit -m "ci(v0.8.2): record exact source cache run $RUN_ID"
           git push origin HEAD:v0.8x-batch-diagnosis
 
-# autorun trigger: 2026-08-01T17:58+08:00
+# autorun trigger: 2026-08-01T18:07+08:00
