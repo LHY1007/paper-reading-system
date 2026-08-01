@@ -104,24 +104,81 @@ jobs:
             v082-strong-ai-v19-${{ inputs.paper_key || github.event.inputs.paper_key }}-
             v082-strong-ai-v18-${{ inputs.paper_key || github.event.inputs.paper_key }}-
 
-      - name: Obtain and inject exact source PDFs
+      - name: Obtain and verify the requested exact source PDF
+        env:
+          PAPER_KEY: ${{ inputs.paper_key || github.event.inputs.paper_key }}
+          CHO_CACHE_HIT: ${{ steps.cho-cache.outputs.cache-hit }}
+          LUCAS_CACHE_HIT: ${{ steps.lucas-cache.outputs.cache-hit }}
         run: |
           set -euo pipefail
           source /tmp/v082_strong_ai_paths
-          python tools/prefetch_v082_blocked_sources.py \
-            --registry config/v082_paper_sources.json \
-            --output-dir .build/v082/pdfs \
-            --report .build/v082/strong-one/BLOCKED_SOURCE_PREFETCH.json || true
-          python tools/download_v082_release_sources_continue.py \
-            --registry config/v082_paper_sources.json \
-            --canonical-html "$CANVAS_ORIGINAL" \
-            --output-dir .build/v082/pdfs \
-            --report .build/v082/strong-one/SOURCE_DOWNLOAD_AVAILABLE.json \
-            --reuse || true
-          test "${{ steps.cho-cache.outputs.cache-hit }}" = "true"
-          test "${{ steps.lucas-cache.outputs.cache-hit }}" = "true"
-          cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
-          cp .build/v082/lucas-source/09_lucas-2024.pdf .build/v082/pdfs/09_lucas-2024.pdf
+
+          # Dedicated publisher-blocked caches are dependencies only for the
+          # papers that actually need them. A Landry run must not be stopped by
+          # an unrelated Cho or Lucas cache miss.
+          if [ "$PAPER_KEY" = "cho-2026" ]; then
+            test "$CHO_CACHE_HIT" = "true"
+            test -s .build/v082/cho-source/07_cho-2026.pdf
+            cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
+          fi
+          if [ "$PAPER_KEY" = "lucas-2024" ]; then
+            test "$LUCAS_CACHE_HIT" = "true"
+            test -s .build/v082/lucas-source/09_lucas-2024.pdf
+            cp .build/v082/lucas-source/09_lucas-2024.pdf .build/v082/pdfs/09_lucas-2024.pdf
+          fi
+
+          SOURCE_PATH=$(python - <<'PY'
+          import json, os
+          from pathlib import Path
+          registry = json.loads(Path('config/v082_paper_sources.json').read_text('utf-8'))
+          paper = next(item for item in registry['papers'] if item['key'] == os.environ['PAPER_KEY'])
+          print(f".build/v082/pdfs/{int(paper['order']):02d}_{paper['key']}.pdf")
+          PY
+          )
+
+          if [ ! -s "$SOURCE_PATH" ]; then
+            python tools/prefetch_v082_blocked_sources.py \
+              --registry config/v082_paper_sources.json \
+              --output-dir .build/v082/pdfs \
+              --report .build/v082/strong-one/BLOCKED_SOURCE_PREFETCH.json || true
+            python tools/download_v082_release_sources_continue.py \
+              --registry config/v082_paper_sources.json \
+              --canonical-html "$CANVAS_ORIGINAL" \
+              --output-dir .build/v082/pdfs \
+              --report .build/v082/strong-one/SOURCE_DOWNLOAD_AVAILABLE.json \
+              --reuse || true
+          fi
+
+          test -s "$SOURCE_PATH"
+          python - "$SOURCE_PATH" <<'PY'
+          import hashlib, json, sys
+          from pathlib import Path
+          import fitz
+
+          path = Path(sys.argv[1])
+          registry = json.loads(Path('config/v082_paper_sources.json').read_text('utf-8'))
+          key = path.stem.split('_', 1)[1]
+          paper = next(item for item in registry['papers'] if item['key'] == key)
+          with fitz.open(path) as document:
+              pages = len(document)
+              if pages != int(paper['expected_pages']):
+                  raise SystemExit(
+                      f"wrong source page count for {key}: {pages} != {paper['expected_pages']}"
+                  )
+              first_pages = ''.join(page.get_text() for page in document[:2]).lower()
+          normalized_title = ' '.join(str(paper['title']).lower().split())
+          title_tokens = [token for token in normalized_title.split() if len(token) >= 7]
+          matched = sum(token in first_pages for token in title_tokens)
+          if title_tokens and matched < max(3, len(title_tokens) // 2):
+              raise SystemExit(f"source title identity check failed for {key}")
+          print(json.dumps({
+              'paper_key': key,
+              'source_path': str(path),
+              'pages': pages,
+              'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+              'passed': True,
+          }, indent=2))
+          PY
 
       - name: Generate and independently review every variable component
         env:
