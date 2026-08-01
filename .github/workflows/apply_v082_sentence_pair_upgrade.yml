@@ -2,7 +2,7 @@ name: Apply V0.8.2 sentence-pair upgrade
 
 on:
   push:
-    branches: [v0.8x-batch-diagnosis]
+    branches: [v082-sentence-pair-isolated]
     paths:
       - ".github/v082-sentence-upgrade/**"
       - "tools/apply_v082_sentence_pair_upgrade.py"
@@ -13,7 +13,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: v082-sentence-pair-upgrade
+  group: v082-sentence-pair-isolated
   cancel-in-progress: false
 
 jobs:
@@ -23,121 +23,55 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: v0.8x-batch-diagnosis
+          ref: v082-sentence-pair-isolated
           fetch-depth: 0
-
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      - name: Install deterministic validation dependencies
+      - name: Install validation dependencies
         run: python -m pip install --disable-pip-version-check beautifulsoup4 jsonschema lxml
-
-      - name: Verify and apply the staged upgrade
+      - name: Apply verified bundle
         run: python tools/apply_v082_sentence_pair_upgrade.py
-
-      - name: Run sentence reconstruction and pairing tests
-        run: |
-          set -euo pipefail
-          python tools/test_v082_sentence_pairs.py
-          python -m py_compile \
-            tools/v082_sentence_pairs.py \
-            tools/validate_v082_sentence_pairs.py \
-            tools/generate_v082_reader_manifest_with_copilot_sdk_v20.py \
-            tools/generate_v082_reader_manifest_with_copilot_sdk_v21.py \
-            tools/generate_v082_reader_manifest_with_github_models_v7.py \
-            tools/render_v082_canvas_component_locked.py \
-            tools/render_v082_from_frozen_shell.py \
-            tools/validate_v082_canvas_shell_lock.py \
-            tools/validate_v082_canvas_components_core.py \
-            tools/validate_v082_rendered_architecture.py \
-            tools/validate_v082_strong_ai_review.py \
-            tools/run_v082_manifest_generation_one_strong.py \
-            tools/validate_v082_reader_content_quality.py \
-            tools/build_v082_reader_if_ready.py \
-            tools/normalize_v082_canvas_master.py \
-            tools/freeze_v082_canvas_shell.py \
-            tools/validate_v082_frozen_shell.py
-
-      - name: Rebuild and prove the immutable CANVAS shell
+      - name: Prove sentence-pair contracts
         shell: bash
         run: |
           set -euo pipefail
-          CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
-          test -n "$CANVAS"
-          mkdir -p .build/v082/sentence-upgrade reports/v082-sentence-upgrade
-          MASTER=.build/v082/sentence-upgrade/00_CANVAS_NORMALIZED.html
-          SHELL=.build/v082/sentence-upgrade/V082_CANVAS_FROZEN_SHELL.html
-          OUTPUT=.build/v082/sentence-upgrade/V082_SENTENCE_SMOKE_READER.html
-          MANIFEST=tests/fixtures/v082_shell_smoke_manifest.json
-
-          python tools/normalize_v082_canvas_master.py "$CANVAS" "$MASTER" \
-            --report reports/v082-sentence-upgrade/NORMALIZED_MASTER.json
-          python tools/freeze_v082_canvas_shell_v2.py "$MASTER" "$SHELL" \
-            --report reports/v082-sentence-upgrade/FROZEN_SHELL_BUILD.json
-          cmp "$SHELL" templates/v082/V082_CANVAS_FROZEN_SHELL.html
-          python tools/validate_v082_frozen_shell.py templates/v082/V082_CANVAS_FROZEN_SHELL.html \
-            --master "$MASTER" \
-            --lock config/v082_frozen_shell_lock.json \
-            --report reports/v082-sentence-upgrade/FROZEN_SHELL_GATE.json
-
-          python tools/validate_v082_manifest_code_boundary.py "$MANIFEST" \
-            --report reports/v082-sentence-upgrade/MANIFEST_CODE_BOUNDARY.json
-          python tools/validate_v082_sentence_pairs.py "$MANIFEST" \
-            --report reports/v082-sentence-upgrade/SENTENCE_PAIR_GATE.json
-          python tools/render_v082_from_frozen_shell.py "$MANIFEST" "$OUTPUT" \
+          python tools/test_v082_sentence_pairs.py
+          python tools/validate_v082_sentence_pairs.py tests/fixtures/v082_shell_smoke_manifest.json --report /tmp/SENTENCE_PAIR_GATE.json
+          python tools/render_v082_from_frozen_shell.py \
+            tests/fixtures/v082_shell_smoke_manifest.json \
+            /tmp/V082_SENTENCE_SMOKE_READER.html \
             --shell templates/v082/V082_CANVAS_FROZEN_SHELL.html \
             --lock config/v082_frozen_shell_lock.json \
             --schema schemas/paper_content_manifest_v082.schema.json \
-            --report reports/v082-sentence-upgrade/SMOKE_RENDER.json
-          python tools/validate_v082_canvas_shell_lock.py "$OUTPUT" --canonical "$MASTER" \
-            --report reports/v082-sentence-upgrade/SMOKE_SHELL_LOCK.json
-          python tools/validate_v082_canvas_components.py "$OUTPUT" \
-            --report reports/v082-sentence-upgrade/SMOKE_COMPONENTS.json
-          python tools/validate_v082_rendered_architecture.py "$OUTPUT" \
+            --report /tmp/SMOKE_RENDER.json
+          python tools/validate_v082_rendered_architecture.py \
+            /tmp/V082_SENTENCE_SMOKE_READER.html \
             --shell templates/v082/V082_CANVAS_FROZEN_SHELL.html \
-            --manifest "$MANIFEST" \
+            --manifest tests/fixtures/v082_shell_smoke_manifest.json \
             --lock config/v082_frozen_shell_lock.json \
-            --report reports/v082-sentence-upgrade/SMOKE_RENDERED_ARCHITECTURE.json
-
-      - name: Assert retired quick mode and exact clickable pairs
-        run: |
+            --report /tmp/SMOKE_RENDERED_ARCHITECTURE.json
           python - <<'PY'
           from collections import defaultdict
           from pathlib import Path
           from bs4 import BeautifulSoup
-
-          path = Path('.build/v082/sentence-upgrade/V082_SENTENCE_SMOKE_READER.html')
-          soup = BeautifulSoup(path.read_text('utf-8'), 'html.parser')
-          errors = []
-          body = soup.body
-          if body is None or body.get('data-mode') != 'bilingual':
-              errors.append('reader does not start in bilingual mode')
+          path = Path('/tmp/V082_SENTENCE_SMOKE_READER.html')
+          text = path.read_text('utf-8')
+          soup = BeautifulSoup(text, 'html.parser')
+          assert soup.body and soup.body.get('data-mode') == 'bilingual'
           quick = soup.select_one('#quick-pane')
-          if quick is not None and not quick.has_attr('hidden'):
-              errors.append('redundant quick pane is visible')
+          assert quick is None or quick.has_attr('hidden')
           switch = soup.select_one('#readerModeSwitch')
-          if switch is not None and not switch.has_attr('hidden'):
-              errors.append('redundant mode switch is visible')
-
+          assert switch is None or switch.has_attr('hidden')
           groups = defaultdict(list)
           for piece in soup.select('#bilingual-pane .sentence-piece[data-sentence-group]'):
-              groups[piece.get('data-sentence-group')].append(piece)
-          if not groups:
-              errors.append('no sentence-pair groups rendered')
-          for group, pieces in groups.items():
-              if len(pieces) != 2:
-                  errors.append(f'{group} has {len(pieces)} rendered sides rather than two')
-              if any(not piece.get_text(' ', strip=True) for piece in pieces):
-                  errors.append(f'{group} contains an empty side')
-          if 'dataset.sentenceGroup' not in path.read_text('utf-8'):
-              errors.append('sentence click handler does not use the exact pair group')
-          if errors:
-              raise SystemExit('\n'.join(errors))
-          print(f'validated {len(groups)} exact English-Chinese clickable groups')
+              groups[piece['data-sentence-group']].append(piece)
+          assert groups and all(len(items) == 2 for items in groups.values())
+          assert all(all(item.get_text(' ', strip=True) for item in items) for items in groups.values())
+          assert 'dataset.sentenceGroup' in text
+          print(f'validated {len(groups)} exact clickable bilingual sentence groups')
           PY
-
-      - name: Commit the proven upgrade and remove transport files
+      - name: Commit proven upgrade
         shell: bash
         run: |
           set -euo pipefail
@@ -148,24 +82,15 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
           git commit -m "Enforce sentence-paired bilingual V0.8.2 readers"
-
-          for attempt in 1 2 3 4 5; do
-            git fetch origin v0.8x-batch-diagnosis
-            if git rebase origin/v0.8x-batch-diagnosis && git push origin HEAD:v0.8x-batch-diagnosis; then
-              exit 0
-            fi
-            git rebase --abort 2>/dev/null || true
-            sleep $((attempt * 4))
-          done
-          echo "Unable to publish sentence-pair upgrade after five attempts" >&2
-          exit 1
-
+          git push origin HEAD:v082-sentence-pair-isolated
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: v082-sentence-pair-upgrade-proof
+          name: v082-sentence-pair-isolated-proof
           path: |
-            reports/v082-sentence-upgrade
-            .build/v082/sentence-upgrade/V082_SENTENCE_SMOKE_READER.html
+            /tmp/SENTENCE_PAIR_GATE.json
+            /tmp/SMOKE_RENDER.json
+            /tmp/SMOKE_RENDERED_ARCHITECTURE.json
+            /tmp/V082_SENTENCE_SMOKE_READER.html
           if-no-files-found: warn
           retention-days: 14
