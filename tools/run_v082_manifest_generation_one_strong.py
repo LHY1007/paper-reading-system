@@ -127,7 +127,7 @@ def main() -> None:
             "--report", str(reports / "STRONG_AI_REVIEW_GATE.json"),
         ]),
         ("semantic_grounding", [
-            sys.executable, "tools/validate_v082_reader_semantics_v4.py",
+            sys.executable, "tools/validate_v082_reader_semantics_v5.py",
             str(generated), "--evidence", str(evidence),
             "--report", str(reports / "SEMANTIC_GROUNDING.json"),
         ]),
