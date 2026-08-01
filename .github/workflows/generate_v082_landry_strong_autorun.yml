@@ -1,0 +1,19 @@
+name: Generate V0.8.2 Landry reader with strong AI
+
+on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - ".github/workflows/generate_v082_landry_strong_autorun.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  copilot-requests: write
+
+jobs:
+  generate-landry:
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: landry-2026
+    secrets: inherit
