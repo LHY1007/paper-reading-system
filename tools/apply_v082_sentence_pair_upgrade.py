@@ -10,7 +10,7 @@ from pathlib import Path, PurePosixPath
 
 
 PART_DIR = Path('.github/v082-sentence-upgrade')
-EXPECTED_PARTS = [f'part{i:02d}' for i in range(11)]
+EXPECTED_PARTS = [f'chunk{i:02d}' for i in range(14)]
 EXPECTED_B64_LENGTH = 122576
 EXPECTED_B64_SHA256 = '77b159c78733c97570c589020ea3964e925954364a07ba3bc0e55539c5dab3d4'
 EXPECTED_XZ_SHA256 = '20a4df7b68cde8bd06d89547f0d678052f56cf60fe4ea3154e89046e480f61e4'
@@ -32,7 +32,7 @@ def safe_member_path(name: str) -> Path:
 
 
 def main() -> None:
-    actual = sorted(path.name for path in PART_DIR.glob('part*'))
+    actual = sorted(path.name for path in PART_DIR.glob('chunk*'))
     if actual != EXPECTED_PARTS:
         raise SystemExit(f'upgrade parts mismatch: expected {EXPECTED_PARTS}, found {actual}')
 
