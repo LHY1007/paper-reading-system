@@ -1,0 +1,79 @@
+name: Generate remaining V0.8.2 papers strictly sequentially
+
+on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - "content/v082_reviews/landry-2026.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  copilot-requests: write
+
+concurrency:
+  group: v082-remaining-strong-sequence
+  cancel-in-progress: false
+
+jobs:
+  lee-2025:
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: lee-2025
+    secrets: inherit
+
+  valanarasu-2026:
+    needs: lee-2025
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: valanarasu-2026
+    secrets: inherit
+
+  li-hex-2026:
+    needs: valanarasu-2026
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: li-hex-2026
+    secrets: inherit
+
+  andani-2025:
+    needs: li-hex-2026
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: andani-2025
+    secrets: inherit
+
+  cho-2026:
+    needs: andani-2025
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: cho-2026
+    secrets: inherit
+
+  spitzer-2025:
+    needs: cho-2026
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: spitzer-2025
+    secrets: inherit
+
+  lucas-2024:
+    needs: spitzer-2025
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: lucas-2024
+    secrets: inherit
+
+  sorin-2023:
+    needs: lucas-2024
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: sorin-2023
+    secrets: inherit
+
+  karimi-2023:
+    needs: sorin-2023
+    uses: ./.github/workflows/generate_v082_one_paper_strong.yml
+    with:
+      paper_key: karimi-2023
+    secrets: inherit
