@@ -77,3 +77,67 @@ jobs:
     with:
       paper_key: karimi-2023
     secrets: inherit
+
+  arm-final-build:
+    needs: karimi-2023
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
+      - name: Verify all strong-AI manifests and arm final build
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git fetch origin v0.8x-batch-diagnosis
+          git reset --hard origin/v0.8x-batch-diagnosis
+          python - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+
+          registry = json.loads(Path('config/v082_paper_sources.json').read_text('utf-8'))
+          papers = [p for p in registry['papers'] if int(p['order']) != 0]
+          records = []
+          failures = []
+          for paper in papers:
+              key = paper['key']
+              manifest = Path(f'content/v082_manifests/{key}.json')
+              review = Path(f'content/v082_reviews/{key}.json')
+              if not manifest.exists() or not review.exists():
+                  failures.append(f'{key}:missing manifest/review')
+                  continue
+              review_state = json.loads(review.read_text('utf-8'))
+              if review_state.get('passed') is not True:
+                  failures.append(f'{key}:review not passed')
+              if review_state.get('independent_reviewer_acceptance_passed') is not True:
+                  failures.append(f'{key}:independent reviewer did not accept')
+              records.append({
+                  'paper_key': key,
+                  'manifest_sha256': hashlib.sha256(manifest.read_bytes()).hexdigest(),
+                  'review_sha256': hashlib.sha256(review.read_bytes()).hexdigest(),
+                  'passed': review_state.get('passed') is True,
+                  'independent_reviewer_acceptance_passed': review_state.get('independent_reviewer_acceptance_passed') is True,
+              })
+          if failures:
+              raise SystemExit('final build cannot be armed: ' + '; '.join(failures))
+          trigger = {
+              'version': 'v082-final-build-trigger-strong-sequence-1',
+              'all_reviewed_manifests_passed': True,
+              'independent_reviewer_acceptance_passed': True,
+              'reviewed_paper_count': len(records),
+              'papers': records,
+          }
+          Path('.github/v082-final-build-trigger').write_text(
+              json.dumps(trigger, ensure_ascii=False, indent=2) + '\n', encoding='utf-8'
+          )
+          PY
+          git add .github/v082-final-build-trigger
+          if git diff --cached --quiet; then
+            echo "Final build trigger already current"
+          else
+            git commit -m "Arm complete V0.8.2 final reader build"
+            git push origin HEAD:v0.8x-batch-diagnosis
+          fi
