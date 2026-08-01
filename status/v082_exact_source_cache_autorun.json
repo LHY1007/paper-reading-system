@@ -1,8 +1,8 @@
 {
   "version": "v082-exact-source-cache-autorun-1",
-  "run_id": "30692778477",
+  "run_id": "30693059567",
   "run_attempt": "1",
-  "cho_result": "failure",
-  "lucas_result": "skipped",
-  "passed": false
+  "cho_result": "success",
+  "lucas_result": "success",
+  "passed": true
 }
