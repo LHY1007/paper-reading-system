@@ -11,11 +11,96 @@ permissions:
   contents: write
   copilot-requests: write
 
+concurrency:
+  group: v082-landry-strong-autorun
+  cancel-in-progress: true
+
 jobs:
+  record-start:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
+      - name: Record Landry run identity
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          mkdir -p status
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          value = {
+              "version": "v082-landry-strong-autorun-1",
+              "paper_key": "landry-2026",
+              "run_id": os.environ["RUN_ID"],
+              "run_attempt": os.environ["RUN_ATTEMPT"],
+              "trigger_sha": os.environ["HEAD_SHA"],
+              "status": "started"
+          }
+          Path("status/v082_landry_strong_autorun.json").write_text(
+              json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+          )
+          PY
+          git add status/v082_landry_strong_autorun.json
+          git commit -m "ci(v0.8.2): record Landry strong run $RUN_ID"
+          git push origin HEAD:v0.8x-batch-diagnosis
+
   generate-landry:
+    needs: record-start
     uses: ./.github/workflows/generate_v082_one_paper_strong.yml
     with:
       paper_key: landry-2026
     secrets: inherit
 
-# autorun trigger: 2026-08-01T16:42+08:00
+  record-finish:
+    if: always()
+    needs: [record-start, generate-landry]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
+      - name: Record Landry run result
+        env:
+          RUN_ID: ${{ github.run_id }}
+          RUN_ATTEMPT: ${{ github.run_attempt }}
+          HEAD_SHA: ${{ github.sha }}
+          GENERATION_RESULT: ${{ needs.generate-landry.result }}
+        run: |
+          set -euo pipefail
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git fetch origin v0.8x-batch-diagnosis
+          git reset --hard origin/v0.8x-batch-diagnosis
+          mkdir -p status
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          result = os.environ["GENERATION_RESULT"]
+          value = {
+              "version": "v082-landry-strong-autorun-1",
+              "paper_key": "landry-2026",
+              "run_id": os.environ["RUN_ID"],
+              "run_attempt": os.environ["RUN_ATTEMPT"],
+              "trigger_sha": os.environ["HEAD_SHA"],
+              "status": "completed",
+              "generation_result": result,
+              "passed": result == "success"
+          }
+          Path("status/v082_landry_strong_autorun.json").write_text(
+              json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+          )
+          PY
+          git add status/v082_landry_strong_autorun.json
+          git commit -m "ci(v0.8.2): record Landry strong result $RUN_ID"
+          git push origin HEAD:v0.8x-batch-diagnosis
+
+# autorun trigger: 2026-08-01T16:49+08:00
