@@ -6,6 +6,11 @@ on:
       - v0.8x-batch-diagnosis
     paths:
       - .github/v082-regenerate-html-trigger
+  pull_request:
+    branches:
+      - main
+    paths:
+      - .github/v082-regenerate-html-trigger
   workflow_dispatch:
 
 permissions:
@@ -17,6 +22,7 @@ concurrency:
 
 jobs:
   render:
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.ref == 'v0.8x-batch-diagnosis'
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -46,7 +52,7 @@ jobs:
           cp "$CANVAS" "$HTML/00_CANVAS.html"
 
           count=0
-          for manifest in $(find content/v082_manifests -maxdepth 1 -type f -name '*.json' | sort); do
+          while IFS= read -r manifest; do
             key=$(basename "$manifest" .json)
             output="$HTML/${key}.html"
             python tools/validate_v082_manifest_code_boundary.py "$manifest" \
@@ -62,7 +68,7 @@ jobs:
               --lock config/v082_frozen_shell_lock.json \
               --report "$REPORTS/${key}_ARCHITECTURE.json"
             count=$((count + 1))
-          done
+          done < <(find content/v082_manifests -maxdepth 1 -type f -name '*.json' | sort)
 
           test "$count" -gt 0
           python - <<'PY'
