@@ -1,0 +1,13 @@
+{
+  "source": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+  "output": "V0.8.2_CANVAS_NORMALIZED_MASTER.html",
+  "source_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
+  "output_sha256": "d72ad77c76487c39c699c420582ef8c102fa889bc77f68b83f277946802309cd",
+  "mode_switch_added": true,
+  "mode_style_added": true,
+  "mode_script_added": true,
+  "duplicate_term_handler_retired": true,
+  "figure_image_attributes_added": 8,
+  "table_cards_normalized": 5,
+  "section_attributes_added": 1
+}

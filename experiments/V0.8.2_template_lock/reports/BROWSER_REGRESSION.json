@@ -1,0 +1,498 @@
+{
+  "generated_at": "2026-07-28T14:55:51Z",
+  "files": [
+    {
+      "file": "V0.8.2_CANVAS_NORMALIZED_MASTER.html",
+      "url": "http://127.0.0.1:50057/experiments/V0.8.2_template_lock/output/V0.8.2_CANVAS_NORMALIZED_MASTER.html",
+      "runtime_review": {
+        "version": "0.8.0-candidate",
+        "passed": true,
+        "errors": [],
+        "warnings": [
+          "image_panel_focus_disabled_without_verified_coordinates"
+        ],
+        "checkedAt": "2026-07-28T14:55:30.287Z"
+      },
+      "checks": {
+        "v080_review_passed": {
+          "passed": true,
+          "detail": {
+            "version": "0.8.0-candidate",
+            "passed": true,
+            "errors": [],
+            "warnings": [
+              "image_panel_focus_disabled_without_verified_coordinates"
+            ],
+            "checkedAt": "2026-07-28T14:55:30.287Z"
+          }
+        },
+        "both_mode_panes_exist": {
+          "passed": true,
+          "detail": null
+        },
+        "visible_mode_controls_exist": {
+          "passed": true,
+          "detail": 2
+        },
+        "quick_mode_switch": {
+          "passed": true,
+          "detail": null
+        },
+        "quick_mode_accessibility_state": {
+          "passed": true,
+          "detail": null
+        },
+        "bilingual_mode_switch": {
+          "passed": true,
+          "detail": null
+        },
+        "bilingual_mode_accessibility_state": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_open": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_backdrop_visible": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_outside_close": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_card_toggle": {
+          "passed": true,
+          "detail": {
+            "id": "graphical-abstract",
+            "before_hidden": true,
+            "after_hidden": false
+          }
+        },
+        "right_viewer_open": {
+          "passed": true,
+          "detail": "graphical-abstract"
+        },
+        "right_viewer_has_content": {
+          "passed": true,
+          "detail": null
+        },
+        "right_viewer_close": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_study_open": {
+          "passed": true,
+          "detail": "graphical-abstract"
+        },
+        "figure_study_has_content": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_study_close": {
+          "passed": true,
+          "detail": {
+            "aria_hidden": "true",
+            "class": ""
+          }
+        },
+        "term_tooltip_content": {
+          "passed": false,
+          "detail": ""
+        },
+        "citation_popover_content": {
+          "passed": true,
+          "detail": "参考文献（3篇）\n1\n\nRahal, Z., El Darzi, R., Moghaddam, S.J., Cascone, T., and Kadara, H. (2025). Tumour and microenvironment crosstalk in NSCLC progression and response to therapy. Nat. Rev. Clin. Oncol. 22, 463–482. https:// doi.org/10.1038/s4157"
+        },
+        "dynamic_annotation_tool_installed": {
+          "passed": true,
+          "detail": null
+        },
+        "dynamic_edit_tool_installed": {
+          "passed": true,
+          "detail": null
+        },
+        "no_page_errors": {
+          "passed": true,
+          "detail": []
+        },
+        "no_console_errors": {
+          "passed": true,
+          "detail": []
+        }
+      },
+      "page_errors": [],
+      "console_errors": [],
+      "failures": [
+        "term_tooltip_content"
+      ],
+      "passed": false
+    },
+    {
+      "file": "V0.8.2_COMPONENT_LOCKED_SMOKE.html",
+      "url": "http://127.0.0.1:50057/experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_SMOKE.html",
+      "runtime_review": {
+        "version": "0.8.2-component-locked",
+        "passed": true,
+        "errors": [],
+        "warnings": [
+          "image_panel_focus_disabled_without_verified_coordinates"
+        ],
+        "checkedAt": "2026-07-28T14:55:36.124Z"
+      },
+      "checks": {
+        "v080_review_passed": {
+          "passed": true,
+          "detail": {
+            "version": "0.8.2-component-locked",
+            "passed": true,
+            "errors": [],
+            "warnings": [
+              "image_panel_focus_disabled_without_verified_coordinates"
+            ],
+            "checkedAt": "2026-07-28T14:55:36.124Z"
+          }
+        },
+        "both_mode_panes_exist": {
+          "passed": true,
+          "detail": null
+        },
+        "visible_mode_controls_exist": {
+          "passed": true,
+          "detail": 2
+        },
+        "quick_mode_switch": {
+          "passed": true,
+          "detail": null
+        },
+        "quick_mode_accessibility_state": {
+          "passed": true,
+          "detail": null
+        },
+        "bilingual_mode_switch": {
+          "passed": true,
+          "detail": null
+        },
+        "bilingual_mode_accessibility_state": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_open": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_backdrop_visible": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_outside_close": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_card_toggle": {
+          "passed": true,
+          "detail": {
+            "id": "figure-1",
+            "before_hidden": true,
+            "after_hidden": false
+          }
+        },
+        "right_viewer_open": {
+          "passed": true,
+          "detail": "figure-1"
+        },
+        "right_viewer_has_content": {
+          "passed": true,
+          "detail": null
+        },
+        "right_viewer_close": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_study_open": {
+          "passed": true,
+          "detail": "figure-1"
+        },
+        "figure_study_has_content": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_study_close": {
+          "passed": true,
+          "detail": {
+            "aria_hidden": "true",
+            "class": ""
+          }
+        },
+        "term_tooltip_content": {
+          "passed": false,
+          "detail": ""
+        },
+        "citation_popover_content": {
+          "passed": true,
+          "detail": "参考文献\n未找到对应参考文献。"
+        },
+        "dynamic_annotation_tool_installed": {
+          "passed": true,
+          "detail": null
+        },
+        "dynamic_edit_tool_installed": {
+          "passed": true,
+          "detail": null
+        },
+        "no_page_errors": {
+          "passed": true,
+          "detail": []
+        },
+        "no_console_errors": {
+          "passed": true,
+          "detail": []
+        }
+      },
+      "page_errors": [],
+      "console_errors": [],
+      "failures": [
+        "term_tooltip_content"
+      ],
+      "passed": false
+    },
+    {
+      "file": "V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
+      "url": "http://127.0.0.1:50057/experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
+      "runtime_review": {
+        "version": "0.8.2-component-locked",
+        "passed": true,
+        "errors": [],
+        "warnings": [
+          "image_panel_focus_disabled_without_verified_coordinates"
+        ],
+        "checkedAt": "2026-07-28T14:55:41.246Z"
+      },
+      "checks": {
+        "v080_review_passed": {
+          "passed": true,
+          "detail": {
+            "version": "0.8.2-component-locked",
+            "passed": true,
+            "errors": [],
+            "warnings": [
+              "image_panel_focus_disabled_without_verified_coordinates"
+            ],
+            "checkedAt": "2026-07-28T14:55:41.246Z"
+          }
+        },
+        "both_mode_panes_exist": {
+          "passed": true,
+          "detail": null
+        },
+        "visible_mode_controls_exist": {
+          "passed": true,
+          "detail": 2
+        },
+        "quick_mode_switch": {
+          "passed": true,
+          "detail": null
+        },
+        "quick_mode_accessibility_state": {
+          "passed": true,
+          "detail": null
+        },
+        "bilingual_mode_switch": {
+          "passed": true,
+          "detail": null
+        },
+        "bilingual_mode_accessibility_state": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_open": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_backdrop_visible": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_outside_close": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_card_toggle": {
+          "passed": true,
+          "detail": {
+            "id": "figure-1",
+            "before_hidden": true,
+            "after_hidden": false
+          }
+        },
+        "right_viewer_open": {
+          "passed": true,
+          "detail": "figure-1"
+        },
+        "right_viewer_has_content": {
+          "passed": true,
+          "detail": null
+        },
+        "right_viewer_close": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_study_open": {
+          "passed": true,
+          "detail": "figure-1"
+        },
+        "figure_study_has_content": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_study_close": {
+          "passed": true,
+          "detail": {
+            "aria_hidden": "true",
+            "class": ""
+          }
+        },
+        "dynamic_annotation_tool_installed": {
+          "passed": true,
+          "detail": null
+        },
+        "dynamic_edit_tool_installed": {
+          "passed": true,
+          "detail": null
+        },
+        "no_page_errors": {
+          "passed": true,
+          "detail": []
+        },
+        "no_console_errors": {
+          "passed": true,
+          "detail": []
+        }
+      },
+      "page_errors": [],
+      "console_errors": [],
+      "failures": [],
+      "passed": true
+    },
+    {
+      "file": "V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
+      "url": "http://127.0.0.1:50057/experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
+      "runtime_review": {
+        "version": "0.8.2-component-locked",
+        "passed": true,
+        "errors": [],
+        "warnings": [
+          "image_panel_focus_disabled_without_verified_coordinates"
+        ],
+        "checkedAt": "2026-07-28T14:55:45.691Z"
+      },
+      "checks": {
+        "v080_review_passed": {
+          "passed": true,
+          "detail": {
+            "version": "0.8.2-component-locked",
+            "passed": true,
+            "errors": [],
+            "warnings": [
+              "image_panel_focus_disabled_without_verified_coordinates"
+            ],
+            "checkedAt": "2026-07-28T14:55:45.691Z"
+          }
+        },
+        "both_mode_panes_exist": {
+          "passed": true,
+          "detail": null
+        },
+        "visible_mode_controls_exist": {
+          "passed": true,
+          "detail": 2
+        },
+        "quick_mode_switch": {
+          "passed": true,
+          "detail": null
+        },
+        "quick_mode_accessibility_state": {
+          "passed": true,
+          "detail": null
+        },
+        "bilingual_mode_switch": {
+          "passed": true,
+          "detail": null
+        },
+        "bilingual_mode_accessibility_state": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_open": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_backdrop_visible": {
+          "passed": true,
+          "detail": null
+        },
+        "settings_outside_close": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_card_toggle": {
+          "passed": true,
+          "detail": {
+            "id": "figure-1",
+            "before_hidden": true,
+            "after_hidden": false
+          }
+        },
+        "right_viewer_open": {
+          "passed": true,
+          "detail": "figure-1"
+        },
+        "right_viewer_has_content": {
+          "passed": true,
+          "detail": null
+        },
+        "right_viewer_close": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_study_open": {
+          "passed": true,
+          "detail": "figure-1"
+        },
+        "figure_study_has_content": {
+          "passed": true,
+          "detail": null
+        },
+        "figure_study_close": {
+          "passed": true,
+          "detail": {
+            "aria_hidden": "true",
+            "class": ""
+          }
+        },
+        "dynamic_annotation_tool_installed": {
+          "passed": true,
+          "detail": null
+        },
+        "dynamic_edit_tool_installed": {
+          "passed": true,
+          "detail": null
+        },
+        "no_page_errors": {
+          "passed": true,
+          "detail": []
+        },
+        "no_console_errors": {
+          "passed": true,
+          "detail": []
+        }
+      },
+      "page_errors": [],
+      "console_errors": [],
+      "failures": [],
+      "passed": true
+    }
+  ],
+  "passed": false
+}

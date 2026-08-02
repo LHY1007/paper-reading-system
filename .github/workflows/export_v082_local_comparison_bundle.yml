@@ -1,0 +1,68 @@
+name: Export V0.8.2 local comparison bundle
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/export_v082_local_comparison_bundle.yml"
+      - "tools/**"
+      - "config/**"
+      - "schemas/**"
+      - "00_V0.8.2_CANVAS*.html"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export-bundle:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 1
+      - name: Collect executable comparison bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .build/v082-local-bundle/{tools,config,schemas,legacy}
+          cp -a tools/. .build/v082-local-bundle/tools/
+          cp -a config/. .build/v082-local-bundle/config/
+          cp -a schemas/. .build/v082-local-bundle/schemas/
+          CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
+          test -n "$CANVAS"
+          cp "$CANVAS" .build/v082-local-bundle/legacy/00_ORIGINAL_V082_CANVAS.html
+          python - <<'PY'
+          import pathlib, shutil, json
+          root=pathlib.Path('.')
+          out=root/'.build/v082-local-bundle/legacy'
+          htmls=list(root.glob('*.html'))
+          selected={}
+          for key,tokens in {
+              'maas':['maas','risk_continuum','risk-continuum'],
+              'valanarasu':['valanarasu','gigatime','virtual_population'],
+          }.items():
+              candidates=[]
+              for p in htmls:
+                  if p.name.startswith('00_V0.8.2_CANVAS'):
+                      continue
+                  low=p.name.lower()
+                  if any(t in low for t in tokens):
+                      candidates.append(p)
+              if candidates:
+                  chosen=max(candidates,key=lambda p:p.stat().st_size)
+                  target=out/f'OLD_BATCH_{key.upper()}.html'
+                  shutil.copy2(chosen,target)
+                  selected[key]={'source':chosen.name,'target':target.name,'bytes':chosen.stat().st_size}
+          (out/'LEGACY_SELECTION.json').write_text(json.dumps(selected,ensure_ascii=False,indent=2)+'\n','utf-8')
+          print(json.dumps(selected,ensure_ascii=False,indent=2))
+          PY
+          cp README_V082_FIXED_SHELL.md .build/v082-local-bundle/ 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v082-local-comparison-bundle
+          path: .build/v082-local-bundle
+          if-no-files-found: error
+          retention-days: 14

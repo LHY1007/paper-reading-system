@@ -1,0 +1,48 @@
+{
+  "version": "v082-andani-reader-plan-1",
+  "status": "approved content plan; final manifest still required",
+  "paper": {
+    "key": "andani-2025",
+    "title_en": "Histopathology-based protein multiplex generation using deep learning",
+    "title_zh": "基于组织病理与深度学习的蛋白多重图像生成",
+    "journal": "Nature Machine Intelligence",
+    "publisher": "Springer Nature",
+    "doi": "10.1038/s42256-025-01074-y",
+    "article_type": "Article",
+    "publication_timeline": "Received 6 December 2024 · Accepted 10 June 2025 · Published online 4 August 2025",
+    "citation": "Nature Machine Intelligence 7, 1292–1307 (2025)",
+    "journal_scope": "Nature Machine Intelligence publishes fundamental and applied research in artificial intelligence, machine learning and robotics.",
+    "field_positioning": "该研究属于计算病理、H&E到IMC多通道生成、空间蛋白共定位和临床表型预测。"
+  },
+  "overview": {
+    "qa": [
+      {"question": "研究解决什么问题？", "answer": "IMC可同时测量多种肿瘤和免疫蛋白，但成本高、视野有限且连续切片存在错位。研究提出HistoPlexer，从常规H&E生成多通道IMC，并检验联合预测是否能保留蛋白间关系、免疫空间表型和临床信息。"},
+      {"question": "核心数据是什么？", "answer": "主要数据为78名转移性黑色素瘤患者的336个配对H&E与IMC区域，其中231个用于训练、105个用于测试，预测11种肿瘤、免疫和抗原呈递蛋白；另在TCGA-SKCM和两个公开像素对齐数据集验证。"},
+      {"question": "模型或分析的输入与输出是什么？", "answer": "模型输入配准的H&E图块，以条件GAN翻译器同时输出11通道蛋白图；训练结合对抗损失、高斯金字塔多尺度L1损失和图块对比损失。生成图进一步用于细胞分类、蛋白共定位、免疫冷热分型和生存预测。"},
+      {"question": "主要生物学发现是什么？", "answer": "联合多通道预测比逐蛋白模型更好地保持稀疏免疫标志物之间的空间共定位，并能重建肿瘤中心和前沿的免疫浸润模式，区分炎症型、排斥型和荒漠型肿瘤。"},
+      {"question": "主要临床结果是什么？", "answer": "HistoPlexer生成特征在独立TCGA-SKCM队列中为H&E模型补充信息，改善生存预测和免疫亚型分类；专家盲评中相当一部分生成图被判断为真实。"},
+      {"question": "最重要的限制是什么？", "answer": "主要限制是训练与真实IMC来自连续切片而非同一切片，无法要求像素级完全一致；主要训练队列为黑色素瘤且仅11种蛋白，B细胞和T细胞形态相近导致CD20与CD3/CD8混淆，临床验证仍是回顾性的。"}
+    ],
+    "method": "配准连续切片H&E与IMC区域 → 条件GAN同时生成11通道蛋白 → 用多尺度像素损失和图块对比损失适应切片错位 → 评价图像质量与专家感知 → 进行细胞分类、蛋白共定位和免疫分型 → 在TCGA-SKCM检验生存和亚型预测增益",
+    "story": "HistoPlexer的核心贡献不是单通道虚拟染色，而是让一个模型联合学习肿瘤与免疫蛋白，从而利用通道之间的关系补偿稀疏标志物。文章依次验证图像相似性、细胞类型、蛋白共定位、全切片免疫表型和临床预测，形成从技术到生物学再到应用的证据链。"
+  },
+  "body_section_map": [
+    ["Introduction", "引言"], ["Histopathology-based protein multiplex generation with HistoPlexer", "HistoPlexer组织病理蛋白多重生成"],
+    ["HistoPlexer generates accurate and realistic protein multiplexes", "HistoPlexer生成准确且逼真的蛋白多重图"],
+    ["Cell typing", "细胞类型识别"], ["HistoPlexer preserves spatial co-localization patterns", "HistoPlexer保留空间共定位模式"],
+    ["HistoPlexer enables multiplexed proteomics profiling on the WSI level", "HistoPlexer支持全切片多重蛋白组分析"],
+    ["HistoPlexer facilitates immune phenotyping", "HistoPlexer支持免疫表型分析"],
+    ["HistoPlexer generalizes to an independent patient cohort", "HistoPlexer在独立患者队列中的泛化"],
+    ["Discussion", "讨论"], ["Methods", "方法"], ["Data availability", "数据可用性"], ["Code availability", "代码可用性"]
+  ],
+  "main_figures": [
+    {"id": "figure-1", "title_en": "Figure 1. Overview of HistoPlexer architecture", "title_zh": "图1：HistoPlexer架构概览", "reader_role": "说明H&E到多通道IMC的生成流程、判别器及三类损失。", "panel_requirement": "解释翻译器、对抗训练、高斯金字塔损失、对比损失和全切片拼接。"},
+    {"id": "figure-2", "title_en": "Figure 2. ROI-level assessment of HistoPlexer", "title_zh": "图2：HistoPlexer区域级评估", "reader_role": "比较多通道与单通道模型、基线方法和代表性生成结果。", "panel_requirement": "说明MS-SSIM、PSNR、RMSE-SW、专家感知测试及通道混淆。"},
+    {"id": "figure-3", "title_en": "Figure 3. Assessing performance beyond pixel level using cell-type and spatial analyses", "title_zh": "图3：通过细胞类型和空间分析进行超越像素层面的评估", "reader_role": "检验生成图是否保留细胞身份和蛋白共定位。", "panel_requirement": "解释细胞分类、肿瘤中心/前沿、单通道与多通道共定位误差及过度共定位。"},
+    {"id": "figure-4", "title_en": "Figure 4. Qualitative WSI-level assessment of HistoPlexer", "title_zh": "图4：HistoPlexer全切片定性评估", "reader_role": "展示从图块扩展到全切片后的空间连续性和标志物分布。", "panel_requirement": "对照H&E、真实和生成IMC，指出全局结构与局部误差。"},
+    {"id": "figure-5", "title_en": "Figure 5. Immune phenotyping using HistoPlexer", "title_zh": "图5：利用HistoPlexer进行免疫表型分析", "reader_role": "验证生成蛋白能否区分免疫热、排斥和荒漠表型。", "panel_requirement": "说明中心与前沿的CD8分布、分型规则、真实与预测一致性。"},
+    {"id": "figure-6", "title_en": "Figure 6. Generalization to an independent patient cohort", "title_zh": "图6：独立患者队列中的泛化", "reader_role": "检验TCGA-SKCM中的生存和免疫亚型预测增益。", "panel_requirement": "比较H&E、生成IMC和融合模型，明确外部队列标签和统计不确定性。"}
+  ],
+  "supplementary_source_requirement": "Extended Data Tables 1–4必须按表格而非普通图片呈现；补充图和表需说明其对应的基线、单蛋白性能及公开数据验证。",
+  "reference_requirement": {"expected_count": 66, "preserve_source_numbers": true, "reject_body_paragraphs": true}
+}

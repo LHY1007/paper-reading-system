@@ -1,0 +1,44 @@
+{
+  "version": "v082-sorin-reader-plan-1",
+  "status": "approved content plan; final manifest still required",
+  "paper": {
+    "key": "sorin-2023",
+    "title_en": "Single-cell spatial landscapes of the lung tumour immune microenvironment",
+    "title_zh": "肺肿瘤免疫微环境的单细胞空间图谱",
+    "journal": "Nature",
+    "publisher": "Springer Nature",
+    "doi": "10.1038/s41586-022-05672-3",
+    "article_type": "Article",
+    "publication_timeline": "Received 24 March 2022 · Accepted 20 December 2022 · Published online 1 February 2023",
+    "citation": "Nature 614, 548–554 (2023)",
+    "journal_scope": "Nature publishes major advances of broad significance across the natural and biomedical sciences.",
+    "field_positioning": "该研究属于肺腺癌成像质谱、单细胞空间免疫生态、组织学亚型和深度学习结局预测。"
+  },
+  "overview": {
+    "qa": [
+      {"question": "研究解决什么问题？", "answer": "肺腺癌通常按组织学形态分型，但不同形态中的免疫细胞位置、邻域和临床意义不清楚。研究利用高通量IMC在大队列中绘制空间TIME，并检验单个小组织芯能否预测术后进展。"},
+      {"question": "核心数据是什么？", "answer": "研究分析416名肺腺癌患者，使用35通道IMC获得超过160万个细胞，覆盖贴壁型、乳头型、腺泡型、微乳头型和实性五种组织学模式，并结合吸烟、分期、进展和生存等临床信息。"},
+      {"question": "模型或分析的输入与输出是什么？", "answer": "输入为1平方毫米肿瘤芯的多通道IMC和细胞分割结果；分析输出17类细胞、细胞配对相互作用和空间邻域，并以深度神经网络直接从IMC图像预测进展、吸烟、年龄、BMI和组织学等临床变量。"},
+      {"question": "主要生物学发现是什么？", "answer": "实性肿瘤具有最高免疫浸润，差异主要由髓系细胞而非总淋巴细胞驱动。CD163阳性巨噬细胞与Treg或CD8 T细胞的空间关系随组织学模式变化，多个细胞邻域呈现亚型特异的组织方式。"},
+      {"question": "主要临床结果是什么？", "answer": "单细胞频率和空间邻域与生存及进展相关，深度学习可仅使用一个1平方毫米肿瘤芯较准确地识别术后进展患者，为术后风险管理提供潜在工具。"},
+      {"question": "最重要的限制是什么？", "answer": "组织芯可能不能覆盖全肿瘤异质性，IMC面板限制了可定义的细胞状态；模型在同一研究体系内训练和验证，临床混杂变量可能影响生存关联，尚需跨中心和前瞻性验证。"}
+    ],
+    "method": "416例肺腺癌组织芯35通道IMC → 细胞分割和17类细胞鉴定 → 比较五种组织学模式的细胞比例 → 计算细胞配对相互作用和空间邻域 → 关联临床变量与生存 → 深度学习从原始IMC预测进展及其他表型",
+    "story": "文章显示肺腺癌形态亚型背后存在不同的空间免疫生态：决定差异的不是简单免疫多少，而是髓系细胞构成及其与T细胞的邻域关系。通过把这些高维空间模式交给深度学习，研究进一步证明很小的组织区域也包含可用于进展预测的信息。"
+  },
+  "body_section_map": [
+    ["Introduction", "引言"], ["LUAD tumour immune microenvironment", "肺腺癌肿瘤免疫微环境"],
+    ["LUAD multicellular spatial interactions", "肺腺癌多细胞空间相互作用"],
+    ["LUAD architecture and survival outcomes", "肺腺癌组织结构与生存结局"],
+    ["Predicting outcomes using deep learning", "利用深度学习预测结局"],
+    ["Discussion", "讨论"], ["Methods", "方法"], ["Code availability", "代码可用性"]
+  ],
+  "main_figures": [
+    {"id": "figure-1", "title_en": "Figure 1. IMC defines the spatial landscape of LUAD", "title_zh": "图1：IMC定义肺腺癌空间图谱", "reader_role": "建立416例、35通道、17类细胞和五种组织学模式的基础图谱。", "panel_requirement": "解释IMC流程、标志物、细胞分类、代表图和各形态中的细胞比例。"},
+    {"id": "figure-2", "title_en": "Figure 2. Variability in single-cell distributions across clinical variables and in cell–cell interaction profiles across histological patterns in LUAD", "title_zh": "图2：单细胞分布和细胞互作随临床变量及组织学模式变化", "reader_role": "把细胞频率和配对相互作用连接到患者与形态特征。", "panel_requirement": "说明比较对象、标准化方法、相关方向及不同形态中的巨噬细胞—T细胞关系。"},
+    {"id": "figure-3", "title_en": "Figure 3. Single-cell populations and neighbourhoods are associated with distinct outcomes in LUAD", "title_zh": "图3：单细胞群体和空间邻域与肺腺癌结局相关", "reader_role": "识别与生存或进展相关的细胞和多细胞邻域。", "panel_requirement": "解释邻域定义、组成、生存曲线、混杂因素和统计边界。"},
+    {"id": "figure-4", "title_en": "Figure 4. Machine learning of IMC data predicts clinical outcomes", "title_zh": "图4：基于IMC数据的机器学习预测临床结局", "reader_role": "展示从原始IMC图像到进展及临床表型预测的模型。", "panel_requirement": "说明输入尺度、训练验证、分类对象、性能、显著区域和单芯预测限制。"}
+  ],
+  "supplementary_source_requirement": "Extended Data Figures 1–10需保留抗体验证、不同邻域参数、临床混杂和模型补充评估；主PDF中被误识别为表格的作者块不得作为科学表格。",
+  "reference_requirement": {"expected_count": 47, "preserve_source_numbers": true, "reject_body_paragraphs": true}
+}

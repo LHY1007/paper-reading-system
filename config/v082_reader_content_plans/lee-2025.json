@@ -1,0 +1,47 @@
+{
+  "version": "v082-lee-reader-plan-1",
+  "status": "approved content plan; final manifest still required",
+  "paper": {
+    "key": "lee-2025",
+    "title_en": "Single-cell analysis reveals a longitudinal trajectory of meningioma evolution and heterogeneity",
+    "title_zh": "单细胞分析揭示脑膜瘤演化与异质性的纵向轨迹",
+    "journal": "Nature Communications",
+    "publisher": "Springer Nature",
+    "doi": "10.1038/s41467-025-60653-0",
+    "article_type": "Article",
+    "publication_timeline": "Received 11 September 2024 · Accepted 30 May 2025",
+    "citation": "Nature Communications 16, 5481 (2025)",
+    "journal_scope": "Nature Communications publishes multidisciplinary research with substantial advances across the natural and clinical sciences.",
+    "field_positioning": "该研究属于脑膜瘤复发演化、单核转录组、RNA velocity和免疫细胞通讯研究。"
+  },
+  "overview": {
+    "qa": [
+      {"question": "研究解决什么问题？", "answer": "脑膜瘤复发后肿瘤细胞状态如何变化、哪些分子推动治疗抵抗，以及复发肿瘤与免疫微环境之间如何重新建立相互作用仍不清楚。研究对同一患者的原发和复发样本进行单核测序并重建纵向轨迹。"},
+      {"question": "核心数据是什么？", "answer": "研究收集7名患者的14个匹配原发与复发样本，10x单核RNA测序获得100,175个细胞，其中74,979个通过质控；样本覆盖WHO 1至3级及一次或多次复发。"},
+      {"question": "模型或分析的输入与输出是什么？", "answer": "输入为原发和复发脑膜瘤单核转录组、CNV、临床分级及组织学验证；分析包括差异表达、分子亚型标注、RNA velocity与latent time、风险基因筛选和细胞通讯，输出复发演化轨迹、COL6A3风险轴及巨噬细胞—肿瘤互作。"},
+      {"question": "主要生物学发现是什么？", "answer": "复发肿瘤细胞更富集细胞周期、增殖、DNA修复和细胞外基质程序，RNA velocity呈多方向转移。COL6A3在复发轨迹晚期占据主导，并与高风险、治疗抵抗及免疫抑制性巨噬细胞通讯相关。"},
+      {"question": "主要临床结果是什么？", "answer": "高COL6A3表达与更差结局相关，复发和高级别肿瘤中增殖及高风险状态更常见。研究通过细胞与组织实验支持COL6A3作为潜在干预节点，但尚未形成临床可直接使用的前瞻性风险模型。"},
+      {"question": "最重要的限制是什么？", "answer": "队列仅7名患者，分级、治疗和复发次数存在异质性；RNA velocity和细胞通讯属于计算推断，COL6A3的因果作用主要由体外实验支持，仍需更大纵向队列和体内验证。"}
+    ],
+    "method": "匹配原发/复发样本单核测序 → 细胞类型与CNV鉴定 → 比较肿瘤状态和分子亚型 → RNA velocity与latent time重建演化方向 → 相关性筛选COL6A3风险轴 → 生存、组织学和体外干预验证 → 分析巨噬细胞与肿瘤细胞通讯",
+    "story": "文章把复发脑膜瘤描述为多方向而非单一路径的状态重构，但这些路径在晚期集中到增殖、修复和COL6A3相关细胞外基质程序。与此同时，C1Q阳性免疫抑制性巨噬细胞与肿瘤细胞之间的COL6A3通讯加强，连接了肿瘤内在演化和微环境重塑。"
+  },
+  "body_section_map": [
+    ["Introduction", "引言"], ["Results", "结果"],
+    ["Longitudinal profiling of meningioma at single-cell resolution", "脑膜瘤纵向单细胞图谱"],
+    ["Longitudinal evolutionary trajectory reveals variability in RNA velocity and increased proliferative states in recurrent meningiomas", "纵向轨迹揭示复发脑膜瘤RNA速度变化和增殖状态增加"],
+    ["Identification of COL6A3 as a major driver of risk vulnerability and potential therapeutic target in recurrent meningioma", "COL6A3是复发脑膜瘤风险脆弱性的重要驱动因素和潜在靶点"],
+    ["TME analysis reveals cell-cell interaction between tumor cells and C1Q + macrophages that drive COL6A3 crosstalk in recurrent meningiomas", "微环境分析揭示C1Q阳性巨噬细胞与肿瘤细胞的COL6A3通讯"],
+    ["Cellular architecture of lymphocytes in longitudinal meningioma", "纵向脑膜瘤中的淋巴细胞组成"],
+    ["Discussion", "讨论"], ["Methods", "方法"], ["Data availability", "数据可用性"], ["Code availability", "代码可用性"]
+  ],
+  "main_figures": [
+    {"id": "figure-1", "title_en": "Figure 1. A single-cell atlas of longitudinal meningioma", "title_zh": "图1：脑膜瘤纵向单细胞图谱", "reader_role": "介绍7名患者的配对设计、74,979个细胞、细胞类型和原发/复发组成。", "panel_requirement": "解释队列流程、tSNE、标志基因、CNV鉴定及各样本细胞比例。"},
+    {"id": "figure-2", "title_en": "Figure 2. Transcriptional heterogeneity and trajectory of primary and recurrent meningioma tumor cells", "title_zh": "图2：原发和复发脑膜瘤细胞的转录异质性与演化轨迹", "reader_role": "比较复发相关基因、通路、CNV、RNA velocity、分子亚型和细胞周期。", "panel_requirement": "逐图说明差异基因方向、velocity起点终点、多方向转移及复发增殖增加。"},
+    {"id": "figure-3", "title_en": "Figure 3. Risk signature analysis of primary and recurrent tumor cells identified COL6A3 as a driver of risk vulnerability", "title_zh": "图3：风险特征分析确定COL6A3为复发风险脆弱性的驱动因素", "reader_role": "从候选基因筛选、轨迹相关性、生存和实验验证建立COL6A3证据链。", "panel_requirement": "说明筛选标准、风险方向、表达定位、敲低实验和证据边界。"},
+    {"id": "figure-4", "title_en": "Figure 4. TME analysis reveals cell-cell interaction between tumor cells and myeloid cells in longitudinal meningioma", "title_zh": "图4：纵向脑膜瘤中肿瘤细胞与髓系细胞的相互作用", "reader_role": "描述复发微环境组成、巨噬细胞状态和COL6A3相关通讯。", "panel_requirement": "解释细胞比例、巨噬细胞亚型、配体受体网络及C1Q阳性细胞的作用。"},
+    {"id": "figure-5", "title_en": "Figure 5. Distinctive characteristics of T cells and NK cells between primary and recurrent meningiomas", "title_zh": "图5：原发与复发脑膜瘤中T细胞和NK细胞的差异", "reader_role": "补充淋巴细胞状态变化及其与复发微环境的关系。", "panel_requirement": "逐子图解释亚群、功能通路、耗竭或细胞毒状态及样本差异。"}
+  ],
+  "supplementary_source_requirement": "完整保留Supplementary Figures和Source Data指向，主文未嵌入的补充表不得被默认为不存在。",
+  "reference_requirement": {"expected_count": 64, "preserve_source_numbers": true, "reject_body_paragraphs": true}
+}

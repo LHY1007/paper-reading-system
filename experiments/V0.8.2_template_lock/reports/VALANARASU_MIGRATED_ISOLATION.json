@@ -1,0 +1,16 @@
+{
+  "file": "V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
+  "manifest": "VALANARASU_LEGACY_CONTENT.json",
+  "paper_key": "multimodal-ai-generates-virtual-population-for-tumor-microenvironment-modeling",
+  "reference_count": 0,
+  "study_ids": [
+    "figure-1",
+    "figure-2",
+    "figure-3",
+    "figure-4",
+    "figure-5",
+    "figure-6"
+  ],
+  "errors": [],
+  "passed": true
+}

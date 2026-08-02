@@ -1,0 +1,77 @@
+{
+  "file": "V0.8.0_EXPERIMENT_Valanarasu_batch_content.html",
+  "sha256": "279b6fa859d19d8958d22060d381119749f46a6635a7c73aa13d0cfbed20a8dd",
+  "bytes": 5572147,
+  "pages": 35,
+  "bilingual_units": 12,
+  "english_blocks": 12,
+  "chinese_blocks": 12,
+  "core_english_words": 983,
+  "core_chinese_chars": 862,
+  "appendix_words": 14055,
+  "core_to_appendix_coverage": 0.06993952330131625,
+  "expected_pdf_body_blocks": 183,
+  "bilingual_to_pdf_body_block_ratio": 0.06557377049180328,
+  "malformed_nested_p": 24,
+  "duplicated_overview_cards": 9,
+  "truncated_units": [
+    2
+  ],
+  "reference_contamination_units": [],
+  "table_fragment_units": [
+    6
+  ],
+  "garbled_toc_labels": [
+    "01 · t modeling PDF p.1",
+    "02 · t modeling PDF p.2",
+    "03 · t modeling PDF p.2",
+    "04 · t modeling PDF p.3",
+    "05 · t modeling PDF p.3",
+    "06 · 20 B cells PDF p.3",
+    "07 · 0 B cells PDF p.10",
+    "08 · 0 B cells PDF p.14",
+    "09 · 0 B cells PDF p.16",
+    "10 · 0 B cells PDF p.21"
+  ],
+  "numeric_citation_corruption": 3,
+  "features": {
+    "mode_panes": true,
+    "bilingual_units": true,
+    "right_viewer": true,
+    "figure_index": true,
+    "settings": true,
+    "reference_popover": true,
+    "left_resizer": true,
+    "right_resizer": true,
+    "study_mode": true,
+    "annotation": true
+  },
+  "baseline_required_features": {
+    "mode_panes": true,
+    "bilingual_units": true,
+    "right_viewer": true,
+    "figure_index": true,
+    "settings": true,
+    "reference_popover": true,
+    "left_resizer": true,
+    "right_resizer": true,
+    "study_mode": true,
+    "annotation": true
+  },
+  "missing_from_baseline": [],
+  "content_score": 10,
+  "structural_score": 100,
+  "content_errors": [
+    "too few bilingual units: 12 < 38",
+    "PDF-native body-block coverage too low: 0.066 < 0.45 (12/183)",
+    "core English coverage too low: 0.070 < 0.45",
+    "malformed nested paragraphs: 24",
+    "duplicated overview-card nesting: 9",
+    "explicitly truncated or page-split core paragraphs: [2]",
+    "table fragments inserted as prose: [6]",
+    "garbled TOC labels: ['01 · t modeling PDF p.1', '02 · t modeling PDF p.2', '03 · t modeling PDF p.2', '04 · t modeling PDF p.3', '05 · t modeling PDF p.3', '06 · 20 B cells PDF p.3', '07 · 0 B cells PDF p.10', '08 · 0 B cells PDF p.14']",
+    "numeric values misclassified as citations: 3"
+  ],
+  "structural_errors": [],
+  "passed": false
+}

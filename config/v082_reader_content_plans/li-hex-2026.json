@@ -1,0 +1,50 @@
+{
+  "version": "v082-li-hex-reader-plan-1",
+  "status": "approved content plan; final manifest still required",
+  "paper": {
+    "key": "li-hex-2026",
+    "title_en": "AI-enabled virtual spatial proteomics from histopathology for interpretable biomarker discovery in lung cancer",
+    "title_zh": "基于组织病理的AI虚拟空间蛋白组学用于肺癌可解释生物标志物发现",
+    "journal": "Nature Medicine",
+    "publisher": "Springer Nature",
+    "doi": "10.1038/s41591-025-04060-4",
+    "article_type": "Article",
+    "publication_timeline": "Received 14 May 2025 · Accepted 15 October 2025 · Published online 5 January 2026",
+    "citation": "Nature Medicine 32, 231–244 (2026)",
+    "journal_scope": "Nature Medicine publishes high-impact translational and clinical biomedical research with potential to change disease understanding or patient care.",
+    "field_positioning": "该研究位于计算病理、虚拟空间蛋白组学、多模态生存与免疫治疗预测以及可解释生物标志物发现的交叉方向。"
+  },
+  "overview": {
+    "qa": [
+      {"question": "研究解决什么问题？", "answer": "CODEX等空间蛋白组技术能解析肿瘤免疫生态，但成本、设备和流程限制了临床规模应用。研究检验能否从常规H&E直接生成40通道虚拟空间蛋白组，并将其用于跨中心结局预测和可解释空间生物标志物发现。"},
+      {"question": "核心数据是什么？", "answer": "HEX在382个肿瘤样本的819,000个配对图块上训练和验证，预测40个免疫、结构和功能蛋白；临床评估覆盖六个独立NSCLC队列共2,298名患者，并在12个其他癌种的5,019名患者中验证预后泛化。"},
+      {"question": "模型或分析的输入与输出是什么？", "answer": "HEX输入约50微米H&E图块，利用病理基础模型同时回归40个蛋白表达并重建虚拟CODEX；MICA再联合H&E和虚拟蛋白特征，通过共注意力和集合建模输出预后风险或免疫治疗反应，同时生成风险热图和空间蛋白解释。"},
+      {"question": "主要生物学发现是什么？", "answer": "HEX恢复了肿瘤、T细胞、髓系、基质和功能标志物的空间组织。治疗响应者中辅助性T细胞和细胞毒性T细胞更易共定位，非响应者则富集免疫抑制性TAM和中性粒细胞聚集，提示不同空间生态与敏感和耐药相关。"},
+      {"question": "主要临床结果是什么？", "answer": "融合H&E与虚拟空间蛋白组后，早期肺癌预后预测相对提高约22%，免疫治疗反应预测提高24%至39%，并在多个独立队列和泛癌数据中验证。"},
+      {"question": "最重要的限制是什么？", "answer": "虚拟蛋白仍是由形态推断的估计值，不同蛋白的可预测性和空间误差不同；训练配对样本规模有限，回顾性多队列存在处理差异，模型增益和空间标志物仍需前瞻性临床验证及直接蛋白检测确认。"}
+    ],
+    "method": "同切片CODEX/H&E配准并构建40通道图块 → 训练HEX同时预测空间蛋白 → 交叉验证、独立队列和泛癌验证 → 以MICA联合H&E与虚拟CODEX → 预测预后和免疫治疗反应 → 用风险热图、蛋白分布和空间邻域解释结果",
+    "story": "HEX把虚拟染色从单纯图像翻译推进到跨中心临床验证：模型先证明40种蛋白的空间预测可重复，再通过多模态融合提高风险和疗效预测，最后把预测信号还原为空间肿瘤—免疫生态。其临床价值建立在虚拟蛋白提供了H&E之外的信息，而不是图像看起来像真实CODEX。"
+  },
+  "body_section_map": [
+    ["Introduction", "引言"], ["Study overview", "研究概览"],
+    ["HEX enables accurate prediction of protein expression from H&E images", "HEX可从H&E准确预测蛋白表达"],
+    ["Cross-validation performance", "交叉验证性能"], ["Independent validation performance", "独立验证性能"],
+    ["HEX improves prognosis prediction in early-stage lung cancer", "HEX改善早期肺癌预后预测"],
+    ["Biological interpretation of HEX-based prognosis prediction", "HEX预后预测的生物学解释"],
+    ["HEX improves immunotherapy response prediction in advanced lung cancer", "HEX改善晚期肺癌免疫治疗反应预测"],
+    ["Biological interpretation of HEX-based immunotherapy response prediction", "HEX免疫治疗预测的生物学解释"],
+    ["Spatial transcriptomics comparison and scaling analyses", "与空间转录组的比较及尺度分析"],
+    ["Discussion", "讨论"], ["Methods", "方法"], ["Data availability", "数据可用性"], ["Code availability", "代码可用性"]
+  ],
+  "main_figures": [
+    {"id": "figure-1", "title_en": "Figure 1. Development, validation and clinical applications of HEX", "title_zh": "图1：HEX的开发、验证与临床应用", "reader_role": "总览同切片数据、40蛋白预测、多模态融合和六个临床队列。", "panel_requirement": "分别解释HEX训练与外部验证流程、MICA联合模型、预后队列和免疫治疗队列。"},
+    {"id": "figure-2", "title_en": "Figure 2. Performance evaluation of HEX for protein biomarker prediction", "title_zh": "图2：HEX蛋白生物标志物预测性能评估", "reader_role": "给出交叉验证的四类指标、基线比较和代表性虚拟CODEX。", "panel_requirement": "说明Pearson、Spearman、SSIM、MSE各自衡量什么，比较对象和不同蛋白的性能差异。"},
+    {"id": "figure-3", "title_en": "Figure 3. Independent validation of HEX for protein biomarker prediction", "title_zh": "图3：HEX蛋白预测的独立验证", "reader_role": "检验不同样本、染色协议、扫描设备和癌种中的泛化。", "panel_requirement": "逐队列说明是否零样本迁移、指标方向、代表图和泛癌限制。"},
+    {"id": "figure-4", "title_en": "Figure 4. MICA improves prognosis prediction in patients with early-stage NSCLC", "title_zh": "图4：MICA改善早期NSCLC患者预后预测", "reader_role": "比较临床、H&E、虚拟CODEX和联合模型的风险分层。", "panel_requirement": "解释训练验证划分、C-index或AUC、Kaplan–Meier、外部队列和统计增益。"},
+    {"id": "figure-5", "title_en": "Figure 5. Biological interpretation of MICA-derived risk predictions using HEX virtual spatial proteomics", "title_zh": "图5：利用HEX虚拟空间蛋白组解释MICA风险预测", "reader_role": "将模型风险映射为空间蛋白和肿瘤—免疫邻域。", "panel_requirement": "说明风险热图、蛋白表达比较、共定位模式、生存关联以及相关性边界。"},
+    {"id": "figure-6", "title_en": "Figure 6. MICA improves immunotherapy response prediction and identifies spatial proteomic signatures in advanced NSCLC", "title_zh": "图6：MICA改善晚期NSCLC免疫治疗反应预测并识别空间蛋白特征", "reader_role": "完成免疫治疗预测和响应/耐药生态解释。", "panel_requirement": "解释模型比较、ROC或PR结果、响应者T细胞共定位及非响应者TAM/中性粒细胞聚集。"}
+  ],
+  "supplementary_source_requirement": "保留Extended Data Figures 1–10的技术、泛癌、IHC和生存验证证据；不得把无面板扩展图判定为不完整，只需按其单一统计图或图组解释。",
+  "reference_requirement": {"expected_count": 69, "preserve_source_numbers": true, "reject_body_paragraphs": true}
+}

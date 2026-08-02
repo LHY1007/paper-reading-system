@@ -1,0 +1,118 @@
+{
+  "version": "v082-maas-reader-plan-2",
+  "status": "approved content plan; final manifest still required",
+  "paper": {
+    "key": "maas-2026",
+    "title_en": "A microenvironment-determined risk continuum refines subtyping in meningioma and reveals determinants of machine learning-based tumor classification",
+    "title_zh": "由肿瘤微环境决定的风险连续谱完善脑膜瘤分型，并揭示机器学习肿瘤分类的决定因素",
+    "journal": "Nature Genetics",
+    "publisher": "Springer Nature",
+    "doi": "10.1038/s41588-025-02475-w",
+    "article_type": "Article",
+    "publication_timeline": "Received 30 October 2024 · Accepted 10 December 2025 · Published online 9 February 2026 · Issue February 2026",
+    "citation": "Nature Genetics 58, 341–354 (2026) · Main article 14 pages · PDF with extended data 32 pages",
+    "journal_scope": "Nature Genetics publishes high-impact research on genetics and genomics, including disease classification and translational genomics.",
+    "field_positioning": "该研究位于脑膜瘤分子分型、肿瘤微环境、DNA 甲基化分类器解释和临床风险分层的交叉方向。",
+    "authors_requirement": "Extract the complete author list from the source and preserve author order; show the first and corresponding authors prominently without replacing the list with a placeholder.",
+    "affiliations_requirement": "Extract the numbered affiliations and preserve the author-affiliation mapping."
+  },
+  "overview": {
+    "qa": [
+      {
+        "question": "研究解决什么问题？",
+        "answer": "现有脑膜瘤 DNA 甲基化分类器通常把病例划分为离散亚型，但分类信号究竟来自肿瘤细胞本身还是肿瘤微环境并不清楚。研究检验非肿瘤细胞是否会改变分类结果，并判断 NF2 突变型脑膜瘤更符合离散亚型还是连续风险谱。"
+      },
+      {
+        "question": "核心数据是什么？",
+        "answer": "研究整合 26 例脑膜瘤的 snRNA-seq、120 例免疫组化及部分 MIBI、37 例空间 RNA-seq、4,502 例发现集甲基化数据、7,495 例跨肿瘤甲基化参考数据、三个临床验证队列，以及 1,378 例 PU.1 免疫组化 TMA 队列。"
+      },
+      {
+        "question": "模型或分析的输入与输出是什么？",
+        "answer": "输入包括 DNA 甲基化、单核转录组、空间转录组、CNV、免疫组化和临床结局；分析将甲基化信号分解为肿瘤细胞与基质/免疫成分，评估这些成分如何影响分类器分数，并输出连续风险结构及可用于临床分层的 PU.1/CD68 免疫细胞指标。"
+      },
+      {
+        "question": "主要生物学发现是什么？",
+        "answer": "NF2 突变型脑膜瘤并非由彼此清楚分离的分子亚型组成，而是肿瘤内在改变与微环境成分逐步变化形成的连续谱。低风险病例含更多微胶质样细胞，高风险病例的 TAM 总量下降，但更偏向浸润性、增殖和免疫抑制性巨噬细胞状态。"
+      },
+      {
+        "question": "主要临床结果是什么？",
+        "answer": "较低的免疫细胞或 TAM 比例与更高复发风险相关，并在 WHO 分级之外提供额外信息。独立 1,378 例队列中，PU.1 核染色可自动量化 TAM，在 WHO 1–2 级病例中改善复发风险预测，C-index 由 0.63 提升至 0.66。"
+      },
+      {
+        "question": "最重要的限制是什么？",
+        "answer": "微环境成分主要由多组学分解和观察性队列推断，尚不能证明 TAM 变化驱动肿瘤进展；不同队列检测平台和样本构成不完全一致，WHO 3 级病例数量较少，PU.1 阈值仍需前瞻性和跨中心验证。"
+      }
+    ],
+    "method": "snRNA-seq 定义肿瘤与微环境细胞 → IHC/MIBI 和空间 RNA-seq 进行正交验证 → 分解 4,502 例甲基化数据中的肿瘤/基质信号 → 解析分类器探针与亚克隆贡献 → 建立 NF2 突变型风险连续谱 → 在临床队列检验免疫成分与复发 → 用 1,378 例 PU.1 TMA 验证简化临床指标",
+    "story": "这篇文章不是提出另一个更细的脑膜瘤亚型表，而是说明现有分类器同时读取了肿瘤细胞和微环境信号。NF2 突变型脑膜瘤从低风险、微胶质样细胞丰富的状态逐步过渡到高风险、肿瘤内在异常和浸润性巨噬细胞占优的状态；因此临床分层应同时考虑肿瘤基因组和微环境，PU.1 提供了一个可落地但仍需前瞻性验证的简化入口。"
+  },
+  "body_section_map": [
+    ["Introduction", "引言"],
+    ["Results", "结果"],
+    ["Cellular composition of the tumor microenvironment", "脑膜瘤肿瘤微环境的细胞组成"],
+    ["Stromal signal contribution to meningioma machine-learning classification", "基质信号对脑膜瘤机器学习分类的贡献"],
+    ["Stromal and neoplastic epigenetic signatures", "基质与肿瘤细胞来源的表观遗传特征"],
+    ["Meningioma subclones", "脑膜瘤亚克隆及其分类信号"],
+    ["Clinical impact of tumor microenvironment composition", "肿瘤微环境组成的临床影响"],
+    ["Discussion", "讨论"],
+    ["Methods", "方法"],
+    ["Data availability", "数据可用性"],
+    ["Code availability", "代码可用性"],
+    ["References", "参考文献"]
+  ],
+  "main_figures": [
+    {
+      "id": "figure-1",
+      "title_en": "Figure 1. Meningioma molecular classification models and snRNA cohort overview",
+      "title_zh": "图 1：脑膜瘤分子分类体系与单核 RNA 队列概览",
+      "reader_role": "先统一不同分型体系之间的对应关系，再说明全文四部分实验和各数据集分别用于探索还是验证。",
+      "panel_requirement": "A 解释 NF2 状态与各分类体系的对应；B 解释 26 例 snRNA 队列的 WHO、甲基化类别和 UCSF 分组；C 按四个研究问题逐块说明数据、样本量和探索/验证关系。"
+    },
+    {
+      "id": "figure-2",
+      "title_en": "Figure 2. Tumor-associated macrophages are the largest subset of non-neoplastic cells that differ in number and phenotype by meningioma grade and methylation class",
+      "title_zh": "图 2：TAM 是最主要的非肿瘤细胞，其数量和表型随脑膜瘤分级及甲基化类别变化",
+      "reader_role": "证明低风险与高风险脑膜瘤的差异不仅来自肿瘤细胞，也包括 TAM 数量、来源和状态的系统变化。",
+      "panel_requirement": "按 a–c 的细胞构成、d–g 的 snRNA/IHC/MIBI/标志基因验证、h–j 的空间与反卷积证据三层解释，明确低风险微胶质样细胞与高风险浸润性巨噬细胞的方向。"
+    },
+    {
+      "id": "figure-3",
+      "title_en": "Figure 3. NF2-mutant meningiomas contain a mixture of neoplastic and stromal epigenetic signatures",
+      "title_zh": "图 3：NF2 突变型脑膜瘤同时包含肿瘤细胞和基质来源的表观遗传信号",
+      "reader_role": "把甲基化分类器的信号分解为肿瘤内在与微环境成分，解释同一类别为何出现连续和混合的分类分数。"
+    },
+    {
+      "id": "figure-4",
+      "title_en": "Figure 4. NF2-mutant meningioma is a spectrum rather than distinct tumor subtypes",
+      "title_zh": "图 4：NF2 突变型脑膜瘤更符合连续谱，而不是彼此独立的肿瘤亚型",
+      "reader_role": "比较脑膜瘤与髓母细胞瘤、室管膜瘤的聚类边界，并结合分类分数、CNV、复发转换、空间亚克隆和 TAM 组成说明连续谱的来源。"
+    },
+    {
+      "id": "figure-5",
+      "title_en": "Figure 5. The number of immune cells in a meningioma can predict the risk for recurrence",
+      "title_zh": "图 5：脑膜瘤中的免疫细胞数量可预测复发风险",
+      "reader_role": "在发现和验证队列中检验免疫成分是否在 WHO 分级之外提供复发风险信息，并明确高免疫与低/中免疫组的方向。"
+    },
+    {
+      "id": "figure-6",
+      "title_en": "Figure 6. TAM cell quantification by immunohistochemical PU.1 staining can facilitate risk prediction in meningioma",
+      "title_zh": "图 6：通过 PU.1 免疫组化量化 TAM 可改善脑膜瘤风险预测",
+      "reader_role": "把多组学发现转化为临床可执行的核染色指标，展示 1,378 例队列中的自动量化、生存分层、WHO 2 级风险、Cox 模型、C-index 和预测误差改善。"
+    }
+  ],
+  "supplementary_source_requirement": "The main PDF cites supplementary tables and supplementary figures that are separate files. A complete release requires an authorized source bundle and explicit inventory; absence from the main PDF must not be silently treated as zero supplementary material.",
+  "reference_requirement": {
+    "expected_count": 86,
+    "preserve_source_numbers": true,
+    "reject_body_paragraphs": true
+  },
+  "explicit_rejections_of_current_maas": [
+    "Do not use a DOI and first-page running text as the research question.",
+    "Do not describe pages, extracted blocks or reference counts as the core dataset.",
+    "Do not paste an ethics or nuclei-isolation paragraph into input-output or workflow.",
+    "Do not create Front matter, author fragments, article title fragments or repeated References as body sections.",
+    "Do not title every figure merely Fig.; retain the complete descriptive title.",
+    "Do not use the English caption as the Chinese caption or as the figure-study explanation.",
+    "Do not render any manifest with identity translation or placeholder authors."
+  ]
+}

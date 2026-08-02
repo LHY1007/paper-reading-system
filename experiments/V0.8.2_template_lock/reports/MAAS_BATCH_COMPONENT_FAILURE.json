@@ -1,0 +1,15 @@
+{
+  "file": "01_V0.8.2_Maas_等_-_2026_-_A_microenvironment-determined_risk_continuum_refines_subtyping_in_meningioma_and_reveals_determinant.html",
+  "bilingual_units": 0,
+  "figure_cards": 0,
+  "table_cards": 0,
+  "references": 0,
+  "errors": [
+    "missing overview card #quick-pane #overview",
+    "missing overview card #overview-bilingual-folded > .card",
+    "missing #figure-table-index",
+    "no bilingual units"
+  ],
+  "passed": false,
+  "citation_count": 0
+}

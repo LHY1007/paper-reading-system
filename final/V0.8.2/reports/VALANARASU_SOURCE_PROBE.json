@@ -1,0 +1,617 @@
+{
+  "digitalcommons": {
+    "requested": "https://digitalcommons.providence.org/publications/11120/",
+    "status": 200,
+    "final_url": "https://digitalcommons.providence.org/publications/11120/",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 45534,
+    "headers": {},
+    "candidate_urls": [
+      "https://digitalcommons.providence.org/publications/11120/article",
+      "https://digitalcommons.providence.org/assets/scripts/article-downloads.pack.js"
+    ],
+    "markers": {
+      "pdf": 3,
+      "pdfft": 0,
+      "download": 21,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "digitalcommons_view_11120": {
+    "requested": "https://digitalcommons.providence.org/cgi/viewcontent.cgi?article=11120&context=publications",
+    "status": 202,
+    "final_url": "https://digitalcommons.providence.org/cgi/viewcontent.cgi?article=11120&context=publications",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 0,
+    "headers": {},
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "digitalcommons_view_12119": {
+    "requested": "https://digitalcommons.providence.org/cgi/viewcontent.cgi?article=12119&context=publications",
+    "status": 202,
+    "final_url": "https://digitalcommons.providence.org/cgi/viewcontent.cgi?article=12119&context=publications",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 0,
+    "headers": {},
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "digitalcommons_view_12120": {
+    "requested": "https://digitalcommons.providence.org/cgi/viewcontent.cgi?article=12120&context=publications",
+    "status": 202,
+    "final_url": "https://digitalcommons.providence.org/cgi/viewcontent.cgi?article=12120&context=publications",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 0,
+    "headers": {},
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "digitalcommons_view_11119": {
+    "requested": "https://digitalcommons.providence.org/cgi/viewcontent.cgi?article=11119&context=publications",
+    "status": 202,
+    "final_url": "https://digitalcommons.providence.org/cgi/viewcontent.cgi?article=11119&context=publications",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 0,
+    "headers": {},
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "digitalcommons_view_11121": {
+    "requested": "https://digitalcommons.providence.org/cgi/viewcontent.cgi?article=11121&context=publications",
+    "status": 202,
+    "final_url": "https://digitalcommons.providence.org/cgi/viewcontent.cgi?article=11121&context=publications",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 0,
+    "headers": {},
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "microsoft_research": {
+    "requested": "https://www.microsoft.com/en-us/research/publication/multimodal-ai-generates-virtual-population-for-tumor-microenvironment-modeling/",
+    "status": 200,
+    "final_url": "https://www.microsoft.com/en-us/research/publication/multimodal-ai-generates-virtual-population-for-tumor-microenvironment-modeling/",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 178798,
+    "headers": {
+      "Link": "<https://www.microsoft.com/en-us/research/wp-json/>; rel=\"https://api.w.org/\";<https://www.microsoft.com/en-us/research/wp-json/wp/v2/msr-research-item/1157953>; rel=\"alternate\"; title=\"JSON\"; type=\"application/json\";<https://www.microsoft.com/en-us/research/?p=1157953>; rel=shortlink"
+    },
+    "candidate_urls": [
+      "https://www.microsoft.com/en-us/research/publication/multimodal-ai-generates-virtual-population-for-tumor-microenvironment-modeling/article",
+      "https://www.microsoft.com/en-us/research/wp-content/uploads/2025/12/Multimodal-AI-generates-virtual-population-for-tumor.pdf",
+      "https://www.cell.com/cell/fulltext/S0092-8674(25)01312-1",
+      "https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.microsoft.com%2Fen-us%2Fresearch%2Fpublication%2Fmultimodal-ai-generates-virtual-population-for-tumor-microenvironment-modeling%2F&title=Multimodal%20AI%20generates%20virtual%20population%20for%20tumor%20microenvironment%20modeling&summary=Multimodal%20AI%20generates%20virtual%20population%20for%20tumor%20microenvironment%20modeling&source=Microsoft%20Research",
+      "https://www.microsoft.com/en-us/download"
+    ],
+    "markers": {
+      "pdf": 3,
+      "pdfft": 0,
+      "download": 9,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 1,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": [
+      "r\" content=\"Sheng Wang\" /> <meta name=\"citation_author\" content=\"Hoifung Poon\" /> <meta name=\"citation_publication_date\" content=\"2025/12/09\" /> <meta name=\"citation_pdf_url\" content=\"https://www.microsoft.com/en-us/research/wp-content/uploads/2025/12/Multimodal-AI-generates-virtual-population-for-tumor.pdf\" /> <meta name=\"citation_journal_title\" content=\"Cell\" /> <!-- Facebook Pixel Code --> <script> function facebookTracking() { !function(f,b,e,v,n,t,s){if(f"
+    ]
+  },
+  "providence_pure": {
+    "requested": "https://providence.elsevierpure.com/en/publications/multimodal-ai-generates-virtual-population-for-tumor-microenviron/",
+    "status": 200,
+    "final_url": "https://providence.elsevierpure.com/en/publications/multimodal-ai-generates-virtual-population-for-tumor-microenviron/",
+    "content_type": "text/html;charset=UTF-8",
+    "bytes": 56725,
+    "headers": {},
+    "candidate_urls": [
+      "https://providence.elsevierpure.com/en/publications/multimodal-ai-generates-virtual-population-for-tumor-microenviron/article",
+      "https://www.linkedin.com/shareArticle?mini=true&url=https://providence.elsevierpure.com/en/publications/multimodal-ai-generates-virtual-population-for-tumor-microenviron/%3Futm_source%3Dlinkedin%26utm_medium%3Dsocial%26utm_campaign%3Dsharelink%26doi%3D10.1016%2Fj.cell.2025.11.016&summary=Check+out+this+research+output+at+Providence%3A+Multimodal+AI+generates+virtual+population+for+tumor+microenvironment+modeling"
+    ],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 1,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "crossref": {
+    "requested": "https://api.crossref.org/works/10.1016/j.cell.2025.11.016",
+    "status": 200,
+    "final_url": "https://api.crossref.org/works/10.1016/j.cell.2025.11.016",
+    "content_type": "application/json",
+    "bytes": 22539,
+    "headers": {},
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "pubmed": {
+    "requested": "https://pubmed.ncbi.nlm.nih.gov/41371214/",
+    "status": 403,
+    "final_url": "https://pubmed.ncbi.nlm.nih.gov/41371214/",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 134,
+    "headers": {},
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "ncbi_elink": {
+    "requested": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&id=41371214&cmd=llinks",
+    "status": 200,
+    "final_url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&id=41371214&cmd=llinks",
+    "content_type": "text/xml; charset=UTF-8",
+    "bytes": 1341,
+    "headers": {},
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "europepmc": {
+    "requested": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:41371214&format=json&resultType=core",
+    "status": 200,
+    "final_url": "https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:41371214&format=json&resultType=core",
+    "content_type": "application/json;charset=UTF-8",
+    "bytes": 9599,
+    "headers": {},
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 1,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "openalex": {
+    "requested": "https://api.openalex.org/works/https://doi.org/10.1016/j.cell.2025.11.016",
+    "status": 200,
+    "final_url": "https://api.openalex.org/works/https://doi.org/10.1016/j.cell.2025.11.016",
+    "content_type": "application/json",
+    "bytes": 35729,
+    "headers": {},
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 5,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "semantic_scholar_DOI_1": {
+    "requested": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016/j.cell.2025.11.016?fields=title,openAccessPdf,url,externalIds",
+    "status": 200,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1016/j.cell.2025.11.016?fields=title,openAccessPdf,url,externalIds",
+    "content_type": "application/json",
+    "bytes": 447,
+    "headers": {},
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 1,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "semantic_scholar_PMID_1": {
+    "requested": "https://api.semanticscholar.org/graph/v1/paper/PMID:41371214?fields=title,openAccessPdf,url,externalIds",
+    "status": 429,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/PMID:41371214?fields=title,openAccessPdf,url,externalIds",
+    "content_type": "application/json",
+    "bytes": 174,
+    "headers": {},
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "semantic_scholar_PMID_2": {
+    "requested": "https://api.semanticscholar.org/graph/v1/paper/PMID:41371214?fields=title,openAccessPdf,url,externalIds",
+    "status": 429,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/PMID:41371214?fields=title,openAccessPdf,url,externalIds",
+    "content_type": "application/json",
+    "bytes": 174,
+    "headers": {},
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "semantic_scholar_PMID_3": {
+    "requested": "https://api.semanticscholar.org/graph/v1/paper/PMID:41371214?fields=title,openAccessPdf,url,externalIds",
+    "status": 429,
+    "final_url": "https://api.semanticscholar.org/graph/v1/paper/PMID:41371214?fields=title,openAccessPdf,url,externalIds",
+    "content_type": "application/json",
+    "bytes": 174,
+    "headers": {},
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "elsevier_content_article_pii_s0092867425013121_httpaccept_text_xml": {
+    "requested": "https://api.elsevier.com/content/article/pii/S0092867425013121?httpAccept=text/xml",
+    "status": 200,
+    "final_url": "https://api.elsevier.com/content/article/pii/S0092867425013121?httpAccept=text/xml",
+    "content_type": "text/xml;charset=UTF-8",
+    "bytes": 1923,
+    "headers": {},
+    "candidate_urls": [
+      "https://api.elsevier.com/content/article/pii/S0092867425013121",
+      "https://www.sciencedirect.com/science/article/pii/S0092867425013121"
+    ],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 1,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": [
+      "coredata><prism:url>https://api.elsevier.com/content/article/pii/S0092867425013121</prism:url><dc:identifier>doi:10.1016/j.cell.2025.11.016</dc:identifier><eid>1-s2.0-S0092867425013121</eid><prism:doi>10.1016/j.cell.2025.11.016</prism:doi><pii>S0092-8674(25)01312-1</pii><dc:title>Multimodal AI generates virtual population for tumor microenvironment modeling </dc:title><prism:publicationName>Cell</prism:publicationName><prism:aggregationType>Journal</prism:aggreg"
+    ]
+  },
+  "elsevier_content_article_pii_s0092867425013121_httpaccept_application_xml": {
+    "requested": "https://api.elsevier.com/content/article/pii/S0092867425013121?httpAccept=application/xml",
+    "status": 200,
+    "final_url": "https://api.elsevier.com/content/article/pii/S0092867425013121?httpAccept=application/xml",
+    "content_type": "application/xml;charset=UTF-8",
+    "bytes": 1961,
+    "headers": {},
+    "candidate_urls": [
+      "https://api.elsevier.com/content/article/pii/S0092867425013121",
+      "https://www.sciencedirect.com/science/article/pii/S0092867425013121"
+    ],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 1,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": [
+      "coredata><prism:url>https://api.elsevier.com/content/article/pii/S0092867425013121</prism:url><dc:identifier>doi:10.1016/j.cell.2025.11.016</dc:identifier><eid>1-s2.0-S0092867425013121</eid><prism:doi>10.1016/j.cell.2025.11.016</prism:doi><pii>S0092-8674(25)01312-1</pii><dc:title>Multimodal AI generates virtual population for tumor microenvironment modeling </dc:title><prism:publicationName>Cell</prism:publicationName><prism:aggregationType>Journal</prism:aggreg"
+    ]
+  },
+  "elsevier_content_article_pii_s0092867425013121_view_full": {
+    "requested": "https://api.elsevier.com/content/article/pii/S0092867425013121?view=FULL",
+    "status": 401,
+    "final_url": "https://api.elsevier.com/content/article/pii/S0092867425013121?view=FULL",
+    "content_type": "text/xml;charset=UTF-8",
+    "bytes": 133,
+    "headers": {},
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "elsevier_content_article_doi_10_1016_j_cell_2025_11_016_httpaccept_text_xml": {
+    "requested": "https://api.elsevier.com/content/article/doi/10.1016/j.cell.2025.11.016?httpAccept=text/xml",
+    "status": 200,
+    "final_url": "https://api.elsevier.com/content/article/doi/10.1016/j.cell.2025.11.016?httpAccept=text/xml",
+    "content_type": "text/xml;charset=UTF-8",
+    "bytes": 1923,
+    "headers": {
+      "Content-Disposition": "inline;filename=f.txt"
+    },
+    "candidate_urls": [
+      "https://api.elsevier.com/content/article/pii/S0092867425013121",
+      "https://www.sciencedirect.com/science/article/pii/S0092867425013121"
+    ],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 1,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": [
+      "coredata><prism:url>https://api.elsevier.com/content/article/pii/S0092867425013121</prism:url><dc:identifier>doi:10.1016/j.cell.2025.11.016</dc:identifier><eid>1-s2.0-S0092867425013121</eid><prism:doi>10.1016/j.cell.2025.11.016</prism:doi><pii>S0092-8674(25)01312-1</pii><dc:title>Multimodal AI generates virtual population for tumor microenvironment modeling </dc:title><prism:publicationName>Cell</prism:publicationName><prism:aggregationType>Journal</prism:aggreg"
+    ]
+  },
+  "elsevier_content_article_doi_10_1016_j_cell_2025_11_016_view_full": {
+    "requested": "https://api.elsevier.com/content/article/doi/10.1016/j.cell.2025.11.016?view=FULL",
+    "status": 401,
+    "final_url": "https://api.elsevier.com/content/article/doi/10.1016/j.cell.2025.11.016?view=FULL",
+    "content_type": "text/xml;charset=UTF-8",
+    "bytes": 133,
+    "headers": {
+      "Content-Disposition": "inline;filename=f.txt"
+    },
+    "candidate_urls": [],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "sciencedirect_html": {
+    "requested": "https://www.sciencedirect.com/science/article/pii/S0092867425013121",
+    "status": 403,
+    "final_url": "https://www.sciencedirect.com/science/article/pii/S0092867425013121",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 832804,
+    "headers": {},
+    "candidate_urls": [
+      "https://www.sciencedirect.com/science/article/pii/text/html; charset=UTF-8",
+      "https://www.sciencedirect.com/science/article/pii/IE=edge",
+      "https://www.sciencedirect.com/science/article/pii/1",
+      "https://www.sciencedirect.com/science/article/pii/width=device-width, initial-scale=1",
+      "https://www.sciencedirect.com/science/article/pii/NOARCHIVE",
+      "https://www.sciencedirect.com/science/article/pii/noodp",
+      "https://www.sciencedirect.com/science/article/pii/noydir",
+      "https://sdfestaticassets-eu-west-1.sciencedirectassets.com/shared-assets/103/images/favSD.ico",
+      "https://sdfestaticassets-us-east-1.sciencedirectassets.com/shared-assets/24/images/elsevier-non-solus-new-grey.svg"
+    ],
+    "markers": {
+      "pdf": 12,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 2,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "sciencedirect_pdf": {
+    "requested": "https://www.sciencedirect.com/science/article/pii/S0092867425013121/pdfft?isDTMRedir=true&download=true",
+    "status": 403,
+    "final_url": "https://www.sciencedirect.com/science/article/pii/S0092867425013121/pdfft?isDTMRedir=true&download=true",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 832804,
+    "headers": {},
+    "candidate_urls": [
+      "https://www.sciencedirect.com/science/article/pii/S0092867425013121/text/html; charset=UTF-8",
+      "https://www.sciencedirect.com/science/article/pii/S0092867425013121/IE=edge",
+      "https://www.sciencedirect.com/science/article/pii/S0092867425013121/1",
+      "https://www.sciencedirect.com/science/article/pii/S0092867425013121/width=device-width, initial-scale=1",
+      "https://www.sciencedirect.com/science/article/pii/S0092867425013121/NOARCHIVE",
+      "https://www.sciencedirect.com/science/article/pii/S0092867425013121/noodp",
+      "https://www.sciencedirect.com/science/article/pii/S0092867425013121/noydir",
+      "https://sdfestaticassets-eu-west-1.sciencedirectassets.com/shared-assets/103/images/favSD.ico",
+      "https://sdfestaticassets-us-east-1.sciencedirectassets.com/shared-assets/24/images/elsevier-non-solus-new-grey.svg"
+    ],
+    "markers": {
+      "pdf": 12,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 2,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "cell_fulltext": {
+    "requested": "https://www.cell.com/cell/fulltext/S0092-8674(25)01312-1",
+    "status": 403,
+    "final_url": "https://www.cell.com/cell/fulltext/S0092-8674(25)01312-1",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 5764,
+    "headers": {},
+    "candidate_urls": [
+      "https://www.cell.com/cell/fulltext/text/html; charset=UTF-8",
+      "https://www.cell.com/cell/fulltext/IE=Edge",
+      "https://www.cell.com/cell/fulltext/noindex,nofollow",
+      "https://www.cell.com/cell/fulltext/width=device-width,initial-scale=1",
+      "https://www.cell.com/cell/fulltext/default-src 'none'; script-src 'nonce-3KpByE9H9HBFEzNe63VxLh' 'unsafe-eval' https:/challenges.cloudflare.com; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self' https:/challenges.cloudflare.com; connect-src 'self' https:/challenges.cloudflare.com; frame-src 'self' https:/challenges.cloudflare.com blob:; child-src 'self' https:/challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri 'self'",
+      "https://www.cell.com/cell/fulltext/360"
+    ],
+    "markers": {
+      "pdf": 0,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  },
+  "cell_pdf": {
+    "requested": "https://www.cell.com/cell/pdf/S0092-8674(25)01312-1.pdf",
+    "status": 403,
+    "final_url": "https://www.cell.com/cell/pdf/S0092-8674(25)01312-1.pdf",
+    "content_type": "text/html; charset=UTF-8",
+    "bytes": 5761,
+    "headers": {},
+    "candidate_urls": [
+      "https://www.cell.com/cell/pdf/text/html; charset=UTF-8",
+      "https://www.cell.com/cell/pdf/IE=Edge",
+      "https://www.cell.com/cell/pdf/noindex,nofollow",
+      "https://www.cell.com/cell/pdf/width=device-width,initial-scale=1",
+      "https://www.cell.com/cell/pdf/default-src 'none'; script-src 'nonce-RshoTd73yulvQmtWJcRBTe' 'unsafe-eval' https:/challenges.cloudflare.com; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self' https:/challenges.cloudflare.com; connect-src 'self' https:/challenges.cloudflare.com; frame-src 'self' https:/challenges.cloudflare.com blob:; child-src 'self' https:/challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri 'self'",
+      "https://www.cell.com/cell/pdf/360"
+    ],
+    "markers": {
+      "pdf": 6,
+      "pdfft": 0,
+      "download": 0,
+      "els-cdn": 0,
+      "sciencedirectassets": 0,
+      "1-s2.0": 0,
+      "__NEXT_DATA__": 0,
+      "citation_pdf_url": 0,
+      "bepress_citation_pdf_url": 0
+    },
+    "body_snippets": []
+  }
+}

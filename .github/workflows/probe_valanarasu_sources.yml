@@ -1,0 +1,118 @@
+name: Probe Valanarasu open-access source
+
+on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - ".github/workflows/probe_valanarasu_sources.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install probe dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4
+      - name: Probe official and institutional source metadata
+        run: |
+          mkdir -p final/V0.8.2/reports
+          python - <<'PY'
+          from __future__ import annotations
+          import json, re, time
+          from pathlib import Path
+          from urllib.parse import urljoin
+          import requests
+          from bs4 import BeautifulSoup
+
+          doi='10.1016/j.cell.2025.11.016'
+          pii='S0092867425013121'
+          pmid='41371214'
+          ua='Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 Chrome/149 Safari/537.36'
+          session=requests.Session(); session.headers.update({'User-Agent':ua,'Accept-Language':'en-US,en;q=0.9'})
+          report={}
+
+          def fetch(name,url,headers=None):
+              try:
+                  r=session.get(url,timeout=90,allow_redirects=True,headers=headers or {})
+                  body=r.text if len(r.content)<10_000_000 else ''
+                  urls=[]
+                  if body:
+                      soup=BeautifulSoup(body,'html.parser')
+                      for node in soup.find_all(['meta','a','link','iframe','embed','script']):
+                          vals=[]
+                          for key in ('href','src','content','data-pdf-url','data-download-url','data-url'):
+                              value=node.get(key)
+                              if value:
+                                  vals.append(urljoin(r.url,value))
+                          for value in vals:
+                              if any(token in value.lower() for token in ('pdf','download','viewcontent','fulltext','article','document','els-cdn','sciencedirectassets')):
+                                  urls.append(value)
+                  markers={key:body.lower().count(key.lower()) for key in ['pdf','pdfft','download','els-cdn','sciencedirectassets','1-s2.0','__NEXT_DATA__','citation_pdf_url','bepress_citation_pdf_url']}
+                  report[name]={'requested':url,'status':r.status_code,'final_url':r.url,'content_type':r.headers.get('content-type',''),'bytes':len(r.content),'headers':{k:v for k,v in r.headers.items() if k.lower() in {'location','content-disposition','link','x-robots-tag'}},'candidate_urls':list(dict.fromkeys(urls))[:200],'markers':markers,'body_snippets':[]}
+                  for pattern in [r'.{0,160}citation_pdf_url.{0,300}',r'.{0,160}bepress_citation_pdf_url.{0,300}',r'.{0,160}1-s2\.0.{0,300}',r'.{0,160}els-cdn.{0,300}',r'.{0,160}pdfDownload.{0,300}',r'.{0,160}viewcontent.{0,300}']:
+                      matches=re.findall(pattern,body,flags=re.I|re.S)
+                      report[name]['body_snippets'].extend([' '.join(x.split()) for x in matches[:10]])
+                  return r
+              except Exception as exc:
+                  report[name]={'requested':url,'error':f'{type(exc).__name__}: {exc}'}
+                  return None
+
+          fetch('digitalcommons','https://digitalcommons.providence.org/publications/11120/')
+          for article in ['11120','12119','12120','11119','11121']:
+              fetch(f'digitalcommons_view_{article}',f'https://digitalcommons.providence.org/cgi/viewcontent.cgi?article={article}&context=publications')
+          fetch('microsoft_research','https://www.microsoft.com/en-us/research/publication/multimodal-ai-generates-virtual-population-for-tumor-microenvironment-modeling/')
+          fetch('providence_pure','https://providence.elsevierpure.com/en/publications/multimodal-ai-generates-virtual-population-for-tumor-microenviron/')
+          fetch('crossref',f'https://api.crossref.org/works/{doi}')
+          fetch('pubmed',f'https://pubmed.ncbi.nlm.nih.gov/{pmid}/')
+          fetch('ncbi_elink',f'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/elink.fcgi?dbfrom=pubmed&id={pmid}&cmd=llinks')
+          fetch('europepmc',f'https://www.ebi.ac.uk/europepmc/webservices/rest/search?query=EXT_ID:{pmid}&format=json&resultType=core')
+          fetch('openalex',f'https://api.openalex.org/works/https://doi.org/{doi}')
+          for identity in [f'DOI:{doi}',f'PMID:{pmid}']:
+              for attempt in range(3):
+                  r=fetch(f'semantic_scholar_{identity.split(":")[0]}_{attempt+1}',f'https://api.semanticscholar.org/graph/v1/paper/{identity}?fields=title,openAccessPdf,url,externalIds')
+                  if r is not None and r.status_code != 429:
+                      break
+                  time.sleep(3*(attempt+1))
+          for suffix in [
+              f'content/article/pii/{pii}?httpAccept=text/xml',
+              f'content/article/pii/{pii}?httpAccept=application/xml',
+              f'content/article/pii/{pii}?view=FULL',
+              f'content/article/doi/{doi}?httpAccept=text/xml',
+              f'content/article/doi/{doi}?view=FULL',
+          ]:
+              fetch('elsevier_'+re.sub(r'[^a-z0-9]+','_',suffix.lower()),'https://api.elsevier.com/'+suffix,headers={'Accept':'text/xml,application/xml,text/html;q=0.8,*/*;q=0.5'})
+          fetch('sciencedirect_html',f'https://www.sciencedirect.com/science/article/pii/{pii}',headers={'Accept':'text/html,application/xhtml+xml'})
+          fetch('sciencedirect_pdf',f'https://www.sciencedirect.com/science/article/pii/{pii}/pdfft?isDTMRedir=true&download=true',headers={'Accept':'application/pdf,text/html;q=0.8'})
+          fetch('cell_fulltext','https://www.cell.com/cell/fulltext/S0092-8674(25)01312-1')
+          fetch('cell_pdf','https://www.cell.com/cell/pdf/S0092-8674(25)01312-1.pdf',headers={'Accept':'application/pdf,text/html;q=0.8'})
+          Path('final/V0.8.2/reports/VALANARASU_SOURCE_PROBE.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n','utf-8')
+          print(json.dumps({name:{k:v for k,v in data.items() if k in ('status','final_url','content_type','bytes','candidate_urls','markers','body_snippets','error')} for name,data in report.items()},ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: valanarasu-source-probe
+          path: final/V0.8.2/reports/VALANARASU_SOURCE_PROBE.json
+          retention-days: 14
+      - name: Commit source probe report
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add final/V0.8.2/reports/VALANARASU_SOURCE_PROBE.json
+          if git diff --cached --quiet; then
+            echo "Probe report unchanged"
+          else
+            git commit -m "Record Valanarasu source probe"
+            git push origin HEAD:v0.8x-batch-diagnosis
+          fi

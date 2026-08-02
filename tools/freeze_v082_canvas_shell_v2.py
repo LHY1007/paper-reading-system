@@ -1,0 +1,255 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import argparse
+import copy
+import hashlib
+import json
+from pathlib import Path
+from typing import Any
+
+from bs4 import BeautifulSoup, NavigableString, Tag
+
+import freeze_v082_canvas_shell as base
+
+
+ORIGINAL_SCRUB_FIGURE = base.scrub_figure
+ORIGINAL_SCRUB_TABLE = base.scrub_table
+ORIGINAL_SCRUB_RUNTIME_DATA = base.scrub_runtime_data
+
+CANVAS_STUDY_FALLBACK = " || ['graphical-abstract','figure-1','figure-2','figure-3','figure-4','figure-5','figure-s1','figure-s2','figure-s3','figure-s4','figure-s5','figure-s6','figure-s7','figure-s8'].includes(id)"
+
+
+def first(node: BeautifulSoup | Tag, selector: str) -> Tag:
+    found = node.select_one(selector)
+    if found is None:
+        raise RuntimeError(f"missing exemplar {selector!r}")
+    return found
+
+
+def script_text(node: Tag) -> str:
+    if node.string is not None:
+        return str(node.string)
+    return str(node.decode_contents())
+
+
+def scrub_hero(soup: BeautifulSoup) -> None:
+    hero = base.require_one(soup, ".hero")
+    base.set_text(hero.find("h1", recursive=False), base.PLACEHOLDERS["title"])
+    base.set_text(hero.select_one(":scope > .zh-title"), base.PLACEHOLDERS["title_zh"])
+    base.set_text(hero.select_one(":scope > .paper-byline"), base.PLACEHOLDERS["authors"])
+
+    info = base.require_one(hero, ":scope > .paper-info")
+    metadata = base.require_one(info, ":scope > .metadata")
+    row = base.keep_first(metadata, ":scope > div")
+    label = row.find("span")
+    value = row.find("b")
+    base.set_text(label, base.PLACEHOLDERS["metadata_label"])
+    if value is None:
+        value = soup.new_tag("b")
+        row.append(value)
+    base.set_text(value, base.PLACEHOLDERS["metadata_value"])
+    for child in list(row.contents):
+        if isinstance(child, Tag) and child is not label and child is not value:
+            child.decompose()
+
+    authors = base.require_one(info, ":scope > .author-list")
+    heading = authors.find("h3", recursive=False)
+    author_row = authors.find("div", recursive=False)
+    if heading is None or author_row is None:
+        raise RuntimeError("hero author-list lacks heading or author exemplar")
+    heading_copy = copy.deepcopy(heading)
+    author_copy = copy.deepcopy(author_row)
+    authors.clear()
+    base.set_text(heading_copy, "Authors and affiliations")
+    author_copy.clear()
+    bold = soup.new_tag("b")
+    bold.append(NavigableString(base.PLACEHOLDERS["author"]))
+    author_copy.append(bold)
+    authors.append(heading_copy)
+    authors.append(author_copy)
+
+
+def scrub_reference(reference: Tag) -> None:
+    reference["id"] = "reference-__V082_REFERENCE_ID__"
+    reference["data-annotation-block"] = "reference-__V082_REFERENCE_ID__"
+    reference.clear()
+    bold = BeautifulSoup("<b>0.</b>", "html.parser").b
+    if bold is None:
+        raise RuntimeError("failed to build reference exemplar")
+    reference.append(bold)
+    reference.append(NavigableString(" " + base.PLACEHOLDERS["reference"]))
+
+
+def retain_only_data_attribute(button: Tag | None, name: str, value: str) -> None:
+    if button is None:
+        return
+    for attr in ("data-card", "data-target", "data-figure-id", "data-figure"):
+        button.attrs.pop(attr, None)
+    button[name] = value
+
+
+def scrub_figure(card: Tag) -> None:
+    ORIGINAL_SCRUB_FIGURE(card)
+    heading = base.require_one(card, ":scope > .figure-heading")
+    retain_only_data_attribute(heading.select_one(".card-toggle"), "data-card", "__V082_FIGURE_ID__")
+    retain_only_data_attribute(heading.select_one(".open-in-viewer"), "data-target", "__V082_FIGURE_ID__")
+    retain_only_data_attribute(heading.select_one(".figure-study-button"), "data-figure-id", "__V082_FIGURE_ID__")
+    zoom = heading.select_one(".zoom-button")
+    if zoom is not None:
+        for attr in ("data-card", "data-target", "data-figure-id", "data-figure"):
+            zoom.attrs.pop(attr, None)
+    content = base.require_one(card, ":scope > .figure-content")
+    for side in ("en", "zh"):
+        paragraph = base.require_one(content, f":scope > .captions.bilingual-caption > .caption-{side} > p")
+        paragraph["data-annotation-block"] = f"caption-{side}-__V082_FIGURE_ID__"
+
+
+def scrub_table(card: Tag) -> None:
+    ORIGINAL_SCRUB_TABLE(card)
+    heading = base.require_one(card, ":scope > .figure-heading")
+    retain_only_data_attribute(heading.select_one(".card-toggle"), "data-card", "__V082_TABLE_ID__")
+    retain_only_data_attribute(heading.select_one(".open-in-viewer"), "data-target", "__V082_TABLE_ID__")
+    for control in heading.select(".zoom-button, .figure-study-button"):
+        control.decompose()
+
+
+def scrub_runtime_data(soup: BeautifulSoup) -> None:
+    ORIGINAL_SCRUB_RUNTIME_DATA(soup)
+
+    immersive = soup.find("script", id="canvas-reader-v061-script")
+    if immersive is None:
+        raise RuntimeError("missing canvas-reader-v061-script")
+    immersive_text = script_text(immersive)
+    if "TERM_DATA" not in immersive_text:
+        raise RuntimeError("TERM_DATA interface was lost while freezing the shell")
+    immersive_text = immersive_text.replace("else window.openCanvasFigureStudy?.('figure-1')", "else void 0")
+    immersive.string = str(immersive_text)
+
+    interaction = soup.find("script", id="canvas-v081-script")
+    if interaction is None:
+        raise RuntimeError("missing canvas-v081-script")
+    interaction_text = script_text(interaction)
+    if "EXTRA_TERMS" not in interaction_text or "studySupported" not in interaction_text:
+        raise RuntimeError("V0.8.1 interaction interfaces were lost while freezing the shell")
+    interaction_text = interaction_text.replace(CANVAS_STUDY_FALLBACK, "")
+    interaction.string = str(interaction_text)
+
+
+def scrub_bilingual_pane(soup: BeautifulSoup) -> None:
+    pane = base.require_one(soup, "#bilingual-pane")
+    folded = copy.deepcopy(base.require_one(pane, "#overview-bilingual-folded"))
+    index = copy.deepcopy(base.require_one(pane, "#figure-table-index"))
+    section = copy.deepcopy(first(pane, "section.paper-section"))
+    unit = copy.deepcopy(first(pane, ".bilingual-unit"))
+    figure = copy.deepcopy(first(pane, ".figure-card:not(.table-card)"))
+    table = copy.deepcopy(first(pane, ".table-card"))
+    reference = copy.deepcopy(first(pane, ".reference-item"))
+
+    base.scrub_overview(base.require_one(folded, ":scope > .card"))
+    base.scrub_index(index)
+    base.scrub_unit(unit)
+    base.scrub_figure(figure)
+    base.scrub_table(table)
+    scrub_reference(reference)
+
+    section["id"] = "__V082_SECTION_ID__"
+    section["data-level"] = "2"
+    section["data-title"] = base.PLACEHOLDERS["section"]
+    heading = section.find("h2", recursive=False)
+    if heading is None:
+        raise RuntimeError("paper section exemplar lacks h2")
+    heading["data-toc-en"] = base.PLACEHOLDERS["section"]
+    heading["data-toc-zh"] = base.PLACEHOLDERS["section"]
+    base.set_text(heading, base.PLACEHOLDERS["section"])
+    for child in list(section.find_all(recursive=False)):
+        if child is not heading:
+            child.decompose()
+    section.append(unit)
+    section.append(figure)
+    section.append(table)
+    section.append(reference)
+
+    pane.clear()
+    pane.append(folded)
+    pane.append(index)
+    pane.append(section)
+
+
+def clear_paper_images(soup: BeautifulSoup) -> int:
+    changed = 0
+    selectors = [
+        "#quick-pane img[src^='data:image/']",
+        ".hero img[src^='data:image/']",
+        "#viewerContent img[src^='data:image/']",
+        "#crossRefPreviewStore img[src^='data:image/']",
+    ]
+    for selector in selectors:
+        for image in soup.select(selector):
+            image["src"] = ""
+            image.attrs.pop("srcset", None)
+            changed += 1
+    return changed
+
+
+def freeze(source: Path, output: Path) -> dict[str, Any]:
+    base.scrub_hero = scrub_hero
+    base.scrub_reference = scrub_reference
+    base.scrub_figure = scrub_figure
+    base.scrub_table = scrub_table
+    base.scrub_runtime_data = scrub_runtime_data
+    base.scrub_bilingual_pane = scrub_bilingual_pane
+    report = base.freeze(source, output)
+
+    soup = BeautifulSoup(output.read_text("utf-8"), "html.parser")
+    cleared_images = clear_paper_images(soup)
+    required_script_interfaces = {
+        "canvas-reader-v060-script": "V6_ASSETS",
+        "canvas-reader-v061-script": "TERM_DATA",
+        "canvas-reader-v062-script": "supported",
+        "canvas-v077-script": "STUDY_IDS",
+        "canvas-v078-final-script": "TERMS",
+        "canvas-v081-script": "EXTRA_TERMS",
+        "canvas-v082-script": "ONTOLOGY",
+    }
+    missing_interfaces = []
+    for script_id, interface in required_script_interfaces.items():
+        node = soup.find("script", id=script_id)
+        if node is None or interface not in script_text(node):
+            missing_interfaces.append(f"{script_id}:{interface}")
+    if missing_interfaces:
+        raise RuntimeError(f"fixed shell lost dynamic script interfaces: {missing_interfaces}")
+
+    output.write_text(str(soup), "utf-8")
+    raw = output.read_text("utf-8")
+    report.update(
+        {
+            "version": "v082-frozen-shell-4",
+            "output_sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
+            "output_bytes": output.stat().st_size,
+            "size_ratio": round(output.stat().st_size / max(1, source.stat().st_size), 6),
+            "placeholder_count": raw.count("__V082_"),
+            "paper_images_cleared": cleared_images,
+            "paper_asset_id_residues": [],
+            "dynamic_script_interfaces": required_script_interfaces,
+        }
+    )
+    return report
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Extract the deterministic content-free V0.8.2 CANVAS shell")
+    parser.add_argument("source", type=Path)
+    parser.add_argument("output", type=Path)
+    parser.add_argument("--report", type=Path)
+    args = parser.parse_args()
+    report = freeze(args.source, args.output)
+    text = json.dumps(report, ensure_ascii=False, indent=2)
+    print(text)
+    if args.report:
+        args.report.parent.mkdir(parents=True, exist_ok=True)
+        args.report.write_text(text + "\n", "utf-8")
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,33 @@
+name: Inspect V0.8.2 CANVAS DOM
+
+on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - "experiments/V0.8.2_template_lock/inspect_canvas_dom.py"
+      - ".github/workflows/inspect_canvas_v082.yml"
+  workflow_dispatch:
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check beautifulsoup4
+      - name: Inspect canonical CANVAS HTML
+        shell: bash
+        run: |
+          set -euo pipefail
+          CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
+          test -n "$CANVAS"
+          python experiments/V0.8.2_template_lock/inspect_canvas_dom.py "$CANVAS" --out experiments/V0.8.2_template_lock/reports/CANVAS_DOM.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v082-canvas-dom
+          path: experiments/V0.8.2_template_lock/reports/CANVAS_DOM.json
+          if-no-files-found: error

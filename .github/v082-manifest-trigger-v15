@@ -1,0 +1,5 @@
+{
+  "version": "v082-manifest-trigger-v15",
+  "reason": "rerun all papers after table-contract and panel-grounding fixes",
+  "requested_at": "2026-07-31T23:05:00+08:00"
+}

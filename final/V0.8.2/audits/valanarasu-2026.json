@@ -1,0 +1,549 @@
+{
+  "schema_version": "v082-pdf-native-audit-1",
+  "paper_key": "valanarasu-2026",
+  "source_pdf": ".build/v082/pdfs/04_valanarasu-2026.pdf",
+  "source_pdf_sha256": "c7a18a6e01f74ed1d748845a66fc0f053b94580a685f41aac17a891a8356ad14",
+  "pages": 35,
+  "body_font_size": 8.468,
+  "raw_text_blocks": 445,
+  "kept_text_blocks": 357,
+  "repeated_header_footer_patterns": 6,
+  "events": {
+    "heading": 847,
+    "body": 61810,
+    "caption": 16228,
+    "reference": 15478
+  },
+  "paragraphs": 84,
+  "sections": 24,
+  "assets": 22,
+  "references": 55,
+  "asset_audit": [
+    {
+      "id": "graphical-abstract",
+      "caption_sha256": "14cdf038ebc15766adacf44137b7971a197a977235f937a7082e01a3c49b9c54",
+      "source_page": 1,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        215.32
+      ],
+      "pixels": [
+        917,
+        277
+      ],
+      "bytes": 30018,
+      "sha256": "2e9760da586b3ffae391061df62f6792a9595dbec72aa1be95008a0330337f35"
+    },
+    {
+      "id": "table-1",
+      "caption_sha256": "3df5248095ac0d9691375000bd52d9db98ab14dac9f0a43d842220b3756d80fc",
+      "source_page": 2,
+      "clip": [
+        18.09,
+        39.15,
+        584.9,
+        720.35
+      ],
+      "pixels": [
+        908,
+        1091
+      ],
+      "bytes": 246570,
+      "sha256": "ccdb885aed70133314e2217e8ec2550d3366bf91abcd83d4b2fd44366e730360"
+    },
+    {
+      "id": "figure-1",
+      "caption_sha256": "6e5378a592943f814b42fed5630d9d76fc1b17058c112b9382b46e5a832b9a09",
+      "source_page": 4,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        592.99
+      ],
+      "pixels": [
+        917,
+        881
+      ],
+      "bytes": 141226,
+      "sha256": "0572a3a770031a77644e29c5613821a8e60bb715aac7dc8fbf2008b105576926"
+    },
+    {
+      "id": "figure-2",
+      "caption_sha256": "72434b5d5ada7ed371884b32473555ddc334e09c2ed4d49f618d0c7cc530c7e3",
+      "source_page": 6,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        592.76
+      ],
+      "pixels": [
+        917,
+        881
+      ],
+      "bytes": 129406,
+      "sha256": "8337504040711f3222182f1619997b3334e2b1d4b127f744d8da5936a99d6751"
+    },
+    {
+      "id": "figure-3",
+      "caption_sha256": "c33c46eb85a8ea9f7acc8dc78e8554dbbcfb3d396227921e99bccc33dd6b14c5",
+      "source_page": 7,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        692.71
+      ],
+      "pixels": [
+        917,
+        1041
+      ],
+      "bytes": 219676,
+      "sha256": "6289de4eee40def19ec7d8e8568867e9f5ea49870b4778e742393db5b2da8b6b"
+    },
+    {
+      "id": "figure-4",
+      "caption_sha256": "1510ad310b438d294461062fec7eb30537121e45006ace7f3188a2918b285018",
+      "source_page": 9,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        599.22
+      ],
+      "pixels": [
+        917,
+        891
+      ],
+      "bytes": 121860,
+      "sha256": "f94196a3d8125991eace7a6810d84c7ae8e16f978f3076a42a481652f28f0d2c"
+    },
+    {
+      "id": "figure-5",
+      "caption_sha256": "21efad7e9accc5ddbc1f4ec1def3a0ba8ff9b3421abae504e5932aef10c5a50f",
+      "source_page": 11,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        653.14
+      ],
+      "pixels": [
+        917,
+        978
+      ],
+      "bytes": 166356,
+      "sha256": "81bd10b64ab95e5993eecaf8f9987a33c07fcd51bea80ba1a37459d96de95fd7"
+    },
+    {
+      "id": "figure-6",
+      "caption_sha256": "e4a94eab9882c8b5a7f35b260eeb06745364f311d55f8cf060044cc6ed1d332b",
+      "source_page": 12,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        700.93
+      ],
+      "pixels": [
+        917,
+        1054
+      ],
+      "bytes": 82048,
+      "sha256": "e691243a1abf737019ba1b0b24de89ff2b6b8686957edd170e104426e887e07b"
+    },
+    {
+      "id": "figure-s1",
+      "caption_sha256": "a1a21ebed0d170f52d86672f2ef4dba9b816cf244c7be4f6c585a2aa957e253d",
+      "source_page": 22,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        418.88
+      ],
+      "pixels": [
+        917,
+        603
+      ],
+      "bytes": 34538,
+      "sha256": "028ae9625acd3997e39300a8a2d8289e0036f0e1687874ef3d26074d084495df"
+    },
+    {
+      "id": "figure-s2",
+      "caption_sha256": "f93b2fe00d704450e890ea19fe68ac2f8a6cc49139f8fe7dd658e9a4655aa16a",
+      "source_page": 23,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        260.71
+      ],
+      "pixels": [
+        917,
+        350
+      ],
+      "bytes": 27970,
+      "sha256": "77d037c243980aab9d8c37ad7a1c2dca12be8b1f9f05f766eb90dc65527df0c8"
+    },
+    {
+      "id": "figure-s3",
+      "caption_sha256": "89923e8197b6e6033535834e125c3f946c6c27d751289b181715abe0469101f1",
+      "source_page": 24,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        295.07
+      ],
+      "pixels": [
+        917,
+        405
+      ],
+      "bytes": 13938,
+      "sha256": "b115313c2f22c1426bb7fe428467fefbec3f6ed776d5e12521d0b2a8016e7a2c"
+    },
+    {
+      "id": "figure-s4",
+      "caption_sha256": "1dc365510e3d1ae55ac6141657651ca99c09f5ee43167471cd10af7bba995894",
+      "source_page": 25,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        429.71
+      ],
+      "pixels": [
+        917,
+        620
+      ],
+      "bytes": 107062,
+      "sha256": "b936951261b63e7ad64021cf429b38392009d15e1f67a6aa0c9c220c551801db"
+    },
+    {
+      "id": "figure-s5",
+      "caption_sha256": "b9b6e0c9694ccb2196db93e0aa4f9b317aa8b552071e80ba8686db561768769c",
+      "source_page": 26,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        633.64
+      ],
+      "pixels": [
+        917,
+        946
+      ],
+      "bytes": 90840,
+      "sha256": "ddbc17eecbf701aa5159c5b3912e67f8b67631dbada8b8ba1f0a9284502a1fcd"
+    },
+    {
+      "id": "figure-s6",
+      "caption_sha256": "b250dbbb07ad1c50985400b90dfd54b25bcdd938cd2d11a84352fcf726c3024a",
+      "source_page": 27,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        389.12
+      ],
+      "pixels": [
+        917,
+        555
+      ],
+      "bytes": 47402,
+      "sha256": "3ed1851d1a37342899927e2ffdebf34ac0eaa84a4c4af42e7572f22bfe6390af"
+    },
+    {
+      "id": "figure-s7",
+      "caption_sha256": "bb3e22f5430686a4499565ee51f82da69bc5cb67ae01770c99dab5eabc645e2b",
+      "source_page": 28,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        296.54
+      ],
+      "pixels": [
+        917,
+        407
+      ],
+      "bytes": 36332,
+      "sha256": "3ee367bb920b4511551afa78832f16816ffbe986a265fe444d993aba9bfbb71f"
+    },
+    {
+      "id": "figure-s8",
+      "caption_sha256": "e76325d87818676d358f7fed7f498293150d5c34ac329f41cea2a60ec178c848",
+      "source_page": 28,
+      "clip": [
+        18.09,
+        39.15,
+        584.9,
+        720.35
+      ],
+      "pixels": [
+        908,
+        1091
+      ],
+      "bytes": 52032,
+      "sha256": "4debe7cb7dbf006e3aa88afcc1cfd8ef0513d1e5e34f12c42148edb88d3e9d6a"
+    },
+    {
+      "id": "figure-s9",
+      "caption_sha256": "e8dc9fe1156805b16743e634f1f3eb70fd25ea7d4ebdf3158520c13992b39cff",
+      "source_page": 30,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        237.07
+      ],
+      "pixels": [
+        917,
+        312
+      ],
+      "bytes": 15400,
+      "sha256": "a563fb97b428854e1cb38d37ae3beb73991a96c9ca0da5ab0b5993c2311501cc"
+    },
+    {
+      "id": "figure-s10",
+      "caption_sha256": "789bae1a9582928137ea3851c57650bbdf2d176fa0179dc91196b6fae974dd39",
+      "source_page": 31,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        274.66
+      ],
+      "pixels": [
+        917,
+        372
+      ],
+      "bytes": 20532,
+      "sha256": "a5a397e90558cde2fdc635ab3eb923fdb5f74c6359e98e75c075c59714252d20"
+    },
+    {
+      "id": "figure-s11",
+      "caption_sha256": "808f99054b3c84ee6c4d5c6b63a208be1636663c3a35e859e92e0a9f939e6822",
+      "source_page": 32,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        421.1
+      ],
+      "pixels": [
+        917,
+        606
+      ],
+      "bytes": 28172,
+      "sha256": "59d3abfadafe8190dfdf5d0ee60a6cb3ac34a13d744a8cb78f15c6519a1fc63c"
+    },
+    {
+      "id": "figure-s12",
+      "caption_sha256": "86b8b911047111ea002f61e4945955128fb6d6471200a8ea6877aac03bf5a493",
+      "source_page": 33,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        419.34
+      ],
+      "pixels": [
+        917,
+        603
+      ],
+      "bytes": 27438,
+      "sha256": "47fe47d61f4b8b0e01b2c3f07329a1d85d9be917be92708ba5a7861430ad43b5"
+    },
+    {
+      "id": "figure-s13",
+      "caption_sha256": "8ec18f0c45fd90db441545a69d22bf8fbda17aa9715d37d02350d7f25e56aa2f",
+      "source_page": 34,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        254.93
+      ],
+      "pixels": [
+        917,
+        340
+      ],
+      "bytes": 13418,
+      "sha256": "6c10d80684fda161905f7b4f10f3bc4a6d32ed19c2a55fcf2a12fc1728490ab4"
+    },
+    {
+      "id": "figure-s14",
+      "caption_sha256": "07191315d0d6cd01c6c887489c92367fb858ebf7353eff45a804440b6754cc88",
+      "source_page": 35,
+      "clip": [
+        15.07,
+        43.06,
+        587.91,
+        301.59
+      ],
+      "pixels": [
+        917,
+        415
+      ],
+      "bytes": 16592,
+      "sha256": "c01bfe9dcee02749dfd5e68e8b4c2946bca73429ae7b92fef2a60c1f25475a11"
+    }
+  ],
+  "kept_text_sha256": "f7c2171758dd41ca83b2fb30fac8c35662239a478eb446bfdc7db6dd6a0ee18d",
+  "manifest_source_fragments_sha256": "e7de958d9ea3f196d17f0cabc7f752f8989bacc58e959ebe6d32cf289c0e2826",
+  "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
+  "passed": true,
+  "strict_layout_parser": "v082-final-16",
+  "formula_blocks_detected": 11,
+  "formula_blocks_missing": 0,
+  "formula_samples": [
+    "Dice c = 2 ∑ y c ̂ yc ∑ y c + ∑ ̂ yc",
+    "H = −",
+    "L BCE = 1",
+    "L Dice = 1 − 1 C",
+    "L model = L Dice + 0:5 ∗ L BCE",
+    "c = 1",
+    "i = 1",
+    "σ = p p(1 − p) √",
+    "∑",
+    "∑ C",
+    "∑ N"
+  ],
+  "cross_column_body_merges": 4,
+  "cross_column_caption_merges": 0,
+  "source_chars": 60432,
+  "expected_reference_count": 55,
+  "expected_main_figures": 0,
+  "strict_errors": [],
+  "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
+  "source_outline_entries": 37,
+  "figure_titles_corrected_from_pdf_toc": 0,
+  "captions_trimmed": 2,
+  "caption_panel_evidence_blocks": 31,
+  "reference_repair_applied": true,
+  "titles_extended_from_caption": 0,
+  "uppercase_panel_evidence_blocks": 24,
+  "titles_completed_from_caption": 20,
+  "tables_reconstructed": 1,
+  "table_image_fallbacks": 0,
+  "cross_page_captions_rebuilt": 1,
+  "continuation_blocks_missing": [],
+  "cross_page_captions_rebuilt_by_title_lookup": [
+    "figure-3"
+  ],
+  "authors_extracted": 21,
+  "affiliations_extracted": 6,
+  "publication_timeline_extracted": true,
+  "group_authors_extracted": [],
+  "body_reconstruction": {
+    "version": "v082-body-reconstruction-5",
+    "body_font_size": 8.468,
+    "paragraphs": 84,
+    "source_chars": 60432,
+    "candidate_source_chars": 60417,
+    "accepted_source_chars": 60417,
+    "page_candidate_chars": {
+      "2": 3504,
+      "3": 4455,
+      "5": 6878,
+      "6": 468,
+      "8": 5930,
+      "9": 361,
+      "10": 6376,
+      "13": 6304,
+      "14": 335,
+      "17": 4220,
+      "18": 4970,
+      "19": 6243,
+      "20": 6321,
+      "21": 4052
+    },
+    "page_source_chars": {
+      "2": 3504,
+      "3": 4455,
+      "5": 6878,
+      "6": 468,
+      "8": 5930,
+      "9": 361,
+      "10": 6376,
+      "13": 6304,
+      "14": 335,
+      "17": 4220,
+      "18": 4970,
+      "19": 6243,
+      "20": 6321,
+      "21": 4052
+    },
+    "page_paragraphs": {
+      "2": 7,
+      "3": 6,
+      "5": 10,
+      "6": 2,
+      "8": 9,
+      "9": 2,
+      "10": 12,
+      "13": 5,
+      "14": 1,
+      "17": 5,
+      "18": 15,
+      "19": 6,
+      "20": 5,
+      "21": 16
+    },
+    "page_coverage": {
+      "2": 1.0,
+      "3": 1.0,
+      "5": 1.0,
+      "6": 1.0,
+      "8": 1.0,
+      "9": 1.0,
+      "10": 1.0,
+      "13": 1.0,
+      "14": 1.0,
+      "17": 1.0,
+      "18": 1.0,
+      "19": 1.0,
+      "20": 1.0,
+      "21": 1.0
+    },
+    "low_coverage_pages": [],
+    "extended_data_start_page": null,
+    "sections": [
+      "Graphical abstract",
+      "Abstract",
+      "Introduction",
+      "GigaTIME generates a virtual population of multiplex immunofluorescence",
+      "GigaTIME translates whole-slide H&E images to mIF",
+      "Virtual population enables large-scale discovery of protein-biomarker associations",
+      "Virtual population enables large-scale discovery on pathological stages and patient stratification",
+      "Independent validation using a virtual population from TCGA",
+      "Virtual population uncovers interesting spatial and combinatorial protein activation patterns",
+      "Discussion",
+      "Limitations of the study",
+      "Details of acquiring paired training and testing dataset for GigaTIME",
+      "Details of registration and preprocessing on acquired mIF images",
+      "Details of training GigaTIME as cross-modal translator model",
+      "Details of baseline comparisons",
+      "Details of metrics to evaluate the translation performance",
+      "Details of Providence data for generating virtual population",
+      "Details of generating virtual population data",
+      "Details of biomarker discovery using virtual population",
+      "Details of pathological staging and survival analysis using virtual population",
+      "Details of the TCGA-based virtual population",
+      "Details of the combinatorial analysis",
+      "Details of the spatially informed metrics",
+      "Quantification and statistical analysis",
+      "Additional resources"
+    ]
+  },
+  "fallback_authors_extracted": 21,
+  "fallback_affiliations_extracted": 0,
+  "titles_recovered_v16": 0,
+  "panel_evidence_recovered_v16": 2,
+  "layout_reference_repair_applied": true
+}

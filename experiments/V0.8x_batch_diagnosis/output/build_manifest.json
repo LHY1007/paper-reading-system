@@ -1,0 +1,17 @@
+{
+  "experiment": "same batch content under V0.8.0 and V0.8.1 adapters",
+  "outputs": [
+    {
+      "version": "0.8.0",
+      "source": "04_V0.8.2_Valanarasu_等_-_2026_-_Multimodal_AI_generates_virtual_population_for_tumor_microenvironment_modeling.html",
+      "output": "experiments/V0.8x_batch_diagnosis/output/V0.8.0_EXPERIMENT_Valanarasu_batch_content.html",
+      "bytes": 5572147
+    },
+    {
+      "version": "0.8.1",
+      "source": "04_V0.8.2_Valanarasu_等_-_2026_-_Multimodal_AI_generates_virtual_population_for_tumor_microenvironment_modeling.html",
+      "output": "experiments/V0.8x_batch_diagnosis/output/V0.8.1_EXPERIMENT_Valanarasu_batch_content.html",
+      "bytes": 5572376
+    }
+  ]
+}

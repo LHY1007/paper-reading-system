@@ -1,0 +1,62 @@
+name: Probe V0.8.2 final source inputs
+
+on:
+  push:
+    branches: [v0.8x-batch-diagnosis]
+    paths:
+      - ".github/workflows/probe_v082_final_sources.yml"
+      - "config/v082_paper_sources.json"
+      - "tools/download_v082_sources.py"
+      - "tools/download_v082_release_sources.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  source-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install source-audit dependencies
+        run: python -m pip install --disable-pip-version-check requests beautifulsoup4 PyMuPDF
+      - name: Locate canonical CANVAS input
+        shell: bash
+        run: |
+          set -euo pipefail
+          CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
+          test -n "$CANVAS"
+          printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_source_paths
+      - name: Audit CANVAS input and validate all non-CANVAS PDFs
+        shell: bash
+        run: |
+          set -euo pipefail
+          source /tmp/v082_source_paths
+          mkdir -p .build/v082/pdfs final/V0.8.2/reports
+          python tools/download_v082_release_sources.py \
+            --registry config/v082_paper_sources.json \
+            --canonical-html "$CANVAS_ORIGINAL" \
+            --output-dir .build/v082/pdfs \
+            --report final/V0.8.2/reports/SOURCE_DOWNLOAD.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: v082-final-source-probe
+          path: final/V0.8.2/reports/SOURCE_DOWNLOAD.json
+          retention-days: 14
+      - name: Record reproducible source report
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add final/V0.8.2/reports/SOURCE_DOWNLOAD.json
+          if git diff --cached --quiet; then
+            echo "Source report already current"
+          else
+            git commit -m "Record V0.8.2 source input audit"
+            git push origin HEAD:v0.8x-batch-diagnosis
+          fi

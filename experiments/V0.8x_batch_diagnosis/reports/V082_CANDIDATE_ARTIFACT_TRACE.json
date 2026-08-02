@@ -1,0 +1,767 @@
+{
+  "branch": "origin/v0.8.2-candidate",
+  "commits": [
+    {
+      "sha": "1b187b169d7d4370f567b2fd5920cd9d7b769588",
+      "date": "2026-07-28T02:07:24+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add content provenance and translation-lock contract"
+    },
+    {
+      "sha": "239faf660f737f92de803e9479614d6e69ac6c82",
+      "date": "2026-07-28T02:04:57+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add sequential 17-paper QA manifest"
+    },
+    {
+      "sha": "b67e4cfa8f21caab0bff2777226f4333d3808c52",
+      "date": "2026-07-28T02:04:19+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 migrated reader contract validator"
+    },
+    {
+      "sha": "b5fa46a579453d638f37148dad4c0f186d1fd865",
+      "date": "2026-07-28T02:03:56+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add non-parallel sequential batch gate"
+    },
+    {
+      "sha": "e312180b47d0d5c22a95053b8681775446c346a8",
+      "date": "2026-07-28T02:03:41+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add strict sequential batch generation contract"
+    },
+    {
+      "sha": "b0e07ec9d337b309122977e3397107592ecddd98",
+      "date": "2026-07-28T02:02:21+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Run active V0.8.2 build workflow"
+    },
+    {
+      "sha": "36e0f84a40f0e8e43a55950314621f6ea1c80530",
+      "date": "2026-07-28T02:00:47+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Rebuild V0.8.2 candidate with active workflow"
+    },
+    {
+      "sha": "c2efb84c635fb8c43bddcf3d88cc651a54955515",
+      "date": "2026-07-28T01:59:12+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Trigger active V0.8.2 build and validation workflow"
+    },
+    {
+      "sha": "82e1af8bfe93769dbe9b4a6cc736fa3353f92930",
+      "date": "2026-07-28T01:58:46+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Extend active release workflow to build and validate V0.8.2"
+    },
+    {
+      "sha": "f279555215dedaf4dd9a282676b555b2af569fa0",
+      "date": "2026-07-28T01:56:36+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Trigger V0.8.2 candidate build after workflow registration"
+    },
+    {
+      "sha": "670c73ea7f7dc32920e8e0ee39aa8108e4fcbcfb",
+      "date": "2026-07-28T01:43:14+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Fix V0.8.2 patch chunk count"
+    },
+    {
+      "sha": "da26c107b0204ad60e21a700a2309c8cbe26bb7b",
+      "date": "2026-07-28T01:42:54+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 patch chunk 09"
+    },
+    {
+      "sha": "001983c9fde38eddb86e4edd4906db9fb77709e6",
+      "date": "2026-07-28T01:40:36+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 patch chunk 08"
+    },
+    {
+      "sha": "08e806a611b18d6576af6cad3c6a0e4f2435324a",
+      "date": "2026-07-28T01:37:19+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 patch chunk 07"
+    },
+    {
+      "sha": "9c0fdacf97121563c2a4e0a12ac36c6051c6496a",
+      "date": "2026-07-28T01:31:07+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Trigger V0.8.2 candidate build"
+    },
+    {
+      "sha": "cf0307818a35dbb111de3eea2d59ca843bee744a",
+      "date": "2026-07-28T01:30:59+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 candidate release guide"
+    },
+    {
+      "sha": "8ef80337510c42ac9d0f038779fbb305dbd6cb87",
+      "date": "2026-07-28T01:30:42+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add PDF layout-aware citation classifier"
+    },
+    {
+      "sha": "07945a2fe30063c0c0b4f7296fccd064febc018d",
+      "date": "2026-07-28T01:30:16+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 citation extraction contract"
+    },
+    {
+      "sha": "4b9dfd43100128137388d9fb0c0cae357dc81f2b",
+      "date": "2026-07-28T01:30:04+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 changelog"
+    },
+    {
+      "sha": "26b3fb93d50432dc86e44f31a809c21314531462",
+      "date": "2026-07-28T01:29:46+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 candidate build workflow"
+    },
+    {
+      "sha": "161c1d072792d82e86684e2f6c007e654b4cbbff",
+      "date": "2026-07-28T01:29:26+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 candidate validator"
+    },
+    {
+      "sha": "3f8f7239588620377dd4e06ad35d4fd3d527cbb2",
+      "date": "2026-07-28T01:29:07+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add deterministic V0.8.2 candidate builder"
+    },
+    {
+      "sha": "775f1daab17e48d186af871fcedd8806be2cd9bb",
+      "date": "2026-07-28T01:24:34+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 patch chunk 06"
+    },
+    {
+      "sha": "b0f097736c266020c69361082d4eafb6112a8d2f",
+      "date": "2026-07-28T01:21:22+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 patch chunk 05"
+    },
+    {
+      "sha": "fd6a8f9c131f105b81d983a661854a7ce1b5ca74",
+      "date": "2026-07-28T01:18:01+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 patch chunk 04"
+    },
+    {
+      "sha": "6b560dd51d6bf33dd2ed8a35054fd705daeb2240",
+      "date": "2026-07-28T01:14:53+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 patch chunk 03"
+    },
+    {
+      "sha": "2ace7b790adf2209ed289192a02cd0b406a1e976",
+      "date": "2026-07-28T01:10:45+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 patch chunk 02"
+    },
+    {
+      "sha": "4baec410978d4aa7d1f18d75a8854aeffedcdfed",
+      "date": "2026-07-28T01:07:15+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 patch chunk 01"
+    },
+    {
+      "sha": "feb65d9a57241bb40783b71aaf8b0d100737aa31",
+      "date": "2026-07-28T01:03:58+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.2 patch chunk 00"
+    },
+    {
+      "sha": "7569d52b68288027213bc70154b3deccbc329547",
+      "date": "2026-07-27T23:16:10+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 static content-lock QA report"
+    },
+    {
+      "sha": "b1c9d557822778b175b4fe5ea5cb73282e9403b9",
+      "date": "2026-07-27T15:13:17Z",
+      "author": "github-actions[bot]",
+      "subject": "Build V0.8.1 CANVAS candidate HTML"
+    },
+    {
+      "sha": "0ba9498e7e7ac32a5afe66c2fabced4cb5ce8f80",
+      "date": "2026-07-27T23:13:03+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Trigger V0.8.1 candidate build"
+    },
+    {
+      "sha": "e4cc68c8b704675339a252e9975bf3d2c63632f2",
+      "date": "2026-07-27T23:12:54+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 candidate checksum"
+    },
+    {
+      "sha": "46af8f89f3ea5e774dd2bb193c88abe334e7a6bd",
+      "date": "2026-07-27T23:12:41+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 candidate release guide"
+    },
+    {
+      "sha": "36c24397b25eddefa48a1b45ac4642284b0b190d",
+      "date": "2026-07-27T23:12:16+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add locked V0.8.1 candidate build workflow"
+    },
+    {
+      "sha": "bd83acf635223a99d64a4534ed5467acedd125a8",
+      "date": "2026-07-27T23:10:37+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 browser interaction QA report"
+    },
+    {
+      "sha": "1b7a8bdd9d7b65dfcfac7b52f9186ceaf9d2163a",
+      "date": "2026-07-27T23:10:22+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 final QA summary"
+    },
+    {
+      "sha": "14e36ddbfd48a7ae3129dea893b1278c5863f470",
+      "date": "2026-07-27T23:10:02+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 engineering notes"
+    },
+    {
+      "sha": "6628f0887d4f16851ec9fc826e46c24f5d64e63c",
+      "date": "2026-07-27T23:09:46+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 figure-study generation contract"
+    },
+    {
+      "sha": "a1bf6e3a8102485c91eccd44df5aed71b2f1c4cc",
+      "date": "2026-07-27T23:09:27+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 candidate changelog"
+    },
+    {
+      "sha": "af7e45b4975672387de7366b3a64e9d956be6d35",
+      "date": "2026-07-27T23:08:59+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 content and interaction contract validator"
+    },
+    {
+      "sha": "4e166598ececfde6f9751cc3e912eabce54e58ae",
+      "date": "2026-07-27T23:08:39+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add deterministic V0.8.1 candidate builder"
+    },
+    {
+      "sha": "ce16f491b7cfde978c2c8ae5bbc7d737fba450f8",
+      "date": "2026-07-27T23:07:16+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 patch chunk 06"
+    },
+    {
+      "sha": "64d4fd56c3237b910bdb47e6323ff7146607639c",
+      "date": "2026-07-27T23:06:59+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 patch chunk 05"
+    },
+    {
+      "sha": "fb8b7ed360c6d1971f7bacac79b5a60b713dda3a",
+      "date": "2026-07-27T23:02:24+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 patch chunk 04"
+    },
+    {
+      "sha": "6baf647c3dc0912931e5f160614fe4a0e33d9f19",
+      "date": "2026-07-27T23:00:25+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 patch chunk 03"
+    },
+    {
+      "sha": "713d10d24d09d57a93544e03747b3597e270dcb3",
+      "date": "2026-07-27T22:58:19+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 patch chunk 02"
+    },
+    {
+      "sha": "5c829da58f1e73dc93c7d0730c9284392ca066da",
+      "date": "2026-07-27T22:56:04+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 patch chunk 01"
+    },
+    {
+      "sha": "72bf33c0e630b8b4a94b1a3467df33b9294974ae",
+      "date": "2026-07-27T22:54:02+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.8.1 patch chunk 00"
+    },
+    {
+      "sha": "d3ac5256378e9163db326a48e5b3c0ef3be53d73",
+      "date": "2026-07-27T14:51:07Z",
+      "author": "github-actions[bot]",
+      "subject": "Publish V0.8 CANVAS formal release"
+    },
+    {
+      "sha": "396117328bccfebdb2a2624eefda053fba42c9af",
+      "date": "2026-07-27T22:50:52+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Trigger V0.8 formal release build"
+    },
+    {
+      "sha": "469a2d3d19d32ec5cb6a9420ba3b18954ebf1f3f",
+      "date": "2026-07-27T22:50:38+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Allow explicit V0.8 formal build trigger"
+    },
+    {
+      "sha": "686897bc5f14ebde80d333284cf87fe204706191",
+      "date": "2026-07-27T22:50:13+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add locked V0.8 formal release workflow"
+    },
+    {
+      "sha": "b1a8b0bce779f3a4f238b412f6f79ff591b099e6",
+      "date": "2026-07-27T22:49:50+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add deterministic V0.8 patch from locked V0.7.8"
+    },
+    {
+      "sha": "0caa351bd5bb47e7c863cde8d6ae95f3cef62535",
+      "date": "2026-07-27T22:47:43+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Support compressed deterministic patch manifests"
+    },
+    {
+      "sha": "dc057e83ec0dfd24e3548e200f254e7ddb984ac8",
+      "date": "2026-07-27T22:46:35+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add deterministic locked HTML patch builder"
+    },
+    {
+      "sha": "1ab331e3b0d7c67021e0db32ebb547b866bc20a0",
+      "date": "2026-07-27T21:40:05+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Keep main release policy unchanged"
+    },
+    {
+      "sha": "8bfff897b855f70595c4ce0347622f84e55a3dcd",
+      "date": "2026-07-27T21:38:32+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Restore main release workflow after candidate setup"
+    },
+    {
+      "sha": "112c098b5da2e606dff46d9bccc7062119fcfa6e",
+      "date": "2026-07-27T21:36:34+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add draft PR candidate build workflow"
+    },
+    {
+      "sha": "46ba4e109c0314c42ff468834e64bb61e0a6fb40",
+      "date": "2026-07-27T21:34:46+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Request locked V0.8 candidate branch build"
+    },
+    {
+      "sha": "9c0b7a2fbd891ba7bd0ee9551f4320405f882c09",
+      "date": "2026-07-27T21:34:30+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Support locked candidate builds in release workflow"
+    },
+    {
+      "sha": "a1952d43d849d1ee4f0fd94dcb5afe0e97a6d8bd",
+      "date": "2026-07-27T21:32:25+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Trigger V0.8 candidate branch build"
+    },
+    {
+      "sha": "7c0f15e795ee67be8b01d107379b712f90f45edb",
+      "date": "2026-07-27T21:32:08+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Run V0.8 candidate builder from default branch trigger"
+    },
+    {
+      "sha": "d1ac1ebcde0cd41354b91734c18e8d32e2fa92ed",
+      "date": "2026-07-27T21:29:59+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add candidate branch build workflow"
+    },
+    {
+      "sha": "0746486495ca0205c7caaa59cd1dded7f68c2db6",
+      "date": "2026-07-27T19:46:27+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Remove temporary remote upload manifest after publication"
+    },
+    {
+      "sha": "35418cfda56021086acbb129f1daeae40903f1bd",
+      "date": "2026-07-27T19:46:17+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Remove obsolete partial upload chunk after verified publication"
+    },
+    {
+      "sha": "b94297ddbbefbdac3e1e0895e6e97f5e4f65b1ef",
+      "date": "2026-07-27T11:45:19Z",
+      "author": "github-actions[bot]",
+      "subject": "Publish V0.7.8 CANVAS HTML"
+    },
+    {
+      "sha": "8d1be0f96c70bad23047895ece554abc2a3349c6",
+      "date": "2026-07-27T19:45:10+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Trigger verified publication of V0.7.8 CANVAS HTML"
+    },
+    {
+      "sha": "8fd5e8debe5da2d820694e5539ccf621733e9897",
+      "date": "2026-07-27T19:44:58+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add verified remote asset publishing workflow"
+    },
+    {
+      "sha": "c63f8630a9c3a90700ddd77431b75aad47471d51",
+      "date": "2026-07-27T19:40:00+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.7.8 compressed source template chunk 000"
+    },
+    {
+      "sha": "9d6b34e5f0ee66c2db85255b2276c4fc04c2b75b",
+      "date": "2026-07-27T19:34:09+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add release validation workflow"
+    },
+    {
+      "sha": "69a862df2a0fcd045023e42e6b634cfe9b869050",
+      "date": "2026-07-27T19:33:56+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.7.8 artifact checksum"
+    },
+    {
+      "sha": "93df6f900b599dfbd92e337bd800a1d4f566050f",
+      "date": "2026-07-27T19:33:44+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.7.8 release documentation"
+    },
+    {
+      "sha": "331db95920e3b77c83a36947e4f3ebc56d0c0486",
+      "date": "2026-07-27T19:32:32+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.7.8 artifact manifest"
+    },
+    {
+      "sha": "81f617632e2981cce6810924478e0b306b89004c",
+      "date": "2026-07-27T19:32:12+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.7.8 browser QA report"
+    },
+    {
+      "sha": "472f80ac9684f9a49a5d547839b1c79fc69c59d8",
+      "date": "2026-07-27T19:31:58+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.7.8 static QA report"
+    },
+    {
+      "sha": "eaebb982f3256e5ffcae14002a2fca21f744def1",
+      "date": "2026-07-27T19:31:42+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.7.8 figure-study contract validator"
+    },
+    {
+      "sha": "62057cb3a30d60482df051388a114522490be849",
+      "date": "2026-07-27T19:31:20+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add mandatory figure-study generation prompt"
+    },
+    {
+      "sha": "de93022cb714d80826db3e0eeb762c2d30462518",
+      "date": "2026-07-27T19:31:02+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add locked maintenance contract for V0.7.8"
+    },
+    {
+      "sha": "93570e0bd01a540b881d20c5a3f5e4664d9dd1e5",
+      "date": "2026-07-27T19:30:44+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Add V0.7.8 changelog"
+    },
+    {
+      "sha": "d6518bf65b9cf26e47e94f17f0de9a965ea91a33",
+      "date": "2026-07-27T19:30:26+08:00",
+      "author": "cynthia0122109-cyber",
+      "subject": "Document V0.7.8 release and immutable version rules"
+    },
+    {
+      "sha": "df9ee05ec486d00f1d045bcfbe33f1ad68b6afdf",
+      "date": "2026-07-27T00:05:43+08:00",
+      "author": "Hanyu",
+      "subject": "Initial commit"
+    }
+  ],
+  "workflows": [
+    {
+      "path": ".github/workflows/build_v080_candidate.yml",
+      "content": "name: Build V0.8 candidate\n\non:\n  push:\n    branches:\n      - main\n    paths:\n      - \"releases/V0.8-candidate/build_trigger_main.txt\"\n  workflow_dispatch:\n\npermissions:\n  contents: write\n\njobs:\n  build-and-review:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          ref: v0.8-candidate\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.12\"\n      - name: Install validator dependencies\n        run: python -m pip install --quiet beautifulsoup4\n      - name: Build candidate from locked V0.7.8 body\n        run: python releases/V0.8-candidate/build.py\n      - name: Validate content and function contract\n        run: |\n          python releases/V0.8-candidate/validators/validate.py \\\n            published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html \\\n            published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html\n      - name: Verify checksum\n        run: sha256sum --check releases/V0.8-candidate/SHA256SUMS.txt\n      - name: Commit candidate artifact to candidate branch\n        run: |\n          git config user.name \"github-actions[bot]\"\n          git config user.email \"41898282+github-actions[bot]@users.noreply.github.com\"\n          git add published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html\n          if git diff --cached --quiet; then\n            echo \"Candidate artifact already current\"\n          else\n            git commit -m \"Build V0.8 CANVAS candidate HTML\"\n            git push origin HEAD:v0.8-candidate\n          fi\n"
+    },
+    {
+      "path": ".github/workflows/build_v080_formal.yml",
+      "content": "name: Build V0.8 formal release\n\non:\n  push:\n    branches: [main]\n    paths:\n      - \"releases/V0.8/source/from_V0.7.8.patch.json.gz.b64\"\n      - \"releases/V0.8/build_trigger.txt\"\n      - \"tools/apply_line_patch.py\"\n  workflow_dispatch:\n\npermissions:\n  contents: write\n\njobs:\n  build:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.12\"\n      - name: Build locked V0.8 artifact\n        run: |\n          python tools/apply_line_patch.py \\\n            published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html \\\n            releases/V0.8/source/from_V0.7.8.patch.json.gz.b64 \\\n            published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html\n      - name: Verify release checksum\n        run: echo \"c02aad24689eefaed372decb3068f339a83d5c15fdf8b45f259c019418ceece2  published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html\" | sha256sum --check\n      - name: Commit formal artifact\n        run: |\n          git config user.name \"github-actions[bot]\"\n          git config user.email \"41898282+github-actions[bot]@users.noreply.github.com\"\n          git add published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html\n          if git diff --cached --quiet; then\n            echo \"V0.8 artifact already current\"\n          else\n            git commit -m \"Publish V0.8 CANVAS formal release\"\n            git push origin HEAD:main\n          fi\n"
+    },
+    {
+      "path": ".github/workflows/build_v081_candidate.yml",
+      "content": "name: Build V0.8.1 candidate\n\non:\n  push:\n    branches: [v0.8.1-candidate]\n    paths:\n      - \"releases/V0.8.1/build_trigger.txt\"\n      - \"releases/V0.8.1/build.py\"\n      - \"releases/V0.8.1/source/patch_chunks/**\"\n      - \"releases/V0.8.1/validators/validate.py\"\n  workflow_dispatch:\n\npermissions:\n  contents: write\n\njobs:\n  build-and-review:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          ref: v0.8.1-candidate\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.12\"\n      - name: Build candidate from locked V0.8\n        run: python releases/V0.8.1/build.py\n      - name: Validate candidate contract\n        run: |\n          python releases/V0.8.1/validators/validate.py \\\n            published/V0.8.1_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html \\\n            --sha256 6b5e13ae62361b2b10ac2d3abdbb51eda0188a102195b0384b037463cb3ab013\n      - name: Commit candidate artifact\n        run: |\n          git config user.name \"github-actions[bot]\"\n          git config user.email \"41898282+github-actions[bot]@users.noreply.github.com\"\n          git add published/V0.8.1_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html\n          if git diff --cached --quiet; then\n            echo \"Candidate artifact already current\"\n          else\n            git commit -m \"Build V0.8.1 CANVAS candidate HTML\"\n            git push origin HEAD:v0.8.1-candidate\n          fi\n"
+    },
+    {
+      "path": ".github/workflows/build_v082_candidate.yml",
+      "content": "name: Build V0.8.2 candidate\n\non:\n  push:\n    branches: [v0.8.2-candidate]\n    paths:\n      - \"releases/V0.8.2/build_trigger.txt\"\n      - \"releases/V0.8.2/build.py\"\n      - \"releases/V0.8.2/source/patch_chunks/**\"\n      - \"releases/V0.8.2/validators/validate.py\"\n      - \".github/workflows/build_v082_candidate.yml\"\n  workflow_dispatch:\n\npermissions:\n  contents: write\n\njobs:\n  build-and-review:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          ref: v0.8.2-candidate\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.12\"\n      - name: Build candidate from locked V0.8.1\n        run: python releases/V0.8.2/build.py\n      - name: Validate candidate contract\n        run: |\n          python releases/V0.8.2/validators/validate.py \\\n            published/V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html \\\n            --sha256 84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1\n      - name: Commit candidate artifact\n        run: |\n          git config user.name \"github-actions[bot]\"\n          git config user.email \"41898282+github-actions[bot]@users.noreply.github.com\"\n          git add published/V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html\n          if git diff --cached --quiet; then\n            echo \"Candidate artifact already current\"\n          else\n            git commit -m \"Build V0.8.2 CANVAS candidate HTML\"\n            git push origin HEAD:v0.8.2-candidate\n          fi\n"
+    },
+    {
+      "path": ".github/workflows/candidate_pr_build.yml",
+      "content": "name: Review and build candidate pull request\n\non:\n  pull_request:\n    branches:\n      - main\n    paths:\n      - \"releases/V0.8-candidate/**\"\n      - \"published/V0.8_CANVAS_*\"\n\npermissions:\n  contents: write\n  pull-requests: read\n\njobs:\n  build-v080:\n    if: github.head_ref == 'v0.8-candidate'\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          ref: ${{ github.event.pull_request.head.ref }}\n          fetch-depth: 0\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.12\"\n      - run: python -m pip install --quiet beautifulsoup4\n      - name: Build from locked V0.7.8\n        run: python releases/V0.8-candidate/build.py\n      - name: Validate content and interaction contract\n        run: |\n          python releases/V0.8-candidate/validators/validate.py \\\n            published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html \\\n            published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html\n          sha256sum --check releases/V0.8-candidate/SHA256SUMS.txt\n      - name: Commit generated candidate only to candidate branch\n        run: |\n          git config user.name \"github-actions[bot]\"\n          git config user.email \"41898282+github-actions[bot]@users.noreply.github.com\"\n          git add published/V0.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html\n          if git diff --cached --quiet; then\n            echo \"Candidate artifact already current\"\n          else\n            git commit -m \"Build V0.8 CANVAS candidate HTML\"\n            git push origin HEAD:${{ github.event.pull_request.head.ref }}\n          fi\n"
+    },
+    {
+      "path": ".github/workflows/publish_remote_asset.yml",
+      "content": "name: Publish remote release asset\n\non:\n  push:\n    paths:\n      - \"releases/**/source/remote_asset.json\"\n  workflow_dispatch:\n\npermissions:\n  contents: write\n\njobs:\n  publish:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.12\"\n      - name: Download and verify release asset\n        run: |\n          python - <<'PY'\n          import hashlib\n          import json\n          import pathlib\n          import urllib.request\n\n          manifests = sorted(pathlib.Path(\"releases\").glob(\"*/source/remote_asset.json\"))\n          if not manifests:\n              raise SystemExit(\"remote asset manifest missing\")\n          manifest_path = manifests[-1]\n          data = json.loads(manifest_path.read_text(\"utf-8\"))\n          target = pathlib.Path(data[\"target\"])\n          target.parent.mkdir(parents=True, exist_ok=True)\n          with urllib.request.urlopen(data[\"url\"], timeout=180) as response:\n              target.write_bytes(response.read())\n          digest = hashlib.sha256(target.read_bytes()).hexdigest()\n          if digest != data[\"sha256\"]:\n              raise SystemExit(f\"SHA256 mismatch: {digest}\")\n          print(f\"verified {target}: {digest}\")\n          PY\n      - name: Validate release contract\n        run: |\n          python releases/V0.7.8/validators/validate_figure_study.py published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html\n      - name: Commit published artifact\n        run: |\n          git config user.name \"github-actions[bot]\"\n          git config user.email \"41898282+github-actions[bot]@users.noreply.github.com\"\n          git add published/\n          if git diff --cached --quiet; then\n            echo \"Artifact already published\"\n          else\n            git commit -m \"Publish V0.7.8 CANVAS HTML\"\n            git push\n          fi\n"
+    },
+    {
+      "path": ".github/workflows/validate_release.yml",
+      "content": "name: Validate paper reader release\n\non:\n  push:\n    paths:\n      - \"published/**/*.html\"\n      - \"releases/**/validators/*.py\"\n      - \"releases/V0.8.2/build.py\"\n      - \"releases/V0.8.2/source/patch_chunks/**\"\n  pull_request:\n    paths:\n      - \"published/**/*.html\"\n      - \"releases/**/validators/*.py\"\n      - \"releases/V0.8.2/build.py\"\n      - \"releases/V0.8.2/source/patch_chunks/**\"\n\npermissions:\n  contents: write\n\njobs:\n  validate:\n    runs-on: ubuntu-latest\n    steps:\n      - uses: actions/checkout@v4\n        with:\n          ref: ${{ github.ref }}\n      - uses: actions/setup-python@v5\n        with:\n          python-version: \"3.12\"\n      - name: Build V0.8.2 candidate from locked V0.8.1\n        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/v0.8.2-candidate' && hashFiles('releases/V0.8.2/build.py') != '' }}\n        run: python releases/V0.8.2/build.py\n      - name: Validate V0.8.2 candidate contract\n        if: ${{ hashFiles('published/V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html') != '' }}\n        run: >-\n          python releases/V0.8.2/validators/validate.py\n          published/V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html\n          --sha256 84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1\n      - name: Validate V0.7.8 figure-study contract\n        if: ${{ hashFiles('published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html') != '' }}\n        run: >-\n          python releases/V0.7.8/validators/validate_figure_study.py\n          published/V0.7.8_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html\n      - name: Commit V0.8.2 candidate artifact\n        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/v0.8.2-candidate' }}\n        run: |\n          git config user.name \"github-actions[bot]\"\n          git config user.email \"41898282+github-actions[bot]@users.noreply.github.com\"\n          git add published/V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html\n          if git diff --cached --quiet; then\n            echo \"V0.8.2 candidate artifact already current\"\n          else\n            git commit -m \"Build V0.8.2 CANVAS candidate HTML\"\n            git push origin HEAD:v0.8.2-candidate\n          fi\n"
+    }
+  ],
+  "runs": [
+    {
+      "id": 30291972557,
+      "name": "Build V0.8.2 candidate",
+      "head_sha": "b0e07ec9d337b309122977e3397107592ecddd98",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-07-27T18:02:26Z",
+      "updated_at": "2026-07-27T18:02:41Z",
+      "run_number": 10,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30291972557",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30291972557/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30291971201,
+      "name": "Validate paper reader release",
+      "head_sha": "b0e07ec9d337b309122977e3397107592ecddd98",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-07-27T18:02:25Z",
+      "updated_at": "2026-07-27T18:02:40Z",
+      "run_number": 12,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30291971201",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30291971201/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30291851009,
+      "name": "Build V0.8.2 candidate",
+      "head_sha": "36e0f84a40f0e8e43a55950314621f6ea1c80530",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-07-27T18:00:50Z",
+      "updated_at": "2026-07-27T18:01:03Z",
+      "run_number": 9,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30291851009",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30291851009/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30291726890,
+      "name": "Validate paper reader release",
+      "head_sha": "c2efb84c635fb8c43bddcf3d88cc651a54955515",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-07-27T17:59:19Z",
+      "updated_at": "2026-07-27T17:59:36Z",
+      "run_number": 11,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30291726890",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30291726890/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30291722092,
+      "name": "Build V0.8.2 candidate",
+      "head_sha": "c2efb84c635fb8c43bddcf3d88cc651a54955515",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-07-27T17:59:15Z",
+      "updated_at": "2026-07-27T17:59:28Z",
+      "run_number": 8,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30291722092",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30291722092/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30291722086,
+      "name": "Validate paper reader release",
+      "head_sha": "c2efb84c635fb8c43bddcf3d88cc651a54955515",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-07-27T17:59:15Z",
+      "updated_at": "2026-07-27T17:59:29Z",
+      "run_number": 10,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30291722086",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30291722086/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30291694224,
+      "name": "Validate paper reader release",
+      "head_sha": "82e1af8bfe93769dbe9b4a6cc736fa3353f92930",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-07-27T17:58:52Z",
+      "updated_at": "2026-07-27T17:59:14Z",
+      "run_number": 9,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30291694224",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30291694224/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30291530774,
+      "name": "Validate paper reader release",
+      "head_sha": "f279555215dedaf4dd9a282676b555b2af569fa0",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-07-27T17:56:41Z",
+      "updated_at": "2026-07-27T17:56:54Z",
+      "run_number": 8,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30291530774",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30291530774/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30291528008,
+      "name": "Build V0.8.2 candidate",
+      "head_sha": "f279555215dedaf4dd9a282676b555b2af569fa0",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-07-27T17:56:39Z",
+      "updated_at": "2026-07-27T17:56:52Z",
+      "run_number": 7,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30291528008",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30291528008/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30290711067,
+      "name": "Validate paper reader release",
+      "head_sha": "670c73ea7f7dc32920e8e0ee39aa8108e4fcbcfb",
+      "event": "pull_request",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-07-27T17:46:00Z",
+      "updated_at": "2026-07-27T17:46:13Z",
+      "run_number": 7,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30290711067",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30290711067/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30290501801,
+      "name": "Build V0.8.2 candidate",
+      "head_sha": "670c73ea7f7dc32920e8e0ee39aa8108e4fcbcfb",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-07-27T17:43:17Z",
+      "updated_at": "2026-07-27T17:43:35Z",
+      "run_number": 6,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30290501801",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30290501801/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30290475559,
+      "name": "Build V0.8.2 candidate",
+      "head_sha": "da26c107b0204ad60e21a700a2309c8cbe26bb7b",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-07-27T17:42:57Z",
+      "updated_at": "2026-07-27T17:43:12Z",
+      "run_number": 5,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30290475559",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30290475559/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30290305872,
+      "name": "Build V0.8.2 candidate",
+      "head_sha": "001983c9fde38eddb86e4edd4906db9fb77709e6",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-07-27T17:40:39Z",
+      "updated_at": "2026-07-27T17:40:58Z",
+      "run_number": 4,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30290305872",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30290305872/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30290063185,
+      "name": "Build V0.8.2 candidate",
+      "head_sha": "08e806a611b18d6576af6cad3c6a0e4f2435324a",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-07-27T17:37:22Z",
+      "updated_at": "2026-07-27T17:37:44Z",
+      "run_number": 3,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30290063185",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30290063185/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30289596935,
+      "name": "Build V0.8.2 candidate",
+      "head_sha": "9c0fdacf97121563c2a4e0a12ac36c6051c6496a",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-07-27T17:31:10Z",
+      "updated_at": "2026-07-27T17:31:30Z",
+      "run_number": 2,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30289596935",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30289596935/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30289489222,
+      "name": "Build V0.8.2 candidate",
+      "head_sha": "26b3fb93d50432dc86e44f31a809c21314531462",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-07-27T17:29:48Z",
+      "updated_at": "2026-07-27T17:30:00Z",
+      "run_number": 1,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30289489222",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30289489222/artifacts",
+      "artifacts": []
+    },
+    {
+      "id": 30289466175,
+      "name": "Validate paper reader release",
+      "head_sha": "161c1d072792d82e86684e2f6c007e654b4cbbff",
+      "event": "push",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-07-27T17:29:29Z",
+      "updated_at": "2026-07-27T17:29:44Z",
+      "run_number": 6,
+      "html_url": "https://github.com/LHY1007/paper-reading-system/actions/runs/30289466175",
+      "artifacts_url": "https://api.github.com/repos/LHY1007/paper-reading-system/actions/runs/30289466175/artifacts",
+      "artifacts": []
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "version": "v082-reader-content-blueprint-1",
+  "basis": "00 V0.8.2 CANVAS reader",
+  "principle": "The fixed shell owns presentation and interaction. The paper manifest must contain reader-ready scientific content, not parser diagnostics or raw PDF fragments.",
+  "modules": [
+    {
+      "id": "paper_header",
+      "reader_question": "What paper am I reading and why is it relevant?",
+      "required_fields": [
+        "title_en", "title_zh", "authors", "affiliations", "journal", "publisher", "doi",
+        "article_type", "publication_timeline", "citation", "journal_scope", "field_positioning",
+        "correspondence", "article_url"
+      ],
+      "requirements": [
+        "title_zh is a fluent scientific Chinese translation rather than copied English",
+        "authors and affiliations are extracted as actual names and institutions",
+        "publication_timeline includes available received, revised, accepted, online and issue dates",
+        "citation contains volume, issue or article number, page range and PDF pages when available",
+        "journal_scope explains the journal in one factual sentence",
+        "field_positioning explains the paper's disciplinary position in one reader-facing sentence"
+      ],
+      "forbidden": [
+        "Authors listed in the source PDF", "slides", "Source PDF SHA256", "Extraction", "source-audited"
+      ]
+    },
+    {
+      "id": "one_page_overview",
+      "reader_question": "Can I understand the entire study before reading the body?",
+      "fixed_questions": [
+        "研究解决什么问题？", "核心数据是什么？", "模型或分析的输入与输出是什么？",
+        "主要生物学发现是什么？", "主要临床结果是什么？", "最重要的限制是什么？"
+      ],
+      "requirements": [
+        "each answer is a specific synthesis of this paper, normally 35-140 Chinese characters",
+        "core data names cohorts, sample sizes, modalities and paired or validation relationships",
+        "input-output states the analytical object, transformation and final output, not a copied Methods paragraph",
+        "biological finding and clinical result are distinct and include concrete findings",
+        "limitations state limitations reported or directly supported by the study design",
+        "method is a concise arrow-linked workflow of 5-9 stages",
+        "story is a one-paragraph conclusion explaining what the study establishes and what it does not"
+      ],
+      "evidence_priority": ["abstract", "study design figure", "results section", "discussion", "limitations"],
+      "forbidden_patterns": [
+        "https://doi.org/", "The source PDF contains", "extracted natural text blocks",
+        "Interpretation is limited", "Ethics statement", "Nuclei isolation", "Source PDF"
+      ]
+    },
+    {
+      "id": "section_map",
+      "reader_question": "Does the body follow the scientific argument rather than the PDF layout?",
+      "requirements": [
+        "retain genuine article section and subsection boundaries in source order",
+        "every English heading has an accurate Chinese heading",
+        "front-page title fragments, highlights bullets, author lines, running headers and figure labels are not sections",
+        "duplicate References headings are collapsed to one reference area",
+        "methods subsections remain available but do not replace the paper's results narrative"
+      ],
+      "forbidden_section_titles": [
+        "Front matter", "Article", "Authors", "Authors and affiliations", "Check for updates",
+        "Received", "Accepted", "Published online"
+      ]
+    },
+    {
+      "id": "bilingual_body",
+      "reader_question": "Can I read the original and translation paragraph by paragraph without losing context?",
+      "requirements": [
+        "one source paragraph is one bilingual unit unless a publisher physically splits it across columns or pages",
+        "English is source-faithful and preserves citations and figure references",
+        "Chinese is a complete contextual translation with terminology kept consistent across the paper",
+        "sentences are not cut mid-sentence and unrelated paragraphs are not merged",
+        "terms are highlighted only after the translation is stable"
+      ],
+      "forbidden": ["identity translation", "raw page header", "axis labels as prose", "caption text merged into body"]
+    },
+    {
+      "id": "figure_card",
+      "reader_question": "Can I tell what a figure proves before opening it?",
+      "required_fields": [
+        "id", "title_en", "title_zh", "intro", "image_src", "caption_en", "caption_zh", "study"
+      ],
+      "requirements": [
+        "title includes the figure number and complete descriptive title",
+        "intro is a 1-2 sentence reader-facing description of the figure's role in the paper",
+        "image contains the complete source figure at readable resolution",
+        "caption_en is the complete source legend without body-paragraph contamination",
+        "caption_zh is a full Chinese translation",
+        "study.overview explains how to read the whole figure and its relation to adjacent figures",
+        "study.panels contains every labeled panel or logical block with a specific title and explanation",
+        "panel explanations describe axes, objects, comparisons, results and connections without inventing evidence",
+        "study.conclusion states the figure-level conclusion and the next logical step"
+      ],
+      "forbidden_titles": ["Fig.", "Figure", "Figure 1.", "Graphical abstract"],
+      "forbidden": ["caption copied as figure study", "generic boundary disclaimer as explanation"]
+    },
+    {
+      "id": "table_card",
+      "reader_question": "Can I inspect a table as structured data rather than as an unreadable screenshot?",
+      "requirements": [
+        "source tables are emitted with kind=table",
+        "headers and rows preserve the source structure",
+        "title and caption are bilingual",
+        "an image fallback is allowed only when merged cells cannot be reconstructed, and must be explicitly audited"
+      ],
+      "forbidden": ["every table converted to kind=figure", "empty headers", "OCR-like duplicated columns"]
+    },
+    {
+      "id": "terms",
+      "reader_question": "Can an unfamiliar reader understand the paper's recurring terminology?",
+      "requirements": [
+        "include recurring domain, method and statistical terms that materially affect interpretation",
+        "definitions explain the term in the context of this paper",
+        "aliases cover source spelling and common abbreviations",
+        "do not highlight ordinary words or entire acronym expansions"
+      ]
+    },
+    {
+      "id": "references",
+      "reader_question": "Can I trace every citation to the correct source?",
+      "requirements": [
+        "preserve original reference numbering",
+        "retain complete bibliographic text",
+        "citation ranges map to all included references",
+        "reference count and missing numbers are audited against the source"
+      ],
+      "forbidden": ["renumbering extracted references sequentially", "silently dropping missing references"]
+    }
+  ],
+  "release_rule": "A raw PDF extraction may be stored for evidence, but it must not be rendered as a candidate reader until all reader-facing modules pass the content-quality validator."
+}

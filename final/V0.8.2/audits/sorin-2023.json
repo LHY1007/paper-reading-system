@@ -1,0 +1,373 @@
+{
+  "schema_version": "v082-pdf-native-audit-1",
+  "paper_key": "sorin-2023",
+  "source_pdf": ".build/v082/pdfs/10_sorin-2023.pdf",
+  "source_pdf_sha256": "33203fbc0518868027d1cac99647e468e1c1b61795b050e2abbc19dad0056060",
+  "pages": 24,
+  "body_font_size": 8.25,
+  "raw_text_blocks": 643,
+  "kept_text_blocks": 623,
+  "repeated_header_footer_patterns": 3,
+  "events": {
+    "heading": 325,
+    "body": 53613,
+    "caption": 17072,
+    "reference": 2650
+  },
+  "paragraphs": 36,
+  "sections": 11,
+  "assets": 14,
+  "references": 47,
+  "asset_audit": [
+    {
+      "id": "figure-1",
+      "caption_sha256": "ce76fcab10c1e530bd40de6faf1bffd197fd3b9d7f92b3012cbb654f260a731c",
+      "source_page": 2,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        441.38
+      ],
+      "pixels": [
+        906,
+        638
+      ],
+      "bytes": 126650,
+      "sha256": "ff7cb66d3787be93bceec271428eff9fb3280423da0f90c3c201f730fb699695"
+    },
+    {
+      "id": "figure-2",
+      "caption_sha256": "4a2a6b03d8831ea08426c4f42b88a9155cbef768d81650374c691c8bf387de5f",
+      "source_page": 3,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        378.02
+      ],
+      "pixels": [
+        906,
+        536
+      ],
+      "bytes": 101390,
+      "sha256": "203223be2a7469c1e279639fa63b2bffc4d01a60dbd9c58038e5083f37360134"
+    },
+    {
+      "id": "figure-3",
+      "caption_sha256": "311474c753af09601de0605deaa34f9d943bf727391c68e7871d76c98a3ec800",
+      "source_page": 5,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        281.32
+      ],
+      "pixels": [
+        906,
+        382
+      ],
+      "bytes": 61076,
+      "sha256": "0d1bde00d0fef6bb75cf114a64f6bf9a2cc40ecac43265a2d15a11cd593c921f"
+    },
+    {
+      "id": "figure-4",
+      "caption_sha256": "a6ca0d1df5f3bac7d1f7fc0ecaee1ec391bc2a80448c98e417ac1f20ffbadfa3",
+      "source_page": 6,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        347.84
+      ],
+      "pixels": [
+        906,
+        488
+      ],
+      "bytes": 76432,
+      "sha256": "756f2e03ee5d01971638b36667dd88261082c7116c4fed171fbd3495535ee9e8"
+    },
+    {
+      "id": "extended-data-figure-1",
+      "caption_sha256": "4b5f0390b091d42538c873c61816aa5b95b587923db33cc83743e5f800af82d7",
+      "source_page": 10,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        617.31
+      ],
+      "pixels": [
+        906,
+        919
+      ],
+      "bytes": 83528,
+      "sha256": "09ae558fe01dc939d2cf16cf67112ca48656060c310e0263847313236a126b67"
+    },
+    {
+      "id": "extended-data-figure-2",
+      "caption_sha256": "cdbd3520f127029df43f95640bcea4ac238256dfea349fff5b3911f21e029559",
+      "source_page": 11,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        656.89
+      ],
+      "pixels": [
+        906,
+        983
+      ],
+      "bytes": 292958,
+      "sha256": "0711e304cf44bca45f3395fe5b6a4fca89c99dc847aa5f0ce2cb5c9d96bf3d34"
+    },
+    {
+      "id": "extended-data-figure-3",
+      "caption_sha256": "a4f8e6206dab0f1d334e52e2584e875a396484ba02a4aeeab0f78d7152fde0ef",
+      "source_page": 12,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        657.18
+      ],
+      "pixels": [
+        906,
+        983
+      ],
+      "bytes": 294152,
+      "sha256": "13dd2e72ee6c7c7819ad993f729edfd50ad0bcb6845f2de9a75647f1db512e28"
+    },
+    {
+      "id": "extended-data-figure-4",
+      "caption_sha256": "96a0b80de09ddddf5ce6898085bdfaaf4382bda9c02424a8eb4ea998f5b4d38a",
+      "source_page": 13,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        508.62
+      ],
+      "pixels": [
+        906,
+        745
+      ],
+      "bytes": 214224,
+      "sha256": "3815c5d08b836822a2c07e50e3c63973167ebc8d3603cf141d8aa25ef7485cd1"
+    },
+    {
+      "id": "extended-data-figure-5",
+      "caption_sha256": "93509f5234a2f60e0e95c65f0ab6a1df33281180fb168093932fa0833aa6bfa5",
+      "source_page": 14,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        654.94
+      ],
+      "pixels": [
+        906,
+        979
+      ],
+      "bytes": 74470,
+      "sha256": "ec11c14df2b22c231f6b48ca990f9d14219ec83543f09cebb0aca6074594e6b9"
+    },
+    {
+      "id": "extended-data-figure-6",
+      "caption_sha256": "02864fc8195187e39d4bffda72ac0dd7da5b40ffad18b6598f94a5c243026d72",
+      "source_page": 15,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 183730,
+      "sha256": "b688a6bba518a6aae6109a7593ed41da74fe78685df668566930a08dc86fea3e"
+    },
+    {
+      "id": "extended-data-figure-7",
+      "caption_sha256": "f3e8bf52015a08e3443acc1c5f855f73544b20453351b2802c67a34400f6e910",
+      "source_page": 17,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 109528,
+      "sha256": "c71e75b046b74d8804ce91978598c1e86c13e7ca446be01031794dde6fbdf91f"
+    },
+    {
+      "id": "extended-data-figure-8",
+      "caption_sha256": "76c123e57773e0a9a5b4201eb4a75dd865815c041c09d374a2354046e545877b",
+      "source_page": 19,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        659.44
+      ],
+      "pixels": [
+        906,
+        987
+      ],
+      "bytes": 88310,
+      "sha256": "e00bb67b3115e2747ccdb5d9c5af0143d7bb8d72b8072c8b6e7e30e109bfc1ef"
+    },
+    {
+      "id": "extended-data-figure-9",
+      "caption_sha256": "94ac52b6d020495f8dac2319bbcde4d6afeb3f349de8f92e17c46c388c767845",
+      "source_page": 20,
+      "clip": [
+        14.88,
+        43.5,
+        580.39,
+        583.66
+      ],
+      "pixels": [
+        906,
+        865
+      ],
+      "bytes": 88534,
+      "sha256": "293e2f7841c0ce8cd0c93f974a2c2c69af10d8b1b0462366620bf8f863f31500"
+    },
+    {
+      "id": "extended-data-figure-10",
+      "caption_sha256": "767e402e7a73daca497ca708c4c7cb6e29c3b64eefc88c3c13adefddf9a91bba",
+      "source_page": 20,
+      "clip": [
+        17.86,
+        39.54,
+        577.42,
+        727.6
+      ],
+      "pixels": [
+        896,
+        1102
+      ],
+      "bytes": 136128,
+      "sha256": "a90bb0988551c2ff00bc7d0344ba667bfcfc32a4af5c18238587054c01c1ed93"
+    }
+  ],
+  "kept_text_sha256": "de0a8a5356327d11d9b3b7337870ea4deb6cc72ba83e140eb31e2b12d5abd6b7",
+  "manifest_source_fragments_sha256": "db391414ab8bd631e706d5e21392d465f37f12687deea30e89f0655e07e4e74e",
+  "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
+  "passed": true,
+  "strict_layout_parser": "v082-final-16",
+  "formula_blocks_detected": 1,
+  "formula_blocks_missing": 0,
+  "formula_samples": [
+    "where p = {0 or 1} Mi , which determines whether the pixel pc"
+  ],
+  "cross_column_body_merges": 3,
+  "cross_column_caption_merges": 1,
+  "source_chars": 38557,
+  "expected_reference_count": 47,
+  "expected_main_figures": 0,
+  "strict_errors": [],
+  "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
+  "source_outline_entries": 21,
+  "figure_titles_corrected_from_pdf_toc": 6,
+  "captions_trimmed": 1,
+  "caption_panel_evidence_blocks": 29,
+  "reference_repair_applied": true,
+  "titles_extended_from_caption": 0,
+  "uppercase_panel_evidence_blocks": 0,
+  "titles_completed_from_caption": 0,
+  "tables_reconstructed": 0,
+  "table_image_fallbacks": 0,
+  "cross_page_captions_rebuilt": 0,
+  "continuation_blocks_missing": [],
+  "cross_page_captions_rebuilt_by_title_lookup": [],
+  "authors_extracted": 25,
+  "affiliations_extracted": 12,
+  "publication_timeline_extracted": true,
+  "group_authors_extracted": [],
+  "body_reconstruction": {
+    "version": "v082-body-reconstruction-5",
+    "body_font_size": 8.25,
+    "paragraphs": 36,
+    "source_chars": 38557,
+    "candidate_source_chars": 38542,
+    "accepted_source_chars": 38542,
+    "page_candidate_chars": {
+      "1": 3668,
+      "2": 1825,
+      "3": 2814,
+      "4": 8771,
+      "5": 4783,
+      "6": 2850,
+      "7": 2643,
+      "8": 6954,
+      "9": 4234
+    },
+    "page_source_chars": {
+      "1": 3668,
+      "2": 1825,
+      "3": 2814,
+      "4": 8771,
+      "5": 4783,
+      "6": 2850,
+      "7": 2643,
+      "8": 6954,
+      "9": 4234
+    },
+    "page_paragraphs": {
+      "1": 4,
+      "2": 3,
+      "3": 4,
+      "4": 6,
+      "5": 4,
+      "6": 4,
+      "7": 2,
+      "8": 16,
+      "9": 8
+    },
+    "page_coverage": {
+      "1": 1.0,
+      "2": 1.0,
+      "3": 1.0,
+      "4": 1.0,
+      "5": 1.0,
+      "6": 1.0,
+      "7": 1.0,
+      "8": 1.0,
+      "9": 1.0
+    },
+    "low_coverage_pages": [],
+    "extended_data_start_page": 20,
+    "sections": [
+      "Introduction",
+      "LUAD tumour immune microenvironment",
+      "LUAD multicellular spatial interactions",
+      "LUAD architecture and survival outcomes",
+      "Predicting outcomes using deep learning",
+      "Discussion",
+      "Clinical cohort",
+      "Sample staining and IMC",
+      "Antibody optimization",
+      "Data transformation and normalization",
+      "Cell segmentation and lineage assignment",
+      "Cell–cell pairwise interaction",
+      "Neighbourhood identification",
+      "Deep learning",
+      "Statistical analysis and workflow",
+      "Reporting summary",
+      "Code availability"
+    ]
+  },
+  "fallback_authors_extracted": 25,
+  "fallback_affiliations_extracted": 12,
+  "titles_recovered_v16": 8,
+  "panel_evidence_recovered_v16": 24,
+  "layout_reference_repair_applied": true
+}

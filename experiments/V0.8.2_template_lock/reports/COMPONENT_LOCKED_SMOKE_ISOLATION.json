@@ -1,0 +1,11 @@
+{
+  "file": "V0.8.2_COMPONENT_LOCKED_SMOKE.html",
+  "manifest": "smoke_manifest.json",
+  "paper_key": "v082-template-lock-smoke",
+  "reference_count": 1,
+  "study_ids": [
+    "figure-1"
+  ],
+  "errors": [],
+  "passed": true
+}

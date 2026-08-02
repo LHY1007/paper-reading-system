@@ -1,0 +1,93 @@
+name: Apply V0.8.2 sentence-pair upgrade
+
+on:
+  pull_request:
+    branches: [v0.8x-batch-diagnosis]
+    types: [opened]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: v082-sentence-pair-pr-apply
+  cancel-in-progress: false
+
+jobs:
+  apply-and-prove:
+    if: github.event.pull_request.head.ref == 'v082-sentence-pair-isolated'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v082-sentence-pair-isolated
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check beautifulsoup4 jsonschema lxml
+      - name: Apply verified bundle
+        run: python tools/apply_v082_sentence_pair_upgrade.py
+      - name: Prove sentence-pair contracts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python tools/test_v082_sentence_pairs.py
+          python tools/validate_v082_sentence_pairs.py tests/fixtures/v082_shell_smoke_manifest.json --report /tmp/SENTENCE_PAIR_GATE.json
+          python tools/render_v082_from_frozen_shell.py \
+            tests/fixtures/v082_shell_smoke_manifest.json \
+            /tmp/V082_SENTENCE_SMOKE_READER.html \
+            --shell templates/v082/V082_CANVAS_FROZEN_SHELL.html \
+            --lock config/v082_frozen_shell_lock.json \
+            --schema schemas/paper_content_manifest_v082.schema.json \
+            --report /tmp/SMOKE_RENDER.json
+          python tools/validate_v082_rendered_architecture.py \
+            /tmp/V082_SENTENCE_SMOKE_READER.html \
+            --shell templates/v082/V082_CANVAS_FROZEN_SHELL.html \
+            --manifest tests/fixtures/v082_shell_smoke_manifest.json \
+            --lock config/v082_frozen_shell_lock.json \
+            --report /tmp/SMOKE_RENDERED_ARCHITECTURE.json
+          python - <<'PY'
+          from collections import defaultdict
+          from pathlib import Path
+          from bs4 import BeautifulSoup
+          path = Path('/tmp/V082_SENTENCE_SMOKE_READER.html')
+          text = path.read_text('utf-8')
+          soup = BeautifulSoup(text, 'html.parser')
+          assert soup.body and soup.body.get('data-mode') == 'bilingual'
+          quick = soup.select_one('#quick-pane')
+          assert quick is None or quick.has_attr('hidden')
+          switch = soup.select_one('#readerModeSwitch')
+          assert switch is None or switch.has_attr('hidden')
+          groups = defaultdict(list)
+          for piece in soup.select('#bilingual-pane .sentence-piece[data-sentence-group]'):
+              groups[piece['data-sentence-group']].append(piece)
+          assert groups and all(len(items) == 2 for items in groups.values())
+          assert all(all(item.get_text(' ', strip=True) for item in items) for items in groups.values())
+          assert 'dataset.sentenceGroup' in text
+          print(f'validated {len(groups)} exact clickable bilingual sentence groups')
+          PY
+      - name: Commit proven upgrade to isolated branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .github/v082-sentence-upgrade
+          rm -f tools/apply_v082_sentence_pair_upgrade.py
+          rm -f .github/workflows/apply_v082_sentence_pair_upgrade.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Enforce sentence-paired bilingual V0.8.2 readers"
+          git push origin HEAD:v082-sentence-pair-isolated
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v082-sentence-pair-pr-proof
+          path: |
+            /tmp/SENTENCE_PAIR_GATE.json
+            /tmp/SMOKE_RENDER.json
+            /tmp/SMOKE_RENDERED_ARCHITECTURE.json
+            /tmp/V082_SENTENCE_SMOKE_READER.html
+          if-no-files-found: warn
+          retention-days: 14

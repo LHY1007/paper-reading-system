@@ -1,0 +1,52 @@
+{
+  "version": "v082-landry-reader-plan-1",
+  "status": "approved content plan; final manifest still required",
+  "paper": {
+    "key": "landry-2026",
+    "title_en": "Spatially resolved single-cell analyses of human meningioma identify novel cell states influencing tumor microenvironment and progression",
+    "title_zh": "空间分辨单细胞分析揭示影响脑膜瘤微环境与进展的新型细胞状态",
+    "journal": "Nature Genetics",
+    "publisher": "Springer Nature",
+    "doi": "10.1038/s41588-026-02615-w",
+    "article_type": "Article",
+    "publication_timeline": "Received 17 July 2025 · Accepted 28 April 2026 · Published online 9 June 2026",
+    "citation": "Nature Genetics 58, 1383–1395 (2026)",
+    "journal_scope": "Nature Genetics publishes high-impact research in genetics and genomics, including disease mechanisms, molecular classification and translational genomics.",
+    "field_positioning": "该研究属于脑膜瘤单细胞与空间组学、髓系微环境、分子分型及结局预测的交叉研究。"
+  },
+  "overview": {
+    "qa": [
+      {"question": "研究解决什么问题？", "answer": "现有脑膜瘤分子分型主要来自肿瘤整体测量，无法充分解释同一肿瘤内部的细胞状态、硬脑膜到肿瘤的空间变化以及这些状态对进展和预后的贡献。研究利用大规模单核与高分辨空间转录组解析肿瘤细胞和非肿瘤细胞状态。"},
+      {"question": "核心数据是什么？", "answer": "研究包含102个单核RNA测序样本和580,185个高质量细胞核、43个Visium HD样本和7,146,538个分割细胞，并整合712例DNA甲基化与RNA测序、88例蛋白组以及59例血浆甲基化数据。"},
+      {"question": "模型或分析的输入与输出是什么？", "answer": "输入包括snRNA-seq、Visium HD、bulk RNA、DNA甲基化、蛋白组和临床结局；分析通过NMF定义肿瘤、髓系、淋巴和内皮细胞的转录元程序，量化空间共定位和配体受体关系，并输出可补充分子组别的细胞状态风险指标。"},
+      {"question": "主要生物学发现是什么？", "answer": "髓系细胞是脑膜瘤最主要的非肿瘤细胞，其循环、IFN、EMT、TNF、组织修复和代谢状态在不同分子组之间存在系统差异。髓系状态从硬脑膜进入肿瘤后发生重编程，并与特定肿瘤细胞程序和空间相互作用相对应。"},
+      {"question": "主要临床结果是什么？", "answer": "多个非肿瘤细胞状态与结局相关，并能在既有分子组和细胞丰度之外改善风险预测。研究提示仅按肿瘤分子组分类不足以覆盖微环境状态带来的进展差异。"},
+      {"question": "最重要的限制是什么？", "answer": "不同组学来自部分重叠但并非完全一致的样本，空间数据仍受取样区域限制；细胞状态与预后的关系主要来自回顾性关联，尚不能证明髓系状态直接驱动进展，风险模型也需要独立前瞻性验证。"}
+    ],
+    "method": "建立单核细胞图谱并用NMF定义细胞状态 → 在公开数据、bulk RNA和蛋白组中正交验证 → 利用区域取样和Visium HD分析空间异质性及硬脑膜到肿瘤的重编程 → 推断髓系—肿瘤相互作用 → 将细胞状态纳入结局模型",
+    "story": "文章从细胞状态而非单纯细胞类型重新描述脑膜瘤微环境：肿瘤细胞具有显著个体差异，而髓系细胞呈现可重复、可跨平台验证的功能状态；这些状态沿硬脑膜—肿瘤空间轴变化，并与肿瘤程序、空间组织和预后共同构成分子分型之外的风险层。"
+  },
+  "body_section_map": [
+    ["Introduction", "引言"], ["Study cohort", "研究队列"],
+    ["A single-cell atlas of meningioma reveals recurrent transcriptional metaprograms", "脑膜瘤单细胞图谱揭示重复出现的转录元程序"],
+    ["Myeloid cell states are differentially enriched across existing biological classifications", "不同生物学分类中的髓系细胞状态存在差异性富集"],
+    ["Bulk proteomic analysis validates the biological correlates of myeloid MPs", "bulk蛋白组验证髓系元程序的生物学对应关系"],
+    ["Some meningiomas exhibit considerable neoplastic transcriptional heterogeneity over space", "部分脑膜瘤具有显著的空间肿瘤转录异质性"],
+    ["Spatially informed sampling provides insight into the immune reprogramming of meningioma", "空间取样揭示脑膜瘤免疫重编程"],
+    ["The myeloid TNF MP is suppressed across the dura–tumor interface", "髓系TNF元程序在硬脑膜—肿瘤界面受到抑制"],
+    ["Myeloid–neoplastic interactions are state-specific and influence the tumor microenvironment", "状态特异性的髓系—肿瘤相互作用塑造微环境"],
+    ["Meningioma cell states are prognostic, independent of MG and cell abundance", "细胞状态在分子组和细胞丰度之外具有预后价值"],
+    ["Integrating meningioma cell states can refine outcome predictions in addition to existing MGs", "整合细胞状态可进一步改善结局预测"],
+    ["Discussion", "讨论"], ["Methods", "方法"], ["Data availability", "数据可用性"], ["Code availability", "代码可用性"]
+  ],
+  "main_figures": [
+    {"id": "figure-1", "title_en": "Figure 1. The meningioma microenvironment exhibits considerable transcriptional diversity and can be defined by recurrent cell-type-specific metaprogams", "title_zh": "图1：脑膜瘤微环境具有显著转录多样性，并可由重复出现的细胞类型特异性元程序定义", "reader_role": "建立队列和单细胞图谱，定义肿瘤、髓系、淋巴和内皮细胞的状态，并展示髓系状态与分子组的关系。", "panel_requirement": "逐块解释队列规模、细胞类型UMAP、肿瘤与髓系NMF程序、跨细胞类型相似性以及不同分子组中的状态分布。"},
+    {"id": "figure-2", "title_en": "Figure 2. Regionally diverse sampling within the same meningiomas identifies transcriptional intra-tumoral heterogeneity but comparatively stable copy number alterations", "title_zh": "图2：同一脑膜瘤的多区域取样揭示转录异质性，但拷贝数改变相对稳定", "reader_role": "区分空间转录状态变化与较稳定的基因组拷贝数背景。", "panel_requirement": "说明多区域取样、细胞状态差异、CNV一致性及1p/22q缺失与异质性的关系。"},
+    {"id": "figure-3", "title_en": "Figure 3. Spatially resolved snRNA-seq and spatial transcriptomics reveals increased myeloid abundance and shifts in myeloid MP expression from dura to tumor", "title_zh": "图3：空间单核与空间转录组揭示从硬脑膜到肿瘤的髓系增加和状态迁移", "reader_role": "描述硬脑膜—肿瘤轴上的免疫重编程。", "panel_requirement": "逐子图解释区域设计、细胞比例、髓系状态评分、TNF程序下降及其空间验证。"},
+    {"id": "figure-4", "title_en": "Figure 4. Each myeloid cell state is associated with unique neoplastic–myeloid interactions and spatial dependencies", "title_zh": "图4：不同髓系状态对应独特的肿瘤—髓系相互作用和空间依赖", "reader_role": "把髓系状态与配体受体关系、肿瘤程序和空间共定位连接起来。", "panel_requirement": "明确相互作用对象、方向、空间尺度以及相关性不能等同于因果。"},
+    {"id": "figure-5", "title_en": "Figure 5. Multiple cell states are prognostic and can be used to refine outcome prediction beyond existing molecular tools", "title_zh": "图5：多种细胞状态具有预后价值，并可在现有分子工具之外改善结局预测", "reader_role": "完成临床验证，比较细胞状态、分子组及联合模型。", "panel_requirement": "解释生存曲线、单变量和多变量结果、风险模型增益及验证范围。"},
+    {"id": "figure-6", "title_en": "Figure 6. Graphical overview of findings", "title_zh": "图6：研究发现的整体图示", "reader_role": "总结细胞状态、空间重编程、相互作用和临床风险之间的完整逻辑。", "panel_requirement": "按硬脑膜、肿瘤微环境、肿瘤细胞和结局四个层次解释。"}
+  ],
+  "supplementary_source_requirement": "保留全部Extended Data图的完整标题、图注和主图关联；不得将补充图的验证证据省略为通用占位内容。",
+  "reference_requirement": {"expected_count": 76, "preserve_source_numbers": true, "reject_body_paragraphs": true}
+}

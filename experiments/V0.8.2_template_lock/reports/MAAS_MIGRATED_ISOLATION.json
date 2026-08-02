@@ -1,0 +1,27 @@
+{
+  "file": "V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
+  "manifest": "MAAS_LEGACY_CONTENT.json",
+  "paper_key": "a-microenvironment-determined-risk-continuum-refines-subtyping-in-meningioma-and",
+  "reference_count": 0,
+  "study_ids": [
+    "figure-1",
+    "figure-10",
+    "figure-11",
+    "figure-12",
+    "figure-13",
+    "figure-14",
+    "figure-15",
+    "figure-16",
+    "figure-17",
+    "figure-2",
+    "figure-3",
+    "figure-4",
+    "figure-5",
+    "figure-6",
+    "figure-7",
+    "figure-8",
+    "figure-9"
+  ],
+  "errors": [],
+  "passed": true
+}

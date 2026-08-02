@@ -1,0 +1,554 @@
+=== canonical component contract ===
+{
+  "file": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+  "bilingual_units": 111,
+  "figure_cards": 14,
+  "table_cards": 5,
+  "references": 112,
+  "errors": [
+    "figure card 7 image missing data-complete-page",
+    "figure card 8 image missing data-complete-page",
+    "figure card 9 image missing data-complete-page",
+    "figure card 10 image missing data-complete-page",
+    "figure card 11 image missing data-complete-page",
+    "figure card 12 image missing data-complete-page",
+    "figure card 13 image missing data-complete-page",
+    "figure card 14 image missing data-complete-page",
+    "table card 1 captions mismatch",
+    "table card 2 captions mismatch",
+    "table card 3 captions mismatch",
+    "table card 4 captions mismatch",
+    "table card 5 captions mismatch",
+    "paper section 40 missing canonical data-level/title"
+  ],
+  "passed": false
+}
+canonical_rc=0
+=== smoke render ===
+{
+  "output": "experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_SMOKE.html",
+  "sha256": "28368c1290840920e3eb5a27f9aaf36998fd7de9882154c2fd8d190a676d78b7",
+  "sections": 2,
+  "paragraphs": 2,
+  "assets": 2,
+  "references": 1,
+  "paper_isolation_postprocessed": true,
+  "review_manifest_completed": true
+}
+smoke_render_rc=0
+{
+  "file": "V0.8.2_COMPONENT_LOCKED_SMOKE.html",
+  "bilingual_units": 2,
+  "figure_cards": 1,
+  "table_cards": 1,
+  "references": 1,
+  "errors": [],
+  "passed": true
+}
+smoke_component_rc=0
+{
+  "canonical": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+  "candidate": "V0.8.2_COMPONENT_LOCKED_SMOKE.html",
+  "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
+  "candidate_sha256": "28368c1290840920e3eb5a27f9aaf36998fd7de9882154c2fd8d190a676d78b7",
+  "canonical_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
+  "candidate_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
+  "canonical_style_hashes": [
+    "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
+    "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
+    "f82f1da605f7f77839bfef3d0a2b3be1154aedbae6e61d8ed62ff8adaa1d8268",
+    "f81b9084ea6ef20186446db9baa9c415ef1d781316ba6d192ff8db3c8736160c",
+    "4101554deeee96cd761b2f2ab80261fee454cc6f7b573c6bd39f93364d27ae35",
+    "8f665ecc1b1f41d06bf7c5dd0774d6029f8b059751d2901bfcc0aef4bd3da269",
+    "a0175adf0fb35d5da4c3c4d55c6a70e930e7575f0211fc67942aa5043f891ae1",
+    "46ce2357d64a9530417760c526dcfe6f00aa95ff7cf6cc0b1304c3761e3c137f",
+    "b59d633ba71d347cf6aa80ec1b61c4ceaa0035387fe8b70504d9989a99e8dd39",
+    "8e475bd3924ac3e4be952771041cf9e65c0fbdfe4787d508e1302234369a769b",
+    "1e2358b59d6dd01c9469f0ec37deacd4d32848fe39c79e422332a9e02f7c982a",
+    "1466d3ab816b730a60de0d364f4b24f23798aa32b7ca9cda4efa9280e7071a95",
+    "3fe54f99d0128c6b05b67a46c6e5164fccae91e7d044b4168040c0c42c074ab5",
+    "1e9a0d4f384f0b43cc5d110acb807fe68308851064ad75ec4660a11b0551ef09",
+    "94b0e20c1730cb0e549d5a51e6fd829d9484dc01113aaacc1b0271c40bb4deec"
+  ],
+  "candidate_style_hashes": [
+    "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
+    "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
+    "f82f1da605f7f77839bfef3d0a2b3be1154aedbae6e61d8ed62ff8adaa1d8268",
+    "f81b9084ea6ef20186446db9baa9c415ef1d781316ba6d192ff8db3c8736160c",
+    "4101554deeee96cd761b2f2ab80261fee454cc6f7b573c6bd39f93364d27ae35",
+    "8f665ecc1b1f41d06bf7c5dd0774d6029f8b059751d2901bfcc0aef4bd3da269",
+    "a0175adf0fb35d5da4c3c4d55c6a70e930e7575f0211fc67942aa5043f891ae1",
+    "46ce2357d64a9530417760c526dcfe6f00aa95ff7cf6cc0b1304c3761e3c137f",
+    "b59d633ba71d347cf6aa80ec1b61c4ceaa0035387fe8b70504d9989a99e8dd39",
+    "8e475bd3924ac3e4be952771041cf9e65c0fbdfe4787d508e1302234369a769b",
+    "1e2358b59d6dd01c9469f0ec37deacd4d32848fe39c79e422332a9e02f7c982a",
+    "1466d3ab816b730a60de0d364f4b24f23798aa32b7ca9cda4efa9280e7071a95",
+    "3fe54f99d0128c6b05b67a46c6e5164fccae91e7d044b4168040c0c42c074ab5",
+    "1e9a0d4f384f0b43cc5d110acb807fe68308851064ad75ec4660a11b0551ef09",
+    "94b0e20c1730cb0e549d5a51e6fd829d9484dc01113aaacc1b0271c40bb4deec"
+  ],
+  "topbar_children": [
+    {
+      "tag": "button",
+      "id": "tocBtn",
+      "classes": []
+    },
+    {
+      "tag": "div",
+      "id": null,
+      "classes": [
+        "brand"
+      ]
+    },
+    {
+      "tag": "div",
+      "id": null,
+      "classes": [
+        "search"
+      ]
+    },
+    {
+      "tag": "button",
+      "id": "immersiveBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "settingsBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "annotationBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "docMarkupBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "pdfBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "printBtn",
+      "classes": []
+    }
+  ],
+  "layout_children": [
+    {
+      "tag": "aside",
+      "id": "sidebar",
+      "classes": [
+        "sidebar"
+      ]
+    },
+    {
+      "tag": "div",
+      "id": "leftResizeHandle",
+      "classes": [
+        "resizer",
+        "left-resizer"
+      ]
+    },
+    {
+      "tag": "main",
+      "id": null,
+      "classes": [
+        "main"
+      ]
+    },
+    {
+      "tag": "div",
+      "id": "rightResizeHandle",
+      "classes": [
+        "resizer",
+        "right-resizer"
+      ]
+    },
+    {
+      "tag": "aside",
+      "id": "viewer",
+      "classes": [
+        "viewer"
+      ]
+    }
+  ],
+  "errors": [],
+  "passed": true,
+  "canonical_kind": "original-00"
+}
+smoke_shell_rc=0
+{
+  "file": "V0.8.2_COMPONENT_LOCKED_SMOKE.html",
+  "manifest": "smoke_manifest.json",
+  "paper_key": "v082-template-lock-smoke",
+  "reference_count": 1,
+  "study_ids": [
+    "figure-1"
+  ],
+  "errors": [],
+  "passed": true
+}
+smoke_isolation_rc=0
+=== legacy migration/render ===
+{"output": "experiments/V0.8.2_template_lock/manifests/MAAS_LEGACY_CONTENT.json", "paragraphs": 29, "assets": 17}
+maas_migrate_rc=0
+{"output": "experiments/V0.8.2_template_lock/manifests/VALANARASU_LEGACY_CONTENT.json", "paragraphs": 18, "assets": 6}
+val_migrate_rc=0
+{
+  "output": "experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
+  "sha256": "0b0e20e581972673843aed773592a90781661bd68b73552a7a7e8dce10608395",
+  "sections": 1,
+  "paragraphs": 12,
+  "assets": 17,
+  "references": 0,
+  "paper_isolation_postprocessed": true,
+  "review_manifest_completed": true
+}
+MAAS_render_rc=0
+{
+  "file": "V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
+  "bilingual_units": 12,
+  "figure_cards": 17,
+  "table_cards": 0,
+  "references": 0,
+  "errors": [],
+  "passed": true
+}
+{
+  "canonical": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+  "candidate": "V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
+  "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
+  "candidate_sha256": "0b0e20e581972673843aed773592a90781661bd68b73552a7a7e8dce10608395",
+  "canonical_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
+  "candidate_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
+  "canonical_style_hashes": [
+    "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
+    "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
+    "f82f1da605f7f77839bfef3d0a2b3be1154aedbae6e61d8ed62ff8adaa1d8268",
+    "f81b9084ea6ef20186446db9baa9c415ef1d781316ba6d192ff8db3c8736160c",
+    "4101554deeee96cd761b2f2ab80261fee454cc6f7b573c6bd39f93364d27ae35",
+    "8f665ecc1b1f41d06bf7c5dd0774d6029f8b059751d2901bfcc0aef4bd3da269",
+    "a0175adf0fb35d5da4c3c4d55c6a70e930e7575f0211fc67942aa5043f891ae1",
+    "46ce2357d64a9530417760c526dcfe6f00aa95ff7cf6cc0b1304c3761e3c137f",
+    "b59d633ba71d347cf6aa80ec1b61c4ceaa0035387fe8b70504d9989a99e8dd39",
+    "8e475bd3924ac3e4be952771041cf9e65c0fbdfe4787d508e1302234369a769b",
+    "1e2358b59d6dd01c9469f0ec37deacd4d32848fe39c79e422332a9e02f7c982a",
+    "1466d3ab816b730a60de0d364f4b24f23798aa32b7ca9cda4efa9280e7071a95",
+    "3fe54f99d0128c6b05b67a46c6e5164fccae91e7d044b4168040c0c42c074ab5",
+    "1e9a0d4f384f0b43cc5d110acb807fe68308851064ad75ec4660a11b0551ef09",
+    "94b0e20c1730cb0e549d5a51e6fd829d9484dc01113aaacc1b0271c40bb4deec"
+  ],
+  "candidate_style_hashes": [
+    "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
+    "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
+    "f82f1da605f7f77839bfef3d0a2b3be1154aedbae6e61d8ed62ff8adaa1d8268",
+    "f81b9084ea6ef20186446db9baa9c415ef1d781316ba6d192ff8db3c8736160c",
+    "4101554deeee96cd761b2f2ab80261fee454cc6f7b573c6bd39f93364d27ae35",
+    "8f665ecc1b1f41d06bf7c5dd0774d6029f8b059751d2901bfcc0aef4bd3da269",
+    "a0175adf0fb35d5da4c3c4d55c6a70e930e7575f0211fc67942aa5043f891ae1",
+    "46ce2357d64a9530417760c526dcfe6f00aa95ff7cf6cc0b1304c3761e3c137f",
+    "b59d633ba71d347cf6aa80ec1b61c4ceaa0035387fe8b70504d9989a99e8dd39",
+    "8e475bd3924ac3e4be952771041cf9e65c0fbdfe4787d508e1302234369a769b",
+    "1e2358b59d6dd01c9469f0ec37deacd4d32848fe39c79e422332a9e02f7c982a",
+    "1466d3ab816b730a60de0d364f4b24f23798aa32b7ca9cda4efa9280e7071a95",
+    "3fe54f99d0128c6b05b67a46c6e5164fccae91e7d044b4168040c0c42c074ab5",
+    "1e9a0d4f384f0b43cc5d110acb807fe68308851064ad75ec4660a11b0551ef09",
+    "94b0e20c1730cb0e549d5a51e6fd829d9484dc01113aaacc1b0271c40bb4deec"
+  ],
+  "topbar_children": [
+    {
+      "tag": "button",
+      "id": "tocBtn",
+      "classes": []
+    },
+    {
+      "tag": "div",
+      "id": null,
+      "classes": [
+        "brand"
+      ]
+    },
+    {
+      "tag": "div",
+      "id": null,
+      "classes": [
+        "search"
+      ]
+    },
+    {
+      "tag": "button",
+      "id": "immersiveBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "settingsBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "annotationBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "docMarkupBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "pdfBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "printBtn",
+      "classes": []
+    }
+  ],
+  "layout_children": [
+    {
+      "tag": "aside",
+      "id": "sidebar",
+      "classes": [
+        "sidebar"
+      ]
+    },
+    {
+      "tag": "div",
+      "id": "leftResizeHandle",
+      "classes": [
+        "resizer",
+        "left-resizer"
+      ]
+    },
+    {
+      "tag": "main",
+      "id": null,
+      "classes": [
+        "main"
+      ]
+    },
+    {
+      "tag": "div",
+      "id": "rightResizeHandle",
+      "classes": [
+        "resizer",
+        "right-resizer"
+      ]
+    },
+    {
+      "tag": "aside",
+      "id": "viewer",
+      "classes": [
+        "viewer"
+      ]
+    }
+  ],
+  "errors": [],
+  "passed": true,
+  "canonical_kind": "original-00"
+}
+{
+  "file": "V0.8.2_COMPONENT_LOCKED_MAAS_LEGACY_CONTENT.html",
+  "manifest": "MAAS_LEGACY_CONTENT.json",
+  "paper_key": "a-microenvironment-determined-risk-continuum-refines-subtyping-in-meningioma-and",
+  "reference_count": 0,
+  "study_ids": [
+    "figure-1",
+    "figure-10",
+    "figure-11",
+    "figure-12",
+    "figure-13",
+    "figure-14",
+    "figure-15",
+    "figure-16",
+    "figure-17",
+    "figure-2",
+    "figure-3",
+    "figure-4",
+    "figure-5",
+    "figure-6",
+    "figure-7",
+    "figure-8",
+    "figure-9"
+  ],
+  "errors": [],
+  "passed": true
+}
+{
+  "output": "experiments/V0.8.2_template_lock/output/V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
+  "sha256": "8b633b6cff3bb0c8a58dd16705908dfd1393e2e9ceec58ff4ca40aff53fa5302",
+  "sections": 1,
+  "paragraphs": 12,
+  "assets": 6,
+  "references": 0,
+  "paper_isolation_postprocessed": true,
+  "review_manifest_completed": true
+}
+VALANARASU_render_rc=0
+{
+  "file": "V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
+  "bilingual_units": 12,
+  "figure_cards": 6,
+  "table_cards": 0,
+  "references": 0,
+  "errors": [],
+  "passed": true
+}
+{
+  "canonical": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+  "candidate": "V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
+  "canonical_sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
+  "candidate_sha256": "8b633b6cff3bb0c8a58dd16705908dfd1393e2e9ceec58ff4ca40aff53fa5302",
+  "canonical_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
+  "candidate_shell_sha256": "1d1fabc90501ee5f851338d480b1a2cb1bfd625661adc7ecbfa7003f0842ee4b",
+  "canonical_style_hashes": [
+    "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
+    "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
+    "f82f1da605f7f77839bfef3d0a2b3be1154aedbae6e61d8ed62ff8adaa1d8268",
+    "f81b9084ea6ef20186446db9baa9c415ef1d781316ba6d192ff8db3c8736160c",
+    "4101554deeee96cd761b2f2ab80261fee454cc6f7b573c6bd39f93364d27ae35",
+    "8f665ecc1b1f41d06bf7c5dd0774d6029f8b059751d2901bfcc0aef4bd3da269",
+    "a0175adf0fb35d5da4c3c4d55c6a70e930e7575f0211fc67942aa5043f891ae1",
+    "46ce2357d64a9530417760c526dcfe6f00aa95ff7cf6cc0b1304c3761e3c137f",
+    "b59d633ba71d347cf6aa80ec1b61c4ceaa0035387fe8b70504d9989a99e8dd39",
+    "8e475bd3924ac3e4be952771041cf9e65c0fbdfe4787d508e1302234369a769b",
+    "1e2358b59d6dd01c9469f0ec37deacd4d32848fe39c79e422332a9e02f7c982a",
+    "1466d3ab816b730a60de0d364f4b24f23798aa32b7ca9cda4efa9280e7071a95",
+    "3fe54f99d0128c6b05b67a46c6e5164fccae91e7d044b4168040c0c42c074ab5",
+    "1e9a0d4f384f0b43cc5d110acb807fe68308851064ad75ec4660a11b0551ef09",
+    "94b0e20c1730cb0e549d5a51e6fd829d9484dc01113aaacc1b0271c40bb4deec"
+  ],
+  "candidate_style_hashes": [
+    "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
+    "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
+    "f82f1da605f7f77839bfef3d0a2b3be1154aedbae6e61d8ed62ff8adaa1d8268",
+    "f81b9084ea6ef20186446db9baa9c415ef1d781316ba6d192ff8db3c8736160c",
+    "4101554deeee96cd761b2f2ab80261fee454cc6f7b573c6bd39f93364d27ae35",
+    "8f665ecc1b1f41d06bf7c5dd0774d6029f8b059751d2901bfcc0aef4bd3da269",
+    "a0175adf0fb35d5da4c3c4d55c6a70e930e7575f0211fc67942aa5043f891ae1",
+    "46ce2357d64a9530417760c526dcfe6f00aa95ff7cf6cc0b1304c3761e3c137f",
+    "b59d633ba71d347cf6aa80ec1b61c4ceaa0035387fe8b70504d9989a99e8dd39",
+    "8e475bd3924ac3e4be952771041cf9e65c0fbdfe4787d508e1302234369a769b",
+    "1e2358b59d6dd01c9469f0ec37deacd4d32848fe39c79e422332a9e02f7c982a",
+    "1466d3ab816b730a60de0d364f4b24f23798aa32b7ca9cda4efa9280e7071a95",
+    "3fe54f99d0128c6b05b67a46c6e5164fccae91e7d044b4168040c0c42c074ab5",
+    "1e9a0d4f384f0b43cc5d110acb807fe68308851064ad75ec4660a11b0551ef09",
+    "94b0e20c1730cb0e549d5a51e6fd829d9484dc01113aaacc1b0271c40bb4deec"
+  ],
+  "topbar_children": [
+    {
+      "tag": "button",
+      "id": "tocBtn",
+      "classes": []
+    },
+    {
+      "tag": "div",
+      "id": null,
+      "classes": [
+        "brand"
+      ]
+    },
+    {
+      "tag": "div",
+      "id": null,
+      "classes": [
+        "search"
+      ]
+    },
+    {
+      "tag": "button",
+      "id": "immersiveBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "settingsBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "annotationBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "docMarkupBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "pdfBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "printBtn",
+      "classes": []
+    }
+  ],
+  "layout_children": [
+    {
+      "tag": "aside",
+      "id": "sidebar",
+      "classes": [
+        "sidebar"
+      ]
+    },
+    {
+      "tag": "div",
+      "id": "leftResizeHandle",
+      "classes": [
+        "resizer",
+        "left-resizer"
+      ]
+    },
+    {
+      "tag": "main",
+      "id": null,
+      "classes": [
+        "main"
+      ]
+    },
+    {
+      "tag": "div",
+      "id": "rightResizeHandle",
+      "classes": [
+        "resizer",
+        "right-resizer"
+      ]
+    },
+    {
+      "tag": "aside",
+      "id": "viewer",
+      "classes": [
+        "viewer"
+      ]
+    }
+  ],
+  "errors": [],
+  "passed": true,
+  "canonical_kind": "original-00"
+}
+{
+  "file": "V0.8.2_COMPONENT_LOCKED_VALANARASU_LEGACY_CONTENT.html",
+  "manifest": "VALANARASU_LEGACY_CONTENT.json",
+  "paper_key": "multimodal-ai-generates-virtual-population-for-tumor-microenvironment-modeling",
+  "reference_count": 0,
+  "study_ids": [
+    "figure-1",
+    "figure-2",
+    "figure-3",
+    "figure-4",
+    "figure-5",
+    "figure-6"
+  ],
+  "errors": [],
+  "passed": true
+}

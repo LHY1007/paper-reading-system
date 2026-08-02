@@ -1,0 +1,10 @@
+{
+  "version": "v082-landry-strong-autorun-1",
+  "paper_key": "landry-2026",
+  "run_id": "30692412961",
+  "run_attempt": "1",
+  "trigger_sha": "87e885883223bb2fbed008b559ba434b76fd39a6",
+  "status": "completed",
+  "generation_result": "failure",
+  "passed": false
+}

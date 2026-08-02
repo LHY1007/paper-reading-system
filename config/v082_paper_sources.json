@@ -1,0 +1,157 @@
+{
+  "version": "0.8.2-final-source-registry-5",
+  "papers": [
+    {
+      "order": 0,
+      "key": "canvas",
+      "doi": "10.1016/j.cell.2026.05.031",
+      "title": "Cellular architecture and neighborhood-informed virtual spatial tumor profiling from histopathology",
+      "journal": "Cell",
+      "year": 2026,
+      "expected_pages": 29,
+      "expected_reference_count": 112,
+      "output": "00_V0.8.2_FINAL_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+      "download_candidates": ["https://www.cell.com/cell/pdf/S0092-8674(26)00590-8.pdf"]
+    },
+    {
+      "order": 1,
+      "key": "maas-2026",
+      "doi": "10.1038/s41588-025-02475-w",
+      "title": "A microenvironment-determined risk continuum refines subtyping in meningioma and reveals determinants of machine learning-based tumor classification",
+      "journal": "Nature Genetics",
+      "year": 2026,
+      "expected_pages": 32,
+      "expected_reference_count": 86,
+      "output": "01_V0.8.2_FINAL_Maas_meningioma_risk_continuum.html",
+      "download_candidates": ["https://www.nature.com/articles/s41588-025-02475-w.pdf"]
+    },
+    {
+      "order": 2,
+      "key": "landry-2026",
+      "doi": "10.1038/s41588-026-02615-w",
+      "title": "Spatially resolved single-cell analyses of human meningioma identify novel cell states influencing tumor microenvironment and progression",
+      "journal": "Nature Genetics",
+      "year": 2026,
+      "expected_pages": 26,
+      "expected_reference_count": 76,
+      "output": "02_V0.8.2_FINAL_Landry_spatial_single-cell_meningioma.html",
+      "download_candidates": ["https://www.nature.com/articles/s41588-026-02615-w.pdf"]
+    },
+    {
+      "order": 3,
+      "key": "lee-2025",
+      "doi": "10.1038/s41467-025-60653-0",
+      "title": "Single-cell analysis reveals a longitudinal trajectory of meningioma evolution and heterogeneity",
+      "journal": "Nature Communications",
+      "year": 2025,
+      "expected_pages": 14,
+      "expected_reference_count": 64,
+      "output": "03_V0.8.2_FINAL_Lee_longitudinal_meningioma.html",
+      "download_candidates": ["https://www.nature.com/articles/s41467-025-60653-0.pdf"]
+    },
+    {
+      "order": 4,
+      "key": "valanarasu-2026",
+      "doi": "10.1016/j.cell.2025.11.016",
+      "title": "Multimodal AI generates virtual population for tumor microenvironment modeling",
+      "journal": "Cell",
+      "year": 2026,
+      "expected_pages": 35,
+      "expected_reference_count": 55,
+      "output": "04_V0.8.2_FINAL_Valanarasu_GigaTIME.html",
+      "download_candidates": [
+        "https://www.microsoft.com/en-us/research/wp-content/uploads/2025/12/Multimodal-AI-generates-virtual-population-for-tumor.pdf",
+        "https://www.cell.com/cell/pdf/S0092-8674(25)01312-1.pdf"
+      ]
+    },
+    {
+      "order": 5,
+      "key": "li-hex-2026",
+      "doi": "10.1038/s41591-025-04060-4",
+      "title": "AI-enabled virtual spatial proteomics from histopathology for interpretable biomarker discovery in lung cancer",
+      "journal": "Nature Medicine",
+      "year": 2026,
+      "expected_pages": 31,
+      "expected_reference_count": 69,
+      "output": "05_V0.8.2_FINAL_Li_HEX_virtual_spatial_proteomics.html",
+      "download_candidates": ["https://www.nature.com/articles/s41591-025-04060-4.pdf"]
+    },
+    {
+      "order": 6,
+      "key": "andani-2025",
+      "doi": "10.1038/s42256-025-01074-y",
+      "title": "Histopathology-based protein multiplex generation using deep learning",
+      "journal": "Nature Machine Intelligence",
+      "year": 2025,
+      "expected_pages": 28,
+      "expected_reference_count": 66,
+      "output": "06_V0.8.2_FINAL_Andani_HistoPlexer.html",
+      "download_candidates": ["https://www.nature.com/articles/s42256-025-01074-y.pdf"]
+    },
+    {
+      "order": 7,
+      "key": "cho-2026",
+      "doi": "10.1126/science.adz2742",
+      "title": "Pan-cancer spatial atlas of tertiary lymphoid structures",
+      "journal": "Science",
+      "year": 2026,
+      "expected_pages": 24,
+      "expected_reference_count": 118,
+      "output": "07_V0.8.2_FINAL_Cho_pan-cancer_TLS_atlas.html",
+      "download_candidates": ["https://www.science.org/doi/pdf/10.1126/science.adz2742"]
+    },
+    {
+      "order": 8,
+      "key": "spitzer-2025",
+      "doi": "10.1038/s41588-025-02168-4",
+      "title": "Deciphering the longitudinal trajectories of glioblastoma ecosystems by integrative single-cell genomics",
+      "journal": "Nature Genetics",
+      "year": 2025,
+      "expected_pages": 28,
+      "expected_reference_count": 52,
+      "output": "08_V0.8.2_FINAL_Spitzer_longitudinal_GBM_ecosystems.html",
+      "download_candidates": ["https://www.nature.com/articles/s41588-025-02168-4.pdf"]
+    },
+    {
+      "order": 9,
+      "key": "lucas-2024",
+      "doi": "10.1038/s41588-024-01747-1",
+      "title": "Spatial genomic, biochemical and cellular mechanisms underlying meningioma heterogeneity and evolution",
+      "journal": "Nature Genetics",
+      "year": 2024,
+      "expected_pages": 31,
+      "expected_reference_count": 66,
+      "output": "09_V0.8.2_FINAL_Lucas_meningioma_heterogeneity.html",
+      "download_candidates": [
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11239374/bin/nihms-2002659.pdf",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC11239374/pdf/nihms-2002659.pdf?download=1",
+        "https://escholarship.org/content/qt3sx7d9gv/qt3sx7d9gv.pdf",
+        "https://www.nature.com/articles/s41588-024-01747-1.pdf"
+      ]
+    },
+    {
+      "order": 10,
+      "key": "sorin-2023",
+      "doi": "10.1038/s41586-022-05672-3",
+      "title": "Single-cell spatial landscapes of the lung tumour immune microenvironment",
+      "journal": "Nature",
+      "year": 2023,
+      "expected_pages": 24,
+      "expected_reference_count": 47,
+      "output": "10_V0.8.2_FINAL_Sorin_lung_TIME.html",
+      "download_candidates": ["https://www.nature.com/articles/s41586-022-05672-3.pdf"]
+    },
+    {
+      "order": 11,
+      "key": "karimi-2023",
+      "doi": "10.1038/s41586-022-05680-3",
+      "title": "Single-cell spatial immune landscapes of primary and metastatic brain tumours",
+      "journal": "Nature",
+      "year": 2023,
+      "expected_pages": 28,
+      "expected_reference_count": 62,
+      "output": "11_V0.8.2_FINAL_Karimi_brain_tumour_immune_landscapes.html",
+      "download_candidates": ["https://www.nature.com/articles/s41586-022-05680-3.pdf"]
+    }
+  ]
+}

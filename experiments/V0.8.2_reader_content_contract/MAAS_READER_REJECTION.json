@@ -1,0 +1,31 @@
+{
+  "version": "v082-maas-reader-rejection-1",
+  "paper": "A microenvironment-determined risk continuum refines subtyping in meningioma and reveals determinants of machine learning-based tumor classification",
+  "candidate_status": "rejected; not a usable reader and not a release candidate",
+  "total_reader_content_violations": 412,
+  "violations_by_module": {
+    "paper_header": 9,
+    "one_page_overview": 18,
+    "section_and_body": 225,
+    "figures_and_tables": 160
+  },
+  "representative_failures": [
+    "English title copied into the Chinese-title position",
+    "placeholder author list and no affiliations",
+    "publisher, complete publication timeline, journal scope and field positioning missing",
+    "source SHA and extraction diagnostics shown to the reader",
+    "DOI and first-page running text used as the research question",
+    "PDF page count, extracted block count and reference count used as the core dataset",
+    "ethics statement used as model input/output and workflow",
+    "generic evidence disclaimer used as the study limitation",
+    "Front matter and sentence fragments treated as scientific sections",
+    "multiple duplicate References sections",
+    "body Chinese slots contain copied English",
+    "all figure titles reduced to Fig. or Extended Data Fig.",
+    "English captions reused as Chinese captions",
+    "captions reused as figure-study explanations",
+    "source tables emitted as image figures rather than structured table cards"
+  ],
+  "root_cause": "The parser fabricated reader-facing overview and metadata from arbitrary raw PDF fragments, while the translation stage did not perform paper-level synthesis, section cleanup, figure interpretation or table reconstruction.",
+  "required_action": "Regenerate the content manifest from the CANVAS-derived reader blueprint and block HTML rendering until the reader-content validator passes."
+}

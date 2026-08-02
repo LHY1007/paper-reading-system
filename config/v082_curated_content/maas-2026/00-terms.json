@@ -1,0 +1,143 @@
+{
+  "version": "v082-maas-curated-content-1",
+  "paper_key": "maas-2026",
+  "terms": [
+    {
+      "id": "TME",
+      "label": "TME",
+      "definition_zh": "肿瘤微环境，由肿瘤细胞之外的免疫、血管、基质及其他非肿瘤细胞和分子环境共同构成。本文重点分析这些成分如何影响脑膜瘤分类与复发风险。",
+      "aliases": ["tumor microenvironment", "tumour microenvironment", "肿瘤微环境"],
+      "category": "微环境",
+      "level": 1
+    },
+    {
+      "id": "TAM",
+      "label": "TAM",
+      "definition_zh": "肿瘤相关巨噬细胞。本文为简化表述，将CD68阳性的髓系来源细胞统称为TAM，并进一步区分微胶质样细胞与外周髓系来源的浸润性巨噬细胞。",
+      "aliases": ["tumor-associated macrophage", "tumour-associated macrophage", "肿瘤相关巨噬细胞"],
+      "category": "细胞类型",
+      "level": 1
+    },
+    {
+      "id": "MC",
+      "label": "MC",
+      "definition_zh": "甲基化类别，即Heidelberg脑肿瘤分类器定义的脑膜瘤类别，包括ben-1、ben-2、ben-3、int-A、int-B和mal。本文检验这些类别是离散亚型还是连续风险状态。",
+      "aliases": ["methylation class", "甲基化类别", "ben-1", "ben-2", "ben-3", "int-A", "int-B", "mal"],
+      "category": "分子分型",
+      "level": 1
+    },
+    {
+      "id": "MG",
+      "label": "MG",
+      "definition_zh": "UCSF甲基化分组，主要包括Merlin intact、immune enriched和hypermitotic。文章将其与Heidelberg MC及Toronto等其他分型体系进行对应比较。",
+      "aliases": ["methylation group", "甲基化组", "UCSF group"],
+      "category": "分子分型",
+      "level": 2
+    },
+    {
+      "id": "NF2",
+      "label": "NF2",
+      "definition_zh": "编码Merlin的抑癌基因。脑膜瘤首先可按NF2野生型和NF2突变型区分；本文的风险连续谱主要发生在NF2突变型脑膜瘤内部。",
+      "aliases": ["NF2-mutant", "NF2-wild-type", "Merlin"],
+      "category": "基因与分型",
+      "level": 1
+    },
+    {
+      "id": "snRNA-seq",
+      "label": "snRNA-seq",
+      "definition_zh": "单核RNA测序，适用于冻存组织并在单核分辨率描述肿瘤细胞和非肿瘤细胞的转录状态。本文用26例脑膜瘤建立细胞组成和TAM状态参考。",
+      "aliases": ["single-nucleus RNA sequencing", "snRNA", "单核RNA测序"],
+      "category": "技术",
+      "level": 1
+    },
+    {
+      "id": "NMF",
+      "label": "NMF",
+      "definition_zh": "非负矩阵分解。本文用于把大规模甲基化数据分解为可重复出现的肿瘤细胞来源和基质来源表观遗传特征。",
+      "aliases": ["non-negative matrix factorization", "非负矩阵分解"],
+      "category": "计算方法",
+      "level": 2
+    },
+    {
+      "id": "NNLS",
+      "label": "NNLS",
+      "definition_zh": "非负最小二乘。作者使用已识别的特征对独立病例进行非负解卷积，估计每个病例中不同肿瘤和基质成分的比例。",
+      "aliases": ["non-negative least squares", "非负最小二乘"],
+      "category": "计算方法",
+      "level": 2
+    },
+    {
+      "id": "CNV",
+      "label": "CNV",
+      "definition_zh": "拷贝数变异，包括染色体片段扩增或缺失。本文使用1p、6q、22q等改变描述脑膜瘤亚克隆和高风险肿瘤内在演化。",
+      "aliases": ["copy-number variation", "copy-number variant", "拷贝数变异"],
+      "category": "基因组",
+      "level": 1
+    },
+    {
+      "id": "MIBI",
+      "label": "MIBI",
+      "definition_zh": "多重离子束成像，可在同一组织区域检测多种蛋白。本文用CD68、IBA1、TMEM119和P2RY12正交区分微胶质样细胞与浸润性巨噬细胞。",
+      "aliases": ["multiplexed ion beam imaging", "多重离子束成像"],
+      "category": "空间蛋白技术",
+      "level": 2
+    },
+    {
+      "id": "PU.1",
+      "label": "PU.1",
+      "definition_zh": "髓系细胞核转录因子标志物。因其核染色便于自动计数，文章在1,378例TMA队列中将PU.1作为临床可实施的TAM定量指标。",
+      "aliases": ["SPI1", "PU1"],
+      "category": "标志物",
+      "level": 1
+    },
+    {
+      "id": "CD68",
+      "label": "CD68",
+      "definition_zh": "常用髓系/巨噬细胞标志物。本文既用其估计TAM数量，也利用染色形态和联合标志物识别微胶质样与浸润性巨噬细胞，但CD68本身并不专属于某一来源。",
+      "aliases": ["CD68-positive", "CD68阳性"],
+      "category": "标志物",
+      "level": 1
+    },
+    {
+      "id": "P2RY12",
+      "label": "P2RY12",
+      "definition_zh": "脑驻留微胶质相关标志物。与TMEM119、IBA1及较低CD68表达联合出现时，支持微胶质样TAM身份。",
+      "aliases": ["P2RY12-positive", "P2RY12阳性"],
+      "category": "标志物",
+      "level": 2
+    },
+    {
+      "id": "TMEM119",
+      "label": "TMEM119",
+      "definition_zh": "微胶质相关膜蛋白标志物。本文将TMEM119与P2RY12、IBA1联合用于区分脑驻留微胶质样细胞和外周来源巨噬细胞。",
+      "aliases": ["TMEM119-positive", "TMEM119阳性"],
+      "category": "标志物",
+      "level": 2
+    },
+    {
+      "id": "SPP1",
+      "label": "SPP1",
+      "definition_zh": "与肿瘤支持、治疗耐受和进展相关的巨噬细胞程序标志基因。高风险MC mal中的巨噬细胞更富集SPP1相关状态。",
+      "aliases": ["osteopontin"],
+      "category": "功能程序",
+      "level": 2
+    },
+    {
+      "id": "Cell2location",
+      "label": "Cell2location",
+      "definition_zh": "利用单细胞参考对空间转录组位置进行细胞类型反卷积的方法。本文用它估计空间子图中肿瘤细胞、内皮细胞、微胶质样细胞和巨噬细胞的组成。",
+      "aliases": ["cell2location", "空间反卷积"],
+      "category": "计算方法",
+      "level": 2
+    },
+    {
+      "id": "C-index",
+      "label": "C-index",
+      "definition_zh": "一致性指数，用于衡量生存风险模型对结局排序的准确性。本文中加入PU.1后，WHO 1–2级病例的C-index由0.63提高到0.66。",
+      "aliases": ["concordance index", "一致性指数"],
+      "category": "临床统计",
+      "level": 2
+    }
+  ],
+  "studies": {}
+}

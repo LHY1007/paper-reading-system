@@ -1,0 +1,242 @@
+{
+  "registry_version": "0.8.2-final-source-registry-5",
+  "source_contract": {
+    "canonical_order_0": "locked and independently validated CANVAS HTML baseline",
+    "orders_1_to_11": "downloaded original article PDFs with page-count and SHA-256 audit"
+  },
+  "expected_papers": 12,
+  "completed_papers": 11,
+  "papers": [
+    {
+      "order": 0,
+      "key": "canvas",
+      "doi": "10.1016/j.cell.2026.05.031",
+      "source_mode": "locked_canonical_html",
+      "path": "00_V0.8.2_CANVAS_Cellular_architecture_and_neighborhood-informed_virtual_spatial_tumor_profiling.html",
+      "sha256": "84c37e235f40e782c79de6625ddd9369cba64095f28bff75ae702fb5893f6ff1",
+      "pages": 29,
+      "component_counts": {
+        "bilingual_units": 111,
+        "figure_cards": 19,
+        "table_cards": 5,
+        "reference_items": 112
+      },
+      "audit_note": "Order 0 is not regenerated from a downloaded PDF. It is the normalized product and content baseline; PDF-native extraction is exercised independently by orders 1-11."
+    },
+    {
+      "order": 1,
+      "key": "maas-2026",
+      "doi": "10.1038/s41588-025-02475-w",
+      "source_mode": "reused_pdf",
+      "path": ".build/v082/pdfs/01_maas-2026.pdf",
+      "sha256": "6736c1c3f7096e758fbe071ef6d4513810037633ae442049f3904b462e530399",
+      "pages": 32,
+      "first_page_text": "Nature Genetics | Volume 58 | February 2026 | 341–354 341 nature genetics https://doi.org/10.1038/s41588-025-02475-w Article A microenvironment-determined risk continuum refines subtyping in meningioma and reveals determinants of machine learning-based tumor classification Classification of tumors in neuro-oncology today relies on molecular patterns (mostly DNA methylation) and their machine learning-supported interpretation. Understanding the process of algorithmic interpretation is essential f"
+    },
+    {
+      "order": 2,
+      "key": "landry-2026",
+      "doi": "10.1038/s41588-026-02615-w",
+      "source_mode": "reused_pdf",
+      "path": ".build/v082/pdfs/02_landry-2026.pdf",
+      "sha256": "a8f8fd8f61497c2123129f2c60a792ef9c0d876c2ee4822b44db65ec5f5e54ea",
+      "pages": 26,
+      "first_page_text": "Nature Genetics | Volume 58 | June 2026 | 1383–1395 1383 nature genetics https://doi.org/10.1038/s41588-026-02615-w Article Spatially resolved single-cell analyses of human meningioma identify novel cell states influencing tumor microenvironment and progression Alexander P. Landry1,2,3, Leeor S. Yefet1,2,3, Justin Z. Wang1,2,3, Andrew Ajisebutu1,3, Chloe Gui1,2,3, Yosef Ellenbogen1,2,3, Jeff Liu1,3, Vikas Patil1,3, Colleen Q. Ding1,3, Qingxia Wei1,3, Sheila Mansouri1,3,4, Olivia Singh1,3,4, Aaro"
+    },
+    {
+      "order": 3,
+      "key": "lee-2025",
+      "doi": "10.1038/s41467-025-60653-0",
+      "source_mode": "reused_pdf",
+      "path": ".build/v082/pdfs/03_lee-2025.pdf",
+      "sha256": "0201a21d5f28c1a0a649da33f89fc42f9fc7661330e9c767964d9c0380bf0531",
+      "pages": 14,
+      "first_page_text": "Article https://doi.org/10.1038/s41467-025-60653-0 Single-cell analysis reveals a longitudinal trajectory of meningioma evolution and heterogeneity Ji Yoon Lee 1,2, Eun Jung Lee2,3, Bo Yeon Seo2,3, Jiwon Kim 1,2, Youjin Song1,2, Dayoung Lee1,2, Namsung Moon1,2, Harim Koo 1,2,4, Chul-Kee Park 5, Min-Sung Kim5, Serk In Park2,3,6, Do-Hyun Nam 7, Doo-Sik Kong 7 & Jason K. Sa 1,2 Meningioma is the most prevalent primary brain tumor with extensive intra- tumoral heterogeneity and high recurrence rates"
+    },
+    {
+      "order": 4,
+      "key": "valanarasu-2026",
+      "doi": "10.1016/j.cell.2025.11.016",
+      "source_mode": "reused_pdf",
+      "path": ".build/v082/pdfs/04_valanarasu-2026.pdf",
+      "sha256": "c7a18a6e01f74ed1d748845a66fc0f053b94580a685f41aac17a891a8356ad14",
+      "pages": 35,
+      "first_page_text": "Article Multimodal AI generates virtual population for tumor microenvironment modeling Graphical abstract Highlights • GigaTIME uses multimodal AI to translate H&E pathology slides to spatial proteomics • GigaTIME generates a virtual population with cell states from routine H&E slides • Virtual population enables large-scale clinical discovery and patient stratification • Virtual population reveals new spatial and combinatorial protein activation patterns Authors Jeya Maria Jose Valanarasu, Hanw"
+    },
+    {
+      "order": 5,
+      "key": "li-hex-2026",
+      "doi": "10.1038/s41591-025-04060-4",
+      "source_mode": "reused_pdf",
+      "path": ".build/v082/pdfs/05_li-hex-2026.pdf",
+      "sha256": "8cb0b084388fab4389a4c8cfb986499bc09ed586fcf8ca04cdc2521f90ce8292",
+      "pages": 31,
+      "first_page_text": "Nature Medicine | Volume 32 | January 2026 | 231–244 231 nature medicine https://doi.org/10.1038/s41591-025-04060-4 Article AI-enabled virtual spatial proteomics from histopathology for interpretable biomarker discovery in lung cancer Spatial proteomics enables high-resolution mapping of protein expression and can transform our understanding of biology and disease. However, major challenges remain for clinical translation, including cost, complexity and scalability. Here we present H&E to protei"
+    },
+    {
+      "order": 6,
+      "key": "andani-2025",
+      "doi": "10.1038/s42256-025-01074-y",
+      "source_mode": "reused_pdf",
+      "path": ".build/v082/pdfs/06_andani-2025.pdf",
+      "sha256": "7653d95f0e835b09ed1d9ff8054bc3c7cdbada594bccd069adc67961dc23aa90",
+      "pages": 28,
+      "first_page_text": "Nature Machine Intelligence | Volume 7 | August 2025 | 1292–1307 1292 nature machine intelligence Article https://doi.org/10.1038/s42256-025-01074-y Histopathology-based protein multiplex generation using deep learning Multiplexed protein imaging offers valuable insights into interactions between tumours and their surrounding tumour microenvironment, but its widespread use is limited by cost, time and tissue availability. Here we present HistoPlexer, a deep learning framework that generates spat"
+    },
+    {
+      "order": 8,
+      "key": "spitzer-2025",
+      "doi": "10.1038/s41588-025-02168-4",
+      "source_mode": "reused_pdf",
+      "path": ".build/v082/pdfs/08_spitzer-2025.pdf",
+      "sha256": "9f60cb9535737621dc2ce34c120469374de4a5e5da6b2a8bd7fdc055428082cf",
+      "pages": 28,
+      "first_page_text": "Nature Genetics | Volume 57 | May 2025 | 1168–1178 1168 nature genetics Article https://doi.org/10.1038/s41588-025-02168-4 Deciphering the longitudinal trajectories of glioblastoma ecosystems by integrative single-cell genomics The evolution of isocitrate dehydrogenase (IDH)-wildtype glioblastoma (GBM) after standard-of-care therapy remains poorly understood. Here we analyzed matched primary and recurrent GBMs from 59 patients using single-nucleus RNA sequencing and bulk DNA sequencing, assessin"
+    },
+    {
+      "order": 9,
+      "key": "lucas-2024",
+      "doi": "10.1038/s41588-024-01747-1",
+      "source_mode": "reused_pdf",
+      "path": ".build/v082/pdfs/09_lucas-2024.pdf",
+      "sha256": "5f5aa25327a729d741f7d9dd027a30ebadcf10ea6ef3c8dfac4d339422981ad5",
+      "pages": 45,
+      "first_page_text": "UCSF UC San Francisco Previously Published Works Title Spatial genomic, biochemical and cellular mechanisms underlying meningioma heterogeneity and evolution Permalink https://escholarship.org/uc/item/3sx7d9gv Journal Nature Genetics, 56(6) ISSN 1061-4036 Authors Lucas, Calixto-Hope G Mirchia, Kanish Seo, Kyounghee et al. Publication Date 2024-06-01 DOI 10.1038/s41588-024-01747-1 Peer reviewed eScholarship.org Powered by the California Digital Library University of California"
+    },
+    {
+      "order": 10,
+      "key": "sorin-2023",
+      "doi": "10.1038/s41586-022-05672-3",
+      "source_mode": "reused_pdf",
+      "path": ".build/v082/pdfs/10_sorin-2023.pdf",
+      "sha256": "33203fbc0518868027d1cac99647e468e1c1b61795b050e2abbc19dad0056060",
+      "pages": 24,
+      "first_page_text": "548 | Nature | Vol 614 | 16 February 2023 Article Single-cell spatial landscapes of the lung tumour immune microenvironment Mark Sorin1,2,13, Morteza Rezanejad3,4,13, Elham Karimi1,13, Benoit Fiset1, Lysanne Desharnais1,2, Lucas J. M. Perus1,5, Simon Milette1,5, Miranda W. Yu1,5, Sarah M. Maritan1,6, Samuel Doré1,2, Émilie Pichette7, William Enlow8, Andréanne Gagné8, Yuhong Wei1, Michele Orain8, Venkata S. K. Manem8,9, Roni Rayes1, Peter M. Siegel1,6,10, Sophie Camilleri-Broët11, Pierre Olivier "
+    },
+    {
+      "order": 11,
+      "key": "karimi-2023",
+      "doi": "10.1038/s41586-022-05680-3",
+      "source_mode": "reused_pdf",
+      "path": ".build/v082/pdfs/11_karimi-2023.pdf",
+      "sha256": "3797f16efd80c878898a5ed235336579624c3053b19c7aa13716729027dd6cdb",
+      "pages": 28,
+      "first_page_text": "Nature | Vol 614 | 16 February 2023 | 555 Article Single-cell spatial immune landscapes of primary and metastatic brain tumours Elham Karimi1,20, Miranda W. Yu1,2,20, Sarah M. Maritan1,3,20, Lucas J. M. Perus1,2,20, Morteza Rezanejad4, Mark Sorin1,5, Matthew Dankner1,3, Parvaneh Fallah6, Samuel Doré1,5, Dongmei Zuo1, Benoit Fiset1, Daan J. Kloosterman7, LeeAnn Ramsay1, Yuhong Wei1, Stephanie Lam8, Roa Alsajjan9,10, Ian R. Watson1,11, Gloria Roldan Urgoiti12,13, Morag Park1,6,11, Dieta Brandsma14"
+    }
+  ],
+  "failures": [
+    {
+      "order": 7,
+      "key": "cho-2026",
+      "doi": "10.1126/science.adz2742",
+      "error": "DownloadError: all PDF download candidates failed after 5 attempts",
+      "discovery": {
+        "pmc": {
+          "pmc_found": false
+        },
+        "europepmc": {
+          "records": [
+            {
+              "pmcid": null,
+              "pmid": "42207882",
+              "urls": [
+                "https://doi.org/10.1126/science.adz2742"
+              ]
+            }
+          ]
+        },
+        "unpaywall": {
+          "error": "HTTPError: 422 Client Error: Unprocessable Entity for url: https://api.unpaywall.org/v2/10.1126%2Fscience.adz2742?email=noreply%40example.com"
+        },
+        "openalex": {
+          "open_access": {
+            "is_oa": false,
+            "oa_status": "closed",
+            "oa_url": null,
+            "any_repository_has_fulltext": false
+          },
+          "locations": [
+            {
+              "source": "Science",
+              "version": "publishedVersion",
+              "is_oa": false,
+              "pdf_url": null,
+              "landing_page_url": "https://doi.org/10.1126/science.adz2742"
+            },
+            {
+              "source": "Science",
+              "version": "publishedVersion",
+              "is_oa": false,
+              "pdf_url": null,
+              "landing_page_url": "https://doi.org/10.1126/science.adz2742"
+            },
+            {
+              "source": "PubMed",
+              "version": "publishedVersion",
+              "is_oa": false,
+              "pdf_url": null,
+              "landing_page_url": "https://pubmed.ncbi.nlm.nih.gov/42207882"
+            }
+          ]
+        },
+        "semantic_scholar": {
+          "error": "HTTPError: 429 Client Error:  for url: https://api.semanticscholar.org/graph/v1/paper/DOI:10.1126%2Fscience.adz2742?fields=title%2CopenAccessPdf%2Curl%2CexternalIds"
+        },
+        "crossref": {
+          "crossref_links": 1
+        },
+        "doi": {
+          "error": "HTTPError: 403 Client Error: Forbidden for url: https://www.science.org/doi/10.1126/science.adz2742"
+        }
+      },
+      "candidates": [
+        "https://www.science.org/doi/pdf/10.1126/science.adz2742",
+        "https://doi.org/10.1126/science.adz2742",
+        "https://pubmed.ncbi.nlm.nih.gov/42207882"
+      ],
+      "attempts": [
+        {
+          "url": "https://www.science.org/doi/pdf/10.1126/science.adz2742",
+          "final_url": "https://www.science.org/doi/pdf/10.1126/science.adz2742",
+          "status": 403,
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 5861,
+          "nested_pdf_links": 0
+        },
+        {
+          "url": "https://www.science.org/doi/pdf/10.1126/science.adz2742?download=true",
+          "final_url": "https://www.science.org/doi/pdf/10.1126/science.adz2742?download=true",
+          "status": 403,
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 5939,
+          "nested_pdf_links": 0
+        },
+        {
+          "url": "https://www.science.org/doi/epdf/10.1126/science.adz2742",
+          "final_url": "https://www.science.org/doi/epdf/10.1126/science.adz2742",
+          "status": 403,
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 5864,
+          "nested_pdf_links": 0
+        },
+        {
+          "url": "https://doi.org/10.1126/science.adz2742",
+          "final_url": "https://www.science.org/doi/10.1126/science.adz2742",
+          "status": 403,
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 5828,
+          "nested_pdf_links": 0
+        },
+        {
+          "url": "https://pubmed.ncbi.nlm.nih.gov/42207882",
+          "final_url": "https://pubmed.ncbi.nlm.nih.gov/42207882",
+          "status": 403,
+          "content_type": "text/html; charset=UTF-8",
+          "bytes": 134,
+          "nested_pdf_links": 0
+        }
+      ]
+    }
+  ],
+  "passed": false
+}

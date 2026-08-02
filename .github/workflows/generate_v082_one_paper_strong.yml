@@ -1,0 +1,218 @@
+name: Generate one V0.8.2 paper with strong AI review
+
+on:
+  workflow_call:
+    inputs:
+      paper_key:
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      paper_key:
+        description: Registered paper key
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  copilot-requests: write
+
+env:
+  PYTHONUNBUFFERED: "1"
+  V082_PRIMARY_MODEL: "gpt-5.4"
+  V082_REVIEW_MODEL: "gpt-5.4"
+  V082_VISION_MODEL: "gpt-5.4"
+  V082_REASONING_EFFORT: "high"
+  V082_TRANSLATION_REASONING_EFFORT: "medium"
+  V082_COPILOT_COMPONENT_TIMEOUT_SECONDS: "420"
+  V082_COPILOT_IDLE_TIMEOUT_SECONDS: "360"
+  V082_TRANSLATION_BATCH_ITEMS: "8"
+  V082_TRANSLATION_BATCH_CHARS: "12000"
+  V082_REFERENCE_INTERVAL_SECONDS: "0.08"
+  CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
+  LUCAS_CACHE_KEY: "v082-lucas-source-s41588-024-01747-1-31p-v1"
+
+jobs:
+  generate-one:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install evidence, Copilot SDK and strong-AI dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            github-copilot-sdk json-repair requests beautifulsoup4 PyMuPDF curl_cffi jsonschema lxml pillow
+          python - <<'PY'
+          import copilot
+          import json_repair
+          print('github-copilot-sdk and json-repair imports passed')
+          PY
+
+      - name: Verify JSON, table, panel, translation and reviewer contracts
+        run: |
+          python tools/test_copilot_json_provider.py
+          python tools/test_v082_translation_tokens.py
+          python tools/test_v082_batched_translation.py
+          python tools/test_v082_component_contracts.py
+
+      - name: Locate CANVAS and prepare directories
+        run: |
+          set -euo pipefail
+          CANVAS=$(find . -maxdepth 1 -name '00_V0.8.2_CANVAS*.html' | head -n 1)
+          test -n "$CANVAS"
+          printf 'CANVAS_ORIGINAL=%q\n' "$CANVAS" > /tmp/v082_strong_ai_paths
+          mkdir -p .build/v082/{pdfs,cho-source,lucas-source,model-cache,strong-one}
+
+      - name: Restore audited source PDF cache
+        id: source-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/pdfs
+          key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json', 'tools/download_v082_sources.py', 'tools/download_v082_release_sources.py', 'tools/download_v082_release_sources_continue.py', 'tools/prefetch_v082_blocked_sources.py') }}
+          restore-keys: |
+            v082-source-pdfs-
+
+      - name: Restore exact Cho source
+        id: cho-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/cho-source
+          key: ${{ env.CHO_CACHE_KEY }}
+
+      - name: Restore exact Lucas source
+        id: lucas-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/lucas-source
+          key: ${{ env.LUCAS_CACHE_KEY }}
+
+      - name: Restore paper-specific strong-AI cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/model-cache
+          key: v082-strong-ai-v20-${{ inputs.paper_key || github.event.inputs.paper_key }}-${{ hashFiles('tools/copilot_sdk_json_provider.py', 'tools/copilot_sdk_json_provider_v2.py', 'tools/generate_v082_reader_manifest_with_copilot_sdk_v20.py', 'tools/generate_v082_reader_manifest_with_copilot_sdk_v19.py', 'tools/generate_v082_reader_manifest_with_copilot_sdk_v18.py', 'tools/generate_v082_reader_manifest_with_copilot_sdk_v17.py', 'tools/generate_v082_reader_manifest_with_copilot_sdk_v16.py', 'tools/generate_v082_reader_manifest_with_copilot_sdk_v15.py', 'tools/generate_v082_reader_manifest_with_copilot_sdk_v14.py', 'tools/generate_v082_reader_manifest_with_strong_ai_v13.py', 'tools/validate_v082_reader_semantics_v4.py', 'tools/normalize_v082_paper_tables.py', 'config/v082_reader_content_plans/*.json') }}
+          restore-keys: |
+            v082-strong-ai-v20-${{ inputs.paper_key || github.event.inputs.paper_key }}-
+            v082-strong-ai-v19-${{ inputs.paper_key || github.event.inputs.paper_key }}-
+            v082-strong-ai-v18-${{ inputs.paper_key || github.event.inputs.paper_key }}-
+
+      - name: Obtain and verify the requested exact source PDF
+        env:
+          PAPER_KEY: ${{ inputs.paper_key || github.event.inputs.paper_key }}
+          CHO_CACHE_HIT: ${{ steps.cho-cache.outputs.cache-hit }}
+          LUCAS_CACHE_HIT: ${{ steps.lucas-cache.outputs.cache-hit }}
+        run: |
+          set -euo pipefail
+          source /tmp/v082_strong_ai_paths
+
+          # Dedicated publisher-blocked caches are dependencies only for the
+          # papers that actually need them. A Landry run must not be stopped by
+          # an unrelated Cho or Lucas cache miss.
+          if [ "$PAPER_KEY" = "cho-2026" ]; then
+            test "$CHO_CACHE_HIT" = "true"
+            test -s .build/v082/cho-source/07_cho-2026.pdf
+            cp .build/v082/cho-source/07_cho-2026.pdf .build/v082/pdfs/07_cho-2026.pdf
+          fi
+          if [ "$PAPER_KEY" = "lucas-2024" ]; then
+            test "$LUCAS_CACHE_HIT" = "true"
+            test -s .build/v082/lucas-source/09_lucas-2024.pdf
+            cp .build/v082/lucas-source/09_lucas-2024.pdf .build/v082/pdfs/09_lucas-2024.pdf
+          fi
+
+          SOURCE_PATH=$(python - <<'PY'
+          import json, os
+          from pathlib import Path
+          registry = json.loads(Path('config/v082_paper_sources.json').read_text('utf-8'))
+          paper = next(item for item in registry['papers'] if item['key'] == os.environ['PAPER_KEY'])
+          print(f".build/v082/pdfs/{int(paper['order']):02d}_{paper['key']}.pdf")
+          PY
+          )
+
+          if [ ! -s "$SOURCE_PATH" ]; then
+            python tools/prefetch_v082_blocked_sources.py \
+              --registry config/v082_paper_sources.json \
+              --output-dir .build/v082/pdfs \
+              --report .build/v082/strong-one/BLOCKED_SOURCE_PREFETCH.json || true
+            python tools/download_v082_release_sources_continue.py \
+              --registry config/v082_paper_sources.json \
+              --canonical-html "$CANVAS_ORIGINAL" \
+              --output-dir .build/v082/pdfs \
+              --report .build/v082/strong-one/SOURCE_DOWNLOAD_AVAILABLE.json \
+              --reuse || true
+          fi
+
+          test -s "$SOURCE_PATH"
+          python - "$SOURCE_PATH" <<'PY'
+          import hashlib, json, sys
+          from pathlib import Path
+          import fitz
+
+          path = Path(sys.argv[1])
+          registry = json.loads(Path('config/v082_paper_sources.json').read_text('utf-8'))
+          key = path.stem.split('_', 1)[1]
+          paper = next(item for item in registry['papers'] if item['key'] == key)
+          with fitz.open(path) as document:
+              pages = len(document)
+              if pages != int(paper['expected_pages']):
+                  raise SystemExit(
+                      f"wrong source page count for {key}: {pages} != {paper['expected_pages']}"
+                  )
+              first_pages = ''.join(page.get_text() for page in document[:2]).lower()
+          normalized_title = ' '.join(str(paper['title']).lower().split())
+          title_tokens = [token for token in normalized_title.split() if len(token) >= 7]
+          matched = sum(token in first_pages for token in title_tokens)
+          if title_tokens and matched < max(3, len(title_tokens) // 2):
+              raise SystemExit(f"source title identity check failed for {key}")
+          print(json.dumps({
+              'paper_key': key,
+              'source_path': str(path),
+              'pages': pages,
+              'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+              'passed': True,
+          }, indent=2))
+          PY
+
+      - name: Generate and independently review every variable component
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          COPILOT_GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PAPER_KEY: ${{ inputs.paper_key || github.event.inputs.paper_key }}
+        run: |
+          python tools/run_v082_manifest_generation_one_strong.py "$PAPER_KEY" \
+            --registry config/v082_paper_sources.json \
+            --pdf-dir .build/v082/pdfs \
+            --plans-dir config/v082_reader_content_plans \
+            --manifest-dir content/v082_manifests \
+            --review-dir content/v082_reviews \
+            --work-root .build/v082/strong-one \
+            --cache-dir .build/v082/model-cache \
+            --branch v0.8x-batch-diagnosis \
+            --generator tools/generate_v082_reader_manifest_with_copilot_sdk_v20.py
+
+      - name: Save paper-specific model and reference cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .build/v082/model-cache
+          key: v082-strong-ai-v20-${{ inputs.paper_key || github.event.inputs.paper_key }}-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Upload complete per-paper audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v082-strong-ai-${{ inputs.paper_key || github.event.inputs.paper_key }}
+          path: |
+            .build/v082/strong-one/${{ inputs.paper_key || github.event.inputs.paper_key }}
+            content/v082_manifests/${{ inputs.paper_key || github.event.inputs.paper_key }}.json
+            content/v082_reviews/${{ inputs.paper_key || github.event.inputs.paper_key }}.json
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 30

@@ -1,0 +1,144 @@
+{
+  "canonical": "V0.8.2_CANVAS_NORMALIZED_MASTER.html",
+  "candidate": "V0.8.2_COMPONENT_LOCKED_SMOKE.html",
+  "canonical_sha256": "d72ad77c76487c39c699c420582ef8c102fa889bc77f68b83f277946802309cd",
+  "candidate_sha256": "57e43af5c0ebf979b9cd6e784ac34ccc9fb09b06da463f8f75c07895946195c6",
+  "canonical_shell_sha256": "3ae17b77cd7ca23846794a13856181fd63c63ebcd01d72d414685382fcc79c13",
+  "candidate_shell_sha256": "3ae17b77cd7ca23846794a13856181fd63c63ebcd01d72d414685382fcc79c13",
+  "canonical_style_hashes": [
+    "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
+    "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
+    "f82f1da605f7f77839bfef3d0a2b3be1154aedbae6e61d8ed62ff8adaa1d8268",
+    "f81b9084ea6ef20186446db9baa9c415ef1d781316ba6d192ff8db3c8736160c",
+    "4101554deeee96cd761b2f2ab80261fee454cc6f7b573c6bd39f93364d27ae35",
+    "8f665ecc1b1f41d06bf7c5dd0774d6029f8b059751d2901bfcc0aef4bd3da269",
+    "a0175adf0fb35d5da4c3c4d55c6a70e930e7575f0211fc67942aa5043f891ae1",
+    "46ce2357d64a9530417760c526dcfe6f00aa95ff7cf6cc0b1304c3761e3c137f",
+    "b59d633ba71d347cf6aa80ec1b61c4ceaa0035387fe8b70504d9989a99e8dd39",
+    "8e475bd3924ac3e4be952771041cf9e65c0fbdfe4787d508e1302234369a769b",
+    "1e2358b59d6dd01c9469f0ec37deacd4d32848fe39c79e422332a9e02f7c982a",
+    "1466d3ab816b730a60de0d364f4b24f23798aa32b7ca9cda4efa9280e7071a95",
+    "c2385fe9a6c043df4eb1daa05efb2c1983a77120b7bf77e6a8a2b484066a907d",
+    "3fe54f99d0128c6b05b67a46c6e5164fccae91e7d044b4168040c0c42c074ab5",
+    "1e9a0d4f384f0b43cc5d110acb807fe68308851064ad75ec4660a11b0551ef09",
+    "94b0e20c1730cb0e549d5a51e6fd829d9484dc01113aaacc1b0271c40bb4deec"
+  ],
+  "candidate_style_hashes": [
+    "f775c1a545ae5fcc8f37e924688ab97d9ab0a49239c89d9ae5e5855c7361f2d2",
+    "afd4b5de8744468403421ba82b97e10b054abca10512d5864da6ae298afd2fa0",
+    "f82f1da605f7f77839bfef3d0a2b3be1154aedbae6e61d8ed62ff8adaa1d8268",
+    "f81b9084ea6ef20186446db9baa9c415ef1d781316ba6d192ff8db3c8736160c",
+    "4101554deeee96cd761b2f2ab80261fee454cc6f7b573c6bd39f93364d27ae35",
+    "8f665ecc1b1f41d06bf7c5dd0774d6029f8b059751d2901bfcc0aef4bd3da269",
+    "a0175adf0fb35d5da4c3c4d55c6a70e930e7575f0211fc67942aa5043f891ae1",
+    "46ce2357d64a9530417760c526dcfe6f00aa95ff7cf6cc0b1304c3761e3c137f",
+    "b59d633ba71d347cf6aa80ec1b61c4ceaa0035387fe8b70504d9989a99e8dd39",
+    "8e475bd3924ac3e4be952771041cf9e65c0fbdfe4787d508e1302234369a769b",
+    "1e2358b59d6dd01c9469f0ec37deacd4d32848fe39c79e422332a9e02f7c982a",
+    "1466d3ab816b730a60de0d364f4b24f23798aa32b7ca9cda4efa9280e7071a95",
+    "c2385fe9a6c043df4eb1daa05efb2c1983a77120b7bf77e6a8a2b484066a907d",
+    "3fe54f99d0128c6b05b67a46c6e5164fccae91e7d044b4168040c0c42c074ab5",
+    "1e9a0d4f384f0b43cc5d110acb807fe68308851064ad75ec4660a11b0551ef09",
+    "94b0e20c1730cb0e549d5a51e6fd829d9484dc01113aaacc1b0271c40bb4deec"
+  ],
+  "topbar_children": [
+    {
+      "tag": "button",
+      "id": "tocBtn",
+      "classes": []
+    },
+    {
+      "tag": "div",
+      "id": null,
+      "classes": [
+        "brand"
+      ]
+    },
+    {
+      "tag": "div",
+      "id": "readerModeSwitch",
+      "classes": [
+        "reader-mode-switch"
+      ]
+    },
+    {
+      "tag": "div",
+      "id": null,
+      "classes": [
+        "search"
+      ]
+    },
+    {
+      "tag": "button",
+      "id": "immersiveBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "settingsBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "annotationBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "docMarkupBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "pdfBtn",
+      "classes": []
+    },
+    {
+      "tag": "button",
+      "id": "printBtn",
+      "classes": []
+    }
+  ],
+  "layout_children": [
+    {
+      "tag": "aside",
+      "id": "sidebar",
+      "classes": [
+        "sidebar"
+      ]
+    },
+    {
+      "tag": "div",
+      "id": "leftResizeHandle",
+      "classes": [
+        "resizer",
+        "left-resizer"
+      ]
+    },
+    {
+      "tag": "main",
+      "id": null,
+      "classes": [
+        "main"
+      ]
+    },
+    {
+      "tag": "div",
+      "id": "rightResizeHandle",
+      "classes": [
+        "resizer",
+        "right-resizer"
+      ]
+    },
+    {
+      "tag": "aside",
+      "id": "viewer",
+      "classes": [
+        "viewer"
+      ]
+    }
+  ],
+  "errors": [],
+  "passed": true,
+  "canonical_kind": "normalized-master"
+}

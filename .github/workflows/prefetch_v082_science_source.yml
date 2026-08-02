@@ -1,0 +1,86 @@
+name: Prefetch V0.8.2 Science source with Chromium
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/prefetch_v082_science_source.yml"
+      - "tools/prefetch_v082_science_with_playwright.py"
+      - "tools/prefetch_v082_adobe_shared_pdf.py"
+      - "config/v082_paper_sources.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: v082-science-source-prefetch
+  cancel-in-progress: true
+
+env:
+  CHO_ADOBE_PREVIEW_URL: "https://to.adobe.com/phMsfMA7YPzZqvAdG8hYM4vE9jVf"
+  CHO_CACHE_KEY: "v082-cho-source-adz2742-24p-v1"
+
+jobs:
+  prefetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install source and Chromium dependencies
+        run: |
+          python -m pip install --disable-pip-version-check \
+            requests beautifulsoup4 curl_cffi lxml PyMuPDF playwright
+          python -m playwright install --with-deps chromium
+
+      - name: Restore dedicated Cho source cache
+        id: cho-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/cho-source
+          key: ${{ env.CHO_CACHE_KEY }}
+
+      - name: Materialize the user-supplied 24-page Science PDF through temporary Adobe share
+        if: steps.cho-cache.outputs.cache-hit != 'true'
+        run: |
+          mkdir -p .build/v082/cho-source .build/v082/science-prefetch
+          python tools/prefetch_v082_adobe_shared_pdf.py \
+            --url "$CHO_ADOBE_PREVIEW_URL" \
+            --output .build/v082/cho-source/07_cho-2026.pdf \
+            --report .build/v082/science-prefetch/CHO_ADOBE_SOURCE.json \
+            --expected-pages 24 \
+            --doi 10.1126/science.adz2742 \
+            --title-fragment "Pan-cancer spatial atlas of tertiary lymphoid structures"
+
+      - name: Revalidate cached or newly materialized Cho source
+        run: |
+          mkdir -p .build/v082/science-prefetch
+          python tools/prefetch_v082_adobe_shared_pdf.py \
+            --url "$CHO_ADOBE_PREVIEW_URL" \
+            --output .build/v082/cho-source/07_cho-2026.pdf \
+            --report .build/v082/science-prefetch/CHO_SOURCE_FINAL.json \
+            --expected-pages 24 \
+            --doi 10.1126/science.adz2742 \
+            --title-fragment "Pan-cancer spatial atlas of tertiary lymphoid structures"
+
+      - name: Save dedicated Cho source cache
+        if: success() && steps.cho-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: .build/v082/cho-source
+          key: ${{ env.CHO_CACHE_KEY }}
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v082-science-source-prefetch
+          path: .build/v082/science-prefetch
+          if-no-files-found: warn
+          retention-days: 30

@@ -1,0 +1,197 @@
+name: Build V0.8.2 Maas source-grounded reader manifest
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/test_v082_copilot_sdk.yml"
+      - "tools/generate_v082_reader_manifest_with_google_translate_v12.py"
+      - "tools/generate_v082_reader_manifest_with_google_translate_v11.py"
+      - "tools/apply_v082_curated_content.py"
+      - "tools/validate_v082_reader_semantics_v5.py"
+      - "config/v082_reader_content_plans/maas-2026.json"
+      - "config/v082_curated_content/maas-2026/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PYTHONUNBUFFERED: "1"
+
+jobs:
+  maas-reader-manifest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: v0.8x-batch-diagnosis
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install parser and translation dependencies
+        run: |
+          pip install --disable-pip-version-check requests beautifulsoup4 PyMuPDF curl_cffi jsonschema lxml pillow
+
+      - name: Restore audited source PDF cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .build/v082/pdfs
+          key: v082-source-pdfs-${{ hashFiles('config/v082_paper_sources.json', 'tools/download_v082_sources.py', 'tools/download_v082_release_sources.py', 'tools/download_v082_release_sources_continue.py', 'tools/prefetch_v082_blocked_sources.py') }}
+          restore-keys: |
+            v082-source-pdfs-
+
+      - name: Build exact Maas evidence
+        run: |
+          set -euo pipefail
+          mkdir -p .build/v082/maas-reader/reports .build/v082/model-cache
+          test -s .build/v082/pdfs/01_maas-2026.pdf
+          python tools/build_pdf_native_manifest_v082.py \
+            .build/v082/pdfs/01_maas-2026.pdf \
+            .build/v082/maas-reader/evidence.json \
+            --registry config/v082_paper_sources.json \
+            --key maas-2026 \
+            --audit .build/v082/maas-reader/evidence-audit.json
+          python tools/validate_v082_evidence_quality_v5.py \
+            .build/v082/maas-reader/evidence.json \
+            --audit .build/v082/maas-reader/evidence-audit.json \
+            --report .build/v082/maas-reader/reports/EVIDENCE_QUALITY.json
+
+      - name: Translate exact text and assemble deterministic scaffold
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          V082_TRANSLATE_INTERVAL_SECONDS: "0.08"
+        run: |
+          set -euo pipefail
+          python tools/generate_v082_reader_manifest_with_google_translate_v12.py \
+            .build/v082/maas-reader/evidence.json \
+            config/v082_reader_content_plans/maas-2026.json \
+            .build/v082/maas-reader/manifest.scaffold.json \
+            --cache-dir .build/v082/model-cache
+          python tools/normalize_v082_paper_tables.py \
+            .build/v082/maas-reader/manifest.scaffold.json \
+            --output .build/v082/maas-reader/manifest.normalized.json
+
+      - name: Apply source-audited terminology and 73 panel explanations
+        run: |
+          set -euo pipefail
+          python tools/apply_v082_curated_content.py \
+            .build/v082/maas-reader/manifest.normalized.json \
+            config/v082_curated_content/maas-2026 \
+            --output .build/v082/maas-reader/manifest.json
+
+      - name: Run complete fail-closed manifest audits
+        run: |
+          set -euo pipefail
+          python tools/validate_v082_final_manifest.py \
+            .build/v082/maas-reader/manifest.json \
+            --schema schemas/paper_content_manifest_v082.schema.json \
+            --audit .build/v082/maas-reader/evidence-audit.json \
+            --report .build/v082/maas-reader/reports/FINAL_MANIFEST.json
+          python tools/validate_v082_manifest_code_boundary.py \
+            .build/v082/maas-reader/manifest.json \
+            --report .build/v082/maas-reader/reports/CODE_BOUNDARY.json
+          python tools/validate_v082_reader_semantics_v5.py \
+            .build/v082/maas-reader/manifest.json \
+            --evidence .build/v082/maas-reader/evidence.json \
+            --curated-audit config/v082_curated_content/maas-2026/panel-audit.json \
+            --report .build/v082/maas-reader/reports/SEMANTIC_GROUNDING.json
+          python tools/validate_v082_reader_content_quality.py \
+            .build/v082/maas-reader/manifest.json \
+            --report .build/v082/maas-reader/reports/READER_CONTENT.json
+
+      - name: Write transparent content provenance
+        run: |
+          python - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          root = Path('.build/v082/maas-reader')
+          manifest = json.loads((root / 'manifest.json').read_text('utf-8'))
+          evidence = json.loads((root / 'evidence.json').read_text('utf-8'))
+          semantic = json.loads((root / 'reports' / 'SEMANTIC_GROUNDING.json').read_text('utf-8'))
+          figures = [a for a in manifest['assets'] if a['kind'] == 'figure']
+          report = {
+              'version': 'v082-source-grounded-curation-1',
+              'paper_key': 'maas-2026',
+              'generation_mode': 'exact-source extraction, deterministic translation and source-audited manual scientific curation',
+              'independent_model_review_claimed': False,
+              'source_parser': evidence.get('parser'),
+              'source_sha256': evidence.get('source_sha256'),
+              'paragraphs': sum(1 for s in manifest['sections'] for b in s['blocks'] if b.get('type') == 'paragraph'),
+              'figures': len(figures),
+              'curated_panels': sum(len((a.get('study') or {}).get('panels') or []) for a in figures),
+              'curated_panel_audit_passed': semantic.get('passed') is True,
+              'terms': len(manifest['terms']),
+              'references': len(manifest['references']),
+              'manifest_sha256': hashlib.sha256((root / 'manifest.json').read_bytes()).hexdigest(),
+              'passed': True,
+          }
+          (root / 'reports' / 'CONTENT_PROVENANCE.json').write_text(json.dumps(report, ensure_ascii=False, indent=2) + '\n', 'utf-8')
+          print(json.dumps(report, ensure_ascii=False, indent=2))
+          PY
+
+      - name: Persist validated Maas manifest and review record
+        run: |
+          set -euo pipefail
+          mkdir -p content/v082_manifests content/v082_reviews
+          cp .build/v082/maas-reader/manifest.json content/v082_manifests/maas-2026.json
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          root = Path('.build/v082/maas-reader')
+          report_names = [
+              'EVIDENCE_QUALITY.json', 'FINAL_MANIFEST.json', 'CODE_BOUNDARY.json',
+              'SEMANTIC_GROUNDING.json', 'READER_CONTENT.json', 'CONTENT_PROVENANCE.json'
+          ]
+          reports = {name: json.loads((root / 'reports' / name).read_text('utf-8')) for name in report_names}
+          failed = [name for name, value in reports.items() if value.get('passed') is not True]
+          if failed:
+              raise SystemExit('refusing to persist failed reports: ' + ', '.join(failed))
+          review = {
+              'version': 'v082-content-review-2',
+              'paper_key': 'maas-2026',
+              'review_mode': 'source-grounded-curation',
+              'passed': True,
+              'independent_reviewer_acceptance_passed': False,
+              'source_audited_curated_acceptance_passed': True,
+              'exact_source_preservation_passed': True,
+              'authoritative_pdf_panel_audit_passed': True,
+              'manifest_sha256': hashlib.sha256((root / 'manifest.json').read_bytes()).hexdigest(),
+              'workflow_run_id': os.environ.get('GITHUB_RUN_ID'),
+              'workflow_head_sha': os.environ.get('GITHUB_SHA'),
+              'reports': {
+                  name: {
+                      'version': value.get('version'),
+                      'passed': value.get('passed'),
+                      'error_count': len(value.get('errors') or value.get('violations') or []),
+                  }
+                  for name, value in reports.items()
+              },
+          }
+          Path('content/v082_reviews/maas-2026.json').write_text(json.dumps(review, ensure_ascii=False, indent=2) + '\n', 'utf-8')
+          print(json.dumps(review, ensure_ascii=False, indent=2))
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add content/v082_manifests/maas-2026.json content/v082_reviews/maas-2026.json
+          if git diff --cached --quiet; then
+            echo "Validated Maas content is already current"
+          else
+            git commit -m "Add validated V0.8.2 Maas reader content"
+            git fetch origin v0.8x-batch-diagnosis
+            git rebase origin/v0.8x-batch-diagnosis
+            git push origin HEAD:v0.8x-batch-diagnosis
+          fi
+
+      - name: Upload validated Maas manifest and evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v082-maas-validated-reader-manifest
+          path: .build/v082/maas-reader
+          include-hidden-files: true
+          retention-days: 30
