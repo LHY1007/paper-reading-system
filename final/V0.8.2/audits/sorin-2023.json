@@ -10,11 +10,11 @@
   "repeated_header_footer_patterns": 3,
   "events": {
     "heading": 325,
-    "body": 53613,
+    "body": 53596,
     "caption": 17072,
     "reference": 2650
   },
-  "paragraphs": 36,
+  "paragraphs": 134,
   "sections": 11,
   "assets": 14,
   "references": 47,
@@ -30,11 +30,11 @@
         441.38
       ],
       "pixels": [
-        906,
-        638
+        1698,
+        1195
       ],
-      "bytes": 126650,
-      "sha256": "ff7cb66d3787be93bceec271428eff9fb3280423da0f90c3c201f730fb699695"
+      "bytes": 343702,
+      "sha256": "211659fb6e1b86be5783ddf2da5e89c3832ecea42285a9df19bf57f7cdbb452a"
     },
     {
       "id": "figure-2",
@@ -47,11 +47,11 @@
         378.02
       ],
       "pixels": [
-        906,
-        536
+        1698,
+        1005
       ],
-      "bytes": 101390,
-      "sha256": "203223be2a7469c1e279639fa63b2bffc4d01a60dbd9c58038e5083f37360134"
+      "bytes": 252328,
+      "sha256": "ab968075ba796b07807816cc8c0b12effc7df0a55198200ae8d62e3e78cbb05a"
     },
     {
       "id": "figure-3",
@@ -64,11 +64,11 @@
         281.32
       ],
       "pixels": [
-        906,
-        382
+        1698,
+        714
       ],
-      "bytes": 61076,
-      "sha256": "0d1bde00d0fef6bb75cf114a64f6bf9a2cc40ecac43265a2d15a11cd593c921f"
+      "bytes": 140152,
+      "sha256": "9037598ee788d37ea11bb5ba85aca62cd877c6cd8667b9a4525570bdd0cabcd8"
     },
     {
       "id": "figure-4",
@@ -81,11 +81,11 @@
         347.84
       ],
       "pixels": [
-        906,
-        488
+        1698,
+        914
       ],
-      "bytes": 76432,
-      "sha256": "756f2e03ee5d01971638b36667dd88261082c7116c4fed171fbd3495535ee9e8"
+      "bytes": 178682,
+      "sha256": "9d130d67585db5be29d1aeaa06d547d6137c34b990b05da17c82d6db3083b1d0"
     },
     {
       "id": "extended-data-figure-1",
@@ -98,11 +98,11 @@
         617.31
       ],
       "pixels": [
-        906,
-        919
+        1698,
+        1722
       ],
-      "bytes": 83528,
-      "sha256": "09ae558fe01dc939d2cf16cf67112ca48656060c310e0263847313236a126b67"
+      "bytes": 197886,
+      "sha256": "ff72a42d87be022c49cb3c458eb6bbf8a096ffffce7c200c275534c527f91ff3"
     },
     {
       "id": "extended-data-figure-2",
@@ -115,11 +115,11 @@
         656.89
       ],
       "pixels": [
-        906,
-        983
+        1698,
+        1841
       ],
-      "bytes": 292958,
-      "sha256": "0711e304cf44bca45f3395fe5b6a4fca89c99dc847aa5f0ce2cb5c9d96bf3d34"
+      "bytes": 922292,
+      "sha256": "c8adf007f209d5e01f8b0b951e7340dc2a07c3d6f890488d0b775cc0d4283d6f"
     },
     {
       "id": "extended-data-figure-3",
@@ -132,11 +132,11 @@
         657.18
       ],
       "pixels": [
-        906,
-        983
+        1698,
+        1842
       ],
-      "bytes": 294152,
-      "sha256": "13dd2e72ee6c7c7819ad993f729edfd50ad0bcb6845f2de9a75647f1db512e28"
+      "bytes": 935628,
+      "sha256": "ca767b53fa5bbd7a8d8284b9cd675c25aa05f3f9a6c4f47bcbb546c3115e51ee"
     },
     {
       "id": "extended-data-figure-4",
@@ -149,11 +149,11 @@
         508.62
       ],
       "pixels": [
-        906,
-        745
+        1698,
+        1396
       ],
-      "bytes": 214224,
-      "sha256": "3815c5d08b836822a2c07e50e3c63973167ebc8d3603cf141d8aa25ef7485cd1"
+      "bytes": 693204,
+      "sha256": "42c463c611cbfa6b09860e206263e6c15ecbde534cf8a79ced8d10709422751d"
     },
     {
       "id": "extended-data-figure-5",
@@ -166,11 +166,11 @@
         654.94
       ],
       "pixels": [
-        906,
-        979
+        1698,
+        1835
       ],
-      "bytes": 74470,
-      "sha256": "ec11c14df2b22c231f6b48ca990f9d14219ec83543f09cebb0aca6074594e6b9"
+      "bytes": 149328,
+      "sha256": "62e253156af43b1123e6c713751d4023d94544c54a3f3028825abfaaa65f0aa6"
     },
     {
       "id": "extended-data-figure-6",
@@ -183,11 +183,11 @@
         727.6
       ],
       "pixels": [
-        896,
-        1102
+        1680,
+        2065
       ],
-      "bytes": 183730,
-      "sha256": "b688a6bba518a6aae6109a7593ed41da74fe78685df668566930a08dc86fea3e"
+      "bytes": 583424,
+      "sha256": "d75177e678c15e3e70e798576a56e39ec9bcff6497d8df3aedf5f57e9e33eeb9"
     },
     {
       "id": "extended-data-figure-7",
@@ -200,11 +200,11 @@
         727.6
       ],
       "pixels": [
-        896,
-        1102
+        1680,
+        2065
       ],
-      "bytes": 109528,
-      "sha256": "c71e75b046b74d8804ce91978598c1e86c13e7ca446be01031794dde6fbdf91f"
+      "bytes": 254962,
+      "sha256": "075f2be23150dda1a40dc10afbdea24138c6bc2cad2b746a90f0bae77cbef2ec"
     },
     {
       "id": "extended-data-figure-8",
@@ -217,11 +217,11 @@
         659.44
       ],
       "pixels": [
-        906,
-        987
+        1698,
+        1849
       ],
-      "bytes": 88310,
-      "sha256": "e00bb67b3115e2747ccdb5d9c5af0143d7bb8d72b8072c8b6e7e30e109bfc1ef"
+      "bytes": 172708,
+      "sha256": "92a667d351b3986c0b6c2aae6b92aacabaf002eb1a286509eeec310f8e7a6399"
     },
     {
       "id": "extended-data-figure-9",
@@ -234,11 +234,11 @@
         583.66
       ],
       "pixels": [
-        906,
-        865
+        1698,
+        1621
       ],
-      "bytes": 88534,
-      "sha256": "293e2f7841c0ce8cd0c93f974a2c2c69af10d8b1b0462366620bf8f863f31500"
+      "bytes": 198058,
+      "sha256": "a55f54cd191c4b2826be6747497f1f4eafaff1c48f636dd73a2f912e924a19f1"
     },
     {
       "id": "extended-data-figure-10",
@@ -251,123 +251,33 @@
         727.6
       ],
       "pixels": [
-        896,
-        1102
+        1680,
+        2065
       ],
-      "bytes": 136128,
-      "sha256": "a90bb0988551c2ff00bc7d0344ba667bfcfc32a4af5c18238587054c01c1ed93"
+      "bytes": 318354,
+      "sha256": "66209411b9883572c176551ace16b1b55c94eb92357828838db2652f0cc962c1"
     }
   ],
   "kept_text_sha256": "de0a8a5356327d11d9b3b7337870ea4deb6cc72ba83e140eb31e2b12d5abd6b7",
-  "manifest_source_fragments_sha256": "db391414ab8bd631e706d5e21392d465f37f12687deea30e89f0655e07e4e74e",
+  "manifest_source_fragments_sha256": "3c49ad22fee804ddbd1ff8733da18c65e653c72c706a0a8ea6e0d6f729a37adc",
   "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
   "passed": true,
-  "strict_layout_parser": "v082-final-16",
-  "formula_blocks_detected": 1,
+  "strict_layout_parser": "v082-final-3",
+  "formula_blocks_detected": 6,
   "formula_blocks_missing": 0,
   "formula_samples": [
-    "where p = {0 or 1} Mi , which determines whether the pixel pc"
+    "=1 =1 =1 i",
+    "Age (≥75)",
+    "BMI ≥30",
+    "E p p p p ( ) = { , , ..., } c",
+    "≥30 pack-years",
+    "≥75 years of age"
   ],
   "cross_column_body_merges": 3,
   "cross_column_caption_merges": 1,
-  "source_chars": 38557,
+  "source_chars": 53596,
   "expected_reference_count": 47,
   "expected_main_figures": 0,
   "strict_errors": [],
-  "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
-  "source_outline_entries": 21,
-  "figure_titles_corrected_from_pdf_toc": 6,
-  "captions_trimmed": 1,
-  "caption_panel_evidence_blocks": 29,
-  "reference_repair_applied": true,
-  "titles_extended_from_caption": 0,
-  "uppercase_panel_evidence_blocks": 0,
-  "titles_completed_from_caption": 0,
-  "tables_reconstructed": 0,
-  "table_image_fallbacks": 0,
-  "cross_page_captions_rebuilt": 0,
-  "continuation_blocks_missing": [],
-  "cross_page_captions_rebuilt_by_title_lookup": [],
-  "authors_extracted": 25,
-  "affiliations_extracted": 12,
-  "publication_timeline_extracted": true,
-  "group_authors_extracted": [],
-  "body_reconstruction": {
-    "version": "v082-body-reconstruction-5",
-    "body_font_size": 8.25,
-    "paragraphs": 36,
-    "source_chars": 38557,
-    "candidate_source_chars": 38542,
-    "accepted_source_chars": 38542,
-    "page_candidate_chars": {
-      "1": 3668,
-      "2": 1825,
-      "3": 2814,
-      "4": 8771,
-      "5": 4783,
-      "6": 2850,
-      "7": 2643,
-      "8": 6954,
-      "9": 4234
-    },
-    "page_source_chars": {
-      "1": 3668,
-      "2": 1825,
-      "3": 2814,
-      "4": 8771,
-      "5": 4783,
-      "6": 2850,
-      "7": 2643,
-      "8": 6954,
-      "9": 4234
-    },
-    "page_paragraphs": {
-      "1": 4,
-      "2": 3,
-      "3": 4,
-      "4": 6,
-      "5": 4,
-      "6": 4,
-      "7": 2,
-      "8": 16,
-      "9": 8
-    },
-    "page_coverage": {
-      "1": 1.0,
-      "2": 1.0,
-      "3": 1.0,
-      "4": 1.0,
-      "5": 1.0,
-      "6": 1.0,
-      "7": 1.0,
-      "8": 1.0,
-      "9": 1.0
-    },
-    "low_coverage_pages": [],
-    "extended_data_start_page": 20,
-    "sections": [
-      "Introduction",
-      "LUAD tumour immune microenvironment",
-      "LUAD multicellular spatial interactions",
-      "LUAD architecture and survival outcomes",
-      "Predicting outcomes using deep learning",
-      "Discussion",
-      "Clinical cohort",
-      "Sample staining and IMC",
-      "Antibody optimization",
-      "Data transformation and normalization",
-      "Cell segmentation and lineage assignment",
-      "Cell–cell pairwise interaction",
-      "Neighbourhood identification",
-      "Deep learning",
-      "Statistical analysis and workflow",
-      "Reporting summary",
-      "Code availability"
-    ]
-  },
-  "fallback_authors_extracted": 25,
-  "fallback_affiliations_extracted": 12,
-  "titles_recovered_v16": 8,
-  "panel_evidence_recovered_v16": 24,
-  "layout_reference_repair_applied": true
+  "reader_grade_crop_scale": 3.0
 }

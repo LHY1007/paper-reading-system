@@ -14,7 +14,7 @@
     "caption": 16134,
     "reference": 13197
   },
-  "paragraphs": 71,
+  "paragraphs": 168,
   "sections": 18,
   "assets": 12,
   "references": 76,
@@ -30,11 +30,11 @@
         622.51
       ],
       "pixels": [
-        906,
-        928
+        1698,
+        1738
       ],
-      "bytes": 316314,
-      "sha256": "47c5b10a2997b3c6a98deed75107900f700317a7cf550d3ce72d98a51d59f80e"
+      "bytes": 740984,
+      "sha256": "8c9fb35a0d573543d8b9a075f2f34e7e249ddb3051c739a36754cb4998db7c5a"
     },
     {
       "id": "figure-2",
@@ -47,11 +47,11 @@
         562.45
       ],
       "pixels": [
-        906,
-        831
+        1698,
+        1558
       ],
-      "bytes": 274206,
-      "sha256": "18f9bf3cfa20cecbc97a02800234eebdc6a82925342e3814aa2cb2f003f81cbb"
+      "bytes": 628236,
+      "sha256": "ff0dfed1fe70715696169da0d207176e337fb5cb1f974a716b4bf9c3dcaeea7d"
     },
     {
       "id": "figure-3",
@@ -64,11 +64,11 @@
         561.92
       ],
       "pixels": [
-        906,
-        831
+        1698,
+        1556
       ],
-      "bytes": 285370,
-      "sha256": "75e1e848c141b0b3d4fd58b313027c8c92afd073862394c8cf137d721552b932"
+      "bytes": 662554,
+      "sha256": "76e43e973c5e775f263aa3fc828ac080c60da0bec9d57f536b9294576fec47d8"
     },
     {
       "id": "figure-4",
@@ -81,28 +81,28 @@
         512.02
       ],
       "pixels": [
-        906,
-        751
+        1698,
+        1407
       ],
-      "bytes": 264254,
-      "sha256": "d4e04ed1c27d1c4652936a861cf9b1a5652a4dbc96a6763d21ee8c77d350e81f"
+      "bytes": 608048,
+      "sha256": "bb57745d4c3348bcba4e13498a8344dcbdae53aa8ba5562449cddc9da435aaa5"
     },
     {
       "id": "figure-5",
       "caption_sha256": "6cc65d9a10b80abbc79926155680837ac236373a0f53a005d0e147c67fe7927d",
-      "source_page": 9,
+      "source_page": 10,
       "clip": [
-        17.86,
-        39.54,
-        577.42,
-        727.6
+        14.88,
+        43.5,
+        580.39,
+        573.06
       ],
       "pixels": [
-        896,
-        1102
+        1698,
+        1590
       ],
-      "bytes": 149938,
-      "sha256": "106073d420d6e6e6047c61ebf0fd6c0f7ea028e8f191ceae32485b2fc901f465"
+      "bytes": 178894,
+      "sha256": "5c782dd7cbc65a3914392805cad09d511471e65a0535423c085f8e64e611a16d"
     },
     {
       "id": "figure-6",
@@ -115,11 +115,11 @@
         531.67
       ],
       "pixels": [
-        906,
-        782
+        1698,
+        1466
       ],
-      "bytes": 54654,
-      "sha256": "ac308e774e4f0eb7fec4a6c00911806e5bbdc145486ac1e6483947ffd70aa9ea"
+      "bytes": 126600,
+      "sha256": "00db3bd5986f0c74f52a93fa43945ed68d7041dddaa62b702c3ac15e4ba78497"
     },
     {
       "id": "extended-data-figure-1",
@@ -132,11 +132,11 @@
         536.05
       ],
       "pixels": [
-        906,
-        789
+        1698,
+        1479
       ],
-      "bytes": 49744,
-      "sha256": "ceb4f71582cbb494dfa8bfc969355a693f73a1c19dd6af52b8f68cdeeab5dff1"
+      "bytes": 125682,
+      "sha256": "fb7da964ff8fe15f82ee571cdeb0ac1bc312ebe593892cc69bd2fdeeaa4e6c99"
     },
     {
       "id": "extended-data-figure-2",
@@ -149,11 +149,11 @@
         551.4
       ],
       "pixels": [
-        906,
-        814
+        1698,
+        1525
       ],
-      "bytes": 51912,
-      "sha256": "9d3dafdd9a9bf6917ded714d9e1216414b23b2542d59e326578a275d0938f36e"
+      "bytes": 113468,
+      "sha256": "110a91ee9ffaeb17c23a4ff8d355fe41ab68fbc64506d3a0df24082f40d39c47"
     },
     {
       "id": "extended-data-figure-3",
@@ -166,11 +166,11 @@
         490.09
       ],
       "pixels": [
-        906,
-        716
+        1698,
+        1341
       ],
-      "bytes": 45754,
-      "sha256": "16966a81b86e7f55a93c2ff930b83e439da430140c170e9927c19238867d653e"
+      "bytes": 96576,
+      "sha256": "84a53ca150a1a8a858f0e004c2dabcbbba055ca1ddc7890992c1799a4f78a617"
     },
     {
       "id": "extended-data-figure-4",
@@ -183,11 +183,11 @@
         579.78
       ],
       "pixels": [
-        906,
-        859
+        1698,
+        1610
       ],
-      "bytes": 135914,
-      "sha256": "b39cdefa1faaa78572b23fdaffb129c4466bc0137369fcc6908833e0e53d5d56"
+      "bytes": 390796,
+      "sha256": "8c77d71ee51c70ee1fcf0071d3ce788747cdcf2e96283bf325fd95c7955f62d0"
     },
     {
       "id": "extended-data-figure-5",
@@ -200,11 +200,11 @@
         571.17
       ],
       "pixels": [
-        906,
-        845
+        1698,
+        1584
       ],
-      "bytes": 51692,
-      "sha256": "a3544051cf33d119f42a373c54766e9735e4ec37ee6ea41f3a90ac45396f045b"
+      "bytes": 111514,
+      "sha256": "45b63d67a9eeb73c89c052f873263fbfce23e092046b59e3deb9edd8fc9281f3"
     },
     {
       "id": "extended-data-figure-6",
@@ -217,18 +217,18 @@
         472.76
       ],
       "pixels": [
-        906,
-        688
+        1698,
+        1289
       ],
-      "bytes": 32640,
-      "sha256": "bee69182af6754b818c2b7220f5d23644a76042550c73661fb1f93a8c8418a91"
+      "bytes": 68090,
+      "sha256": "7c0e7d7f8dded0eb2e5014beecd82bd968fcf8e24c4912ec206ee9e73662d3a0"
     }
   ],
   "kept_text_sha256": "8d97ee16e1f1012fae3f9f600e6c5feda022b3ae84a8664f468f1e3b1158c38f",
   "manifest_source_fragments_sha256": "d6120ca1e365aa85b19278d88d99ea539aaa266dc48bbe2e4a5b9724348ba338",
   "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
   "passed": true,
-  "strict_layout_parser": "v082-final-16",
+  "strict_layout_parser": "v082-final-3",
   "formula_blocks_detected": 2,
   "formula_blocks_missing": 0,
   "formula_samples": [
@@ -237,143 +237,9 @@
   ],
   "cross_column_body_merges": 3,
   "cross_column_caption_merges": 1,
-  "source_chars": 53330,
+  "source_chars": 67076,
   "expected_reference_count": 76,
   "expected_main_figures": 0,
   "strict_errors": [],
-  "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
-  "source_outline_entries": 31,
-  "figure_titles_corrected_from_pdf_toc": 12,
-  "captions_trimmed": 2,
-  "caption_panel_evidence_blocks": 39,
-  "reference_repair_applied": true,
-  "titles_extended_from_caption": 0,
-  "uppercase_panel_evidence_blocks": 0,
-  "titles_completed_from_caption": 0,
-  "tables_reconstructed": 0,
-  "table_image_fallbacks": 0,
-  "cross_page_captions_rebuilt": 0,
-  "continuation_blocks_missing": [],
-  "cross_page_captions_rebuilt_by_title_lookup": [],
-  "authors_extracted": 18,
-  "affiliations_extracted": 9,
-  "publication_timeline_extracted": true,
-  "group_authors_extracted": [],
-  "body_reconstruction": {
-    "version": "v082-body-reconstruction-5",
-    "body_font_size": 8.25,
-    "paragraphs": 71,
-    "source_chars": 53330,
-    "candidate_source_chars": 53324,
-    "accepted_source_chars": 53324,
-    "page_candidate_chars": {
-      "1": 1607,
-      "2": 6275,
-      "4": 5098,
-      "5": 24,
-      "6": 5571,
-      "8": 5222,
-      "10": 495,
-      "11": 1492,
-      "12": 5430,
-      "14": 7672,
-      "15": 7781,
-      "16": 4534,
-      "17": 2123
-    },
-    "page_source_chars": {
-      "1": 1607,
-      "2": 6275,
-      "4": 5098,
-      "5": 24,
-      "6": 5571,
-      "8": 5222,
-      "10": 495,
-      "11": 1492,
-      "12": 5430,
-      "14": 7672,
-      "15": 7781,
-      "16": 4534,
-      "17": 2123
-    },
-    "page_paragraphs": {
-      "1": 2,
-      "2": 7,
-      "4": 7,
-      "5": 2,
-      "6": 6,
-      "8": 7,
-      "10": 2,
-      "11": 3,
-      "12": 4,
-      "14": 8,
-      "15": 11,
-      "16": 10,
-      "17": 8
-    },
-    "page_coverage": {
-      "1": 1.0,
-      "2": 1.0,
-      "4": 1.0,
-      "5": 1.0,
-      "6": 1.0,
-      "8": 1.0,
-      "10": 1.0,
-      "11": 1.0,
-      "12": 1.0,
-      "14": 1.0,
-      "15": 1.0,
-      "16": 1.0,
-      "17": 1.0
-    },
-    "low_coverage_pages": [],
-    "extended_data_start_page": 18,
-    "sections": [
-      "Abstract",
-      "Introduction",
-      "Study cohort",
-      "A single-cell atlas of meningioma reveals recurrent transcriptional metaprograms",
-      "Myeloid cell states are differentially enriched across existing biological classifications",
-      "Some myeloid MPs are consistent with myeloid gene programs from glioblastoma",
-      "Bulk proteomic analysis validates the biological correlates of myeloid MPs",
-      "Some meningiomas exhibit considerable neoplastic transcriptional heterogeneity over space",
-      "Neoplastic chromosome 1p and 22q losses are largely stable across whole meningiomas",
-      "Bulk methylation validates the regional consistency in meningioma biomarkers",
-      "Chromosome 22q and 1p loss incurs greater spatial neoplastic heterogeneity",
-      "Spatially informed sampling provides insight into the immune reprogramming of meningioma",
-      "The myeloid TNF MP is suppressed across the dura–tumor interface",
-      "Myeloid–neoplastic interactions are state-specific and influence the tumor microenvironment",
-      "Spatial transcriptomics reveals global spatial dependencies between cell types",
-      "Meningioma cell states are prognostic, independent of MG and cell abundance",
-      "Integrating meningioma cell states can refine outcome predictions in addition to existing MGs",
-      "Discussion",
-      "Sample processing",
-      "DNA methylation",
-      "SnRNA-seq and quality control",
-      "Cell type annotation",
-      "Cell-level copy number inference",
-      "Gene program identification with NMF",
-      "Receptor–ligand inference",
-      "Bulk RNA deconvolution analysis",
-      "Survival analysis",
-      "Spatial transcriptomics",
-      "Spatial transcriptomics cell–cell communication inference",
-      "Spatial co-localization analysis",
-      "Plasma methylation profiling",
-      "Shotgun proteomics",
-      "Differential protein abundance and pathway analysis",
-      "Statistics and reproducibility",
-      "Reporting summary",
-      "Data availability",
-      "Code availability",
-      "Acknowledgements",
-      "Author contributions",
-      "Additional information"
-    ]
-  },
-  "fallback_authors_extracted": 18,
-  "fallback_affiliations_extracted": 9,
-  "titles_recovered_v16": 0,
-  "panel_evidence_recovered_v16": 0,
-  "layout_reference_repair_applied": true
+  "reader_grade_crop_scale": 3.0
 }

@@ -9,12 +9,12 @@
   "kept_text_blocks": 1737,
   "repeated_header_footer_patterns": 4,
   "events": {
-    "body": 76887,
+    "body": 76874,
     "heading": 337,
     "reference": 34787,
     "caption": 36999
   },
-  "paragraphs": 110,
+  "paragraphs": 212,
   "sections": 19,
   "assets": 16,
   "references": 86,
@@ -22,19 +22,19 @@
     {
       "id": "figure-1",
       "caption_sha256": "1061a1bf6a1327aeb6cb664d0d262a5b66d013cf932b6025d7aaaa01979f3e13",
-      "source_page": 1,
+      "source_page": 2,
       "clip": [
-        17.86,
-        39.54,
-        577.42,
-        727.6
+        14.88,
+        43.5,
+        580.39,
+        438.61
       ],
       "pixels": [
-        896,
-        1102
+        1698,
+        1186
       ],
-      "bytes": 218424,
-      "sha256": "fef4e29808e7f678d7ab3fef429d279a0c9da4edb2372469457bffc42f928b68"
+      "bytes": 177038,
+      "sha256": "1e31d64fc50187cdc92ba6c3acf2fddb7ea80f45f776655ab13edbb6250536b1"
     },
     {
       "id": "figure-2",
@@ -47,11 +47,11 @@
         502.05
       ],
       "pixels": [
-        906,
-        735
+        1698,
+        1377
       ],
-      "bytes": 271620,
-      "sha256": "8dde82431d9167ce52f20cd673fff6042ac9219a68788e7c120c0a5eda6bbadb"
+      "bytes": 628224,
+      "sha256": "0c7c555bd6bd4a3025e761d20f748164bd7f0cb54f9cf2cb8e2a70624c3e8067"
     },
     {
       "id": "figure-3",
@@ -64,11 +64,11 @@
         622.99
       ],
       "pixels": [
-        906,
-        928
+        1698,
+        1739
       ],
-      "bytes": 120570,
-      "sha256": "34d1954291151ddd4e5c05161c8103fc59bc887afadb73d10ce2a9f9159d91a4"
+      "bytes": 276448,
+      "sha256": "eee5d71424d775658f2d5e2cbf268e25ddf802f2f9b0912310f6e0d8e906e607"
     },
     {
       "id": "figure-4",
@@ -81,11 +81,11 @@
         562.52
       ],
       "pixels": [
-        906,
-        832
+        1698,
+        1558
       ],
-      "bytes": 303728,
-      "sha256": "7260105db88291218d43fe9d281b120d534abb8c9da93664bc8547c001b5906b"
+      "bytes": 704598,
+      "sha256": "cfbbd608ae66e0c81f573218a518509f922c32fbc401a4da44824a3892232a46"
     },
     {
       "id": "figure-5",
@@ -98,11 +98,11 @@
         583.15
       ],
       "pixels": [
-        906,
-        865
+        1698,
+        1620
       ],
-      "bytes": 95396,
-      "sha256": "781f6d239e63fbcc079bacea1bfc316c75259d1a5b3e227089da5db4152f76b6"
+      "bytes": 235408,
+      "sha256": "b063872c5f884f60ef0466976eee11f83f9a2e57dea12f009882b78b609d80bb"
     },
     {
       "id": "figure-6",
@@ -115,45 +115,45 @@
         573.05
       ],
       "pixels": [
-        906,
-        848
+        1698,
+        1590
       ],
-      "bytes": 90042,
-      "sha256": "e9e5144863d3ac24528809813ae3cf6837175e4a450cf7edebdd22d87df254ac"
+      "bytes": 219572,
+      "sha256": "0ef0f27b3ff71e95125211a6337e95ac906d4f75feeba275d66ad0402b19c1c6"
     },
     {
       "id": "extended-data-figure-1",
       "caption_sha256": "871d7ef80b95353a8bd8fbda1107ec8beef5fb1bd18a6b37fa1047e8721b858b",
-      "source_page": 21,
+      "source_page": 22,
       "clip": [
-        17.86,
-        39.54,
-        577.42,
-        727.6
+        14.88,
+        43.5,
+        580.39,
+        463.67
       ],
       "pixels": [
-        896,
-        1102
+        1698,
+        1262
       ],
-      "bytes": 291016,
-      "sha256": "16b55f982b4ecfc3afebe74eea7626ddc908f2ba76b38df180b1b31987d6b62c"
+      "bytes": 122508,
+      "sha256": "889e47ed7a2b85e282df2c038fd5cd51197e09698e2db60f5571d59650e5622a"
     },
     {
       "id": "extended-data-figure-2",
       "caption_sha256": "36c66abb6e3eaae703f71baf9e4528cbcab40ca07eca9f01a673da540bd1b3be",
-      "source_page": 22,
+      "source_page": 23,
       "clip": [
-        17.86,
-        39.54,
-        577.42,
-        727.6
+        14.88,
+        43.5,
+        580.39,
+        657.17
       ],
       "pixels": [
-        896,
-        1102
+        1698,
+        1842
       ],
-      "bytes": 100336,
-      "sha256": "e14dcda8c70b178eeec41da936f82bd331cff76fc6ea87b4f5fa987bf0e5b9e4"
+      "bytes": 240938,
+      "sha256": "da20ebf5b46c3a5f8e37add4267fa34d2da4f0116b5287fb30c68717efc1f4a3"
     },
     {
       "id": "extended-data-figure-3",
@@ -166,11 +166,11 @@
         727.6
       ],
       "pixels": [
-        896,
-        1102
+        1680,
+        2065
       ],
-      "bytes": 94016,
-      "sha256": "37f5a0e1a3287a5bbee23af71ae2d570ebca23afe147d41be9d886627f16f565"
+      "bytes": 228212,
+      "sha256": "4149a952b2194230697dc461294dc759af46c078ba616c4b4ff73a16ba6997ae"
     },
     {
       "id": "extended-data-figure-4",
@@ -180,31 +180,31 @@
         14.88,
         43.5,
         580.39,
-        334.47
+        545.57
       ],
       "pixels": [
-        906,
-        467
+        1698,
+        1507
       ],
-      "bytes": 48892,
-      "sha256": "69e3b0ca2db40851868fd7fb1e10040215620a63f0295851ba0ca0cdd7845fda"
+      "bytes": 180968,
+      "sha256": "6c24db05afd63fce4d25333445f1ce5ab78daae79ef074fc7db96c7fab059377"
     },
     {
       "id": "extended-data-figure-5",
       "caption_sha256": "6dfc4dcdd6f2da8f63772da8ceccac5a1a76a66aa72bb4321277abbd745923c9",
-      "source_page": 26,
+      "source_page": 27,
       "clip": [
-        17.86,
-        39.54,
-        577.42,
-        727.6
+        14.88,
+        43.5,
+        580.39,
+        620.36
       ],
       "pixels": [
-        896,
-        1102
+        1698,
+        1732
       ],
-      "bytes": 138780,
-      "sha256": "542376f047e4a8ac1efb244aa1d002e3194857b6d04f2e286f6845322a4c3268"
+      "bytes": 200724,
+      "sha256": "7327b0f3095079eb524a41c158f1f7378e9ea83e8fd035206eca271d3a507828"
     },
     {
       "id": "extended-data-figure-6",
@@ -217,11 +217,11 @@
         564.53
       ],
       "pixels": [
-        906,
-        835
+        1698,
+        1564
       ],
-      "bytes": 102766,
-      "sha256": "2690fdf1f48029d89f68e87da90674b5bbcd9cd26f4b76d33e714c7e30b32d34"
+      "bytes": 201798,
+      "sha256": "bc988fc2901fa8909bc6ff569991b70b75f57cbc20429d6f7800d857a8fea842"
     },
     {
       "id": "extended-data-figure-7",
@@ -234,45 +234,45 @@
         707.02
       ],
       "pixels": [
-        906,
-        1063
+        1698,
+        1992
       ],
-      "bytes": 114526,
-      "sha256": "4e13b0ad2c988a697cabb9760a5fdde12d36aa4839807b711e0086bab72bc961"
+      "bytes": 276076,
+      "sha256": "1b364bf83acb370b039d26f909dc18b9093725ac9a7e23e1c396f523816b19bd"
     },
     {
       "id": "extended-data-figure-8",
       "caption_sha256": "80d925ffde481b94386e2fdb5476e361e987d567d5fb0b4fe53a877df5374a7d",
-      "source_page": 29,
+      "source_page": 30,
       "clip": [
-        17.86,
-        39.54,
-        577.42,
-        727.6
+        14.88,
+        43.5,
+        580.39,
+        395.04
       ],
       "pixels": [
-        896,
-        1102
+        1698,
+        1056
       ],
-      "bytes": 125044,
-      "sha256": "8b988cca24eb423246e95a797c5898736f204626ab22bf46d18d3a45427236a6"
+      "bytes": 138156,
+      "sha256": "1b954703f51a9cdba41eb4289a82d62ab98cb0cc852a9ab6157d63abc566a870"
     },
     {
       "id": "extended-data-figure-9",
       "caption_sha256": "03741b2947abc8e942a4c6b324e1956a49301807c766af0fced4d68654dd663c",
-      "source_page": 30,
+      "source_page": 31,
       "clip": [
-        17.86,
-        39.54,
-        577.42,
-        727.6
+        14.88,
+        43.5,
+        580.39,
+        625.93
       ],
       "pixels": [
-        896,
-        1102
+        1698,
+        1748
       ],
-      "bytes": 77468,
-      "sha256": "34d0b95429c798eb7bf042d91524d646ba378b4aa68cae60321c59cc0f5e534a"
+      "bytes": 241356,
+      "sha256": "31a9fe792bbd8eb70717838aa66edae05418fe64a6ab5a0254811ee15a01b227"
     },
     {
       "id": "extended-data-figure-10",
@@ -285,24 +285,30 @@
         490.08
       ],
       "pixels": [
-        906,
-        716
+        1698,
+        1341
       ],
-      "bytes": 96686,
-      "sha256": "f949f19e150d2886b132dc32ed948650b1b64a0b4f09517e74bd90f04d876fb9"
+      "bytes": 195954,
+      "sha256": "00dc5a49f0d4f938741dbda782a1af5862b07ba3c77a4d772d8c90580adae782"
     }
   ],
   "kept_text_sha256": "76e2836c6f47a3ebda7bd6b2dbb98362a84c8974973a0b31f5a727d226dc63db",
-  "manifest_source_fragments_sha256": "a24efd586bc43f857b3f2c633ac9774858e4a0d40632621a034cabfc38e880fe",
+  "manifest_source_fragments_sha256": "c343ba02c490fec85ba505231291706020fb7aaeceeceed746af65d8385d466a",
   "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
   "passed": true,
-  "strict_layout_parser": "v082-final-16",
-  "formula_blocks_detected": 20,
+  "strict_layout_parser": "v082-final-3",
+  "formula_blocks_detected": 35,
   "formula_blocks_missing": 0,
   "formula_samples": [
+    "(k) ij w(k)hj)",
     "A = WAHA = (BH+",
+    "A H(k)",
+    "A ||2.",
+    "Accuracy = Number of Correct Predictions",
     "Cjk = round (",
     "CrossEntropyLoss = −",
+    "D) (W+",
+    "DC) .",
     "F1 Scoremacro = 2 × Precisionmacro × Recallmacro",
     "H ←H ×",
     "K k=1σ ( ∑",
@@ -312,157 +318,14 @@
     "Recallmacro = 1",
     "T k=1d′",
     "W [W > 1] ←1",
-    "W ←W ×",
-    "c=1",
-    "h Nx) = W2 × D × B × φ (W1 × x + b1) + b2",
-    "i=1",
-    "∑",
-    "∑ k∈NNNi)",
-    "∑i(Xi−̄X)",
-    "∑i∑jwij(Xi−̄X)(X j−̄X)"
+    "W ×",
+    "W ←W ×"
   ],
   "cross_column_body_merges": 4,
   "cross_column_caption_merges": 7,
-  "source_chars": 73125,
+  "source_chars": 76874,
   "expected_reference_count": 86,
   "expected_main_figures": 0,
   "strict_errors": [],
-  "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
-  "source_outline_entries": 25,
-  "figure_titles_corrected_from_pdf_toc": 16,
-  "captions_trimmed": 3,
-  "caption_panel_evidence_blocks": 55,
-  "reference_repair_applied": true,
-  "titles_extended_from_caption": 1,
-  "uppercase_panel_evidence_blocks": 31,
-  "titles_completed_from_caption": 0,
-  "tables_reconstructed": 0,
-  "table_image_fallbacks": 0,
-  "cross_page_captions_rebuilt": 0,
-  "continuation_blocks_missing": [],
-  "cross_page_captions_rebuilt_by_title_lookup": [],
-  "authors_extracted": 69,
-  "affiliations_extracted": 74,
-  "publication_timeline_extracted": true,
-  "group_authors_extracted": [
-    "The German “Aggressive Meningiomas” Consortium (KAM)"
-  ],
-  "body_reconstruction": {
-    "version": "v082-body-reconstruction-5",
-    "body_font_size": 8.249,
-    "paragraphs": 110,
-    "source_chars": 73125,
-    "candidate_source_chars": 73106,
-    "accepted_source_chars": 73106,
-    "page_candidate_chars": {
-      "1": 3110,
-      "2": 2511,
-      "3": 5429,
-      "5": 8336,
-      "7": 6188,
-      "11": 6478,
-      "15": 7346,
-      "16": 6919,
-      "17": 7760,
-      "18": 6864,
-      "19": 3924,
-      "20": 3801,
-      "21": 4440
-    },
-    "page_source_chars": {
-      "1": 3110,
-      "2": 2511,
-      "3": 5429,
-      "5": 8336,
-      "7": 6188,
-      "11": 6478,
-      "15": 7346,
-      "16": 6919,
-      "17": 7760,
-      "18": 6864,
-      "19": 3924,
-      "20": 3801,
-      "21": 4440
-    },
-    "page_paragraphs": {
-      "1": 4,
-      "2": 3,
-      "3": 5,
-      "5": 8,
-      "7": 7,
-      "11": 8,
-      "15": 15,
-      "16": 14,
-      "17": 12,
-      "18": 17,
-      "19": 19,
-      "20": 8,
-      "21": 9
-    },
-    "page_coverage": {
-      "1": 1.0,
-      "2": 1.0,
-      "3": 1.0,
-      "5": 1.0,
-      "7": 1.0,
-      "11": 1.0,
-      "15": 1.0,
-      "16": 1.0,
-      "17": 1.0,
-      "18": 1.0,
-      "19": 1.0,
-      "20": 1.0,
-      "21": 1.0
-    },
-    "low_coverage_pages": [],
-    "extended_data_start_page": 22,
-    "sections": [
-      "Abstract",
-      "Introduction",
-      "Results",
-      "Cellular composition of the tumor-microenvironment",
-      "Stromal signal contribution to meningioma ML classification",
-      "Stromal and neoplastic epigenetic signatures",
-      "Meningioma subclones",
-      "Clinical impact of TME composition",
-      "Discussion",
-      "Ethics statement",
-      "Nuclei isolation from fresh frozen tissue",
-      "snRNA-seq data processing",
-      "snRNA-seq CNV inference",
-      "TAM classification and analysis",
-      "Bulk RNA-seq data analysis",
-      "Sources of bulk methylation data",
-      "Methylation post-processing",
-      "Feature selection",
-      "Deriving neoplastic and stromal signatures",
-      "Meningioma classifier probe contribution",
-      "Epigenome cell-type deconvolution for clinical modeling",
-      "Immunohistochemistry and quantification",
-      "Data import, preprocessing, filtering and normalization for spatial data analysis",
-      "Spatial sequencing CNV estimation",
-      "Spatial autocorrelation: Moran’s I",
-      "Single-cell deconvolution using Cell2location",
-      "Construction of spatial graphs from Visium spatially resolved transcriptomic data",
-      "GNNs from the NePSTA",
-      "Evaluation metrics",
-      "NePSTA GNN architecture",
-      "GNN architecture",
-      "Model training procedure",
-      "Evaluation of the subgraph cell composition",
-      "Clinical cohorts and predictive modeling",
-      "Statistics and reproducibility",
-      "Data availability",
-      "Code availability",
-      "Acknowledgements",
-      "Author contributions",
-      "Competing interests",
-      "Additional information"
-    ]
-  },
-  "fallback_authors_extracted": 9,
-  "fallback_affiliations_extracted": 0,
-  "titles_recovered_v16": 0,
-  "panel_evidence_recovered_v16": 14,
-  "layout_reference_repair_applied": true
+  "reader_grade_crop_scale": 3.0
 }

@@ -10,11 +10,11 @@
   "repeated_header_footer_patterns": 4,
   "events": {
     "heading": 633,
-    "body": 60991,
+    "body": 61005,
     "caption": 22065,
     "reference": 27466
   },
-  "paragraphs": 60,
+  "paragraphs": 176,
   "sections": 22,
   "assets": 14,
   "references": 62,
@@ -30,11 +30,11 @@
         528.59
       ],
       "pixels": [
-        906,
-        777
+        1698,
+        1456
       ],
-      "bytes": 166560,
-      "sha256": "b7177dd6adcfdd78eaedf53df075af8e8497ee2ec48747eb7005403e0d7aefa5"
+      "bytes": 405706,
+      "sha256": "7eac691d6352c6765dbcbdbe5f30c11ef5081ad881cb886564f7c2f78515402c"
     },
     {
       "id": "figure-2",
@@ -47,11 +47,11 @@
         471.46
       ],
       "pixels": [
-        906,
-        686
+        1698,
+        1285
       ],
-      "bytes": 137104,
-      "sha256": "d8060065631d01a71e35235a387e976ce3e82a486d7a7366cd237e7c1960559c"
+      "bytes": 303112,
+      "sha256": "347c30a32a48f5dabc893b36c90d2f3e184691d443384638ceb11906324ae165"
     },
     {
       "id": "figure-3",
@@ -64,11 +64,11 @@
         412.5
       ],
       "pixels": [
-        906,
-        591
+        1698,
+        1108
       ],
-      "bytes": 102352,
-      "sha256": "7a1ff26ead2a1273289a1ab3765a58c9f0e26a925f04bd014d819cece0343c94"
+      "bytes": 244886,
+      "sha256": "891a5db41b40451f546744038c8aa27389cff120d9f0e273b5fd2341f2c1ac5f"
     },
     {
       "id": "figure-4",
@@ -81,11 +81,11 @@
         440.07
       ],
       "pixels": [
-        906,
-        636
+        1698,
+        1191
       ],
-      "bytes": 108112,
-      "sha256": "9de2fda7fb68f0f4930ab30f7374078103d6117bca37a27b9b508c8f432f20f0"
+      "bytes": 253482,
+      "sha256": "20c1a382cd450f8c42d1e84c259258cfe7381beaa69e80ccae529872df4215f1"
     },
     {
       "id": "extended-data-figure-1",
@@ -98,11 +98,11 @@
         657.18
       ],
       "pixels": [
-        906,
-        983
+        1698,
+        1842
       ],
-      "bytes": 56162,
-      "sha256": "43104905f572509b1c9eb74372e7ef7c65509d7fe784947e924cfc92d648a1a5"
+      "bytes": 123776,
+      "sha256": "38de6cfcb3dabe914e20426348f20818154725a3b530b4edb5118821b84f6689"
     },
     {
       "id": "extended-data-figure-2",
@@ -115,11 +115,11 @@
         655.17
       ],
       "pixels": [
-        906,
-        980
+        1698,
+        1836
       ],
-      "bytes": 97504,
-      "sha256": "5a5d0abcc18d06ebe19b2cd371ee7354730eec4d5330fc529870027401b72c03"
+      "bytes": 218622,
+      "sha256": "2c96293fe5697301846d297591644d8c3faf5879ecadad317c29418a0fd2f6c7"
     },
     {
       "id": "extended-data-figure-3",
@@ -132,28 +132,28 @@
         658.31
       ],
       "pixels": [
-        906,
-        985
+        1698,
+        1845
       ],
-      "bytes": 311876,
-      "sha256": "84a409ae146cddafc930457b844bcc328141c51d6c79baacd25b5161ad9c8ae9"
+      "bytes": 1023820,
+      "sha256": "180cfd26a31618bf92463ae180ae51c30258463656b48e0f2791713ab90fe3f2"
     },
     {
       "id": "extended-data-figure-4",
       "caption_sha256": "3b0d731d4aa38825c9a5c28b6486d8de71eaf6142b65ae37e5facff3d0e7e9a9",
-      "source_page": 16,
+      "source_page": 17,
       "clip": [
-        17.86,
-        39.54,
-        577.42,
-        727.6
+        14.88,
+        43.5,
+        580.39,
+        571.9
       ],
       "pixels": [
-        896,
-        1102
+        1698,
+        1586
       ],
-      "bytes": 322950,
-      "sha256": "7028a0615f33a8b9ac429ecdda8dd11bf83a2a7d16541f4bf6085918f6c20460"
+      "bytes": 189728,
+      "sha256": "35fed0d99b76b5603edea6a186cf184f221a85f7f5d30983c5e4959dba765b75"
     },
     {
       "id": "extended-data-figure-5",
@@ -166,11 +166,11 @@
         662.23
       ],
       "pixels": [
-        906,
-        991
+        1698,
+        1857
       ],
-      "bytes": 256518,
-      "sha256": "5a43da990ec939344282a9470843414c3ee66076723088816bf9baa80a918cad"
+      "bytes": 595470,
+      "sha256": "75f93ec6adf0b2e00011882ca9ee73fb2627a7028814ad92862833816ba105d7"
     },
     {
       "id": "extended-data-figure-6",
@@ -183,11 +183,11 @@
         569.2
       ],
       "pixels": [
-        906,
-        842
+        1698,
+        1578
       ],
-      "bytes": 150458,
-      "sha256": "b64609ab7be4a9180cf2cb99850c087cdb2ce7a0c8d3d35ac00027583894f7be"
+      "bytes": 380844,
+      "sha256": "12573f22212a5ba1e7c25bcd440244a74209faefecd0ced6688750de7a7bd316"
     },
     {
       "id": "extended-data-figure-7",
@@ -200,11 +200,11 @@
         657.18
       ],
       "pixels": [
-        906,
-        983
+        1698,
+        1842
       ],
-      "bytes": 113584,
-      "sha256": "551dd8a08873faa894ecf3e9535d2015d162becfd9ae0e350001f640db5f0049"
+      "bytes": 232254,
+      "sha256": "659c1012764a58ae3d40f08693078e117e4ca51bb83ea8984331bc38ca7592d8"
     },
     {
       "id": "extended-data-figure-8",
@@ -217,28 +217,28 @@
         657.18
       ],
       "pixels": [
-        906,
-        983
+        1698,
+        1842
       ],
-      "bytes": 96860,
-      "sha256": "da5d6acc7462e38ed7547a19cbedf7cbdc0dcc4ec45d44250dedbd87e53d6b29"
+      "bytes": 184984,
+      "sha256": "ff4303b896a8b141d6247f8eca40c782a46f4da46268b8376caff228d8deede2"
     },
     {
       "id": "extended-data-figure-9",
       "caption_sha256": "47378020c91300c9420c36267b966e24d95518a3579fcdb09abca850f781c87a",
-      "source_page": 21,
+      "source_page": 22,
       "clip": [
-        17.86,
-        39.54,
-        577.42,
-        727.6
+        14.88,
+        43.5,
+        580.39,
+        553.28
       ],
       "pixels": [
-        896,
-        1102
+        1698,
+        1530
       ],
-      "bytes": 125810,
-      "sha256": "4bfb7183c129e5b62ec9fc6b60b02d583cd6001e1ee3a75061b61ca39991b212"
+      "bytes": 279984,
+      "sha256": "320139102b058a732adcce940650dd30f6f4ab0e8212b5d6c7072f06c704ab5f"
     },
     {
       "id": "extended-data-figure-10",
@@ -251,145 +251,26 @@
         727.6
       ],
       "pixels": [
-        896,
-        1102
+        1680,
+        2065
       ],
-      "bytes": 176880,
-      "sha256": "eedd4f6e6a8504bc01c35c5b7fd48f2b8873667e00eb70d3d890b754420c962d"
+      "bytes": 475484,
+      "sha256": "0d77c5b712a7fcee0adfda526ec7ada51fc10aa5ed8be0e96bf1c32fba265079"
     }
   ],
   "kept_text_sha256": "58604b4fadfea1426b1c1e6eebe099c1371bffa5ca75f41a519fdc20de465d30",
-  "manifest_source_fragments_sha256": "6d886bd9ed65a268733d1e8a1ea33cc75c57062bdf91f960ac059de52f3f6229",
+  "manifest_source_fragments_sha256": "0292f8004a3684dd36f0ae64d3a056c29140240ee35dc8c05636006522496dd0",
   "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
   "passed": true,
-  "strict_layout_parser": "v082-final-16",
-  "formula_blocks_detected": 11,
+  "strict_layout_parser": "v082-final-3",
+  "formula_blocks_detected": 0,
   "formula_blocks_missing": 0,
-  "formula_samples": [
-    "Breast (n = 12)",
-    "Breast (n = 17)",
-    "CN_high (n=13) CN_low (n=14)",
-    "Lung (n = 22)",
-    "Lung (n = 29)",
-    "Melanoma (n = 13)",
-    "Melanoma (n = 6)",
-    "Other (n = 13)",
-    "Other (n = 7)",
-    "Recur (n = 22)",
-    "time (years) CN_high (n=16) CN_low (n=16)"
-  ],
+  "formula_samples": [],
   "cross_column_body_merges": 4,
   "cross_column_caption_merges": 2,
-  "source_chars": 50816,
+  "source_chars": 61005,
   "expected_reference_count": 62,
   "expected_main_figures": 0,
   "strict_errors": [],
-  "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
-  "source_outline_entries": 21,
-  "figure_titles_corrected_from_pdf_toc": 13,
-  "captions_trimmed": 0,
-  "caption_panel_evidence_blocks": 54,
-  "reference_repair_applied": true,
-  "titles_extended_from_caption": 0,
-  "uppercase_panel_evidence_blocks": 0,
-  "titles_completed_from_caption": 0,
-  "tables_reconstructed": 0,
-  "table_image_fallbacks": 0,
-  "cross_page_captions_rebuilt": 0,
-  "continuation_blocks_missing": [],
-  "cross_page_captions_rebuilt_by_title_lookup": [],
-  "authors_extracted": 28,
-  "affiliations_extracted": 19,
-  "publication_timeline_extracted": true,
-  "group_authors_extracted": [],
-  "body_reconstruction": {
-    "version": "v082-body-reconstruction-5",
-    "body_font_size": 8.243,
-    "paragraphs": 60,
-    "source_chars": 50816,
-    "candidate_source_chars": 50802,
-    "accepted_source_chars": 50802,
-    "page_candidate_chars": {
-      "1": 3092,
-      "2": 663,
-      "3": 8599,
-      "4": 1324,
-      "5": 8600,
-      "6": 2134,
-      "7": 1868,
-      "8": 3092,
-      "10": 8071,
-      "11": 7224,
-      "12": 6135
-    },
-    "page_source_chars": {
-      "1": 3092,
-      "2": 663,
-      "3": 8599,
-      "4": 1324,
-      "5": 8600,
-      "6": 2134,
-      "7": 1868,
-      "8": 3092,
-      "10": 8071,
-      "11": 7224,
-      "12": 6135
-    },
-    "page_paragraphs": {
-      "1": 3,
-      "2": 2,
-      "3": 7,
-      "4": 11,
-      "5": 7,
-      "6": 2,
-      "7": 3,
-      "8": 3,
-      "10": 6,
-      "11": 14,
-      "12": 16
-    },
-    "page_coverage": {
-      "1": 1.0,
-      "2": 1.0,
-      "3": 1.0,
-      "4": 1.0,
-      "5": 1.0,
-      "6": 1.0,
-      "7": 1.0,
-      "8": 1.0,
-      "10": 1.0,
-      "11": 1.0,
-      "12": 1.0
-    },
-    "low_coverage_pages": [],
-    "extended_data_start_page": 15,
-    "sections": [
-      "Introduction",
-      "Mapping the brain TME with IMC",
-      "Single-cell interaction networks",
-      "Spatial cellular neighbourhoods",
-      "+MPO macrophages are associated with survival",
-      "Discussion",
-      "Clinical samples for IMC",
-      "Antibody optimization",
-      "Immunostaining and IMC",
-      "Data transformation and normalization",
-      "Cell segmentation and lineage assignment",
-      "Cell–cell pairwise interaction analysis",
-      "Cellular neighbourhood identification",
-      "IMC survival analysis",
-      "Immunohistofluorescence co-staining",
-      "Clinical samples for IHF",
-      "Publicly available RNA-sequencing data",
-      "Statistics and reproducibility",
-      "Reporting summary",
-      "Data availability",
-      "Code availability"
-    ]
-  },
-  "fallback_authors_extracted": 28,
-  "fallback_affiliations_extracted": 19,
-  "titles_recovered_v16": 1,
-  "panel_evidence_recovered_v16": 9,
-  "layout_reference_repair_applied": true
+  "reader_grade_crop_scale": 3.0
 }

@@ -14,7 +14,7 @@
     "caption": 10366,
     "reference": 10919
   },
-  "paragraphs": 51,
+  "paragraphs": 141,
   "sections": 110,
   "assets": 14,
   "references": 66,
@@ -30,11 +30,11 @@
         595.57
       ],
       "pixels": [
-        931,
-        884
+        1746,
+        1657
       ],
-      "bytes": 129450,
-      "sha256": "d754dd3bddd9cdb273e8df77782e5c421a786342b72b4b2c183bc44126a498bc"
+      "bytes": 374744,
+      "sha256": "afde8b25871ab17ab513ea72eb26bdfb9e0a91738adb47ed1748ede1074cd1f7"
     },
     {
       "id": "extended-data-figure-2",
@@ -47,11 +47,11 @@
         494.92
       ],
       "pixels": [
-        931,
-        723
+        1746,
+        1355
       ],
-      "bytes": 99050,
-      "sha256": "9063a6c59116fe95ef7a25132f3fd455d22eb090b81b788ce5a998527a67347c"
+      "bytes": 224548,
+      "sha256": "49c45452d292277f72eb7cc03b21a8e4eaba80cd4ee021f906b46a0e0e31acdf"
     },
     {
       "id": "extended-data-figure-3",
@@ -64,11 +64,11 @@
         572.76
       ],
       "pixels": [
-        931,
-        848
+        1746,
+        1589
       ],
-      "bytes": 108866,
-      "sha256": "5f252cf495074daeb1e3797536b6844dd435f9297fa12e30dfa10feefa0e1ad7"
+      "bytes": 285552,
+      "sha256": "973ca47acd91aa3825044dd62e5d304b7117b3c24547d1a4178cadc57a139e77"
     },
     {
       "id": "extended-data-figure-4",
@@ -81,11 +81,11 @@
         627.19
       ],
       "pixels": [
-        931,
-        935
+        1746,
+        1752
       ],
-      "bytes": 152044,
-      "sha256": "e4581e84994d575ad0a1cb1b3346d187eeb65a44662dc9a3af2d0219ebbf2b97"
+      "bytes": 375468,
+      "sha256": "2944056e1949c56e9d7b54d40be3dd49f56c5301c0c33cbd4793cd342c4f4dd4"
     },
     {
       "id": "extended-data-figure-5",
@@ -98,11 +98,11 @@
         573.0
       ],
       "pixels": [
-        931,
-        848
+        1746,
+        1590
       ],
-      "bytes": 129596,
-      "sha256": "eb47b5a80953bdcccb657528c8c64cbe8517076a424becb43338d601a5c2a020"
+      "bytes": 372320,
+      "sha256": "7f222183e1b671c01968468bb4cfd0bcf9bd692d8244b391d0e5b286761278eb"
     },
     {
       "id": "extended-data-figure-6",
@@ -115,11 +115,11 @@
         627.19
       ],
       "pixels": [
-        931,
-        935
+        1746,
+        1752
       ],
-      "bytes": 239208,
-      "sha256": "65e594c4c60dde85e7c7eeefa15e9c4be263e2cf1fa47c4bb1dc083611d7ebe4"
+      "bytes": 649618,
+      "sha256": "373413b533f4a6d8b1a890a6e8e56ffce7a9b039f591923627da91782c116d3b"
     },
     {
       "id": "extended-data-figure-7",
@@ -132,11 +132,11 @@
         573.0
       ],
       "pixels": [
-        931,
-        848
+        1746,
+        1590
       ],
-      "bytes": 136048,
-      "sha256": "65574c87c8ae2bf902e45510166fa8b2a8b202b81d86308d3dcf0181d04f4e0c"
+      "bytes": 383902,
+      "sha256": "de223fac3c6601659f3e926fb666d4f5db2d84a14583a4f5d4744e7443e11079"
     },
     {
       "id": "extended-data-figure-8",
@@ -149,11 +149,11 @@
         728.64
       ],
       "pixels": [
-        921,
-        1103
+        1726,
+        2068
       ],
-      "bytes": 149370,
-      "sha256": "3c5fc5bdb3c1f7ff4b7230a6967ccf4beec65c30679d78da132f57f74eb8c364"
+      "bytes": 324568,
+      "sha256": "df9f7160334d15c1535880cb7ca4f47be02ce339b9afe625d67ea1fdffb5b3cb"
     },
     {
       "id": "extended-data-figure-9",
@@ -166,11 +166,11 @@
         643.18
       ],
       "pixels": [
-        931,
-        961
+        1746,
+        1800
       ],
-      "bytes": 160654,
-      "sha256": "7602753328df3ca18cf0cecbc296fe8dcffbe918e46599b3d02db86548440be7"
+      "bytes": 442720,
+      "sha256": "b6243a8ec735aae64c3418dd0c5a7d8e6b0e9b7d98dd38bfbc846d888dc61d69"
     },
     {
       "id": "extended-data-figure-10",
@@ -183,11 +183,11 @@
         383.88
       ],
       "pixels": [
-        931,
-        546
+        1746,
+        1022
       ],
-      "bytes": 75110,
-      "sha256": "3b2d475875d1ac70bae33f7e5b04a9515ecb6b8147441ca146c8ea33b1cab91b"
+      "bytes": 171746,
+      "sha256": "bd933be9fa6f95a635ba69be96e784d41ff8fb661e1e1c4b4a2a3f4bc081526a"
     },
     {
       "id": "figure-1",
@@ -200,11 +200,11 @@
         572.76
       ],
       "pixels": [
-        931,
-        848
+        1746,
+        1589
       ],
-      "bytes": 173044,
-      "sha256": "005d2229adafaac3b7b1af34a84d8371c92c42be58afe73bc061cba60054889f"
+      "bytes": 417270,
+      "sha256": "2fbc1831b0587ddb1ac48d7985feb9d637a3cffe1a001dae6fb05f6a3cb4470e"
     },
     {
       "id": "figure-2",
@@ -217,11 +217,11 @@
         573.0
       ],
       "pixels": [
-        931,
-        848
+        1746,
+        1590
       ],
-      "bytes": 174296,
-      "sha256": "fe80f79c7a8609138cdde3c9749ae95bf592e1d0d76ba8d280d74ceabdc0b83c"
+      "bytes": 471446,
+      "sha256": "5d803b7d4acf299dc038d8f1df46b27dea731ab6eb7bf7f75513c79b59e8c921"
     },
     {
       "id": "figure-4",
@@ -234,11 +234,11 @@
         468.36
       ],
       "pixels": [
-        931,
-        681
+        1746,
+        1276
       ],
-      "bytes": 213638,
-      "sha256": "339f1ca9151f9293f9a34697b5afbf32ad797d22442f7abc7fea5be423f4c3db"
+      "bytes": 632346,
+      "sha256": "394382c6261a5b492d514102e5b8eb44800242c5b9c51c97c54df41b6c8a73ad"
     },
     {
       "id": "figure-6",
@@ -251,156 +251,26 @@
         472.92
       ],
       "pixels": [
-        931,
-        688
+        1746,
+        1289
       ],
-      "bytes": 166680,
-      "sha256": "1b2eacd4a9ba965e3d63786dc1d60a2a774c79d6fc8b4d2e67f99cca7aa4e22b"
+      "bytes": 529598,
+      "sha256": "0fe82902bd4e18541459249bc712ce7a71e8ee22b6861b8dab2c448c8069c9f2"
     }
   ],
   "kept_text_sha256": "bd9581cdc5d0f155d79889c77294be23bebddd3dba333a6cec54335c4d9e4e1b",
   "manifest_source_fragments_sha256": "281168ee361323167b4d93bf59ca5c05be52504c554fa90d26da353f8666267c",
   "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
   "passed": true,
-  "strict_layout_parser": "v082-final-16",
+  "strict_layout_parser": "v082-final-3",
   "formula_blocks_detected": 0,
   "formula_blocks_missing": 0,
   "formula_samples": [],
   "cross_column_body_merges": 0,
   "cross_column_caption_merges": 0,
-  "source_chars": 56204,
+  "source_chars": 74982,
   "expected_reference_count": 66,
   "expected_main_figures": 0,
   "strict_errors": [],
-  "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
-  "source_outline_entries": 42,
-  "figure_titles_corrected_from_pdf_toc": 14,
-  "captions_trimmed": 0,
-  "caption_panel_evidence_blocks": 43,
-  "reference_repair_applied": true,
-  "titles_extended_from_caption": 0,
-  "uppercase_panel_evidence_blocks": 0,
-  "titles_completed_from_caption": 1,
-  "tables_reconstructed": 0,
-  "table_image_fallbacks": 0,
-  "cross_page_captions_rebuilt": 0,
-  "continuation_blocks_missing": [],
-  "cross_page_captions_rebuilt_by_title_lookup": [],
-  "authors_extracted": 19,
-  "affiliations_extracted": 8,
-  "publication_timeline_extracted": false,
-  "group_authors_extracted": [],
-  "body_reconstruction": {
-    "version": "v082-body-reconstruction-5",
-    "body_font_size": 10.0,
-    "paragraphs": 51,
-    "source_chars": 56204,
-    "candidate_source_chars": 56198,
-    "accepted_source_chars": 56198,
-    "page_candidate_chars": {
-      "3": 3373,
-      "4": 3420,
-      "5": 3316,
-      "6": 3388,
-      "7": 3152,
-      "8": 3744,
-      "9": 3190,
-      "10": 3464,
-      "11": 3388,
-      "12": 2940,
-      "13": 3369,
-      "14": 3575,
-      "15": 3607,
-      "16": 3392,
-      "17": 3106,
-      "18": 3216,
-      "19": 2558
-    },
-    "page_source_chars": {
-      "3": 3373,
-      "4": 3420,
-      "5": 3316,
-      "6": 3388,
-      "7": 3152,
-      "8": 3744,
-      "9": 3190,
-      "10": 3464,
-      "11": 3388,
-      "12": 2940,
-      "13": 3369,
-      "14": 3575,
-      "15": 3607,
-      "16": 3392,
-      "17": 3106,
-      "18": 3216,
-      "19": 2558
-    },
-    "page_paragraphs": {
-      "3": 3,
-      "4": 4,
-      "5": 4,
-      "6": 4,
-      "7": 4,
-      "8": 2,
-      "9": 5,
-      "10": 2,
-      "11": 4,
-      "12": 7,
-      "13": 3,
-      "14": 3,
-      "15": 3,
-      "16": 2,
-      "17": 3,
-      "18": 3,
-      "19": 3
-    },
-    "page_coverage": {
-      "3": 1.0,
-      "4": 1.0,
-      "5": 1.0,
-      "6": 1.0,
-      "7": 1.0,
-      "8": 1.0,
-      "9": 1.0,
-      "10": 1.0,
-      "11": 1.0,
-      "12": 1.0,
-      "13": 1.0,
-      "14": 1.0,
-      "15": 1.0,
-      "16": 1.0,
-      "17": 1.0,
-      "18": 1.0,
-      "19": 1.0
-    },
-    "low_coverage_pages": [],
-    "extended_data_start_page": 20,
-    "sections": [
-      "Code availability",
-      "Experimental design and workflow",
-      "Divergent intratumor gene and protein expression programs",
-      "Spatial sub-clonal copy number variants, signaling mechanisms, and cell",
-      "mechanisms, and cell types",
-      "Personalized systemic therapy to overcome intratumor heterogeneity",
-      "Discussion",
-      "Inclusion and ethics",
-      "Meningiomas, clinical data, histology, and light microscopy",
-      "DNA methylation profiling and analysis",
-      "Targeted DNA sequencing and analysis",
-      "Targeted RNA sequencing and analysis",
-      "Spatial transcriptome sequencing and analysis",
-      "Spatial protein profiling and analysis",
-      "Cell culture and molecular biology",
-      "Cell culture quantitative reverse-transcriptase polymerase chain reaction",
-      "Cell culture RNA sequencing and analysis",
-      "Meningioma co-culture pharmacology and microscopy",
-      "Statistics",
-      "Reporting summary"
-    ]
-  },
-  "fallback_authors_extracted": 19,
-  "fallback_affiliations_extracted": 8,
-  "titles_recovered_v16": 13,
-  "panel_evidence_recovered_v16": 4,
-  "layout_reference_repair_applied": true
+  "reader_grade_crop_scale": 3.0
 }

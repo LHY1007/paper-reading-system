@@ -9,12 +9,12 @@
   "kept_text_blocks": 630,
   "repeated_header_footer_patterns": 3,
   "events": {
-    "body": 70358,
+    "body": 70295,
     "heading": 473,
     "caption": 7699,
     "reference": 10212
   },
-  "paragraphs": 102,
+  "paragraphs": 296,
   "sections": 17,
   "assets": 14,
   "references": 66,
@@ -30,45 +30,45 @@
         586.16
       ],
       "pixels": [
-        906,
-        869
+        1698,
+        1629
       ],
-      "bytes": 80864,
-      "sha256": "524d4853bfe42daf026631e14e9a428ab0d0829ac4072e6816bcdb16283ccc2e"
+      "bytes": 224064,
+      "sha256": "a0ca573e535e5a72805a1719800cf349cee60e142950074f668cffca4af7ca9e"
     },
     {
       "id": "figure-2",
       "caption_sha256": "abda05f740a8bc7f591e2e98b853a42a6208ffb32648fcb2ae40e0a265e8f06a",
-      "source_page": 3,
+      "source_page": 4,
       "clip": [
-        17.86,
-        39.54,
-        577.42,
-        727.6
+        14.88,
+        43.5,
+        580.39,
+        489.83
       ],
       "pixels": [
-        896,
-        1102
+        1698,
+        1340
       ],
-      "bytes": 148370,
-      "sha256": "7bb547c5a45374c6836c59e46ebfa5d8302bbf9ee6ad4714d2d828219d049063"
+      "bytes": 350938,
+      "sha256": "230d1a8106b26ccd23d7df449c92ff92e408c1d7b68dae366ad61a0ca8e57e6e"
     },
     {
       "id": "figure-3",
       "caption_sha256": "409dda42c4ae817c52e4107ad1d2590f6229423175900f1f29182dbd862585af",
-      "source_page": 4,
+      "source_page": 5,
       "clip": [
-        17.86,
-        39.54,
-        577.42,
-        727.6
+        14.88,
+        43.5,
+        580.39,
+        557.55
       ],
       "pixels": [
-        896,
-        1102
+        1698,
+        1543
       ],
-      "bytes": 236370,
-      "sha256": "91b4704fcb5fb660600197d4ca4e0824c189b241b4db0fdad7cfa5d1ec946660"
+      "bytes": 387542,
+      "sha256": "e50ed1cefc6a369fbbe2b9b73c86bd1f51834b064abb4d10e165a6fd563b14b6"
     },
     {
       "id": "figure-4",
@@ -81,28 +81,28 @@
         343.46
       ],
       "pixels": [
-        906,
-        481
+        1698,
+        901
       ],
-      "bytes": 27898,
-      "sha256": "7214e4a9299cc746e8029a8f94aafe53fea05ce4b8d46b8e69b0ef6dbd60b1ee"
+      "bytes": 73442,
+      "sha256": "8062dba4cc6388bbd3185e064812713e848b0be102273981f4fd5c385ae3f0c0"
     },
     {
       "id": "figure-5",
       "caption_sha256": "bdc9438c39beac885f75431dd7eba80557d87a44776f4a3f0118c883c7090dbe",
-      "source_page": 6,
+      "source_page": 7,
       "clip": [
-        17.86,
-        39.54,
-        577.42,
-        727.6
+        14.88,
+        43.5,
+        580.39,
+        458.05
       ],
       "pixels": [
-        896,
-        1102
+        1698,
+        1245
       ],
-      "bytes": 241040,
-      "sha256": "5b052ed17f3d610b55437f6b98d8b472c1850a29d9c6b16e0e59b3bc2c8300ee"
+      "bytes": 238800,
+      "sha256": "9489efdefcbb40a3019e22a172ee45411245d26452f8c23caf96d8528a76c6aa"
     },
     {
       "id": "figure-6",
@@ -112,14 +112,14 @@
         14.88,
         43.5,
         580.39,
-        316.72
+        582.0
       ],
       "pixels": [
-        906,
-        438
+        1698,
+        1617
       ],
-      "bytes": 42804,
-      "sha256": "89284f6fc5bcbdd6058e4cfd0596dd388657681995dbdbceb2262e610ff5eaa8"
+      "bytes": 194568,
+      "sha256": "17379677a5f9cb2816e50edd2fca46c3c3059fab7aac2ca39dd1dddde1c6410c"
     },
     {
       "id": "extended-data-figure-1",
@@ -132,11 +132,11 @@
         522.56
       ],
       "pixels": [
-        906,
-        768
+        1698,
+        1438
       ],
-      "bytes": 31326,
-      "sha256": "1c3b94e7a5751dc98de7e0a468eaf52244557e9bc99d31d9a7a9508f6b69fb05"
+      "bytes": 68216,
+      "sha256": "c9d5787fe4c898659de6b5ff528b90d08555407a79b7b75354516e7267eee020"
     },
     {
       "id": "extended-data-figure-2",
@@ -149,11 +149,11 @@
         438.32
       ],
       "pixels": [
-        906,
-        633
+        1698,
+        1185
       ],
-      "bytes": 130182,
-      "sha256": "faef41c4567e980c7b83060c097ddabb232db15ad0b88940130269a084af2248"
+      "bytes": 419548,
+      "sha256": "10f37e07c32efe5d5d0dac60857d1f2b8d0ba4ae6d7903bff853256465915bcb"
     },
     {
       "id": "extended-data-figure-3",
@@ -166,11 +166,11 @@
         727.6
       ],
       "pixels": [
-        896,
-        1102
+        1680,
+        2065
       ],
-      "bytes": 160890,
-      "sha256": "3cdf5ba58fc5366cfb562ff5be7b925462a1e98c23f7a4d694d1fce6d7a15927"
+      "bytes": 507270,
+      "sha256": "923086693a3c254e5794e370904e96a850330a58142cdf0c043b7875d3b42169"
     },
     {
       "id": "extended-data-figure-4",
@@ -183,11 +183,11 @@
         727.6
       ],
       "pixels": [
-        896,
-        1102
+        1680,
+        2065
       ],
-      "bytes": 18880,
-      "sha256": "f49772aad8ae26e7ef321da6e7fc88885078589cf6c3804aa29c8b9101e25ea2"
+      "bytes": 49706,
+      "sha256": "59b3d508348bd5a1022bfead3998496c15f9eefd0f687b62893ac287b7e514ad"
     },
     {
       "id": "extended-data-table-1",
@@ -200,11 +200,11 @@
         727.6
       ],
       "pixels": [
-        896,
-        1102
+        1680,
+        2065
       ],
-      "bytes": 44856,
-      "sha256": "0a51714f6dc98d872204967375d1faaf0cb61bffe02fd0312f0dc3018da5c947"
+      "bytes": 134812,
+      "sha256": "2bfbdf093fe1d38836f8803c7761d8937c1ce50e153828808c1833b6fd279a69"
     },
     {
       "id": "extended-data-table-2",
@@ -217,11 +217,11 @@
         727.6
       ],
       "pixels": [
-        896,
-        1102
+        1680,
+        2065
       ],
-      "bytes": 68872,
-      "sha256": "a1443c0c2390d4bdb357abedc9101220771d57a81fc6888aabbf3f5ce543f299"
+      "bytes": 151338,
+      "sha256": "9876f388427fff92febd7adcf6c2817524ffbe97ddc8a9c60791f1c28abddafb"
     },
     {
       "id": "extended-data-table-3",
@@ -234,11 +234,11 @@
         727.6
       ],
       "pixels": [
-        896,
-        1102
+        1680,
+        2065
       ],
-      "bytes": 57990,
-      "sha256": "2963dad3822af9376dde1d11fcbad8656416673b1c996b101c4cf38620c41c0b"
+      "bytes": 123290,
+      "sha256": "40a96538c7b929257de5c9b1a3b02906024c64df685193156e3ca2086c9cb160"
     },
     {
       "id": "extended-data-table-4",
@@ -251,176 +251,47 @@
         727.6
       ],
       "pixels": [
-        896,
-        1102
+        1680,
+        2065
       ],
-      "bytes": 31166,
-      "sha256": "e05b489e05ef9b6fe39bf0795ab545d82eec70149b038428ca2a75db5e423b7a"
+      "bytes": 69206,
+      "sha256": "9682ceee5df9e4d101c118ea2bf7efd7f6977cf373b11750a4bdacf97fb8a403"
     }
   ],
   "kept_text_sha256": "6fd154d50915a45357a8ea59fcb5f2b7290e0f50200115a5ade77166c2c7782f",
-  "manifest_source_fragments_sha256": "f5dfd0193808a3038593732ec63afc72581dccb9e36f1d6fbd94b80baadc9ac9",
+  "manifest_source_fragments_sha256": "284619f9683b4c4897a9f972e37eea9f73e9271e2c5bcb670dc31d8c6dd3d976",
   "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
   "passed": true,
-  "strict_layout_parser": "v082-final-16",
-  "formula_blocks_detected": 35,
+  "strict_layout_parser": "v082-final-3",
+  "formula_blocks_detected": 90,
   "formula_blocks_missing": 0,
   "formula_samples": [
-    "Cold (n = 26)",
+    "(I(i) −I′(i))",
+    "(I(xk + i, yk + j) −I′(xk + i, yk + j))",
+    "(SSIMj(I, I′))",
+    "(m) k ) . (13)",
+    "(−c(m) log ( fsurv (y(m)",
+    "+ (1 −c(m)) log ( fhazard (y(m)",
+    "+ (1 −c(m)) log ( fsurv (y(m)",
+    "1 w × h",
+    "2] + EExp∼Xp [(D(G(s)(xp)|xp)) 2]",
+    "2] ,",
+    "= AP→HWvH,",
+    "D =",
+    "EExp ∼Xp",
+    "G =",
     "H = Softmax (",
     "HYPE = (",
     "HYPEfake = (",
     "HYPEreal = (",
-    "Hot (n = 8)",
-    "K ∑",
-    "Lce = −",
-    "Lgp = ∑",
-    "M ∑",
-    "M ∑ i=1",
-    "MSE = 1",
-    "N j=1 exp{w⊤(tanh(Vhj) ⊙η(Uhj))}",
-    "N ∑",
-    "PSNR = 10log10 ( L2",
-    "ai = exp{w⊤(tanh(Vhi) ⊙η(Uhi))}",
-    "exp(z ⋅z+/τ) + ∑",
-    "g = g(hi) =",
-    "i=0",
-    "i=1"
+    "I + μ2",
+    "I + σ2"
   ],
   "cross_column_body_merges": 3,
   "cross_column_caption_merges": 4,
-  "source_chars": 55652,
+  "source_chars": 70134,
   "expected_reference_count": 66,
   "expected_main_figures": 0,
   "strict_errors": [],
-  "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
-  "source_outline_entries": 45,
-  "figure_titles_corrected_from_pdf_toc": 10,
-  "captions_trimmed": 1,
-  "caption_panel_evidence_blocks": 11,
-  "reference_repair_applied": false,
-  "titles_extended_from_caption": 0,
-  "uppercase_panel_evidence_blocks": 0,
-  "titles_completed_from_caption": 0,
-  "tables_reconstructed": 0,
-  "table_image_fallbacks": 0,
-  "cross_page_captions_rebuilt": 0,
-  "continuation_blocks_missing": [],
-  "cross_page_captions_rebuilt_by_title_lookup": [],
-  "authors_extracted": 130,
-  "affiliations_extracted": 18,
-  "publication_timeline_extracted": true,
-  "group_authors_extracted": [],
-  "body_reconstruction": {
-    "version": "v082-body-reconstruction-5",
-    "body_font_size": 8.243,
-    "paragraphs": 102,
-    "source_chars": 55652,
-    "candidate_source_chars": 55613,
-    "accepted_source_chars": 55613,
-    "page_candidate_chars": {
-      "1": 2334,
-      "2": 7940,
-      "3": 1184,
-      "4": 1997,
-      "5": 962,
-      "6": 4219,
-      "7": 2390,
-      "8": 732,
-      "9": 8498,
-      "10": 6788,
-      "11": 4550,
-      "12": 5621,
-      "13": 3956,
-      "15": 4442
-    },
-    "page_source_chars": {
-      "1": 2334,
-      "2": 7940,
-      "3": 1184,
-      "4": 1997,
-      "5": 962,
-      "6": 4219,
-      "7": 2390,
-      "8": 732,
-      "9": 8498,
-      "10": 6788,
-      "11": 4550,
-      "12": 5621,
-      "13": 3956,
-      "15": 4442
-    },
-    "page_paragraphs": {
-      "1": 2,
-      "2": 10,
-      "3": 3,
-      "4": 3,
-      "5": 2,
-      "6": 4,
-      "7": 7,
-      "8": 2,
-      "9": 11,
-      "10": 15,
-      "11": 39,
-      "12": 27,
-      "13": 9,
-      "15": 7
-    },
-    "page_coverage": {
-      "1": 1.0,
-      "2": 1.0,
-      "3": 1.0,
-      "4": 1.0,
-      "5": 1.0,
-      "6": 1.0,
-      "7": 1.0,
-      "8": 1.0,
-      "9": 1.0,
-      "10": 1.0,
-      "11": 1.0,
-      "12": 1.0,
-      "13": 1.0,
-      "15": 1.0
-    },
-    "low_coverage_pages": [],
-    "extended_data_start_page": 17,
-    "sections": [
-      "Abstract",
-      "Introduction",
-      "Histopathology-based protein multiplex generation with HistoPlexer",
-      "HistoPlexer generates accurate and realistic protein multiplexes",
-      "Cell typing",
-      "HistoPlexer preserves spatial co-localization patterns",
-      "HistoPlexer enables multiplexed proteomics profiling on the WSI level",
-      "HistoPlexer facilitates immune phenotyping",
-      "HistoPlexer generalizes to an independent patient cohort",
-      "Discussion",
-      "Datasets and preprocessing",
-      "Ultivue dataset",
-      "TCGA–SKCM",
-      "HistoPlexer architecture",
-      "Adversarial loss",
-      "Gaussian pyramid loss",
-      "Patch-wise contrastive loss",
-      "Implementation and training details",
-      "Evaluation metrics",
-      "HistoPlexer for cell-level analysis",
-      "t-SNE on cell-level marker expression",
-      "Annotations for immune phenotyping",
-      "MIL-based clinical outcome prediction",
-      "Multimodal fusion via co-attention mechanism",
-      "Reporting summary",
-      "Data availability",
-      "Code availability",
-      "Acknowledgements",
-      "Author contributions",
-      "Competing interests",
-      "Additional information"
-    ]
-  },
-  "fallback_authors_extracted": 4,
-  "fallback_affiliations_extracted": 0,
-  "titles_recovered_v16": 0,
-  "panel_evidence_recovered_v16": 16,
-  "layout_reference_repair_applied": true
+  "reader_grade_crop_scale": 3.0
 }

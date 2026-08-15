@@ -10,11 +10,11 @@
   "repeated_header_footer_patterns": 6,
   "events": {
     "heading": 847,
-    "body": 61810,
+    "body": 61807,
     "caption": 16228,
     "reference": 15478
   },
-  "paragraphs": 84,
+  "paragraphs": 125,
   "sections": 24,
   "assets": 22,
   "references": 55,
@@ -30,11 +30,11 @@
         215.32
       ],
       "pixels": [
-        917,
-        277
+        1719,
+        517
       ],
-      "bytes": 30018,
-      "sha256": "2e9760da586b3ffae391061df62f6792a9595dbec72aa1be95008a0330337f35"
+      "bytes": 61058,
+      "sha256": "df0a416be920a733db4a7804d7ed029dfdf15c1abbcb518cd680ea19185e35b3"
     },
     {
       "id": "table-1",
@@ -47,11 +47,11 @@
         720.35
       ],
       "pixels": [
-        908,
-        1091
+        1701,
+        2045
       ],
-      "bytes": 246570,
-      "sha256": "ccdb885aed70133314e2217e8ec2550d3366bf91abcd83d4b2fd44366e730360"
+      "bytes": 565208,
+      "sha256": "64d5689fcec3682aea254ae3f8fcfd625965d5bf3712be1604b88b04e50a0735"
     },
     {
       "id": "figure-1",
@@ -64,11 +64,11 @@
         592.99
       ],
       "pixels": [
-        917,
-        881
+        1719,
+        1650
       ],
-      "bytes": 141226,
-      "sha256": "0572a3a770031a77644e29c5613821a8e60bb715aac7dc8fbf2008b105576926"
+      "bytes": 429222,
+      "sha256": "63a525503d23fe4837ccc98aa2f76925f977e4eca19fb4f7133dc801fef2343b"
     },
     {
       "id": "figure-2",
@@ -81,11 +81,11 @@
         592.76
       ],
       "pixels": [
-        917,
-        881
+        1719,
+        1650
       ],
-      "bytes": 129406,
-      "sha256": "8337504040711f3222182f1619997b3334e2b1d4b127f744d8da5936a99d6751"
+      "bytes": 348068,
+      "sha256": "1d1f9cf53e399f808a7eb4227447e6e16a3c81609261b89d9f8f2da82c5a77c7"
     },
     {
       "id": "figure-3",
@@ -98,11 +98,11 @@
         692.71
       ],
       "pixels": [
-        917,
-        1041
+        1719,
+        1950
       ],
-      "bytes": 219676,
-      "sha256": "6289de4eee40def19ec7d8e8568867e9f5ea49870b4778e742393db5b2da8b6b"
+      "bytes": 570484,
+      "sha256": "ca2c70f490c9a3030f0561aa2e6394080539720e50f42ab252bfacdde5d5f361"
     },
     {
       "id": "figure-4",
@@ -115,11 +115,11 @@
         599.22
       ],
       "pixels": [
-        917,
-        891
+        1719,
+        1669
       ],
-      "bytes": 121860,
-      "sha256": "f94196a3d8125991eace7a6810d84c7ae8e16f978f3076a42a481652f28f0d2c"
+      "bytes": 270478,
+      "sha256": "3d5aba97245b48221ddddb809bacfc71e5513ae865bd4e5430ea183903f925cb"
     },
     {
       "id": "figure-5",
@@ -132,11 +132,11 @@
         653.14
       ],
       "pixels": [
-        917,
-        978
+        1719,
+        1831
       ],
-      "bytes": 166356,
-      "sha256": "81bd10b64ab95e5993eecaf8f9987a33c07fcd51bea80ba1a37459d96de95fd7"
+      "bytes": 448062,
+      "sha256": "5f1d9eb51e85f37a461326d79ef77ad78284c974991cfa562da66e60c5b6eb9a"
     },
     {
       "id": "figure-6",
@@ -149,11 +149,11 @@
         700.93
       ],
       "pixels": [
-        917,
-        1054
+        1719,
+        1974
       ],
-      "bytes": 82048,
-      "sha256": "e691243a1abf737019ba1b0b24de89ff2b6b8686957edd170e104426e887e07b"
+      "bytes": 192204,
+      "sha256": "2f1d8746dfa864eb9f40faf581ea185c71a7ec71017c3104738c760c6f25bf80"
     },
     {
       "id": "figure-s1",
@@ -166,11 +166,11 @@
         418.88
       ],
       "pixels": [
-        917,
-        603
+        1719,
+        1128
       ],
-      "bytes": 34538,
-      "sha256": "028ae9625acd3997e39300a8a2d8289e0036f0e1687874ef3d26074d084495df"
+      "bytes": 78610,
+      "sha256": "1ffe07e7d43365ebff7eb18fdad1222f1a849e8a235c7223e631f508d79e23c9"
     },
     {
       "id": "figure-s2",
@@ -183,11 +183,11 @@
         260.71
       ],
       "pixels": [
-        917,
-        350
+        1719,
+        654
       ],
-      "bytes": 27970,
-      "sha256": "77d037c243980aab9d8c37ad7a1c2dca12be8b1f9f05f766eb90dc65527df0c8"
+      "bytes": 60910,
+      "sha256": "ba018562f17eebf24783091944b5d41bbcdd2e432e56f3ae886cf0a6c7eba5f9"
     },
     {
       "id": "figure-s3",
@@ -200,11 +200,11 @@
         295.07
       ],
       "pixels": [
-        917,
-        405
+        1719,
+        757
       ],
-      "bytes": 13938,
-      "sha256": "b115313c2f22c1426bb7fe428467fefbec3f6ed776d5e12521d0b2a8016e7a2c"
+      "bytes": 31936,
+      "sha256": "f22314f7b25be1f6397e61c19a440fe8a741d577fe769b600a444e934a2f93ec"
     },
     {
       "id": "figure-s4",
@@ -217,11 +217,11 @@
         429.71
       ],
       "pixels": [
-        917,
-        620
+        1719,
+        1161
       ],
-      "bytes": 107062,
-      "sha256": "b936951261b63e7ad64021cf429b38392009d15e1f67a6aa0c9c220c551801db"
+      "bytes": 298974,
+      "sha256": "9af070cd9496079a936a254935b6338f1492aad72316e0f7acd8f581ea4b2ab1"
     },
     {
       "id": "figure-s5",
@@ -234,11 +234,11 @@
         633.64
       ],
       "pixels": [
-        917,
-        946
+        1719,
+        1772
       ],
-      "bytes": 90840,
-      "sha256": "ddbc17eecbf701aa5159c5b3912e67f8b67631dbada8b8ba1f0a9284502a1fcd"
+      "bytes": 218600,
+      "sha256": "bc6289482f22ea3e8b76f458704dd42b538dfac8fc64b12e15f66587dcaf69d3"
     },
     {
       "id": "figure-s6",
@@ -251,11 +251,11 @@
         389.12
       ],
       "pixels": [
-        917,
-        555
+        1719,
+        1039
       ],
-      "bytes": 47402,
-      "sha256": "3ed1851d1a37342899927e2ffdebf34ac0eaa84a4c4af42e7572f22bfe6390af"
+      "bytes": 112028,
+      "sha256": "9e14984d0fd060ee2dae743c973b1996ca451b186d0275b5e26dd6f1e6b050e9"
     },
     {
       "id": "figure-s7",
@@ -268,11 +268,11 @@
         296.54
       ],
       "pixels": [
-        917,
-        407
+        1719,
+        761
       ],
-      "bytes": 36332,
-      "sha256": "3ee367bb920b4511551afa78832f16816ffbe986a265fe444d993aba9bfbb71f"
+      "bytes": 82914,
+      "sha256": "d3154876e57be8aafd86621004cdac49729bd13f9f76c49cf8e17b3b3990c75f"
     },
     {
       "id": "figure-s8",
@@ -285,11 +285,11 @@
         720.35
       ],
       "pixels": [
-        908,
-        1091
+        1701,
+        2045
       ],
-      "bytes": 52032,
-      "sha256": "4debe7cb7dbf006e3aa88afcc1cfd8ef0513d1e5e34f12c42148edb88d3e9d6a"
+      "bytes": 120978,
+      "sha256": "bee2057c5322ef10773a031b07e782d15344aeb03d54725da3a30741fd0bd6d0"
     },
     {
       "id": "figure-s9",
@@ -302,11 +302,11 @@
         237.07
       ],
       "pixels": [
-        917,
-        312
+        1719,
+        583
       ],
-      "bytes": 15400,
-      "sha256": "a563fb97b428854e1cb38d37ae3beb73991a96c9ca0da5ab0b5993c2311501cc"
+      "bytes": 31758,
+      "sha256": "2473b615223a2a716633f8f24d1a4bcddc223fff50ea01d8e6623c42a73f3eca"
     },
     {
       "id": "figure-s10",
@@ -319,11 +319,11 @@
         274.66
       ],
       "pixels": [
-        917,
-        372
+        1719,
+        695
       ],
-      "bytes": 20532,
-      "sha256": "a5a397e90558cde2fdc635ab3eb923fdb5f74c6359e98e75c075c59714252d20"
+      "bytes": 45036,
+      "sha256": "2dd60f7ecbe710e487159f41c332d4514c0b4df8be7742b69fdaea59e1dc16a0"
     },
     {
       "id": "figure-s11",
@@ -336,11 +336,11 @@
         421.1
       ],
       "pixels": [
-        917,
-        606
+        1719,
+        1135
       ],
-      "bytes": 28172,
-      "sha256": "59d3abfadafe8190dfdf5d0ee60a6cb3ac34a13d744a8cb78f15c6519a1fc63c"
+      "bytes": 57862,
+      "sha256": "2e7dfc8f9254e4e6693423706eb5566c7208ca0f25840451de07a447985e8c38"
     },
     {
       "id": "figure-s12",
@@ -353,11 +353,11 @@
         419.34
       ],
       "pixels": [
-        917,
-        603
+        1719,
+        1130
       ],
-      "bytes": 27438,
-      "sha256": "47fe47d61f4b8b0e01b2c3f07329a1d85d9be917be92708ba5a7861430ad43b5"
+      "bytes": 55974,
+      "sha256": "7750d788cecce4b0b7367b545fd93babe3cd86de15d56e84e99eabf94cd36fc5"
     },
     {
       "id": "figure-s13",
@@ -370,11 +370,11 @@
         254.93
       ],
       "pixels": [
-        917,
-        340
+        1719,
+        636
       ],
-      "bytes": 13418,
-      "sha256": "6c10d80684fda161905f7b4f10f3bc4a6d32ed19c2a55fcf2a12fc1728490ab4"
+      "bytes": 28192,
+      "sha256": "0f99dcf400b5a331a89338fbaf10e8ec0b9054208a0562e6648562ee8ab58141"
     },
     {
       "id": "figure-s14",
@@ -387,19 +387,19 @@
         301.59
       ],
       "pixels": [
-        917,
-        415
+        1719,
+        776
       ],
-      "bytes": 16592,
-      "sha256": "c01bfe9dcee02749dfd5e68e8b4c2946bca73429ae7b92fef2a60c1f25475a11"
+      "bytes": 35244,
+      "sha256": "f15e907771ef083d767fd71583d33b6bbe8dfb2b1a20440381702c791dc3dce3"
     }
   ],
   "kept_text_sha256": "f7c2171758dd41ca83b2fb30fac8c35662239a478eb446bfdc7db6dd6a0ee18d",
-  "manifest_source_fragments_sha256": "e7de958d9ea3f196d17f0cabc7f752f8989bacc58e959ebe6d32cf289c0e2826",
+  "manifest_source_fragments_sha256": "c4e640ca99d8780646c1ac7366eef7c1e5ab56b87059ea0424ee702527cdc627",
   "coverage_policy": "Every non-noise PDF text block is classified as heading, body, caption, reference or other; body/caption/reference content is retained in the manifest or audit.",
   "passed": true,
-  "strict_layout_parser": "v082-final-16",
-  "formula_blocks_detected": 11,
+  "strict_layout_parser": "v082-final-3",
+  "formula_blocks_detected": 14,
   "formula_blocks_missing": 0,
   "formula_samples": [
     "Dice c = 2 ∑ y c ̂ yc ∑ y c + ∑ ̂ yc",
@@ -407,143 +407,21 @@
     "L BCE = 1",
     "L Dice = 1 − 1 C",
     "L model = L Dice + 0:5 ∗ L BCE",
+    "S =",
+    "SNR = μ",
     "c = 1",
     "i = 1",
     "σ = p p(1 − p) √",
-    "∑",
+    "⃒⃒⃒∂I ∂x",
+    "⃒⃒⃒∂I ∂y",
     "∑ C",
     "∑ N"
   ],
   "cross_column_body_merges": 4,
   "cross_column_caption_merges": 0,
-  "source_chars": 60432,
+  "source_chars": 61807,
   "expected_reference_count": 55,
   "expected_main_figures": 0,
   "strict_errors": [],
-  "reader_content_status": "evidence-only; requires paper-specific reader content task and completed bilingual manifest",
-  "source_outline_entries": 37,
-  "figure_titles_corrected_from_pdf_toc": 0,
-  "captions_trimmed": 2,
-  "caption_panel_evidence_blocks": 31,
-  "reference_repair_applied": true,
-  "titles_extended_from_caption": 0,
-  "uppercase_panel_evidence_blocks": 24,
-  "titles_completed_from_caption": 20,
-  "tables_reconstructed": 1,
-  "table_image_fallbacks": 0,
-  "cross_page_captions_rebuilt": 1,
-  "continuation_blocks_missing": [],
-  "cross_page_captions_rebuilt_by_title_lookup": [
-    "figure-3"
-  ],
-  "authors_extracted": 21,
-  "affiliations_extracted": 6,
-  "publication_timeline_extracted": true,
-  "group_authors_extracted": [],
-  "body_reconstruction": {
-    "version": "v082-body-reconstruction-5",
-    "body_font_size": 8.468,
-    "paragraphs": 84,
-    "source_chars": 60432,
-    "candidate_source_chars": 60417,
-    "accepted_source_chars": 60417,
-    "page_candidate_chars": {
-      "2": 3504,
-      "3": 4455,
-      "5": 6878,
-      "6": 468,
-      "8": 5930,
-      "9": 361,
-      "10": 6376,
-      "13": 6304,
-      "14": 335,
-      "17": 4220,
-      "18": 4970,
-      "19": 6243,
-      "20": 6321,
-      "21": 4052
-    },
-    "page_source_chars": {
-      "2": 3504,
-      "3": 4455,
-      "5": 6878,
-      "6": 468,
-      "8": 5930,
-      "9": 361,
-      "10": 6376,
-      "13": 6304,
-      "14": 335,
-      "17": 4220,
-      "18": 4970,
-      "19": 6243,
-      "20": 6321,
-      "21": 4052
-    },
-    "page_paragraphs": {
-      "2": 7,
-      "3": 6,
-      "5": 10,
-      "6": 2,
-      "8": 9,
-      "9": 2,
-      "10": 12,
-      "13": 5,
-      "14": 1,
-      "17": 5,
-      "18": 15,
-      "19": 6,
-      "20": 5,
-      "21": 16
-    },
-    "page_coverage": {
-      "2": 1.0,
-      "3": 1.0,
-      "5": 1.0,
-      "6": 1.0,
-      "8": 1.0,
-      "9": 1.0,
-      "10": 1.0,
-      "13": 1.0,
-      "14": 1.0,
-      "17": 1.0,
-      "18": 1.0,
-      "19": 1.0,
-      "20": 1.0,
-      "21": 1.0
-    },
-    "low_coverage_pages": [],
-    "extended_data_start_page": null,
-    "sections": [
-      "Graphical abstract",
-      "Abstract",
-      "Introduction",
-      "GigaTIME generates a virtual population of multiplex immunofluorescence",
-      "GigaTIME translates whole-slide H&E images to mIF",
-      "Virtual population enables large-scale discovery of protein-biomarker associations",
-      "Virtual population enables large-scale discovery on pathological stages and patient stratification",
-      "Independent validation using a virtual population from TCGA",
-      "Virtual population uncovers interesting spatial and combinatorial protein activation patterns",
-      "Discussion",
-      "Limitations of the study",
-      "Details of acquiring paired training and testing dataset for GigaTIME",
-      "Details of registration and preprocessing on acquired mIF images",
-      "Details of training GigaTIME as cross-modal translator model",
-      "Details of baseline comparisons",
-      "Details of metrics to evaluate the translation performance",
-      "Details of Providence data for generating virtual population",
-      "Details of generating virtual population data",
-      "Details of biomarker discovery using virtual population",
-      "Details of pathological staging and survival analysis using virtual population",
-      "Details of the TCGA-based virtual population",
-      "Details of the combinatorial analysis",
-      "Details of the spatially informed metrics",
-      "Quantification and statistical analysis",
-      "Additional resources"
-    ]
-  },
-  "fallback_authors_extracted": 21,
-  "fallback_affiliations_extracted": 0,
-  "titles_recovered_v16": 0,
-  "panel_evidence_recovered_v16": 2,
-  "layout_reference_repair_applied": true
+  "reader_grade_crop_scale": 3.0
 }
