@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-"""Canonical entry point for the V0.8.2 PDF-native evidence builder.
+"""Canonical V0.8.2 PDF-native evidence builder.
 
-Parser v16 preserves the page-aware body reconstruction from v15 and adds
-layout-ordered references, complete source authors and affiliations, descriptive
-figure titles, panel evidence, Science publication metadata, and high-confidence
-formula filtering. Reader-facing Chinese content remains a separate fail-closed stage.
+Uses the final v3 hotfix layer: source-anchored two-column caption crops,
+reader-grade 3x figure rendering, formula-safe body retention, and exact
+layout-native bibliography reconstruction across Nature/Cell/Science PDFs.
 """
 
-from build_pdf_native_manifest_v082_v16 import main
+from build_pdf_native_manifest_v082_final_v2 import main
 
 
 if __name__ == "__main__":
