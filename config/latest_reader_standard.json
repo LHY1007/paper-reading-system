@@ -1,0 +1,27 @@
+{
+  "version": "0.8.3",
+  "status": "formal",
+  "release_contract": "config/v083_release.json",
+  "reference_basis": "Andani et al. 2025 V0.8.2 FINAL_VALIDATED2 + V0.8.3 delegated terminology interaction fix",
+  "reference_v082_sha256": "e66cc0fd7b2b7add744afd3db5f0d02106f3871bc954932f46053850e6ed5569",
+  "reference_v083_sha256": "c65aa3996657300180ba6c983c6145496f8efe221d1b1aeb58eb6e59037b0915",
+  "required_interactions": [
+    "sentence-level English-Chinese pairing and paired highlighting",
+    "inline citation popup at citation position",
+    "inline figure/table reference opens the corresponding asset",
+    "highlighted terminology opens explanation on click, Enter, or Space",
+    "terminology interaction works in the bilingual body, right viewer, and dynamically rendered figure-study document",
+    "complete figure/table preview index",
+    "full-screen figure-study with source image and per-panel explanations",
+    "reference popups, annotation tools, reader settings, resizing and viewer controls"
+  ],
+  "forbidden_regressions": [
+    "visible Quick Overview mode",
+    "paragraph-level matching in place of sentence-level pairing",
+    "citations moved to paragraph ends",
+    "figure references moved to paragraph ends",
+    "visible but non-interactive terminology",
+    "generic figure explanation without panel-by-panel coverage",
+    "paper-specific HTML/CSS/JS generated independently instead of using the fixed reader shell"
+  ]
+}
