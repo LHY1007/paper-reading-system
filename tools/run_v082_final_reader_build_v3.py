@@ -46,12 +46,22 @@ def main() -> None:
     parser.add_argument("--build-root", type=Path, default=Path(".build/v082"))
     parser.add_argument("--registry", type=Path, default=Path("config/v082_paper_sources.json"))
     parser.add_argument("--shell-lock", type=Path, default=Path("config/v082_frozen_shell_lock.json"))
+    parser.add_argument("--latest-standard", type=Path, default=Path("config/v082_latest_reader_standard.json"))
     parser.add_argument("--materialized-shell", type=Path, default=Path("templates/v082/V082_CANVAS_FROZEN_SHELL.html"))
     args, _ = parser.parse_known_args()
 
     lock = load(args.shell_lock)
     shell = args.materialized_shell
     preflight_errors: list[Any] = []
+    if not args.latest_standard.exists():
+        preflight_errors.append(f"latest reader standard is missing: {args.latest_standard}")
+    else:
+        standard = load(args.latest_standard)
+        if standard.get("status") != "latest":
+            preflight_errors.append("latest reader standard is not marked status=latest")
+        if not (standard.get("reference_artifact") or {}).get("sha256"):
+            preflight_errors.append("latest reader standard lacks a reference artifact SHA-256")
+
     if not shell.exists():
         preflight_errors.append(f"committed product shell is missing: {shell}")
         actual_sha = None
@@ -81,12 +91,13 @@ def main() -> None:
         "expected_bytes": lock.get("frozen_shell_bytes"),
         "actual_bytes": actual_bytes,
         "lock_version": lock.get("version"),
+        "latest_reader_standard": str(args.latest_standard),
         "errors": preflight_errors,
         "passed": not preflight_errors,
     }
     write(args.output_root / "reports" / "PRODUCT_SHELL_PROVENANCE.json", provenance)
     if preflight_errors:
-        raise SystemExit("materialized product shell preflight failed")
+        raise SystemExit("materialized product shell / latest-standard preflight failed")
 
     command = [
         sys.executable,
@@ -119,6 +130,26 @@ def main() -> None:
     papers = sorted(registry["papers"], key=lambda item: int(item["order"]))
     baseline = args.output_root / "readers" / papers[0]["output"]
     readers = [args.output_root / "readers" / item["output"] for item in papers[1:]]
+
+    latest_standard_report = args.output_root / "reports" / "LATEST_READER_STANDARD_GATE.json"
+    latest_standard_command = [
+        sys.executable,
+        "tools/validate_v082_latest_reader_standard.py",
+        *[str(path) for path in readers],
+        "--standard",
+        str(args.latest_standard),
+        "--report",
+        str(latest_standard_report),
+    ]
+    print("+", " ".join(latest_standard_command), flush=True)
+    latest_standard_result = subprocess.run(latest_standard_command, text=True)
+    latest_standard_gate = load(latest_standard_report) if latest_standard_report.exists() else {
+        "passed": False,
+        "errors": ["latest reader standard report was not produced"],
+    }
+    if latest_standard_result.returncode != 0 or not latest_standard_gate.get("passed"):
+        post_errors.append("rendered readers regressed below the locked Andani FINAL_VALIDATED2 standard")
+
     layout_report = args.output_root / "reports" / "LAYOUT_INVARIANCE.json"
     layout_command = [
         sys.executable,
@@ -147,6 +178,7 @@ def main() -> None:
         isinstance(item, dict) and "runtime_vs_materialized_shell" in item
         for item in post_errors
     )
+    gate["latest_reader_standard"] = latest_standard_gate
     gate["layout_invariance"] = layout
     existing_errors = list(gate.get("errors") or [])
     existing_errors.extend(post_errors)
@@ -159,11 +191,13 @@ def main() -> None:
         index = load(release_index)
         index["passed"] = gate["passed"]
         index["product_shell_sha256"] = actual_sha
+        index["latest_reader_standard_id"] = latest_standard_gate.get("standard_id")
+        index["latest_reader_standard_passed"] = bool(latest_standard_gate.get("passed"))
         index["layout_invariance_passed"] = bool(layout.get("passed"))
         write(release_index, index)
 
     if post_errors:
-        raise SystemExit("final product-shell and layout gate failed")
+        raise SystemExit("final latest-standard / product-shell / layout gate failed")
 
 
 if __name__ == "__main__":
