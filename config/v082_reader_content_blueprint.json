@@ -1,7 +1,8 @@
 {
-  "version": "v082-reader-content-blueprint-1",
-  "basis": "00 V0.8.2 CANVAS reader",
-  "principle": "The fixed shell owns presentation and interaction. The paper manifest must contain reader-ready scientific content, not parser diagnostics or raw PDF fragments.",
+  "version": "v082-reader-content-blueprint-2",
+  "basis": "Andani V0.8.2 FINAL_VALIDATED2 reader standard",
+  "latest_standard": "config/v082_latest_reader_standard.json",
+  "principle": "The fixed shell owns presentation and interaction. The paper manifest must contain reader-ready scientific content, with sentence-level bilingual alignment, source-positioned citations and figure/table links, complete terminology, and visually audited figure studies.",
   "modules": [
     {
       "id": "paper_header",
@@ -62,19 +63,41 @@
     },
     {
       "id": "bilingual_body",
-      "reader_question": "Can I read the original and translation paragraph by paragraph without losing context?",
+      "reader_question": "Can I read and interact with the original and translation sentence by sentence without losing paragraph context?",
       "requirements": [
-        "one source paragraph is one bilingual unit unless a publisher physically splits it across columns or pages",
-        "English is source-faithful and preserves citations and figure references",
-        "Chinese is a complete contextual translation with terminology kept consistent across the paper",
-        "sentences are not cut mid-sentence and unrelated paragraphs are not merged",
-        "terms are highlighted only after the translation is stable"
+        "source paragraphs are reconstructed before translation, including cross-column and cross-page continuation recovery",
+        "each reconstructed paragraph is segmented into complete English sentences only after abbreviations, decimals, numeric ranges, equations, citations and figure references are protected",
+        "every English sentence has exactly one Chinese counterpart with a stable sentence-group identifier",
+        "clicking an English or Chinese sentence highlights only its one-to-one counterpart rather than the entire paragraph",
+        "English is source-faithful and Chinese is a complete contextual translation with terminology kept consistent across the paper",
+        "rejoining all English sentence pieces reconstructs the recovered source paragraph without omission or duplication",
+        "rejoining all Chinese sentence pieces reconstructs the complete translated paragraph without omission or duplication",
+        "terms are highlighted only after sentence pairing and translation are stable"
       ],
-      "forbidden": ["identity translation", "raw page header", "axis labels as prose", "caption text merged into body"]
+      "forbidden": [
+        "identity translation", "raw page header", "axis labels as prose", "caption text merged into body",
+        "orphan parenthetical tail", "orphan citation number", "paragraph-wide click highlighting", "unequal bilingual sentence counts"
+      ]
+    },
+    {
+      "id": "inline_cross_references",
+      "reader_question": "Do citations and figure/table references remain exactly where the paper uses them?",
+      "requirements": [
+        "reference citations remain attached to the source sentence and original semantic position",
+        "citation ranges map to all included reference IDs without converting scientific numbers into citations",
+        "scientific numbers such as years, grades, cohort sizes, percentages, statistics and figure panel numbers are validated separately from citation IDs",
+        "figure and table references remain inline at the original textual location and are directly clickable there",
+        "clicking an inline figure or table reference opens or focuses the corresponding reader asset",
+        "inline references are not moved to paragraph ends and are not regenerated as a detached list"
+      ],
+      "forbidden": [
+        "all citations appended at paragraph end", "all figure links appended at paragraph end", "visible internal asset slug",
+        "scientific number interpreted as bibliography ID", "non-clickable source figure mention"
+      ]
     },
     {
       "id": "figure_card",
-      "reader_question": "Can I tell what a figure proves before opening it?",
+      "reader_question": "Can I tell what a figure proves before opening it, and can I understand every major subpanel after opening it?",
       "required_fields": [
         "id", "title_en", "title_zh", "intro", "image_src", "caption_en", "caption_zh", "study"
       ],
@@ -85,12 +108,18 @@
         "caption_en is the complete source legend without body-paragraph contamination",
         "caption_zh is a full Chinese translation",
         "study.overview explains how to read the whole figure and its relation to adjacent figures",
-        "study.panels contains every labeled panel or logical block with a specific title and explanation",
-        "panel explanations describe axes, objects, comparisons, results and connections without inventing evidence",
+        "a visual inventory is performed on the rendered source figure before panel explanations are written",
+        "study.panels contains every labeled panel and every meaningful unlabeled logical block needed to understand a composite figure",
+        "panel explanations identify the plotted object, comparison, axes or visual encoding when applicable, the actual result shown and the panel's role in the argument",
+        "panel labels in the reader match the visual inventory and source caption; missing or invented panels fail release",
+        "large composite figures receive proportionally detailed panel explanations rather than caption paraphrases",
         "study.conclusion states the figure-level conclusion and the next logical step"
       ],
       "forbidden_titles": ["Fig.", "Figure", "Figure 1.", "Graphical abstract"],
-      "forbidden": ["caption copied as figure study", "generic boundary disclaimer as explanation"]
+      "forbidden": [
+        "caption copied as figure study", "generic boundary disclaimer as explanation", "empty preview card",
+        "empty panel explanation", "raw internal figure ID visible to readers", "placeholder panel count"
+      ]
     },
     {
       "id": "table_card",
@@ -99,31 +128,37 @@
         "source tables are emitted with kind=table",
         "headers and rows preserve the source structure",
         "title and caption are bilingual",
+        "inline table mentions open or focus this table from the body",
         "an image fallback is allowed only when merged cells cannot be reconstructed, and must be explicitly audited"
       ],
       "forbidden": ["every table converted to kind=figure", "empty headers", "OCR-like duplicated columns"]
     },
     {
       "id": "terms",
-      "reader_question": "Can an unfamiliar reader understand the paper's recurring terminology?",
+      "reader_question": "Can an unfamiliar reader understand the paper's recurring terminology in place?",
       "requirements": [
         "include recurring domain, method and statistical terms that materially affect interpretation",
         "definitions explain the term in the context of this paper",
         "aliases cover source spelling and common abbreviations",
-        "do not highlight ordinary words or entire acronym expansions"
+        "term entries are actually instantiated as interactive highlights in the rendered body",
+        "a nontrivial scientific paper with effectively zero term highlights fails release unless explicitly justified and independently audited",
+        "do not highlight ordinary words or entire acronym expansions when only the canonical term should be interactive"
       ]
     },
     {
       "id": "references",
-      "reader_question": "Can I trace every citation to the correct source?",
+      "reader_question": "Can I trace every citation to the correct source without losing its sentence context?",
       "requirements": [
         "preserve original reference numbering",
         "retain complete bibliographic text",
         "citation ranges map to all included references",
-        "reference count and missing numbers are audited against the source"
+        "reference count and missing numbers are audited against the source",
+        "every rendered citation remains inline in the sentence where the source placed it and opens the appropriate reference card or group"
       ],
-      "forbidden": ["renumbering extracted references sequentially", "silently dropping missing references"]
+      "forbidden": [
+        "renumbering extracted references sequentially", "silently dropping missing references", "detaching citations to paragraph ends"
+      ]
     }
   ],
-  "release_rule": "A raw PDF extraction may be stored for evidence, but it must not be rendered as a candidate reader until all reader-facing modules pass the content-quality validator."
+  "release_rule": "A raw PDF extraction may be stored for evidence, but it must not be rendered as a candidate reader until all reader-facing modules pass the content-quality validator and the rendered result is not functionally weaker than config/v082_latest_reader_standard.json."
 }
