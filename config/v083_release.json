@@ -1,0 +1,43 @@
+{
+  "version": "0.8.3",
+  "status": "formal",
+  "branch": "v0.8.3",
+  "basis": "V0.8.2_FINAL_VALIDATED2 / latest-reader-standard",
+  "release_date": "2026-08-17",
+  "primary_fix": "Terminology in the bilingual body, right-side figure viewer, and full-screen figure-study view must open its explanation reliably on click or keyboard activation.",
+  "interaction_contract": {
+    "selector": ".term-pop",
+    "events": ["click", "Enter", "Space"],
+    "routing": "delegated capture-phase handler",
+    "reason": "legacy sentence, annotation, and figure handlers may stop bubbling; terminology interaction therefore cannot depend on bubble-phase delivery",
+    "tooltip": "#termTooltip",
+    "supported_contexts": ["#bilingual-pane", "#viewerContent", "#v6StudyDoc"]
+  },
+  "regression_requirements": [
+    "term click opens a visible tooltip",
+    "tooltip title equals visible term text",
+    "tooltip body comes from data-tip/data-definition",
+    "second click toggles the tooltip closed",
+    "click outside closes the tooltip",
+    "Enter and Space activate a focused term",
+    "term click must not trigger sentence-pairing or figure-card actions",
+    "dynamic terms inserted after page load must work without rebinding"
+  ],
+  "reference_reader": {
+    "paper": "Andani et al. 2025 - Histopathology-based protein multiplex generation using deep learning",
+    "v082_reference_sha256": "e66cc0fd7b2b7add744afd3db5f0d02106f3871bc954932f46053850e6ed5569",
+    "v083_local_reference_sha256": "c65aa3996657300180ba6c983c6145496f8efe221d1b1aeb58eb6e59037b0915"
+  },
+  "locked_reader_features": [
+    "sentence-level English-Chinese pairing",
+    "inline scientific citations",
+    "inline figure/table references",
+    "terminology highlighting and explanations",
+    "figure/table preview index",
+    "right-side figure viewer",
+    "full-screen figure-study with per-panel explanations",
+    "reference popups",
+    "annotation tools",
+    "reader settings"
+  ]
+}
