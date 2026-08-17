@@ -1,0 +1,37 @@
+{
+  "standard_id": "v082-andani-final-validated2",
+  "status": "latest",
+  "locked_at": "2026-08-17T18:09:00+08:00",
+  "reference_artifact": {
+    "paper": "Andani et al. 2025 - Histopathology-based protein multiplex generation using deep learning",
+    "filename": "Andani 等 - 2025 - Histopathology-based protein multiplex generation using deep learning_V0.8.2_FINAL_VALIDATED2.html",
+    "sha256": "e66cc0fd7b2b7add744afd3db5f0d02106f3871bc954932f46053850e6ed5569",
+    "bundle_sha256": "d4403937aad73bb82e239c287e5bfa2a30e6ee2a8f99a005f107d6c8ecafe239",
+    "role": "reader-facing reference implementation for all subsequent V0.8.2 paper readers"
+  },
+  "reference_observations": {
+    "default_mode": "bilingual",
+    "visible_quick_mode": false,
+    "figure_cards": 14,
+    "reference_items": 66,
+    "term_highlights": 1228,
+    "figure_references": 104,
+    "citation_nodes": 188,
+    "sentence_piece_nodes": 944
+  },
+  "non_negotiable_contracts": [
+    "The fixed reader shell, layout, color system, controls and generic JavaScript are not regenerated per paper.",
+    "The redundant Quick Read mode remains hidden; the reader opens in bilingual close-reading mode.",
+    "Body text is reconstructed from the source before translation; headers, captions, axis text and cross-column fragments must not contaminate body paragraphs.",
+    "Bilingual alignment is sentence-level. Every English sentence has exactly one Chinese counterpart and clicking one sentence highlights only that pair.",
+    "In-text reference citations remain at their original sentence location. Citation identifiers are validated separately from scientific numbers, years, grades, sample sizes, statistics and figure numbers.",
+    "Figure and table mentions remain at their original textual location and are directly clickable there; they must never be collected or appended at the paragraph end merely for convenience.",
+    "Recurring scientific terminology is highlighted after final translation using the term interaction component. A paper with an empty or effectively absent terminology layer fails release.",
+    "Figure preview cards must be populated. Empty placeholder cards, raw internal slugs and database IDs are forbidden in visible text.",
+    "Every major figure is visually inventoried before interpretation. Every labeled subpanel and every meaningful unlabeled logical block must receive a specific explanation grounded in the source figure, caption and adjacent Results text.",
+    "Figure-study explanations must identify the plotted object, comparison, axes or encoding when applicable, the result actually shown and how that panel connects to the paper argument. Generic caption paraphrases do not pass.",
+    "Equations, numeric sequences, abbreviations and parenthetical cross-references are protected during PDF reconstruction and cannot become orphan text blocks.",
+    "A future reader may improve paper-specific content quality, but it may not remove or weaken any interaction or content contract present in this standard."
+  ],
+  "release_rule": "All subsequent V0.8.2 outputs must satisfy this standard or a strictly stronger successor standard. Passing an older validator is not sufficient if the rendered reader regresses relative to this reference implementation."
+}
