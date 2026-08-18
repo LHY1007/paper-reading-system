@@ -1,0 +1,81 @@
+{
+  "paper": {
+    "title": "The covariance environment defines cellular niches for spatial inference",
+    "authors": "Haviv et al.",
+    "doi": "10.1038/s41587-024-02193-4",
+    "source_pages": 40
+  },
+  "reader": {
+    "version": "V0.8.3 FORMAT_LOCKED",
+    "file": "Haviv_et_al_2024_COVET_ENVI_V0.8.3_FORMAT_LOCKED.html",
+    "sha256": "b94592fa77f3168d8f41cb3a7c7a0047fd5c49de84db91a3657c8e29d095138a",
+    "bytes": 11575700,
+    "fixed_component_format": true,
+    "visible_quick_read": false,
+    "sentence_groups": 162,
+    "sentence_piece_nodes": 324,
+    "inline_citation_nodes": 76,
+    "inline_figure_table_refs": 96,
+    "term_highlights": 957,
+    "references": 105,
+    "main_figures": 6,
+    "extended_data_figures": 10,
+    "supplementary_table_cards": 4,
+    "figure_studies": 16,
+    "figure_study_panels_or_logical_blocks": 117,
+    "figure_study_panel_counts": {
+      "figure-1": 8,
+      "figure-2": 15,
+      "figure-3": 9,
+      "figure-4": 9,
+      "figure-5": 7,
+      "figure-6": 14,
+      "extended-data-figure-1": 4,
+      "extended-data-figure-2": 5,
+      "extended-data-figure-3": 7,
+      "extended-data-figure-4": 5,
+      "extended-data-figure-5": 4,
+      "extended-data-figure-6": 5,
+      "extended-data-figure-7": 4,
+      "extended-data-figure-8": 9,
+      "extended-data-figure-9": 7,
+      "extended-data-figure-10": 5
+    }
+  },
+  "supplementary_source": {
+    "official_final_article_checked": true,
+    "supplementary_figures_listed": false,
+    "reporting_summary_listed": true,
+    "supplementary_table_workbook_listed": true,
+    "workbook_note": "Nature final page states: all tables, each in a dedicated Excel sheet.",
+    "extended_data_note": "Extended Data Figs. 1–10 are present in the uploaded 40-page PDF and are embedded and interpreted."
+  },
+  "static_gate": {
+    "passed": true,
+    "errors": [],
+    "checks": [
+      "fixed overview/metadata components; no paper-specific layout classes",
+      "all sentence groups are exactly one English + one Chinese node",
+      "all citation targets resolve",
+      "all figure/table reference targets resolve",
+      "all 16 figures have figure-study entry points and V6_STUDY data",
+      "all 117 figure-study units have non-empty, specific explanations",
+      "terminology layer present and all rendered terms have definitions",
+      "105 reference entries present",
+      "no Starfysh or previous DOI leakage"
+    ]
+  },
+  "browser_interaction_regression": {
+    "passed": true,
+    "body_term_tooltip": true,
+    "inline_figure_reference_opens_viewer": true,
+    "viewer_title_updates_to_figure_1": true,
+    "figure_study_opens": true,
+    "dynamic_figure_study_term_tooltip": true,
+    "runtime_review_gate_passed": true,
+    "page_errors": 0,
+    "console_errors": 0,
+    "runtime_warning": "image_panel_focus_disabled_without_verified_coordinates"
+  },
+  "content_scope_note": "This acceptance build is a structured close-reading reader covering the abstract, major Results narrative, Discussion, core computational Methods, application-specific Methods, data/code availability, all main/Extended Data figures, and references. It is used to lock the reader system behavior and formatting contract; it is not used to weaken source-completeness requirements for future builds."
+}
