@@ -13,6 +13,21 @@
     "tooltip": "#termTooltip",
     "supported_contexts": ["#bilingual-pane", "#viewerContent", "#v6StudyDoc"]
   },
+  "supplementary_source_contract": {
+    "mandatory_when_cited": true,
+    "rule": "Supplementary figures/tables cited by the final article must be independently retrieved from an official source when they are not embedded in the supplied main PDF.",
+    "source_priority": ["publisher", "PMC/Europe PMC", "author official repository/archive"],
+    "required_gates": [
+      "final-publication numbering verified",
+      "actual supplementary asset acquired",
+      "official caption acquired",
+      "each visible panel inspected",
+      "panel-by-panel explanation completed",
+      "asset exposed in preview/viewer/study UI",
+      "original in-text supplementary reference linked when present",
+      "provenance and checksum recorded"
+    ]
+  },
   "regression_requirements": [
     "term click opens a visible tooltip",
     "tooltip title equals visible term text",
@@ -21,7 +36,8 @@
     "click outside closes the tooltip",
     "Enter and Space activate a focused term",
     "term click must not trigger sentence-pairing or figure-card actions",
-    "dynamic terms inserted after page load must work without rebinding"
+    "dynamic terms inserted after page load must work without rebinding",
+    "cited supplementary material may not be silently omitted because it is absent from the main PDF"
   ],
   "reference_reader": {
     "paper": "Andani et al. 2025 - Histopathology-based protein multiplex generation using deep learning",
@@ -33,9 +49,9 @@
     "inline scientific citations",
     "inline figure/table references",
     "terminology highlighting and explanations",
-    "figure/table preview index",
+    "complete main and supplementary figure/table preview index",
     "right-side figure viewer",
-    "full-screen figure-study with per-panel explanations",
+    "full-screen figure-study with actual source images and per-panel explanations",
     "reference popups",
     "annotation tools",
     "reader settings"
