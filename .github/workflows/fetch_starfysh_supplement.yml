@@ -1,0 +1,50 @@
+name: Fetch official Starfysh supplementary information
+
+on:
+  push:
+    branches: [v0.8.3]
+    paths:
+      - '.github/workflows/fetch_starfysh_supplement.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PDF utilities
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Download official supplementary PDF
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p starfysh-supp
+          NATURE='https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41587-024-02173-8/MediaObjects/41587_2024_2173_MOESM1_ESM.pdf'
+          if curl -fL --retry 3 --retry-delay 2 "$NATURE" -o starfysh-supp/Starfysh_Supplementary_Information.pdf; then
+            echo 'source=nature' > starfysh-supp/source.txt
+          else
+            echo 'Nature download failed; trying Europe PMC supplementaryFiles.'
+            curl -fL --retry 3 --retry-delay 2 'https://www.ebi.ac.uk/europepmc/webservices/rest/PMC11415552/supplementaryFiles' -o /tmp/supp.zip
+            unzip -o /tmp/supp.zip -d /tmp/supp-unpacked
+            CANDIDATE=$(find /tmp/supp-unpacked -type f \( -iname '*MOESM1*pdf' -o -iname '*supp*pdf' \) | head -n 1)
+            test -n "$CANDIDATE"
+            cp "$CANDIDATE" starfysh-supp/Starfysh_Supplementary_Information.pdf
+            echo 'source=europepmc' > starfysh-supp/source.txt
+          fi
+          pdfinfo starfysh-supp/Starfysh_Supplementary_Information.pdf > starfysh-supp/pdfinfo.txt
+          pdftotext -layout starfysh-supp/Starfysh_Supplementary_Information.pdf starfysh-supp/supplement.txt
+          mkdir -p starfysh-supp/pages
+          pdftoppm -jpeg -jpegopt quality=90 -r 160 starfysh-supp/Starfysh_Supplementary_Information.pdf starfysh-supp/pages/page >/dev/null 2>&1
+          grep -n -i -E 'Supplementary (Figure|Fig)' starfysh-supp/supplement.txt > starfysh-supp/figure-caption-index.txt || true
+          sha256sum starfysh-supp/Starfysh_Supplementary_Information.pdf > starfysh-supp/sha256.txt
+          ls -lh starfysh-supp/Starfysh_Supplementary_Information.pdf
+          cat starfysh-supp/pdfinfo.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: starfysh-official-supplement
+          path: starfysh-supp
+          retention-days: 7
