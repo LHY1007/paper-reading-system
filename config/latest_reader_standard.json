@@ -11,31 +11,50 @@
     "inline figure/table reference opens the corresponding asset",
     "highlighted terminology opens explanation on click, Enter, or Space",
     "terminology interaction works in the bilingual body, right viewer, and dynamically rendered figure-study document",
-    "complete figure/table preview index including supplementary figures and tables referenced by the article",
-    "full-screen figure-study with the actual source image and panel-by-panel explanations",
+    "complete figure/table preview index",
+    "full-screen figure-study with source image and per-panel explanations",
     "reference popups, annotation tools, reader settings, resizing and viewer controls"
   ],
+  "component_format_contract": {
+    "principle": "Paper-specific content may change, but reader component DOM, class names, typography routing and spacing primitives may not be invented per paper.",
+    "validator": "tools/validate_v083_component_format.py",
+    "overview": {
+      "root": "#overview-bilingual-folded > section.card#overview-clone",
+      "qa_grid": "#overview-clone > .qa-grid",
+      "qa_item": "article.qa > h3 + p",
+      "qa_count": 6,
+      "method": "#overview-clone > h3 + p",
+      "conclusion": "#overview-clone > .story > b + p"
+    },
+    "paper_info": {
+      "metadata": ".hero > .paper-info > .metadata",
+      "row": ".metadata > div > span + value"
+    },
+    "forbidden_paper_specific_classes": [
+      "overview-grid",
+      "overview-card",
+      "method-flow",
+      "paper-info-grid"
+    ],
+    "fail_closed": true
+  },
   "supplementary_source_contract": {
-    "mandatory": true,
-    "rule": "If the article cites supplementary figures or tables that are not embedded in the supplied main PDF, the generator must independently retrieve the official supplementary information before declaring the reader complete.",
+    "principle": "If the article cites supplementary figures or tables that are absent from the uploaded main PDF, the builder must retrieve the final published supplementary material itself before declaring the reader complete.",
     "preferred_sources": [
-      "publisher supplementary information",
-      "PubMed Central / Europe PMC supplementary files",
-      "author-provided official repository or archival deposit"
+      "publisher final supplementary information",
+      "PMC or Europe PMC supplementaryFiles",
+      "official author or project repository"
     ],
     "requirements": [
-      "use the actual supplementary figure/table rather than reconstructing it from prose",
-      "verify the final-publication numbering against the publisher version",
-      "read the official caption and visually inspect every panel before writing panel explanations",
-      "make supplementary figure/table references clickable at their original sentence positions",
-      "include supplementary assets in the preview index and figure-study mode",
-      "record source provenance and file checksum"
+      "use the final published supplement when available rather than an older preprint supplement",
+      "obtain the actual supplementary figure/table image or source page",
+      "verify numbering against the final article",
+      "preserve the official English caption and provide a complete Chinese caption translation",
+      "visually inventory every labeled panel and meaningful unlabeled logical block before writing figure-study explanations",
+      "make supplementary figure/table mentions clickable at their original in-text position",
+      "include supplementary assets in the preview index and right-side viewer"
     ],
-    "not_allowed": [
-      "omit a supplementary figure only because it is absent from the user-supplied main PDF",
-      "substitute an older preprint supplement when final publisher supplementary material is available",
-      "invent a supplementary figure from the main-text description"
-    ]
+    "forbidden_shortcut": "The absence of supplementary figures from the user-uploaded main PDF is never sufficient reason to omit them when the article explicitly cites them."
   },
   "forbidden_regressions": [
     "visible Quick Overview mode",
@@ -44,7 +63,8 @@
     "figure references moved to paragraph ends",
     "visible but non-interactive terminology",
     "generic figure explanation without panel-by-panel coverage",
-    "supplementary figures referenced in the paper but absent from the final reader without an explicit source-unavailability audit",
-    "paper-specific HTML/CSS/JS generated independently instead of using the fixed reader shell"
+    "paper-specific HTML/CSS/JS generated independently instead of using the fixed reader shell",
+    "paper-specific replacement markup for fixed hero or overview components",
+    "supplementary figures omitted solely because they are not embedded in the uploaded main PDF"
   ]
 }
