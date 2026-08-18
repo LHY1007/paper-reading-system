@@ -1,0 +1,17 @@
+{
+  "version": "0.8.3",
+  "status": "formal",
+  "default_branch": "main",
+  "version_branch": "v0.8.3",
+  "stable_alias_branch": "latest",
+  "standard_contract": "config/latest_reader_standard.json",
+  "release_contract": "config/v083_release.json",
+  "acceptance_reference": {
+    "paper": "The covariance environment defines cellular niches for spatial inference",
+    "doi": "10.1038/s41587-024-02193-4",
+    "reader": "Haviv_et_al_2024_COVET_ENVI_V0.8.3_FORMAT_LOCKED.html",
+    "sha256": "b94592fa77f3168d8f41cb3a7c7a0047fd5c49de84db91a3657c8e29d095138a",
+    "validation": "releases/V0.8.3/reference/haviv-covet-envi-validation.json"
+  },
+  "usage": "Consume main by default; use v0.8.3 to pin this release or latest as the stable alias."
+}
