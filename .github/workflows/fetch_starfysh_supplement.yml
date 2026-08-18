@@ -5,6 +5,9 @@ on:
     branches: [v0.8.3]
     paths:
       - '.github/workflows/fetch_starfysh_supplement.yml'
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened]
   workflow_dispatch:
 
 permissions:
@@ -16,6 +19,8 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: v0.8.3
       - name: Install PDF utilities
         run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
       - name: Download official supplementary PDF
