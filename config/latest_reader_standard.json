@@ -11,10 +11,32 @@
     "inline figure/table reference opens the corresponding asset",
     "highlighted terminology opens explanation on click, Enter, or Space",
     "terminology interaction works in the bilingual body, right viewer, and dynamically rendered figure-study document",
-    "complete figure/table preview index",
-    "full-screen figure-study with source image and per-panel explanations",
+    "complete figure/table preview index including supplementary figures and tables referenced by the article",
+    "full-screen figure-study with the actual source image and panel-by-panel explanations",
     "reference popups, annotation tools, reader settings, resizing and viewer controls"
   ],
+  "supplementary_source_contract": {
+    "mandatory": true,
+    "rule": "If the article cites supplementary figures or tables that are not embedded in the supplied main PDF, the generator must independently retrieve the official supplementary information before declaring the reader complete.",
+    "preferred_sources": [
+      "publisher supplementary information",
+      "PubMed Central / Europe PMC supplementary files",
+      "author-provided official repository or archival deposit"
+    ],
+    "requirements": [
+      "use the actual supplementary figure/table rather than reconstructing it from prose",
+      "verify the final-publication numbering against the publisher version",
+      "read the official caption and visually inspect every panel before writing panel explanations",
+      "make supplementary figure/table references clickable at their original sentence positions",
+      "include supplementary assets in the preview index and figure-study mode",
+      "record source provenance and file checksum"
+    ],
+    "not_allowed": [
+      "omit a supplementary figure only because it is absent from the user-supplied main PDF",
+      "substitute an older preprint supplement when final publisher supplementary material is available",
+      "invent a supplementary figure from the main-text description"
+    ]
+  },
   "forbidden_regressions": [
     "visible Quick Overview mode",
     "paragraph-level matching in place of sentence-level pairing",
@@ -22,6 +44,7 @@
     "figure references moved to paragraph ends",
     "visible but non-interactive terminology",
     "generic figure explanation without panel-by-panel coverage",
+    "supplementary figures referenced in the paper but absent from the final reader without an explicit source-unavailability audit",
     "paper-specific HTML/CSS/JS generated independently instead of using the fixed reader shell"
   ]
 }
