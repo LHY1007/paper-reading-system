@@ -1,0 +1,51 @@
+name: V0.8.3 locked component-format gate
+
+on:
+  push:
+    branches: [v0.8.3]
+    paths:
+      - 'tools/validate_v083_component_format.py'
+      - 'tools/test_v083_component_format.py'
+      - 'config/latest_reader_standard.json'
+      - 'config/v083_release.json'
+      - 'published/V0.8.3*.html'
+      - 'final/V0.8.3/**/*.html'
+  pull_request:
+    paths:
+      - 'tools/validate_v083_component_format.py'
+      - 'tools/test_v083_component_format.py'
+      - 'config/latest_reader_standard.json'
+      - 'config/v083_release.json'
+      - 'published/V0.8.3*.html'
+      - 'final/V0.8.3/**/*.html'
+  workflow_dispatch:
+
+jobs:
+  component-format:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check beautifulsoup4
+      - name: Prove good fixed markup passes and paper-specific markup fails
+        run: python tools/test_v083_component_format.py
+      - name: Validate committed V0.8.3 readers when present
+        shell: bash
+        run: |
+          set -euo pipefail
+          mapfile -t readers < <(find published final/V0.8.3 -type f -name '*.html' 2>/dev/null | sort || true)
+          if [ "${#readers[@]}" -eq 0 ]; then
+            echo 'No committed V0.8.3 reader artifacts in this checkout; synthetic regression gate passed.'
+            exit 0
+          fi
+          python tools/validate_v083_component_format.py "${readers[@]}" --report /tmp/V083_COMPONENT_FORMAT_GATE.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: v083-component-format-gate
+          path: /tmp/V083_COMPONENT_FORMAT_GATE.json
+          if-no-files-found: ignore
+          retention-days: 14
