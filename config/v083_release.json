@@ -3,13 +3,48 @@
   "status": "formal",
   "branch": "v0.8.3",
   "basis": "V0.8.2_FINAL_VALIDATED2 / latest-reader-standard",
-  "release_date": "2026-08-17",
-  "primary_fix": "Terminology in the bilingual body, right-side figure viewer, and full-screen figure-study view must open its explanation reliably on click or keyboard activation.",
+  "release_date": "2026-08-26",
+  "primary_fix": "V0.8.3 now separates universal reader features from conditional figure-study. Source-faithful bilingual text, inline terminology, inline citations with reference links, inline figure/table links, preview index and right-side viewer are mandatory for every paper. Figure-study is enabled only for CNS-family or biology/bioinformatics-heavy papers.",
+  "reader_profiles": {
+    "config": "config/v083_reader_profiles.json",
+    "classifier": "tools/v083_reader_profile.py",
+    "standard": {
+      "figure_study_enabled": false,
+      "use_for": "conventional low-reading-difficulty method, engineering or clinical papers"
+    },
+    "figure_intensive": {
+      "figure_study_enabled": true,
+      "use_for": "CNS-family main/sub-journal papers and biology/bioinformatics-heavy discovery papers"
+    }
+  },
+  "source_fidelity_contract": {
+    "english": "visible English body is the source text, not AI-authored prose or summary",
+    "chinese": "Chinese is translation only; no summary, explanation, inference, added background or conclusion strengthening",
+    "sentence_pairing": "one source scientific sentence to one Chinese translation sentence",
+    "finalizer": "tools/finalize_v083_manifest.py",
+    "validator": "tools/validate_v083_manifest_contract.py",
+    "fail_closed": true
+  },
+  "inline_content_contract": {
+    "terminology": "term highlighting and clickable explanations are mandatory wherever the term dictionary matches the English or Chinese body",
+    "citations": "citations remain at their source positions and resolve through referenceData; cited references expose an external DOI/publisher/arXiv/search link",
+    "figures_tables": "Figure/Table/Extended Data/Supplementary mentions remain at their source positions and open the corresponding asset",
+    "renderer": "tools/render_v082_canvas_component_locked_v2.py"
+  },
+  "pdf_asset_contract": {
+    "principle": "use PDF-native extraction rather than visual screenshot cropping whenever the source object is available",
+    "preferred_order": [
+      "embedded PDF raster image object/xref",
+      "PDF vector/page clip exported as SVG",
+      "deterministic PDF-coordinate crop only when the first two are impossible"
+    ],
+    "forbidden_default": "manual visual screenshot crop used as the primary extraction method"
+  },
   "interaction_contract": {
     "selector": ".term-pop",
     "events": ["click", "Enter", "Space"],
     "routing": "delegated capture-phase handler",
-    "reason": "legacy sentence, annotation, and figure handlers may stop bubbling; terminology interaction therefore cannot depend on bubble-phase delivery",
+    "reason": "legacy sentence, annotation and figure handlers may stop bubbling; terminology interaction cannot depend on bubble-phase delivery",
     "tooltip": "#termTooltip",
     "supported_contexts": ["#bilingual-pane", "#viewerContent", "#v6StudyDoc"]
   },
@@ -26,31 +61,35 @@
     "rule": "A paper may supply text values only. It may not invent replacement DOM/classes or paper-specific typography for fixed hero/overview components."
   },
   "regression_requirements": [
+    "source English reconstructs the PDF text rather than an AI summary",
+    "Chinese is translation only",
+    "sentence-level English-Chinese pairing remains one-to-one",
+    "English terminology remains highlighted and clickable",
+    "Chinese terminology remains highlighted when a Chinese alias is defined",
+    "citation numbers remain clickable at their original source positions",
+    "cited reference popup contains an external link",
+    "inline figure/table references remain clickable at their original source positions",
+    "figure/table preview cards and right-side viewer remain functional",
+    "standard profile exposes no figure-study UI",
+    "figure_intensive profile retains full panel/logical-block figure-study",
     "term click opens a visible tooltip",
-    "tooltip title equals visible term text",
-    "tooltip body comes from data-tip/data-definition",
-    "second click toggles the tooltip closed",
+    "second term click toggles the tooltip closed",
     "click outside closes the tooltip",
     "Enter and Space activate a focused term",
-    "term click must not trigger sentence-pairing or figure-card actions",
-    "dynamic terms inserted after page load must work without rebinding",
-    "hero metadata uses the locked metadata component and cannot collapse label/value text together",
-    "one-page overview uses the locked card/qa-grid/qa/story component hierarchy and cannot introduce paper-specific overview classes"
+    "dynamic terms inserted after page load work without rebinding",
+    "hero metadata and overview use locked components"
   ],
-  "reference_reader": {
-    "paper": "Andani et al. 2025 - Histopathology-based protein multiplex generation using deep learning",
-    "v082_reference_sha256": "e66cc0fd7b2b7add744afd3db5f0d02106f3871bc954932f46053850e6ed5569",
-    "v083_local_reference_sha256": "c65aa3996657300180ba6c983c6145496f8efe221d1b1aeb58eb6e59037b0915"
-  },
   "locked_reader_features": [
     "sentence-level English-Chinese pairing",
+    "source-faithful English body",
+    "translation-only Chinese body",
     "inline scientific citations",
+    "reference popups with external links",
     "inline figure/table references",
     "terminology highlighting and explanations",
     "figure/table preview index",
     "right-side figure viewer",
-    "full-screen figure-study with per-panel explanations",
-    "reference popups",
+    "conditional figure-study by reader profile",
     "annotation tools",
     "reader settings",
     "locked hero metadata formatting",
