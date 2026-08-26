@@ -5,41 +5,42 @@
   "release_branch": "v0.8.3",
   "stable_alias_branch": "latest",
   "release_contract": "config/v083_release.json",
-  "reference_basis": "Haviv et al. 2024 COVET/ENVI V0.8.3 FORMAT_LOCKED acceptance reader, preserving the V0.8.2 FINAL_VALIDATED2 interaction/content contract plus V0.8.3 terminology and fixed-component gates",
-  "historical_reference_v082_sha256": "e66cc0fd7b2b7add744afd3db5f0d02106f3871bc954932f46053850e6ed5569",
-  "previous_reference_v083_sha256": "c65aa3996657300180ba6c983c6145496f8efe221d1b1aeb58eb6e59037b0915",
-  "current_acceptance_reference": {
-    "paper": "The covariance environment defines cellular niches for spatial inference",
-    "doi": "10.1038/s41587-024-02193-4",
-    "reader_file": "Haviv_et_al_2024_COVET_ENVI_V0.8.3_FORMAT_LOCKED.html",
-    "sha256": "b94592fa77f3168d8f41cb3a7c7a0047fd5c49de84db91a3657c8e29d095138a",
-    "bytes": 11575700,
-    "validation_record": "releases/V0.8.3/reference/haviv-covet-envi-validation.json",
-    "sentence_groups": 162,
-    "inline_citation_nodes": 76,
-    "inline_figure_table_refs": 96,
-    "term_highlights": 957,
-    "references": 105,
-    "main_figures": 6,
-    "extended_data_figures": 10,
-    "figure_studies": 16,
-    "figure_study_panels_or_logical_blocks": 117
-  },
+  "reader_profile_contract": "config/v083_reader_profiles.json",
+  "source_fidelity_validator": "tools/validate_v083_manifest_contract.py",
+  "manifest_finalizer": "tools/finalize_v083_manifest.py",
+  "reference_basis": "V0.8.3 preserves the original fixed CANVAS reader shell. Universal features are mandatory for every paper; figure-study is conditional by paper type rather than globally required.",
   "direct_use": {
-    "default": "Use the repository default branch main. It is the current V0.8.3 production line.",
-    "pinned": "Use branch v0.8.3 when an immutable versioned branch name is preferred.",
-    "stable_alias": "Use branch latest as an explicit stable alias for the same production commit."
+    "default": "Use repository default branch main.",
+    "pinned": "Use branch v0.8.3 when a versioned branch name is preferred.",
+    "stable_alias": "Use branch latest as the stable alias."
   },
-  "required_interactions": [
+  "universal_required_features": [
+    "source-faithful English body: no AI summary or paraphrase in the bilingual reading layer",
+    "Chinese translation only: no explanation, inference, expansion or conclusion strengthening",
     "sentence-level English-Chinese pairing and paired highlighting",
-    "inline citation popup at citation position",
-    "inline figure/table reference opens the corresponding asset",
-    "highlighted terminology opens explanation on click, Enter, or Space",
-    "terminology interaction works in the bilingual body, right viewer, and dynamically rendered figure-study document",
+    "terminology highlighting and clickable definitions in English; Chinese aliases are highlighted when defined",
+    "inline citation popup at the original citation position",
+    "cited reference popup exposes an external DOI/publisher/arXiv/search link",
+    "inline figure/table reference opens the corresponding asset at the original mention position",
     "complete figure/table preview index",
-    "full-screen figure-study with source image and per-panel explanations",
-    "reference popups, annotation tools, reader settings, resizing and viewer controls"
+    "right-side figure/table viewer",
+    "complete source English captions and complete Chinese caption translations",
+    "reference popups, annotation tools, reader settings, resizing and viewer controls",
+    "PDF-native figure/table extraction whenever the PDF exposes an image object or vector region"
   ],
+  "conditional_figure_study": {
+    "standard": {
+      "enabled": false,
+      "use_for": "conventional low-reading-difficulty method/engineering/clinical papers",
+      "must_keep": ["preview index", "right-side viewer", "bilingual captions", "inline asset links"]
+    },
+    "figure_intensive": {
+      "enabled": true,
+      "use_for": "CNS-family main/sub-journal papers and biology/bioinformatics-heavy discovery papers",
+      "must_keep": ["all universal features", "full-screen figure study", "panel-by-panel or logical-block source-grounded explanations"]
+    },
+    "manual_override": "paper-specific plan may explicitly choose standard or figure_intensive; manual override has priority"
+  },
   "component_format_contract": {
     "principle": "Paper-specific content may change, but reader component DOM, class names, typography routing and spacing primitives may not be invented per paper.",
     "validator": "tools/validate_v083_component_format.py",
@@ -55,41 +56,42 @@
       "metadata": ".hero > .paper-info > .metadata",
       "row": ".metadata > div > span + value"
     },
-    "forbidden_paper_specific_classes": [
-      "overview-grid",
-      "overview-card",
-      "method-flow",
-      "paper-info-grid"
-    ],
+    "forbidden_paper_specific_classes": ["overview-grid", "overview-card", "method-flow", "paper-info-grid"],
     "fail_closed": true
   },
   "supplementary_source_contract": {
     "principle": "If the article cites supplementary figures or tables that are absent from the uploaded main PDF, the builder must retrieve the final published supplementary material itself before declaring the reader complete.",
-    "preferred_sources": [
-      "publisher final supplementary information",
-      "PMC or Europe PMC supplementaryFiles",
-      "official author or project repository"
-    ],
+    "preferred_sources": ["publisher final supplementary information", "PMC or Europe PMC supplementaryFiles", "official author or project repository"],
     "requirements": [
       "use the final published supplement when available rather than an older preprint supplement",
       "obtain the actual supplementary figure/table image or source page",
       "verify numbering against the final article",
       "preserve the official English caption and provide a complete Chinese caption translation",
-      "visually inventory every labeled panel and meaningful unlabeled logical block before writing figure-study explanations",
       "make supplementary figure/table mentions clickable at their original in-text position",
-      "include supplementary assets in the preview index and right-side viewer"
-    ],
-    "forbidden_shortcut": "The absence of supplementary figures from the user-uploaded main PDF is never sufficient reason to omit them when the article explicitly cites them."
+      "include supplementary assets in the preview index and right-side viewer",
+      "if the reader profile is figure_intensive, inventory every labeled panel and meaningful unlabeled logical block before writing figure-study explanations"
+    ]
+  },
+  "pdf_asset_extraction_contract": {
+    "preferred_order": ["embedded PDF raster object/xref", "PDF vector/page clip exported as SVG", "deterministic PDF-coordinate crop"],
+    "forbidden_default": "manual visual screenshot cropping"
   },
   "forbidden_regressions": [
     "visible Quick Overview mode",
+    "AI-authored English summary in place of source text",
+    "Chinese interpretation mixed into translation",
     "paragraph-level matching in place of sentence-level pairing",
     "citations moved to paragraph ends",
+    "citation numbers rendered as plain text without popup/link behavior",
     "figure references moved to paragraph ends",
     "visible but non-interactive terminology",
-    "generic figure explanation without panel-by-panel coverage",
+    "terminology highlighting dropped from a source-faithful rebuild",
+    "figure/table preview cards or right-side viewer no longer clickable",
+    "figure-study forced onto conventional low-reading-difficulty papers",
+    "figure-study omitted from CNS-family or biology/bioinformatics-heavy figure-intensive papers",
     "paper-specific HTML/CSS/JS generated independently instead of using the fixed reader shell",
     "paper-specific replacement markup for fixed hero or overview components",
-    "supplementary figures omitted solely because they are not embedded in the uploaded main PDF"
+    "supplementary figures omitted solely because they are not embedded in the uploaded main PDF",
+    "manual screenshot crop used when the PDF exposes an extractable image object or vector region"
   ]
 }
