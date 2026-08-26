@@ -1,0 +1,89 @@
+{
+  "version": "v083-reader-profiles-1",
+  "default_profile": "standard",
+  "manual_override_precedence": true,
+  "profiles": {
+    "standard": {
+      "figure_study_enabled": false,
+      "description": "Conventional method/engineering/clinical papers whose figures and tables are readable directly from the source asset and caption. Preserve preview, right-side viewer, bilingual captions and inline figure/table links, but do not create the full-screen figure-study layer.",
+      "required_asset_features": [
+        "complete figure/table preview index",
+        "right-side viewer",
+        "complete English caption",
+        "complete Chinese caption translation",
+        "inline figure/table links at the original mention position"
+      ]
+    },
+    "figure_intensive": {
+      "figure_study_enabled": true,
+      "description": "CNS-family main/sub-journal papers and biology/bioinformatics-heavy discovery papers where dense multi-panel figures carry the scientific argument. Preserve all standard asset features and additionally create panel/logical-block figure study.",
+      "required_asset_features": [
+        "complete figure/table preview index",
+        "right-side viewer",
+        "complete English caption",
+        "complete Chinese caption translation",
+        "inline figure/table links at the original mention position",
+        "full-screen figure study",
+        "panel-by-panel or logical-block explanations grounded in the source figure and legend"
+      ]
+    }
+  },
+  "automatic_rules": {
+    "cns_journal_patterns": [
+      "^Nature(?:\\s|$)",
+      "^Science(?:\\s|$)",
+      "^Cell$",
+      "^Cancer Cell$",
+      "^Molecular Cell$",
+      "^Cell Metabolism$",
+      "^Cell Genomics$",
+      "^Cell Systems$",
+      "^Cell Reports Medicine$",
+      "^Immunity$",
+      "^Neuron$",
+      "^Developmental Cell$"
+    ],
+    "bioinformatics_keywords": [
+      "single-cell",
+      "single cell",
+      "scrna-seq",
+      "snrna-seq",
+      "spatial transcriptomics",
+      "spatial proteomics",
+      "spatial omics",
+      "multi-omics",
+      "multiomics",
+      "transcriptomic",
+      "proteomic",
+      "cell-cell communication",
+      "ligand-receptor",
+      "trajectory analysis",
+      "pseudotime",
+      "tumor microenvironment",
+      "tumour microenvironment",
+      "cellular niche",
+      "spatial niche",
+      "ecosystem",
+      "atlas",
+      "gene program",
+      "gene expression program",
+      "clonal evolution"
+    ],
+    "bioinformatics_keyword_threshold": 2,
+    "strong_single_keyword_triggers": [
+      "single-cell",
+      "spatial transcriptomics",
+      "spatial proteomics",
+      "multi-omics",
+      "cell-cell communication"
+    ],
+    "engineering_journal_patterns": [
+      "IEEE Transactions on Medical Imaging",
+      "Medical Image Analysis",
+      "MICCAI",
+      "Pattern Recognition",
+      "Computer Methods and Programs in Biomedicine"
+    ],
+    "rule": "CNS-family or biology/bioinformatics-heavy papers use figure_intensive. Conventional engineering/method papers remain standard unless the biological-analysis signals independently trigger figure_intensive. Manual paper-plan override always wins."
+  }
+}
