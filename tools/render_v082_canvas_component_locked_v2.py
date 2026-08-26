@@ -48,10 +48,18 @@ def format_reference_ids(ids: list[str]) -> str:
 
 
 def append_inline(soup: BeautifulSoup, parent: Tag, items: list[dict[str, Any]], unit: str, prefix: str, terms: dict[str, dict[str, Any]]) -> None:
+    """Render exact inline content without moving citations/figures/terms.
+
+    V0.8.3 adds citation_label so bracketed source citations such as [15] can
+    remain at their original position while still using the established
+    citation popup. Empty citation-only items do not create empty sentence
+    spans. The text content itself is never rewritten here.
+    """
     parent.clear()
     for index, item in enumerate(items):
-        text = item.get("text", "")
+        text = str(item.get("text", ""))
         group = f"sp-{prefix}-{unit}-{index}"
+        emitted_text = False
         if item.get("figure_ids"):
             ids = item["figure_ids"]
             for position, asset_id in enumerate(ids):
@@ -63,6 +71,7 @@ def append_inline(soup: BeautifulSoup, parent: Tag, items: list[dict[str, Any]],
                 button["data-target"] = asset_id
                 button.append(NavigableString(text if len(ids) == 1 else asset_id))
                 parent.append(button)
+            emitted_text = True
         elif item.get("section_id"):
             button = soup.new_tag("button")
             button["class"] = ["section-ref"]
@@ -70,6 +79,7 @@ def append_inline(soup: BeautifulSoup, parent: Tag, items: list[dict[str, Any]],
             button["data-target"] = item["section_id"]
             button.append(NavigableString(text))
             parent.append(button)
+            emitted_text = True
         elif item.get("term_id"):
             term_data = terms.get(item["term_id"], {})
             outer = soup.new_tag("span")
@@ -82,10 +92,13 @@ def append_inline(soup: BeautifulSoup, parent: Tag, items: list[dict[str, Any]],
                 outer["data-term-category"] = category
             outer["role"] = "button"
             outer["tabindex"] = "0"
-            outer.append(core.base.sentence(soup, text, group, index))
+            if text:
+                outer.append(core.base.sentence(soup, text, group, index))
             parent.append(outer)
-        else:
+            emitted_text = bool(text)
+        elif text:
             parent.append(core.base.sentence(soup, text, group, index))
+            emitted_text = True
 
         reference_ids = [str(value) for value in item.get("citation_ids", [])]
         if reference_ids:
@@ -94,8 +107,12 @@ def append_inline(soup: BeautifulSoup, parent: Tag, items: list[dict[str, Any]],
             citation["data-refs"] = ",".join(reference_ids)
             citation["role"] = "button"
             citation["tabindex"] = "0"
-            citation.append(NavigableString(format_reference_ids(reference_ids)))
+            label = str(item.get("citation_label") or format_reference_ids(reference_ids))
+            citation["data-citation-label"] = label
+            citation.append(NavigableString(label))
             parent.append(citation)
+        elif not emitted_text and text:
+            parent.append(core.base.sentence(soup, text, group, index))
 
 
 def complete_review_manifest(soup: BeautifulSoup, manifest: dict[str, Any], study_ids: list[str]) -> None:
@@ -105,7 +122,7 @@ def complete_review_manifest(soup: BeautifulSoup, manifest: dict[str, Any], stud
     all_card_ids = [card.get("id") for card in soup.select("#bilingual-pane .figure-card[id]")]
     table_ids = [card.get("id") for card in soup.select("#bilingual-pane .table-card[id]")]
     data = {
-        "version": "0.8.2-component-locked",
+        "version": "0.8.3-component-locked",
         "base_version": "0.8.2-CANVAS",
         "content_hashes": {},
         "expected": {
