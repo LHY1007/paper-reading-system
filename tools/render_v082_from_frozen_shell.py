@@ -10,6 +10,7 @@ from typing import Any
 from bs4 import BeautifulSoup
 
 import render_v082_canvas_component_locked_v2 as locked_renderer
+from postprocess_v083_reader_profile import apply as apply_v083_profile
 
 
 PAPER_META_KEYS = {
@@ -84,7 +85,8 @@ def render(shell: Path, manifest_path: Path, output: Path, schema: Path | None, 
     soup.html["data-v082-template"] = "frozen-shell-rendered"
     soup.html["data-v082-shell-sha256"] = shell_sha
     soup.html["data-v082-shell-lock"] = str(lock.get("version") or "")
-    output.write_text(str(soup), "utf-8")
+    rendered = apply_v083_profile(str(soup), manifest)
+    output.write_text(rendered, "utf-8")
 
     raw = output.read_text("utf-8")
     unresolved = sorted({token.split("__", 1)[0] for token in raw.split("__V082_")[1:]})
@@ -94,12 +96,13 @@ def render(shell: Path, manifest_path: Path, output: Path, schema: Path | None, 
 
     report.update(
         {
-            "renderer": "v082-frozen-shell-2",
+            "renderer": "v083-frozen-shell-profile-aware-1",
             "shell": str(shell),
             "shell_sha256": shell_sha,
             "shell_lock": str(lock_path),
             "shell_lock_version": lock.get("version"),
             "manifest": str(manifest_path),
+            "reader_profile": manifest.get("reader_profile") or {},
             "output_sha256": hashlib.sha256(output.read_bytes()).hexdigest(),
             "unresolved_placeholders": unresolved,
         }
@@ -108,7 +111,7 @@ def render(shell: Path, manifest_path: Path, output: Path, schema: Path | None, 
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Render paper data through the immutable, hash-locked V0.8.2 CANVAS shell")
+    parser = argparse.ArgumentParser(description="Render paper data through the immutable CANVAS shell with V0.8.3 profile-aware figure-study visibility")
     parser.add_argument("manifest", type=Path)
     parser.add_argument("output", type=Path)
     parser.add_argument("--shell", type=Path, required=True)
